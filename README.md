@@ -125,10 +125,10 @@ const App: React.SFC<AppProps> = ({ message }) => <div>{message}</div>;
 You can also do this for stateful component types (really, any types):
 
 ```tsx
-type AppProps = {
+type AppProps = { // like this
   message: string,
 }
-type AppState = {
+type AppState = { // and this
   count: number,
 }
 class App extends React.Component<AppProps, AppState> {
@@ -184,7 +184,7 @@ Union types are handy for solving some of these typing problems:
 
 ```tsx
 class App extends React.Component<{}, {
-    count: number | null,
+    count: number | null, // like this
   }> {
   state = {
     count: null
@@ -208,7 +208,7 @@ If a component has an optional prop, add a question mark :) and assign during de
 
 ```tsx
 class MyComponent extends React.Component<{
-  message?: string,
+  message?: string, // like this
 }> {
   render() {
     const {message = 'default'} = this.props;
@@ -228,13 +228,17 @@ Sometimes union types need to be cast to a more specific type to work with other
 
 ```tsx
 class MyComponent extends React.Component<{
-  message?: string,
+  message: string,
 }> {
   render() {
-    const {message = 'default'} = this.props;
+    const {message} = this.props;
     return (
       <Component2 message={message as SpecialMessageType}>{message}</Component2>
     );
   }
 }
 ```
+
+# My question isn't answered here!
+
+[File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
