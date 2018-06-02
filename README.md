@@ -269,7 +269,7 @@ This can be a bit tricky. The tooling really comes in handy here, as the @type d
 
 ```tsx
 class App extends React.Component<{}, { // no props
-    count: string,
+    text: string,
   }> {
   state = {
     text: ''
