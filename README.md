@@ -210,9 +210,13 @@ export const Card = (props: Props) => {
 
 # Component/Design System Development
 
-For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>
+For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
 # Building
+
+Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+# Prettier + TSLint
 
 Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -280,6 +284,75 @@ class MyComponent extends React.Component<{
   }
 }
 ```
+
+# Troubleshooting Handbook: TSLint
+
+Sometimes TSLint is just getting in the way. Judicious turning off of things can be helpful. Here are useful tslint disables you may use:
+
+- `/* tslint:disable */` total disable
+- `// tslint:disable-line` just this line
+- `/* tslint:disable:semicolon */` sometimes prettier adds semicolons and tslint doesn't like it.
+- `/* tslint:disable:no-any */` disable tslint restriction on no-any when you WANT to use any
+- `/* tslint:disable:max-line-length */` disable line wrapping linting
+
+so on and so forth. there are any number of things you can disable, usually you can look at the error raised in VScode or whatever the tooling and the name of the error will correspond to the rule you should disable.
+
+# Troubleshooting Handbook: tsconfig.json
+
+This is the setup I roll with for my component library:
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "build/lib",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "scripts"]
+}
+```
+
+Please open an issue and discuss if there are better recommended choices. I like noImplicitAny to force me to type things.
+
+# Recommended React + Typescript codebases to learn from
+
+- https://github.com/jaredpalmer/formik
+- https://github.com/jaredpalmer/react-fns
+- https://github.com/palantir/blueprint
+- https://github.com/Shopify/polaris
+
+# People you can ask React + Typescript questions about
+
+remember nobody owes you anything...
+
+First try:
+
+- [Google](https://google.com)
+- [StackOverflow](https://stackoverflow.com)
+
+Then: 
+
+- me! <https://twitter.com/swyx>
+- (maybe) Jared Palmer <https://twitter.com/jaredpalmer>
+- [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # My question isn't answered here!
 
