@@ -50,6 +50,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 ```
 
+In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run Typescript with `--esModuleInterop` (or [add `"esModuleInterop": true` to tsconfig](https://stackoverflow.com/questions/48785451/is-there-a-way-to-use-esmoduleinterop-in-tsconfig-as-opposed-to-it-being-a-fla)) to import like in regular jsx:
+
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+```
+
 <details>
 
 <summary>Explanation</summary>
