@@ -1,7 +1,7 @@
 
 <details>
 
-<summary><h3>Table of Contents</h3></summary>
+<summary><b>Table of Contents</b></summary>
 
 - [Prerequisites](#prerequisites)
 - [React + Typescript Starter Kits](#react---typescript-starter-kits)
@@ -243,6 +243,7 @@ class App extends React.Component<{}, { // no props
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
+
 # Higher Order Components/Render Props
 
 Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
