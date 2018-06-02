@@ -1,6 +1,17 @@
 # Table of Contents
 
-1. todo
+- [Prerequisites](#prerequisites)
+- [React + Typescript Starter Kits](#react---typescript-starter-kits)
+- [Import React](#import-react)
+- [Stateless Functional Components](#stateless-functional-components)
+- [Stateful Class-based Components](#stateful-class-based-components)
+- [Extracting Prop Types](#extracting-prop-types)
+- [Forms and Events](#forms-and-events)
+- [Type Troubleshooting Handbook](#type-troubleshooting-handbook)
+  * [Union types](#union-types)
+  * [Optional Types](#optional-types)
+  * [Type Casting](#type-casting)
+- [My question isn't answered here!](#my-question-isn-t-answered-here-)
 
 # Prerequisites
 
