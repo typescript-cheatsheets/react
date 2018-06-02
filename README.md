@@ -34,6 +34,8 @@
 
 1. good understanding of [React](https://reactjs.org)
 2. familiarity with [Typescript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+3. having read [the Typescript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
 
 # React + Typescript Starter Kits
 
