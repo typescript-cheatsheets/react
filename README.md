@@ -1,7 +1,7 @@
 
 <details>
 
-<summary># Table of Contents</summary>
+<summary><h3>Table of Contents</h3></summary>
 
 - [Prerequisites](#prerequisites)
 - [React + Typescript Starter Kits](#react---typescript-starter-kits)
@@ -39,7 +39,7 @@
 2. <https://github.com/sw-yx/create-react-app-parcel> works with Typescript out of the box.
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
-In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/)
+In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/).
 
 # Import React
 
@@ -47,6 +47,14 @@ In particular, make sure that you have `@types/react` and `@types/react-dom` ins
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 ```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 
 # Stateless Functional Components
 
@@ -61,6 +69,13 @@ Or you can use the provided generic type for functional components:
 ```tsx
 const App: React.SFC<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # Stateful Class-based Components
 
@@ -138,6 +153,12 @@ class App extends React.Component<{
   }
 }
 ```
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # Extracting Prop Types
 
@@ -171,6 +192,13 @@ class App extends React.Component<AppProps, AppState> {
 
 `interface`s are different from `type`s in Typescript, but for our purposes they do the same things. [read more](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Forms and Events
 
 This can be a bit tricky. The tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
@@ -200,6 +228,12 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 # Higher Order Components/Render Props
 
 Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
@@ -219,18 +253,45 @@ export const Card = (props: Props) => {
   );
 };
 ```
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # Component/Design System Development
 
 For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Building
 
 Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Prettier + TSLint
 
 Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # Troubleshooting Handbook: Types
 
@@ -260,6 +321,12 @@ class App extends React.Component<{}, {
 }
 ```
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 ## Optional Types
 
 If a component has an optional prop, add a question mark :) and assign during destructure (or use defaultProps).
@@ -279,6 +346,12 @@ class MyComponent extends React.Component<{
 
 You can also use a `!` character to assert that something is not undefined, but this is not encouraged.
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 ## Type Casting
 
 Sometimes union types need to be cast to a more specific type to work with other APIs, so cast with the `as` keyword.
@@ -297,6 +370,13 @@ class MyComponent extends React.Component<{
 }
 ```
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Troubleshooting Handbook: TSLint
 
 Sometimes TSLint is just getting in the way. Judicious turning off of things can be helpful. Here are useful tslint disables you may use:
@@ -308,6 +388,13 @@ Sometimes TSLint is just getting in the way. Judicious turning off of things can
 - `/* tslint:disable:max-line-length */` disable line wrapping linting
 
 so on and so forth. there are any number of things you can disable, usually you can look at the error raised in VScode or whatever the tooling and the name of the error will correspond to the rule you should disable.
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # Troubleshooting Handbook: tsconfig.json
 
@@ -344,12 +431,26 @@ This is the setup I roll with for my component library:
 
 Please open an issue and discuss if there are better recommended choices. I like noImplicitAny to force me to type things.
 
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Recommended React + Typescript codebases to learn from
 
 - https://github.com/jaredpalmer/formik
 - https://github.com/jaredpalmer/react-fns
 - https://github.com/palantir/blueprint
 - https://github.com/Shopify/polaris
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
 
 # People you can ask React + Typescript questions about
 
