@@ -17,13 +17,15 @@
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
+  * [Enum Types](#enum-types)
   * [Type Casting](#type-casting)
+  * [Intersection Types](#intersection-types)
+  * [Omit attribute from a type](#omit-attribute-from-a-type)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook--tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook--tsconfigjson)
 - [Recommended React + Typescript codebases to learn from](#recommended-react---typescript-codebases-to-learn-from)
 - [People you can ask React + Typescript questions about](#people-you-can-ask-react---typescript-questions-about)
 - [My question isn't answered here!](#my-question-isn-t-answered-here-)
-
 
 </details>
 
@@ -352,6 +354,39 @@ You can also use a `!` character to assert that something is not undefined, but 
 <summary>Explanation</summary>
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
+## Enum Types
+
+Enums in Typescript default to numbers. You will usually want to use them as strings instead:
+
+```tsx
+export enum ButtonSizes {
+  default = 'default',
+  small = 'small',
+  large = 'large'
+}
+```
+
+Usage:
+
+```tsx
+export const PrimaryButton = (
+  props: Props & React.HTMLProps<HTMLButtonElement>
+) => (
+  <Button
+    size={ButtonSizes.default}
+    {...props}
+  />
+);
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This handy because Typescript will throw errors when you mistype a string for your props.
+
 </details>
 
 ## Type Casting
