@@ -9,8 +9,11 @@
 - [Stateless Functional Components](#stateless-functional-components)
 - [Stateful Class-based Components](#stateful-class-based-components)
 - [Extracting Prop Types](#extracting-prop-types)
+- [Basic Prop Types Examples](#basic-prop-types-examples)
+- [Useful React Type Examples](#useful-react-type-examples)
 - [Forms and Events](#forms-and-events)
 - [Higher Order Components/Render Props](#higher-order-components-render-props)
+- [References/createRef](#references-createref)
 - [Component/Design System Development](#component-design-system-development)
 - [Building](#building)
 - [Prettier + TSLint](#prettier---tslint)
@@ -80,6 +83,8 @@ Or you can use the provided generic type for functional components:
 ```tsx
 const App: React.SFC<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
+
+Quite frankly I prefer the former pattern as it's shorter.
 
 <details>
 
@@ -210,6 +215,53 @@ class App extends React.Component<AppProps, AppState> {
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
+
+# Basic Prop Types Examples
+
+```tsx
+type AppProps = {
+  message: string,
+  count: number,
+  disabled: boolean,
+  names: string[], // array of a type!
+  obj: object, // any object as long as you dont use it in your typescript code
+  obj2: {}, // same
+  object: {
+   id: string,
+   title: string
+  }, // an object with defined properties
+  objects: {
+   id: string,
+   title: string
+  }[], // array of objects!
+  onSomething: Function, // not recommended
+  onClick: () => void, // function that doesn't return anything
+  onChange: (id: number) => void, // function with named prop
+  optional?: OptionalType, // an optional prop
+}
+```
+
+# Useful React Type Examples
+
+```tsx
+export declare interface AppProps {
+  children1: JSX.Element; // bad
+  children2: JSX.Element | JSX.Element[]; // meh
+  children3: React.ReactChild | React.ReactChildren; // better
+  children: React.ReactNode; // best
+  style?: React.CSSProperties; // for style
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
+  props: Props & React.HTMLProps<HTMLButtonElement> // to impersonate all the props of a HTML element
+}
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
 # Forms and Events
 
 This can be a bit tricky. The tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
@@ -265,6 +317,35 @@ export const Card = (props: Props) => {
   );
 };
 ```
+
+If you are using a function-as-a-child render prop:
+
+```tsx
+export interface Props {
+  children: (foo: string) => React.ReactNode;
+}
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
+# References/createRef
+
+Use a `React.RefObject`:
+
+```tsx
+class CssThemeProvider extends React.PureComponent<Props> {
+  private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+  render() {
+    return <div ref={this.rootRef}>{this.props.children}</div>;
+  }
+}
+```
+
 <details>
 
 <summary>Explanation</summary>
@@ -389,6 +470,12 @@ export const PrimaryButton = (
     {...props}
   />
 );
+```
+
+Perhaps a better alternative to enum though, is just declaring a bunch of strings with union:
+
+```tsx
+export declare type Position = 'left' | 'right' | 'top' | 'bottom';
 ```
 
 <details>
