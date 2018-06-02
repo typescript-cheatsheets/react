@@ -99,7 +99,7 @@ Within Typescript, `React.Component` is a generic type (aka `React.Component<Pro
 
 ```tsx
 class App extends React.Component<{
-  message: string, // like this
+  message: string, // it takes one prop called 'message' which is a string type
 }> {
   render() {
     return (
@@ -113,9 +113,9 @@ If the component has state, here's how to add the types for the state:
 
 ```tsx
 class App extends React.Component<{
-  message: string,
+  message: string, // this is the prop type
 }, {
-    count: number, // like this
+    count: number, // this is the state type
   }> {
   state = { 
     count: 0
