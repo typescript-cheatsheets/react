@@ -1,4 +1,7 @@
-# Table of Contents
+
+<details>
+
+<summary># Table of Contents</summary>
 
 - [Prerequisites](#prerequisites)
 - [React + Typescript Starter Kits](#react---typescript-starter-kits)
@@ -10,11 +13,20 @@
 - [Higher Order Components/Render Props](#higher-order-components-render-props)
 - [Component/Design System Development](#component-design-system-development)
 - [Building](#building)
+- [Prettier + TSLint](#prettier---tslint)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
   * [Type Casting](#type-casting)
+- [Troubleshooting Handbook: TSLint](#troubleshooting-handbook--tslint)
+- [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook--tsconfigjson)
+- [Recommended React + Typescript codebases to learn from](#recommended-react---typescript-codebases-to-learn-from)
+- [People you can ask React + Typescript questions about](#people-you-can-ask-react---typescript-questions-about)
 - [My question isn't answered here!](#my-question-isn-t-answered-here-)
+
+
+</details>
+
 
 # Prerequisites
 
