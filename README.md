@@ -327,6 +327,7 @@ class App extends React.Component<{}, {
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
+
 ## Optional Types
 
 If a component has an optional prop, add a question mark :) and assign during destructure (or use defaultProps).
@@ -352,6 +353,7 @@ You can also use a `!` character to assert that something is not undefined, but 
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
+
 ## Type Casting
 
 Sometimes union types need to be cast to a more specific type to work with other APIs, so cast with the `as` keyword.
@@ -368,6 +370,85 @@ class MyComponent extends React.Component<{
     );
   }
 }
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
+
+## Intersection Types
+
+Adding two types together:
+
+```tsx
+export interface Props {
+  /** this dictates what the button will say  */
+  label: string;
+  /** this dictates what the button will do  */
+  onClick: (e: any) => void; // tslint:disable-line
+  /**
+   * Options for the button styling
+   *
+   * @default {size: default, type: primary}
+   *
+   */
+  displaytype?: {
+    size?: ButtonSizes;
+    type?: ButtonTypes;
+  };
+  /**
+   * Disables onclick
+   *
+   * @default false
+   */
+  disabled?: boolean;
+}
+export const PrimaryButton = (
+  props: Props & React.HTMLProps<HTMLButtonElement>
+) => (
+  <Button
+    {...props}
+  />
+);
+```
+
+## Omit attribute from a type
+
+Sometimes when intersecting types, we want to define our own version of an attribute. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` attribute. Here's how to extract that out:
+
+```tsx
+export interface Props {
+  label: React.ReactNode
+}
+
+// here is the magic - omitting an attribute
+type Diff<T extends string, U extends string> = ({ [P in T]: P } &
+  { [P in U]: never } & { [x: string]: never })[T];
+type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+// end of magic
+
+// usage
+export const Checkbox = (
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, 'label'>
+) => {
+  const { label } = props;
+  return (
+    <div className='Checkbox'>
+      <label className='Checkbox-label'>
+        <input
+          type="checkbox"
+          checked={!!checkedclass}
+          {...props}
+        />
+      </label>
+      <span>{label}</span>
+    </div>
+  );
+};
 ```
 
 <details>
