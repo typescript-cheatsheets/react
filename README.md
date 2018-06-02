@@ -7,7 +7,10 @@
 - [Stateful Class-based Components](#stateful-class-based-components)
 - [Extracting Prop Types](#extracting-prop-types)
 - [Forms and Events](#forms-and-events)
-- [Type Troubleshooting Handbook](#type-troubleshooting-handbook)
+- [Higher Order Components/Render Props](#higher-order-components-render-props)
+- [Component/Design System Development](#component-design-system-development)
+- [Building](#building)
+- [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
   * [Type Casting](#type-casting)
@@ -185,7 +188,35 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
-# Type Troubleshooting Handbook
+# Higher Order Components/Render Props
+
+Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
+
+```tsx
+import * as React from 'react';
+export interface Props {
+  label?: React.ReactNode;
+  children: React.ReactNode;
+}
+export const Card = (props: Props) => {
+  return (
+    <div>
+      {props.label && <div>{props.label}</div>}
+      {props.children}
+    </div>
+  );
+};
+```
+
+# Component/Design System Development
+
+For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>
+
+# Building
+
+Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+# Troubleshooting Handbook: Types
 
 Facing weird type errors? You aren't alone. This is the worst part of using Typescript with React. Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
