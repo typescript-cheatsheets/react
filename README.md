@@ -43,6 +43,9 @@
 # React + Typescript Starter Kits
 
 1. <https://github.com/wmonk/create-react-app-typescript> is the officially recommended Typescript fork of `create-react-app`.
+
+   > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project.
+   
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
