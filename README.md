@@ -386,6 +386,19 @@ Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
+# Working with Non-Typescript Libraries (writing your own index.d.ts)
+
+
+Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
+
 # Troubleshooting Handbook: Types
 
 Facing weird type errors? You aren't alone. This is the worst part of using Typescript with React. Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
@@ -518,29 +531,10 @@ Adding two types together:
 
 ```tsx
 export interface Props {
-  /** this dictates what the button will say  */
   label: string;
-  /** this dictates what the button will do  */
-  onClick: (e: any) => void; // tslint:disable-line
-  /**
-   * Options for the button styling
-   *
-   * @default {size: default, type: primary}
-   *
-   */
-  displaytype?: {
-    size?: ButtonSizes;
-    type?: ButtonTypes;
-  };
-  /**
-   * Disables onclick
-   *
-   * @default false
-   */
-  disabled?: boolean;
 }
 export const PrimaryButton = (
-  props: Props & React.HTMLProps<HTMLButtonElement>
+  props: Props & React.HTMLProps<HTMLButtonElement> // adding my Props together with the @types/react button provided props
 ) => (
   <Button
     {...props}
@@ -554,7 +548,7 @@ Sometimes when intersecting types, we want to define our own version of an attri
 
 ```tsx
 export interface Props {
-  label: React.ReactNode
+  label: React.ReactNode // this will conflict with the InputElement's label
 }
 
 // here is the magic - omitting an attribute
@@ -573,7 +567,6 @@ export const Checkbox = (
       <label className='Checkbox-label'>
         <input
           type="checkbox"
-          checked={!!checkedclass}
           {...props}
         />
       </label>
