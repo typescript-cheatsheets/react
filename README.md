@@ -8,6 +8,7 @@
 - [Import React](#import-react)
 - [Stateless Functional Components](#stateless-functional-components)
 - [Stateful Class-based Components](#stateful-class-based-components)
+- [Typing DefaultProps](#typing-defaultprops)
 - [Extracting Prop Types](#extracting-prop-types)
 - [Basic Prop Types Examples](#basic-prop-types-examples)
 - [Useful React Type Examples](#useful-react-type-examples)
@@ -17,17 +18,19 @@
 - [Component/Design System Development](#component-design-system-development)
 - [Building](#building)
 - [Prettier + TSLint](#prettier---tslint)
+- [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
   * [Enum Types](#enum-types)
-  * [Type Casting](#type-casting)
+  * [Type Assertion](#type-assertion)
   * [Intersection Types](#intersection-types)
   * [Omit attribute from a type](#omit-attribute-from-a-type)
+  * [Type Zoo](#type-zoo)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook--tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook--tsconfigjson)
 - [Recommended React + Typescript codebases to learn from](#recommended-react---typescript-codebases-to-learn-from)
-- [People you can ask React + Typescript questions about](#people-you-can-ask-react---typescript-questions-about)
+- [Other React + Typescript resources](#other-react---typescript-resources)
 - [My question isn't answered here!](#my-question-isn-t-answered-here-)
 
 </details>
@@ -181,6 +184,11 @@ class App extends React.Component<{
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
+# Typing DefaultProps
+
+It is easy to [type defaults for functional components](https://twitter.com/GeeWengel/status/1000242363376205825), but there is some debate in the community on how to type the `static defaultProps` field for class-based components. We have an active discussion on several approaches on how to do this. [Please check out our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/4).
+
+
 # Extracting Prop Types
 
 Instead of defining prop types inline, you can declare them separately (useful for reusability or code organization):
@@ -219,7 +227,6 @@ class App extends React.Component<AppProps, AppState> {
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
-
 
 # Basic Prop Types Examples
 
@@ -393,8 +400,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 # Working with Non-Typescript Libraries (writing your own index.d.ts)
 
-
-Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8).
 
 <details>
 
@@ -490,7 +496,7 @@ export const PrimaryButton = (
 );
 ```
 
-Perhaps a better alternative to enum though, is just declaring a bunch of strings with union:
+A simpler alternative to enum is just declaring a bunch of strings with union, but this doesn't get autocompletion or syntactic benefits:
 
 ```tsx
 export declare type Position = 'left' | 'right' | 'top' | 'bottom';
@@ -504,10 +510,9 @@ This handy because Typescript will throw errors when you mistype a string for yo
 
 </details>
 
-## Type Casting
+## Type Assertion
 
-Sometimes union types need to be cast to a more specific type to work with other APIs, so cast with the `as` keyword.
-
+Sometimes Typescript is just getting your type wrong, or union types need to be asserted to a more specific type to work with other APIs, so assert with the `as` keyword. This tells the compiler you know better than it does.
 
 ```tsx
 class MyComponent extends React.Component<{
@@ -526,7 +531,9 @@ class MyComponent extends React.Component<{
 
 <summary>Explanation</summary>
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+Note that this is [not the same as casting](https://www.reddit.com/r/reactjs/comments/8o5owb/react_typescript_cheatsheet_for_react_users_using/e01d2md/?context=3).
+
+Something to add? Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
 
@@ -587,6 +594,10 @@ export const Checkbox = (
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
+
+## Type Zoo
+
+As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit).
 
 # Troubleshooting Handbook: TSLint
 
@@ -666,7 +677,10 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 # Other React + Typescript resources
 
 - me! <https://twitter.com/swyx>
-- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover.
+- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
+- [Ultimate React Component Patterns with Typescript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
+- [Basarat's Typescript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
+- [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # My question isn't answered here!
