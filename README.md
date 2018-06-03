@@ -1,4 +1,6 @@
 
+:wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out Typescript with React! This is meant to be an intermediate guide for React developers familiar with the concepts of Typescript but who are just getting started writing their first React + Typescript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
+
 <details>
 
 <summary><b>Table of Contents</b></summary>
