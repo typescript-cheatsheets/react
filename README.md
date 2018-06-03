@@ -77,7 +77,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 You can specify the type of props as you destructure them:
 
 ```tsx
-const App = ({ message: string }) => <div>{message}</div>;
+const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
 Or you can use the provided generic type for functional components:
