@@ -660,19 +660,10 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
-# People you can ask React + Typescript questions about
-
-remember nobody owes you anything...
-
-First try:
-
-- [Google](https://google.com)
-- [StackOverflow](https://stackoverflow.com)
-
-Then: 
+# Other React + Typescript resources
 
 - me! <https://twitter.com/swyx>
-- (maybe) Jared Palmer <https://twitter.com/jaredpalmer>
+- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover.
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # My question isn't answered here!
