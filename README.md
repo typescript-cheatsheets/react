@@ -55,7 +55,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 ```
 
-In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run Typescript with `--esModuleInterop` (or [add `"esModuleInterop": true` to tsconfig](https://stackoverflow.com/questions/48785451/is-there-a-way-to-use-esmoduleinterop-in-tsconfig-as-opposed-to-it-being-a-fla)) to import like in regular jsx:
+In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run Typescript with `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true` to tsconfig) to import like in regular jsx:
 
 ```tsx
 import React from 'react';
@@ -66,7 +66,9 @@ import ReactDOM from 'react-dom';
 
 <summary>Explanation</summary>
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+Why not `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
+
+Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
 
