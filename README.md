@@ -147,9 +147,9 @@ class App extends React.Component<{
     );
   }
   increment = (amt: number) => { // like this
-    this.setState({
-      count: this.state.count + amt
-    });
+    this.setState(state => ({
+      count: state.count + amt
+    }));
   }
 }
 ```
@@ -422,9 +422,9 @@ class App extends React.Component<{}, {
     );
   }
   increment = (amt: number) => {
-    this.setState({
-      count: this.state.count + amt
-    });
+    this.setState(state => ({
+      count: (state.count || 0) + amt
+    }));
   }
 }
 ```
