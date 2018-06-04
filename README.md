@@ -16,6 +16,7 @@
 - [Useful React Type Examples](#useful-react-type-examples)
 - [Forms and Events](#forms-and-events)
 - [Higher Order Components/Render Props](#higher-order-components-render-props)
+- [Context](#context)
 - [References/createRef](#references-createref)
 - [Component/Design System Development](#component-design-system-development)
 - [Building](#building)
@@ -50,7 +51,7 @@
 1. <https://github.com/wmonk/create-react-app-typescript> is the officially recommended Typescript fork of `create-react-app`.
 
    > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project.
-   
+
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
@@ -127,7 +128,7 @@ class App extends React.Component<{
 }, {
     count: number, // this is the state type
   }> {
-  state = { 
+  state = {
     count: 0
   }
   render() {
@@ -338,6 +339,60 @@ If you are using a function-as-a-child render prop:
 export interface Props {
   children: (foo: string) => React.ReactNode;
 }
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+</details>
+
+# Context
+
+Using the new context API `React.createContext`:
+
+```tsx
+interface ProviderState {
+  themeColor: string
+}
+
+interface UpdateStateArg {
+  key: keyof ProviderState
+  value: string
+}
+
+interface ProviderStore {
+  state: ProviderState
+  update: (arg: UpdateStateArg) => void
+}
+
+const Context = React.createContext({} as ProviderStore)
+
+class Provider extends React.Component<{}, ProviderState> {
+  public readonly state = {
+    themeColor: 'red'
+  }
+
+  private update = ({ key, value }: UpdateStateArg) => {
+    this.setState({ [key]: value })
+  }
+
+  public render() {
+    const store: ProviderStore = {
+      state: this.state,
+      update: this.update
+    }
+
+    return (
+      <Context.Provider value={store}>
+        {this.props.children}
+      </Context.Provider>
+    )
+  }
+}
+
+const Consumer = Context.Consumer
 ```
 
 <details>
