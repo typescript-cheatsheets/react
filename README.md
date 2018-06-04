@@ -5,22 +5,30 @@
 
 <summary><b>Table of Contents</b></summary>
 
-- [Prerequisites](#prerequisites)
-- [React + Typescript Starter Kits](#react---typescript-starter-kits)
-- [Import React](#import-react)
-- [Stateless Functional Components](#stateless-functional-components)
-- [Stateful Class-based Components](#stateful-class-based-components)
-- [Typing DefaultProps](#typing-defaultprops)
-- [Extracting Prop Types](#extracting-prop-types)
-- [Basic Prop Types Examples](#basic-prop-types-examples)
-- [Useful React Type Examples](#useful-react-type-examples)
-- [Forms and Events](#forms-and-events)
-- [Higher Order Components/Render Props](#higher-order-components-render-props)
-- [References/createRef](#references-createref)
-- [Component/Design System Development](#component-design-system-development)
-- [Building](#building)
-- [Prettier + TSLint](#prettier---tslint)
-- [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
+- [Section 1: Setup](#section-1--setup)
+  * [Prerequisites](#prerequisites)
+  * [React + Typescript Starter Kits](#react---typescript-starter-kits)
+  * [Import React](#import-react)
+- [Section 2: Getting Started](#section-2--getting-started)
+  * [Stateless Functional Components](#stateless-functional-components)
+  * [Stateful Class-based Components](#stateful-class-based-components)
+  * [Typing DefaultProps](#typing-defaultprops)
+  * [Extracting Prop Types](#extracting-prop-types)
+  * [Basic Prop Types Examples](#basic-prop-types-examples)
+  * [Useful React Type Examples](#useful-react-type-examples)
+  * [Forms and Events](#forms-and-events)
+- [Section 3: Advanced Guides](#section-3--advanced-guides)
+  * [Higher Order Components/Render Props](#higher-order-components-render-props)
+  * [Context](#context)
+  * [Forwarding References/createRef](#forwarding-references-createref)
+  * [Portals](#portals)
+  * [Error Boundaries](#error-boundaries)
+  * [Timeout/Placeholder/createFetcher](#timeout-placeholder-createfetcher)
+- [Section 4: Misc. Concerns](#section-4--misc-concerns)
+  * [Component/Design System Development](#component-design-system-development)
+  * [Building](#building)
+  * [Prettier + TSLint](#prettier---tslint)
+  * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
@@ -37,26 +45,27 @@
 
 </details>
 
+# Section 1: Setup
 
-# Prerequisites
+## Prerequisites
 
 1. good understanding of [React](https://reactjs.org)
 2. familiarity with [Typescript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 3. having read [the Typescript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
 4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
 
-# React + Typescript Starter Kits
+## React + Typescript Starter Kits
 
 1. <https://github.com/wmonk/create-react-app-typescript> is the officially recommended Typescript fork of `create-react-app`.
 
-   > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project.
-   
+   > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project. *Contributed by: [@antmdvs](https://github.com/sw-yx/react-typescript-cheatsheet/pull/11)*
+
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
 In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/).
 
-# Import React
+## Import React
 
 ```tsx
 import * as React from 'react';
@@ -80,7 +89,11 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 </details>
 
 
-# Stateless Functional Components
+# Section 2: Getting Started
+
+## Stateless Functional Components
+
+*Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9)*
 
 You can specify the type of props as you destructure them:
 
@@ -96,14 +109,9 @@ const App: React.SFC<{ message: string }> = ({ message }) => <div>{message}</div
 
 Quite frankly I prefer the former pattern as it's shorter.
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Stateful Class-based Components
+## Stateful Class-based Components
 
 Within Typescript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you actually want to provide it with prop and (optionally) state types:
 
@@ -127,7 +135,7 @@ class App extends React.Component<{
 }, {
     count: number, // this is the state type
   }> {
-  state = { 
+  state = {
     count: 0
   }
   render() {
@@ -179,14 +187,12 @@ class App extends React.Component<{
   }
 }
 ```
-<details>
 
-<summary>Explanation</summary>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+## Typing DefaultProps
 
-# Typing DefaultProps
+It is easy to [type defaults for functional components](https://twitter.com/GeeWengel/status/1000242363376205825), but there is some debate in the community on how to type the `static defaultProps` field for class-based components. 
 
 It is easy to type a defaultProps static member of a React component. There's more than one way to do it, but since we want to show the neatest code as possible
 we choosed to propose this way of implementing them:
@@ -234,10 +240,9 @@ The problem with this approach that if we need to add another prop in the future
 `IMyComponentDefaultProps`!
 </details>
 
+## Extracting Prop Types
 
-# Extracting Prop Types
-
-Instead of defining prop types inline, you can declare them separately (useful for reusability or code organization):
+Instead of defining prop types *inline*, you can declare them separately (useful for reusability or code organization):
 
 ```tsx
 type AppProps = { message: string }
@@ -267,14 +272,9 @@ class App extends React.Component<AppProps, AppState> {
 
 `interface`s are different from `type`s in Typescript, but for our purposes they do the same things. [read more](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Basic Prop Types Examples
+## Basic Prop Types Examples
 
 ```tsx
 type AppProps = {
@@ -299,7 +299,7 @@ type AppProps = {
 }
 ```
 
-# Useful React Type Examples
+## Useful React Type Examples
 
 ```tsx
 export declare interface AppProps {
@@ -313,14 +313,9 @@ export declare interface AppProps {
 }
 ```
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Forms and Events
+## Forms and Events
 
 This can be a bit tricky. The tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
 
@@ -349,14 +344,11 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
+# Section 3: Advanced Guides
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Higher Order Components/Render Props
+## Higher Order Components/Render Props
 
 Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
 
@@ -384,14 +376,60 @@ export interface Props {
 }
 ```
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
+## Context
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+*Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)*
 
-# References/createRef
+Using the new context API `React.createContext`:
+
+```tsx
+interface ProviderState {
+  themeColor: string
+}
+
+interface UpdateStateArg {
+  key: keyof ProviderState
+  value: string
+}
+
+interface ProviderStore {
+  state: ProviderState
+  update: (arg: UpdateStateArg) => void
+}
+
+const Context = React.createContext({} as ProviderStore)
+
+class Provider extends React.Component<{}, ProviderState> {
+  public readonly state = {
+    themeColor: 'red'
+  }
+
+  private update = ({ key, value }: UpdateStateArg) => {
+    this.setState({ [key]: value })
+  }
+
+  public render() {
+    const store: ProviderStore = {
+      state: this.state,
+      update: this.update
+    }
+
+    return (
+      <Context.Provider value={store}>
+        {this.props.children}
+      </Context.Provider>
+    )
+  }
+}
+
+const Consumer = Context.Consumer
+```
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Forwarding References/createRef
 
 Use a `React.RefObject`:
 
@@ -404,57 +442,51 @@ class CssThemeProvider extends React.PureComponent<Props> {
 }
 ```
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
+## Portals
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+*Not written yet.*
 
-# Component/Design System Development
+[Want to contribute this section? Respond in this issue.](https://github.com/sw-yx/react-typescript-cheatsheet/issues/6)
+
+## Error Boundaries
+
+*Not written yet.*
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Timeout/Placeholder/createFetcher
+
+*Not written yet.* watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+# Section 4: Misc. Concerns
+
+Sometimes writing React isn't just about React. While we don't focus on other libraries like Redux (see below for more on that), here are some tips on other common concerns when making apps with React + Typescript.
+
+## Component/Design System Development
 
 For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
-<details>
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-<summary>Explanation</summary>
+## Building
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+*Not written yet.*
 
-# Building
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+## Prettier + TSLint
 
-<details>
+We have an active discussion on Linting [here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/7).
 
-<summary>Explanation</summary>
+## Working with Non-Typescript Libraries (writing your own index.d.ts)
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Prettier + TSLint
-
-Please contribute on this topic! [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
-# Working with Non-Typescript Libraries (writing your own index.d.ts)
+*Not written yet.*
 
 Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8).
-
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
 
 # Troubleshooting Handbook: Types
 
