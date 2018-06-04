@@ -234,7 +234,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 }
 ```
 
-The problem with this approach that if we need to add another prop in the future to the defaultProps map then I should update the 
+The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the 
 `IMyComponentDefaultProps`!
 </details>
 
