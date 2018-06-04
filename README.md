@@ -188,7 +188,51 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 # Typing DefaultProps
 
-It is easy to [type defaults for functional components](https://twitter.com/GeeWengel/status/1000242363376205825), but there is some debate in the community on how to type the `static defaultProps` field for class-based components. We have an active discussion on several approaches on how to do this. [Please check out our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/4).
+It is easy to type a defaultProps static member of a React component. There's more than one way to do it, but since we want to show the neatest code as possible
+we choosed to propose this way of implementing them:
+
+```ts
+interface IMyComponentProps {
+  firstProp: string;
+  secondProp: IPerson[];
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static defaultProps: Partial<IMyComponentProps> = {
+    firstProp: "default",
+  };
+}
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fullfill a partial 
+version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
+
+The other suggestions was related to create a new interface that will look like this:
+
+```ts
+interface IMyComponentProps {
+  firstProp: string;
+  secondProp: IPerson[];
+}
+
+interface IMyComponentDefaultProps {
+    firstProp: string;
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static defaultProps: IMyComponentDefaultProps = {
+    firstProp: "default",
+  };
+}
+```
+
+The problem with this approach that if we need to add another prop in the future to the defaultProps map then I should update the 
+`IMyComponentDefaultProps`!
+</details>
 
 
 # Extracting Prop Types
