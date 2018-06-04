@@ -27,7 +27,7 @@
 - [Section 4: Misc. Concerns](#section-4--misc-concerns)
   * [Component/Design System Development](#component-design-system-development)
   * [Building](#building)
-  * [Prettier + TSLint](#prettier---tslint)
+  * [Prettier + TSLint](#prettier--tslint)
   * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
