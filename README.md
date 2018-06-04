@@ -192,8 +192,6 @@ class App extends React.Component<{
 
 ## Typing DefaultProps
 
-It is easy to [type defaults for functional components](https://twitter.com/GeeWengel/status/1000242363376205825), but there is some debate in the community on how to type the `static defaultProps` field for class-based components. 
-
 It is easy to type a defaultProps static member of a React component. There's more than one way to do it, but since we want to show the neatest code as possible
 we choosed to propose this way of implementing them:
 
