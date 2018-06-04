@@ -439,6 +439,54 @@ For developing with Storybook, read the docs I maintain over here: <https://stor
 
 We have an active discussion on Linting [here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/7).
 
+To user prettier with TSLint you will need [`tslint-config-prettier`](https://github.com/alexjoverm/tslint-config-prettier) which disables all conflicting rules and optionally [`tslint-plugin-prettier`](https://github.com/ikatyang/tslint-plugin-prettier) which will highlight differences as TSLint issues.
+
+Example configuration:
+
+<table>
+    <tr>
+        <th>
+            <strong>tslint.json</strong>
+        </th>
+        <th>
+            <strong>.prettierrc</strong>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <pre>
+{
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": ["node_modules/**/*.ts"]
+  },
+  "rules": {
+    "prettier": true
+  }
+}
+            </pre>
+        </td>
+        <td>
+            <pre>
+{
+  "printWidth": 89,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false
+}
+            </pre>
+        </td>
+    </tr>
+</table>
+
 ## Working with Non-Typescript Libraries (writing your own index.d.ts)
 
 *Not written yet.*
