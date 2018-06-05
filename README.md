@@ -238,6 +238,8 @@ The problem with this approach that if we need to add another prop in the future
 `IMyComponentDefaultProps`!
 </details>
 
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
 ## Extracting Prop Types
 
 Instead of defining prop types *inline*, you can declare them separately (useful for reusability or code organization):
