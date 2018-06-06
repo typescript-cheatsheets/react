@@ -244,11 +244,7 @@ The problem with this approach that if we need to add another prop in the future
 
 ## propTypes in TypeScript
 
-Since TypeScript is supporting and embracing Types in compile-time some may think that there's no need for injecting the propTypes
-to do the run-time type checking. While that's true in some cases (like developing an app that is totally being used by TypeScript developers),
-injecting the propType is still recommened and relevant in the libraries that is willing to be used 
-by JavaScript developers because they won't gain the benefits of the type-system and will likely break things such as: passing props with 
-not suitable types.
+`propTypes` may be unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
 
 ```ts
 interface IMyComponentProps {
