@@ -13,6 +13,7 @@
   * [Stateless Functional Components](#stateless-functional-components)
   * [Stateful Class-based Components](#stateful-class-based-components)
   * [Typing DefaultProps](#typing-defaultprops)
+  * [propTypes in TypeScript](#proptypes-in-typescript)
   * [Extracting Prop Types](#extracting-prop-types)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Type Examples](#useful-react-type-examples)
@@ -237,6 +238,31 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the 
 `IMyComponentDefaultProps`!
 </details>
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+
+## propTypes in TypeScript
+
+Since TypeScript is supporting and embracing Types in compile-time some may think that there's no need for injecting the propTypes
+to do the run-time type checking. While that's true in some cases (like developing an app that is totally being used by TypeScript developers),
+injecting the propType is still recommened and relevant in the libraries that is willing to be used 
+by JavaScript developers because they won't gain the benefits of the type-system and will likely break things such as: passing props with 
+not suitable types.
+
+```ts
+interface IMyComponentProps {
+  autoHeight: boolean;
+  secondProp: number;
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static propTypes = {
+    autoHeight: PropTypes.bool,
+    secondProp: PropTypes.number.isRequired,
+  };
+}
+```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
