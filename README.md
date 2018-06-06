@@ -107,7 +107,11 @@ Or you can use the provided generic type for functional components:
 const App: React.SFC<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
 
-Quite frankly I prefer the former pattern as it's shorter. However, if you need to use `children` property inside the function body, in the former case it has to be added explicitly. `SFC<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
+<details>
+
+<summary><b>Discussion</b></summary>
+
+The former pattern is shorter, so why would people use `React.SFC` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `SFC<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
 
 ```tsx
 const Title: React.SFC<{ title: string }> = ({ children, title }) => (
@@ -116,6 +120,8 @@ const Title: React.SFC<{ title: string }> = ({ children, title }) => (
 ```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+</details>
 
 ## Stateful Class-based Components
 
