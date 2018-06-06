@@ -486,6 +486,8 @@ Example configuration:
     </tr>
 </table>
 
+An example github repository with a project showing how to integrate [prettier + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
+
 ## ESLint + TSLint
 
 Why? ESLint ecosystem is rich, with lots of different plugins and config files, whereas TSLint tend to lag behind in some areas.
@@ -557,6 +559,8 @@ npm i -D typescript-eslint-parser
   </td>
  </tr>
 </table>
+
+An example github repository with a project showing how to integrate [eslint + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
 
 ## Working with Non-Typescript Libraries (writing your own index.d.ts)
 
