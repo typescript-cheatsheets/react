@@ -27,7 +27,8 @@
 - [Section 4: Misc. Concerns](#section-4--misc-concerns)
   * [Component/Design System Development](#component-design-system-development)
   * [Building](#building)
-  * [Prettier + TSLint](#prettier---tslint)
+  * [Prettier + TSLint](#prettier--tslint)
+  * [ESLint + TSLint](#eslint--tslint)
   * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
@@ -490,7 +491,131 @@ For developing with Storybook, read the docs I maintain over here: <https://stor
 
 ## Prettier + TSLint
 
-We have an active discussion on Linting [here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/7).
+*Contributed by: [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14)*
+
+To use prettier with TSLint you will need [`tslint-config-prettier`](https://github.com/alexjoverm/tslint-config-prettier) which disables all the conflicting rules and optionally [`tslint-plugin-prettier`](https://github.com/ikatyang/tslint-plugin-prettier) which will highlight differences as TSLint issues.
+
+Example configuration:
+
+<table>
+    <tr>
+        <th>
+            <strong>tslint.json</strong>
+        </th>
+        <th>
+            <strong>.prettierrc</strong>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <pre>
+{
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": ["node_modules/**/*.ts"]
+  },
+  "rules": {
+    "prettier": true
+  }
+}
+            </pre>
+        </td>
+        <td>
+            <pre>
+{
+  "printWidth": 89,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false
+}
+            </pre>
+        </td>
+    </tr>
+</table>
+
+An example github repository with a project showing how to integrate [prettier + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
+
+## ESLint + TSLint
+
+Why? ESLint ecosystem is rich, with lots of different plugins and config files, whereas TSLint tend to lag behind in some areas.
+
+To remedy this nuisance there is an [`eslint-typescript-parser`](https://github.com/eslint/typescript-eslint-parser) which tries to bridge the differences between javascript and typescript. It still has some rough corners, but can provide consistent assistance with certain plugins.
+
+<table>
+ <tr>
+  <td>
+   Usage
+  </td>
+  <td>
+   .eslintrc
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <pre>
+// Install:
+
+npm i -D typescript-eslint-parser
+
+// And in your ESLint configuration file:
+
+"parser": "typescript-eslint-parser"
+  </pre>
+  </td>
+  <td>
+  <pre>
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["prettier", "jest", "unicorn"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
+  </pre>
+  </td>
+ </tr>
+</table>
+
+An example github repository with a project showing how to integrate [eslint + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
 
 ## Working with Non-Typescript Libraries (writing your own index.d.ts)
 
