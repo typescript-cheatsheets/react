@@ -244,7 +244,7 @@ The problem with this approach that if we need to add another prop in the future
 
 ## propTypes in TypeScript
 
-`propTypes` may be unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
+`propTypes` may seem unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
 
 ```ts
 interface IMyComponentProps {
