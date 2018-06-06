@@ -93,7 +93,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 ## Stateless Functional Components
 
-*Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9)*
+*Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9) and [@tpetrina](https://github.com/sw-yx/react-typescript-cheatsheet/pull/21)*
 
 You can specify the type of props as you destructure them:
 
