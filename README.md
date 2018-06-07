@@ -13,6 +13,7 @@
   * [Stateless Functional Components](#stateless-functional-components)
   * [Stateful Class-based Components](#stateful-class-based-components)
   * [Typing DefaultProps](#typing-defaultprops)
+  * [propTypes in TypeScript](#proptypes-in-typescript)
   * [Extracting Prop Types](#extracting-prop-types)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Type Examples](#useful-react-type-examples)
@@ -250,6 +251,27 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the 
 `IMyComponentDefaultProps`!
 </details>
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+
+## propTypes in TypeScript
+
+`propTypes` may seem unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
+
+```ts
+interface IMyComponentProps {
+  autoHeight: boolean;
+  secondProp: number;
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static propTypes = {
+    autoHeight: PropTypes.bool,
+    secondProp: PropTypes.number.isRequired,
+  };
+}
+```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
