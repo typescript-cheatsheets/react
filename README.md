@@ -13,8 +13,8 @@
   * [Stateless Functional Components](#stateless-functional-components)
   * [Stateful Class-based Components](#stateful-class-based-components)
   * [Typing DefaultProps](#typing-defaultprops)
-  * [propTypes in TypeScript](#proptypes-in-typescript)
   * [Extracting Prop Types](#extracting-prop-types)
+  * [Types or Interfaces?](#types-or-interfaces-)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Type Examples](#useful-react-type-examples)
   * [Forms and Events](#forms-and-events)
@@ -26,10 +26,11 @@
   * [Error Boundaries](#error-boundaries)
   * [Timeout/Placeholder/createFetcher](#timeout-placeholder-createfetcher)
 - [Section 4: Misc. Concerns](#section-4--misc-concerns)
+  * [Writing Typescript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   * [Component/Design System Development](#component-design-system-development)
   * [Building](#building)
-  * [Prettier + TSLint](#prettier--tslint)
-  * [ESLint + TSLint](#eslint--tslint)
+  * [Prettier + TSLint](#prettier---tslint)
+  * [ESLint + TSLint](#eslint---tslint)
   * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
   * [Union types](#union-types)
@@ -251,27 +252,6 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the 
 `IMyComponentDefaultProps`!
 </details>
-
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
-
-## propTypes in TypeScript
-
-`propTypes` may seem unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
-
-```ts
-interface IMyComponentProps {
-  autoHeight: boolean;
-  secondProp: number;
-}
-
-export class MyComponent extends React.Component<IMyComponentProps, {}> {
-  static propTypes = {
-    autoHeight: PropTypes.bool,
-    secondProp: PropTypes.number.isRequired,
-  };
-}
-```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -510,6 +490,26 @@ class CssThemeProvider extends React.PureComponent<Props> {
 # Section 4: Misc. Concerns
 
 Sometimes writing React isn't just about React. While we don't focus on other libraries like Redux (see below for more on that), here are some tips on other common concerns when making apps with React + Typescript.
+
+## Writing Typescript Libraries instead of Apps
+
+`propTypes` may seem unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
+
+```ts
+interface IMyComponentProps {
+  autoHeight: boolean;
+  secondProp: number;
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static propTypes = {
+    autoHeight: PropTypes.bool,
+    secondProp: PropTypes.number.isRequired,
+  };
+}
+```
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 ## Component/Design System Development
 
