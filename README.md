@@ -28,7 +28,7 @@
 - [Section 4: Misc. Concerns](#section-4--misc-concerns)
   * [Writing Typescript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   * [Component/Design System Development](#component-design-system-development)
-  * [Building](#building)
+  * [Migrating from Flow](#migrating-from-flow)
   * [Prettier + TSLint](#prettier---tslint)
   * [ESLint + TSLint](#eslint---tslint)
   * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries--writing-your-own-indexdts-)
@@ -517,9 +517,9 @@ For developing with Storybook, read the docs I maintain over here: <https://stor
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-## Building
+## Migrating From Flow
 
-*Not written yet.*
+You may wish to use <https://github.com/piotrwitek/utility-types>. If you have specific advice in this area, please file a PR!
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -656,6 +656,8 @@ An example github repository with a project showing how to integrate [eslint + t
 *Not written yet.*
 
 Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8).
+
+
 
 # Troubleshooting Handbook: Types
 
@@ -844,7 +846,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 ## Type Zoo
 
-As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit).
+As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit), as well as [utility-types](https://github.com/piotrwitek/utility-types) (especially for those migrating from Flow).
 
 # Troubleshooting Handbook: TSLint
 
