@@ -369,6 +369,32 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
+You can also use React's event handler types like this:
+
+```tsx
+class App extends React.Component<{}, { // no props
+    text: string,
+  }> {
+  state = {
+    text: ''
+  }
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          value={this.state.text}
+          onChange={this.onChange}
+        />
+      </div>
+    );
+  }
+  onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    this.setState({text: e.currentTarget.value})
+  }
+}
+```
+
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # Section 3: Advanced Guides
