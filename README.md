@@ -369,7 +369,7 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
-Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you can may alternatively apply types on to the event handler itself (*contributed by @TomasHubelbauer*):
+Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (*contributed by @TomasHubelbauer*):
 
 ```tsx
   onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
