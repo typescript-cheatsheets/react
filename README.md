@@ -369,33 +369,21 @@ class App extends React.Component<{}, { // no props
 }
 ```
 
-You can also use React's event handler types like this:
+Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you can may alternatively apply types on to the event handler itself (*contributed by @TomasHubelbauer*):
 
 ```tsx
-class App extends React.Component<{}, { // no props
-    text: string,
-  }> {
-  state = {
-    text: ''
-  }
-  render() {
-    return (
-      <div>
-        <input
-          type="text"
-          value={this.state.text}
-          onChange={this.onChange}
-        />
-      </div>
-    );
-  }
   onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({text: e.currentTarget.value})
   }
-}
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+<details>
+
+<summary><b>Discussion</b></summary>
+
+Why two ways to do the same thing? The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... *artisanally hand-rolled*. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
+
+</details>
 
 # Section 3: Advanced Guides
 
