@@ -485,9 +485,39 @@ class CssThemeProvider extends React.PureComponent<Props> {
 
 ## Portals
 
-*Not written yet.*
+Using `ReactDOM.createPortal`:
 
-[Want to contribute this section? Respond in this issue.](https://github.com/sw-yx/react-typescript-cheatsheet/issues/6)
+```tsx
+const modalRoot = document.getElementById('modal-root') as HTMLElement;
+// assuming in your html file has a div with id 'modal-root';
+
+export class Modal extends React.Component {
+    el: HTMLElement = document.createElement('div');
+
+    componentDidMount() {
+        modalRoot.appendChild(this.el);
+    }
+
+    componentWillUnmount() {
+        modalRoot.removeChild(this.el);
+    }
+
+    render() {
+        return ReactDOM.createPortal(
+            this.props.children,
+            this.el
+        )
+    }
+}
+```
+
+<details>
+
+<summary><b>Context of Example</b></summary>
+
+This example is based on the [Event Bubbling Through Portal](https://reactjs.org/docs/portals.html#event-bubbling-through-portals) example of React docs.
+
+</details>
 
 ## Error Boundaries
 
