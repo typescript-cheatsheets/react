@@ -944,6 +944,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 - [Ultimate React Component Patterns with Typescript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's Typescript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
 - [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
+- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # My question isn't answered here!
