@@ -63,9 +63,7 @@
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
-4. <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
-
-In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/).
+In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + Typescript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
 ## Import React
 
@@ -757,12 +755,16 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 - https://github.com/palantir/blueprint
 - https://github.com/Shopify/polaris
 
-<details>
+React Boilerplates:
 
-<summary>Explanation</summary>
+- <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/react-typescript-cheatsheet/pull/20)*
+
+- https://github.com/GeekyAnts/react-native-seed
+- https://github.com/lopezjurip/ReactNativeTS
+- https://github.com/emin93/react-native-template-typescript
+- <https://github.com/Microsoft/TypeScript-React-Native-Starter>
 
 # Other React + Typescript resources
 
