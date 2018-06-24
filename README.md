@@ -212,7 +212,7 @@ class App extends React.Component<{
 ## Typing DefaultProps
 
 It is easy to type a defaultProps static member of a React component. There's more than one way to do it, but since we want to show the neatest code as possible
-we choosed to propose this way of implementing them:
+we chose to propose this way of implementing them:
 
 ```ts
 interface IMyComponentProps {
@@ -231,7 +231,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 
 <summary>Explanation</summary>
 
-This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fullfill a partial 
+This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial 
 version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
 
 The other suggestions was related to create a new interface that will look like this:
