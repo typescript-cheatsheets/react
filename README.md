@@ -963,6 +963,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 - https://github.com/jaredpalmer/react-fns
 - https://github.com/palantir/blueprint
 - https://github.com/Shopify/polaris
+- https://github.com/NullVoxPopuli/react-vs-ember/tree/master/testing/react
 
 React Boilerplates:
 
