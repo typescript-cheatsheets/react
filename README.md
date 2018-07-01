@@ -67,6 +67,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
    > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project. *Contributed by: [@antmdvs](https://github.com/sw-yx/react-typescript-cheatsheet/pull/11)*
 
+   > <https://github.com/jpavon/react-scripts-ts> Alternative react-scripts-ts with Webpack 4 and other features.
+
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
@@ -231,7 +233,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 
 <summary>Explanation</summary>
 
-This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial 
+This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial
 version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
 
 The other suggestions was related to create a new interface that will look like this:
@@ -253,7 +255,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 }
 ```
 
-The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the 
+The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the
 `IMyComponentDefaultProps`!
 </details>
 
