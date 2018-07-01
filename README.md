@@ -63,12 +63,19 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 ## React + Typescript Starter Kits
 
-1. <https://github.com/wmonk/create-react-app-typescript> is the officially recommended Typescript fork of `create-react-app`.
+1. based on `create-react-app`
+
+- [wmonk](https://github.com/wmonk/create-react-app-typescript)'s script is officially recommended but has very strict tslint rules
+
+   > In your command line: `create-react-app my-app --scripts-version=react-scripts-ts`
 
    > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project. *Contributed by: [@antmdvs](https://github.com/sw-yx/react-typescript-cheatsheet/pull/11)*
 
-   > <https://github.com/jpavon/react-scripts-ts> Alternative react-scripts-ts with Webpack 4 and other features.
+- [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
 
+   > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
+   
+  
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
