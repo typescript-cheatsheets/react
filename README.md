@@ -478,7 +478,7 @@ Use a `React.RefObject`:
 
 ```tsx
 class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+  private rootRef = React.createRef<HTMLDivElement>();
   render() {
     return <div ref={this.rootRef}>{this.props.children}</div>;
   }
