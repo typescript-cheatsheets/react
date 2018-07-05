@@ -225,12 +225,12 @@ we chose to propose this way of implementing them:
 
 ```ts
 interface IMyComponentProps {
-  firstProp: string;
+  firstProp?: string;
   secondProp: IPerson[];
 }
 
-export class MyComponent extends React.Component<IMyComponentProps, {}> {
-  static defaultProps: Partial<IMyComponentProps> = {
+export class MyComponent extends React.Component<IMyComponentProps> {
+  public static defaultProps: Partial<IMyComponentProps> = {
     firstProp: "default",
   };
 }
