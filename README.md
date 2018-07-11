@@ -42,6 +42,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Enum Types](#enum-types)
   * [Type Assertion](#type-assertion)
   * [Intersection Types](#intersection-types)
+  * [Types for Conditional Rendering](#types-for-conditional-rendering)
   * [Omit attribute from a type](#omit-attribute-from-a-type)
   * [Type Zoo](#type-zoo)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
@@ -860,6 +861,42 @@ export const PrimaryButton = (
 );
 ```
 
+## Types for Conditional Rendering
+
+Components can render different things based on props that are passed in, and this can be confusing to type. Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
+
+<details>
+
+```tsx
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+interface LinkProps {}
+
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+type RouterLinkProps = Omit<NavLinkProps, 'href'>
+
+const Link = <T extends {}>(
+    props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+) => {
+    if ((props as RouterLinkProps).to) {
+        return <NavLink {...props as RouterLinkProps} />
+    } else {
+        return <a {...props as AnchorProps} />
+    }
+}
+
+<Link<RouterLinkProps> to="/">My link</Link> // ok
+<Link<AnchorProps> href="/">My link</Link> // ok
+<Link<RouterLinkProps> to="/" href="/">My link</Link> // error
+```
+
+<summary>Further Discussion</summary>
+
+We have more discussion and examples [in our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12).
+
+</details>
+
+
 ## Omit attribute from a type
 
 Sometimes when intersecting types, we want to define our own version of an attribute. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` attribute. Here's how to extract that out:
@@ -893,13 +930,6 @@ export const Checkbox = (
   );
 };
 ```
-
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
 
 ## Type Zoo
 
