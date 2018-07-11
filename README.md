@@ -745,16 +745,9 @@ class App extends React.Component<{}, {
 }
 ```
 
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
 ## Optional Types
 
-If a component has an optional prop, add a question mark :) and assign during destructure (or use defaultProps).
+If a component has an optional prop, add a question mark and assign during destructure (or use defaultProps).
 
 ```tsx
 class MyComponent extends React.Component<{
@@ -865,7 +858,6 @@ export const PrimaryButton = (
 
 Components can render different things based on props that are passed in, and this can be confusing to type. Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
 
-<details>
 
 ```tsx
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
@@ -889,6 +881,8 @@ const Link = <T extends {}>(
 <Link<AnchorProps> href="/">My link</Link> // ok
 <Link<RouterLinkProps> to="/" href="/">My link</Link> // error
 ```
+
+<details>
 
 <summary>Further Discussion</summary>
 
