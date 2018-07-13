@@ -891,19 +891,18 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type RouterLinkProps = Omit<NavLinkProps, 'href'>
 
 interface Button {
-  as?: React.ComponentClass
+  as: React.ComponentClass | 'a'
 }
 
 const Button: React.SFC<Button> = (props) => {
-  const {as, children, ...rest} = props
-  const Component = as || 'a'
+  const {as: Component, children, ...rest} = props
   return (
     <Component className="button" {...rest}>{children}</Component>
   )
 }
 
 const AnchorButton: React.SFC<AnchorProps> = (props) => (
-  <Button {...props} />
+  <Button as="a" {...props} />
 )
 
 const LinkButton: React.SFC<RouterLinkProps> = (props) => (
