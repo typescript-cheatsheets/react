@@ -75,8 +75,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 - [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
 
    > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
-   
-  
+
+
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
 
@@ -880,6 +880,38 @@ const Link = <T extends {}>(
 <Link<RouterLinkProps> to="/">My link</Link> // ok
 <Link<AnchorProps> href="/">My link</Link> // ok
 <Link<RouterLinkProps> to="/" href="/">My link</Link> // error
+```
+
+If you want to conditionaly render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
+
+```tsx
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+type RouterLinkProps = Omit<NavLinkProps, 'href'>
+
+interface Button {
+  as: React.ComponentClass | 'a'
+}
+
+const Button: React.SFC<Button> = (props) => {
+  const {as: Component, children, ...rest} = props
+  return (
+    <Component className="button" {...rest}>{children}</Component>
+  )
+}
+
+const AnchorButton: React.SFC<AnchorProps> = (props) => (
+  <Button as="a" {...props} />
+)
+
+const LinkButton: React.SFC<RouterLinkProps> = (props) => (
+  <Button as={NavLink} {...props} />
+)
+
+<LinkButton to="/login">Login</LinkButton>
+<AnchorButton href="/login">Login</AnchorButton>
+<AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
 ```
 
 <details>
