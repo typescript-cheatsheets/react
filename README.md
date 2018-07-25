@@ -796,7 +796,7 @@ export const PrimaryButton = (
 );
 ```
 
-A simpler alternative to enum is just declaring a bunch of strings with union, but this doesn't get autocompletion or syntactic benefits:
+A simpler alternative to enum is just declaring a bunch of strings with union:
 
 ```tsx
 export declare type Position = 'left' | 'right' | 'top' | 'bottom';
@@ -806,7 +806,7 @@ export declare type Position = 'left' | 'right' | 'top' | 'bottom';
 
 <summary>Explanation</summary>
 
-This handy because Typescript will throw errors when you mistype a string for your props.
+This is handy because Typescript will throw errors when you mistype a string for your props.
 
 </details>
 
