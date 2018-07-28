@@ -225,16 +225,35 @@ It is easy to type a defaultProps static member of a React component. There's mo
 we chose to propose this way of implementing them:
 
 ```ts
-interface IMyComponentProps {
-  firstProp?: string;
-  secondProp: IPerson[];
+interface IDefaultProps {
+  optionalDescription: string;
 }
 
-export class MyComponent extends React.Component<IMyComponentProps> {
-  public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: "default",
-  };
+interface IProps extends Partial<IDefaultProps> {
+  requiredTitle: string;
 }
+
+type IPropsWithDefaults = IDefaultProps & IProps;
+
+class Example extends React.Component<IPropsWithDefaults> {
+  public static defaultProps: IDefaultProps = {
+    optionalDescription: 'Empty text',
+  };
+
+  public render() {
+    const { requiredTitle, optionalDescription } = this.props;
+
+    return (
+      <div>
+        <h1>{requiredTitle.toLocaleUpperCase()}</h1>
+        <p>{optionalDescription.italics()}<p>
+      </div>
+    );
+  }
+}
+
+// Explicitly export component with optional props
+export default Example as React.ComponentClass<IProps>;
 ```
 
 <details>
@@ -242,29 +261,9 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 <summary>Explanation</summary>
 
 This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial
-version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
+version on the wrapped interface. In that way we can extend defaultProps without any changes in the types! 
+A new `Intersection type` is created as a combination of default and component's own props.
 
-The other suggestions was related to create a new interface that will look like this:
-
-```ts
-interface IMyComponentProps {
-  firstProp: string;
-  secondProp: IPerson[];
-}
-
-interface IMyComponentDefaultProps {
-    firstProp: string;
-}
-
-export class MyComponent extends React.Component<IMyComponentProps, {}> {
-  static defaultProps: IMyComponentDefaultProps = {
-    firstProp: "default",
-  };
-}
-```
-
-The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the
-`IMyComponentDefaultProps`!
 </details>
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
