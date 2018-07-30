@@ -28,8 +28,11 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Forwarding References/createRef](#forwarding-referencescreateref)
   * [Portals](#portals)
   * [Error Boundaries](#error-boundaries)
-  * [Timeout/Placeholder/createFetcher](#timeoutplaceholdercreatefetcher)
-- [Section 4: Misc. Concerns](#section-4-misc-concerns)
+  * [Timeout/Placeholder/createFetcher](#timeoutplaceholdercreatefetcher))
+- [Section 4: Useful Patterns by Typescript Version](#section-4-useful-patterns-by-typescript-version)
+  * [Typescript 2.9](#typescript-2.9)
+  * [Typescript 3.0](#typescript-3.0)
+- [Section 5: Misc. Concerns](#section-5-misc-concerns)
   * [Writing Typescript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   * [Component/Design System Development](#componentdesign-system-development)
   * [Migrating from Flow](#migrating-from-flow)
@@ -545,7 +548,58 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-# Section 4: Misc. Concerns
+# Section 4: Useful Patterns by Typescript Version
+
+Typescript Versions often introduce new ways to do things; this section helps current users of React + Typescript upgrade Typescript versions and explore patterns commonly used by Typescript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)!
+
+*Typescript version guides before 2.9 are unwritten, please feel free to send a PR!*
+
+## Typescript 2.9
+
+*To be completed.*
+
+## Typescript 3.0
+
+[[Release Notes](https://github.com/Microsoft/TypeScript/releases/tag/v3.0.1) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2018/07/30/announcing-typescript-3-0/)]
+
+1. Typed rest parameters for writing arguments of variable length:
+
+```ts
+// `rest` accepts any number of strings - even none!
+function foo(...rest: string[]) {
+    // ...
+}
+
+foo("hello"); // works
+foo("hello", "world"); // also works
+```
+
+2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
+
+**NOTE: not yet supported by `@types/react` as of Jul 2018**
+
+```ts
+export interface Props {
+    name: string
+}
+
+export class Greet extends React.Component<Props> {
+    render() {
+        const { name } = this.props;
+        return <div>Hello ${name.toUpperCase()}!</div>;
+    }
+    static defaultProps = { name: "world"}
+}
+
+// Type-checks! No type assertions needed!
+let el = <Greet />
+```
+
+3. new `Unknown` type
+
+For typing API's to force type checks - *should we include this?*
+
+# Section 5: Misc. Concerns
 
 Sometimes writing React isn't just about React. While we don't focus on other libraries like Redux (see below for more on that), here are some tips on other common concerns when making apps with React + Typescript.
 
