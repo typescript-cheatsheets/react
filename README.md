@@ -1069,6 +1069,20 @@ This is the setup I roll with for my component library:
 
 Please open an issue and discuss if there are better recommended choices. I like noImplicitAny to force me to type things.
 
+If you run into bugs with your library's official typings, you can copy them locally and tell Typescript to use your local version using the "paths" field:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+       "mobx-react": ["../typings/modules/mobx-react"]
+    }
+  }
+}
+```
+
+[Thanks to @adamrackis for the tip.](https://twitter.com/AdamRackis/status/1024827730452520963)
+
 <details>
 
 <summary>Explanation</summary>
