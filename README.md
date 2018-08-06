@@ -1097,6 +1097,8 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 - https://github.com/palantir/blueprint
 - https://github.com/Shopify/polaris
 - https://github.com/NullVoxPopuli/react-vs-ember/tree/master/testing/react
+- https://github.com/artsy/reaction
+- https://github.com/artsy/emission (React Native)
 
 React Boilerplates:
 
