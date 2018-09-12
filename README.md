@@ -1069,7 +1069,9 @@ This is the setup I roll with for my component library:
 
 Please open an issue and discuss if there are better recommended choices. I like noImplicitAny to force me to type things.
 
-If you run into bugs with your library's official typings, you can copy them locally and tell Typescript to use your local version using the "paths" field:
+# Troubleshooting Handbook: Bugs in official typings
+
+If you run into bugs with your library's official typings, you can copy them locally and tell Typescript to use your local version using the "paths" field. In your `tsconfig.json`:
 
 ```json
 {
@@ -1082,6 +1084,22 @@ If you run into bugs with your library's official typings, you can copy them loc
 ```
 
 [Thanks to @adamrackis for the tip.](https://twitter.com/AdamRackis/status/1024827730452520963)
+
+If you just need to add an interface, or add missing members to an existing interface, you don't need to copy the whole typing package. Instead, you can use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
+
+```tsx
+// my-typings.ts
+declare module 'plotly.js' {
+  interface PlotlyHTMLElement {
+    removeAllListeners(): void;
+  }
+}
+
+// MyComponent.tsx
+import { PlotlyHTMLElement } from 'plotly.js';
+import './my-typings';
+const f = (e: PlotlyHTMLElement) => { e.removeAllListeners(); }
+```
 
 <details>
 
