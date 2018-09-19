@@ -82,6 +82,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
 3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
+4. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and Typescript
 
 In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + Typescript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
