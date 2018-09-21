@@ -1,5 +1,5 @@
 
-:wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out Typescript with React! This is meant to be an intermediate guide for React developers familiar with the concepts of Typescript but who are just getting started writing their first React + Typescript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
+:wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! This is meant to be an intermediate guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
 
 Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) *maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)*
 
@@ -11,7 +11,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 - [Section 1: Setup](#section-1-setup)
   * [Prerequisites](#prerequisites)
-  * [React + Typescript Starter Kits](#react--typescript-starter-kits)
+  * [React + TypeScript Starter Kits](#react--typescript-starter-kits)
   * [Import React](#import-react)
 - [Section 2: Getting Started](#section-2-getting-started)
   * [Stateless Functional Components](#stateless-functional-components)
@@ -29,16 +29,16 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Portals](#portals)
   * [Error Boundaries](#error-boundaries)
   * [Timeout/Placeholder/createFetcher](#timeoutplaceholdercreatefetcher))
-- [Section 4: Useful Patterns by Typescript Version](#section-4-useful-patterns-by-typescript-version)
-  * [Typescript 2.9](#typescript-29)
-  * [Typescript 3.0](#typescript-30)
+- [Section 4: Useful Patterns by TypeScript Version](#section-4-useful-patterns-by-typescript-version)
+  * [TypeScript 2.9](#typescript-29)
+  * [TypeScript 3.0](#typescript-30)
 - [Section 5: Misc. Concerns](#section-5-misc-concerns)
-  * [Writing Typescript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
+  * [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   * [Component/Design System Development](#componentdesign-system-development)
   * [Migrating from Flow](#migrating-from-flow)
   * [Prettier + TSLint](#prettier--tslint)
   * [ESLint + TSLint](#eslint--tslint)
-  * [Working with Non-Typescript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
+  * [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook-types)
   * [Union types](#union-types)
   * [Optional Types](#optional-types)
@@ -50,8 +50,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Type Zoo](#type-zoo)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
-- [Recommended React + Typescript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
-- [Other React + Typescript resources](#other-react--typescript-resources)
+- [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
+- [Other React + TypeScript resources](#other-react--typescript-resources)
 - [My question isn't answered here!](#my-question-isnt-answered-here)
 
 </details>
@@ -61,11 +61,11 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 ## Prerequisites
 
 1. good understanding of [React](https://reactjs.org)
-2. familiarity with [Typescript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
-3. having read [the Typescript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
 4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
 
-## React + Typescript Starter Kits
+## React + TypeScript Starter Kits
 
 1. based on `create-react-app`
 
@@ -80,11 +80,11 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
    > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
 
 
-2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + Typescript app with Parcel :)
-3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + Typescript + Webpack + Babel
-4. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and Typescript
+2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + TypeScript app with Parcel :)
+3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + TypeScript + Webpack + Babel
+4. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 
-In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + Typescript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
+In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
 ## Import React
 
@@ -93,7 +93,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 ```
 
-In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run Typescript with `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true` to tsconfig) to import like in regular jsx:
+In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run TypeScript with `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true` to tsconfig) to import like in regular jsx:
 
 ```tsx
 import React from 'react';
@@ -146,7 +146,7 @@ const Title: React.SFC<{ title: string }> = ({ children, title }) => (
 
 ## Stateful Class-based Components
 
-Within Typescript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you actually want to provide it with prop and (optionally) state types:
+Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you actually want to provide it with prop and (optionally) state types:
 
 ```tsx
 class App extends React.Component<{
@@ -307,13 +307,13 @@ class App extends React.Component<AppProps, AppState> {
 
 ## Types or Interfaces?
 
-`interface`s are different from `type`s in Typescript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
+`interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
 
 - always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions.
 
 - consider using `type` for your React Component Props and State, because it is more constrained.
 
-[You can read more about the edge cases of using types and interfaces here](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c). Note there have been significant changes since Typescript 2.1.
+[You can read more about the edge cases of using types and interfaces here](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c). Note there have been significant changes since TypeScript 2.1.
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -549,17 +549,17 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-# Section 4: Useful Patterns by Typescript Version
+# Section 4: Useful Patterns by TypeScript Version
 
-Typescript Versions often introduce new ways to do things; this section helps current users of React + Typescript upgrade Typescript versions and explore patterns commonly used by Typescript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)!
+TypeScript Versions often introduce new ways to do things; this section helps current users of React + TypeScript upgrade TypeScript versions and explore patterns commonly used by TypeScript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)!
 
-*Typescript version guides before 2.9 are unwritten, please feel free to send a PR!*
+*TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!*
 
-## Typescript 2.9
+## TypeScript 2.9
 
 *To be completed.*
 
-## Typescript 3.0
+## TypeScript 3.0
 
 [[Release Notes](https://github.com/Microsoft/TypeScript/releases/tag/v3.0.1) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2018/07/30/announcing-typescript-3-0/)]
 
@@ -602,11 +602,11 @@ For typing API's to force type checks - *should we include this?*
 
 # Section 5: Misc. Concerns
 
-Sometimes writing React isn't just about React. While we don't focus on other libraries like Redux (see below for more on that), here are some tips on other common concerns when making apps with React + Typescript.
+Sometimes writing React isn't just about React. While we don't focus on other libraries like Redux (see below for more on that), here are some tips on other common concerns when making apps with React + TypeScript.
 
-## Writing Typescript Libraries instead of Apps
+## Writing TypeScript Libraries instead of Apps
 
-`propTypes` may seem unnecessary with TypeScript, especially when building React + Typescript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
+`propTypes` may seem unnecessary with TypeScript, especially when building React + TypeScript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
 
 ```ts
 interface IMyComponentProps {
@@ -764,7 +764,7 @@ npm i -D typescript-eslint-parser
 
 An example github repository with a project showing how to integrate [eslint + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
 
-## Working with Non-Typescript Libraries (writing your own index.d.ts)
+## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
 *Not written yet.*
 
@@ -774,7 +774,7 @@ Please contribute on this topic! [We have an ongoing issue here with some refere
 
 # Troubleshooting Handbook: Types
 
-Facing weird type errors? You aren't alone. This is the worst part of using Typescript with React. Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
+Facing weird type errors? You aren't alone. This is the worst part of using TypeScript with React. Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
 ## Union types
 
@@ -828,7 +828,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 ## Enum Types
 
-Enums in Typescript default to numbers. You will usually want to use them as strings instead:
+Enums in TypeScript default to numbers. You will usually want to use them as strings instead:
 
 ```tsx
 export enum ButtonSizes {
@@ -861,13 +861,13 @@ export declare type Position = 'left' | 'right' | 'top' | 'bottom';
 
 <summary>Explanation</summary>
 
-This is handy because Typescript will throw errors when you mistype a string for your props.
+This is handy because TypeScript will throw errors when you mistype a string for your props.
 
 </details>
 
 ## Type Assertion
 
-Sometimes Typescript is just getting your type wrong, or union types need to be asserted to a more specific type to work with other APIs, so assert with the `as` keyword. This tells the compiler you know better than it does.
+Sometimes TypeScript is just getting your type wrong, or union types need to be asserted to a more specific type to work with other APIs, so assert with the `as` keyword. This tells the compiler you know better than it does.
 
 ```tsx
 class MyComponent extends React.Component<{
@@ -1072,7 +1072,7 @@ Please open an issue and discuss if there are better recommended choices. I like
 
 # Troubleshooting Handbook: Bugs in official typings
 
-If you run into bugs with your library's official typings, you can copy them locally and tell Typescript to use your local version using the "paths" field. In your `tsconfig.json`:
+If you run into bugs with your library's official typings, you can copy them locally and tell TypeScript to use your local version using the "paths" field. In your `tsconfig.json`:
 
 ```json
 {
@@ -1109,7 +1109,7 @@ const f = (e: PlotlyHTMLElement) => { e.removeAllListeners(); }
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
 
-# Recommended React + Typescript codebases to learn from
+# Recommended React + TypeScript codebases to learn from
 
 - https://github.com/jaredpalmer/formik
 - https://github.com/jaredpalmer/react-fns
@@ -1130,12 +1130,12 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - https://github.com/emin93/react-native-template-typescript
 - <https://github.com/Microsoft/TypeScript-React-Native-Starter>
 
-# Other React + Typescript resources
+# Other React + TypeScript resources
 
 - me! <https://twitter.com/swyx>
 - <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
-- [Ultimate React Component Patterns with Typescript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
-- [Basarat's Typescript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
+- [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
+- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
 - [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
