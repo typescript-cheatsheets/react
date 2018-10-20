@@ -65,6 +65,38 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
 4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
 
+<details>
+<summary><b>Note on Microsoft's TypeScript-React-Starter</b></summary>
+
+[Adding state management](https://github.com/Microsoft/TypeScript-React-Starter#adding-state-management) Demo is out of date and requires following changes.
+
+### In [Creating a store](https://github.com/Microsoft/TypeScript-React-Starter#creating-a-store)
+
+```diff
+ import { createStore } from 'redux';
+ import { enthusiasm } from './reducers/index';
+ import { StoreState } from './types/index';
++import { EnthusiasmAction } from './actions/index';
+ import './index.css';
+-const store = createStore<StoreState>(enthusiasm, {
++const store = createStore<StoreState, EnthusiasmAction, any, any>(enthusiasm, {
+   enthusiasmLevel: 1,
+   languageName: 'TypeScript',
+ });
+```
+
+### In [Making a container](https://github.com/Microsoft/TypeScript-React-Starter#making-a-container)
+
+```diff
+import Hello from '../components/Hello';
+import * as actions from '../actions/';
+import { StoreState } from '../types/index';
+-import { connect, Dispatch } from 'react-redux';
++import { connect } from 'react-redux';
++import { Dispatch } from 'redux';
+```
+</details>
+
 ## React + TypeScript Starter Kits
 
 1. based on `create-react-app`
