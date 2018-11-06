@@ -67,9 +67,10 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 ## React + TypeScript Starter Kits
 
-1. based on `create-react-app`
+1. [Create React App](https://facebook.github.io/create-react-app/) - create React apps with no build configuration
+2. based on `create-react-app`
 
-- [wmonk](https://github.com/wmonk/create-react-app-typescript)'s script is officially recommended but has very strict tslint rules
+- [wmonk](https://github.com/wmonk/create-react-app-typescript)'s script is a fork of create-react-app but has very strict tslint rules
 
    > In your command line: `create-react-app my-app --scripts-version=react-scripts-ts`
 
@@ -80,9 +81,9 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
    > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
 
 
-2. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + TypeScript app with Parcel :)
-3. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + TypeScript + Webpack + Babel
-4. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
+3. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + TypeScript app with Parcel :)
+4. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for manual setup of React + TypeScript + Webpack + Babel
+5. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 
 In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
