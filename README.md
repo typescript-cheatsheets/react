@@ -24,6 +24,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Forms and Events](#forms-and-events)
 - [Section 3: Advanced Guides](#section-3-advanced-guides)
   * [Higher Order Components/Render Props](#higher-order-componentsrender-props)
+  * [Hooks](#hooks)
   * [Context](#context)
   * [Forwarding References/createRef](#forwarding-referencescreateref)
   * [Portals](#portals)
@@ -433,6 +434,12 @@ export interface Props {
   children: (foo: string) => React.ReactNode;
 }
 ```
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Hooks
+
+*Not written yet.*
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
