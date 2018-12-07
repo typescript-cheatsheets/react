@@ -14,8 +14,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [React + TypeScript Starter Kits](#react--typescript-starter-kits)
   * [Import React](#import-react)
 - [Section 2: Getting Started](#section-2-getting-started)
-  * [Stateless Functional Components](#stateless-functional-components)
-  * [Stateful Class-based Components](#stateful-class-based-components)
+  * [Function Components](#function-components)
+  * [Class Components](#class-components)
   * [Typing DefaultProps](#typing-defaultprops)
   * [Extracting Prop Types](#extracting-prop-types)
   * [Types or Interfaces?](#types-or-interfaces)
@@ -113,7 +113,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 # Section 2: Getting Started
 
-## Stateless Functional Components
+## Function Components
 
 *Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9) and [@tpetrina](https://github.com/sw-yx/react-typescript-cheatsheet/pull/21)*
 
@@ -123,20 +123,20 @@ You can specify the type of props as you destructure them:
 const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
-Or you can use the provided generic type for functional components:
+Or you can use the provided generic type for function components:
 
 ```tsx
-const App: React.SFC<{ message: string }> = ({ message }) => <div>{message}</div>;
+const App: React.FunctionComponent<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
 
 <details>
 
 <summary><b>Discussion</b></summary>
 
-The former pattern is shorter, so why would people use `React.SFC` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `SFC<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
+The former pattern is shorter, so why would people use `React.FunctionComponent` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
 
 ```tsx
-const Title: React.SFC<{ title: string }> = ({ children, title }) => (
+const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) => (
     <div title={title}>{children}</div>
 );
 ```
@@ -145,7 +145,7 @@ const Title: React.SFC<{ title: string }> = ({ children, title }) => (
 
 </details>
 
-## Stateful Class-based Components
+## Class Components
 
 Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you actually want to provide it with prop and (optionally) state types:
 
@@ -280,7 +280,7 @@ Instead of defining prop types *inline*, you can declare them separately (useful
 
 ```tsx
 type AppProps = { message: string }
-const App: React.SFC<AppProps> = ({ message }) => <div>{message}</div>;
+const App: React.FunctionComponent<AppProps> = ({ message }) => <div>{message}</div>;
 ```
 
 You can also do this for stateful component types (really, any types):
@@ -950,18 +950,18 @@ interface Button {
   as: React.ComponentClass | 'a'
 }
 
-const Button: React.SFC<Button> = (props) => {
+const Button: React.FunctionComponent<Button> = (props) => {
   const {as: Component, children, ...rest} = props
   return (
     <Component className="button" {...rest}>{children}</Component>
   )
 }
 
-const AnchorButton: React.SFC<AnchorProps> = (props) => (
+const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
   <Button as="a" {...props} />
 )
 
-const LinkButton: React.SFC<RouterLinkProps> = (props) => (
+const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
   <Button as={NavLink} {...props} />
 )
 
