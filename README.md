@@ -439,7 +439,15 @@ export interface Props {
 
 ## Hooks
 
-*Not written yet.*
+Hooks are supported in `@types/react` from v16.7 up.
+
+Many hooks are initialized with null-ish default values, and you may wonder how to provide types. Do this:
+
+```tsx
+const [user, setUser] = useState<IUser | null>(null);
+```
+
+If you are writing a React Hooks library, don't forget that you can also expose 
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
