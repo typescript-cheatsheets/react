@@ -71,12 +71,6 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript) - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
 2. Custom scripts that work with `create-react-app` and support Typescript:
 
-- [wmonk](https://github.com/wmonk/create-react-app-typescript)'s script is a fork of create-react-app but has very strict tslint rules
-
-   > In your command line: `create-react-app my-app --scripts-version=react-scripts-ts`
-
-   > CodeSandbox has a [React TypeScript template](https://codesandbox.io/s/react-ts) based on this project. *Contributed by: [@antmdvs](https://github.com/sw-yx/react-typescript-cheatsheet/pull/11)*
-
 - [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
 
    > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
