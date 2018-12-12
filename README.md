@@ -435,13 +435,38 @@ export interface Props {
 
 Hooks are supported in `@types/react` from v16.7 up.
 
-Many hooks are initialized with null-ish default values, and you may wonder how to provide types. Do this:
+**useState**
+
+Many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
 
 ```tsx
 const [user, setUser] = useState<IUser | null>(null);
+
+// later...
+setUser(newUser)
 ```
 
-If you are writing a React Hooks library, don't forget that you can also expose 
+**Custom Hooks**
+
+If you are returning an array in your Custom Hook, you will want to avoid type inference as Typescript will infer a union type (when you actually want different types in each position of the array). Instead, assert or define the function return types:
+
+```tsx
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false);
+  const load = (aPromise: Promise<any>) => {
+    setState(true);
+    return aPromise.finally(() => {
+      setState(false);
+    });
+  };
+  return [isLoading, load] as [
+    boolean,
+    (aPromise: Promise<any>) => Promise<any>
+  ];
+}
+```
+
+If you are writing a React Hooks library, don't forget that you can also expose your types.
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
