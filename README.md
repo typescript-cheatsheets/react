@@ -61,10 +61,11 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 ## Prerequisites
 
-1. good understanding of [React](https://reactjs.org)
-2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
-3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
+1. good understanding of JavaScript and ES6
+2. good understanding of [React](https://reactjs.org)
+3. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+4. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+5. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
 
 ## React + TypeScript Starter Kits
 
