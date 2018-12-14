@@ -31,6 +31,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 - [Section 4: Useful Patterns by TypeScript Version](#section-4-useful-patterns-by-typescript-version)
   * [TypeScript 2.9](#typescript-29)
   * [TypeScript 3.0](#typescript-30)
+  * [TypeScript 3.1](#typescript-31)
+  * [TypeScript 3.2](#typescript-32)
 - [Section 5: Misc. Concerns](#section-5-misc-concerns)
   * [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   * [Component/Design System Development](#componentdesign-system-development)
@@ -242,7 +244,26 @@ class App extends React.Component<{
 
 ## Typing defaultProps
 
-There's more than one way to do it, but this is the best advice we've yet seen:
+For Typescript 3.0+, type inference [just works](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html). Just type your props like normal.
+
+```tsx
+export interface Props {
+    name: string;
+}
+
+export class Greet extends React.Component<Props> {
+    render() {
+        const { name } = this.props;
+        return <div>Hello ${name.toUpperCase()}!</div>;
+    }
+    static defaultProps = { name: "world"};
+}
+
+// Type-checks! No type assertions needed!
+let el = <Greet />
+```
+
+For Typescript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
 
 ```ts
 type Props = Required<typeof MyComponent.defaultProps> & { /* additional props here */ }
@@ -605,8 +626,6 @@ foo("hello", "world"); // also works
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
 
-**NOTE: not yet supported by `@types/react` as of Jul 2018**
-
 ```ts
 export interface Props {
     name: string
@@ -626,7 +645,31 @@ let el = <Greet />
 
 3. new `Unknown` type
 
-For typing API's to force type checks - *should we include this?*
+For typing API's to force type checks - not specifically React related.
+
+## Typescript 3.1
+
+1. Properties declarations on functions
+
+Attaching properties to functions like this "just works" now:
+
+```tsx
+export const FooComponent => ({ name }) => (
+    <div>Hello! I am {name}</div>
+);
+
+FooComponent.defaultProps = {
+    name: "swyx",
+};
+```
+
+2. New `typesVersions` field in `package.json`
+
+not specifically React related.
+
+## Typescript 3.2
+
+[nothing specifically React related.](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-2.html)
 
 # Section 5: Misc. Concerns
 
