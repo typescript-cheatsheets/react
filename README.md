@@ -1,4 +1,3 @@
-
 :wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! This is meant to be an intermediate guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
 
 Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) *maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)*
@@ -16,8 +15,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 - [Section 2: Getting Started](#section-2-getting-started)
   * [Function Components](#function-components)
   * [Class Components](#class-components)
-  * [Typing DefaultProps](#typing-defaultprops)
-  * [Extracting Prop Types](#extracting-prop-types)
+  * [Typing defaultProps](#typing-defaultprops)
   * [Types or Interfaces?](#types-or-interfaces)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Type Examples](#useful-react-type-examples)
@@ -140,31 +138,42 @@ const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) 
 
 </details>
 
-## Class Components
+<details>
+<summary><b>Common Pitfalls</b></summary>
 
-Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you actually want to provide it with prop and (optionally) state types:
+These patterns are not supported:
 
 ```tsx
-class App extends React.Component<{
-  message: string, // it takes one prop called 'message' which is a string type
-}> {
-  render() {
-    return (
-      <div>{this.props.message}</div>
-    );
-  }
-}
+const MyConditionalComponent = ({ shouldRender = false }) => shouldRender ? <div /> : false
+const el = <MyConditionalComponent /> // throws an error
+
+const MyArrayComponent = () => Array(5).fill(<div />)
+const el2 = <MyArrayComponentt /> // throws an error
 ```
 
-If the component has state, here's how to add the types for the state:
+This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`. Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-class App extends React.Component<{
-  message: string, // this is the prop type
-}, {
-    count: number, // this is the state type
-  }> {
-  state = {
+const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element
+```
+
+[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
+
+</details>
+
+## Class Components
+
+Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you want to provide it with (optional) prop and state type parameters:
+
+```tsx
+type MyProps = { // using `interface` is also ok
+  message: string
+}
+type MyState = {
+  count: number // like this
+}
+class App extends React.Component<MyProps, MyState> {
+  state: MyState = { // second annotation for better type inference
     count: 0
   }
   render() {
@@ -175,7 +184,19 @@ class App extends React.Component<{
 }
 ```
 
-If you need to define a clickhandler, just do it like normal, but just remember any arguments for your functions also need to be typed:
+Don't forget that you can export/import/extend these types/interfaces for reuse.
+
+<details>
+<summary><b>Why annotate `state` twice?</b></summary>
+
+It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state. This is because they work in two different ways, the 2nd generic type parameter will allow `this.setState()` to work correctly, because that method comes from the base class, but initializing `state` inside the component overrides the base implementation so you have to make sure that you tell the compiler that you're not actually doing anything different.
+
+[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
+
+</details>
+
+
+**Class Methods**: Do it like normal, but just remember any arguments for your functions also need to be typed:
 
 ```tsx
 class App extends React.Component<{
@@ -199,7 +220,7 @@ class App extends React.Component<{
 }
 ```
 
-If you need to declare class properties for later use, just declare it with a type:
+**Class Properties**: If you need to declare class properties for later use, just declare it like `state`:
 
 ```tsx
 class App extends React.Component<{
@@ -219,10 +240,25 @@ class App extends React.Component<{
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-## Typing DefaultProps
+## Typing defaultProps
 
-It is easy to type a defaultProps static member of a React component. There's more than one way to do it, but since we want to show the neatest code as possible
-we chose to propose this way of implementing them:
+There's more than one way to do it, but this is the best advice we've yet seen:
+
+```ts
+type Props = Required<typeof MyComponent.defaultProps> & { /* additional props here */ }
+
+export class MyComponent extends React.Component<Props> {
+  static defaultProps = {
+    foo: 'foo'
+  }
+}
+```
+
+<details>
+
+<summary>Explanation</summary>
+
+Our former recommendation used the `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
 
 ```ts
 interface IMyComponentProps {
@@ -237,67 +273,11 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 }
 ```
 
-<details>
+The problem with this approach is it causes complex issues with the type inference working with `JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
 
-<summary>Explanation</summary>
+[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
 
-This proposal is using `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial
-version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
-
-The other suggestions was related to create a new interface that will look like this:
-
-```ts
-interface IMyComponentProps {
-  firstProp: string;
-  secondProp: IPerson[];
-}
-
-interface IMyComponentDefaultProps {
-    firstProp: string;
-}
-
-export class MyComponent extends React.Component<IMyComponentProps, {}> {
-  static defaultProps: IMyComponentDefaultProps = {
-    firstProp: "default",
-  };
-}
-```
-
-The problem with this approach that if we need to add another prop in the future to the defaultProps map then we should update the
-`IMyComponentDefaultProps`!
 </details>
-
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
-## Extracting Prop Types
-
-Instead of defining prop types *inline*, you can declare them separately (useful for reusability or code organization):
-
-```tsx
-type AppProps = { message: string }
-const App: React.FunctionComponent<AppProps> = ({ message }) => <div>{message}</div>;
-```
-
-You can also do this for stateful component types (really, any types):
-
-```tsx
-type AppProps = { // like this
-  message: string,
-}
-type AppState = { // and this
-  count: number,
-}
-class App extends React.Component<AppProps, AppState> {
-  state = {
-    count: 0
-  }
-  render() {
-    return (
-      <div>{this.props.message} {this.state.count}</div>
-    );
-  }
-}
-```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -320,21 +300,29 @@ type AppProps = {
   message: string,
   count: number,
   disabled: boolean,
-  names: string[], // array of a type!
-  obj: object, // any object as long as you dont use it in your typescript code
+  // array of a type!
+  names: string[], 
+  // any object as long as you dont use its properties (not common)
+  obj: object, 
   obj2: {}, // same
-  object: {
+  // an object with defined properties (preferred)
+  obj3: {
    id: string,
    title: string
-  }, // an object with defined properties
-  objects: {
+  },
+  // array of objects! (common)
+  objArr: {
    id: string,
    title: string
-  }[], // array of objects!
-  onSomething: Function, // not recommended
-  onClick: () => void, // function that doesn't return anything
-  onChange: (id: number) => void, // function with named prop
-  optional?: OptionalType, // an optional prop
+  }[],
+  // any function as long as you don't invoke it (not recommended)
+  onSomething: Function,
+  // function that doesn't take or return anything (VERY COMMON)
+  onClick: () => void,
+  // function with named prop (VERY COMMON)
+  onChange: (id: number) => void,
+  // an optional prop (VERY COMMON!)
+  optional?: OptionalType,
 }
 ```
 
@@ -356,8 +344,13 @@ export declare interface AppProps {
 
 ## Forms and Events
 
-This can be a bit tricky. The tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
+If performance is not an issue, inlining handlers is easiest as you can just use type inference:
 
+```tsx
+const el = <button onClick={event => {/* ... */}} />
+```
+
+But if you need to define your event handler separately, IDE tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
 
 ```tsx
 class App extends React.Component<{}, { // no props
@@ -365,6 +358,9 @@ class App extends React.Component<{}, { // no props
   }> {
   state = {
     text: ''
+  }
+  onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({text: e.currentTarget.value})
   }
   render() {
     return (
@@ -376,9 +372,6 @@ class App extends React.Component<{}, { // no props
         />
       </div>
     );
-  }
-  onChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({text: e.currentTarget.value})
   }
 }
 ```
