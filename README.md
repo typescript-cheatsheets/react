@@ -1211,8 +1211,10 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - [Palmer Group's Typescript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To Typescript Section
-- [Gustav Wengel's blogpost - converting a React codebase to Typescript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
-- [Lyft's React-To-Typescript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
+- Typescript conversion:
+  - [Lyft's React-To-Typescript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
+  - [Gustav Wengel's blogpost - converting a React codebase to Typescript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
+  - [Microsoft React Typescript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # My question isn't answered here!
