@@ -1208,7 +1208,7 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
 - [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
-- [Palmer Group's Typescript + React Guidelines](https://github.com/palmerhq/typescript)
+- [Palmer Group's Typescript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To Typescript Section
 - [Gustav Wengel's blogpost - converting a React codebase to Typescript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
