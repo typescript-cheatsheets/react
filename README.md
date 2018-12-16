@@ -68,17 +68,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript) - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
-2. Custom scripts that work with `create-react-app` and support Typescript:
-
-- [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
-
-   > In your command line: `create-react-app my-app --scripts-version=@jpavon/react-scripts-ts`
-
-
-3. <https://github.com/sw-yx/create-react-app-parcel-typescript> sets up a React + TypeScript app with Parcel :)
-4. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for **manual setup** of React + TypeScript + Webpack + Babel
-5. [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript) - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/): `npm create react-app woot --typescript`
+2. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for **manual setup** of React + TypeScript + Webpack + Babel
 
 In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
@@ -1192,6 +1183,8 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 React Boilerplates:
 
+- [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
+- [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
 React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/react-typescript-cheatsheet/pull/20)*
