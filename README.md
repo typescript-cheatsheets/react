@@ -49,6 +49,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Types for Conditional Rendering](#types-for-conditional-rendering)
   * [Omit attribute from a type](#omit-attribute-from-a-type)
   * [Type Zoo](#type-zoo)
+  * [Third Party Libraries](#third-party-libraries)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
@@ -300,6 +301,8 @@ The problem with this approach is it causes complex issues with the type inferen
 - always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions.
 
 - consider using `type` for your React Component Props and State, because it is more constrained.
+
+Types are useful for union types (see below) whereas Interfaces are better for declaring shapes and then `implementing` or `extending` them.
 
 [You can read more about the edge cases of using types and interfaces here](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c). Note there have been significant changes since TypeScript 2.1.
 
@@ -1106,6 +1109,10 @@ export const Checkbox = (
 ## Type Zoo
 
 As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit), as well as [utility-types](https://github.com/piotrwitek/utility-types) (especially for those migrating from Flow).
+
+## Third Party Libraries
+
+Sometimes DefinitelyTyped can get it wrong, or isn't quite addressing your use case. You can declare your own file with the same interface name. Typescript will merge interfaces with the same name.
 
 # Troubleshooting Handbook: TSLint
 
