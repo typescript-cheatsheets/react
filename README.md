@@ -41,7 +41,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [ESLint + TSLint](#eslint--tslint)
   * [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Troubleshooting Handbook: Types](#troubleshooting-handbook-types)
-  * [Union types](#union-types)
+  * [Union Types and Type Guarding](#union-types-and-type-guarding)
   * [Optional Types](#optional-types)
   * [Enum Types](#enum-types)
   * [Type Assertion](#type-assertion)
@@ -836,9 +836,11 @@ Please contribute on this topic! [We have an ongoing issue here with some refere
 
 # Troubleshooting Handbook: Types
 
-Facing weird type errors? You aren't alone. This is the worst part of using TypeScript with React. Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
+Facing weird type errors? You aren't alone. This is the worst part of using TypeScript with React. However, the more you get good at this, the less time you'll be working *against* the compiler and the more the compiler will be working *for* you! 
 
-## Union types
+Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
+
+## Union Types and Type Guarding
 
 Union types are handy for solving some of these typing problems:
 
@@ -861,6 +863,31 @@ class App extends React.Component<{}, {
   }
 }
 ```
+
+**Type Guarding**: Sometimes Union Types solve a problem in one area but create another downstream. Learn how to write checks, guards, and assertions (also see the Conditional Rendering section below). For example:
+
+```tsx
+interface Admin {
+  role: string:
+}
+interface User {
+  email: string;
+}
+function redirect(usr: Admin | User) {
+  if("role" in usr) { // use the `in` operator for typeguards since TS 2.7+
+    routeToAdminPage(usr.role);
+  } else {
+    routeToHomePage(usr.email);
+  }
+}
+
+// custom type guard, does the same thing in older TS versions or where `in` isnt enough
+function isAdmin(usr: Admin | User): usr is Admin {
+  return (<Admin>usr).role !==undefined
+}
+```
+
+If you need `if/elseif` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
 
 ## Optional Types
 
@@ -973,7 +1000,9 @@ export const PrimaryButton = (
 
 ## Types for Conditional Rendering
 
-Components can render different things based on props that are passed in, and this can be confusing to type. Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
+Components can render different things based on props that are passed in, and this can be confusing to model in terms of argument and return types. See the Type checks, guards, and assertion strategies discussed above as a first resort.
+
+You can also do fairly advanced logic within your types ([they are Turing complete!](https://github.com/Microsoft/TypeScript/issues/14833)). Read the [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html) section of the docs for ideas on how to use `Pick`, `ReadOnly`, `Partial`, and `Record`. Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
 
 
 ```tsx
