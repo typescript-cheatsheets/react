@@ -1119,6 +1119,7 @@ This is the setup I roll with for my component library:
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
@@ -1130,7 +1131,7 @@ This is the setup I roll with for my component library:
 }
 ```
 
-Please open an issue and discuss if there are better recommended choices. I like noImplicitAny to force me to type things.
+Please open an issue and discuss if there are better recommended choices for React.
 
 # Troubleshooting Handbook: Bugs in official typings
 
