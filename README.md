@@ -639,7 +639,38 @@ let el = <Greet />
 
 3. new `Unknown` type
 
-For typing API's to force type checks - not specifically React related.
+For typing API's to force type checks - not specifically React related, however very handy for dealing with API responses:
+
+```tsx
+interface IComment {
+    date: Date;
+    message: string;
+}
+
+interface IDataService1 {
+    getData(): any;
+}
+
+let service1: IDataService1;
+const response = service1.getData();
+response.a.b.c.d; // RUNTIME ERROR
+
+// ----- compare with -------
+
+interface IDataService2 {
+    getData(): unknown; // ooo
+}
+
+let service2: IDataService2;
+const response2 = service2.getData();
+// response2.a.b.c.d; // COMPILE TIME ERROR if you do this
+
+if (typeof response === 'string') {
+    console.log(response.toUpperCase()); // `response` now has type 'string'
+}
+```
+
+You can also assert a type, or use a **type guard** against an `unknown` type. This is better than resorting to `any`.
 
 ## Typescript 3.1
 
@@ -656,10 +687,6 @@ FooComponent.defaultProps = {
     name: "swyx",
 };
 ```
-
-2. New `typesVersions` field in `package.json`
-
-not specifically React related.
 
 ## Typescript 3.2
 
@@ -911,12 +938,7 @@ class MyComponent extends React.Component<{
 
 You can also use a `!` character to assert that something is not undefined, but this is not encouraged.
 
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
+*Something to add? [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!*
 
 ## Enum Types
 
@@ -951,7 +973,7 @@ export declare type Position = 'left' | 'right' | 'top' | 'bottom';
 
 <details>
 
-<summary>Explanation</summary>
+<summary>Brief Explanation</summary>
 
 This is handy because TypeScript will throw errors when you mistype a string for your props.
 
