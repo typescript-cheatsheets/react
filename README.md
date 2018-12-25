@@ -1099,7 +1099,7 @@ This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/r
 
 # Troubleshooting Handbook: tsconfig.json
 
-This is the setup I roll with for my component library:
+You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for my component library:
 
 ```json
 {
@@ -1118,6 +1118,7 @@ This is the setup I roll with for my component library:
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
+    "esModuleInterop": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -1132,6 +1133,11 @@ This is the setup I roll with for my component library:
 ```
 
 Please open an issue and discuss if there are better recommended choices for React.
+
+Selected flags and why we like them:
+
+- `esModuleInterop`: disables namespace imports (`import * as foo from "foo"`) and enables CJS/AMD/UMD style imports (`import fs from "fs"`)
+- `strictPropertyInitialization`: forces you to initialize class properties or explicitly declare that they can be undefined. You can opt out of this with a definite assignment assertion.
 
 # Troubleshooting Handbook: Bugs in official typings
 
