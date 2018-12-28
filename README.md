@@ -19,6 +19,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Types or Interfaces?](#types-or-interfaces)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Type Examples](#useful-react-type-examples)
+  * [Commenting Components](#commenting-components)
   * [Forms and Events](#forms-and-events)
 - [Section 3: Advanced Guides](#section-3-advanced-guides)
   * [Higher Order Components/Render Props](#higher-order-componentsrender-props)
@@ -352,6 +353,30 @@ export declare interface AppProps {
   style?: React.CSSProperties; // for style
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
   props: Props & React.HTMLProps<HTMLButtonElement> // to impersonate all the props of a HTML element
+}
+```
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Commenting Components
+
+Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
+
+```tsx
+import React from 'react';
+
+interface MyProps {
+  /** Description of prop "label".
+   * @default foobar
+   * */
+  label?: string;
+}
+
+/**
+ * General component description in JSDoc format. Markdown is *supported*.
+ */
+export default function MyComponent({ label = 'foobar' }: MyProps) {
+  return <div>Hello world {label}</div>;
 }
 ```
 
