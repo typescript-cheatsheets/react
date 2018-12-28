@@ -19,7 +19,6 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Types or Interfaces?](#types-or-interfaces)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
   * [Useful React Prop Type Examples](#useful-react-prop-type-examples)
-  * [Commenting Components](#commenting-components)
   * [Forms and Events](#forms-and-events)
 - [Section 3: Advanced Guides](#section-3-advanced-guides)
   * [Higher Order Components/Render Props](#higher-order-componentsrender-props)
@@ -36,7 +35,8 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [TypeScript 3.2](#typescript-32)
 - [Section 5: Misc. Concerns](#section-5-misc-concerns)
   * [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
-  * [Component/Design System Development](#componentdesign-system-development)
+  * [Commenting Components](#commenting-components)
+  * [Design System Development](#design-system-development)
   * [Migrating from Flow](#migrating-from-flow)
   * [Prettier + TSLint](#prettier--tslint)
   * [ESLint + TSLint](#eslint--tslint)
@@ -316,33 +316,35 @@ type AppProps = {
   message: string,
   count: number,
   disabled: boolean,
-  // array of a type!
+  /** array of a type! */
   names: string[], 
-  // string literals to specify exact string values
+  /** string literals to specify exact string values */
   status: 'waiting' | 'success',
-  // any object as long as you dont use its properties (not common)
+  /** any object as long as you dont use its properties (not common) */
   obj: object, 
   obj2: {}, // same
-  // an object with defined properties (preferred)
+  /** an object with defined properties (preferred) */
   obj3: {
    id: string,
    title: string
   },
-  // array of objects! (common)
+  /** array of objects! (common) */
   objArr: {
    id: string,
    title: string
   }[],
-  // any function as long as you don't invoke it (not recommended)
+  /** any function as long as you don't invoke it (not recommended) */
   onSomething: Function,
-  // function that doesn't take or return anything (VERY COMMON)
+  /** function that doesn't take or return anything (VERY COMMON) */
   onClick: () => void,
-  // function with named prop (VERY COMMON)
+  /** function with named prop (VERY COMMON) */
   onChange: (id: number) => void,
-  // an optional prop (VERY COMMON!)
+  /** an optional prop (VERY COMMON!) */
   optional?: OptionalType,
 }
 ```
+
+Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](#commenting-components) section below.
 
 ## Useful React Prop Type Examples
 
@@ -355,30 +357,6 @@ export declare interface AppProps {
   style?: React.CSSProperties; // to pass through style props
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
   props: Props & React.HTMLProps<HTMLButtonElement>  // to impersonate all the props of a HTML element
-}
-```
-
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
-## Commenting Components
-
-Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
-
-```tsx
-import React from 'react';
-
-interface MyProps {
-  /** Description of prop "label".
-   * @default foobar
-   * */
-  label?: string;
-}
-
-/**
- * General component description in JSDoc format. Markdown is *supported*.
- */
-export default function MyComponent({ label = 'foobar' }: MyProps) {
-  return <div>Hello world {label}</div>;
 }
 ```
 
@@ -743,9 +721,36 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-## Component/Design System Development
 
-For developing with Storybook, read the docs I maintain over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
+## Commenting Components
+
+Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
+
+```tsx
+import React from 'react';
+
+interface MyProps {
+  /** Description of prop "label".
+   * @default foobar
+   * */
+  label?: string;
+}
+
+/**
+ * General component description in JSDoc format. Markdown is *supported*.
+ */
+export default function MyComponent({ label = 'foobar' }: MyProps) {
+  return <div>Hello world {label}</div>;
+}
+```
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Design System Development
+
+I do like [Docz](https://docz.site/) which takes basically [1 line of config](https://www.docz.site/documentation/project-configuration#typescript) to accept Typescript. However it is newer and has a few more rough edges (many breaking changes since it is still < v1.0)
+
+For developing with Storybook, read the docs I wrote over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
