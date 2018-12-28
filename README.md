@@ -318,6 +318,8 @@ type AppProps = {
   disabled: boolean,
   // array of a type!
   names: string[], 
+  // string literals to specify exact string values
+  status: 'waiting' | 'success',
   // any object as long as you dont use its properties (not common)
   obj: object, 
   obj2: {}, // same
