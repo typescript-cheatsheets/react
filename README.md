@@ -18,7 +18,7 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
   * [Typing defaultProps](#typing-defaultprops)
   * [Types or Interfaces?](#types-or-interfaces)
   * [Basic Prop Types Examples](#basic-prop-types-examples)
-  * [Useful React Type Examples](#useful-react-type-examples)
+  * [Useful React Prop Type Examples](#useful-react-prop-type-examples)
   * [Commenting Components](#commenting-components)
   * [Forms and Events](#forms-and-events)
 - [Section 3: Advanced Guides](#section-3-advanced-guides)
@@ -342,17 +342,17 @@ type AppProps = {
 }
 ```
 
-## Useful React Type Examples
+## Useful React Prop Type Examples
 
 ```tsx
 export declare interface AppProps {
-  children1: JSX.Element; // bad
-  children2: JSX.Element | JSX.Element[]; // meh
-  children3: React.ReactChild | React.ReactChildren; // better
-  children: React.ReactNode; // best
-  style?: React.CSSProperties; // for style
+  children1: JSX.Element;                            // bad, doesnt account for arrays
+  children2: JSX.Element | JSX.Element[];            // meh, doesnt accept functions
+  children3: React.ReactChild | React.ReactChildren; // better, but doesnt accept strings
+  children: React.ReactNode;                         // best, accepts everything
+  style?: React.CSSProperties; // to pass through style props
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
-  props: Props & React.HTMLProps<HTMLButtonElement> // to impersonate all the props of a HTML element
+  props: Props & React.HTMLProps<HTMLButtonElement>  // to impersonate all the props of a HTML element
 }
 ```
 
