@@ -460,7 +460,7 @@ Now when consuming the component you can omit the `primaryColor` prop or overrid
 
 **Declaring the HoC**
 
-The following utility will be needed.
+The following utilities will be needed.
 
 ```ts
 /**
@@ -472,10 +472,15 @@ The following utility will be needed.
  *
  * type Two = Omit<Three, keyof One>;
  *
- * The type of Two will be
+ * // The type of Two will be
  * interface Two { two: string }
  */
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+/**
+ * Mark mark all the properies from K in T as optional.
+ */
+type Optionalize<T extends K, K> = Omit<T, keyof K>;
 ```
 
 The actual HoC.
@@ -486,7 +491,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComp
   const displayName = WrappedComponent.displayName || WrappedComponent.name || "Component";
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
-  return class ComponentWithTheme extends React.Component<Omit<T, keyof WithThemeProps> & Partial<WithThemeProps>> {
+  return class ComponentWithTheme extends React.Component<Optionalize<T, WithThemeProps>> {
     public static displayName = `withPages(${displayName})`;
 
     public render() {
