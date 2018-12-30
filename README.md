@@ -414,7 +414,98 @@ Why two ways to do the same thing? The first method uses an inferred method sign
 
 # Section 3: Advanced Guides
 
-## Higher Order Components/Render Props
+## Higher Order Components (HoCs)
+
+Sometimes you want a simple way to inject props from somewhere else (either a global store or a provider) and don't want to continually pass down the props for it. Context is great for it, but then the values from the context can only be used in your `render` function. A HoC will provide these values as props.
+
+**The injected props**
+
+```ts
+interface WithThemeProps {
+  primaryColor: string;
+}
+```
+
+**Usage in the component**
+
+The goal is to have the props available on the interface for the component, but subtracted out for the consumers of the component when wrapped in the HoC.
+
+```ts
+
+interface Props extends WithThemeProps {
+  children: ReactNode;
+}
+
+class MyButton extends Component<Props> {
+  public render() {
+    // Render an the element using the theme and other props.
+  }
+
+  private someInternalMethod() {
+    // The theme values are also available as props here.
+  }
+}
+
+export default withTheme(MyButton);
+```
+
+**Consuming the Component**
+
+Now when consuming the component you can omit the `primaryColor` prop or override the one provided through context.
+
+```tsx
+<MyButton>Hello button</MyButton> // Valid
+<MyButton primaryColor="#333">Hello Button</MyButton> // Also valid
+```
+
+**Declaring the HoC**
+
+The following utilities will be needed.
+
+```ts
+/**
+ * Generic type utility to subtract keys from one interface from the other.
+ *
+ * @example
+ * interface One { one: string }
+ * interface Three { one: string, two: string }
+ *
+ * type Two = Omit<Three, keyof One>;
+ *
+ * // The type of Two will be
+ * interface Two { two: string }
+ */
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+/**
+ * Mark mark all the properies from K in T as optional.
+ */
+type Optionalize<T extends K, K> = Omit<T, keyof K>;
+```
+
+The actual HoC.
+
+```ts
+export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComponent: React.ComponentType<T>) {
+  // Try to create a nice displayName for React Dev Tools.
+  const displayName = WrappedComponent.displayName || WrappedComponent.name || "Component";
+
+  // Creating the inner component. The calculated Props type here is the where the magic happens.
+  return class ComponentWithTheme extends React.Component<Optionalize<T, WithThemeProps>> {
+    public static displayName = `withPages(${displayName})`;
+
+    public render() {
+      // Fetch the props you want inject. This could be done with context instead.
+      const themeProps = getThemePropsFromSomeWhere();
+
+      // this.props comes afterwards so the can override the default ones.
+      return <WrappedComponent {...themeProps} {...this.props} />;
+    }
+  }
+}
+```
+
+## Render Props
 
 Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
 
