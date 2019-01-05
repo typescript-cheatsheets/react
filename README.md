@@ -75,7 +75,7 @@ This guide will always assume you are starting with the latest TypeScript versio
 ## React + TypeScript Starter Kits
 
 1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npm create react-app woot --typescript` 
- - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/) (now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/))
+ - We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
 2. [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 
 - In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/)) 
@@ -1447,9 +1447,8 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
-- [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
 - [Palmer Group's Typescript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
-- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
+- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To Typescript Section
 - Typescript conversion:
   - [Lyft's React-To-Typescript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
@@ -1457,7 +1456,9 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
   - [Microsoft React Typescript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-# Selected Advanced TypeScript resources
+# Select Advanced TypeScript resources
+
+Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. It is worth mentioning some resources to help you get started:
 
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbooks.io/typescript/
