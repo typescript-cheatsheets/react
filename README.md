@@ -1,6 +1,9 @@
-:wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! This is meant to be an intermediate guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
+:wave: This repo is maintained by [@swyx](https://twitter.com/swyx) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! This is meant to be a guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
 
-Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) *maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)*
+Translations: 
+
+- [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) *maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)*
+- Your language here?
 
 ### Table of Contents
 
@@ -64,16 +67,19 @@ Translations: [中文翻译](https://github.com/fi3ework/blog/tree/master/react-
 ## Prerequisites
 
 1. good understanding of [React](https://reactjs.org)
-2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful)
 3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-4. (optional) Read Microsoft's [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) docs.
+
+This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript) - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/): `npm create react-app woot --typescript`
-2. <https://github.com/basarat/typescript-react/tree/master/01%20bootstrap> for **manual setup** of React + TypeScript + Webpack + Babel
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npm create react-app woot --typescript` 
+ - see accompanying blogpost for migrating from [`create-react-app-typescript`](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/) (now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/))
+2. [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 
-In particular, make sure that you have `@types/react` and `@types/react-dom` installed. [Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/). There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
+- In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/)) 
+- There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
 ## Import React
 
@@ -105,7 +111,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 *Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9) and [@tpetrina](https://github.com/sw-yx/react-typescript-cheatsheet/pull/21)*
 
-You can specify the type of props as you destructure them:
+You can specify the type of props as you use them:
 
 ```tsx
 const App = ({ message }: { message: string }) => <div>{message}</div>;
@@ -119,7 +125,7 @@ const App: React.FunctionComponent<{ message: string }> = ({ message }) => <div>
 
 <details>
 
-<summary><b>Discussion</b></summary>
+<summary><b>Whats the difference?</b></summary>
 
 The former pattern is shorter, so why would people use `React.FunctionComponent` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
 
@@ -168,7 +174,7 @@ type MyState = {
   count: number // like this
 }
 class App extends React.Component<MyProps, MyState> {
-  state: MyState = { // second annotation for better type inference
+  state: MyState = { // optional second annotation for better type inference
     count: 0
   }
   render() {
@@ -194,14 +200,11 @@ It isn't strictly necessary to annotate the `state` class property, but it allow
 **Class Methods**: Do it like normal, but just remember any arguments for your functions also need to be typed:
 
 ```tsx
-class App extends React.Component<{
-  message: string,
-}, {
-    count: number,
-  }> {
-  state = {
-    count: 0
-  }
+class App extends React.Component<
+  { message: string }, 
+  { count: number }
+  > {
+  state = { count: 0 }
   render() {
     return (
       <div onClick={() => this.increment(1)}>{this.props.message} {this.state.count}</div>
@@ -215,7 +218,7 @@ class App extends React.Component<{
 }
 ```
 
-**Class Properties**: If you need to declare class properties for later use, just declare it like `state`:
+**Class Properties**: If you need to declare class properties for later use, just declare it like `state`, but without assignment:
 
 ```tsx
 class App extends React.Component<{
@@ -256,6 +259,9 @@ export class Greet extends React.Component<Props> {
 let el = <Greet />
 ```
 
+<details>
+ <summary>Typescript 2.9 and earlier</summary>
+ 
 For Typescript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
 
 ```ts
@@ -267,10 +273,6 @@ export class MyComponent extends React.Component<Props> {
   }
 }
 ```
-
-<details>
-
-<summary>Explanation</summary>
 
 Our former recommendation used the `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
 
@@ -354,11 +356,20 @@ export declare interface AppProps {
   children2: JSX.Element | JSX.Element[];            // meh, doesnt accept functions
   children3: React.ReactChild | React.ReactChildren; // better, but doesnt accept strings
   children: React.ReactNode;                         // best, accepts everything
-  style?: React.CSSProperties; // to pass through style props
+  style?: React.CSSProperties;                       // to pass through style props
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
   props: Props & React.HTMLProps<HTMLButtonElement>  // to impersonate all the props of a HTML element
 }
 ```
+
+<details>
+ <summary><b>JSX.Element vs React.ReactNode?</b></summary>
+
+Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57): A more technical explanation is that not everything that is a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
+
+* `JSX.Element` -> Return value of `React.createElement`
+* `React.ReactNode` -> Return value of a component
+</details>
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -379,6 +390,8 @@ class App extends React.Component<{}, { // no props
   state = {
     text: ''
   }
+  
+  // typing on RIGHT hand side of =
   onChange = (e: React.FormEvent<HTMLInputElement>): void => {
     this.setState({text: e.currentTarget.value})
   }
@@ -399,6 +412,7 @@ class App extends React.Component<{}, { // no props
 Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (*contributed by @TomasHubelbauer*):
 
 ```tsx
+  // typing on LEFT hand side of =
   onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({text: e.currentTarget.value})
   }
@@ -406,9 +420,9 @@ Instead of typing the arguments and return values with `React.FormEvent<>` and `
 
 <details>
 
-<summary><b>Discussion</b></summary>
+<summary><b>Why two ways to do the same thing?</b></summary>
 
-Why two ways to do the same thing? The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... *artisanally hand-rolled*. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
+The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... *artisanally hand-rolled*. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
 
 </details>
 
@@ -510,7 +524,6 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComp
 Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
 
 ```tsx
-import * as React from 'react';
 export interface Props {
   label?: React.ReactNode;
   children: React.ReactNode;
@@ -541,7 +554,7 @@ Hooks are supported in `@types/react` from v16.7 up.
 
 **useState**
 
-Many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
+Type inference works very well most of the time. However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
 
 ```tsx
 const [user, setUser] = useState<IUser | null>(null);
@@ -559,9 +572,7 @@ export function useLoading() {
   const [isLoading, setState] = React.useState(false);
   const load = (aPromise: Promise<any>) => {
     setState(true);
-    return aPromise.finally(() => {
-      setState(false);
-    });
+    return aPromise.finally(() => setState(false));
   };
   return [isLoading, load] as [
     boolean,
@@ -570,7 +581,13 @@ export function useLoading() {
 }
 ```
 
-If you are writing a React Hooks library, don't forget that you can also expose your types.
+If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
+
+Example React Hooks + TypeScript Libraries:
+
+- https://github.com/mweststrate/use-st8
+- https://github.com/palmerhq/the-platform
+- https://github.com/sw-yx/hooks
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -595,7 +612,7 @@ interface ProviderStore {
   update: (arg: UpdateStateArg) => void
 }
 
-const Context = React.createContext({} as ProviderStore)
+const Context = React.createContext({} as ProviderStore) // type assertion on empty object
 
 class Provider extends React.Component<{}, ProviderState> {
   public readonly state = {
@@ -800,7 +817,10 @@ if (typeof response === 'string') {
 
 You can also assert a type, or use a **type guard** against an `unknown` type. This is better than resorting to `any`.
 
-## Typescript 3.1
+## TypeScript 3.1
+
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/announcing-typescript-3-1/)]
 
 1. Properties declarations on functions
 
@@ -816,9 +836,15 @@ FooComponent.defaultProps = {
 };
 ```
 
-## Typescript 3.2
+## TypeScript 3.2
 
-[nothing specifically React related.](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-2.html)
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-2.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2018/11/29/announcing-typescript-3-2/)]
+
+nothing specifically React related.
+
+## TypeScript Roadmap
+
+https://github.com/Microsoft/TypeScript/wiki/Roadmap
 
 # Section 5: Misc. Concerns
 
@@ -1420,8 +1446,7 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - me! <https://twitter.com/swyx>
 - <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
-- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an Egghead.io course as well.
-- [Rares Matei's](https://egghead.io/courses/practical-advanced-typescript)'s advanced Typescript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
+- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbooks.io/typescript/content/docs/jsx/react.html) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
 - [Charles Bryant's gitbook](https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/) 2yrs old and on the more basic side but has sample code and IDE advice.
 - [Palmer Group's Typescript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together.
@@ -1431,6 +1456,12 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
   - [Gustav Wengel's blogpost - converting a React codebase to Typescript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React Typescript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+# Selected Advanced TypeScript resources
+
+- Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
+- Basarat's Deep Dive: https://basarat.gitbooks.io/typescript/
+- Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced Typescript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
 
 # My question isn't answered here!
 
