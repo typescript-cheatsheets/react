@@ -305,9 +305,11 @@ The problem with this approach is it causes complex issues with the type inferen
 
 - consider using `type` for your React Component Props and State, because it is more constrained.
 
-Types are useful for union types (see below) whereas Interfaces are better for declaring shapes and then `implementing` or `extending` them.
+Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas Interfaces are better for declaring dictionary shapes and then `implementing` or `extending` them.
 
-[You can read more about the edge cases of using types and interfaces here](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c). Note there have been significant changes since TypeScript 2.1.
+It's a nuanced topic, don't get too hung up on it. Here's a handy graphic: 
+
+![https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg](https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg) (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
