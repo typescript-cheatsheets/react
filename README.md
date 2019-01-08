@@ -1474,3 +1474,12 @@ It is worth mentioning some resources to help you get started:
 # My question isn't answered here!
 
 [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+### Code Visualization:
+
+Here is a cool visualization of the code evolution
+
+ [![Watch the video](https://img.youtube.com/vi/_xADGSksnXY/0.jpg)](https://www.youtube.com/watch?v=_xADGSksnXY)
+
+ [https://www.youtube.com/watch?v=_xADGSksnXY](https://www.youtube.com/watch?v=_xADGSksnXY)
+
