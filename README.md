@@ -57,9 +57,9 @@ Translations:
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
+- [Recommended React + TypeScript talks](#recommended-react--typescript-talks)
 - [Other React + TypeScript resources](#other-react--typescript-resources)
-- [My question isn't answered here!](#my-question-isnt-answered-here)
-
+- [Time to Really Learn TypeScript](#time-to-really-learn-typescript)
 </details>
 
 # Section 1: Setup
@@ -1456,10 +1456,17 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
   - [Microsoft React Typescript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-# Select Advanced TypeScript resources
+# Recommended React + TypeScript talks
 
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. It is worth mentioning some resources to help you get started:
+- Please help contribute this new section!
 
+# Time to Really Learn TypeScript
+
+Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :) 
+
+It is worth mentioning some resources to help you get started:
+
+- Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbooks.io/typescript/
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced Typescript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
