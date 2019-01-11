@@ -9,13 +9,13 @@ Translations:
 
 ## Two Levels of Cheatsheet
 
-- **The Basic Cheatsheet** (`/README.md`) is focused on helping React devs just start using TS in React **apps**
+- **The Basic Cheatsheet** ([`/README.md`](/README.md)) is focused on helping React devs just start using TS in React **apps**
   - focus on opinionated best practices, copy+pastable examples
   - explains some basic TS types usage and setup along the way
   - answers the most Frequently Asked Questions
   - does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
   - The goal is to get effective with TS without learning *too much* TS.
-- **The Advanced Cheatsheet** (`/ADVANCED.md`) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
+- **The Advanced Cheatsheet** ([`/ADVANCED.md`](/ADVANCED.md)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
   - It also has miscellaneous tips and tricks for pro users. 
   - Advice for contributing to DefinitelyTyped
   - The goal is to take *full advantage* of TypeScript.
