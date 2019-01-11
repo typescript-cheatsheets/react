@@ -264,8 +264,9 @@ As you can see from the Omit example above, you can write significant logic in y
 *(Contributed by [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/63))*
 
 There are a lot of places where you want to reuse some slices of props because of prop drilling, 
-so you can either export the props type as part of the module or I use this (either way works), 
-the advantage of using this is that a refactor of the source of truth component will propagate to all consuming components.
+so you can either export the props type as part of the module or extract them (either way works).
+
+The advantage of extracting the prop types is that you won't need to export everything, and a refactor of the source of truth component will propagate to all consuming components.
 
 
 ```ts
