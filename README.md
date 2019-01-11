@@ -7,7 +7,7 @@ Translations:
 
 ---
 
-## Two Levels of Cheatsheet
+## Two Levels of React + TypeScript Cheatsheets
 
 - **The Basic Cheatsheet** ([`/README.md`](/README.md)) is focused on helping React devs just start using TS in React **apps**
   - focus on opinionated best practices, copy+pastable examples
@@ -45,13 +45,13 @@ Translations:
   * [Forwarding References/createRef](#forwarding-referencescreateref)
   * [Portals](#portals)
   * [Error Boundaries](#error-boundaries)
-  * [Concurrent React/React Suspense](#concurrent-reactreactsuspense))
+  * [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
   * [Union Types and Type Guarding](#union-types-and-type-guarding)
   * [Optional Types](#optional-types)
   * [Enum Types](#enum-types)
   * [Type Assertion](#type-assertion)
-  * [Intersection Types](#intersection-types
+  * [Intersection Types](#intersection-types)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
@@ -168,7 +168,13 @@ Hooks are supported in `@types/react` from v16.7 up.
 
 **useState**
 
-Type inference works very well most of the time. However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
+Type inference works very well most of the time: 
+
+```tsx
+const [val, toggle] = useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
+```
+
+However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
 
 ```tsx
 const [user, setUser] = useState<IUser | null>(null);
@@ -351,9 +357,15 @@ The problem with this approach is it causes complex issues with the type inferen
 
 Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas Interfaces are better for declaring dictionary shapes and then `implementing` or `extending` them.
 
+<details>
+  <summary>
+    <b>Useful table for Types vs Interfaces</b>
+  </summary>
 It's a nuanced topic, don't get too hung up on it. Here's a handy graphic: 
 
 ![https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg](https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg) (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
+
+</details>
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -392,7 +404,7 @@ type AppProps = {
 }
 ```
 
-Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](#commenting-components) section below.
+Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](#commenting-components) section in the Advanced Cheatsheet.
 
 ## Useful React Prop Type Examples
 
