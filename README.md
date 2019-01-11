@@ -42,7 +42,7 @@ Translations:
   * [Useful React Prop Type Examples](#useful-react-prop-type-examples)
   * [Forms and Events](#forms-and-events)
   * [Context](#context)
-  * [Forwarding References/createRef](#forwarding-referencescreateref)
+  * [forwardRef/createRef](#forwardrefcreateref)
   * [Portals](#portals)
   * [Error Boundaries](#error-boundaries)
   * [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
@@ -535,18 +535,32 @@ const Consumer = Context.Consumer
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-## Forwarding References/createRef
+## forwardRef/createRef
 
-Use a `React.RefObject`:
+`createRef`:
 
 ```tsx
 class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef = React.createRef<HTMLDivElement>();
+  private rootRef = React.createRef<HTMLDivElement>(); // like this
   render() {
     return <div ref={this.rootRef}>{this.props.children}</div>;
   }
 }
 ```
+
+`forwardRef`:
+
+```tsx
+type Props = { children: React.ReactNode; type: 'submit | 'button' }
+export type Ref = HTMLButtonElement
+export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
+  <button ref={ref} className="MyClassName" type={props.type}>
+    {props.children}
+  </button>
+))
+```
+
+More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
