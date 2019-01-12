@@ -293,7 +293,7 @@ class App extends React.Component<{
 For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/sw-yx/react-typescript-cheatsheet/issues/61). Just type your props like normal.
 
 ```tsx
-export interface Props {
+export type Props = {
     name: string;
 }
 
