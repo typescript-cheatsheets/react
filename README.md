@@ -52,6 +52,8 @@ Translations:
   * [Enum Types](#enum-types)
   * [Type Assertion](#type-assertion)
   * [Intersection Types](#intersection-types)
+  * [Using Inferred Types](#using-inferred-types)
+  * [Using Partial Types](#using-partial-types)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
@@ -174,7 +176,9 @@ Type inference works very well most of the time:
 const [val, toggle] = useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
 ```
 
-However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Use union types:
+See also the [Using Inferred Types](#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
+
+However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
 const [user, setUser] = useState<IUser | null>(null);
@@ -756,7 +760,7 @@ Something to add? Please PR or [File an issue](https://github.com/sw-yx/react-ty
 
 ## Intersection Types
 
-Adding two types together:
+Adding two types together can be handy, for example when your component is supposed to mirror the props of a native component like a `button`:
 
 ```tsx
 export interface Props {
@@ -769,6 +773,38 @@ export const PrimaryButton = (
     {...props}
   />
 );
+```
+
+## Using Inferred Types
+
+Leaning on Typescript's Type Inference is great... until you realize you need a type that was inferred, and have to go back and explicitly declare types/interfaces so you can export them for reuse.
+
+Fortunately, with `typeof`, you wont have to do that. just use it on any value:
+
+```tsx
+const [state, setState] = React.useState({
+  foo: 1,
+  bar: 2
+}) // state's type inferred to be {foo: number, bar: number}
+
+const someMethod = (obj: typeof state) => setState(obj) // grabbing the type of state even though it was inferred
+```
+
+## Using Partial Types
+
+Working with slicing state and props is common in React. Again, you don't really have to go and explicitly redefine your types if you use the `Partial` generic type:
+
+```tsx
+const [state, setState] = React.useState({
+  foo: 1,
+  bar: 2
+}) // state's type inferred to be {foo: number, bar: number}
+
+// NOTE: this is not actually encouraged in React.useState, just demonstrating how to use it
+const partialStateUpdate = (obj: Partial<typeof state>) => setState({...state, obj}) 
+
+// later on...
+partialStateUpdate({foo: 2}) // this works
 ```
 
 # Troubleshooting Handbook: TSLint
