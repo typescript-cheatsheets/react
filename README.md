@@ -555,7 +555,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: 'submit | 'button' }
+type Props = { children: React.ReactNode; type: 'submit' | 'button' }
 export type Ref = HTMLButtonElement
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -655,6 +655,8 @@ interface Admin {
 interface User {
   email: string;
 }
+
+// Method 1: use `in` keyword
 function redirect(usr: Admin | User) {
   if("role" in usr) { // use the `in` operator for typeguards since TS 2.7+
     routeToAdminPage(usr.role);
@@ -663,7 +665,7 @@ function redirect(usr: Admin | User) {
   }
 }
 
-// custom type guard, does the same thing in older TS versions or where `in` isnt enough
+// Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
 function isAdmin(usr: Admin | User): usr is Admin {
   return (<Admin>usr).role !==undefined
 }
@@ -813,7 +815,7 @@ partialStateUpdate({foo: 2}) // this works
 
 <details>
   <summary>
-    Minor caveats on using <pre>Partial</pre>
+    Minor caveats on using <code>Partial</code>
   </summary>
   
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
