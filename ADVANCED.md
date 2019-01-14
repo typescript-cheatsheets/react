@@ -273,16 +273,14 @@ The advantage of extracting the prop types is that you won't need to export ever
 // helper type for all known valid JSX element constructors (class and function based)
 type ElementConstructor<P> =
   | ((props: P) => React.ReactElement<any> | null)
-  | (new (props: P) => React.Component<P, any, any>
+  | (new (props: P) => React.Component<P, any, any>);
 
 // gets the internal props of a component
 // used like Props<typeof MyComponent>
 // or Props<'button'> for intrinsic HTML attributes
 type Props<C> = C extends ElementConstructor<infer P>
   ? P
-  : C extends keyof JSX.IntrinsicElements
-  ? JSX.InstrinsicElements[C]
-  : {}
+  : C extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[C] : {};
 
 // goes one step further and resolves with propTypes and defaultProps properties
 type ApparentProps<C> = C extends ElementConstructor<infer P> ? JSX.LibraryManagedAttributes<C, P> : Props<C>
