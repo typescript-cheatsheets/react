@@ -779,7 +779,7 @@ export const PrimaryButton = (
 
 Leaning on Typescript's Type Inference is great... until you realize you need a type that was inferred, and have to go back and explicitly declare types/interfaces so you can export them for reuse.
 
-Fortunately, with `typeof`, you wont have to do that. just use it on any value:
+Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 
 ```tsx
 const [state, setState] = React.useState({
@@ -787,7 +787,10 @@ const [state, setState] = React.useState({
   bar: 2
 }) // state's type inferred to be {foo: number, bar: number}
 
-const someMethod = (obj: typeof state) => setState(obj) // grabbing the type of state even though it was inferred
+const someMethod = (obj: typeof state) => {  // grabbing the type of state even though it was inferred
+  // some code using obj
+  setState(obj) // this works
+}
 ```
 
 ## Using Partial Types
@@ -800,8 +803,9 @@ const [state, setState] = React.useState({
   bar: 2
 }) // state's type inferred to be {foo: number, bar: number}
 
-// NOTE: this is not actually encouraged in React.useState, just demonstrating how to use it
-const partialStateUpdate = (obj: Partial<typeof state>) => setState({...state, obj}) 
+// NOTE: stale state merging is not actually encouraged in React.useState
+// we are just demonstrating how to use Partial here
+const partialStateUpdate = (obj: Partial<typeof state>) => setState({...state, ...obj}) 
 
 // later on...
 partialStateUpdate({foo: 2}) // this works
