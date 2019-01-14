@@ -811,6 +811,14 @@ const partialStateUpdate = (obj: Partial<typeof state>) => setState({...state, .
 partialStateUpdate({foo: 2}) // this works
 ```
 
+<details>
+  <summary>
+    Minor caveats on using <pre>Partial</pre>
+  </summary>
+  
+Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
+</details>
+
 # Troubleshooting Handbook: TSLint
 
 Sometimes TSLint is just getting in the way. Judicious turning off of things can be helpful. Here are useful tslint disables you may use:
