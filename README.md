@@ -54,6 +54,7 @@ Translations:
   * [Intersection Types](#intersection-types)
   * [Using Inferred Types](#using-inferred-types)
   * [Using Partial Types](#using-partial-types)
+  * [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
