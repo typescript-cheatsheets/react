@@ -821,6 +821,33 @@ partialStateUpdate({foo: 2}) // this works
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
 </details>
 
+## The Types I need weren't exported!
+
+This can be annoying but here are ways to grab the types!
+
+- Grabbing the Prop types of a component: Use `typeof`, and optionally `Omit` any overlapping types
+
+```tsx
+import { Button } from 'library' // but doesn't export ButtonProps
+type ButtonProps = React.ComponentProps<typeof Button> // grab your own
+type AlertButtonProps = Omit<ButtonProps, 'onClick'> // modify
+const AlertButton: React.FC<AlertButtonProps> = props => (
+  <Button onClick={() => alert('hello')} {...props} />
+)
+```
+
+- Grabbing the return type of a function: use `ReturnType`:
+
+```tsx
+// inside some library - return type { baz: number } is inferred but not exported
+function foo(bar: string) {
+  return { baz: 1 }
+}
+
+//  inside your app, if you need { baz: number }
+type FooReturn = ReturnType<typeof foo> // { baz: number }
+```
+
 # Troubleshooting Handbook: TSLint
 
 Sometimes TSLint is just getting in the way. Judicious turning off of things can be helpful. Here are useful tslint disables you may use:
