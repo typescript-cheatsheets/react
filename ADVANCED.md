@@ -17,6 +17,8 @@
   * [Higher Order Components](#higher-order-components-hocs)
   * [Render Props](#render-props)
   * [Types for Conditional Rendering](#types-for-conditional-rendering)
+  * [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
+  * [Props: Must Pass Both](#props-one-or-the-other-but-not-both)
   * [Omit attribute from a type](#omit-attribute-from-a-type)
   * [Type Zoo](#type-zoo)
   * [Extracting Prop Types of a Component](#extracting-prop-types-of-a-component)
@@ -220,6 +222,51 @@ const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
 <AnchorButton href="/login">Login</AnchorButton>
 <AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
 ```
+
+## Props: One or the Other but not Both
+
+Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
+
+```tsx
+type Props1 = { foo: string }
+type Props2 = { bar: string }
+
+function MyComponent(props: Props1): JSX.Element
+function MyComponent(props: Props2): JSX.Element
+function MyComponent(props: Props1 | Props2) {
+  if ('foo' in props) {
+    // props.bar // error
+    return <div>{props.foo}</div>
+  } else {
+    // props.foo // error
+    return <div>{props.bar}</div>
+  }
+}
+const UsageComponent: React.FC = () => (
+  <div>
+    <MyComponent foo="foo" />
+    <MyComponent bar="bar" />
+    {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
+  </div>
+)
+```
+
+
+## Props: Must Pass Both
+
+```tsx
+type OneOrAnother<T1, T2> = 
+  | (T1 & { [K in keyof T2]?: undefined })
+  | (T2 & { [K in keyof T1]?: undefined })
+
+type Props = OneOrAnother<{ a: string; b: string }, {}>
+
+const a: Props = { a: 'a' } // error
+const b: Props = { b: 'b' } // error
+const ab: Props = { a: 'a', b: 'b' } // ok
+```
+
+Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
 
 ## Omit attribute from a type
 
