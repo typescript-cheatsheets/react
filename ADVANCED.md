@@ -670,7 +670,7 @@ Most Commonly Used Interfaces and Types
 - `Component` - base class of all class-based components
 - `PureComponent` - base class for all class-based optimized components
 - `FC`, `FunctionComponent` - a complete interface for function components, often used to type external components instead of typing your own
-- `CSSProperties` - used to type the `css` prop
+- `CSSProperties` - used to type style objects
 - all events: used to type event handlers
 - all event handlers: used to type event handlers
 - all consts: `Children`, `Fragment`, ... are all public and reflect the React runtime namespace
