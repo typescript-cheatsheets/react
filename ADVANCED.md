@@ -656,6 +656,8 @@ We have more discussion and examples [in our issue here](https://github.com/sw-y
 
 # Section 4: @types/react and @types/react-dom APIs
 
+The `@types` typings export both "public" types meant for your use as well as "private" types that are for internal use.
+
 ## `@types/react`
 
 [Link to `.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts)
@@ -664,39 +666,46 @@ We have more discussion and examples [in our issue here](https://github.com/sw-y
 
 Most Commonly Used Interfaces and Types
 
-- `Ref`
-- `ReactElement`
-- `ReactSVGElement`
-- `ReactPortal`
+- `ReactNode` - anything that is renderable *inside* of JSX, this is NOT the same as what can be returned from a component!
+- `Component` - base class of all class-based components
+- `PureComponent` - base class for all class-based optimized components
+- `FC`, `FunctionComponent` - a complete interface for function components, often used to type external components instead of typing your own
+- `CSSProperties` - used to type the `css` prop
+- all events: used to type event handlers
+- all event handlers: used to type event handlers
+- all consts: `Children`, `Fragment`, ... are all public and reflect the React runtime namespace
 
 Not Commonly Used but Good to know
 
-- `DetailedReactHTMLElement`
-- `ReactHTMLElement`
-- `DOMElement`
-- `ClassicElement`
-- `ComponentElement`
-- `FunctionComponentElement`
-- `ClassAttributes`
-- `RefAttributes`
-- `Attributes`
-- `RefObject`
+- `Ref` - used to type `innerRef`
+- `ReactType` - used for higher order components or operations on components
+- `ComponentType` - used for higher order components where you don't specifically deal with the intrinsic components
+- `ReactPortal` - used if you specifically need to type a prop as a portal, otherwise it is part of `ReactNode`
+- `ComponentClass` - a complete interface for the produced constructor function of a class declaration that extends `Component`, often used to type external components instead of typing your own
+- `JSXElementConstructor` - anything that TypeScript considers to be a valid thing that can go into the opening tag of a JSX expression
+- `ComponentProps` - props of a component
+- `ComponentPropsWithRef` - props of a component where if it is a class-based component it will replace the `ref` prop with its own instance type
+- `ComponentPropsWithoutRef` - props of a component without its `ref` prop
+- all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
-Don't use/Internal/Deprecated
+
+A special note that I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
+
+**Namespace: JSX**
+
+- `Element` - the type of any JSX expression
+- `LibraryManagedAttributes` - used to resolve static `defaultProps` and `propTypes` with the internal props type of a component
+- `IntrinsicElements` - every possible built-in component that can be typed in as a lowercase tag name in JSX
+
+**Don't use/Internal/Deprecated**
+
+Anything not listed above are considered internal types and not public.
 
 - `SFCElement`
 - `SFC`
 - `ComponentState`
 - `LegacyRef`
-- `ReactType`
-
-**Namespace: JSX**
-
-- to be written
-
-**Misc**
-
-- to be written
+- `StatelessComponent`
 
 ## `@types/react-dom`
 
