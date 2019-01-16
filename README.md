@@ -409,7 +409,7 @@ type AppProps = {
 }
 ```
 
-Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](#commenting-components) section in the Advanced Cheatsheet.
+Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](/ADVANCED.md#commenting-components) section in the Advanced Cheatsheet.
 
 ## Useful React Prop Type Examples
 
