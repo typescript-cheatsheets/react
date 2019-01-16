@@ -16,6 +16,7 @@
 - [Section 1: Reusable Components/Type Utilities](#section-1-reusable-componentstype-utilities)
   * [Higher Order Components](#higher-order-components-hocs)
   * [Render Props](#render-props)
+  * [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
   * [Types for Conditional Rendering](#types-for-conditional-rendering)
   * [Omit attribute from a type](#omit-attribute-from-a-type)
   * [Type Zoo](#type-zoo)
@@ -159,6 +160,19 @@ export interface Props {
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
+## `as` props (passing a component to be rendered)
+
+`ReactType` is pretty useful to cover most types that can be passed to createElement e.g.
+
+```tsx
+function PassThrough(props: { as: ReactType<any> }) {
+   const { as: Component } = props;
+
+   return <Component />
+}
+```
+
+[Thanks @eps1lon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/69) for this
 
 ## Types for Conditional Rendering
 
