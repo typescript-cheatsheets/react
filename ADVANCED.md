@@ -34,6 +34,7 @@
   * [Prettier + TSLint](#prettier--tslint)
   * [ESLint + TSLint](#eslint--tslint)
   * [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
+- [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
 </details>
 
 # Section 1: Advanced Guides
@@ -652,6 +653,55 @@ Please contribute on this topic! [We have an ongoing issue here with some refere
 We have more discussion and examples [in our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12).
 
 </details>
+
+# Section 4: @types/react and @types/react-dom APIs
+
+## `@types/react`
+
+[Link to `.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts)
+
+**Namespace: React**
+
+Most Commonly Used Interfaces and Types
+
+- `Ref`
+- `ReactElement`
+- `ReactSVGElement`
+- `ReactPortal`
+
+Not Commonly Used but Good to know
+
+- `DetailedReactHTMLElement`
+- `ReactHTMLElement`
+- `DOMElement`
+- `ClassicElement`
+- `ComponentElement`
+- `FunctionComponentElement`
+- `ClassAttributes`
+- `RefAttributes`
+- `Attributes`
+- `RefObject`
+
+Don't use/Internal/Deprecated
+
+- `SFCElement`
+- `SFC`
+- `ComponentState`
+- `LegacyRef`
+- `ReactType`
+
+**Namespace: JSX**
+
+- to be written
+
+**Misc**
+
+- to be written
+
+## `@types/react-dom`
+
+To be written
+
 
 # My question isn't answered here!
 
