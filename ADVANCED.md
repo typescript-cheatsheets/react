@@ -507,7 +507,20 @@ For developing with Storybook, read the docs I wrote over here: <https://storybo
 
 ## Migrating From Flow
 
-You may wish to use <https://github.com/piotrwitek/utility-types>. If you have specific advice in this area, please file a PR!
+You should check out large projects that are migrating from flow to pick up concerns and tips:
+
+- [Jest](https://github.com/facebook/jest/pull/7554)
+- [Expo](https://github.com/expo/expo/issues/2164)
+- [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd/issues/982)
+- [Storybook](https://github.com/storybooks/storybook/issues/5030)
+- [VueJS](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)
+
+Useful libraries: 
+
+- https://github.com/bcherny/flow-to-typescript
+- <https://github.com/piotrwitek/utility-types>. 
+
+If you have specific advice in this area, please file a PR!
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
