@@ -161,112 +161,46 @@ export interface Props {
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 
-## Types for Conditional Rendering
+## Typing a Component that Accepts Different Props
 
-Components can render different things based on props that are passed in, and this can be confusing to model in terms of argument and return types. See the Type checks, guards, and assertion strategies discussed above as a first resort.
+Components, and JSX in general, are analogous to functions. When a component can render differently based on their props, it's similar to how a function can be overloaded to have multiple call signatures. In the same way, you can overload a function component's call signature to list all of its different "versions".
 
-You can also do fairly advanced logic within your types ([they are Turing complete!](https://github.com/Microsoft/TypeScript/issues/14833)). Read the [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html) section of the docs for ideas on how to use `Pick`, `ReadOnly`, `Partial`, and `Record`. Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
-
-
+A very common use case for this is to render something as either a button or an anchor, based on if it receives a `href` attribute.
 ```tsx
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type ButtonProps = JSX.IntrinsicElements['button']
+type AnchorProps = JSX.IntrinsicElements['a']
 
-interface LinkProps {}
-
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
-
-const Link = <T extends {}>(
-    props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
-) => {
-    if ((props as RouterLinkProps).to) {
-        return <NavLink {...props as RouterLinkProps} />
-    } else {
-        return <a {...props as AnchorProps} />
-    }
+// optionally use a custom type guard
+function isPropsForAnchorElement(props: ButtonProps | AnchorProps): props is AnchorProps {
+  return 'href' in props
 }
 
-<Link<RouterLinkProps> to="/">My link</Link> // ok
-<Link<AnchorProps> href="/">My link</Link> // ok
-<Link<RouterLinkProps> to="/" href="/">My link</Link> // error
-```
-
-If you want to conditionaly render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
-
-```tsx
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
-
-interface Button {
-  as: React.ComponentClass | 'a'
-}
-
-const Button: React.FunctionComponent<Button> = (props) => {
-  const {as: Component, children, ...rest} = props
-  return (
-    <Component className="button" {...rest}>{children}</Component>
-  )
-}
-
-const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
-  <Button as="a" {...props} />
-)
-
-const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
-  <Button as={NavLink} {...props} />
-)
-
-<LinkButton to="/login">Login</LinkButton>
-<AnchorButton href="/login">Login</AnchorButton>
-<AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
-```
-
-## Props: One or the Other but not Both
-
-Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
-
-```tsx
-type Props1 = { foo: string }
-type Props2 = { bar: string }
-
-function MyComponent(props: Props1): JSX.Element
-function MyComponent(props: Props2): JSX.Element
-function MyComponent(props: Props1 | Props2) {
-  if ('foo' in props) {
-    // props.bar // error
-    return <div>{props.foo}</div>
+function Clickable(props: ButtonProps): JSX.Element
+function Clickable(props: AnchorProps): JSX.Element
+function Clickable(props: ButtonProps | AnchorProps) {
+  if (isPropsForAnchorElement(props)) {
+    return <a {...props} />
   } else {
-    // props.foo // error
-    return <div>{props.bar}</div>
+    return <button {...props } />
   }
 }
-const UsageComponent: React.FC = () => (
-  <div>
-    <MyComponent foo="foo" />
-    <MyComponent bar="bar" />
-    {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
-  </div>
-)
 ```
 
-
-## Props: Must Pass Both
-
+They don't even need to be completely different props, as long as they have at least one difference in properties:
 ```tsx
-type OneOrAnother<T1, T2> = 
-  | (T1 & { [K in keyof T2]?: undefined })
-  | (T2 & { [K in keyof T1]?: undefined })
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type LinkProps = Omit<JSX.IntrinsicElements[ 'a' ], 'href'> & { to?: string }
 
-type Props = OneOrAnother<{ a: string; b: string }, {}>
-
-const a: Props = { a: 'a' } // error
-const b: Props = { b: 'b' } // error
-const ab: Props = { a: 'a', b: 'b' } // ok
+function RouterLink(props: LinkProps): JSX.Element
+function RouterLink(props: AnchorProps): JSX.Element
+function RouterLink(props: LinkProps | AnchorProps) {
+  if ('to' in props) {
+    return <a {...props} />
+  } else {
+    return <Link {...props } />
+  }
+}
 ```
-
-Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
 
 ## Omit attribute from a type
 
@@ -317,20 +251,10 @@ The advantage of extracting the prop types is that you won't need to export ever
 
 
 ```ts
-// helper type for all known valid JSX element constructors (class and function based)
-type ElementConstructor<P> =
-  | ((props: P) => React.ReactElement<any> | null)
-  | (new (props: P) => React.Component<P, any, any>);
-
-// gets the internal props of a component
-// used like Props<typeof MyComponent>
-// or Props<'button'> for intrinsic HTML attributes
-type Props<C> = C extends ElementConstructor<infer P>
-  ? P
-  : C extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[C] : {};
+import { ComponentProps, JSXElementConstructor } from 'react'
 
 // goes one step further and resolves with propTypes and defaultProps properties
-type ApparentProps<C> = C extends ElementConstructor<infer P> ? JSX.LibraryManagedAttributes<C, P> : Props<C>
+type ApparentComponentProps<C> = C extends JSXElementConstructor<infer P> ? JSX.LibraryManagedAttributes<C, P> : ComponentProps<C>
 ```
 
 You can also use them to strongly type custom event handlers if they're not written at the call sites themselves 
