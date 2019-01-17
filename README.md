@@ -125,11 +125,19 @@ Or you can use the provided generic type for function components:
 const App: React.FunctionComponent<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
 
+If you want to use the `function` keyword instead of an arrow function, you can use this syntax (using a function expression, instead of declaration):
+
+```tsx
+const App: React.FunctionComponent<{ message: string }> = function App({ message }) {
+  return <div{message}</div>;
+}
+```
+
 <details>
 
-<summary><b>Whats the difference?</b></summary>
+<summary><b>What's the difference?</b></summary>
 
-The former pattern is shorter, so why would people use `React.FunctionComponent` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
+The former pattern is shorter, so why would people use `React.FunctionComponent` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type. Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) => ( 
