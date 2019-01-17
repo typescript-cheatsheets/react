@@ -680,7 +680,7 @@ The `@types` typings export both "public" types meant for your use as well as "p
 
 Most Commonly Used Interfaces and Types
 
-- `ReactNode` - anything that is renderable *inside* of JSX, this is NOT the same as what can be returned from a component!
+- `ReactNode` - anything that is renderable *inside* of JSX, this is NOT the same as what can be rendered by a component!
 - `Component` - base class of all class-based components
 - `PureComponent` - base class for all class-based optimized components
 - `FC`, `FunctionComponent` - a complete interface for function components, often used to type external components instead of typing your own
@@ -702,8 +702,7 @@ Not Commonly Used but Good to know
 - `ComponentPropsWithoutRef` - props of a component without its `ref` prop
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
-
-A special note that I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
+[@Ferdaber's note](https://github.com/sw-yx/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
 
 **Namespace: JSX**
 
@@ -713,7 +712,7 @@ A special note that I discourage the use of most `...Element` types because of h
 
 **Don't use/Internal/Deprecated**
 
-Anything not listed above are considered internal types and not public.
+Anything not listed above is considered an internal type and not public. If you're not sure you can check out the source of `@types/react`. The types are annotated accordingly.
 
 - `SFCElement`
 - `SFC`
