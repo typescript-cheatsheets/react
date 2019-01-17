@@ -121,16 +121,8 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 Or you can use the provided generic type for function components:
 
 ```tsx
-// React.FC also works
-const App: React.FunctionComponent<{ message: string }> = ({ message }) => <div>{message}</div>;
-```
-
-If you want to use the `function` keyword instead of an arrow function, you can use this syntax (using a function expression, instead of declaration):
-
-```tsx
-const App: React.FunctionComponent<{ message: string }> = function App({ message }) {
-  return <div{message}</div>;
-}
+// React.FunctionComponent also works
+const App: React.FC<{ message: string }> = ({ message }) => <div>{message}</div>;
 ```
 
 <details>
@@ -145,7 +137,13 @@ const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) 
 );
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+If you want to use the `function` keyword instead of an arrow function, you can use this syntax (using a function expression, instead of declaration):
+
+```tsx
+const App: React.FunctionComponent<{ message: string }> = function App({ message }) {
+  return <div{message}</div>;
+}
+```
 
 </details>
 
