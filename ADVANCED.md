@@ -104,7 +104,7 @@ The following utilities will be needed.
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 /**
- * Mark mark all the properies from K in T as optional.
+ * Remove from T the keys that are in common with K
  */
 type Optionalize<T extends K, K> = Omit<T, keyof K>;
 ```
@@ -125,10 +125,25 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComp
       const themeProps = getThemePropsFromSomeWhere();
 
       // this.props comes afterwards so the can override the default ones.
-      return <WrappedComponent {...themeProps} {...this.props} />;
+      return <WrappedComponent {...themeProps} {...this.props as T} />;
     }
   }
 }
+```
+
+Note that the `{...this.props as T}` assertion is needed because of a current bug in TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
+
+Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
+```ts
+// inject static values to a component so that they're always provided
+export function inject<TProps, TInjectedKeys extends keyof TProps>(
+  Component: React.JSXElementConstructor<TProps>,
+  injector: Pick<TProps, TInjectedKeys>
+ ) {
+   return function Injected(props: Omit<TProps, TInjectedKeys>) {
+     return <Component {...props as TProps} {...injector} />
+   }
+ }
 ```
 
 ## Render Props
