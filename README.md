@@ -426,8 +426,8 @@ export declare interface AppProps {
   children3: React.ReactChild | React.ReactChildren; // better, but doesnt accept strings
   children: React.ReactNode;                         // best, accepts everything
   style?: React.CSSProperties;                       // to pass through style props
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void; // form events!
-  props: Props & React.HTMLProps<HTMLButtonElement>  // to impersonate all the props of a HTML element
+  onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
+  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements['button']>  // to impersonate all the props of a button element without its ref
 }
 ```
 
