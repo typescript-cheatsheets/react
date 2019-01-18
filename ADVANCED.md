@@ -642,9 +642,11 @@ An example github repository with a project showing how to integrate [prettier +
 
 ## ESLint + TSLint
 
-Why? ESLint ecosystem is rich, with lots of different plugins and config files, whereas TSLint tend to lag behind in some areas.
+> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint. The rest of this section is potentially outdated.
 
-To remedy this nuisance there is an [`eslint-typescript-parser`](https://github.com/eslint/typescript-eslint-parser) which tries to bridge the differences between javascript and typescript. It still has some rough corners, but can provide consistent assistance with certain plugins.
+Why use ESLint with/over TSLint? ESLint ecosystem is rich, with lots of different plugins and config files, whereas TSLint tend to lag behind in some areas.
+
+To remedy this nuisance there is an [`typescript-eslint-parser`](https://github.com/eslint/typescript-eslint-parser) which tries to bridge the differences between javascript and typescript. It still has some rough corners, but can provide consistent assistance with certain plugins.
 
 <table>
  <tr>
