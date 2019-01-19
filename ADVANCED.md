@@ -292,11 +292,7 @@ export interface Props {
   label: React.ReactNode // this will conflict with the InputElement's label
 }
 
-// here is the magic - omitting an attribute
-type Diff<T extends string, U extends string> = ({ [P in T]: P } &
-  { [P in U]: never } & { [x: string]: never })[T];
-type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
-// end of magic
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
 // usage
 export const Checkbox = (
