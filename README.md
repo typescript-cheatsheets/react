@@ -100,7 +100,7 @@ import ReactDOM from 'react-dom';
 
 <summary>Explanation</summary>
 
-Why not `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
+Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
 Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
 </details>
@@ -110,9 +110,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 ## Function Components
 
-*Contributed by: [@jasanst](https://github.com/sw-yx/react-typescript-cheatsheet/pull/9) and [@tpetrina](https://github.com/sw-yx/react-typescript-cheatsheet/pull/21)*
-
-You can specify the type of props as you use them:
+You can specify the type of props as you use them and rely on type inference:
 
 ```tsx
 const App = ({ message }: { message: string }) => <div>{message}</div>;
@@ -121,15 +119,18 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 Or you can use the provided generic type for function components:
 
 ```tsx
-// React.FunctionComponent also works
-const App: React.FC<{ message: string }> = ({ message }) => <div>{message}</div>;
+const App: React.FC<{ message: string }> = ({ message }) => <div>{message}</div>; // React.FunctionComponent also works
 ```
 
 <details>
 
 <summary><b>What's the difference?</b></summary>
 
-The former pattern is shorter, so why would people use `React.FunctionComponent` at all? If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type. Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
+The former pattern is shorter, so why would people use `React.FunctionComponent` at all? 
+
+- If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type. 
+- Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
+- *In future*, it will also set `readonly` on your props just like `React.Component<T>` does.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) => ( 
@@ -148,19 +149,27 @@ const App: React.FunctionComponent<{ message: string }> = function App({ message
 </details>
 
 <details>
-<summary><b>Common Pitfalls</b></summary>
+<summary><b>Minor Pitfalls</b></summary>
 
 These patterns are not supported:
 
-```tsx
-const MyConditionalComponent = ({ shouldRender = false }) => shouldRender ? <div /> : false
-const el = <MyConditionalComponent /> // throws an error
+**Conditional rendering**
 
-const MyArrayComponent = () => Array(5).fill(<div />)
-const el2 = <MyArrayComponentt /> // throws an error
+```tsx
+const MyConditionalComponent = ({ shouldRender = false }) => shouldRender ? <div /> : false // don't do this in JS either
+const el = <MyConditionalComponent /> // throws an error
 ```
 
-This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`. Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
+This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
+
+```tsx
+const MyArrayComponent = () => Array(5).fill(<div />)
+const el2 = <MyArrayComponent /> // throws an error
+```
+
+**Array.fill**
+
+Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
 const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element
@@ -251,11 +260,33 @@ Don't forget that you can export/import/extend these types/interfaces for reuse.
 <details>
 <summary><b>Why annotate `state` twice?</b></summary>
 
-It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state. This is because they work in two different ways, the 2nd generic type parameter will allow `this.setState()` to work correctly, because that method comes from the base class, but initializing `state` inside the component overrides the base implementation so you have to make sure that you tell the compiler that you're not actually doing anything different.
+It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state. 
+
+This is because they work in two different ways, the 2nd generic type parameter will allow `this.setState()` to work correctly, because that method comes from the base class, but initializing `state` inside the component overrides the base implementation so you have to make sure that you tell the compiler that you're not actually doing anything different.
 
 [See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
 
 </details>
+
+
+<details>
+  <summary><b>No need for <code>readonly</code></b></summary>
+
+You often see sample code include `readonly` to mark props and state immutable:
+
+```tsx
+type MyProps = {
+  readonly message: string
+}
+type MyState = {
+  readonly count: number
+}
+```
+
+This is not necessary as `React.Component<P,S>` already marks them as immutable. ([See PR and discussion!](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/26813))
+
+</details>
+
 
 
 **Class Methods**: Do it like normal, but just remember any arguments for your functions also need to be typed:
