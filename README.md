@@ -1,24 +1,27 @@
 :wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@IslamAttrash](https://twitter.com/IslamAttrash) and [@ferdaber](https://twitter.com/ferdaber), we're so happy you want to try out TypeScript with React! This is meant to be a guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
 
-Translations: 
+Translations:
 
-- [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) *maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)*
+- [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) _maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)_
 - Your language here?
 
 ---
 
-## Two Levels of React + TypeScript Cheatsheets
+## React + TypeScript Cheatsheets
 
 - **The Basic Cheatsheet** ([`/README.md`](/README.md)) is focused on helping React devs just start using TS in React **apps**
   - focus on opinionated best practices, copy+pastable examples
   - explains some basic TS types usage and setup along the way
   - answers the most Frequently Asked Questions
   - does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
-  - The goal is to get effective with TS without learning *too much* TS.
+  - The goal is to get effective with TS without learning _too much_ TS.
 - **The Advanced Cheatsheet** ([`/ADVANCED.md`](/ADVANCED.md)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
-  - It also has miscellaneous tips and tricks for pro users. 
+  - It also has miscellaneous tips and tricks for pro users.
   - Advice for contributing to DefinitelyTyped
-  - The goal is to take *full advantage* of TypeScript.
+  - The goal is to take _full advantage_ of TypeScript.
+- **The Migrating Cheatsheet** ([`/MIGRATING.md`](/MIGRATING.md)) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
+  - We do not try to convince people to switch, only to help people who have already decided
+  - ⚠️This is the newest cheatsheet, all assistance is welcome
 
 ---
 
@@ -29,39 +32,39 @@ Translations:
 <summary><b>Expand Table of Contents</b></summary>
 
 - [Section 1: Setup](#section-1-setup)
-  * [Prerequisites](#prerequisites)
-  * [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-  * [Import React](#import-react)
+  - [Prerequisites](#prerequisites)
+  - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+  - [Import React](#import-react)
 - [Section 2: Getting Started](#section-2-getting-started)
-  * [Function Components](#function-components)
-  * [Hooks](#hooks)
-  * [Class Components](#class-components)
-  * [Typing defaultProps](#typing-defaultprops)
-  * [Types or Interfaces?](#types-or-interfaces)
-  * [Basic Prop Types Examples](#basic-prop-types-examples)
-  * [Useful React Prop Type Examples](#useful-react-prop-type-examples)
-  * [Forms and Events](#forms-and-events)
-  * [Context](#context)
-  * [forwardRef/createRef](#forwardrefcreateref)
-  * [Portals](#portals)
-  * [Error Boundaries](#error-boundaries)
-  * [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
+  - [Function Components](#function-components)
+  - [Hooks](#hooks)
+  - [Class Components](#class-components)
+  - [Typing defaultProps](#typing-defaultprops)
+  - [Types or Interfaces?](#types-or-interfaces)
+  - [Basic Prop Types Examples](#basic-prop-types-examples)
+  - [Useful React Prop Type Examples](#useful-react-prop-type-examples)
+  - [Forms and Events](#forms-and-events)
+  - [Context](#context)
+  - [forwardRef/createRef](#forwardrefcreateref)
+  - [Portals](#portals)
+  - [Error Boundaries](#error-boundaries)
+  - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
-  * [Union Types and Type Guarding](#union-types-and-type-guarding)
-  * [Optional Types](#optional-types)
-  * [Enum Types](#enum-types)
-  * [Type Assertion](#type-assertion)
-  * [Intersection Types](#intersection-types)
-  * [Using Inferred Types](#using-inferred-types)
-  * [Using Partial Types](#using-partial-types)
-  * [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
+  - [Union Types and Type Guarding](#union-types-and-type-guarding)
+  - [Optional Types](#optional-types)
+  - [Enum Types](#enum-types)
+  - [Type Assertion](#type-assertion)
+  - [Intersection Types](#intersection-types)
+  - [Using Inferred Types](#using-inferred-types)
+  - [Using Partial Types](#using-partial-types)
+  - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
 - [Recommended React + TypeScript talks](#recommended-react--typescript-talks)
 - [Other React + TypeScript resources](#other-react--typescript-resources)
 - [Time to Really Learn TypeScript](#time-to-really-learn-typescript)
-</details>
+  </details>
 
 # Section 1: Setup
 
@@ -75,11 +78,13 @@ This guide will always assume you are starting with the latest TypeScript versio
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npm create react-app my-new-react-typescript-app --typescript` 
- - We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npm create react-app my-new-react-typescript-app --typescript`
+
+- We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
+
 2. [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 
-- In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/)) 
+- In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/))
 - There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
 ## Import React
@@ -103,8 +108,8 @@ import ReactDOM from 'react-dom';
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
 Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
 
+</details>
 
 # Section 2: Getting Started
 
@@ -119,23 +124,26 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 Or you can use the provided generic type for function components:
 
 ```tsx
-const App: React.FC<{ message: string }> = ({ message }) => <div>{message}</div>; // React.FunctionComponent also works
+const App: React.FC<{ message: string }> = ({ message }) => (
+  <div>{message}</div>
+); // React.FunctionComponent also works
 ```
 
 <details>
 
 <summary><b>What's the difference?</b></summary>
 
-The former pattern is shorter, so why would people use `React.FunctionComponent` at all? 
+The former pattern is shorter, so why would people use `React.FunctionComponent` at all?
 
-- If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type. 
+- If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
 - Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
-- *In future*, it will also set `readonly` on your props just like `React.Component<T>` does.
+- _In future_, it will also set `readonly` on your props just like `React.Component<T>` does.
 
 ```tsx
-const Title: React.FunctionComponent<{ title: string }> = ({ children, title }) => ( 
-    <div title={title}>{children}</div>
-);
+const Title: React.FunctionComponent<{ title: string }> = ({
+  children,
+  title
+}) => <div title={title}>{children}</div>;
 ```
 
 If you want to use the `function` keyword instead of an arrow function, you can use this syntax (using a function expression, instead of declaration):
@@ -156,15 +164,16 @@ These patterns are not supported:
 **Conditional rendering**
 
 ```tsx
-const MyConditionalComponent = ({ shouldRender = false }) => shouldRender ? <div /> : false // don't do this in JS either
-const el = <MyConditionalComponent /> // throws an error
+const MyConditionalComponent = ({ shouldRender = false }) =>
+  shouldRender ? <div /> : false; // don't do this in JS either
+const el = <MyConditionalComponent />; // throws an error
 ```
 
 This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
 
 ```tsx
-const MyArrayComponent = () => Array(5).fill(<div />)
-const el2 = <MyArrayComponent /> // throws an error
+const MyArrayComponent = () => Array(5).fill(<div />);
+const el2 = <MyArrayComponent />; // throws an error
 ```
 
 **Array.fill**
@@ -172,13 +181,12 @@ const el2 = <MyArrayComponent /> // throws an error
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element
+const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 ```
 
 [See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
 
 </details>
-
 
 ## Hooks
 
@@ -186,7 +194,7 @@ Hooks are supported in `@types/react` from v16.7 up.
 
 **useState**
 
-Type inference works very well most of the time: 
+Type inference works very well most of the time:
 
 ```tsx
 const [val, toggle] = useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
@@ -200,7 +208,7 @@ However, many hooks are initialized with null-ish default values, and you may wo
 const [user, setUser] = useState<IUser | null>(null);
 
 // later...
-setUser(newUser)
+setUser(newUser);
 ```
 
 **Custom Hooks**
@@ -231,25 +239,28 @@ Example React Hooks + TypeScript Libraries:
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-
 ## Class Components
 
 Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you want to provide it with (optional) prop and state type parameters:
 
 ```tsx
-type MyProps = { // using `interface` is also ok
-  message: string
-}
+type MyProps = {
+  // using `interface` is also ok
+  message: string;
+};
 type MyState = {
-  count: number // like this
-}
+  count: number; // like this
+};
 class App extends React.Component<MyProps, MyState> {
-  state: MyState = { // optional second annotation for better type inference
+  state: MyState = {
+    // optional second annotation for better type inference
     count: 0
-  }
+  };
   render() {
     return (
-      <div>{this.props.message} {this.state.count}</div>
+      <div>
+        {this.props.message} {this.state.count}
+      </div>
     );
   }
 }
@@ -260,14 +271,13 @@ Don't forget that you can export/import/extend these types/interfaces for reuse.
 <details>
 <summary><b>Why annotate `state` twice?</b></summary>
 
-It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state. 
+It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state.
 
 This is because they work in two different ways, the 2nd generic type parameter will allow `this.setState()` to work correctly, because that method comes from the base class, but initializing `state` inside the component overrides the base implementation so you have to make sure that you tell the compiler that you're not actually doing anything different.
 
 [See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
 
 </details>
-
 
 <details>
   <summary><b>No need for <code>readonly</code></b></summary>
@@ -276,37 +286,35 @@ You often see sample code include `readonly` to mark props and state immutable:
 
 ```tsx
 type MyProps = {
-  readonly message: string
-}
+  readonly message: string;
+};
 type MyState = {
-  readonly count: number
-}
+  readonly count: number;
+};
 ```
 
 This is not necessary as `React.Component<P,S>` already marks them as immutable. ([See PR and discussion!](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/26813))
 
 </details>
 
-
-
 **Class Methods**: Do it like normal, but just remember any arguments for your functions also need to be typed:
 
 ```tsx
-class App extends React.Component<
-  { message: string }, 
-  { count: number }
-  > {
-  state = { count: 0 }
+class App extends React.Component<{ message: string }, { count: number }> {
+  state = { count: 0 };
   render() {
     return (
-      <div onClick={() => this.increment(1)}>{this.props.message} {this.state.count}</div>
+      <div onClick={() => this.increment(1)}>
+        {this.props.message} {this.state.count}
+      </div>
     );
   }
-  increment = (amt: number) => { // like this
+  increment = (amt: number) => {
+    // like this
     this.setState(state => ({
       count: state.count + amt
     }));
-  }
+  };
 }
 ```
 
@@ -314,15 +322,17 @@ class App extends React.Component<
 
 ```tsx
 class App extends React.Component<{
-  message: string,
+  message: string;
 }> {
-  pointer: number // like this
+  pointer: number; // like this
   componentDidMount() {
     this.pointer = 3;
   }
   render() {
     return (
-      <div>{this.props.message} and {this.pointer}</div>
+      <div>
+        {this.props.message} and {this.pointer}
+      </div>
     );
   }
 }
@@ -336,19 +346,19 @@ For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org
 
 ```tsx
 export type Props = {
-    name: string;
-}
+  name: string;
+};
 
 export class Greet extends React.Component<Props> {
-    render() {
-        const { name } = this.props;
-        return <div>Hello ${name.toUpperCase()}!</div>;
-    }
-    static defaultProps = { name: "world"};
+  render() {
+    const { name } = this.props;
+    return <div>Hello ${name.toUpperCase()}!</div>;
+  }
+  static defaultProps = { name: 'world' };
 }
 
 // Type-checks! No type assertions needed!
-let el = <Greet />
+let el = <Greet />;
 ```
 
 <details>
@@ -357,12 +367,14 @@ let el = <Greet />
 For Typescript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
 
 ```ts
-type Props = Required<typeof MyComponent.defaultProps> & { /* additional props here */ }
+type Props = Required<typeof MyComponent.defaultProps> & {
+  /* additional props here */
+};
 
 export class MyComponent extends React.Component<Props> {
   static defaultProps = {
     foo: 'foo'
-  }
+  };
 }
 ```
 
@@ -376,7 +388,7 @@ interface IMyComponentProps {
 
 export class MyComponent extends React.Component<IMyComponentProps> {
   public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: "default",
+    firstProp: 'default'
   };
 }
 ```
@@ -403,7 +415,7 @@ Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas In
   <summary>
     <b>Useful table for Types vs Interfaces</b>
   </summary>
-It's a nuanced topic, don't get too hung up on it. Here's a handy graphic: 
+It's a nuanced topic, don't get too hung up on it. Here's a handy graphic:
 
 ![https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg](https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg) (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
 
@@ -415,35 +427,35 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy graphic:
 
 ```tsx
 type AppProps = {
-  message: string,
-  count: number,
-  disabled: boolean,
+  message: string;
+  count: number;
+  disabled: boolean;
   /** array of a type! */
-  names: string[], 
+  names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
-  status: 'waiting' | 'success',
+  status: 'waiting' | 'success';
   /** any object as long as you dont use its properties (not common) */
-  obj: object, 
-  obj2: {}, // same
+  obj: object;
+  obj2: {}; // same
   /** an object with defined properties (preferred) */
   obj3: {
-   id: string,
-   title: string
-  },
+    id: string;
+    title: string;
+  };
   /** array of objects! (common) */
   objArr: {
-   id: string,
-   title: string
-  }[],
+    id: string;
+    title: string;
+  }[];
   /** any function as long as you don't invoke it (not recommended) */
-  onSomething: Function,
+  onSomething: Function;
   /** function that doesn't take or return anything (VERY COMMON) */
-  onClick: () => void,
+  onClick: () => void;
   /** function with named prop (VERY COMMON) */
-  onChange: (id: number) => void,
+  onChange: (id: number) => void;
   /** an optional prop (VERY COMMON!) */
-  optional?: OptionalType,
-}
+  optional?: OptionalType;
+};
 ```
 
 Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](/ADVANCED.md#commenting-components) section in the Advanced Cheatsheet.
@@ -452,13 +464,13 @@ Notice we have used the TSDoc `/** comment */` style here on each prop. You can 
 
 ```tsx
 export declare interface AppProps {
-  children1: JSX.Element;                            // bad, doesnt account for arrays
-  children2: JSX.Element | JSX.Element[];            // meh, doesnt accept functions
+  children1: JSX.Element; // bad, doesnt account for arrays
+  children2: JSX.Element | JSX.Element[]; // meh, doesnt accept functions
   children3: React.ReactChild | React.ReactChildren; // better, but doesnt accept strings
-  children: React.ReactNode;                         // best, accepts everything
-  style?: React.CSSProperties;                       // to pass through style props
+  children: React.ReactNode; // best, accepts everything
+  style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
-  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements['button']>  // to impersonate all the props of a button element without its ref
+  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements['button']>; // to impersonate all the props of a button element without its ref
 }
 ```
 
@@ -467,9 +479,9 @@ export declare interface AppProps {
 
 Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
 
-* `JSX.Element` -> Return value of `React.createElement`
-* `React.ReactNode` -> Return value of a component
-</details>
+- `JSX.Element` -> Return value of `React.createElement`
+- `React.ReactNode` -> Return value of a component
+  </details>
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
@@ -478,38 +490,44 @@ Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57
 If performance is not an issue, inlining handlers is easiest as you can just use type inference:
 
 ```tsx
-const el = <button onClick={event => {/* ... */}} />
+const el = (
+  <button
+    onClick={event => {
+      /* ... */
+    }}
+  />
+);
 ```
 
 But if you need to define your event handler separately, IDE tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
 
 ```tsx
-class App extends React.Component<{}, { // no props
-    text: string,
-  }> {
+class App extends React.Component<
+  {},
+  {
+    // no props
+    text: string;
+  }
+> {
   state = {
     text: ''
-  }
-  
+  };
+
   // typing on RIGHT hand side of =
   onChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({text: e.currentTarget.value})
-  }
+    this.setState({ text: e.currentTarget.value });
+  };
   render() {
     return (
       <div>
-        <input
-          type="text"
-          value={this.state.text}
-          onChange={this.onChange}
-        />
+        <input type="text" value={this.state.text} onChange={this.onChange} />
       </div>
     );
   }
 }
 ```
 
-Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (*contributed by @TomasHubelbauer*):
+Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (_contributed by @TomasHubelbauer_):
 
 ```tsx
   // typing on LEFT hand side of =
@@ -522,57 +540,55 @@ Instead of typing the arguments and return values with `React.FormEvent<>` and `
 
 <summary><b>Why two ways to do the same thing?</b></summary>
 
-The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... *artisanally hand-rolled*. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
+The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... _artisanally hand-rolled_. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
 
 </details>
 
 ## Context
 
-*Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)*
+_Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)_
 
 Using the new context API `React.createContext`:
 
 ```tsx
 interface ProviderState {
-  themeColor: string
+  themeColor: string;
 }
 
 interface UpdateStateArg {
-  key: keyof ProviderState
-  value: string
+  key: keyof ProviderState;
+  value: string;
 }
 
 interface ProviderStore {
-  state: ProviderState
-  update: (arg: UpdateStateArg) => void
+  state: ProviderState;
+  update: (arg: UpdateStateArg) => void;
 }
 
-const Context = React.createContext({} as ProviderStore) // type assertion on empty object
+const Context = React.createContext({} as ProviderStore); // type assertion on empty object
 
 class Provider extends React.Component<{}, ProviderState> {
   public readonly state = {
     themeColor: 'red'
-  }
+  };
 
   private update = ({ key, value }: UpdateStateArg) => {
-    this.setState({ [key]: value })
-  }
+    this.setState({ [key]: value });
+  };
 
   public render() {
     const store: ProviderStore = {
       state: this.state,
       update: this.update
-    }
+    };
 
     return (
-      <Context.Provider value={store}>
-        {this.props.children}
-      </Context.Provider>
-    )
+      <Context.Provider value={store}>{this.props.children}</Context.Provider>
+    );
   }
 }
 
-const Consumer = Context.Consumer
+const Consumer = Context.Consumer;
 ```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
@@ -593,13 +609,13 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: 'submit' | 'button' }
-export type Ref = HTMLButtonElement
+type Props = { children: React.ReactNode; type: 'submit' | 'button' };
+export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
     {props.children}
   </button>
-))
+));
 ```
 
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
@@ -615,22 +631,19 @@ const modalRoot = document.getElementById('modal-root') as HTMLElement;
 // assuming in your html file has a div with id 'modal-root';
 
 export class Modal extends React.Component {
-    el: HTMLElement = document.createElement('div');
+  el: HTMLElement = document.createElement('div');
 
-    componentDidMount() {
-        modalRoot.appendChild(this.el);
-    }
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+  }
 
-    componentWillUnmount() {
-        modalRoot.removeChild(this.el);
-    }
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
 
-    render() {
-        return ReactDOM.createPortal(
-            this.props.children,
-            this.el
-        )
-    }
+  render() {
+    return ReactDOM.createPortal(this.props.children, this.el);
+  }
 }
 ```
 
@@ -644,19 +657,19 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 
 ## Error Boundaries
 
-*Not written yet.*
+_Not written yet._
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 ## Concurrent React/React Suspense
 
-*Not written yet.* watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
+_Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 # Basic Troubleshooting Handbook: Types
 
-Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patience - you are learning a new language after all. However, the more you get good at this, the less time you'll be working *against* the compiler and the more the compiler will be working *for* you! 
+Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patience - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
 Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
@@ -665,22 +678,23 @@ Try to avoid typing with `any` as much as possible to experience the full benefi
 Union types are handy for solving some of these typing problems:
 
 ```tsx
-class App extends React.Component<{}, {
-    count: number | null, // like this
-  }> {
+class App extends React.Component<
+  {},
+  {
+    count: number | null; // like this
+  }
+> {
   state = {
     count: null
-  }
+  };
   render() {
-    return (
-      <div onClick={() => this.increment(1)}>{this.state.count}</div>
-    );
+    return <div onClick={() => this.increment(1)}>{this.state.count}</div>;
   }
   increment = (amt: number) => {
     this.setState(state => ({
       count: (state.count || 0) + amt
     }));
-  }
+  };
 }
 ```
 
@@ -717,20 +731,18 @@ If a component has an optional prop, add a question mark and assign during destr
 
 ```tsx
 class MyComponent extends React.Component<{
-  message?: string, // like this
+  message?: string; // like this
 }> {
   render() {
-    const {message = 'default'} = this.props;
-    return (
-      <div>{message}</div>
-    );
+    const { message = 'default' } = this.props;
+    return <div>{message}</div>;
   }
 }
 ```
 
 You can also use a `!` character to assert that something is not undefined, but this is not encouraged.
 
-*Something to add? [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!*
+_Something to add? [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!_
 
 ## Enum Types
 
@@ -749,12 +761,7 @@ Usage:
 ```tsx
 export const PrimaryButton = (
   props: Props & React.HTMLProps<HTMLButtonElement>
-) => (
-  <Button
-    size={ButtonSizes.default}
-    {...props}
-  />
-);
+) => <Button size={ButtonSizes.default} {...props} />;
 ```
 
 A simpler alternative to enum is just declaring a bunch of strings with union:
@@ -777,10 +784,10 @@ Sometimes TypeScript is just getting your type wrong, or union types need to be 
 
 ```tsx
 class MyComponent extends React.Component<{
-  message: string,
+  message: string;
 }> {
   render() {
-    const {message} = this.props;
+    const { message } = this.props;
     return (
       <Component2 message={message as SpecialMessageType}>{message}</Component2>
     );
@@ -795,8 +802,8 @@ class MyComponent extends React.Component<{
 Note that this is [not the same as casting](https://www.reddit.com/r/reactjs/comments/8o5owb/react_typescript_cheatsheet_for_react_users_using/e01d2md/?context=3).
 
 Something to add? Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
 
+</details>
 
 ## Intersection Types
 
@@ -808,11 +815,7 @@ export interface Props {
 }
 export const PrimaryButton = (
   props: Props & React.HTMLProps<HTMLButtonElement> // adding my Props together with the @types/react button provided props
-) => (
-  <Button
-    {...props}
-  />
-);
+) => <Button {...props} />;
 ```
 
 ## Using Inferred Types
@@ -825,12 +828,13 @@ Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 const [state, setState] = React.useState({
   foo: 1,
   bar: 2
-}) // state's type inferred to be {foo: number, bar: number}
+}); // state's type inferred to be {foo: number, bar: number}
 
-const someMethod = (obj: typeof state) => {  // grabbing the type of state even though it was inferred
+const someMethod = (obj: typeof state) => {
+  // grabbing the type of state even though it was inferred
   // some code using obj
-  setState(obj) // this works
-}
+  setState(obj); // this works
+};
 ```
 
 ## Using Partial Types
@@ -841,14 +845,15 @@ Working with slicing state and props is common in React. Again, you don't really
 const [state, setState] = React.useState({
   foo: 1,
   bar: 2
-}) // state's type inferred to be {foo: number, bar: number}
+}); // state's type inferred to be {foo: number, bar: number}
 
 // NOTE: stale state merging is not actually encouraged in React.useState
 // we are just demonstrating how to use Partial here
-const partialStateUpdate = (obj: Partial<typeof state>) => setState({...state, ...obj}) 
+const partialStateUpdate = (obj: Partial<typeof state>) =>
+  setState({ ...state, ...obj });
 
 // later on...
-partialStateUpdate({foo: 2}) // this works
+partialStateUpdate({ foo: 2 }); // this works
 ```
 
 <details>
@@ -866,12 +871,12 @@ This can be annoying but here are ways to grab the types!
 - Grabbing the Prop types of a component: Use `typeof`, and optionally `Omit` any overlapping types
 
 ```tsx
-import { Button } from 'library' // but doesn't export ButtonProps
-type ButtonProps = React.ComponentProps<typeof Button> // grab your own
-type AlertButtonProps = Omit<ButtonProps, 'onClick'> // modify
+import { Button } from 'library'; // but doesn't export ButtonProps
+type ButtonProps = React.ComponentProps<typeof Button>; // grab your own
+type AlertButtonProps = Omit<ButtonProps, 'onClick'>; // modify
 const AlertButton: React.FC<AlertButtonProps> = props => (
   <Button onClick={() => alert('hello')} {...props} />
-)
+);
 ```
 
 - Grabbing the return type of a function: use `ReturnType`:
@@ -879,11 +884,11 @@ const AlertButton: React.FC<AlertButtonProps> = props => (
 ```tsx
 // inside some library - return type { baz: number } is inferred but not exported
 function foo(bar: string) {
-  return { baz: 1 }
+  return { baz: 1 };
 }
 
 //  inside your app, if you need { baz: number }
-type FooReturn = ReturnType<typeof foo> // { baz: number }
+type FooReturn = ReturnType<typeof foo>; // { baz: number }
 ```
 
 # Troubleshooting Handbook: TSLint
@@ -903,6 +908,7 @@ so on and so forth. there are any number of things you can disable, usually you 
 <summary>Explanation</summary>
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+
 </details>
 
 # Troubleshooting Handbook: tsconfig.json
@@ -952,7 +958,7 @@ If you run into bugs with your library's official typings, you can copy them loc
 {
   "compilerOptions": {
     "paths": {
-       "mobx-react": ["../typings/modules/mobx-react"]
+      "mobx-react": ["../typings/modules/mobx-react"]
     }
   }
 }
@@ -973,7 +979,9 @@ declare module 'plotly.js' {
 // MyComponent.tsx
 import { PlotlyHTMLElement } from 'plotly.js';
 import './my-typings';
-const f = (e: PlotlyHTMLElement) => { e.removeAllListeners(); }
+const f = (e: PlotlyHTMLElement) => {
+  e.removeAllListeners();
+};
 ```
 
 <details>
@@ -981,6 +989,7 @@ const f = (e: PlotlyHTMLElement) => { e.removeAllListeners(); }
 <summary>Explanation</summary>
 
 This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+
 </details>
 
 # Recommended React + TypeScript codebases to learn from
@@ -1000,7 +1009,7 @@ React Boilerplates:
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
-React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/react-typescript-cheatsheet/pull/20)*
+React Native Boilerplates: _contributed by [@spoeck](https://github.com/sw-yx/react-typescript-cheatsheet/pull/20)_
 
 - https://github.com/GeekyAnts/react-native-seed
 - https://github.com/lopezjurip/ReactNativeTS
@@ -1028,7 +1037,7 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 
 # Time to Really Learn TypeScript
 
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :) 
+Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
 
 It is worth mentioning some resources to help you get started:
 
