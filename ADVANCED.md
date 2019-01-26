@@ -202,6 +202,121 @@ function RouterLink(props: LinkProps | AnchorProps) {
 }
 ```
 
+<details>
+  <summary><b>Approach: Generic Components</b></summary>
+  
+  Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
+  
+```tsx
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+interface LinkProps {}
+
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+type RouterLinkProps = Omit<NavLinkProps, 'href'>
+
+const Link = <T extends {}>(
+    props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+) => {
+    if ((props as RouterLinkProps).to) {
+        return <NavLink {...props as RouterLinkProps} />
+    } else {
+        return <a {...props as AnchorProps} />
+    }
+}
+
+<Link<RouterLinkProps> to="/">My link</Link> // ok
+<Link<AnchorProps> href="/">My link</Link> // ok
+<Link<RouterLinkProps> to="/" href="/">My link</Link> // error
+```
+  
+</details>
+
+
+
+<details>
+  <summary><b>Approach: Composition</b></summary>
+  
+If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
+
+```tsx
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+type RouterLinkProps = Omit<NavLinkProps, 'href'>
+
+interface Button {
+  as: React.ComponentClass | 'a'
+}
+
+const Button: React.FunctionComponent<Button> = (props) => {
+  const {as: Component, children, ...rest} = props
+  return (
+    <Component className="button" {...rest}>{children}</Component>
+  )
+}
+
+const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
+  <Button as="a" {...props} />
+)
+
+const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
+  <Button as={NavLink} {...props} />
+)
+
+<LinkButton to="/login">Login</LinkButton>
+<AnchorButton href="/login">Login</AnchorButton>
+<AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
+```
+</details>
+
+
+
+## Props: One or the Other but not Both
+
+Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
+
+```tsx
+type Props1 = { foo: string }
+type Props2 = { bar: string }
+
+function MyComponent(props: Props1): JSX.Element
+function MyComponent(props: Props2): JSX.Element
+function MyComponent(props: Props1 | Props2) {
+  if ('foo' in props) {
+    // props.bar // error
+    return <div>{props.foo}</div>
+  } else {
+    // props.foo // error
+    return <div>{props.bar}</div>
+  }
+}
+const UsageComponent: React.FC = () => (
+  <div>
+    <MyComponent foo="foo" />
+    <MyComponent bar="bar" />
+    {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
+  </div>
+)
+```
+
+
+## Props: Must Pass Both
+
+```tsx
+type OneOrAnother<T1, T2> = 
+  | (T1 & { [K in keyof T2]?: undefined })
+  | (T2 & { [K in keyof T1]?: undefined })
+
+type Props = OneOrAnother<{ a: string; b: string }, {}>
+
+const a: Props = { a: 'a' } // error
+const b: Props = { b: 'b' } // error
+const ab: Props = { a: 'a', b: 'b' } // ok
+```
+
+Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
+
 ## Omit attribute from a type
 
 Sometimes when intersecting types, we want to define our own version of an attribute. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` attribute. Here's how to extract that out:
