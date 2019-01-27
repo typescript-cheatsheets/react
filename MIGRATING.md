@@ -2,7 +2,7 @@
 
 This Cheatsheet collates advice and utilities from real case studies of teams moving significant codebases from plain JS or Flow over to TypeScript. It makes no attempt to _convince_ people to do so, but we do collect what few statistics companies offer up after their conversion experience.
 
-> ⚠️ This Cheatsheet is extremely new and could use all the help we can get. solid advice, results, and up to date content all welcome.
+> ⚠️ This Cheatsheet is extremely new and could use all the help we can get. Solid advice, results, and up to date content all welcome.
 
 ## General Conversion approaches
 
@@ -103,11 +103,15 @@ Old content that is possibly out of date
 ## Results
 
 - Number of production deploys doubled for [Hootsuite][hootsuite]
+- Found accidental globals for [Tiny][tiny]
+- Found incorrect function calls for [Tiny][tiny]
+- Found rarely used, buggy code that was untested for [Tiny][tiny]
 
 ## Misc writeups by notable companies
 
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)
+- [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
 
 ## Links
 
@@ -117,3 +121,4 @@ Old content that is possibly out of date
 [mstsreactconversionguide]: https://github.com/Microsoft/TypeScript-React-Conversion-Guide 'TypeScript React Conversion Guide'
 [entria]: https://medium.com/entria/incremental-migration-to-typescript-on-a-flowtype-codebase-515f6490d92d 'Incremental Migration to TypeScript on a Flowtype codebase'
 [coherentlabs]: https://hashnode.com/post/how-we-migrated-a-200k-loc-project-to-typescript-and-survived-to-tell-the-story-ciyzhikcc0001y253w00n11yb 'How we migrated a 200K+ LOC project to TypeScript and survived to tell the story'
+[tiny]: https://go.tiny.cloud/blog/benefits-of-gradual-strong-typing-in-javascript/ 'Benefits of gradual strong typing in JavaScript'
