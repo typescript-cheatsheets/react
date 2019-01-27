@@ -11,6 +11,7 @@ This Cheatsheet collates advice and utilities from real case studies of teams mo
 - New code must always be written in TypeScript. No exceptions. For existing code: If your task requires you to change JavaScript code, you need to rewrite it. (Source: [Hootsuite][hootsuite])
 - consider using `allowJS`? (Source: [clayallsop][clayallsop], [pleo][pleo])
 - consider `"noImplicitAny": false` if you need a gentler onboarding
+- use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
 - use `declare` keyword for ambient declarations
 
 <details>
