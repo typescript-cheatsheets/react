@@ -95,11 +95,13 @@ Old content that is possibly out of date
 
 ## From Flow
 
+- Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/sw-yx/react-typescript-cheatsheet/pull/79#issuecomment-458227322) at TravelRepublic)
 - [Incremental Migration to TypeScript on a Flowtype codebase][entria] at Entria
 - [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
 - [Expo's migration (issue)](https://github.com/expo/expo/issues/2164)
 - [Atlassian's migration (PR)](https://github.com/atlassian/react-beautiful-dnd/issues/982)
 - [Yarn's migration (issue)](https://github.com/yarnpkg/yarn/issues/6953)
+- [MemSQL's Studio's migration](https://davidgom.es/porting-30k-lines-of-code-from-flow-to-typescript/) - blogpost with many useful tips
 
 ## Results
 
