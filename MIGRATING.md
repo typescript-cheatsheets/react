@@ -83,6 +83,7 @@ Problems to be aware of:
 - [TypeScript's official Guide for migrating from JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
 - [Migrating an EJECTED CRA app to TS](https://spin.atomicobject.com/2018/07/04/migrating-cra-typescript/)
+- [Lyft's JS to TS migration tool](https://github.com/lyft/react-javascript-to-typescript-transform) (includes PropTypes migration)
 - [Hootsuite][hootsuite]
 - [Storybook's migration (PR)](https://github.com/storybooks/storybook/issues/5030)
 - [How we migrated a 200K+ LOC project to TypeScript and survived to tell the story][coherentlabs] - Coherent Labs - using `grunt-ts`, jQuery and Kendo UI
