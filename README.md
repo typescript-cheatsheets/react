@@ -59,6 +59,7 @@ Translations:
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
 - [Recommended React + TypeScript talks](#recommended-react--typescript-talks)
+- [Editor Tooling and Integration](#editor-tooling-and-integration)
 - [Other React + TypeScript resources](#other-react--typescript-resources)
 - [Time to Really Learn TypeScript](#time-to-really-learn-typescript)
 </details>
@@ -976,13 +977,6 @@ import './my-typings';
 const f = (e: PlotlyHTMLElement) => { e.removeAllListeners(); }
 ```
 
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
-</details>
-
 # Recommended React + TypeScript codebases to learn from
 
 - https://github.com/jaredpalmer/formik
@@ -1006,6 +1000,19 @@ React Native Boilerplates: *contributed by [@spoeck](https://github.com/sw-yx/re
 - https://github.com/lopezjurip/ReactNativeTS
 - https://github.com/emin93/react-native-template-typescript
 - <https://github.com/Microsoft/TypeScript-React-Native-Starter>
+
+# Editor Tooling and Integration
+
+- VSCode
+  - swyx's VSCode Extension: https://github.com/sw-yx/swyx-react-typescript-snippets
+  - amVim: https://marketplace.visualstudio.com/items?itemName=auiworks.amvim
+- VIM
+  - https://github.com/Quramy/tsuquyomi
+  - nvim-typescript?
+  - https://github.com/leafgarland/typescript-vim
+  - peitalin/vim-jsx-typescript
+  - NeoVim: https://github.com/neoclide/coc.nvim
+  - other discussion: https://mobile.twitter.com/ryanflorence/status/1085715595994095620
 
 # Other React + TypeScript resources
 
