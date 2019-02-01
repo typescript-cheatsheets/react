@@ -11,6 +11,7 @@ This Cheatsheet collates advice and utilities from real case studies of teams mo
 - Level 1: Unstrict TypeScript
   - `"noImplicitAny": false`
   - "[Just rename all .js files to .ts](https://twitter.com/jamonholmgren/status/1089241726303199232)"
+  - installing all missing typings with [types-installer](https://www.npmjs.com/package/types-installer)
   - consider using `allowJS`? (Source: [clayallsop][clayallsop], [pleo][pleo])
 - Level 2: Strict TypeScript
   - use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
@@ -79,6 +80,13 @@ Problems to be aware of:
 (*thanks [Gil Tayar](https://twitter.com/giltayar/status/1089228919260221441) and [Gleb Bahmutov](https://twitter.com/bahmutov/status/1089229196247908353) for sharing above commentary*)
 
 ## From JS
+
+the "Just Renaming" strategy
+
+- OSX/Linux: `find src -name "*.js" -exec sh -c 'mv"$0" "${0%.js}.tsx"' {} \;`
+
+
+More resources
 
 - [TypeScript's official Guide for migrating from JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
