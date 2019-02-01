@@ -4,24 +4,28 @@ This Cheatsheet collates advice and utilities from real case studies of teams mo
 
 > ⚠️ This Cheatsheet is extremely new and could use all the help we can get. Solid advice, results, and up to date content all welcome.
 
+## Prerequsite
+
+Read [TypeScript's official Guide for migrating from JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) and you should already be familiar with their [React conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
+
 ## General Conversion approaches
 
 - Level 0: Don't use TypeScript, use JSDoc
   - See our [JSDoc section](#JSDoc)
-- Level 1: Unstrict TypeScript
-  - `"noImplicitAny": false`
-  - "[Just rename all .js files to .ts](https://twitter.com/jamonholmgren/status/1089241726303199232)"
-  - installing all missing typings with [types-installer](https://www.npmjs.com/package/types-installer)
-  - consider using `allowJS`? (Source: [clayallsop][clayallsop], [pleo][pleo])
+- Level 1A: Majority JavaScript, increasingly strict TypeScript
+  - as recommended by [official TS guide](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+  - use `allowJS` (Experiences: [clayallsop][clayallsop], [pleo][pleo])
+- Level 1B: Total rename to TypeScript from the start
+  - "[Just rename all .js files to .ts](https://twitter.com/jamonholmgren/status/1089241726303199232)"?
+  - use the loosest, bare minimum settings to start with
 - Level 2: Strict TypeScript
   - use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
-  - use `declare` keyword for ambient declarations
-  
+  - use `declare` keyword for ambient declarations - see [declaration merging](https://github.com/sw-yx/react-typescript-cheatsheet#troubleshooting-handbook-bugs-in-official-typings) to patch library declarations inline
 
 Misc tips/approaches successful companies have taken
 
 - `@ts-ignore` on compiler errors for libraries with no typedefs
-- pick ESLint over TSLint ([source](https://eslint.org/blog/2019/01/future-typescript-eslint))
+- pick ESLint over TSLint (source: [ESLint](https://eslint.org/blog/2019/01/future-typescript-eslint) and [TS Roadmap](https://github.com/Microsoft/TypeScript/issues/29288))
 - New code must always be written in TypeScript. No exceptions. For existing code: If your task requires you to change JavaScript code, you need to rewrite it. (Source: [Hootsuite][hootsuite])
 
 
@@ -32,7 +36,7 @@ Webpack tips
 </b>
 </summary>
 
-- webpack loader: `awesome-typescript-loader` vs `ts-loader`? (there is some disagreement in community about this)
+- webpack loader: `awesome-typescript-loader` vs `ts-loader`? (there is some disagreement in community about this - but read [awesome's point of view](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader))
 - Webpack config:
 
 ```
@@ -64,6 +68,8 @@ module: {
 };
 ```
 
+Special note on `ts-loader` and 3rd party libraries: https://twitter.com/acemarke/status/1091150384184229888
+
 </details>
 
 ## JSDoc
@@ -88,7 +94,6 @@ the "Just Renaming" strategy
 
 More resources
 
-- [TypeScript's official Guide for migrating from JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
 - [Migrating an EJECTED CRA app to TS](https://spin.atomicobject.com/2018/07/04/migrating-cra-typescript/)
 - [Lyft's JS to TS migration tool](https://github.com/lyft/react-javascript-to-typescript-transform) (includes PropTypes migration)
