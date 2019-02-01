@@ -559,6 +559,13 @@ FooComponent.defaultProps = {
 
 nothing specifically React related.
 
+
+## TypeScript 3.3
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-3.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2019/01/31/announcing-typescript-3-3/)]
+
+nothing specifically React related.
+
 ## TypeScript Roadmap
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
