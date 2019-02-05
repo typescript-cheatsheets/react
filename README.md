@@ -260,8 +260,19 @@ A helper function that automatically types tuples can also be helpful if you wri
 ```ts
 function tuplify<T extends any[]>(...elements: T) { return elements }
 
-const myTuple = tuplify(false, 1, 'a') // type is [boolean, number, string]
+function useArray() {
+  const numberValue = useRef(3).current
+  const functionValue = useRef(() => {}).current
+  return [numberValue, functionValue] // type is (number | (() => void))[]
+}
+
+function useTuple() {
+  const numberValue = useRef(3).current
+  const functionValue = useRef(() => {}).current
+  return tuplify(numberValue, functionValue) // type is [number, () => void]
+}
 ```
+The React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
