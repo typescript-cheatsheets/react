@@ -232,7 +232,8 @@ When using `useEffect`, take care not to return anything other than a function o
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
   // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
-  useEffect(() => setTimeout(() => {/* do stuff */}, props.timerMs), [timerMs])
+  const { timerMs } = props; 
+  useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
   return null
 }
 ```
