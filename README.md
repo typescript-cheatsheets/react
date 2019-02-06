@@ -212,6 +212,32 @@ const [user, setUser] = useState<IUser | null>(null);
 setUser(newUser);
 ```
 
+**useRef**
+
+When using `useRef`, you have two options when creating a ref container that does not have an initial value:
+
+```ts
+const ref1 = useRef<HTMLElement>(null)
+const ref2 = useRef<HTMLElement | null>(null)
+```
+
+The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
+
+The second option will make `ref2.current` mutable, and is intended for "instance variables" that you manage yourself.
+
+**useEffect**
+
+When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
+
+```ts
+function DelayedEffect(props: { timerMs: number }) {
+  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
+  const { timerMs } = props; 
+  useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
+  return null
+}
+```
+
 **Custom Hooks**
 
 If you are returning an array in your Custom Hook, you will want to avoid type inference as Typescript will infer a union type (when you actually want different types in each position of the array). Instead, assert or define the function return types:
@@ -229,6 +255,24 @@ export function useLoading() {
   ];
 }
 ```
+
+A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
+```ts
+function tuplify<T extends any[]>(...elements: T) { return elements }
+
+function useArray() {
+  const numberValue = useRef(3).current
+  const functionValue = useRef(() => {}).current
+  return [numberValue, functionValue] // type is (number | (() => void))[]
+}
+
+function useTuple() {
+  const numberValue = useRef(3).current
+  const functionValue = useRef(() => {}).current
+  return tuplify(numberValue, functionValue) // type is [number, () => void]
+}
+```
+The React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
