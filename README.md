@@ -191,7 +191,7 @@ const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 
 ## Hooks
 
-Hooks are supported in `@types/react` from v16.7 up.
+Hooks are supported in `@types/react` from v16.8 up.
 
 **useState**
 
