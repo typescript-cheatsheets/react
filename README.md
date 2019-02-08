@@ -232,7 +232,7 @@ When using `useEffect`, take care not to return anything other than a function o
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
   // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
-  const { timerMs } = props; 
+  const { timerMs } = props;
   useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
   return null
 }
@@ -408,7 +408,7 @@ let el = <Greet />;
 
 <details>
  <summary>Typescript 2.9 and earlier</summary>
- 
+
 For Typescript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
 
 ```ts
@@ -907,7 +907,7 @@ partialStateUpdate({ foo: 2 }); // this works
   <summary>
     Minor caveats on using <code>Partial</code>
   </summary>
-  
+
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
 </details>
 
@@ -1044,7 +1044,7 @@ const f = (e: PlotlyHTMLElement) => {
 
 React Boilerplates:
 
-- [jpavon](https://github.com/jpavon/react-scripts-ts) offers an alternative react-scripts-ts with Webpack 4 and better linting.
+- [@jpavon/react-scripts-ts](https://github.com/jpavon/react-scripts-ts) alternative react-scripts with all TypeScript features using [ts-loader](https://github.com/TypeStrong/ts-loader)
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
