@@ -13,6 +13,7 @@
 
 <summary><b>Expand Table of Contents</b></summary>
 
+- [Section 0: Utility Types](#section-0-utility-types)
 - [Section 1: Reusable Components/Type Utilities](#section-1-reusable-componentstype-utilities)
   * [Higher Order Components](#higher-order-components-hocs)
   * [Render Props](#render-props)
@@ -39,6 +40,88 @@
   * [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
 </details>
+
+# Section 0: Utility Types
+
+Handy Utility Types used in the rest of this cheatsheet, or commonly used with React+TS apps, with explanation on what they do and how they can help. We will assume knowledge of [mapped types and conditional types](https://mariusschulz.com/blog/series/typescript-evolution) like `Exclude<T, U>` and `ReturnType<T>` but try to build progressively upon them.
+
+<details>
+  <summary>
+    <code>Omit&lt;T, K extends keyof T&gt;</code>: Subtract keys from one interface from the other.
+  </summary>
+  
+```ts
+/**
+ * Subtract keys from one interface from the other.
+ *
+ * @example
+ * interface One { one: string }
+ * interface Three { one: string, two: string }
+ *
+ * type Two = Omit<Three, keyof One>;
+ *
+ * // The type of Two will be
+ * interface Two { two: string }
+ */
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+```
+
+You can also supply string literals to omit:
+
+```ts
+type SettingsPageProps = Omit<ServerConfig, 'immutableSetting1' | 'invisibleSetting2'>
+```
+
+</details>
+
+<details>
+  <summary>
+    <code>Optionalize&lt;T extends K, K&gt;</code>: Remove from T the keys that are in common with K
+  </summary>
+  
+```ts
+/**
+ * Remove from T the keys that are in common with K
+ */
+type Optionalize<T extends K, K> = Omit<T, keyof K>;
+```
+  
+  An example usage is in our HOC section below.
+  
+</details>
+<details>
+  <summary>
+    <code>Nullable&lt;T&gt;</code> or <code>Maybe&lt;T&gt;</code>: Make a Type into a Maybe Type
+  </summary>
+  
+```ts
+/**
+ * Make a Type into a Maybe Type
+ */
+type Nullable<T> = T | null
+type Maybe<T> = T | undefined
+```
+
+  Your choice of `null` or `undefined` depends on your approach toward missing values. Some folks feel strongly one way or the other.
+  
+</details>
+<details>
+  <summary>
+    <code>Dictionary&lt;T&gt;</code>: Dictionary of string, value pairs
+  </summary>
+  
+```ts
+/**
+ * Dictionary of string, value pairs
+ */
+type Dictionary<T> = { [key: string]: T }
+```
+
+ `[key: string]` is a very handy trick in general.  You can also modify dictionary fields with [Readonly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html) or make them optional or Omit them, etc.
+ 
+</details>
+
+[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new). We respect the fact that naming and selection of examples here is arbitrary as the possible space is infinite.
 
 # Section 1: Advanced Guides
 
@@ -87,29 +170,6 @@ Now when consuming the component you can omit the `primaryColor` prop or overrid
 ```
 
 **Declaring the HoC**
-
-The following utilities will be needed.
-
-```ts
-/**
- * Generic type utility to subtract keys from one interface from the other.
- *
- * @example
- * interface One { one: string }
- * interface Three { one: string, two: string }
- *
- * type Two = Omit<Three, keyof One>;
- *
- * // The type of Two will be
- * interface Two { two: string }
- */
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-/**
- * Remove from T the keys that are in common with K
- */
-type Optionalize<T extends K, K> = Omit<T, keyof K>;
-```
 
 The actual HoC.
 
@@ -222,7 +282,6 @@ function Clickable(props: ButtonProps | AnchorProps) {
 
 They don't even need to be completely different props, as long as they have at least one difference in properties:
 ```tsx
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 type LinkProps = Omit<JSX.IntrinsicElements[ 'a' ], 'href'> & { to?: string }
 
 function RouterLink(props: LinkProps): JSX.Element
@@ -242,10 +301,7 @@ function RouterLink(props: LinkProps | AnchorProps) {
   Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
   
 ```tsx
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
 interface LinkProps {}
-
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type RouterLinkProps = Omit<NavLinkProps, 'href'>
 
@@ -274,8 +330,6 @@ const Link = <T extends {}>(
 If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
 
 ```tsx
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type RouterLinkProps = Omit<NavLinkProps, 'href'>
 
