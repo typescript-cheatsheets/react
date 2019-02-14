@@ -139,6 +139,7 @@ The former pattern is shorter, so why would people use `React.FunctionComponent`
 - If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
 - Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
 - _In future_, it will also set `readonly` on your props just like `React.Component<T>` does.
+- HOWEVER, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
@@ -387,9 +388,25 @@ class App extends React.Component<{
 
 ## Typing defaultProps
 
-For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/sw-yx/react-typescript-cheatsheet/issues/61). Just type your props like normal.
+For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/sw-yx/react-typescript-cheatsheet/issues/61). Just type your props like normal, except don't use `React.FC`.
 
 ```tsx
+// ////////////////
+// function components
+// ////////////////
+type Props = { age: number } & typeof defaultProps;
+const defaultProps = {
+  who: 'Johny Five',
+};
+
+const Greet = (props: Props) => {
+  /*...*/
+};
+Greet.defaultProps = defaultProps
+
+// ////////////////
+// class components
+// ////////////////
 export type Props = {
   name: string;
 };
@@ -405,6 +422,18 @@ export class Greet extends React.Component<Props> {
 // Type-checks! No type assertions needed!
 let el = <Greet />;
 ```
+<details>
+  <summary>Why does React.FC break defaultProps?</summary>
+  
+  You can check the discussions here:
+  
+  - https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
+  - https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
+  - https://github.com/sw-yx/react-typescript-cheatsheet/issues/87
+  
+  This is just the current state and may be fixed in future.
+  
+</details>
 
 <details>
  <summary>Typescript 2.9 and earlier</summary>
