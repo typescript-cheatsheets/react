@@ -1,9 +1,10 @@
 # Advanced Cheatsheet
 
 **This Advanced Cheatsheet** helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
-  - It also has miscellaneous tips and tricks for pro users. 
-  - Advice for contributing to DefinitelyTyped
-  - The goal is to take *full advantage* of TypeScript.
+
+- It also has miscellaneous tips and tricks for pro users.
+- Advice for contributing to DefinitelyTyped
+- The goal is to take _full advantage_ of TypeScript.
 
 ---
 
@@ -15,31 +16,31 @@
 
 - [Section 0: Utility Types](#section-0-utility-types)
 - [Section 1: Reusable Components/Type Utilities](#section-1-reusable-componentstype-utilities)
-  * [Higher Order Components](#higher-order-components-hocs)
-  * [Render Props](#render-props)
-  * [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
-  * [Types for Conditional Rendering](#types-for-conditional-rendering)
-  * [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
-  * [Props: Must Pass Both](#props-one-or-the-other-but-not-both)
-  * [Omit attribute from a type](#omit-attribute-from-a-type)
-  * [Type Zoo](#type-zoo)
-  * [Extracting Prop Types of a Component](#extracting-prop-types-of-a-component)
-  * [Third Party Libraries](#third-party-libraries)
+  - [Higher Order Components](#higher-order-components-hocs)
+  - [Render Props](#render-props)
+  - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
+  - [Types for Conditional Rendering](#types-for-conditional-rendering)
+  - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
+  - [Props: Must Pass Both](#props-one-or-the-other-but-not-both)
+  - [Omit attribute from a type](#omit-attribute-from-a-type)
+  - [Type Zoo](#type-zoo)
+  - [Extracting Prop Types of a Component](#extracting-prop-types-of-a-component)
+  - [Third Party Libraries](#third-party-libraries)
 - [Section 2: Useful Patterns by TypeScript Version](#section-2-useful-patterns-by-typescript-version)
-  * [TypeScript 2.9](#typescript-29)
-  * [TypeScript 3.0](#typescript-30)
-  * [TypeScript 3.1](#typescript-31)
-  * [TypeScript 3.2](#typescript-32)
+  - [TypeScript 2.9](#typescript-29)
+  - [TypeScript 3.0](#typescript-30)
+  - [TypeScript 3.1](#typescript-31)
+  - [TypeScript 3.2](#typescript-32)
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
-  * [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
-  * [Commenting Components](#commenting-components)
-  * [Design System Development](#design-system-development)
-  * [Migrating from Flow](#migrating-from-flow)
-  * [Prettier + TSLint](#prettier--tslint)
-  * [ESLint + TSLint](#eslint--tslint)
-  * [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
+  - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
+  - [Commenting Components](#commenting-components)
+  - [Design System Development](#design-system-development)
+  - [Migrating from Flow](#migrating-from-flow)
+  - [Prettier + TSLint](#prettier--tslint)
+  - [ESLint + TSLint](#eslint--tslint)
+  - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
-</details>
+  </details>
 
 # Section 0: Utility Types
 
@@ -69,7 +70,10 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 You can also supply string literals to omit:
 
 ```ts
-type SettingsPageProps = Omit<ServerConfig, 'immutableSetting1' | 'invisibleSetting2'>
+type SettingsPageProps = Omit<
+  ServerConfig,
+  'immutableSetting1' | 'invisibleSetting2'
+>;
 ```
 
 </details>
@@ -102,8 +106,8 @@ type Nullable<T> = T | null
 type Maybe<T> = T | undefined
 ```
 
-  Your choice of `null` or `undefined` depends on your approach toward missing values. Some folks feel strongly one way or the other.
-  
+Your choice of `null` or `undefined` depends on your approach toward missing values. Some folks feel strongly one way or the other.
+
 </details>
 <details>
   <summary>
@@ -117,9 +121,15 @@ type Maybe<T> = T | undefined
 type Dictionary<T> = { [key: string]: T }
 ```
 
- `[key: string]` is a very handy trick in general.  You can also modify dictionary fields with [Readonly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html) or make them optional or Omit them, etc.
- 
+`[key: string]` is a very handy trick in general. You can also modify dictionary fields with [Readonly](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html) or make them optional or Omit them, etc.
+
 </details>
+
+There also exist helper type libraries:
+
+- [utility-types](https://github.com/piotrwitek/utility-types)
+- [type-zoo](https://github.com/pelotom/type-zoo)
+- [typesafe-actions](https://github.com/piotrwitek/typesafe-actions)
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new). We respect the fact that naming and selection of examples here is arbitrary as the possible space is infinite.
 
@@ -142,7 +152,6 @@ interface WithThemeProps {
 The goal is to have the props available on the interface for the component, but subtracted out for the consumers of the component when wrapped in the HoC.
 
 ```ts
-
 interface Props extends WithThemeProps {
   children: ReactNode;
 }
@@ -174,12 +183,17 @@ Now when consuming the component you can omit the `primaryColor` prop or overrid
 The actual HoC.
 
 ```ts
-export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComponent: React.ComponentType<T>) {
+export function withTheme<T extends WithThemeProps = WithThemeProps>(
+  WrappedComponent: React.ComponentType<T>
+) {
   // Try to create a nice displayName for React Dev Tools.
-  const displayName = WrappedComponent.displayName || WrappedComponent.name || "Component";
+  const displayName =
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
-  return class ComponentWithTheme extends React.Component<Optionalize<T, WithThemeProps>> {
+  return class ComponentWithTheme extends React.Component<
+    Optionalize<T, WithThemeProps>
+  > {
     public static displayName = `withPages(${displayName})`;
 
     public render() {
@@ -189,23 +203,24 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(WrappedComp
       // this.props comes afterwards so the can override the default ones.
       return <WrappedComponent {...themeProps} {...this.props as T} />;
     }
-  }
+  };
 }
 ```
 
 Note that the `{...this.props as T}` assertion is needed because of a current bug in TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
 
 Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
+
 ```ts
 // inject static values to a component so that they're always provided
 export function inject<TProps, TInjectedKeys extends keyof TProps>(
   Component: React.JSXElementConstructor<TProps>,
   injector: Pick<TProps, TInjectedKeys>
- ) {
-   return function Injected(props: Omit<TProps, TInjectedKeys>) {
-     return <Component {...props as TProps} {...injector} />
-   }
- }
+) {
+  return function Injected(props: Omit<TProps, TInjectedKeys>) {
+    return <Component {...props as TProps} {...injector} />;
+  };
+}
 ```
 
 ### Using `forwardRef`
@@ -247,9 +262,9 @@ export interface Props {
 
 ```tsx
 function PassThrough(props: { as: ReactType<any> }) {
-   const { as: Component } = props;
+  const { as: Component } = props;
 
-   return <Component />
+  return <Component />;
 }
 ```
 
@@ -260,37 +275,41 @@ function PassThrough(props: { as: ReactType<any> }) {
 Components, and JSX in general, are analogous to functions. When a component can render differently based on their props, it's similar to how a function can be overloaded to have multiple call signatures. In the same way, you can overload a function component's call signature to list all of its different "versions".
 
 A very common use case for this is to render something as either a button or an anchor, based on if it receives a `href` attribute.
+
 ```tsx
-type ButtonProps = JSX.IntrinsicElements['button']
-type AnchorProps = JSX.IntrinsicElements['a']
+type ButtonProps = JSX.IntrinsicElements['button'];
+type AnchorProps = JSX.IntrinsicElements['a'];
 
 // optionally use a custom type guard
-function isPropsForAnchorElement(props: ButtonProps | AnchorProps): props is AnchorProps {
-  return 'href' in props
+function isPropsForAnchorElement(
+  props: ButtonProps | AnchorProps
+): props is AnchorProps {
+  return 'href' in props;
 }
 
-function Clickable(props: ButtonProps): JSX.Element
-function Clickable(props: AnchorProps): JSX.Element
+function Clickable(props: ButtonProps): JSX.Element;
+function Clickable(props: AnchorProps): JSX.Element;
 function Clickable(props: ButtonProps | AnchorProps) {
   if (isPropsForAnchorElement(props)) {
-    return <a {...props} />
+    return <a {...props} />;
   } else {
-    return <button {...props } />
+    return <button {...props} />;
   }
 }
 ```
 
 They don't even need to be completely different props, as long as they have at least one difference in properties:
-```tsx
-type LinkProps = Omit<JSX.IntrinsicElements[ 'a' ], 'href'> & { to?: string }
 
-function RouterLink(props: LinkProps): JSX.Element
-function RouterLink(props: AnchorProps): JSX.Element
+```tsx
+type LinkProps = Omit<JSX.IntrinsicElements['a'], 'href'> & { to?: string };
+
+function RouterLink(props: LinkProps): JSX.Element;
+function RouterLink(props: AnchorProps): JSX.Element;
 function RouterLink(props: LinkProps | AnchorProps) {
   if ('to' in props) {
-    return <a {...props} />
+    return <a {...props} />;
   } else {
-    return <Link {...props } />
+    return <Link {...props} />;
   }
 }
 ```
@@ -306,27 +325,28 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 type RouterLinkProps = Omit<NavLinkProps, 'href'>
 
 const Link = <T extends {}>(
-    props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
 ) => {
-    if ((props as RouterLinkProps).to) {
-        return <NavLink {...props as RouterLinkProps} />
-    } else {
-        return <a {...props as AnchorProps} />
-    }
+if ((props as RouterLinkProps).to) {
+return <NavLink {...props as RouterLinkProps} />
+} else {
+return <a {...props as AnchorProps} />
+}
 }
 
 <Link<RouterLinkProps> to="/">My link</Link> // ok
 <Link<AnchorProps> href="/">My link</Link> // ok
 <Link<RouterLinkProps> to="/" href="/">My link</Link> // error
-```
-  
+
+````
+
 </details>
 
 
 
 <details>
   <summary><b>Approach: Composition</b></summary>
-  
+
 If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
 
 ```tsx
@@ -355,28 +375,27 @@ const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
 <LinkButton to="/login">Login</LinkButton>
 <AnchorButton href="/login">Login</AnchorButton>
 <AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
-```
+````
+
 </details>
-
-
 
 ## Props: One or the Other but not Both
 
 Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
 
 ```tsx
-type Props1 = { foo: string }
-type Props2 = { bar: string }
+type Props1 = { foo: string };
+type Props2 = { bar: string };
 
-function MyComponent(props: Props1): JSX.Element
-function MyComponent(props: Props2): JSX.Element
+function MyComponent(props: Props1): JSX.Element;
+function MyComponent(props: Props2): JSX.Element;
 function MyComponent(props: Props1 | Props2) {
   if ('foo' in props) {
     // props.bar // error
-    return <div>{props.foo}</div>
+    return <div>{props.foo}</div>;
   } else {
     // props.foo // error
-    return <div>{props.bar}</div>
+    return <div>{props.bar}</div>;
   }
 }
 const UsageComponent: React.FC = () => (
@@ -385,22 +404,21 @@ const UsageComponent: React.FC = () => (
     <MyComponent bar="bar" />
     {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
   </div>
-)
+);
 ```
-
 
 ## Props: Must Pass Both
 
 ```tsx
-type OneOrAnother<T1, T2> = 
+type OneOrAnother<T1, T2> =
   | (T1 & { [K in keyof T2]?: undefined })
-  | (T2 & { [K in keyof T1]?: undefined })
+  | (T2 & { [K in keyof T1]?: undefined });
 
-type Props = OneOrAnother<{ a: string; b: string }, {}>
+type Props = OneOrAnother<{ a: string; b: string }, {}>;
 
-const a: Props = { a: 'a' } // error
-const b: Props = { b: 'b' } // error
-const ab: Props = { a: 'a', b: 'b' } // ok
+const a: Props = { a: 'a' }; // error
+const b: Props = { b: 'b' }; // error
+const ab: Props = { a: 'a', b: 'b' }; // ok
 ```
 
 Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
@@ -411,10 +429,10 @@ Sometimes when intersecting types, we want to define our own version of an attri
 
 ```tsx
 export interface Props {
-  label: React.ReactNode // this will conflict with the InputElement's label
+  label: React.ReactNode; // this will conflict with the InputElement's label
 }
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
 export const Checkbox = (
@@ -422,12 +440,9 @@ export const Checkbox = (
 ) => {
   const { label } = props;
   return (
-    <div className='Checkbox'>
-      <label className='Checkbox-label'>
-        <input
-          type="checkbox"
-          {...props}
-        />
+    <div className="Checkbox">
+      <label className="Checkbox-label">
+        <input type="checkbox" {...props} />
       </label>
       <span>{label}</span>
     </div>
@@ -441,33 +456,44 @@ As you can see from the Omit example above, you can write significant logic in y
 
 ## Extracting Prop Types of a Component
 
-*(Contributed by [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/63))*
+_(Contributed by [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/63))_
 
-There are a lot of places where you want to reuse some slices of props because of prop drilling, 
+There are a lot of places where you want to reuse some slices of props because of prop drilling,
 so you can either export the props type as part of the module or extract them (either way works).
 
 The advantage of extracting the prop types is that you won't need to export everything, and a refactor of the source of truth component will propagate to all consuming components.
 
-
 ```ts
-import { ComponentProps, JSXElementConstructor } from 'react'
+import { ComponentProps, JSXElementConstructor } from 'react';
 
 // goes one step further and resolves with propTypes and defaultProps properties
-type ApparentComponentProps<C> = C extends JSXElementConstructor<infer P> ? JSX.LibraryManagedAttributes<C, P> : ComponentProps<C>
+type ApparentComponentProps<C> = C extends JSXElementConstructor<infer P>
+  ? JSX.LibraryManagedAttributes<C, P>
+  : ComponentProps<C>;
 ```
 
-You can also use them to strongly type custom event handlers if they're not written at the call sites themselves 
+You can also use them to strongly type custom event handlers if they're not written at the call sites themselves
 (i.e. inlined with the JSX attribute):
 
 ```tsx
 // my-inner-component.tsx
-export function MyInnerComponent(props: { onSomeEvent(event: ComplexEventObj, moreArgs: ComplexArgs): SomeWeirdReturnType }) { /* ... */ }
+export function MyInnerComponent(props: {
+  onSomeEvent(
+    event: ComplexEventObj,
+    moreArgs: ComplexArgs
+  ): SomeWeirdReturnType;
+}) {
+  /* ... */
+}
 
 // my-consuming-component.tsx
 export function MyConsumingComponent() {
   // event and moreArgs are contextually typed along with the return value
-  const theHandler: Props<typeof MyInnerComponent>['onSomeEvent'] = (event, moreArgs) => {}
-  return <MyInnerComponent onSomeEvent={theHandler} />
+  const theHandler: Props<typeof MyInnerComponent>['onSomeEvent'] = (
+    event,
+    moreArgs
+  ) => {};
+  return <MyInnerComponent onSomeEvent={theHandler} />;
 }
 ```
 
@@ -475,15 +501,13 @@ export function MyConsumingComponent() {
 
 Sometimes DefinitelyTyped can get it wrong, or isn't quite addressing your use case. You can declare your own file with the same interface name. Typescript will merge interfaces with the same name.
 
-
 # Section 2: Useful Patterns by TypeScript Version
 
 TypeScript Versions often introduce new ways to do things; this section helps current users of React + TypeScript upgrade TypeScript versions and explore patterns commonly used by TypeScript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)!
 
-*TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!* Apart from official TS team communication we also recommend [Marius Schulz's blog for version notes](https://mariusschulz.com/).
+_TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!_ Apart from official TS team communication we also recommend [Marius Schulz's blog for version notes](https://mariusschulz.com/).
 
 ## TypeScript 2.9
-
 
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2018/05/31/announcing-typescript-2-9/)]
 
@@ -491,13 +515,13 @@ TypeScript Versions often introduce new ways to do things; this section helps cu
 
 ```tsx
 export interface InputFormProps {
-    foo: string; // this is understood inside the template string below
+  foo: string; // this is understood inside the template string below
 }
 
-export const InputForm = styledInput<InputFormProps> `
+export const InputForm = styledInput<InputFormProps>`
     color:
-        ${({themeName}) => themeName === 'dark' ? 'black' : 'white'};
-    border-color: ${({foo}) => foo ? 'red' : 'black'};
+        ${({ themeName }) => (themeName === 'dark' ? 'black' : 'white')};
+    border-color: ${({ foo }) => (foo ? 'red' : 'black')};
 `;
 ```
 
@@ -508,7 +532,7 @@ https://github.com/Microsoft/TypeScript/pull/22415
 Helps with typing/using generic components:
 
 ```tsx
-// instead of 
+// instead of
 <Formik render={(props: FormikProps<Values>) => ....}/>
 
 // usage
@@ -527,30 +551,30 @@ More info: https://github.com/basarat/typescript-book/blob/master/docs/jsx/react
 ```ts
 // `rest` accepts any number of strings - even none!
 function foo(...rest: string[]) {
-    // ...
+  // ...
 }
 
-foo("hello"); // works
-foo("hello", "world"); // also works
+foo('hello'); // works
+foo('hello', 'world'); // also works
 ```
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
 
 ```ts
 export interface Props {
-    name: string
+  name: string;
 }
 
 export class Greet extends React.Component<Props> {
-    render() {
-        const { name } = this.props;
-        return <div>Hello ${name.toUpperCase()}!</div>;
-    }
-    static defaultProps = { name: "world"}
+  render() {
+    const { name } = this.props;
+    return <div>Hello ${name.toUpperCase()}!</div>;
+  }
+  static defaultProps = { name: 'world' };
 }
 
 // Type-checks! No type assertions needed!
-let el = <Greet />
+let el = <Greet />;
 ```
 
 3. new `Unknown` type
@@ -559,12 +583,12 @@ For typing API's to force type checks - not specifically React related, however 
 
 ```tsx
 interface IComment {
-    date: Date;
-    message: string;
+  date: Date;
+  message: string;
 }
 
 interface IDataService1 {
-    getData(): any;
+  getData(): any;
 }
 
 let service1: IDataService1;
@@ -574,7 +598,7 @@ response.a.b.c.d; // RUNTIME ERROR
 // ----- compare with -------
 
 interface IDataService2 {
-    getData(): unknown; // ooo
+  getData(): unknown; // ooo
 }
 
 let service2: IDataService2;
@@ -582,14 +606,13 @@ const response2 = service2.getData();
 // response2.a.b.c.d; // COMPILE TIME ERROR if you do this
 
 if (typeof response === 'string') {
-    console.log(response.toUpperCase()); // `response` now has type 'string'
+  console.log(response.toUpperCase()); // `response` now has type 'string'
 }
 ```
 
 You can also assert a type, or use a **type guard** against an `unknown` type. This is better than resorting to `any`.
 
 ## TypeScript 3.1
-
 
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/announcing-typescript-3-1/)]
 
@@ -613,7 +636,6 @@ FooComponent.defaultProps = {
 
 nothing specifically React related.
 
-
 ## TypeScript 3.3
 
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-3.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2019/01/31/announcing-typescript-3-3/)]
@@ -623,7 +645,6 @@ nothing specifically React related.
 ## TypeScript Roadmap
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
-
 
 # Section 3: Misc. Concerns
 
@@ -642,13 +663,12 @@ interface IMyComponentProps {
 export class MyComponent extends React.Component<IMyComponentProps, {}> {
   static propTypes = {
     autoHeight: PropTypes.bool,
-    secondProp: PropTypes.number.isRequired,
+    secondProp: PropTypes.number.isRequired
   };
 }
 ```
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
 
 ## Commenting Components
 
@@ -692,10 +712,10 @@ You should check out large projects that are migrating from flow to pick up conc
 - [Storybook](https://github.com/storybooks/storybook/issues/5030)
 - [VueJS](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)
 
-Useful libraries: 
+Useful libraries:
 
 - https://github.com/bcherny/flow-to-typescript
-- <https://github.com/piotrwitek/utility-types>. 
+- <https://github.com/piotrwitek/utility-types>.
 
 If you have specific advice in this area, please file a PR!
 
@@ -703,7 +723,7 @@ If you have specific advice in this area, please file a PR!
 
 ## Prettier + TSLint
 
-*Contributed by: [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14)*
+_Contributed by: [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14)_
 
 To use prettier with TSLint you will need [`tslint-config-prettier`](https://github.com/alexjoverm/tslint-config-prettier) which disables all the conflicting rules and optionally [`tslint-plugin-prettier`](https://github.com/ikatyang/tslint-plugin-prettier) which will highlight differences as TSLint issues.
 
@@ -782,6 +802,7 @@ npm i -D typescript-eslint-parser
 // And in your ESLint configuration file:
 
 "parser": "typescript-eslint-parser"
+
   </pre>
   </td>
   <td>
@@ -833,7 +854,7 @@ An example github repository with a project showing how to integrate [eslint + t
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
-*Not written yet.*
+_Not written yet._
 
 Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8).
 
@@ -857,7 +878,7 @@ The `@types` typings export both "public" types meant for your use as well as "p
 
 Most Commonly Used Interfaces and Types
 
-- `ReactNode` - anything that is renderable *inside* of JSX, this is NOT the same as what can be rendered by a component!
+- `ReactNode` - anything that is renderable _inside_ of JSX, this is NOT the same as what can be rendered by a component!
 - `Component` - base class of all class-based components
 - `PureComponent` - base class for all class-based optimized components
 - `FC`, `FunctionComponent` - a complete interface for function components, often used to type external components instead of typing your own
@@ -901,10 +922,6 @@ Anything not listed above is considered an internal type and not public. If you'
 
 To be written
 
-
 # My question isn't answered here!
 
 - [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
-
-
-
