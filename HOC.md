@@ -22,7 +22,7 @@
 
 In this first section we refer closely to [the React docs on HOCs](https://reactjs.org/docs/higher-order-components.html) and offer direct TypeScript parallels.
 
-## Docs Example: Use HOCs For Cross-Cutting Concerns
+## Docs Example: [Use HOCs For Cross-Cutting Concerns](https://reactjs.org/docs/higher-order-components.html#use-hocs-for-cross-cutting-concerns)
 
 <details>
 
@@ -164,7 +164,7 @@ export const BlogPostWithSubscription = withSubscription(
 );
 ```
 
-## Docs Example: Don’t Mutate the Original Component. Use Composition.
+## Docs Example: [Don’t Mutate the Original Component. Use Composition.](https://reactjs.org/docs/higher-order-components.html#dont-mutate-the-original-component-use-composition)
 
 This is pretty straightforward - make sure to assert the passed props as `T` [due to the TS 3.2 bug](https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046).
 
@@ -185,11 +185,11 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
 }
 ```
 
-## Docs Example: Pass Unrelated Props Through to the Wrapped Component
+## Docs Example: [Pass Unrelated Props Through to the Wrapped Component](https://reactjs.org/docs/higher-order-components.html#convention-pass-unrelated-props-through-to-the-wrapped-component)
 
 No TypeScript specific advice needed here.
 
-## Docs Example: Maximizing Composability
+## Docs Example: [Maximizing Composability](https://reactjs.org/docs/higher-order-components.html#convention-maximizing-composability)
 
 HOCs can take the form of Functions that return Higher Order Components that return Components.
 
@@ -277,7 +277,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
 }
 ```
 
-## Docs Example: Wrap the Display Name for Easy Debugging
+## Docs Example: [Wrap the Display Name for Easy Debugging](https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging)
 
 This is pretty straightforward as well.
 
@@ -303,7 +303,7 @@ function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
 }
 ```
 
-## Unwritten
+## Unwritten: [Caveats section](https://reactjs.org/docs/higher-order-components.html#caveats)
 
 - Don’t Use HOCs Inside the render Method
 - Static Methods Must Be Copied Over
