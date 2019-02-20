@@ -152,7 +152,7 @@ If you want to use the `function` keyword instead of an arrow function, you can 
 
 ```tsx
 const App: React.FunctionComponent<{ message: string }> = function App({ message }) {
-  return <div{message}</div>;
+  return <div>{message}</div>;
 }
 ```
 
