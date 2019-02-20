@@ -206,11 +206,6 @@ Here we build our own mini `connect` to understand HOCs:
 ```tsx
 /** utility types we use */
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-type Optionalize<T extends K, K> = Omit<T, keyof K>;
-// // ACTUAL HOC
-interface WithSubscriptionProps {
-  data: TODO_ANY;
-}
 
 /** dummy Data */
 type CommentType = { text: string; id: number };
@@ -226,9 +221,8 @@ const comments: CommentType[] = [
 ];
 /** dummy child components that take anything */
 const Comment = (_: any) => null;
-type TODO_ANY = any;
 /** Rewritten Components from the React docs that just uses injected data prop */
-function CommentList({ data }: WithSubscriptionProps) {
+function CommentList({ data }: WithSubscriptionProps<typeof comments>) {
   return (
     <div>
       {data.map((comment: CommentType) => (
@@ -254,14 +248,17 @@ const ConnectedComment = connect(
   commentActions
 )(CommentList);
 
+// these are the props to be injected by the HOC
+interface WithSubscriptionProps<T> {
+  data: T;
+}
 function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
-  return function<T extends WithSubscriptionProps = WithSubscriptionProps>(
+  return function<T, P extends WithSubscriptionProps<T>, C>(
     WrappedComponent: React.ComponentType<T>
   ) {
+    type Props = JSX.LibraryManagedAttributes<C, Omit<P, 'data'>>;
     // Creating the inner component. The calculated Props type here is the where the magic happens.
-    return class ComponentWithTheme extends React.Component<
-      Optionalize<T, WithSubscriptionProps>
-    > {
+    return class ComponentWithTheme extends React.Component<Props> {
       public render() {
         // Fetch the props you want inject. This could be done with context instead.
         const mappedStateProps = mapStateToProps(this.state, this.props);
@@ -269,7 +266,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
         // this.props comes afterwards so the can override the default ones.
         return (
           <WrappedComponent
-            {...this.props as T}
+            {...this.props}
             {...mappedStateProps}
             {...mappedDispatchProps}
           />
