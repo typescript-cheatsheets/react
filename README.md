@@ -192,7 +192,7 @@ const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 
 ## Hooks
 
-Hooks are supported in `@types/react` from v16.8 up.
+Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L765-L973).
 
 **useState**
 
@@ -232,8 +232,8 @@ When using `useEffect`, take care not to return anything other than a function o
 
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
-  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
   const { timerMs } = props;
+  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
   useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
   return null
 }
@@ -694,6 +694,8 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ));
 ```
 
+If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L735).
+
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
@@ -944,16 +946,18 @@ Note that there are some TS users who don't agree with using `Partial` as it beh
 
 This can be annoying but here are ways to grab the types!
 
-- Grabbing the Prop types of a component: Use `typeof`, and optionally `Omit` any overlapping types
+- Grabbing the Prop types of a component: Use `React.ComponentProps` and `typeof`, and optionally `Omit` any overlapping types
 
 ```tsx
-import { Button } from 'library'; // but doesn't export ButtonProps
-type ButtonProps = React.ComponentProps<typeof Button>; // grab your own
+import { Button } from 'library'; // but doesn't export ButtonProps! oh no!
+type ButtonProps = React.ComponentProps<typeof Button>; // no problem! grab your own!
 type AlertButtonProps = Omit<ButtonProps, 'onClick'>; // modify
 const AlertButton: React.FC<AlertButtonProps> = props => (
   <Button onClick={() => alert('hello')} {...props} />
 );
 ```
+
+You may also use [`ComponentPropsWithoutRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L739) (instead of ComponentProps) and [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L735) (if your component specifically forwards refs)
 
 - Grabbing the return type of a function: use `ReturnType`:
 
