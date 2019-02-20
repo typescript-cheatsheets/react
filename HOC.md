@@ -27,7 +27,7 @@ In this first section we refer closely to [the React docs on HOCs](https://react
 <details>
 
 <summary>
-<b>Misc variables reference in the example below</b>
+<b>Misc variables referenced in the example below</b>
 </summary>
 
 ```tsx
@@ -97,6 +97,8 @@ function BlogPost({ data, id }: BlogPostProps) {
 
 </details>
 
+Example HOC from React Docs translated to TypeScript
+
 ```tsx
 // // ACTUAL HOC
 interface WithSubscriptionProps {
@@ -133,7 +135,6 @@ function withSubscription<
     render() {
       // ... and renders the wrapped component with the fresh data!
       // Notice that we pass through any additional props
-      // return <WrappedComponent data={this.state.data} {...this.props} />;
       return <WrappedComponent data={this.state.data} {...this.props as T} />;
     }
   };
