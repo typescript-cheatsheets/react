@@ -82,7 +82,7 @@ This guide will always assume you are starting with the latest TypeScript versio
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npm create react-app my-new-react-typescript-app --typescript`
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-new-react-typescript-app --typescript`
 
 - We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
 
@@ -427,15 +427,15 @@ let el = <Greet />;
 ```
 <details>
   <summary>Why does React.FC break defaultProps?</summary>
-  
+
   You can check the discussions here:
-  
+
   - https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
   - https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
   - https://github.com/sw-yx/react-typescript-cheatsheet/issues/87
-  
+
   This is just the current state and may be fixed in future.
-  
+
 </details>
 
 <details>
@@ -750,7 +750,7 @@ _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more o
 
 # Basic Troubleshooting Handbook: Types
 
-Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patience - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
+Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patient - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
 Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
@@ -804,7 +804,7 @@ function isAdmin(usr: Admin | User): usr is Admin {
 }
 ```
 
-If you need `if/elseif` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
+If you need `if...else` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
 
 ## Optional Types
 
@@ -978,7 +978,7 @@ type FooReturn = ReturnType<typeof foo>; // { baz: number }
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
 
 ```ts
-// declaration.d.ts 
+// declaration.d.ts
 // anywhere in your project, NOT the same name as any of your .ts/tsx files
 declare module '*.png'
 
@@ -990,7 +990,7 @@ Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 a
 
 # Troubleshooting Handbook: TSLint
 
-Sometimes TSLint is just getting in the way. Judicious turning off of things can be helpful. Here are useful tslint disables you may use:
+Sometimes TSLint is just getting in the way. Judiciously turning off of things can be helpful. Here are useful tslint disables you may use:
 
 - `/* tslint:disable */` total disable
 - `// tslint:disable-line` just this line
