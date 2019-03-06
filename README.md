@@ -1,13 +1,34 @@
-:wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@IslamAttrash](https://twitter.com/IslamAttrash) and [@ferdaber](https://twitter.com/ferdaber), we're so happy you want to try out TypeScript with React! This is meant to be a guide for React developers familiar with the concepts of TypeScript but who are just getting started writing their first React + TypeScript apps. If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)! :+1:
+<div align="center">
+<h1>React+TypeScript Cheatsheets</h1>
 
-Translations:
+<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+  <img
+    height="80"
+    width="80"
+    alt="react + ts logo"
+    src="https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png"
+    align="left"
+  />
+</a>
 
-- [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) _maintained by [@fi3ework](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn)_
-- Your language here?
+<p>Cheatsheets for experienced React developers getting started with TypeScript</p>
+
+[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+
+</div>
+
+
+:wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@ferdaber](https://twitter.com/ferdaber) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)! :+1:
 
 ---
 
-## React + TypeScript Cheatsheets
+## All React + TypeScript Cheatsheets
 
 - **The Basic Cheatsheet** ([`/README.md`](/README.md)) is focused on helping React devs just start using TS in React **apps**
   - focus on opinionated best practices, copy+pastable examples
