@@ -25,7 +25,11 @@
 
 ---
 
+<div align="center">
+
 :wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@ferdaber](https://twitter.com/ferdaber) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)! :+1:
+
+</div>
 
 ---
 
