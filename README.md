@@ -3,8 +3,8 @@
 
 <a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
   <img
-    height="80"
-    width="80"
+    height="90"
+    width="90"
     alt="react + ts logo"
     src="https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png"
     align="left"
