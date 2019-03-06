@@ -1,3 +1,29 @@
+<div align="center">
+
+<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+  <img
+    height="90"
+    width="90"
+    alt="react + ts logo"
+    src="https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png"
+    align="left"
+  />
+</a>
+
+<p>Cheatsheets for experienced React developers getting started with TypeScript</p>
+
+[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+
+</div>
+
+---
+
 # Advanced Cheatsheet
 
 **This Advanced Cheatsheet** helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
