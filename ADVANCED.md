@@ -880,15 +880,29 @@ An example github repository with a project showing how to integrate [eslint + t
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
-_Not written yet._
+Lets say you want to use `de-indent`, but it isn't typed or on DefinitelyTyped. You get an error like this:
 
-Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8).
+```
+[ts]
+Could not find a declaration file for module 'de-indent'. '/Users/swyx/Work/react-sfc-loader/node_modules/de-indent/index.js' implicitly has an 'any' type.
+  Try `npm install @types/de-indent` if it exists or add a new declaration (.d.ts) file containing `declare module 'de-indent';` [7016]
+```
+
+So create a `.d.ts` file anywhere in your project with the module definition:
+
+```ts
+// de-indent.d.ts
+declare module 'de-indent' {
+  function deindent(): void
+  export = deindent // default export
+}
+```
 
 <details>
 
 <summary>Further Discussion</summary>
 
-We have more discussion and examples [in our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12).
+Any other tips? Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8). We have more discussion and examples [in our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12).
 
 </details>
 
