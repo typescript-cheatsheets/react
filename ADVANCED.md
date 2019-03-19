@@ -284,10 +284,10 @@ export interface Props {
 
 ## `as` props (passing a component to be rendered)
 
-`ReactType` is pretty useful to cover most types that can be passed to createElement e.g.
+`ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
 
 ```tsx
-function PassThrough(props: { as: ReactType<any> }) {
+function PassThrough(props: { as: ElementType<any> }) {
   const { as: Component } = props;
 
   return <Component />;
@@ -930,7 +930,7 @@ Most Commonly Used Interfaces and Types
 Not Commonly Used but Good to know
 
 - `Ref` - used to type `innerRef`
-- `ReactType` - used for higher order components or operations on components
+- `ElementType` - used for higher order components or operations on components
 - `ComponentType` - used for higher order components where you don't specifically deal with the intrinsic components
 - `ReactPortal` - used if you specifically need to type a prop as a portal, otherwise it is part of `ReactNode`
 - `ComponentClass` - a complete interface for the produced constructor function of a class declaration that extends `Component`, often used to type external components instead of typing your own
@@ -957,6 +957,7 @@ Anything not listed above is considered an internal type and not public. If you'
 - `ComponentState`
 - `LegacyRef`
 - `StatelessComponent`
+- `ReactType`
 
 ## `@types/react-dom`
 
