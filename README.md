@@ -445,7 +445,7 @@ export class Greet extends React.Component<Props> {
     const { name } = this.props;
     return <div>Hello ${name.toUpperCase()}!</div>;
   }
-  static defaultProps = { name: 'world' };
+  static defaultProps: Partial<Props> = { name: 'world' };
 }
 
 // Type-checks! No type assertions needed!
