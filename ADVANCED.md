@@ -751,6 +751,8 @@ If you have specific advice in this area, please file a PR!
 
 _Contributed by: [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14)_
 
+> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). The rest of this section is potentially outdated.
+
 To use prettier with TSLint you will need [`tslint-config-prettier`](https://github.com/alexjoverm/tslint-config-prettier) which disables all the conflicting rules and optionally [`tslint-plugin-prettier`](https://github.com/ikatyang/tslint-plugin-prettier) which will highlight differences as TSLint issues.
 
 Example configuration:
