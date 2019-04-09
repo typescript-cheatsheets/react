@@ -432,24 +432,24 @@ const Greet = (props: Props) => {
   /*...*/
 };
 Greet.defaultProps = defaultProps
+```
 
-// ////////////////
-// class components
-// ////////////////
-export type Props = {
-  name: string;
-};
+For **Class components**, there are [a couple ways to do it](https://github.com/sw-yx/react-typescript-cheatsheet/pull/103#issuecomment-481061483)(including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
 
-export class Greet extends React.Component<Props> {
-  render() {
-    const { name } = this.props;
-    return <div>Hello ${name.toUpperCase()}!</div>;
+```tsx
+type GreetProps = typeof Greet.defaultProps & {
+  age: number
+}
+
+class Greet extends React.Component<GreetProps> {
+  static defaultProps = {
+    name: 'world'
   }
-  static defaultProps: Partial<Props> = { name: 'world' };
+  /*...*/
 }
 
 // Type-checks! No type assertions needed!
-let el = <Greet />;
+let el = <Greet age={3} />;
 ```
 <details>
   <summary>Why does React.FC break defaultProps?</summary>
