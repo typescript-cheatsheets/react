@@ -145,30 +145,30 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 ## Function Components
 
-You can specify the type of props as you use them and rely on type inference:
+These can be written as normal functions that take a `props` argument and return a JSX element.
 
 ```tsx
-const App = ({ message }: { message: string }) => <div>{message}</div>;
-```
-
-Or you can use the provided generic type for function components:
-
-```tsx
-const App: React.FC<{ message: string }> = ({ message }) => (
-  <div>{message}</div>
-); // React.FunctionComponent also works
+type AppProps { message: string }; /* could also use interface */
+const App = ({ message }: AppProps) => <div>{message}</div>;
 ```
 
 <details>
 
-<summary><b>What's the difference?</b></summary>
+<summary><b>What about `React.FC`/`React.FunctionComponent`?</b></summary>
 
-The former pattern is shorter, so why would people use `React.FunctionComponent` at all?
+You can also write components with `React.FunctionComponent` (or the shorthand `React.FC`):
 
-- If you need to use `children` property inside the function body, in the former case it has to be added explicitly. `FunctionComponent<T>` already includes the correctly typed `children` property which then doesn't have to become part of your type.
-- Typing your function explicitly will also give you typechecking and autocomplete on its static properties, like `displayName`, `propTypes`, and `defaultProps`.
-- _In future_, it will also set `readonly` on your props just like `React.Component<T>` does.
-- HOWEVER, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
+```tsx
+const App: React.FC<{ message: string }> = ({ message }) => (
+  <div>{message}</div>
+);
+```
+
+Some differences from the "normal function" version:
+
+- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - **However**, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
+
+- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might considered better style to be explicit about components that consume `children`, anyway.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
@@ -177,13 +177,11 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 }) => <div title={title}>{children}</div>;
 ```
 
-If you want to use the `function` keyword instead of an arrow function, you can use this syntax (using a function expression, instead of declaration):
+- _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the constructor.
 
-```tsx
-const App: React.FunctionComponent<{ message: string }> = function App({ message }) {
-  return <div>{message}</div>;
-}
-```
+- `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
+
+In most cases it makes very little difference which syntax is used, but the `React.FC` syntax is slightly more verbose without providing clear advantage, so precedence was given to the "normal function" syntax.
 
 </details>
 
