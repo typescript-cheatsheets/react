@@ -179,7 +179,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 
 - _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the constructor.
 
-- `React.FunctionComponent` is explicit about the return type, while the normal function version is implict (or else needs additional annotation).
+- `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
 
 In most cases it makes very little difference which syntax is used, but the `React.FC` syntax is slightly more verbose without providing clear advantage, so precedence was given to the "normal function" syntax.
 
