@@ -145,7 +145,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 
 ## Function Components
 
-These can be written as normal functions that take a props argument and return a JSX element.
+These can be written as normal functions that take a `props` argument and return a JSX element.
 
 ```tsx
 type AppProps { message: string }; /* could also use interface */
@@ -166,7 +166,7 @@ const App: React.FC<{ message: string }> = ({ message }) => (
 
 Some differences from the "normal function" version:
 
-- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - HOWEVER, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
+- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - **However**, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
 
 - It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might considered better style to be explicit about components that consume `children`, anyway.
 
