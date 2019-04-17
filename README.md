@@ -148,7 +148,7 @@ Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatshee
 These can be written as normal functions that take a `props` argument and return a JSX element.
 
 ```tsx
-type AppProps { message: string }; /* could also use interface */
+type AppProps = { message: string }; /* could also use interface */
 const App = ({ message }: AppProps) => <div>{message}</div>;
 ```
 
