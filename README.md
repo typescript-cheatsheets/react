@@ -266,6 +266,32 @@ function DelayedEffect(props: { timerMs: number }) {
 }
 ```
 
+**useRef**
+
+```tsx
+function TextInputWithFocusButton() {
+  // initialise with null, but tell TypeScript we are looking for an HTMLInputElement
+  const inputEl = useRef<HTMLInputElement>(null);
+  const onButtonClick = () => {
+    // strict null checks need us to check if inputEl and current exist.
+    // but once current exists, it is of type HTMLInputElement, thus it
+    // has the method focus! ✅
+    if(inputEl && inputEl.current) {
+      inputEl.current.focus();
+    } 
+  };
+  return (
+    <>
+      { /* in addition, inputEl only can be used with input elements. Yay! */ }
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+```
+
+example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#useref)
+
 **useReducer**
 
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) for reducer actions. Don't forget to define the return type of reducer, otherwise Typescript will infer it.
@@ -328,6 +354,11 @@ function useTuple() {
 }
 ```
 The React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
+
+More Hooks + TypeScript reading:
+
+- https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
+- https://fettblog.eu/typescript-react/hooks/#useref
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
