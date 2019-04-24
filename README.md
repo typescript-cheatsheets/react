@@ -652,8 +652,7 @@ If performance is not an issue, inlining handlers is easiest as you can just use
 
 ```tsx
 const el = (
-  <button
-    onClick={event => {
+  <button onClick={event => {
       /* ... */
     }}
   />
@@ -704,6 +703,41 @@ Instead of typing the arguments and return values with `React.FormEvent<>` and `
 The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... _artisanally hand-rolled_. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
 
 </details>
+
+**Typing onSubmit, with Uncontrolled components in a Form**
+
+If you don't quite care about the type of the event, you can just use React.SyntheticEvent. If your target form has custom named inputs that you'd like to access, you can use type widening:
+
+```tsx
+<form
+    ref={formRef}
+    onSubmit={(e: React.SyntheticEvent) => {
+      e.preventDefault()
+      const target = e.target as typeof e.target & { email: { value: string }; password: { value: string } }
+      const email = target.email.value // typechecks!
+      const password = target.password.value // typechecks!
+      // etc...
+    }}
+  >
+    <div>
+      <label>
+        Email:
+        <input type="email" name="email" />
+      </label>
+    </div>
+    <div>
+      <label>
+        Password:
+        <input type="password" name="password" />
+      </label>
+    </div>
+    <div>
+      <input type="submit" value="Log in" />
+    </div>
+</form>
+```
+
+Of course, if you're making any sort of significant form, [you should use Formik](https://jaredpalmer.com/formik), which is written in TypeScript.
 
 ## Context
 
