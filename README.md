@@ -741,9 +741,50 @@ Of course, if you're making any sort of significant form, [you should use Formik
 
 ## Context
 
+Using `React.createContext` and `useContext`:
+
+```tsx
+export function createCtx<A>(defaultValue: A) {
+  type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>
+  const defaultUpdate: UpdateType = () => defaultValue
+  const ctx = React.createContext({ state: defaultValue, update: defaultUpdate })
+  function Provider({ children }: { children: React.ReactNode }) {
+    const [state, update] = React.useState(defaultValue)
+    return <ctx.Provider value={{ state, update }}>{children}</ctx.Provider>
+  }
+  return [ctx, Provider] as [typeof ctx, typeof Provider]
+}
+
+// usage
+
+const [ctx, TextProvider] = createCtx("someText")
+export const TextContext = ctx
+export function App() {
+  return (
+    <TextProvider>
+      <Component />
+    </TextProvider>
+  )
+}
+export function Component() {
+  const { state, update } = React.useContext(ctx)
+  return (
+    <label>
+      {state}
+      <input type="text" onChange={e => update(e.target.value)} />
+    </label>
+  )
+}
+```
+
+A [useReducer-based version](https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a4971e80114a052) may also be helpful.
+
+<details>
+
+<summary><b>Mutable Context Using a Class component wrapper</b></summary>
+
 _Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)_
 
-Using the new context API `React.createContext`:
 
 ```tsx
 interface ProviderState {
@@ -785,6 +826,9 @@ class Provider extends React.Component<{}, ProviderState> {
 
 const Consumer = Context.Consumer;
 ```
+
+</details>
+
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
