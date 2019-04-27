@@ -741,16 +741,48 @@ Of course, if you're making any sort of significant form, [you should use Formik
 
 ## Context
 
-Using `React.createContext` and `useContext`:
+Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with no `defaultValue`, yet no need to check for `undefined`:
+
+```tsx
+// create context with no upfront defaultValue
+// without having to do undefined check all the time
+function createCtx<A>() {
+  const ctx = React.createContext<A | undefined>(undefined)
+  function useCtx() {
+    const c = React.useContext(ctx)
+    if (!c) throw new Error("useCtx must be inside a Provider with a value")
+    return c
+  }
+  return [useCtx, ctx.Provider] as [() => A, typeof ctx.Provider]
+}
+
+// usage
+
+export const [useCtx, SettingProvider] = createCtx<string>() // no need to specify value upfront!
+export function App() {
+  const key = useCustomHook('key') // get a value from a hook, must be in a component
+  return (
+    <SettingProvider value={key}>
+      <Component />
+    </SettingProvider>
+  )
+}
+export function Component() {
+  const key = useCtx() // can still use without null check!
+  return <div>{key}</div>
+}
+```
+
+Using `React.createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
 
 ```tsx
 export function createCtx<A>(defaultValue: A) {
   type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>
   const defaultUpdate: UpdateType = () => defaultValue
   const ctx = React.createContext({ state: defaultValue, update: defaultUpdate })
-  function Provider({ children }: { children: React.ReactNode }) {
+  function Provider(props: React.PropsWithChildren<{}>) {
     const [state, update] = React.useState(defaultValue)
-    return <ctx.Provider value={{ state, update }}>{children}</ctx.Provider>
+    return <ctx.Provider value={{ state, update }} {...props} />
   }
   return [ctx, Provider] as [typeof ctx, typeof Provider]
 }
@@ -767,7 +799,7 @@ export function App() {
   )
 }
 export function Component() {
-  const { state, update } = React.useContext(ctx)
+  const { state, update } = React.useContext(TextProvider)
   return (
     <label>
       {state}
