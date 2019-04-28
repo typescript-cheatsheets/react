@@ -321,7 +321,26 @@ export function reducer(state: AppState, action: Action): AppState {
 
 **Custom Hooks**
 
-If you are returning an array in your Custom Hook, you will want to avoid type inference as Typescript will infer a union type (when you actually want different types in each position of the array). Instead, assert or define the function return types:
+If you are returning an array in your Custom Hook, you will want to avoid type inference as Typescript will infer a union type (when you actually want different types in each position of the array). Instead, use [TS 3.4 const assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions):
+
+
+```tsx
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false);
+  const load = (aPromise: Promise<any>) => {
+    setState(true);
+    return aPromise.finally(() => setState(false));
+  };
+  return [isLoading, load] as const // infers [boolean, typeof load] instead of (boolean | typeof load)[]
+}
+```  
+
+This way, when you destructure you actually get the right types based on destructure position.
+
+<details>
+<summary><b>Alternative: Asserting a tuple return type</b></summary>
+  
+If you are [having trouble with const assertions](https://github.com/babel/babel/issues/9800), you can also assert or define the function return types:
 
 ```tsx
 export function useLoading() {
@@ -335,7 +354,8 @@ export function useLoading() {
     (aPromise: Promise<any>) => Promise<any>
   ];
 }
-```
+```  
+
 
 A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
 ```ts
@@ -353,7 +373,10 @@ function useTuple() {
   return tuplify(numberValue, functionValue) // type is [number, () => void]
 }
 ```
-The React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
+
+</details>
+
+Note that the React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
 
 More Hooks + TypeScript reading:
 
