@@ -57,6 +57,8 @@
   - [TypeScript 3.0](#typescript-30)
   - [TypeScript 3.1](#typescript-31)
   - [TypeScript 3.2](#typescript-32)
+  - [TypeScript 3.3](#typescript-33)
+  - [TypeScript 3.4](#typescript-34)
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
   - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   - [Commenting Components](#commenting-components)
@@ -667,6 +669,23 @@ nothing specifically React related.
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-3.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2019/01/31/announcing-typescript-3-3/)]
 
 nothing specifically React related.
+
+## TypeScript 3.4
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4)]
+
+1. [`const` assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions)
+
+```tsx
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false);
+  const load = (aPromise: Promise<any>) => {
+    setState(true);
+    return aPromise.finally(() => setState(false));
+  };
+  return [isLoading, load] as const // infers [boolean, typeof load] instead of (boolean | typeof load)[]
+}
+```
 
 ## TypeScript Roadmap
 
