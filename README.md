@@ -245,7 +245,7 @@ setUser(newUser);
 When using `useRef`, you have two options when creating a ref container that does not have an initial value:
 
 ```ts
-const ref1 = useRef<HTMLElement>(null)
+const ref1 = useRef<HTMLElement>(null!)
 const ref2 = useRef<HTMLElement | null>(null)
 ```
 
@@ -889,6 +889,9 @@ const Consumer = Context.Consumer;
 
 ## forwardRef/createRef
 
+
+Check the [Hooks section](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/README.md) for `useRef`.
+
 `createRef`:
 
 ```tsx
@@ -911,6 +914,7 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   </button>
 ));
 ```
+
 
 If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L735).
 
