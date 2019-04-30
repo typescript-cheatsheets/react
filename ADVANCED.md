@@ -47,6 +47,7 @@
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
   - [Types for Conditional Rendering](#types-for-conditional-rendering)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
+  - [Props: Must Pass Both](#props-must-pass-both)
   - [Props: Can Optionally Pass One Only If the Other Is Passed](#props-can-optionally-pass-one-only-if-the-other-is-passed)
   - [Omit attribute from a type](#omit-attribute-from-a-type)
   - [Type Zoo](#type-zoo)
