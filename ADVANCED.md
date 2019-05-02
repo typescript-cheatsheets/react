@@ -32,6 +32,10 @@
 - Advice for contributing to DefinitelyTyped
 - The goal is to take _full advantage_ of TypeScript.
 
+**Creating React + TypeScript Libraries**
+
+The best tool for creating React + TS libraries right now is [`tsdx`](https://github.com/palmerhq/tsdx). Run `npx tsdx create` and select the "react" option. You can view [the React User Guide](https://github.com/palmerhq/tsdx/issues/5) for a few tips on React+TS library best practices and optimizations for production.
+
 ---
 
 ### Advanced Cheatsheet Table of Contents
