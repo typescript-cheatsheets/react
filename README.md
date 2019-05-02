@@ -1,4 +1,5 @@
 <div align="center">
+[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 <h1>React+TypeScript Cheatsheets</h1>
 
 <a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
