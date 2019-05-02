@@ -817,7 +817,9 @@ and a suitable `.eslintrc.json`:
 }
 ```
 
-More `.eslintrc.json` options to consider with more options you may want:
+This is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
+
+More `.eslintrc.json` options to consider with more options you may want for **apps**:
 
 ```json
 
