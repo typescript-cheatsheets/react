@@ -766,94 +766,61 @@ If you have specific advice in this area, please file a PR!
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
-## Prettier + TSLint
+## Linting
 
-_Contributed by: [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14)_
+> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint.
 
-> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). The rest of this section is potentially outdated.
+> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint.
 
-To use prettier with TSLint you will need [`tslint-config-prettier`](https://github.com/alexjoverm/tslint-config-prettier) which disables all the conflicting rules and optionally [`tslint-plugin-prettier`](https://github.com/ikatyang/tslint-plugin-prettier) which will highlight differences as TSLint issues.
+Follow the TypeScript + ESLint docs at https://github.com/typescript-eslint/typescript-eslint:
 
-Example configuration:
+```
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
+```
 
-<table>
-    <tr>
-        <th>
-            <strong>tslint.json</strong>
-        </th>
-        <th>
-            <strong>.prettierrc</strong>
-        </th>
-    </tr>
-    <tr>
-        <td>
-            <pre>
+add a `lint` script to your `package.json`:
+
+```json
+  "scripts": {
+    "lint": "eslint 'src/**/*.ts'"
+  },
+```
+
+and a suitable `.eslintrc.json`:
+
+```json
 {
-  "rulesDirectory": ["tslint-plugin-prettier"],
-  "extends": [
-    "tslint:recommended",
-    "tslint-config-prettier"
-  ],
-  "linterOptions": {
-    "exclude": ["node_modules/**/*.ts"]
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": "eslint:recommended",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
   },
   "rules": {
-    "prettier": true
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
+    "no-empty": "warn"
   }
 }
-            </pre>
-        </td>
-        <td>
-            <pre>
-{
-  "printWidth": 89,
-  "tabWidth": 2,
-  "useTabs": false,
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "all",
-  "bracketSpacing": true,
-  "jsxBracketSameLine": false
-}
-            </pre>
-        </td>
-    </tr>
-</table>
+```
 
-An example github repository with a project showing how to integrate [prettier + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
+More `.eslintrc.json` options to consider with more options you may want:
 
-## ESLint + TSLint
+```json
 
-> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint. The rest of this section is potentially outdated.
-
-Why use ESLint with/over TSLint? ESLint ecosystem is rich, with lots of different plugins and config files, whereas TSLint tend to lag behind in some areas.
-
-To remedy this nuisance there is an [`typescript-eslint-parser`](https://github.com/eslint/typescript-eslint-parser) which tries to bridge the differences between javascript and typescript. It still has some rough corners, but can provide consistent assistance with certain plugins.
-
-<table>
- <tr>
-  <td>
-   Usage
-  </td>
-  <td>
-   .eslintrc
-  </td>
- </tr>
- <tr>
-  <td>
-  <pre>
-// Install:
-
-npm i -D typescript-eslint-parser
-
-// And in your ESLint configuration file:
-
-"parser": "typescript-eslint-parser"
-
-  </pre>
-  </td>
-  <td>
-  <pre>
 {
   "extends": [
     "airbnb",
@@ -892,12 +859,7 @@ npm i -D typescript-eslint-parser
     }
   ]
 }
-  </pre>
-  </td>
- </tr>
-</table>
-
-An example github repository with a project showing how to integrate [eslint + tslint + create-react-app-ts](https://github.com/azdanov/tslint-eslint-crats).
+```
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
