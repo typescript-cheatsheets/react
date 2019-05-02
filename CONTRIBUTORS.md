@@ -3,6 +3,8 @@
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
+<table><tr><td align="center"><a href="https://github.com/ferdaber"><img src="https://avatars2.githubusercontent.com/u/12239873?v=4" width="100px;" alt="Ferdy Budhidharma"/><br /><sub><b>Ferdy Budhidharma</b></sub></a><br /><a href="#review-ferdaber" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-ferdaber" title="Maintenance">🚧</a> <a href="#content-ferdaber" title="Content">🖋</a></td><td align="center"><a href="https://twitter.com/swyx"><img src="https://avatars1.githubusercontent.com/u/6764957?v=4" width="100px;" alt="swyx"/><br /><sub><b>swyx</b></sub></a><br /><a href="#ideas-sw-yx" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-sw-yx" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-sw-yx" title="Maintenance">🚧</a> <a href="#content-sw-yx" title="Content">🖋</a> <a href="#question-sw-yx" title="Answering Questions">💬</a></td></tr></table>
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
