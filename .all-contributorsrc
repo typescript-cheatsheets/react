@@ -41,6 +41,16 @@
         "maintenance",
         "content"
       ]
+    },
+    {
+      "login": "Attrash-Islam",
+      "name": "Islam Attrash",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7091543?v=4",
+      "profile": "https://www.linkedin.com/in/islam-attrash-46703a94/",
+      "contributions": [
+        "maintenance",
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
