@@ -247,8 +247,8 @@ setUser(newUser);
 When using `useRef`, you have two options when creating a ref container that does not have an initial value:
 
 ```ts
-const ref1 = useRef<HTMLElement>(null!)
-const ref2 = useRef<HTMLElement | null>(null)
+const ref1 = useRef<HTMLElement>(null!);
+const ref2 = useRef<HTMLElement | null>(null);
 ```
 
 The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
@@ -263,8 +263,14 @@ When using `useEffect`, take care not to return anything other than a function o
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
   // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
-  useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
-  return null
+  useEffect(
+    () =>
+      setTimeout(() => {
+        /* do stuff */
+      }, timerMs),
+    [timerMs]
+  );
+  return null;
 }
 ```
 
@@ -278,13 +284,13 @@ function TextInputWithFocusButton() {
     // strict null checks need us to check if inputEl and current exist.
     // but once current exists, it is of type HTMLInputElement, thus it
     // has the method focus! ✅
-    if(inputEl && inputEl.current) {
+    if (inputEl && inputEl.current) {
       inputEl.current.focus();
-    } 
+    }
   };
   return (
     <>
-      { /* in addition, inputEl only can be used with input elements. Yay! */ }
+      {/* in addition, inputEl only can be used with input elements. Yay! */}
       <input ref={inputEl} type="text" />
       <button onClick={onButtonClick}>Focus the input</button>
     </>
@@ -300,8 +306,8 @@ You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/
 
 ```tsx
 type Action =
-  { type: 'SET_ONE'; payload: string; }
-  | { type: 'SET_TWO'; payload: number; };
+  | { type: 'SET_ONE'; payload: string }
+  | { type: 'SET_TWO'; payload: number };
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -325,7 +331,6 @@ export function reducer(state: AppState, action: Action): AppState {
 
 If you are returning an array in your Custom Hook, you will want to avoid type inference as Typescript will infer a union type (when you actually want different types in each position of the array). Instead, use [TS 3.4 const assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions):
 
-
 ```tsx
 export function useLoading() {
   const [isLoading, setState] = React.useState(false);
@@ -333,9 +338,9 @@ export function useLoading() {
     setState(true);
     return aPromise.finally(() => setState(false));
   };
-  return [isLoading, load] as const // infers [boolean, typeof load] instead of (boolean | typeof load)[]
+  return [isLoading, load] as const; // infers [boolean, typeof load] instead of (boolean | typeof load)[]
 }
-```  
+```
 
 This way, when you destructure you actually get the right types based on destructure position.
 
@@ -356,23 +361,25 @@ export function useLoading() {
     (aPromise: Promise<any>) => Promise<any>
   ];
 }
-```  
-
+```
 
 A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
+
 ```ts
-function tuplify<T extends any[]>(...elements: T) { return elements }
+function tuplify<T extends any[]>(...elements: T) {
+  return elements;
+}
 
 function useArray() {
-  const numberValue = useRef(3).current
-  const functionValue = useRef(() => {}).current
-  return [numberValue, functionValue] // type is (number | (() => void))[]
+  const numberValue = useRef(3).current;
+  const functionValue = useRef(() => {}).current;
+  return [numberValue, functionValue]; // type is (number | (() => void))[]
 }
 
 function useTuple() {
-  const numberValue = useRef(3).current
-  const functionValue = useRef(() => {}).current
-  return tuplify(numberValue, functionValue) // type is [number, () => void]
+  const numberValue = useRef(3).current;
+  const functionValue = useRef(() => {}).current;
+  return tuplify(numberValue, functionValue); // type is [number, () => void]
 }
 ```
 
@@ -506,42 +513,43 @@ For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 type Props = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: 'Johny Five',
+  who: 'Johny Five'
 };
 
 const Greet = (props: Props) => {
   /*...*/
 };
-Greet.defaultProps = defaultProps
+Greet.defaultProps = defaultProps;
 ```
 
 For **Class components**, there are [a couple ways to do it](https://github.com/sw-yx/react-typescript-cheatsheet/pull/103#issuecomment-481061483)(including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
 
 ```tsx
 type GreetProps = typeof Greet.defaultProps & {
-  age: number
-}
+  age: number;
+};
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
     name: 'world'
-  }
+  };
   /*...*/
 }
 
 // Type-checks! No type assertions needed!
 let el = <Greet age={3} />;
 ```
+
 <details>
   <summary>Why does React.FC break defaultProps?</summary>
 
-  You can check the discussions here:
+You can check the discussions here:
 
-  - https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
-  - https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
-  - https://github.com/sw-yx/react-typescript-cheatsheet/issues/87
+- https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
+- https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
+- https://github.com/sw-yx/react-typescript-cheatsheet/issues/87
 
-  This is just the current state and may be fixed in future.
+This is just the current state and may be fixed in future.
 
 </details>
 
@@ -677,7 +685,8 @@ If performance is not an issue, inlining handlers is easiest as you can just use
 
 ```tsx
 const el = (
-  <button onClick={event => {
+  <button
+    onClick={event => {
       /* ... */
     }}
   />
@@ -735,30 +744,33 @@ If you don't quite care about the type of the event, you can just use React.Synt
 
 ```tsx
 <form
-    ref={formRef}
-    onSubmit={(e: React.SyntheticEvent) => {
-      e.preventDefault()
-      const target = e.target as typeof e.target & { email: { value: string }; password: { value: string } }
-      const email = target.email.value // typechecks!
-      const password = target.password.value // typechecks!
-      // etc...
-    }}
-  >
-    <div>
-      <label>
-        Email:
-        <input type="email" name="email" />
-      </label>
-    </div>
-    <div>
-      <label>
-        Password:
-        <input type="password" name="password" />
-      </label>
-    </div>
-    <div>
-      <input type="submit" value="Log in" />
-    </div>
+  ref={formRef}
+  onSubmit={(e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+    const email = target.email.value; // typechecks!
+    const password = target.password.value; // typechecks!
+    // etc...
+  }}
+>
+  <div>
+    <label>
+      Email:
+      <input type="email" name="email" />
+    </label>
+  </div>
+  <div>
+    <label>
+      Password:
+      <input type="password" name="password" />
+    </label>
+  </div>
+  <div>
+    <input type="submit" value="Log in" />
+  </div>
 </form>
 ```
 
@@ -772,29 +784,29 @@ Using `React.createContext` and [context getters](https://kentcdodds.com/blog/ap
 // create context with no upfront defaultValue
 // without having to do undefined check all the time
 function createCtx<A>() {
-  const ctx = React.createContext<A | undefined>(undefined)
+  const ctx = React.createContext<A | undefined>(undefined);
   function useCtx() {
-    const c = React.useContext(ctx)
-    if (!c) throw new Error("useCtx must be inside a Provider with a value")
-    return c
+    const c = React.useContext(ctx);
+    if (!c) throw new Error('useCtx must be inside a Provider with a value');
+    return c;
   }
-  return [useCtx, ctx.Provider] as [() => A, typeof ctx.Provider]
+  return [useCtx, ctx.Provider] as [() => A, typeof ctx.Provider];
 }
 
 // usage
 
-export const [useCtx, SettingProvider] = createCtx<string>() // no need to specify value upfront!
+export const [useCtx, SettingProvider] = createCtx<string>(); // no need to specify value upfront!
 export function App() {
-  const key = useCustomHook('key') // get a value from a hook, must be in a component
+  const key = useCustomHook('key'); // get a value from a hook, must be in a component
   return (
     <SettingProvider value={key}>
       <Component />
     </SettingProvider>
-  )
+  );
 }
 export function Component() {
-  const key = useCtx() // can still use without null check!
-  return <div>{key}</div>
+  const key = useCtx(); // can still use without null check!
+  return <div>{key}</div>;
 }
 ```
 
@@ -802,35 +814,38 @@ Using `React.createContext` and `useContext` to make a `createCtx` with [`unstat
 
 ```tsx
 export function createCtx<A>(defaultValue: A) {
-  type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>
-  const defaultUpdate: UpdateType = () => defaultValue
-  const ctx = React.createContext({ state: defaultValue, update: defaultUpdate })
+  type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>;
+  const defaultUpdate: UpdateType = () => defaultValue;
+  const ctx = React.createContext({
+    state: defaultValue,
+    update: defaultUpdate
+  });
   function Provider(props: React.PropsWithChildren<{}>) {
-    const [state, update] = React.useState(defaultValue)
-    return <ctx.Provider value={{ state, update }} {...props} />
+    const [state, update] = React.useState(defaultValue);
+    return <ctx.Provider value={{ state, update }} {...props} />;
   }
-  return [ctx, Provider] as [typeof ctx, typeof Provider]
+  return [ctx, Provider] as [typeof ctx, typeof Provider];
 }
 
 // usage
 
-const [ctx, TextProvider] = createCtx("someText")
-export const TextContext = ctx
+const [ctx, TextProvider] = createCtx('someText');
+export const TextContext = ctx;
 export function App() {
   return (
     <TextProvider>
       <Component />
     </TextProvider>
-  )
+  );
 }
 export function Component() {
-  const { state, update } = React.useContext(TextProvider)
+  const { state, update } = React.useContext(TextProvider);
   return (
     <label>
       {state}
       <input type="text" onChange={e => update(e.target.value)} />
     </label>
-  )
+  );
 }
 ```
 
@@ -841,7 +856,6 @@ A [useReducer-based version](https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a497
 <summary><b>Mutable Context Using a Class component wrapper</b></summary>
 
 _Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)_
-
 
 ```tsx
 interface ProviderState {
@@ -886,11 +900,9 @@ const Consumer = Context.Consumer;
 
 </details>
 
-
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 ## forwardRef/createRef
-
 
 Check the [Hooks section](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/README.md) for `useRef`.
 
@@ -916,7 +928,6 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   </button>
 ));
 ```
-
 
 If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L735).
 
@@ -1188,6 +1199,7 @@ partialStateUpdate({ foo: 2 }); // this works
   </summary>
 
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
+
 </details>
 
 ## The Types I need weren't exported!
@@ -1218,6 +1230,7 @@ function foo(bar: string) {
 //  inside your app, if you need { baz: number }
 type FooReturn = ReturnType<typeof foo>; // { baz: number }
 ```
+
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
@@ -1225,10 +1238,10 @@ Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declarati
 ```ts
 // declaration.d.ts
 // anywhere in your project, NOT the same name as any of your .ts/tsx files
-declare module '*.png'
+declare module '*.png';
 
 // importing in a tsx file
-import * as logo from "./logo.png";
+import * as logo from './logo.png';
 ```
 
 Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
