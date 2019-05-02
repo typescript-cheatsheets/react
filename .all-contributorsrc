@@ -51,6 +51,16 @@
         "maintenance",
         "content"
       ]
+    },
+    {
+      "login": "stephenkoo",
+      "name": "Stephen Koo",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/18624246?v=4",
+      "profile": "https://stephenkoo.github.io/",
+      "contributions": [
+        "question",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
