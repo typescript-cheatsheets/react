@@ -334,3 +334,10 @@ function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
 - Don’t Use HOCs Inside the render Method
 - Static Methods Must Be Copied Over
 - Refs Aren’t Passed Through
+
+## Good articles
+
+We will need to extract lessons from here in future but here they are:
+
+- https://medium.com/@xfor/typescript-react-hocs-context-api-cb46da611f12
+- https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb
