@@ -1,9 +1,10 @@
 {
   "name": "react-typescript-cheatsheet",
   "version": "1.0.0",
-  "description": "this package.json is just for all-contributors to work",
+  "description": "this package.json is just for maintenance work",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"**/*.md\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues"
   },
-  "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme"
+  "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  }
 }
