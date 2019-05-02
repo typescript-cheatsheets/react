@@ -17,6 +17,19 @@
         "maintenance",
         "content"
       ]
+    },
+    {
+      "login": "sw-yx",
+      "name": "swyx",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6764957?v=4",
+      "profile": "https://twitter.com/swyx",
+      "contributions": [
+        "ideas",
+        "review",
+        "maintenance",
+        "content",
+        "question"
+      ]
     }
   ],
   "contributorsPerLine": 7,
