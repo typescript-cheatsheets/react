@@ -1312,6 +1312,7 @@ const f = (e: PlotlyHTMLElement) => {
 - https://github.com/artsy/reaction
 - https://github.com/benawad/codeponder (with [coding livestream!](https://www.youtube.com/watch?v=D8IJOwdNSkc&list=PLN3n1USn4xlnI6kwzI8WrNgSdG4Z6daCq))
 - https://github.com/artsy/emission (React Native)
+- [@reach/ui's community typings](https://github.com/reach/reach-ui/pull/105)
 
 React Boilerplates:
 
