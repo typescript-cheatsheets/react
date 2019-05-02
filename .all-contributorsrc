@@ -1,9 +1,11 @@
 {
   "files": [
+    "CONTRIBUTORS.md",
     "README.md"
   ],
   "imageSize": 100,
-  "commit": false,
+  "commit": true,
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "ferdaber",
