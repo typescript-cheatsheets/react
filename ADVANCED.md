@@ -77,7 +77,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
 
 # Section 0: Utility Types
 
-Handy Utility Types used in the rest of this cheatsheet, or commonly used with React+TS apps, with explanation on what they do and how they can help. We will assume knowledge of [mapped types and conditional types](https://mariusschulz.com/blog/series/typescript-evolution) like `Exclude<T, U>` and `ReturnType<T>` but try to build progressively upon them.
+Be familiar with the [Utility Types that ship with TS](https://codewithstyle.info/Comprehensive-list-of-useful-built-in-types-in-TypeScript/). On top of that, here are handy Utility Types used in the rest of this cheatsheet, or commonly used with React+TS apps, with explanation on what they do and how they can help. We will assume knowledge of [mapped types and conditional types](https://mariusschulz.com/blog/series/typescript-evolution) like `Exclude<T, U>` and `ReturnType<T>` but try to build progressively upon them.
 
 <details>
   <summary>
