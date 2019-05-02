@@ -117,6 +117,7 @@ the "Just Renaming" strategy
 
 - OSX/Linux: `find src -name "*.js" -exec sh -c 'mv"$0" "${0%.js}.tsx"' {} \;`
 
+Also try using [TypeWiz](https://github.com/urish/typewiz) to add types.
 
 More resources
 
