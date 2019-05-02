@@ -51,7 +51,8 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
   - [Types for Conditional Rendering](#types-for-conditional-rendering)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
-  - [Props: Must Pass Both](#props-one-or-the-other-but-not-both)
+  - [Props: Must Pass Both](#props-must-pass-both)
+  - [Props: Can Optionally Pass One Only If the Other Is Passed](#props-can-optionally-pass-one-only-if-the-other-is-passed)
   - [Omit attribute from a type](#omit-attribute-from-a-type)
   - [Type Zoo](#type-zoo)
   - [Extracting Prop Types of a Component](#extracting-prop-types-of-a-component)
@@ -454,6 +455,81 @@ const ab: Props = { a: 'a', b: 'b' }; // ok
 ```
 
 Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
+
+## Props: Can Optionally Pass One Only If the Other Is Passed
+
+Say you want a Text component that gets truncated if `truncate` prop is passed but expands to show the full text when `expanded` prop is passed (e.g. when the user clicks the text).
+
+You want to allow `expanded` to be passed only if `truncate` is also passed, because there is no use for `expanded` if the text is not truncated.
+
+You can do this by function overloads:
+
+```tsx
+import React from "react";
+
+type CommonProps = {
+  children: React.ReactNode;
+  as: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+};
+
+type NoTruncateProps = CommonProps & {
+  truncate?: false;
+};
+
+type TruncateProps = CommonProps & {
+  truncate: true;
+  expanded?: boolean;
+};
+
+// Type guard
+const isTruncateProps = (
+  props: NoTruncateProps | TruncateProps
+): props is TruncateProps => !!props.truncate;
+
+// Function overloads to accept both prop types NoTruncateProps & TruncateProps
+function Text(props: NoTruncateProps): JSX.Element;
+function Text(props: TruncateProps): JSX.Element;
+function Text(props: NoTruncateProps | TruncateProps) {
+
+  if (isTruncateProps(props)) {
+    const { children, as: Tag, truncate, expanded, ...otherProps } = props;
+
+    const classNames = truncate ? ".truncate" : "";
+
+    return (
+      <Tag
+        className={classNames}
+        aria-expanded={!!expanded}
+        {...otherProps}
+      >
+        {children}
+      </Tag>
+    );
+  }
+
+  const { children, as: Tag, ...otherProps } = props;
+
+  return <Tag {...otherProps}>{children}</Tag>;
+}
+
+Text.defaultProps = {
+  as: 'span'
+}
+```
+
+Using the Text component:
+```tsx
+const App: React.FC = () => (
+  <>
+    <Text>not truncated</Text> {/* works */}
+    <Text truncate>truncated</Text> {/* works */}
+    <Text truncate expanded>truncate-able but expanded</Text> {/* works */}
+
+    {/* TS error: Property 'truncate' is missing in type '{ children: string; expanded: true; }' but required in type 'Pick<TruncateProps, "expanded" | "children" | "truncate">'} */}
+    <Text expanded>truncate-able but expanded</Text>
+  </>
+);
+```
 
 ## Omit attribute from a type
 
