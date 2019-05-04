@@ -1120,6 +1120,30 @@ export const PrimaryButton = (
 ) => <Button {...props} />;
 ```
 
+You can also use Intersection Types to make reusable subsets of props for similar components:
+
+```tsx
+type BaseProps = {
+   className?: string,
+   style?: React.CSSProperties
+   name: string // used in both
+}
+type DogProps = {
+  tailsCount: number
+}
+type HumanProps = {
+  handsCount: number
+}
+export const Human: React.FC<BaseProps & HumanProps> = // ...
+export const Dog: React.FC<BaseProps & DogProps> = // ...
+```
+
+Make sure not to confuse Intersection Types (which are **and** operations) with Union Types (which are **or** operations). 
+
+## Union Types
+
+This section is yet to be written (please contribute!). Meanwhile, see our [commentary on Union Types usecases](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#union-types-and-type-guarding).
+
 ## Using Inferred Types
 
 Leaning on Typescript's Type Inference is great... until you realize you need a type that was inferred, and have to go back and explicitly declare types/interfaces so you can export them for reuse.
