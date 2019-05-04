@@ -392,7 +392,19 @@ So how do we type `withOwner`?
 3. (optional) Use intersection types if you have more to exclude: `Exclude<keyof T, 'owner' | 'otherprop' | 'moreprop'>`
 4. Names of properties aren't quite the same as properties themselves, which also have an associated type. So we use this generated list of names to `Pick` from the original props: `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered props, e.g. `{ name: string }`
 5. (optional) Instead of writing this manually each time, we could use this utility: `type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>`
-6. Now we write the HOC as a generic function.
+6. Now we write the HOC as a generic function:
+
+```tsx
+function withOwner(owner: string) {
+  return function<T extends { owner: string }> (Component: React.ComponentType<T>) {
+    return function (props: Omit<T, 'owner'>): React.ReactNode {
+      return <Component owner={owner} {...props} />
+    }
+  }
+}
+```
+
+*Note: above is an incomplete, nonworking example. PR a fix!*
 
 
 ## Good articles
