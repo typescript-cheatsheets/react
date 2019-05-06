@@ -680,6 +680,18 @@ export function useLoading() {
 }
 ```
 
+2. Get a string union type with an array
+
+```tsx
+const buttonSizes = [
+  'default',
+  'small',
+  'large'
+] as const
+
+type ButtonSizes = typeof array[number]
+```
+
 ## TypeScript Roadmap
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
