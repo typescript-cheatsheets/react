@@ -893,6 +893,8 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 }
 ```
 
+You can read a [fuller TypeScript + ESLint setup guide  here](https://github.com/MatterhornDev/matterhorn-posts/blob/learn-typescript-linting/learn-typescript-linting.md) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
 Lets say you want to use `de-indent`, but it isn't typed or on DefinitelyTyped. You get an error like this:
