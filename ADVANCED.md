@@ -69,8 +69,8 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Commenting Components](#commenting-components)
   - [Design System Development](#design-system-development)
   - [Migrating from Flow](#migrating-from-flow)
-  - [Prettier + TSLint](#prettier--tslint)
-  - [ESLint + TSLint](#eslint--tslint)
+  - [Prettier](#prettier)
+  - [Linting](#linting)
   - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
   </details>
@@ -758,6 +758,40 @@ Useful libraries:
 If you have specific advice in this area, please file a PR!
 
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+
+## Prettier
+
+There isn't any real secret to Prettier for TypeScript. But its a great idea to run prettier on every commit!
+
+```js
+yarn add -D prettier husky lint-staged
+
+// inside package.json
+{
+  husky: {
+    hooks: {
+      'pre-commit': 'lint-staged',
+    },
+  },
+  'lint-staged': {
+    linters: {
+      '*.{ts,tsx,js,jsx,css,scss,md}': [
+        'prettier --trailing-comma es5 --single-quote --write',
+        'git add',
+      ],
+      ignore: ['**/dist/*, **/node_modules/*'],
+    },
+  },
+  prettier: {
+    printWidth: 80,
+    semi: true,
+    singleQuote: true,
+    trailingComma: 'es5',
+  },
+}
+```
+
+This is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
 
 ## Linting
 
