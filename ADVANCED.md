@@ -768,26 +768,29 @@ yarn add -D prettier husky lint-staged
 
 // inside package.json
 {
-  husky: {
-    hooks: {
-      'pre-commit': 'lint-staged',
-    },
+  //...
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  'lint-staged': {
-    linters: {
-      '*.{ts,tsx,js,jsx,css,scss,md}': [
-        'prettier --trailing-comma es5 --single-quote --write',
-        'git add',
+  "lint-staged": {
+    "linters": {
+      "src/*.{ts,tsx,js,jsx,css,scss,md}": [
+        "prettier --trailing-comma es5 --single-quote --write",
+        "git add"
       ],
-      ignore: ['**/dist/*, **/node_modules/*'],
-    },
+      "ignore": [
+        "**/dist/*, **/node_modules/*"
+      ]
+    }
   },
-  prettier: {
-    printWidth: 80,
-    semi: true,
-    singleQuote: true,
-    trailingComma: 'es5',
-  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
 }
 ```
 
