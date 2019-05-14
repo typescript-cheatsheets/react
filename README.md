@@ -1149,7 +1149,7 @@ export const Human: React.FC<BaseProps & HumanProps> = // ...
 export const Dog: React.FC<BaseProps & DogProps> = // ...
 ```
 
-Make sure not to confuse Intersection Types (which are **and** operations) with Union Types (which are **or** operations). 
+Make sure not to confuse Intersection Types (which are **and** operations) with Union Types (which are **or** operations).
 
 ## Union Types
 
