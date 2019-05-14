@@ -128,7 +128,7 @@ Now when consuming the component you can omit the `primaryColor` prop or overrid
 
 The actual HoC.
 
-```ts
+```tsx
 export function withTheme<T extends WithThemeProps = WithThemeProps>(
   WrappedComponent: React.ComponentType<T>
 ) {
@@ -157,7 +157,7 @@ Note that the `{...this.props as T}` assertion is needed because of a current bu
 
 Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
 
-```ts
+```tsx
 // inject static values to a component so that they're always provided
 export function inject<TProps, TInjectedKeys extends keyof TProps>(
   Component: React.JSXElementConstructor<TProps>,
@@ -581,7 +581,7 @@ foo('hello', 'world'); // also works
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
 
-```ts
+```tsx
 export interface Props {
   name: string;
 }

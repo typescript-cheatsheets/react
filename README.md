@@ -1002,7 +1002,7 @@ class App extends React.Component<
 
 **Type Guarding**: Sometimes Union Types solve a problem in one area but create another downstream. Learn how to write checks, guards, and assertions (also see the Conditional Rendering section below). For example:
 
-```tsx
+```ts
 interface Admin {
   role: string:
 }
@@ -1021,7 +1021,7 @@ function redirect(usr: Admin | User) {
 
 // Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
 function isAdmin(usr: Admin | User): usr is Admin {
-  return (<Admin>usr).role !==undefined
+  return (<Admin>usr).role !== undefined
 }
 ```
 
