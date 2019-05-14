@@ -99,10 +99,10 @@ The goal is to have the props available on the interface for the component, but 
 
 ```ts
 interface Props extends WithThemeProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-class MyButton extends Component<Props> {
+class MyButton extends React.Component<Props> {
   public render() {
     // Render an the element using the theme and other props.
   }
@@ -207,7 +207,7 @@ export interface Props {
 `ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
 
 ```tsx
-function PassThrough(props: { as: ElementType<any> }) {
+function PassThrough(props: { as: React.ElementType<any> }) {
   const { as: Component } = props;
 
   return <Component />;

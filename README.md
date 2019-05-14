@@ -228,7 +228,7 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well most of the time:
 
 ```tsx
-const [val, toggle] = useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
+const [val, toggle] = React.useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
 ```
 
 See also the [Using Inferred Types](#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -236,7 +236,7 @@ See also the [Using Inferred Types](#using-inferred-types) section if you need t
 However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = useState<IUser | null>(null);
+const [user, setUser] = React.useState<IUser | null>(null);
 
 // later...
 setUser(newUser);
@@ -247,8 +247,8 @@ setUser(newUser);
 When using `useRef`, you have two options when creating a ref container that does not have an initial value:
 
 ```ts
-const ref1 = useRef<HTMLElement>(null!)
-const ref2 = useRef<HTMLElement | null>(null)
+const ref1 = React.useRef<HTMLElement>(null!)
+const ref2 = React.useRef<HTMLElement | null>(null)
 ```
 
 The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
@@ -263,7 +263,7 @@ When using `useEffect`, take care not to return anything other than a function o
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
   // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
-  useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
+  React.useEffect(() => setTimeout(() => {/* do stuff */}, timerMs), [timerMs])
   return null
 }
 ```
@@ -273,7 +273,7 @@ function DelayedEffect(props: { timerMs: number }) {
 ```tsx
 function TextInputWithFocusButton() {
   // initialise with null, but tell TypeScript we are looking for an HTMLInputElement
-  const inputEl = useRef<HTMLInputElement>(null);
+  const inputEl = React.useRef<HTMLInputElement>(null);
   const onButtonClick = () => {
     // strict null checks need us to check if inputEl and current exist.
     // but once current exists, it is of type HTMLInputElement, thus it
@@ -364,14 +364,14 @@ A helper function that automatically types tuples can also be helpful if you wri
 function tuplify<T extends any[]>(...elements: T) { return elements }
 
 function useArray() {
-  const numberValue = useRef(3).current
-  const functionValue = useRef(() => {}).current
+  const numberValue = React.useRef(3).current
+  const functionValue = React.useRef(() => {}).current
   return [numberValue, functionValue] // type is (number | (() => void))[]
 }
 
 function useTuple() {
-  const numberValue = useRef(3).current
-  const functionValue = useRef(() => {}).current
+  const numberValue = React.useRef(3).current
+  const functionValue = React.useRef(() => {}).current
   return tuplify(numberValue, functionValue) // type is [number, () => void]
 }
 ```
