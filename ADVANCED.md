@@ -480,7 +480,9 @@ The advantage of extracting the prop types is that you won't need to export ever
 import { ComponentProps, JSXElementConstructor } from 'react';
 
 // goes one step further and resolves with propTypes and defaultProps properties
-type ApparentComponentProps<C> = C extends JSXElementConstructor<infer P>
+type ApparentComponentProps<
+  C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>
+> = C extends JSXElementConstructor<infer P>
   ? JSX.LibraryManagedAttributes<C, P>
   : ComponentProps<C>;
 ```
