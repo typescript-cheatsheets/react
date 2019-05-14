@@ -233,8 +233,6 @@ function isPropsForAnchorElement(
   return 'href' in props;
 }
 
-function Clickable(props: ButtonProps): JSX.Element;
-function Clickable(props: AnchorProps): JSX.Element;
 function Clickable(props: ButtonProps | AnchorProps) {
   if (isPropsForAnchorElement(props)) {
     return <a {...props} />;
@@ -249,8 +247,6 @@ They don't even need to be completely different props, as long as they have at l
 ```tsx
 type LinkProps = Omit<JSX.IntrinsicElements['a'], 'href'> & { to?: string };
 
-function RouterLink(props: LinkProps): JSX.Element;
-function RouterLink(props: AnchorProps): JSX.Element;
 function RouterLink(props: LinkProps | AnchorProps) {
   if ('to' in props) {
     return <a {...props} />;
@@ -333,8 +329,6 @@ Use the `in` keyword, function overloading, and union types to make components t
 type Props1 = { foo: string };
 type Props2 = { bar: string };
 
-function MyComponent(props: Props1): JSX.Element;
-function MyComponent(props: Props2): JSX.Element;
 function MyComponent(props: Props1 | Props2) {
   if ('foo' in props) {
     // props.bar // error
@@ -400,8 +394,6 @@ const isTruncateProps = (
 ): props is TruncateProps => !!props.truncate;
 
 // Function overloads to accept both prop types NoTruncateProps & TruncateProps
-function Text(props: NoTruncateProps): JSX.Element;
-function Text(props: TruncateProps): JSX.Element;
 function Text(props: NoTruncateProps | TruncateProps) {
 
   if (isTruncateProps(props)) {
