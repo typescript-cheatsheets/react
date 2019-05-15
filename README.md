@@ -1011,17 +1011,17 @@ interface User {
 }
 
 // Method 1: use `in` keyword
-function redirect(usr: Admin | User) {
-  if("role" in usr) { // use the `in` operator for typeguards since TS 2.7+
-    routeToAdminPage(usr.role);
+function redirect(user: Admin | User) {
+  if("role" in user) { // use the `in` operator for typeguards since TS 2.7+
+    routeToAdminPage(user.role);
   } else {
-    routeToHomePage(usr.email);
+    routeToHomePage(user.email);
   }
 }
 
 // Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
-function isAdmin(usr: Admin | User): usr is Admin {
-  return (usr as any).role !== undefined
+function isAdmin(user: Admin | User): user is Admin {
+  return (user as any).role !== undefined
 }
 ```
 
