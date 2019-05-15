@@ -1021,7 +1021,7 @@ function redirect(usr: Admin | User) {
 
 // Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
 function isAdmin(usr: Admin | User): usr is Admin {
-  return (<Admin>usr).role !== undefined
+  return (usr as any).role !== undefined
 }
 ```
 
