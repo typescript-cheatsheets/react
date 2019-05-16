@@ -1,9 +1,9 @@
 ---
 name: Migrating Cheatsheet
 about: Report Issue/Suggest an idea for Migrating Cheatsheet
-title: '[Migrating] ISSUE_TITLE_HERE'
+title: "[Migrating] ISSUE_TITLE_HERE"
 labels: MIGRATING
-assignees: ''
+assignees: ""
 ---
 
 **What cheatsheet is this about? (if applicable)**
