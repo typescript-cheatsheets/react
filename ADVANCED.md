@@ -378,11 +378,11 @@ You want to allow `expanded` to be passed only if `truncate` is also passed, bec
 You can do this by function overloads:
 
 ```tsx
-import React from "react";
+import React from 'react';
 
 type CommonProps = {
   children: React.ReactNode;
-  as: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  as: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 };
 
 type NoTruncateProps = CommonProps & {
@@ -403,18 +403,13 @@ const isTruncateProps = (
 function Text(props: NoTruncateProps): JSX.Element;
 function Text(props: TruncateProps): JSX.Element;
 function Text(props: NoTruncateProps | TruncateProps) {
-
   if (isTruncateProps(props)) {
     const { children, as: Tag, truncate, expanded, ...otherProps } = props;
 
-    const classNames = truncate ? ".truncate" : "";
+    const classNames = truncate ? '.truncate' : '';
 
     return (
-      <Tag
-        className={classNames}
-        aria-expanded={!!expanded}
-        {...otherProps}
-      >
+      <Tag className={classNames} aria-expanded={!!expanded} {...otherProps}>
         {children}
       </Tag>
     );
@@ -427,17 +422,20 @@ function Text(props: NoTruncateProps | TruncateProps) {
 
 Text.defaultProps = {
   as: 'span'
-}
+};
 ```
 
 Using the Text component:
+
 ```tsx
 const App: React.FC = () => (
   <>
     <Text>not truncated</Text> {/* works */}
     <Text truncate>truncated</Text> {/* works */}
-    <Text truncate expanded>truncate-able but expanded</Text> {/* works */}
-
+    <Text truncate expanded>
+      truncate-able but expanded
+    </Text>
+    {/* works */}
     {/* TS error: Property 'truncate' is missing in type '{ children: string; expanded: true; }' but required in type 'Pick<TruncateProps, "expanded" | "children" | "truncate">'} */}
     <Text expanded>truncate-able but expanded</Text>
   </>
@@ -676,7 +674,7 @@ export function useLoading() {
     setState(true);
     return aPromise.finally(() => setState(false));
   };
-  return [isLoading, load] as const // infers [boolean, typeof load] instead of (boolean | typeof load)[]
+  return [isLoading, load] as const; // infers [boolean, typeof load] instead of (boolean | typeof load)[]
 }
 ```
 
@@ -852,7 +850,6 @@ This is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/file
 More `.eslintrc.json` options to consider with more options you may want for **apps**:
 
 ```json
-
 {
   "extends": [
     "airbnb",
@@ -893,7 +890,7 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 }
 ```
 
-You can read a [fuller TypeScript + ESLint setup guide  here](https://github.com/MatterhornDev/matterhorn-posts/blob/learn-typescript-linting/learn-typescript-linting.md) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+You can read a [fuller TypeScript + ESLint setup guide here](https://github.com/MatterhornDev/matterhorn-posts/blob/learn-typescript-linting/learn-typescript-linting.md) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
@@ -910,8 +907,8 @@ So create a `.d.ts` file anywhere in your project with the module definition:
 ```ts
 // de-indent.d.ts
 declare module 'de-indent' {
-  function deindent(): void
-  export = deindent // default export
+  function deindent(): void;
+  export = deindent; // default export
 }
 ```
 

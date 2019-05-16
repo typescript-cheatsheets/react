@@ -356,33 +356,38 @@ function Dog({name, owner}: DogProps) {
 And we have a `withOwner` HOC that injects the `owner`:
 
 ```tsx
-const OwnedDog = withOwner('swyx')(Dog)
+const OwnedDog = withOwner('swyx')(Dog);
 ```
 
 We want to type `withOwner` such that it will pass through the types of any component like `Dog`, into the type of `OwnedDog`, minus the `owner` property it injects:
 
 ```tsx
-typeof OwnedDog // we want this to be equal to { name: string }
+typeof OwnedDog; // we want this to be equal to { name: string }
 
-<Dog name="fido" owner="swyx" /> // this should be fine
-<OwnedDog name="fido" owner="swyx" /> // this should have a typeError
-<OwnedDog name="fido" /> // this should be fine
+<Dog name="fido" owner="swyx" />; // this should be fine
+<OwnedDog name="fido" owner="swyx" />; // this should have a typeError
+<OwnedDog name="fido" />; // this should be fine
 
 // and the HOC should be reusable for completely different prop types!
 
-type CatProps {
-  lives: number
-  owner: string
-}
-function Cat({lives, owner}: CatProps) {
-  return <div> Meow: {lives}, Owner: {owner}</div>
+type CatProps = {
+  lives: number;
+  owner: string;
+};
+function Cat({ lives, owner }: CatProps) {
+  return (
+    <div>
+      {' '}
+      Meow: {lives}, Owner: {owner}
+    </div>
+  );
 }
 
-const OwnedCat = withOwner('swyx')(Cat)
+const OwnedCat = withOwner('swyx')(Cat);
 
-<Cat lives={9} owner="swyx" /> // this should be fine
-<OwnedCat lives={9} owner="swyx" /> // this should have a typeError
-<OwnedCat lives={9} /> // this should be fine
+<Cat lives={9} owner="swyx" />; // this should be fine
+<OwnedCat lives={9} owner="swyx" />; // this should have a typeError
+<OwnedCat lives={9} />; // this should be fine
 ```
 
 So how do we type `withOwner`?
@@ -396,16 +401,17 @@ So how do we type `withOwner`?
 
 ```tsx
 function withOwner(owner: string) {
-  return function<T extends { owner: string }> (Component: React.ComponentType<T>) {
-    return function (props: Omit<T, 'owner'>): React.ReactNode {
-      return <Component owner={owner} {...props} />
-    }
-  }
+  return function<T extends { owner: string }>(
+    Component: React.ComponentType<T>
+  ) {
+    return function(props: Omit<T, 'owner'>): React.ReactNode {
+      return <Component owner={owner} {...props} />;
+    };
+  };
 }
 ```
 
-*Note: above is an incomplete, nonworking example. PR a fix!*
-
+_Note: above is an incomplete, nonworking example. PR a fix!_
 
 ## Good articles
 

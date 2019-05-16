@@ -54,7 +54,6 @@ Misc tips/approaches successful companies have taken
 - pick ESLint over TSLint (source: [ESLint](https://eslint.org/blog/2019/01/future-typescript-eslint) and [TS Roadmap](https://github.com/Microsoft/TypeScript/issues/29288))
 - New code must always be written in TypeScript. No exceptions. For existing code: If your task requires you to change JavaScript code, you need to rewrite it. (Source: [Hootsuite][hootsuite])
 
-
 <details>
 <summary>
 <b>
@@ -109,7 +108,7 @@ Problems to be aware of:
 - If you have an error in the jsdoc, you get no warning/error. TS just silently doesn't type annotate the function.
 - [casting can be verbose](https://twitter.com/bahmutov/status/1089229349637754880)
 
-(*thanks [Gil Tayar](https://twitter.com/giltayar/status/1089228919260221441) and [Gleb Bahmutov](https://twitter.com/bahmutov/status/1089229196247908353) for sharing above commentary*)
+(_thanks [Gil Tayar](https://twitter.com/giltayar/status/1089228919260221441) and [Gleb Bahmutov](https://twitter.com/bahmutov/status/1089229196247908353) for sharing above commentary_)
 
 ## From JS
 
