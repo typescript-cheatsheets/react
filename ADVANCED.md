@@ -49,7 +49,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Higher Order Components](#higher-order-components-hocs)
   - [Render Props](#render-props)
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
-  - [Types for Conditional Rendering](#types-for-conditional-rendering)
+  - [Typing a Component that Accepts Different Props](#typing-a-component-that-accepts-different-props)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
   - [Props: Must Pass Both](#props-must-pass-both)
   - [Props: Can Optionally Pass One Only If the Other Is Passed](#props-can-optionally-pass-one-only-if-the-other-is-passed)
