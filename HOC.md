@@ -137,7 +137,7 @@ interface WithDataProps<T> {
 // C is the actual interface of the wrapped component (used to grab defaultProps from it)
 export function withSubscription<T, P extends WithDataProps<T>, C>(
   // this type allows us to infer P, but grab the type of WrappedComponent separately without it interfering with the inference of P
-  WrappedComponent: JSXElementConstructor<P> & C,
+  WrappedComponent: React.JSXElementConstructor<P> & C,
   // selectData is a functor for T
   // props is Readonly because it's readonly inside of the class
   selectData: (
@@ -151,7 +151,7 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
   type State = {
     data: T;
   };
-  return class WithData extends Component<Props, State> {
+  return class WithData extends React.Component<Props, State> {
     constructor(props: Props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);

@@ -99,10 +99,10 @@ The goal is to have the props available on the interface for the component, but 
 
 ```ts
 interface Props extends WithThemeProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-class MyButton extends Component<Props> {
+class MyButton extends React.Component<Props> {
   public render() {
     // Render an the element using the theme and other props.
   }
@@ -128,7 +128,7 @@ Now when consuming the component you can omit the `primaryColor` prop or overrid
 
 The actual HoC.
 
-```ts
+```tsx
 export function withTheme<T extends WithThemeProps = WithThemeProps>(
   WrappedComponent: React.ComponentType<T>
 ) {
@@ -157,7 +157,7 @@ Note that the `{...this.props as T}` assertion is needed because of a current bu
 
 Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
 
-```ts
+```tsx
 // inject static values to a component so that they're always provided
 export function inject<TProps, TInjectedKeys extends keyof TProps>(
   Component: React.JSXElementConstructor<TProps>,
@@ -207,7 +207,7 @@ export interface Props {
 `ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
 
 ```tsx
-function PassThrough(props: { as: ElementType<any> }) {
+function PassThrough(props: { as: React.ElementType<any> }) {
   const { as: Component } = props;
 
   return <Component />;
@@ -233,8 +233,6 @@ function isPropsForAnchorElement(
   return 'href' in props;
 }
 
-function Clickable(props: ButtonProps): JSX.Element;
-function Clickable(props: AnchorProps): JSX.Element;
 function Clickable(props: ButtonProps | AnchorProps) {
   if (isPropsForAnchorElement(props)) {
     return <a {...props} />;
@@ -249,8 +247,6 @@ They don't even need to be completely different props, as long as they have at l
 ```tsx
 type LinkProps = Omit<JSX.IntrinsicElements['a'], 'href'> & { to?: string };
 
-function RouterLink(props: LinkProps): JSX.Element;
-function RouterLink(props: AnchorProps): JSX.Element;
 function RouterLink(props: LinkProps | AnchorProps) {
   if ('to' in props) {
     return <a {...props} />;
@@ -333,8 +329,6 @@ Use the `in` keyword, function overloading, and union types to make components t
 type Props1 = { foo: string };
 type Props2 = { bar: string };
 
-function MyComponent(props: Props1): JSX.Element;
-function MyComponent(props: Props2): JSX.Element;
 function MyComponent(props: Props1 | Props2) {
   if ('foo' in props) {
     // props.bar // error
@@ -400,8 +394,6 @@ const isTruncateProps = (
 ): props is TruncateProps => !!props.truncate;
 
 // Function overloads to accept both prop types NoTruncateProps & TruncateProps
-function Text(props: NoTruncateProps): JSX.Element;
-function Text(props: TruncateProps): JSX.Element;
 function Text(props: NoTruncateProps | TruncateProps) {
   if (isTruncateProps(props)) {
     const { children, as: Tag, truncate, expanded, ...otherProps } = props;
@@ -486,7 +478,9 @@ The advantage of extracting the prop types is that you won't need to export ever
 import { ComponentProps, JSXElementConstructor } from 'react';
 
 // goes one step further and resolves with propTypes and defaultProps properties
-type ApparentComponentProps<C> = C extends JSXElementConstructor<infer P>
+type ApparentComponentProps<
+  C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>
+> = C extends JSXElementConstructor<infer P>
   ? JSX.LibraryManagedAttributes<C, P>
   : ComponentProps<C>;
 ```
@@ -579,7 +573,7 @@ foo('hello', 'world'); // also works
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
 
-```ts
+```tsx
 export interface Props {
   name: string;
 }

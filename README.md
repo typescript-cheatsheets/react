@@ -228,7 +228,7 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well most of the time:
 
 ```tsx
-const [val, toggle] = useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
+const [val, toggle] = React.useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
 ```
 
 See also the [Using Inferred Types](#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -236,7 +236,7 @@ See also the [Using Inferred Types](#using-inferred-types) section if you need t
 However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = useState<IUser | null>(null);
+const [user, setUser] = React.useState<IUser | null>(null);
 
 // later...
 setUser(newUser);
@@ -279,7 +279,7 @@ function DelayedEffect(props: { timerMs: number }) {
 ```tsx
 function TextInputWithFocusButton() {
   // initialise with null, but tell TypeScript we are looking for an HTMLInputElement
-  const inputEl = useRef<HTMLInputElement>(null);
+  const inputEl = React.useRef<HTMLInputElement>(null);
   const onButtonClick = () => {
     // strict null checks need us to check if inputEl and current exist.
     // but once current exists, it is of type HTMLInputElement, thus it
@@ -659,7 +659,7 @@ export declare interface AppProps {
   children1: JSX.Element; // bad, doesnt account for arrays
   children2: JSX.Element | JSX.Element[]; // meh, doesnt accept functions
   children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
-  children3: React.ReactChild[]; // better
+  children4: React.ReactChild[]; // better
   children: React.ReactNode; // best, accepts everything
   functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
   style?: React.CSSProperties; // to pass through style props
@@ -1013,7 +1013,7 @@ class App extends React.Component<
 
 **Type Guarding**: Sometimes Union Types solve a problem in one area but create another downstream. Learn how to write checks, guards, and assertions (also see the Conditional Rendering section below). For example:
 
-```tsx
+```ts
 interface Admin {
   role: string:
 }
@@ -1022,17 +1022,17 @@ interface User {
 }
 
 // Method 1: use `in` keyword
-function redirect(usr: Admin | User) {
-  if("role" in usr) { // use the `in` operator for typeguards since TS 2.7+
-    routeToAdminPage(usr.role);
+function redirect(user: Admin | User) {
+  if("role" in user) { // use the `in` operator for typeguards since TS 2.7+
+    routeToAdminPage(user.role);
   } else {
-    routeToHomePage(usr.email);
+    routeToHomePage(user.email);
   }
 }
 
 // Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
-function isAdmin(usr: Admin | User): usr is Admin {
-  return (<Admin>usr).role !==undefined
+function isAdmin(user: Admin | User): user is Admin {
+  return (user as any).role !== undefined
 }
 ```
 
