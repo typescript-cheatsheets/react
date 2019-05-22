@@ -672,6 +672,33 @@ export function useLoading() {
 }
 ```
 
+## TypeScript 3.5
+
+[RC](https://devblogs.microsoft.com/typescript/announcing-typescript-3-5-rc/)
+
+1. Built-in `<Omit>` Type
+
+2. Higher order type inference from generic constructors
+
+```
+type ComponentClass<P> = new (props: P) => Component<P>;
+declare class Component<P> {
+    props: P;
+    constructor(props: P);
+}
+
+declare function myHoc<P>(C: ComponentClass<P>): ComponentClass<P>;
+
+type NestedProps<T> = { foo: number, stuff: T };
+
+declare class GenericComponent<T> extends Component<NestedProps<T>> {
+}
+
+// type is 'new <T>(props: NestedProps<T>) => Component<NestedProps<T>>'
+const GenericComponent2 = myHoc(GenericComponent);
+
+```
+
 ## TypeScript Roadmap
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
