@@ -672,6 +672,8 @@ export function useLoading() {
 }
 ```
 
+More info on places you can use [const assertions](https://blog.logrocket.com/const-assertions-are-the-killer-new-typescript-feature-b73451f35802).
+
 ## TypeScript 3.5
 
 [RC](https://devblogs.microsoft.com/typescript/announcing-typescript-3-5-rc/)
