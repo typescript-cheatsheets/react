@@ -443,6 +443,7 @@ export interface Props {
   label: React.ReactNode; // this will conflict with the InputElement's label
 }
 
+// this comes inbuilt with TS 3.5
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
@@ -676,9 +677,9 @@ More info on places you can use [const assertions](https://blog.logrocket.com/co
 
 ## TypeScript 3.5
 
-[RC](https://devblogs.microsoft.com/typescript/announcing-typescript-3-5-rc/)
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-5.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-5/)]
 
-1. Built-in `<Omit>` Type
+1. Built-in `<Omit>` Type!!
 
 2. Higher order type inference from generic constructors
 
