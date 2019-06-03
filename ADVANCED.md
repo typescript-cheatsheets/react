@@ -635,12 +635,10 @@ You can also assert a type, or use a **type guard** against an `unknown` type. T
 Attaching properties to functions like this "just works" now:
 
 ```tsx
-export const FooComponent = ({ name }) => (
-    <div>Hello! I am {name}</div>
-);
+export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-    name: "swyx",
+  name: "swyx"
 };
 ```
 
