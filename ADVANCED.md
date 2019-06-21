@@ -681,7 +681,7 @@ More info on places you can use [const assertions](https://blog.logrocket.com/co
 
 2. Higher order type inference from generic constructors
 
-```
+```tsx
 type ComponentClass<P> = new (props: P) => Component<P>;
 declare class Component<P> {
     props: P;
