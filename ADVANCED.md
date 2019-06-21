@@ -684,20 +684,18 @@ More info on places you can use [const assertions](https://blog.logrocket.com/co
 ```tsx
 type ComponentClass<P> = new (props: P) => Component<P>;
 declare class Component<P> {
-    props: P;
-    constructor(props: P);
+  props: P;
+  constructor(props: P);
 }
 
 declare function myHoc<P>(C: ComponentClass<P>): ComponentClass<P>;
 
-type NestedProps<T> = { foo: number, stuff: T };
+type NestedProps<T> = { foo: number; stuff: T };
 
-declare class GenericComponent<T> extends Component<NestedProps<T>> {
-}
+declare class GenericComponent<T> extends Component<NestedProps<T>> {}
 
 // type is 'new <T>(props: NestedProps<T>) => Component<NestedProps<T>>'
 const GenericComponent2 = myHoc(GenericComponent);
-
 ```
 
 ## TypeScript Roadmap
