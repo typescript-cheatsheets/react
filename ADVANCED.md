@@ -321,6 +321,8 @@ const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
 
 </details>
 
+You may also want to use Discriminated Unions, this section is yet unwritten but please check out [Expressive React Component APIs with Discriminated Unions](https://blog.andrewbran.ch/expressive-react-component-apis-with-discriminated-unions/).
+
 ## Props: One or the Other but not Both
 
 Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
