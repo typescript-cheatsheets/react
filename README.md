@@ -1112,7 +1112,7 @@ class MyComponent extends React.Component<{
 
 Note that you cannot assert your way to anything - basically it is only for refining types. Therefore it is not the same as "casting" a type.
 
-You can also assert a property is non-null, when accessing it: 
+You can also assert a property is non-null, when accessing it:
 
 ```ts
 element.parentNode!.removeChild(element) // ! before the period
@@ -1127,19 +1127,19 @@ Of course, try to actually handle the null case instead of asserting :)
 TS' structural typing is handy, until it is inconvenient. However you can simulate nominal typing with [`type branding`](https://basarat.gitbooks.io/typescript/docs/tips/nominalTyping.html):
 
 ```ts
-type OrderID = string & {readonly brand: unique symbol}
-type UserID = string & {readonly brand: unique symbol}
-type ID = OrderID | UserID
+type OrderID = string & { readonly brand: unique symbol };
+type UserID = string & { readonly brand: unique symbol };
+type ID = OrderID | UserID;
 ```
 
 We can create these values with the Companion Object Pattern:
 
 ```ts
 function OrderID(id: string) {
-  return id as OrderID
+  return id as OrderID;
 }
 function UserID(id: string) {
-  return id as UserID
+  return id as UserID;
 }
 ```
 
@@ -1149,7 +1149,7 @@ Now TypeScript will disallow you from using the wrong ID in the wrong place:
 function queryForUser(id: UserID) {
   // ...
 }
-queryForUser(OrderID('foobar')) // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
+queryForUser(OrderID("foobar")); // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
 ```
 
 ## Intersection Types
