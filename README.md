@@ -89,6 +89,8 @@
   - [Using Inferred Types](#using-inferred-types)
   - [Using Partial Types](#using-partial-types)
   - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
+- [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
+- [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilties)
 - [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
@@ -1316,9 +1318,45 @@ declare module "*.png";
 import * as logo from "./logo.png";
 ```
 
+Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
+
 Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
 
+# Troubleshooting Handbook: Operators
+
+- `typeof` and `instanceof`: type query used for refinement
+- `keyof`: get keys of an object
+- `O[K]`: property lookup
+- `[K in O]`: mapped types
+- `+` or `-` or `readonly` or `?`: addition and subtraction and readonly and optional modifiers
+- `x ? Y : Z`: Conditional types for generic types, type aliases, function parameter types
+- `!`: Nonnull assertion for nullable types
+- `=`: Generic type parameter default for generic types
+- `as`: type assertion
+- `is`: type guard for function return types
+
+
+# Troubleshooting Handbook: Utilities
+
+these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1439):
+
+- `ConstructorParameters`: a tuple of class constructor's parameter types
+- `Exclude`: exclude a type from another type
+- `Extract`: select a subtype that is assignable to another type
+- `InstanceType`: the instance type you get from a `new`ing a class constructor
+- `NonNullable`: exclude `null` and `undefined` from a type
+- `Parameters`: a tuple of a function's parameter types
+- `Partial`: Make all properties in an object optional
+- `Readonly`: Make all properties in an object readonly
+- `ReadonlyArray`: Make an immutable array of the given type
+- `Pick`: A subtype of an object type with a subset of its keys
+- `Record`: A map from a key type to a value type
+- `Required`: Make all properties in an object required
+- `ReturnType` A function's return type
+
 # Troubleshooting Handbook: TSLint
+
+**Note: TSLint is in maintenance and ESLint is the way forward for TypeScript**
 
 Sometimes TSLint is just getting in the way. Judiciously turning off of things can be helpful. Here are useful tslint disables you may use:
 
