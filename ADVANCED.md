@@ -570,33 +570,34 @@ export function MyConsumingComponent() {
 
 ## Handling Exceptions
 
-You can provide good information when bad things happen. 
+You can provide good information when bad things happen.
 
 ```ts
 class InvalidDateFormatError extends RangeError {}
 class DateIsInFutureError extends RangeError {}
 
 /**
-  * // optional docblock
-  * @throws {InvalidDateFormatError} The user entered date incorrectly
-  * @throws {DateIsInFutureError} The user entered date in future
-  *
-  */
+ * // optional docblock
+ * @throws {InvalidDateFormatError} The user entered date incorrectly
+ * @throws {DateIsInFutureError} The user entered date in future
+ *
+ */
 function parse(date: string) {
-  if (!isValid(date)) throw new InvalidDateFormatError('not a valid date format')
-  if (isInFuture(date)) throw new DateIsInFutureError('date is in the future')
+  if (!isValid(date))
+    throw new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) throw new DateIsInFutureError("date is in the future");
   // ...
 }
 
 try {
   // call parse(date) somewhere
-} catch(e) {
+} catch (e) {
   if (e instanceof InvalidDateFormatError) {
-    console.error('invalid date format', e)
+    console.error("invalid date format", e);
   } else if (e instanceof DateIsInFutureError) {
-    console.warn('date is in future', e)
+    console.warn("date is in future", e);
   } else {
-    throw e
+    throw e;
   }
 }
 ```
@@ -604,26 +605,28 @@ try {
 Simply throwing an exception is fine, however it would be nice to make TypeScript remind the consumer of your code to handle your exception. We can do that just by returning instead of throwing:
 
 ```ts
-
-function parse(date: string): Date | InvalidDateFormatError | DateIsInFutureError {
-  if (!isValid(date)) return new InvalidDateFormatError('not a valid date format')
-  if (isInFuture(date)) return new DateIsInFutureError('date is in the future')
+function parse(
+  date: string
+): Date | InvalidDateFormatError | DateIsInFutureError {
+  if (!isValid(date))
+    return new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) return new DateIsInFutureError("date is in the future");
   // ...
 }
 
 // now consumer *has* to handle the errors
-let result = parse('mydate')
+let result = parse("mydate");
 if (result instanceof InvalidDateFormatError) {
-  console.error('invalid date format', result.message)
+  console.error("invalid date format", result.message);
 } else if (result instanceof DateIsInFutureError) {
-  console.warn('date is in future', result.message)
+  console.warn("date is in future", result.message);
 } else {
   /// use result safely
 }
 
 // alternately you can just handle all errors
 if (result instanceof Error) {
-  console.error('error', result)
+  console.error("error", result);
 } else {
   /// use result safely
 }
@@ -669,7 +672,6 @@ let result = ask() // Option<string>
               .flatMap(d => new Some(d.toISOString()) // Option<string>
               .getOrElse('error parsing string')
 ```
-
 
 ## Third Party Libraries
 
