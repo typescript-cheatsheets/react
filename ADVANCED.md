@@ -56,6 +56,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Omit attribute from a type](#omit-attribute-from-a-type)
   - [Type Zoo](#type-zoo)
   - [Extracting Prop Types of a Component](#extracting-prop-types-of-a-component)
+  - [Handling Exceptions](#handling-exceptions)
   - [Third Party Libraries](#third-party-libraries)
 - [Section 2: Useful Patterns by TypeScript Version](#section-2-useful-patterns-by-typescript-version)
   - [TypeScript 2.9](#typescript-29)
@@ -82,6 +83,8 @@ We will assume knowledge of utility types covered in the sister project [`typesc
 # Section 1: Advanced Guides
 
 ## Higher Order Components (HoCs)
+
+**Note: there is now a dedicated HoC cheatsheet you can refer to get some practice on HOCs.**
 
 Sometimes you want a simple way to inject props from somewhere else (either a global store or a provider) and don't want to continually pass down the props for it. Context is great for it, but then the values from the context can only be used in your `render` function. A HoC will provide these values as props.
 
@@ -564,6 +567,109 @@ export function MyConsumingComponent() {
   return <MyInnerComponent onSomeEvent={theHandler} />;
 }
 ```
+
+## Handling Exceptions
+
+You can provide good information when bad things happen. 
+
+```ts
+class InvalidDateFormatError extends RangeError {}
+class DateIsInFutureError extends RangeError {}
+
+/**
+  * // optional docblock
+  * @throws {InvalidDateFormatError} The user entered date incorrectly
+  * @throws {DateIsInFutureError} The user entered date in future
+  *
+  */
+function parse(date: string) {
+  if (!isValid(date)) throw new InvalidDateFormatError('not a valid date format')
+  if (isInFuture(date)) throw new DateIsInFutureError('date is in the future')
+  // ...
+}
+
+try {
+  // call parse(date) somewhere
+} catch(e) {
+  if (e instanceof InvalidDateFormatError) {
+    console.error('invalid date format', e)
+  } else if (e instanceof DateIsInFutureError) {
+    console.warn('date is in future', e)
+  } else {
+    throw e
+  }
+}
+```
+
+Simply throwing an exception is fine, however it would be nice to make TypeScript remind the consumer of your code to handle your exception. We can do that just by returning instead of throwing:
+
+```ts
+
+function parse(date: string): Date | InvalidDateFormatError | DateIsInFutureError {
+  if (!isValid(date)) return new InvalidDateFormatError('not a valid date format')
+  if (isInFuture(date)) return new DateIsInFutureError('date is in the future')
+  // ...
+}
+
+// now consumer *has* to handle the errors
+let result = parse('mydate')
+if (result instanceof InvalidDateFormatError) {
+  console.error('invalid date format', result.message)
+} else if (result instanceof DateIsInFutureError) {
+  console.warn('date is in future', result.message)
+} else {
+  /// use result safely
+}
+
+// alternately you can just handle all errors
+if (result instanceof Error) {
+  console.error('error', result)
+} else {
+  /// use result safely
+}
+```
+
+You can also describe exceptions with special-purpose data types (don't say monads...) like the `Try`, `Option` (or `Maybe`), and `Either` data types:
+
+```ts
+interface Option<T> {
+  flatMap<U>(f: (value: T) => None): None
+  flatMap<U>(f: (value: T) => Option<U>): Option<U>
+  getOrElse(value: T): T
+}
+class Some<T> implements Option<T> {
+  constructor(private value: T) {}
+  flatMap<U>(f: (value: T) => None): None
+  flatMap<U>(f: (value: T) => Some<U>): Some<U>
+  flatMap<U>(f: (value: T) => Option<U>): Option<U> {
+    return f(this.value)
+  }
+  getOrElse(): T {
+    return this.value
+  }
+}
+class None implements Option<never> {
+  flatMap<U>(): None {
+    return this
+  }
+  getOrElse<U>(value: U): U {
+    return value
+  }
+}
+
+// now you can use it like:
+let result = Option(6) // Some<number>
+              .flatMap(n => Option(n*3)) // Some<number>
+              .flatMap(n = new None) // None
+              .getOrElse(7)
+
+// or:
+let result = ask() // Option<string>
+              .flatMap(parse) // Option<Date>
+              .flatMap(d => new Some(d.toISOString()) // Option<string>
+              .getOrElse('error parsing string')
+```
+
 
 ## Third Party Libraries
 
