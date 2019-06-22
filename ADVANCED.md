@@ -365,6 +365,16 @@ function handle(event: UserEvent) {
 }
 ```
 
+To streamline this you may also combine this with the concept of **User-Defined Type Guards**:
+
+```ts
+function isString(a: unknown): a is string {
+  return typeof a === 'string'
+}
+```
+
+[Read more about User-Defined Type Guards in the Handbook](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards).
+
 ## Props: One or the Other but not Both
 
 Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
