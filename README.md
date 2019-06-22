@@ -1415,7 +1415,7 @@ You dont always have to implement the module, you can simply import the module a
 
 ```tsx
 // my-typings.ts
-declare module "plotly.js" // each of its imports are `any`
+declare module "plotly.js"; // each of its imports are `any`
 ```
 
 Because you don't have to explicitly import this, this is known as an [ambient module declaration](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html#pitfalls-of-namespaces-and-modules). You can do AMD's in a script-mode `.ts` file (no imports or exports), or a `.d.ts` file anywhere in your project.
@@ -1424,18 +1424,18 @@ You can also do ambient variable and ambient type declarations:
 
 ```ts
 // ambient utiltity type
-type ToArray<T> = T extends unknown[] ? T : T[]
+type ToArray<T> = T extends unknown[] ? T : T[];
 // ambient variable
 declare let process: {
   env: {
-    NODE_ENV: 'development' | 'production'
-  }
-}
+    NODE_ENV: "development" | "production";
+  };
+};
 process = {
   env: {
-    NODE_ENV: 'production'
+    NODE_ENV: "production"
   }
-}
+};
 ```
 
 You can see examples of these included in the built in type declarations in the `lib` field of `tsconfig.json`
