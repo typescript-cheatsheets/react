@@ -160,14 +160,13 @@ This will raise a bunch of type errors and you can start converting files to TS 
 A common practice here is using an ambient TODO type alias for `any` so you can keep track of what you need to come back to:
 
 ```ts
-type TODO_TYPEME = any
+type TODO_TYPEME = any;
 export function myFunc(foo: TODO_TYPEME, bar: TODO_TYPEME): number {
   // ...
 }
 ```
 
 Gradually add [more `strict` mode flags](https://www.typescriptlang.org/docs/handbook/compiler-options.html) like `noImplicitThis`, `strictNullChecks`, and so on until you can eventually just run in full strict mode with no js files left:
-
 
 ```js
 {
