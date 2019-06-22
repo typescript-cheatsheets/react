@@ -122,15 +122,15 @@ This guide will always assume you are starting with the latest TypeScript versio
 ## Import React
 
 ```tsx
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 ```
 
 In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run TypeScript with `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true` to tsconfig) to import like in regular jsx:
 
 ```tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 ```
 
 <details>
@@ -306,17 +306,17 @@ You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/
 
 ```tsx
 type Action =
-  | { type: 'SET_ONE'; payload: string }
-  | { type: 'SET_TWO'; payload: number };
+  | { type: "SET_ONE"; payload: string }
+  | { type: "SET_TWO"; payload: number };
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case 'SET_ONE':
+    case "SET_ONE":
       return {
         ...state,
         one: action.payload // `payload` is string
       };
-    case 'SET_TWO':
+    case "SET_TWO":
       return {
         ...state,
         two: action.payload // `payload` is number
@@ -513,7 +513,7 @@ For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 type Props = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: 'Johny Five'
+  who: "Johny Five"
 };
 
 const Greet = (props: Props) => {
@@ -531,7 +531,7 @@ type GreetProps = typeof Greet.defaultProps & {
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
-    name: 'world'
+    name: "world"
   };
   /*...*/
 }
@@ -565,7 +565,7 @@ type Props = Required<typeof MyComponent.defaultProps> & {
 
 export class MyComponent extends React.Component<Props> {
   static defaultProps = {
-    foo: 'foo'
+    foo: "foo"
   };
 }
 ```
@@ -580,7 +580,7 @@ interface IMyComponentProps {
 
 export class MyComponent extends React.Component<IMyComponentProps> {
   public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: 'default'
+    firstProp: "default"
   };
 }
 ```
@@ -625,7 +625,7 @@ type AppProps = {
   /** array of a type! */
   names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
-  status: 'waiting' | 'success';
+  status: "waiting" | "success";
   /** any object as long as you dont use its properties (not common) */
   obj: object;
   obj2: {}; // almost the same as `object`, exactly the same as `Object`
@@ -664,7 +664,7 @@ export declare interface AppProps {
   functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
-  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements['button']>; // to impersonate all the props of a button element without its ref
+  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements["button"]>; // to impersonate all the props of a button element without its ref
 }
 ```
 
@@ -684,7 +684,13 @@ Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57
 If performance is not an issue, inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
 
 ```tsx
-const el = <button onClick={event => {/* ... */ }} />
+const el = (
+  <button
+    onClick={event => {
+      /* ... */
+    }}
+  />
+);
 ```
 
 But if you need to define your event handler separately, IDE tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
@@ -698,7 +704,7 @@ class App extends React.Component<
   }
 > {
   state = {
-    text: ''
+    text: ""
   };
 
   // typing on RIGHT hand side of =
@@ -781,7 +787,7 @@ function createCtx<A>() {
   const ctx = React.createContext<A | undefined>(undefined);
   function useCtx() {
     const c = React.useContext(ctx);
-    if (!c) throw new Error('useCtx must be inside a Provider with a value');
+    if (!c) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
   return [useCtx, ctx.Provider] as [() => A, typeof ctx.Provider];
@@ -791,7 +797,7 @@ function createCtx<A>() {
 
 export const [useCtx, SettingProvider] = createCtx<string>(); // no need to specify value upfront!
 export function App() {
-  const key = useCustomHook('key'); // get a value from a hook, must be in a component
+  const key = useCustomHook("key"); // get a value from a hook, must be in a component
   return (
     <SettingProvider value={key}>
       <Component />
@@ -823,7 +829,7 @@ export function createCtx<A>(defaultValue: A) {
 
 // usage
 
-const [ctx, TextProvider] = createCtx('someText');
+const [ctx, TextProvider] = createCtx("someText");
 export const TextContext = ctx;
 export function App() {
   return (
@@ -870,7 +876,7 @@ const Context = React.createContext({} as ProviderStore); // type assertion on e
 
 class Provider extends React.Component<{}, ProviderState> {
   public readonly state = {
-    themeColor: 'red'
+    themeColor: "red"
   };
 
   private update = ({ key, value }: UpdateStateArg) => {
@@ -914,7 +920,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: 'submit' | 'button' };
+type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -934,11 +940,11 @@ More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4
 Using `ReactDOM.createPortal`:
 
 ```tsx
-const modalRoot = document.getElementById('modal-root') as HTMLElement;
+const modalRoot = document.getElementById("modal-root") as HTMLElement;
 // assuming in your html file has a div with id 'modal-root';
 
 export class Modal extends React.Component {
-  el: HTMLElement = document.createElement('div');
+  el: HTMLElement = document.createElement("div");
 
   componentDidMount() {
     modalRoot.appendChild(this.el);
@@ -1041,7 +1047,7 @@ class MyComponent extends React.Component<{
   message?: string; // like this
 }> {
   render() {
-    const { message = 'default' } = this.props;
+    const { message = "default" } = this.props;
     return <div>{message}</div>;
   }
 }
@@ -1057,9 +1063,9 @@ Enums in TypeScript default to numbers. You will usually want to use them as str
 
 ```tsx
 export enum ButtonSizes {
-  default = 'default',
-  small = 'small',
-  large = 'large'
+  default = "default",
+  small = "small",
+  large = "large"
 }
 ```
 
@@ -1074,7 +1080,7 @@ export const PrimaryButton = (
 A simpler alternative to enum is just declaring a bunch of strings with union:
 
 ```tsx
-export declare type Position = 'left' | 'right' | 'top' | 'bottom';
+export declare type Position = "left" | "right" | "top" | "bottom";
 ```
 
 <details>
@@ -1162,9 +1168,10 @@ type FunctionType1 = (x: string, y: number) => number;
 But this doesn't let you do any overloading. If you have the implementation, you can put them after each other with the function keyword:
 
 ```ts
-function pickCard(x: {suit: string; card: number; }[]): number;
-function pickCard(x: number): {suit: string; card: number; };
-function pickCard(x): any { // implementation with combined signature
+function pickCard(x: { suit: string; card: number }[]): number;
+function pickCard(x: number): { suit: string; card: number };
+function pickCard(x): any {
+  // implementation with combined signature
   // ...
 }
 ```
@@ -1173,11 +1180,11 @@ However, if you don't have an implementation and are just writing a `.d.ts` defi
 
 ```ts
 type pickCard = {
-  (x: {suit: string; card: number; }[]): number
-  (x: number): {suit: string; card: number; }
+  (x: { suit: string; card: number }[]): number;
+  (x: number): { suit: string; card: number };
   // no need for combined signature in this form
   // you can also type static properties of functions here eg `pickCard.wasCalled`
-}
+};
 ```
 
 Note that when you implement the actual overloaded function, the implementation will need to declare the combined call signature that you'll be handling, it won't be inferred for you. You can see readily see examples of overloads in DOM APIs, e.g. `createElement`.
@@ -1238,11 +1245,11 @@ This can be annoying but here are ways to grab the types!
 - Grabbing the Prop types of a component: Use `React.ComponentProps` and `typeof`, and optionally `Omit` any overlapping types
 
 ```tsx
-import { Button } from 'library'; // but doesn't export ButtonProps! oh no!
+import { Button } from "library"; // but doesn't export ButtonProps! oh no!
 type ButtonProps = React.ComponentProps<typeof Button>; // no problem! grab your own!
-type AlertButtonProps = Omit<ButtonProps, 'onClick'>; // modify
+type AlertButtonProps = Omit<ButtonProps, "onClick">; // modify
 const AlertButton: React.FC<AlertButtonProps> = props => (
-  <Button onClick={() => alert('hello')} {...props} />
+  <Button onClick={() => alert("hello")} {...props} />
 );
 ```
 
@@ -1267,10 +1274,10 @@ Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declarati
 ```ts
 // declaration.d.ts
 // anywhere in your project, NOT the same name as any of your .ts/tsx files
-declare module '*.png';
+declare module "*.png";
 
 // importing in a tsx file
-import * as logo from './logo.png';
+import * as logo from "./logo.png";
 ```
 
 Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
@@ -1354,15 +1361,15 @@ If you just need to add an interface, or add missing members to an existing inte
 
 ```tsx
 // my-typings.ts
-declare module 'plotly.js' {
+declare module "plotly.js" {
   interface PlotlyHTMLElement {
     removeAllListeners(): void;
   }
 }
 
 // MyComponent.tsx
-import { PlotlyHTMLElement } from 'plotly.js';
-import './my-typings';
+import { PlotlyHTMLElement } from "plotly.js";
+import "./my-typings";
 const f = (e: PlotlyHTMLElement) => {
   e.removeAllListeners();
 };
