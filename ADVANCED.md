@@ -1190,7 +1190,7 @@ Not Commonly Used but Good to know
 **Namespace: JSX**
 
 - `Element` - the type of any JSX expression
-- `LibraryManagedAttributes` - It specifies other places where JSX elements can declare and initialize property types. Used to resolve static `defaultProps` and `propTypes` with the internal props type of a component. 
+- `LibraryManagedAttributes` - It specifies other places where JSX elements can declare and initialize property types. Used to resolve static `defaultProps` and `propTypes` with the internal props type of a component.
 - `IntrinsicElements` - every possible built-in component that can be typed in as a lowercase tag name in JSX
 
 Not commonly used but good to know
