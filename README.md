@@ -1335,7 +1335,6 @@ Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 a
 - `as`: type assertion
 - `is`: type guard for function return types
 
-
 # Troubleshooting Handbook: Utilities
 
 these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1439):
