@@ -118,7 +118,66 @@ the "Just Renaming" strategy
 
 Also try using [TypeWiz](https://github.com/urish/typewiz) to add types.
 
-More resources
+You can either load typescript files with webpack, or use the `tsc` compiler to compile your TS files to JS side by side. The basic `tsconfig.json` is:
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true
+  }
+}
+```
+
+Then you will want to enable it to check JS:
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  }
+}
+```
+
+If you have a large codebase and this throws too many errors at once, you can opt out problematic files with `//@ts-nocheck`, or instead turn off `checkJs` and add a `//@ts-check` directive at the top of each regular JS file.
+
+TypeScript should throw up some egregious errors here which should be easy to fix.
+
+Once you are done, swallow the red pill by turning off implicit `any`'s:
+
+```js
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": true // or "strict": true
+  }
+}
+```
+
+This will raise a bunch of type errors and you can start converting files to TS or (optionally) use [JSDoc annotations](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html) in your JS.
+
+A common practice here is using an ambient TODO type alias for `any` so you can keep track of what you need to come back to:
+
+```ts
+type TODO_TYPEME = any
+export function myFunc(foo: TODO_TYPEME, bar: TODO_TYPEME): number {
+  // ...
+}
+```
+
+Gradually add [more `strict` mode flags](https://www.typescriptlang.org/docs/handbook/compiler-options.html) like `noImplicitThis`, `strictNullChecks`, and so on until you can eventually just run in full strict mode with no js files left:
+
+
+```js
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```
+
+**More resources**
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
