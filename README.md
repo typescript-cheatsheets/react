@@ -645,6 +645,8 @@ type AppProps = {
   onClick: () => void;
   /** function with named prop (VERY COMMON) */
   onChange: (id: number) => void;
+  /** alternative function type syntax that takes an event (VERY COMMON) */
+  onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   /** an optional prop (VERY COMMON!) */
   optional?: OptionalType;
 };
@@ -1403,11 +1405,40 @@ declare module "plotly.js" {
 
 // MyComponent.tsx
 import { PlotlyHTMLElement } from "plotly.js";
-import "./my-typings";
+
 const f = (e: PlotlyHTMLElement) => {
   e.removeAllListeners();
 };
 ```
+
+You dont always have to implement the module, you can simply import the module as `any` for a quick start:
+
+```tsx
+// my-typings.ts
+declare module "plotly.js" // each of its imports are `any`
+```
+
+Because you don't have to explicitly import this, this is known as an [ambient module declaration](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html#pitfalls-of-namespaces-and-modules). You can do AMD's in a script-mode `.ts` file (no imports or exports), or a `.d.ts` file anywhere in your project.
+
+You can also do ambient variable and ambient type declarations:
+
+```ts
+// ambient utiltity type
+type ToArray<T> = T extends unknown[] ? T : T[]
+// ambient variable
+declare let process: {
+  env: {
+    NODE_ENV: 'development' | 'production'
+  }
+}
+process = {
+  env: {
+    NODE_ENV: 'production'
+  }
+}
+```
+
+You can see examples of these included in the built in type declarations in the `lib` field of `tsconfig.json`
 
 # Recommended React + TypeScript codebases to learn from
 
