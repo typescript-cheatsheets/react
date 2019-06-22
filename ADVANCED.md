@@ -326,35 +326,42 @@ You may also want to use Discriminated Unions, please check out [Expressive Reac
 Here is a brief intuition for **Discriminated Union Types**:
 
 ```ts
-type UserTextEvent = {value: string, target: HTMLInputElement}
-type UserMouseEvent = {value: [number, number], target: HTMLElement}
-type UserEvent = UserTextEvent | UserMouseEvent
+type UserTextEvent = { value: string; target: HTMLInputElement };
+type UserMouseEvent = { value: [number, number]; target: HTMLElement };
+type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (typeof event.value === 'string') {
-    event.value // string
-    event.target // HTMLInputElement | HTMLElement (!!!!)
-    return
+  if (typeof event.value === "string") {
+    event.value; // string
+    event.target; // HTMLInputElement | HTMLElement (!!!!)
+    return;
   }
-  event.value // [number, number]
-  event.target // HTMLInputElement | HTMLElement (!!!!)
+  event.value; // [number, number]
+  event.target; // HTMLInputElement | HTMLElement (!!!!)
 }
 ```
 
 Even though we have narrowed based on `event.value`, the logic doesn't filter up and sideways to `event.target`. This is because a union type `UserTextEvent | UserMouseEvent` could be BOTH at once. So TypeScript needs a better hint. The solution is to use a literal type to tag each case of your union type:
 
-
 ```ts
-type UserTextEvent = {type: 'TextEvent', value: string, target: HTMLInputElement}
-type UserMouseEvent = {type: 'MouseEvent', value: [number, number], target: HTMLElement}
-type UserEvent = UserTextEvent | UserMouseEvent
+type UserTextEvent = {
+  type: "TextEvent";
+  value: string;
+  target: HTMLInputElement;
+};
+type UserMouseEvent = {
+  type: "MouseEvent";
+  value: [number, number];
+  target: HTMLElement;
+};
+type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (event.type === 'TextEvent') {
-    event.value // string
-    event.target // HTMLInputElement
-    return
+  if (event.type === "TextEvent") {
+    event.value; // string
+    event.target; // HTMLInputElement
+    return;
   }
-  event.value // [number, number]
-  event.target // HTMLElement
+  event.value; // [number, number]
+  event.target; // HTMLElement
 }
 ```
 
