@@ -628,7 +628,7 @@ type AppProps = {
   status: 'waiting' | 'success';
   /** any object as long as you dont use its properties (not common) */
   obj: object;
-  obj2: {}; // same
+  obj2: {}; // almost the same as `object`, exactly the same as `Object`
   /** an object with defined properties (preferred) */
   obj3: {
     id: string;
@@ -681,16 +681,10 @@ Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57
 
 ## Forms and Events
 
-If performance is not an issue, inlining handlers is easiest as you can just use type inference:
+If performance is not an issue, inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
 
 ```tsx
-const el = (
-  <button
-    onClick={event => {
-      /* ... */
-    }}
-  />
-);
+const el = <button onClick={event => {/* ... */ }} />
 ```
 
 But if you need to define your event handler separately, IDE tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
@@ -1011,7 +1005,7 @@ class App extends React.Component<
 }
 ```
 
-**Type Guarding**: Sometimes Union Types solve a problem in one area but create another downstream. Learn how to write checks, guards, and assertions (also see the Conditional Rendering section below). For example:
+**Type Guarding**: Sometimes Union Types solve a problem in one area but create another downstream. If `A` and `B` are both object types, `A | B` isn't "either A or B", it is "A or B or both at once", which causes some confusion if you expected it to be the former. Learn how to write checks, guards, and assertions (also see the Conditional Rendering section below). For example:
 
 ```ts
 interface Admin {
@@ -1154,6 +1148,41 @@ Make sure not to confuse Intersection Types (which are **and** operations) with 
 ## Union Types
 
 This section is yet to be written (please contribute!). Meanwhile, see our [commentary on Union Types usecases](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#union-types-and-type-guarding).
+
+The ADVANCED cheatsheet also has information on Discriminated Union Types, which are helpful when TypeScript doesn't seem to be narrowing your union type as you expect.
+
+## Overloading Function Types
+
+Specifically when it comes to functions, you may need to overload instead of union type. The most common way function types are written uses the shorthand:
+
+```ts
+type FunctionType1 = (x: string, y: number) => number;
+```
+
+But this doesn't let you do any overloading. If you have the implementation, you can put them after each other with the function keyword:
+
+```ts
+function pickCard(x: {suit: string; card: number; }[]): number;
+function pickCard(x: number): {suit: string; card: number; };
+function pickCard(x): any { // implementation with combined signature
+  // ...
+}
+```
+
+However, if you don't have an implementation and are just writing a `.d.ts` definition file, this won't help you either. In this case you can forego any shorthand and write them the old-school way. The key thing to remember here is as far as TypeScript is concerned, `functions are just callable objects with no key`:
+
+```ts
+type pickCard = {
+  (x: {suit: string; card: number; }[]): number
+  (x: number): {suit: string; card: number; }
+  // no need for combined signature in this form
+  // you can also type static properties of functions here eg `pickCard.wasCalled`
+}
+```
+
+Note that when you implement the actual overloaded function, the implementation will need to declare the combined call signature that you'll be handling, it won't be inferred for you. You can see readily see examples of overloads in DOM APIs, e.g. `createElement`.
+
+[Read more about Overloading in the Handbook.](https://www.typescriptlang.org/docs/handbook/functions.html#overloads)
 
 ## Using Inferred Types
 
