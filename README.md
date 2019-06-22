@@ -1095,7 +1095,7 @@ This is handy because TypeScript will throw errors when you mistype a string for
 
 ## Type Assertion
 
-Sometimes TypeScript is just getting your type wrong, or union types need to be asserted to a more specific type to work with other APIs, so assert with the `as` keyword. This tells the compiler you know better than it does.
+Sometimes you know better than TypeScript that the type you're using is narrower than it thinks, or union types need to be asserted to a more specific type to work with other APIs, so assert with the `as` keyword. This tells the compiler you know better than it does.
 
 ```tsx
 class MyComponent extends React.Component<{
@@ -1110,15 +1110,47 @@ class MyComponent extends React.Component<{
 }
 ```
 
-<details>
+Note that you cannot assert your way to anything - basically it is only for refining types. Therefore it is not the same as "casting" a type.
 
-<summary>Explanation</summary>
+You can also assert a property is non-null, when accessing it: 
 
-Note that this is [not the same as casting](https://www.reddit.com/r/reactjs/comments/8o5owb/react_typescript_cheatsheet_for_react_users_using/e01d2md/?context=3).
+```ts
+element.parentNode!.removeChild(element) // ! before the period
+myFunction(document.getElementById(dialog.id!)! // ! after the property accessing
+let userID!: string // definite assignment assertion... be careful!
+```
 
-Something to add? Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+Of course, try to actually handle the null case instead of asserting :)
 
-</details>
+## Simulating Nominal Types
+
+TS' structural typing is handy, until it is inconvenient. However you can simulate nominal typing with [`type branding`](https://basarat.gitbooks.io/typescript/docs/tips/nominalTyping.html):
+
+```ts
+type OrderID = string & {readonly brand: unique symbol}
+type UserID = string & {readonly brand: unique symbol}
+type ID = OrderID | UserID
+```
+
+We can create these values with the Companion Object Pattern:
+
+```ts
+function OrderID(id: string) {
+  return id as OrderID
+}
+function UserID(id: string) {
+  return id as UserID
+}
+```
+
+Now TypeScript will disallow you from using the wrong ID in the wrong place:
+
+```ts
+function queryForUser(id: UserID) {
+  // ...
+}
+queryForUser(OrderID('foobar')) // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
+```
 
 ## Intersection Types
 
