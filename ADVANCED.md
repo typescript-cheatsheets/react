@@ -369,7 +369,7 @@ To streamline this you may also combine this with the concept of **User-Defined 
 
 ```ts
 function isString(a: unknown): a is string {
-  return typeof a === 'string'
+  return typeof a === "string";
 }
 ```
 
