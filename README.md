@@ -681,6 +681,8 @@ Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57
 - `React.ReactNode` -> Return value of a component
   </details>
 
+[More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/129)
+
 [Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
 
 ## Forms and Events
