@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+<a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/81">
   <img
     height="90"
     width="90"
@@ -12,13 +12,13 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
-[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
-[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
-[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
-[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+[Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
 </div>
 
@@ -137,7 +137,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 ) {
   // Try to create a nice displayName for React Dev Tools.
   const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || "Component";
+    WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
   return class ComponentWithTheme extends React.Component<
@@ -174,7 +174,7 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
 
 ### Using `forwardRef`
 
-For "true" reusability you should also consider exposing a ref for your HOC. You can use `React.forwardRef<Ref, Props>` as documented in [the basic cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), but we are interested in more real world examples. [Here is a nice example in practice](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) from @OliverJAsh.
+For "true" reusability you should also consider exposing a ref for your HOC. You can use `React.forwardRef<Ref, Props>` as documented in [the basic cheatsheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), but we are interested in more real world examples. [Here is a nice example in practice](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) from @OliverJAsh.
 
 ## Render Props
 
@@ -203,7 +203,7 @@ export interface Props {
 }
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## `as` props (passing a component to be rendered)
 
@@ -217,7 +217,7 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 }
 ```
 
-[Thanks @eps1lon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/69) for this
+[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) for this
 
 ## Typing a Component that Accepts Different Props
 
@@ -226,14 +226,14 @@ Components, and JSX in general, are analogous to functions. When a component can
 A very common use case for this is to render something as either a button or an anchor, based on if it receives a `href` attribute.
 
 ```tsx
-type ButtonProps = JSX.IntrinsicElements["button"];
-type AnchorProps = JSX.IntrinsicElements["a"];
+type ButtonProps = JSX.IntrinsicElements['button'];
+type AnchorProps = JSX.IntrinsicElements['a'];
 
 // optionally use a custom type guard
 function isPropsForAnchorElement(
   props: ButtonProps | AnchorProps
 ): props is AnchorProps {
-  return "href" in props;
+  return 'href' in props;
 }
 
 function Clickable(props: ButtonProps | AnchorProps) {
@@ -248,10 +248,10 @@ function Clickable(props: ButtonProps | AnchorProps) {
 They don't even need to be completely different props, as long as they have at least one difference in properties:
 
 ```tsx
-type LinkProps = Omit<JSX.IntrinsicElements["a"], "href"> & { to?: string };
+type LinkProps = Omit<JSX.IntrinsicElements['a'], 'href'> & { to?: string };
 
 function RouterLink(props: LinkProps | AnchorProps) {
-  if ("to" in props) {
+  if ('to' in props) {
     return <a {...props} />;
   } else {
     return <Link {...props} />;
@@ -262,7 +262,7 @@ function RouterLink(props: LinkProps | AnchorProps) {
 <details>
   <summary><b>Approach: Generic Components</b></summary>
   
-  Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
+  Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
   
 ```tsx
 interface LinkProps {}
@@ -333,7 +333,7 @@ type UserTextEvent = { value: string; target: HTMLInputElement };
 type UserMouseEvent = { value: [number, number]; target: HTMLElement };
 type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (typeof event.value === "string") {
+  if (typeof event.value === 'string') {
     event.value; // string
     event.target; // HTMLInputElement | HTMLElement (!!!!)
     return;
@@ -347,18 +347,18 @@ Even though we have narrowed based on `event.value`, the logic doesn't filter up
 
 ```ts
 type UserTextEvent = {
-  type: "TextEvent";
+  type: 'TextEvent';
   value: string;
   target: HTMLInputElement;
 };
 type UserMouseEvent = {
-  type: "MouseEvent";
+  type: 'MouseEvent';
   value: [number, number];
   target: HTMLElement;
 };
 type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (event.type === "TextEvent") {
+  if (event.type === 'TextEvent') {
     event.value; // string
     event.target; // HTMLInputElement
     return;
@@ -372,7 +372,7 @@ To streamline this you may also combine this with the concept of **User-Defined 
 
 ```ts
 function isString(a: unknown): a is string {
-  return typeof a === "string";
+  return typeof a === 'string';
 }
 ```
 
@@ -387,7 +387,7 @@ type Props1 = { foo: string };
 type Props2 = { bar: string };
 
 function MyComponent(props: Props1 | Props2) {
-  if ("foo" in props) {
+  if ('foo' in props) {
     // props.bar // error
     return <div>{props.foo}</div>;
   } else {
@@ -413,9 +413,9 @@ type OneOrAnother<T1, T2> =
 
 type Props = OneOrAnother<{ a: string; b: string }, {}>;
 
-const a: Props = { a: "a" }; // error
-const b: Props = { b: "b" }; // error
-const ab: Props = { a: "a", b: "b" }; // ok
+const a: Props = { a: 'a' }; // error
+const b: Props = { b: 'b' }; // error
+const ab: Props = { a: 'a', b: 'b' }; // ok
 ```
 
 Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
@@ -429,11 +429,11 @@ You want to allow `expanded` to be passed only if `truncate` is also passed, bec
 You can do this by function overloads:
 
 ```tsx
-import React from "react";
+import React from 'react';
 
 type CommonProps = {
   children: React.ReactNode;
-  as: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  as: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 };
 
 type NoTruncateProps = CommonProps & {
@@ -455,7 +455,7 @@ function Text(props: NoTruncateProps | TruncateProps) {
   if (isTruncateProps(props)) {
     const { children, as: Tag, truncate, expanded, ...otherProps } = props;
 
-    const classNames = truncate ? ".truncate" : "";
+    const classNames = truncate ? '.truncate' : '';
 
     return (
       <Tag className={classNames} aria-expanded={!!expanded} {...otherProps}>
@@ -470,7 +470,7 @@ function Text(props: NoTruncateProps | TruncateProps) {
 }
 
 Text.defaultProps = {
-  as: "span"
+  as: 'span'
 };
 ```
 
@@ -505,7 +505,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
 export const Checkbox = (
-  props: Props & Omit<React.HTMLProps<HTMLInputElement>, "label">
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, 'label'>
 ) => {
   const { label } = props;
   return (
@@ -525,7 +525,7 @@ As you can see from the Omit example above, you can write significant logic in y
 
 ## Extracting Prop Types of a Component
 
-_(Contributed by [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/63))_
+_(Contributed by [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/63))_
 
 There are a lot of places where you want to reuse some slices of props because of prop drilling,
 so you can either export the props type as part of the module or extract them (either way works).
@@ -533,7 +533,7 @@ so you can either export the props type as part of the module or extract them (e
 The advantage of extracting the prop types is that you won't need to export everything, and a refactor of the source of truth component will propagate to all consuming components.
 
 ```ts
-import { ComponentProps, JSXElementConstructor } from "react";
+import { ComponentProps, JSXElementConstructor } from 'react';
 
 // goes one step further and resolves with propTypes and defaultProps properties
 type ApparentComponentProps<
@@ -560,7 +560,7 @@ export function MyInnerComponent(props: {
 // my-consuming-component.tsx
 export function MyConsumingComponent() {
   // event and moreArgs are contextually typed along with the return value
-  const theHandler: Props<typeof MyInnerComponent>["onSomeEvent"] = (
+  const theHandler: Props<typeof MyInnerComponent>['onSomeEvent'] = (
     event,
     moreArgs
   ) => {};
@@ -584,8 +584,8 @@ class DateIsInFutureError extends RangeError {}
  */
 function parse(date: string) {
   if (!isValid(date))
-    throw new InvalidDateFormatError("not a valid date format");
-  if (isInFuture(date)) throw new DateIsInFutureError("date is in the future");
+    throw new InvalidDateFormatError('not a valid date format');
+  if (isInFuture(date)) throw new DateIsInFutureError('date is in the future');
   // ...
 }
 
@@ -593,9 +593,9 @@ try {
   // call parse(date) somewhere
 } catch (e) {
   if (e instanceof InvalidDateFormatError) {
-    console.error("invalid date format", e);
+    console.error('invalid date format', e);
   } else if (e instanceof DateIsInFutureError) {
-    console.warn("date is in future", e);
+    console.warn('date is in future', e);
   } else {
     throw e;
   }
@@ -609,24 +609,24 @@ function parse(
   date: string
 ): Date | InvalidDateFormatError | DateIsInFutureError {
   if (!isValid(date))
-    return new InvalidDateFormatError("not a valid date format");
-  if (isInFuture(date)) return new DateIsInFutureError("date is in the future");
+    return new InvalidDateFormatError('not a valid date format');
+  if (isInFuture(date)) return new DateIsInFutureError('date is in the future');
   // ...
 }
 
 // now consumer *has* to handle the errors
-let result = parse("mydate");
+let result = parse('mydate');
 if (result instanceof InvalidDateFormatError) {
-  console.error("invalid date format", result.message);
+  console.error('invalid date format', result.message);
 } else if (result instanceof DateIsInFutureError) {
-  console.warn("date is in future", result.message);
+  console.warn('date is in future', result.message);
 } else {
   /// use result safely
 }
 
 // alternately you can just handle all errors
 if (result instanceof Error) {
-  console.error("error", result);
+  console.error('error', result);
 } else {
   /// use result safely
 }
@@ -679,7 +679,7 @@ Sometimes DefinitelyTyped can get it wrong, or isn't quite addressing your use c
 
 # Section 2: Useful Patterns by TypeScript Version
 
-TypeScript Versions often introduce new ways to do things; this section helps current users of React + TypeScript upgrade TypeScript versions and explore patterns commonly used by TypeScript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new)!
+TypeScript Versions often introduce new ways to do things; this section helps current users of React + TypeScript upgrade TypeScript versions and explore patterns commonly used by TypeScript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new)!
 
 _TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!_ Apart from official TS team communication we also recommend [Marius Schulz's blog for version notes](https://mariusschulz.com/).
 
@@ -696,8 +696,8 @@ export interface InputFormProps {
 
 export const InputForm = styledInput<InputFormProps>`
     color:
-        ${({ themeName }) => (themeName === "dark" ? "black" : "white")};
-    border-color: ${({ foo }) => (foo ? "red" : "black")};
+        ${({ themeName }) => (themeName === 'dark' ? 'black' : 'white')};
+    border-color: ${({ foo }) => (foo ? 'red' : 'black')};
 `;
 ```
 
@@ -730,8 +730,8 @@ function foo(...rest: string[]) {
   // ...
 }
 
-foo("hello"); // works
-foo("hello", "world"); // also works
+foo('hello'); // works
+foo('hello', 'world'); // also works
 ```
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
@@ -746,7 +746,7 @@ export class Greet extends React.Component<Props> {
     const { name } = this.props;
     return <div>Hello ${name.toUpperCase()}!</div>;
   }
-  static defaultProps = { name: "world" };
+  static defaultProps = { name: 'world' };
 }
 
 // Type-checks! No type assertions needed!
@@ -781,7 +781,7 @@ let service2: IDataService2;
 const response2 = service2.getData();
 // response2.a.b.c.d; // COMPILE TIME ERROR if you do this
 
-if (typeof response === "string") {
+if (typeof response === 'string') {
   console.log(response.toUpperCase()); // `response` now has type 'string'
 }
 ```
@@ -849,7 +849,7 @@ Attaching properties to functions like this "just works" now:
 export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-  name: "swyx"
+  name: 'swyx'
 };
 ```
 
@@ -935,14 +935,14 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 }
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Commenting Components
 
 Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
-import React from "react";
+import React from 'react';
 
 interface MyProps {
   /** Description of prop "label".
@@ -954,12 +954,12 @@ interface MyProps {
 /**
  * General component description in JSDoc format. Markdown is *supported*.
  */
-export default function MyComponent({ label = "foobar" }: MyProps) {
+export default function MyComponent({ label = 'foobar' }: MyProps) {
   return <div>Hello world {label}</div>;
 }
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Design System Development
 
@@ -967,7 +967,7 @@ I do like [Docz](https://docz.site/) which takes basically [1 line of config](ht
 
 For developing with Storybook, read the docs I wrote over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Migrating From Flow
 
@@ -986,7 +986,7 @@ Useful libraries:
 
 If you have specific advice in this area, please file a PR!
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Prettier
 
@@ -1027,7 +1027,7 @@ This is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files)
 
 ## Linting
 
-> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/sw-yx/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint.
+> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint.
 
 > ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint.
 
@@ -1137,7 +1137,7 @@ So create a `.d.ts` file anywhere in your project with the module definition:
 
 ```ts
 // de-indent.d.ts
-declare module "de-indent" {
+declare module 'de-indent' {
   function deindent(): void;
   export = deindent; // default export
 }
@@ -1147,7 +1147,7 @@ declare module "de-indent" {
 
 <summary>Further Discussion</summary>
 
-Any other tips? Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/sw-yx/react-typescript-cheatsheet/issues/8). We have more discussion and examples [in our issue here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/12).
+Any other tips? Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/8). We have more discussion and examples [in our issue here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12).
 
 </details>
 
@@ -1185,7 +1185,7 @@ Not Commonly Used but Good to know
 - `ComponentPropsWithoutRef` - props of a component without its `ref` prop
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
-[@Ferdaber's note](https://github.com/sw-yx/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
+[@Ferdaber's note](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
 
 **Namespace: JSX**
 
@@ -1216,4 +1216,4 @@ To be written
 
 # My question isn't answered here!
 
-- [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+- [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).

@@ -1,7 +1,7 @@
 <div align="center">
 <h1>React+TypeScript Cheatsheets</h1>
 
-<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+<a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/81">
   <img
     height="90"
     width="90"
@@ -13,13 +13,13 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
-[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
-[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
-[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
-[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+[Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
 </div>
 
@@ -27,7 +27,7 @@
 
 <div align="center">
 
-:wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@ferdaber](https://twitter.com/ferdaber), [@eps1lon](https://twitter.com/sebsilbermann) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! If you see anything wrong or missing, please [file an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)! :+1:
+:wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@ferdaber](https://twitter.com/ferdaber), [@eps1lon](https://twitter.com/sebsilbermann) and [@IslamAttrash](https://twitter.com/IslamAttrash), we're so happy you want to try out TypeScript with React! If you see anything wrong or missing, please [file an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)! :+1:
 
 </div>
 
@@ -119,7 +119,7 @@ This guide will always assume you are starting with the latest TypeScript versio
 2. [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 
 - In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/))
-- There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/sw-yx/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
+- There are also many React + TypeScript boilerplates, please see [our Resources list below](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#recommended-react--typescript-codebases-to-learn-from).
 
 ## Import React
 
@@ -141,7 +141,7 @@ import ReactDOM from "react-dom";
 
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
-Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+Please PR or [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!
 
 </details>
 
@@ -170,7 +170,7 @@ const App: React.FC<{ message: string }> = ({ message }) => (
 
 Some differences from the "normal function" version:
 
-- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - **However**, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/sw-yx/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
+- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - **However**, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
 
 - It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might considered better style to be explicit about components that consume `children`, anyway.
 
@@ -217,7 +217,7 @@ Unfortunately just annotating the function type will not help so if you really n
 const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 ```
 
-[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
+[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
 
 </details>
 
@@ -402,7 +402,7 @@ Example React Hooks + TypeScript Libraries:
 - https://github.com/palmerhq/the-platform
 - https://github.com/sw-yx/hooks
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Class Components
 
@@ -440,7 +440,7 @@ It isn't strictly necessary to annotate the `state` class property, but it allow
 
 This is because they work in two different ways, the 2nd generic type parameter will allow `this.setState()` to work correctly, because that method comes from the base class, but initializing `state` inside the component overrides the base implementation so you have to make sure that you tell the compiler that you're not actually doing anything different.
 
-[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
+[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
 
 </details>
 
@@ -503,11 +503,11 @@ class App extends React.Component<{
 }
 ```
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Typing defaultProps
 
-For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/sw-yx/react-typescript-cheatsheet/issues/61). Just type your props like normal, except don't use `React.FC`.
+For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/61). Just type your props like normal, except don't use `React.FC`.
 
 ```tsx
 // ////////////////
@@ -524,7 +524,7 @@ const Greet = (props: Props) => {
 Greet.defaultProps = defaultProps;
 ```
 
-For **Class components**, there are [a couple ways to do it](https://github.com/sw-yx/react-typescript-cheatsheet/pull/103#issuecomment-481061483)(including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
+For **Class components**, there are [a couple ways to do it](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/103#issuecomment-481061483)(including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
 
 ```tsx
 type GreetProps = typeof Greet.defaultProps & {
@@ -549,7 +549,7 @@ You can check the discussions here:
 
 - https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
 - https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
-- https://github.com/sw-yx/react-typescript-cheatsheet/issues/87
+- https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87
 
 This is just the current state and may be fixed in future.
 
@@ -589,11 +589,11 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 
 The problem with this approach is it causes complex issues with the type inference working with `JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
 
-[See commentary by @ferdaber here](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57).
+[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
 
 </details>
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Types or Interfaces?
 
@@ -615,7 +615,7 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy graphic:
 
 </details>
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Basic Prop Types Examples
 
@@ -675,7 +675,7 @@ export declare interface AppProps {
 <details>
  <summary><b>JSX.Element vs React.ReactNode?</b></summary>
 
-Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
+Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
 
 - `JSX.Element` -> Return value of `React.createElement`
 - `React.ReactNode` -> Return value of a component
@@ -683,7 +683,7 @@ Quote [@ferdaber](https://github.com/sw-yx/react-typescript-cheatsheet/issues/57
 
 [More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/129)
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Forms and Events
 
@@ -740,7 +740,7 @@ Instead of typing the arguments and return values with `React.FormEvent<>` and `
 
 <summary><b>Why two ways to do the same thing?</b></summary>
 
-The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... _artisanally hand-rolled_. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/sw-yx/react-typescript-cheatsheet/pull/24).
+The first method uses an inferred method signature `(e: React.FormEvent<HTMLInputElement>): void` and the second method enforces a type of the delegate provided by `@types/react`. So `React.ChangeEventHandler<>` is simply a "blessed" typing by `@types/react`, whereas you can think of the inferred method as more... _artisanally hand-rolled_. Either way it's a good pattern to know. [See our Github PR for more](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/24).
 
 </details>
 
@@ -861,7 +861,7 @@ A [useReducer-based version](https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a497
 
 <summary><b>Mutable Context Using a Class component wrapper</b></summary>
 
-_Contributed by: [@jpavon](https://github.com/sw-yx/react-typescript-cheatsheet/pull/13)_
+_Contributed by: [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/13)_
 
 ```tsx
 interface ProviderState {
@@ -906,11 +906,11 @@ const Consumer = Context.Consumer;
 
 </details>
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## forwardRef/createRef
 
-Check the [Hooks section](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/README.md) for `useRef`.
+Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md) for `useRef`.
 
 `createRef`:
 
@@ -939,7 +939,7 @@ If you are grabbing the props of a component that forwards refs, use [`Component
 
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Portals
 
@@ -978,13 +978,13 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 
 _Not written yet._
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Concurrent React/React Suspense
 
 _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
 
-[Something to add? File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 # Basic Troubleshooting Handbook: Types
 
@@ -1063,7 +1063,7 @@ class MyComponent extends React.Component<{
 
 You can also use a `!` character to assert that something is not undefined, but this is not encouraged.
 
-_Something to add? [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!_
+_Something to add? [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!_
 
 ## Enum Types
 
@@ -1373,7 +1373,7 @@ so on and so forth. there are any number of things you can disable, usually you 
 
 <summary>Explanation</summary>
 
-This is not yet written. Please PR or [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new) with your suggestions!
+This is not yet written. Please PR or [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!
 
 </details>
 
@@ -1500,7 +1500,7 @@ React Boilerplates:
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
-React Native Boilerplates: _contributed by [@spoeck](https://github.com/sw-yx/react-typescript-cheatsheet/pull/20)_
+React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/20)_
 
 - https://github.com/GeekyAnts/react-native-seed
 - https://github.com/lopezjurip/ReactNativeTS
@@ -1534,7 +1534,7 @@ React Native Boilerplates: _contributed by [@spoeck](https://github.com/sw-yx/re
   - [Lyft's React-To-Typescript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
   - [Gustav Wengel's blogpost - converting a React codebase to Typescript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React Typescript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
-- [You?](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+- [You?](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 # Recommended React + TypeScript talks
 
@@ -1554,7 +1554,7 @@ It is worth mentioning some resources to help you get started:
 # My question isn't answered here!
 
 - Check out [the Advanced Cheatsheet](/ADVANCED.md)
-- [File an issue](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new).
+- [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Contributors
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+<a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/81">
   <img
     height="90"
     width="90"
@@ -12,13 +12,13 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
-[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
-[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
-[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
-[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+[Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
 </div>
 
@@ -67,15 +67,15 @@ const TextBlock = Comment;
 type CommentType = { text: string; id: number };
 const comments: CommentType[] = [
   {
-    text: "comment1",
+    text: 'comment1',
     id: 1
   },
   {
-    text: "comment2",
+    text: 'comment2',
     id: 2
   }
 ];
-const blog = "blogpost";
+const blog = 'blogpost';
 
 /** mock data source */
 const DataSource = {
@@ -142,12 +142,12 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
   // props is Readonly because it's readonly inside of the class
   selectData: (
     dataSource: typeof DataSource,
-    props: Readonly<JSX.LibraryManagedAttributes<C, Omit<P, "data">>>
+    props: Readonly<JSX.LibraryManagedAttributes<C, Omit<P, 'data'>>>
   ) => T
 ) {
   // the magic is here: JSX.LibraryManagedAttributes will take the type of WrapedComponent and resolve its default props
   // against the props of WithData, which is just the original P type with 'data' removed from its requirements
-  type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
+  type Props = JSX.LibraryManagedAttributes<C, Omit<P, 'data'>>;
   type State = {
     data: T;
   };
@@ -187,7 +187,7 @@ export const CommentListWithSubscription = withSubscription(
 
 export const BlogPostWithSubscription = withSubscription(
   BlogPost,
-  (DataSource: DataType, props: Omit<BlogPostProps, "data">) =>
+  (DataSource: DataType, props: Omit<BlogPostProps, 'data'>) =>
     DataSource.getBlogPost(props.id)
 );
 ```
@@ -202,8 +202,8 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
     componentWillReceiveProps(
       nextProps: React.ComponentProps<typeof WrappedComponent>
     ) {
-      console.log("Current props: ", this.props);
-      console.log("Next props: ", nextProps);
+      console.log('Current props: ', this.props);
+      console.log('Next props: ', nextProps);
     }
     render() {
       // Wraps the input component in a container, without mutating it. Good!
@@ -239,11 +239,11 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type CommentType = { text: string; id: number };
 const comments: CommentType[] = [
   {
-    text: "comment1",
+    text: 'comment1',
     id: 1
   },
   {
-    text: "comment2",
+    text: 'comment2',
     id: 2
   }
 ];
@@ -284,7 +284,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
   return function<T, P extends WithSubscriptionProps<T>, C>(
     WrappedComponent: React.ComponentType<T>
   ) {
-    type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
+    type Props = JSX.LibraryManagedAttributes<C, Omit<P, 'data'>>;
     // Creating the inner component. The calculated Props type here is the where the magic happens.
     return class ComponentWithTheme extends React.Component<Props> {
       public render() {
@@ -327,7 +327,7 @@ function withSubscription<
 }
 
 function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
-  return WrappedComponent.displayName || WrappedComponent.name || "Component";
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 ```
 
@@ -356,7 +356,7 @@ function Dog({name, owner}: DogProps) {
 And we have a `withOwner` HOC that injects the `owner`:
 
 ```tsx
-const OwnedDog = withOwner("swyx")(Dog);
+const OwnedDog = withOwner('swyx')(Dog);
 ```
 
 We want to type `withOwner` such that it will pass through the types of any component like `Dog`, into the type of `OwnedDog`, minus the `owner` property it injects:
@@ -377,13 +377,13 @@ type CatProps = {
 function Cat({ lives, owner }: CatProps) {
   return (
     <div>
-      {" "}
+      {' '}
       Meow: {lives}, Owner: {owner}
     </div>
   );
 }
 
-const OwnedCat = withOwner("swyx")(Cat);
+const OwnedCat = withOwner('swyx')(Cat);
 
 <Cat lives={9} owner="swyx" />; // this should be fine
 <OwnedCat lives={9} owner="swyx" />; // this should have a typeError
@@ -404,7 +404,7 @@ function withOwner(owner: string) {
   return function<T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function(props: Omit<T, "owner">): React.ReactNode {
+    return function(props: Omit<T, 'owner'>): React.ReactNode {
       return <Component owner={owner} {...props} />;
     };
   };

@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://github.com/sw-yx/react-typescript-cheatsheet/issues/81">
+<a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/81">
   <img
     height="90"
     width="90"
@@ -12,13 +12,13 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Basic**](https://github.com/sw-yx/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
-[**Advanced**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
-[**Migrating**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/HOC.md) |
+[**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
+[**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
-[Contribute!](https://github.com/sw-yx/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
-[Ask!](https://github.com/sw-yx/react-typescript-cheatsheet/issues/new/choose)
+[Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
+[Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
 </div>
 
@@ -46,7 +46,7 @@ Read [TypeScript's official Guide for migrating from JS](https://www.typescriptl
   - use the loosest, bare minimum settings to start with
 - Level 2: Strict TypeScript
   - use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
-  - use `declare` keyword for ambient declarations - see [declaration merging](https://github.com/sw-yx/react-typescript-cheatsheet#troubleshooting-handbook-bugs-in-official-typings) to patch library declarations inline
+  - use `declare` keyword for ambient declarations - see [declaration merging](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#troubleshooting-handbook-bugs-in-official-typings) to patch library declarations inline
 
 Misc tips/approaches successful companies have taken
 
@@ -193,7 +193,7 @@ Old content that is possibly out of date
 
 ## From Flow
 
-- Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/sw-yx/react-typescript-cheatsheet/pull/79#issuecomment-458227322) at TravelRepublic)
+- Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/79#issuecomment-458227322) at TravelRepublic)
 - [Incremental Migration to TypeScript on a Flowtype codebase][entria] at Entria
 - [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
 - [Expo's migration (issue)](https://github.com/expo/expo/issues/2164)
@@ -218,10 +218,10 @@ Old content that is possibly out of date
 
 ## Links
 
-[hootsuite]: https://medium.com/hootsuite-engineering/thoughts-on-migrating-to-typescript-5e1a04288202 "Thoughts on migrating to TypeScript"
-[clayallsop]: https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88 "Incrementally Migrating JavaScript to TypeScript"
-[pleo]: https://medium.com/pleo/migrating-a-babel-project-to-typescript-af6cd0b451f4 "Migrating a Babel project to TypeScript"
-[mstsreactconversionguide]: https://github.com/Microsoft/TypeScript-React-Conversion-Guide "TypeScript React Conversion Guide"
-[entria]: https://medium.com/entria/incremental-migration-to-typescript-on-a-flowtype-codebase-515f6490d92d "Incremental Migration to TypeScript on a Flowtype codebase"
-[coherentlabs]: https://hashnode.com/post/how-we-migrated-a-200k-loc-project-to-typescript-and-survived-to-tell-the-story-ciyzhikcc0001y253w00n11yb "How we migrated a 200K+ LOC project to TypeScript and survived to tell the story"
-[tiny]: https://go.tiny.cloud/blog/benefits-of-gradual-strong-typing-in-javascript/ "Benefits of gradual strong typing in JavaScript"
+[hootsuite]: https://medium.com/hootsuite-engineering/thoughts-on-migrating-to-typescript-5e1a04288202 'Thoughts on migrating to TypeScript'
+[clayallsop]: https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88 'Incrementally Migrating JavaScript to TypeScript'
+[pleo]: https://medium.com/pleo/migrating-a-babel-project-to-typescript-af6cd0b451f4 'Migrating a Babel project to TypeScript'
+[mstsreactconversionguide]: https://github.com/Microsoft/TypeScript-React-Conversion-Guide 'TypeScript React Conversion Guide'
+[entria]: https://medium.com/entria/incremental-migration-to-typescript-on-a-flowtype-codebase-515f6490d92d 'Incremental Migration to TypeScript on a Flowtype codebase'
+[coherentlabs]: https://hashnode.com/post/how-we-migrated-a-200k-loc-project-to-typescript-and-survived-to-tell-the-story-ciyzhikcc0001y253w00n11yb 'How we migrated a 200K+ LOC project to TypeScript and survived to tell the story'
+[tiny]: https://go.tiny.cloud/blog/benefits-of-gradual-strong-typing-in-javascript/ 'Benefits of gradual strong typing in JavaScript'
