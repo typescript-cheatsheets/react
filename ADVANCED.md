@@ -137,7 +137,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 ) {
   // Try to create a nice displayName for React Dev Tools.
   const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    WrappedComponent.displayName || WrappedComponent.name || "Component";
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
   return class ComponentWithTheme extends React.Component<
@@ -226,14 +226,14 @@ Components, and JSX in general, are analogous to functions. When a component can
 A very common use case for this is to render something as either a button or an anchor, based on if it receives a `href` attribute.
 
 ```tsx
-type ButtonProps = JSX.IntrinsicElements['button'];
-type AnchorProps = JSX.IntrinsicElements['a'];
+type ButtonProps = JSX.IntrinsicElements["button"];
+type AnchorProps = JSX.IntrinsicElements["a"];
 
 // optionally use a custom type guard
 function isPropsForAnchorElement(
   props: ButtonProps | AnchorProps
 ): props is AnchorProps {
-  return 'href' in props;
+  return "href" in props;
 }
 
 function Clickable(props: ButtonProps | AnchorProps) {
@@ -248,10 +248,10 @@ function Clickable(props: ButtonProps | AnchorProps) {
 They don't even need to be completely different props, as long as they have at least one difference in properties:
 
 ```tsx
-type LinkProps = Omit<JSX.IntrinsicElements['a'], 'href'> & { to?: string };
+type LinkProps = Omit<JSX.IntrinsicElements["a"], "href"> & { to?: string };
 
 function RouterLink(props: LinkProps | AnchorProps) {
-  if ('to' in props) {
+  if ("to" in props) {
     return <a {...props} />;
   } else {
     return <Link {...props} />;
@@ -333,7 +333,7 @@ type UserTextEvent = { value: string; target: HTMLInputElement };
 type UserMouseEvent = { value: [number, number]; target: HTMLElement };
 type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (typeof event.value === 'string') {
+  if (typeof event.value === "string") {
     event.value; // string
     event.target; // HTMLInputElement | HTMLElement (!!!!)
     return;
@@ -347,18 +347,18 @@ Even though we have narrowed based on `event.value`, the logic doesn't filter up
 
 ```ts
 type UserTextEvent = {
-  type: 'TextEvent';
+  type: "TextEvent";
   value: string;
   target: HTMLInputElement;
 };
 type UserMouseEvent = {
-  type: 'MouseEvent';
+  type: "MouseEvent";
   value: [number, number];
   target: HTMLElement;
 };
 type UserEvent = UserTextEvent | UserMouseEvent;
 function handle(event: UserEvent) {
-  if (event.type === 'TextEvent') {
+  if (event.type === "TextEvent") {
     event.value; // string
     event.target; // HTMLInputElement
     return;
@@ -372,7 +372,7 @@ To streamline this you may also combine this with the concept of **User-Defined 
 
 ```ts
 function isString(a: unknown): a is string {
-  return typeof a === 'string';
+  return typeof a === "string";
 }
 ```
 
@@ -387,7 +387,7 @@ type Props1 = { foo: string };
 type Props2 = { bar: string };
 
 function MyComponent(props: Props1 | Props2) {
-  if ('foo' in props) {
+  if ("foo" in props) {
     // props.bar // error
     return <div>{props.foo}</div>;
   } else {
@@ -413,9 +413,9 @@ type OneOrAnother<T1, T2> =
 
 type Props = OneOrAnother<{ a: string; b: string }, {}>;
 
-const a: Props = { a: 'a' }; // error
-const b: Props = { b: 'b' }; // error
-const ab: Props = { a: 'a', b: 'b' }; // ok
+const a: Props = { a: "a" }; // error
+const b: Props = { b: "b" }; // error
+const ab: Props = { a: "a", b: "b" }; // ok
 ```
 
 Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
@@ -429,11 +429,11 @@ You want to allow `expanded` to be passed only if `truncate` is also passed, bec
 You can do this by function overloads:
 
 ```tsx
-import React from 'react';
+import React from "react";
 
 type CommonProps = {
   children: React.ReactNode;
-  as: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
 type NoTruncateProps = CommonProps & {
@@ -455,7 +455,7 @@ function Text(props: NoTruncateProps | TruncateProps) {
   if (isTruncateProps(props)) {
     const { children, as: Tag, truncate, expanded, ...otherProps } = props;
 
-    const classNames = truncate ? '.truncate' : '';
+    const classNames = truncate ? ".truncate" : "";
 
     return (
       <Tag className={classNames} aria-expanded={!!expanded} {...otherProps}>
@@ -470,7 +470,7 @@ function Text(props: NoTruncateProps | TruncateProps) {
 }
 
 Text.defaultProps = {
-  as: 'span'
+  as: "span"
 };
 ```
 
@@ -505,7 +505,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
 export const Checkbox = (
-  props: Props & Omit<React.HTMLProps<HTMLInputElement>, 'label'>
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, "label">
 ) => {
   const { label } = props;
   return (
@@ -533,7 +533,7 @@ so you can either export the props type as part of the module or extract them (e
 The advantage of extracting the prop types is that you won't need to export everything, and a refactor of the source of truth component will propagate to all consuming components.
 
 ```ts
-import { ComponentProps, JSXElementConstructor } from 'react';
+import { ComponentProps, JSXElementConstructor } from "react";
 
 // goes one step further and resolves with propTypes and defaultProps properties
 type ApparentComponentProps<
@@ -560,7 +560,7 @@ export function MyInnerComponent(props: {
 // my-consuming-component.tsx
 export function MyConsumingComponent() {
   // event and moreArgs are contextually typed along with the return value
-  const theHandler: Props<typeof MyInnerComponent>['onSomeEvent'] = (
+  const theHandler: Props<typeof MyInnerComponent>["onSomeEvent"] = (
     event,
     moreArgs
   ) => {};
@@ -584,8 +584,8 @@ class DateIsInFutureError extends RangeError {}
  */
 function parse(date: string) {
   if (!isValid(date))
-    throw new InvalidDateFormatError('not a valid date format');
-  if (isInFuture(date)) throw new DateIsInFutureError('date is in the future');
+    throw new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) throw new DateIsInFutureError("date is in the future");
   // ...
 }
 
@@ -593,9 +593,9 @@ try {
   // call parse(date) somewhere
 } catch (e) {
   if (e instanceof InvalidDateFormatError) {
-    console.error('invalid date format', e);
+    console.error("invalid date format", e);
   } else if (e instanceof DateIsInFutureError) {
-    console.warn('date is in future', e);
+    console.warn("date is in future", e);
   } else {
     throw e;
   }
@@ -609,24 +609,24 @@ function parse(
   date: string
 ): Date | InvalidDateFormatError | DateIsInFutureError {
   if (!isValid(date))
-    return new InvalidDateFormatError('not a valid date format');
-  if (isInFuture(date)) return new DateIsInFutureError('date is in the future');
+    return new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) return new DateIsInFutureError("date is in the future");
   // ...
 }
 
 // now consumer *has* to handle the errors
-let result = parse('mydate');
+let result = parse("mydate");
 if (result instanceof InvalidDateFormatError) {
-  console.error('invalid date format', result.message);
+  console.error("invalid date format", result.message);
 } else if (result instanceof DateIsInFutureError) {
-  console.warn('date is in future', result.message);
+  console.warn("date is in future", result.message);
 } else {
   /// use result safely
 }
 
 // alternately you can just handle all errors
 if (result instanceof Error) {
-  console.error('error', result);
+  console.error("error", result);
 } else {
   /// use result safely
 }
@@ -696,8 +696,8 @@ export interface InputFormProps {
 
 export const InputForm = styledInput<InputFormProps>`
     color:
-        ${({ themeName }) => (themeName === 'dark' ? 'black' : 'white')};
-    border-color: ${({ foo }) => (foo ? 'red' : 'black')};
+        ${({ themeName }) => (themeName === "dark" ? "black" : "white")};
+    border-color: ${({ foo }) => (foo ? "red" : "black")};
 `;
 ```
 
@@ -730,8 +730,8 @@ function foo(...rest: string[]) {
   // ...
 }
 
-foo('hello'); // works
-foo('hello', 'world'); // also works
+foo("hello"); // works
+foo("hello", "world"); // also works
 ```
 
 2. Support for `propTypes` and `static defaultProps` in JSX using `LibraryManagedAttributes`:
@@ -746,7 +746,7 @@ export class Greet extends React.Component<Props> {
     const { name } = this.props;
     return <div>Hello ${name.toUpperCase()}!</div>;
   }
-  static defaultProps = { name: 'world' };
+  static defaultProps = { name: "world" };
 }
 
 // Type-checks! No type assertions needed!
@@ -781,7 +781,7 @@ let service2: IDataService2;
 const response2 = service2.getData();
 // response2.a.b.c.d; // COMPILE TIME ERROR if you do this
 
-if (typeof response === 'string') {
+if (typeof response === "string") {
   console.log(response.toUpperCase()); // `response` now has type 'string'
 }
 ```
@@ -849,7 +849,7 @@ Attaching properties to functions like this "just works" now:
 export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-  name: 'swyx'
+  name: "swyx"
 };
 ```
 
@@ -942,7 +942,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
-import React from 'react';
+import React from "react";
 
 interface MyProps {
   /** Description of prop "label".
@@ -954,7 +954,7 @@ interface MyProps {
 /**
  * General component description in JSDoc format. Markdown is *supported*.
  */
-export default function MyComponent({ label = 'foobar' }: MyProps) {
+export default function MyComponent({ label = "foobar" }: MyProps) {
   return <div>Hello world {label}</div>;
 }
 ```
@@ -1137,7 +1137,7 @@ So create a `.d.ts` file anywhere in your project with the module definition:
 
 ```ts
 // de-indent.d.ts
-declare module 'de-indent' {
+declare module "de-indent" {
   function deindent(): void;
   export = deindent; // default export
 }
