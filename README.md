@@ -223,7 +223,7 @@ const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 
 ## Hooks
 
-Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L765-L973).
+Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L800-L1031).
 
 **useState**
 
@@ -935,7 +935,7 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ));
 ```
 
-If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L735).
+If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L770).
 
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
@@ -1293,7 +1293,7 @@ const AlertButton: React.FC<AlertButtonProps> = props => (
 );
 ```
 
-You may also use [`ComponentPropsWithoutRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L739) (instead of ComponentProps) and [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5565fe5e46e329a5ee02ddf739abe11bf16f278d/types/react/index.d.ts#L735) (if your component specifically forwards refs)
+You may also use [`ComponentPropsWithoutRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L774) (instead of ComponentProps) and [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L770) (if your component specifically forwards refs)
 
 - Grabbing the return type of a function: use `ReturnType`:
 
@@ -1339,7 +1339,7 @@ Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 a
 
 # Troubleshooting Handbook: Utilities
 
-these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1439):
+these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
 
 - `ConstructorParameters`: a tuple of class constructor's parameter types
 - `Exclude`: exclude a type from another type

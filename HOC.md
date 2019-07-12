@@ -221,7 +221,7 @@ No TypeScript specific advice needed here.
 
 HOCs can take the form of Functions that return Higher Order Components that return Components.
 
-`connect` from `react-redux` has a number of overloads you can take inspiration [from in the source](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-redux/v5/index.d.ts#L77).
+`connect` from `react-redux` has a number of overloads you can take inspiration [from in the source](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bc0c933415466b34d2de5790f7cd6418f676801e/types/react-redux/v5/index.d.ts#L77).
 
 Here we build our own mini `connect` to understand HOCs:
 
