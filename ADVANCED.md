@@ -404,6 +404,8 @@ const UsageComponent: React.FC = () => (
 );
 ```
 
+Further reading: [how to ban passing `{}` if you have a `NoFields` type.](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable)
+
 ## Props: Must Pass Both
 
 ```tsx
