@@ -988,6 +988,8 @@ _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more o
 
 # Basic Troubleshooting Handbook: Types
 
+> ⚠️ Have you read [the TypeScript FAQ](https://github.com/microsoft/TypeScript/wiki/FAQ)?) Your answer might be there!
+
 Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patient - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
 Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
@@ -1091,13 +1093,7 @@ A simpler alternative to enum is just declaring a bunch of strings with union:
 export declare type Position = "left" | "right" | "top" | "bottom";
 ```
 
-<details>
-
-<summary>Brief Explanation</summary>
-
 This is handy because TypeScript will throw errors when you mistype a string for your props.
-
-</details>
 
 ## Type Assertion
 
