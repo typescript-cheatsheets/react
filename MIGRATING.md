@@ -112,11 +112,16 @@ Problems to be aware of:
 
 ## From JS
 
+### Automated JS to TS Conversion
+
+- [TypeStat](https://github.com/JoshuaKGoldberg/TypeStat) ([used by Codecademy](https://mobile.twitter.com/JoshuaKGoldberg/status/1159090281314160640))
+- [TypeWiz](https://github.com/urish/typewiz)
+
+### Manual JS to TS Conversion
+
 the "Just Renaming" strategy
 
 - OSX/Linux: `find src -name "*.js" -exec sh -c 'mv"$0" "${0%.js}.tsx"' {} \;`
-
-Also try using [TypeWiz](https://github.com/urish/typewiz) to add types.
 
 You can either load typescript files with webpack, or use the `tsc` compiler to compile your TS files to JS side by side. The basic `tsconfig.json` is:
 
