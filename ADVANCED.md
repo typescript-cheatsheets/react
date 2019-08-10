@@ -34,7 +34,7 @@
 
 **Creating React + TypeScript Libraries**
 
-The best tool for creating React + TS libraries right now is [`tsdx`](https://github.com/palmerhq/tsdx). Run `npx tsdx create` and select the "react" option. You can view [the React User Guide](https://github.com/palmerhq/tsdx/issues/5) for a few tips on React+TS library best practices and optimizations for production. 
+The best tool for creating React + TS libraries right now is [`tsdx`](https://github.com/palmerhq/tsdx). Run `npx tsdx create` and select the "react" option. You can view [the React User Guide](https://github.com/palmerhq/tsdx/issues/5) for a few tips on React+TS library best practices and optimizations for production.
 
 - Be sure to also check [`basarat`'s guide](https://basarat.gitbooks.io/typescript/content/docs/quick/library.html) for library tsconfig settings.
 - From the Angular world, check out https://github.com/bitjson/typescript-starter
@@ -153,7 +153,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
       const themeProps = getThemePropsFromSomeWhere();
 
       // this.props comes afterwards so the can override the default ones.
-      return <WrappedComponent {...themeProps} {...this.props as T} />;
+      return <WrappedComponent {...themeProps} {...(this.props as T)} />;
     }
   };
 }
@@ -170,7 +170,7 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
   injector: Pick<TProps, TInjectedKeys>
 ) {
   return function Injected(props: Omit<TProps, TInjectedKeys>) {
-    return <Component {...props as TProps} {...injector} />;
+    return <Component {...(props as TProps)} {...injector} />;
   };
 }
 ```
