@@ -132,6 +132,63 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
 [Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) for this
 
+## Generic Components
+
+Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State.
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+function List<T>(props: Props<T>) {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([])
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+}
+```
+
+You can then use them and get nice type safety through type inference:
+
+```tsx
+ReactDOM.render(
+  <List
+    items={['a','b']}  // type of 'string' inferred
+    renderItem={item => (
+      <li key={item}>
+        {item.toPrecision(3)} // Error: Property 'toPrecision' does not exist on type 'string'.
+      </li>
+    )}
+  />,
+  document.body,
+)
+```
+
+As of [TS 2.9](#typescript-29), you can also supply the type parameter in your JSX to opt out of type inference:
+
+```tsx
+ReactDOM.render(
+  <List<number>
+    items={['a','b']} // Error: Type 'string' is not assignable to type 'number'.
+    renderItem={item => (
+      <li key={item}>
+        {item.toPrecision(3)}
+      </li>
+    )}
+  />,
+  document.body,
+)
+```
+
+You can do this for [class components](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71) too (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326))
+
+
 ## Typing a Component that Accepts Different Props
 
 Components, and JSX in general, are analogous to functions. When a component can render differently based on their props, it's similar to how a function can be overloaded to have multiple call signatures. In the same way, you can overload a function component's call signature to list all of its different "versions".
