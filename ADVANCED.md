@@ -143,7 +143,7 @@ interface Props<T> {
 }
 function List<T>(props: Props<T>) {
   const { items, renderItem } = props;
-  const [state, setState] = React.useState<T[]>([])
+  const [state, setState] = React.useState<T[]>([]);
   return (
     <div>
       {items.map(renderItem)}
@@ -159,15 +159,16 @@ You can then use them and get nice type safety through type inference:
 ```tsx
 ReactDOM.render(
   <List
-    items={['a','b']}  // type of 'string' inferred
+    items={["a", "b"]} // type of 'string' inferred
     renderItem={item => (
       <li key={item}>
-        {item.toPrecision(3)} // Error: Property 'toPrecision' does not exist on type 'string'.
+        {item.toPrecision(3)} // Error: Property 'toPrecision' does not exist on
+        type 'string'.
       </li>
     )}
   />,
-  document.body,
-)
+  document.body
+);
 ```
 
 As of [TS 2.9](#typescript-29), you can also supply the type parameter in your JSX to opt out of type inference:
@@ -175,19 +176,14 @@ As of [TS 2.9](#typescript-29), you can also supply the type parameter in your J
 ```tsx
 ReactDOM.render(
   <List<number>
-    items={['a','b']} // Error: Type 'string' is not assignable to type 'number'.
-    renderItem={item => (
-      <li key={item}>
-        {item.toPrecision(3)}
-      </li>
-    )}
+    items={["a", "b"]} // Error: Type 'string' is not assignable to type 'number'.
+    renderItem={item => <li key={item}>{item.toPrecision(3)}</li>}
   />,
-  document.body,
-)
+  document.body
+);
 ```
 
 You can do this for [class components](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71) too (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326))
-
 
 ## Typing a Component that Accepts Different Props
 
