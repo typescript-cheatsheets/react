@@ -220,6 +220,7 @@ Old content that is possibly out of date
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)
 - [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
 - [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d)
+- [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
 
 ## Links
 
