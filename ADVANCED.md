@@ -154,7 +154,30 @@ function List<T>(props: Props<T>) {
 }
 ```
 
-You can then use them and get nice type safety through type inference:
+The same using fat arrow function style:
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+const List<T> = <T extends {}>(props: Props<T>) => {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([]);
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+}
+```
+
+Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
+
+You can then use the generic components and get nice type safety through type inference:
 
 ```tsx
 ReactDOM.render(
@@ -184,6 +207,75 @@ ReactDOM.render(
 ```
 
 You can do this for [class components](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71) too (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326))
+
+### Generic components with children
+
+`children` is usually not defined as a part of the props type. Unless `children` are explicitly defined as a part of the `props` type, an attempt to use `props.children` in JSX or in the function body will fail:
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+}
+
+/* Property 'children' does not exist on type 'WrapperProps<T>'. */
+const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+
+/*
+Type '{ children: string; item: string; renderItem: (item: string) => string; }' is not assignable to type 'IntrinsicAttributes & WrapperProps<string>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & WrapperProps<string>'.
+*/
+
+const wrapper = (
+  <Wrapper item="test" renderItem={item => item}>
+    {test}
+  </Wrapper>
+);
+```
+
+To work around that, either add `children` to the `WrapperProps` definition (possibly narrowing down its type, as needed):
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+  children: string; // The component will only accept a single string child
+}
+
+const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+```
+
+or wrap the type of the props in `React.PropsWithChildren` (this is what `React.FC<>` does):
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+}
+
+const Wrapper = <T extends {}>(props: React.PropsWithChildren<WrapperProps<T>>) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+```
 
 ## Typing a Component that Accepts Different Props
 
