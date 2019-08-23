@@ -162,7 +162,7 @@ interface Props<T> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-const List<T> = <T extends {}>(props: Props<T>) => {
+const List = <T extends {}>(props: Props<T>) => {
   const { items, renderItem } = props;
   const [state, setState] = React.useState<T[]>([]);
   return (
