@@ -172,7 +172,7 @@ const List = <T extends {}>(props: Props<T>) => {
       {JSON.stringify(state, null, 2)}
     </div>
   );
-}
+};
 ```
 
 Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
@@ -267,7 +267,9 @@ interface WrapperProps<T> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-const Wrapper = <T extends {}>(props: React.PropsWithChildren<WrapperProps<T>>) => {
+const Wrapper = <T extends {}>(
+  props: React.PropsWithChildren<WrapperProps<T>>
+) => {
   return (
     <div>
       {props.renderItem(props.item)}
