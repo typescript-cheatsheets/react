@@ -1548,6 +1548,7 @@ It is worth mentioning some resources to help you get started:
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced Typescript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
 
 # Example App
+
 - [React TypeScript Todo Example 2019 Mid](https://github.com/ryota-murakami/react-typescript-todo-example-2019)
 
 # My question isn't answered here!
