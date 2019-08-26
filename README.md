@@ -796,7 +796,7 @@ function createCtx<A>() {
     if (!c) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
-  return [useCtx, ctx.Provider] as const // make TypeScript infer a tuple, not an array of union types
+  return [useCtx, ctx.Provider] as const; // make TypeScript infer a tuple, not an array of union types
 }
 
 // usage
