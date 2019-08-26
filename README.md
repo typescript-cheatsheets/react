@@ -784,7 +784,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 
 ## Context
 
-Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with no `defaultValue`, yet no need to check for `undefined`:
+Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
 
 ```tsx
 // create context with no upfront defaultValue
@@ -796,12 +796,12 @@ function createCtx<A>() {
     if (!c) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
-  return [useCtx, ctx.Provider] as [() => A, typeof ctx.Provider];
+  return [useCtx, ctx.Provider] as const // make TypeScript infer a tuple, not an array of union types
 }
 
 // usage
 
-export const [useCtx, SettingProvider] = createCtx<string>(); // no need to specify value upfront!
+export const [useCtx, SettingProvider] = createCtx<string>(); // specify type, but no need to specify value upfront!
 export function App() {
   const key = useCustomHook("key"); // get a value from a hook, must be in a component
   return (
@@ -830,7 +830,7 @@ export function createCtx<A>(defaultValue: A) {
     const [state, update] = React.useState(defaultValue);
     return <ctx.Provider value={{ state, update }} {...props} />;
   }
-  return [ctx, Provider] as [typeof ctx, typeof Provider];
+  return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
 }
 
 // usage
