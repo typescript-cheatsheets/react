@@ -1154,6 +1154,8 @@ function queryForUser(id: UserID) {
 queryForUser(OrderID("foobar")); // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
 ```
 
+In future you can use the `unique` keyword to brand. [See this PR](https://github.com/microsoft/TypeScript/pull/33038).
+
 ## Intersection Types
 
 Adding two types together can be handy, for example when your component is supposed to mirror the props of a native component like a `button`:
