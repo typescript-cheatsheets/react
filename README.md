@@ -502,6 +502,7 @@ class App extends React.Component<{
   }
 }
 ```
+Notice if your ts version >= 2.7, you should set `strictPropertyInitialization: false` in tsconfig.json. You can see [details](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html) from official doc, search bkeywords: **Strict Class Initialization**
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
