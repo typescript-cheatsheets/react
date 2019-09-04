@@ -489,9 +489,9 @@ class App extends React.Component<{ message: string }, { count: number }> {
 class App extends React.Component<{
   message: string;
 }> {
-  pointer: number; // like this
+  pointer?: number; // like this, it's equivalent to pointer: number | undefined
   componentDidMount() {
-    this.pointer = 3;
+    this.pointer = 3; // you might assign values later, such as here
   }
   render() {
     return (
@@ -502,7 +502,7 @@ class App extends React.Component<{
   }
 }
 ```
-Notice if your ts version >= 2.7, you should set `strictPropertyInitialization: false` in tsconfig.json. You can see [details](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html) from official doc, search bkeywords: **Strict Class Initialization**
+Notice, if your TypeScript version before 2.7, you can declare property like `pointer: number`, but in 2.7 and later, you should declare it like `pointer?: number` or `pointer!: number`, because start with Typescript version 2.7, there is a new tsconfig option of **strictPropertyInitialization**, it will checks to esure each instance property of a class gets initialized, look at the [details](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html). Search quickly with keywords: **Strict Class Initialization**
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
