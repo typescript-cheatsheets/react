@@ -509,9 +509,10 @@ function withOwner(owner: string) {
 
 _Note: above is an incomplete, nonworking example. PR a fix!_
 
-## Good articles
+## Learn More
 
 We will need to extract lessons from here in future but here they are:
 
 - https://medium.com/@xfor/typescript-react-hocs-context-api-cb46da611f12
 - https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb
+- https://www.matthewgerstman.com/tech/ts-tricks-higher-order-components/
