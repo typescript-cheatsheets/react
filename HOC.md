@@ -141,7 +141,6 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
 
 For "true" reusability you should also consider exposing a ref for your HOC. You can use `React.forwardRef<Ref, Props>` as documented in [the basic cheatsheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), but we are interested in more real world examples. [Here is a nice example in practice](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) from @OliverJAsh.
 
-
 # Section 1: React HOC docs in TypeScript
 
 In this first section we refer closely to [the React docs on HOCs](https://reactjs.org/docs/higher-order-components.html) and offer direct TypeScript parallels.
@@ -269,7 +268,9 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
     render() {
       // the typing for spreading this.props is... very complex. best way right now is to just type it as any
       // data will still be typechecked
-      return <WrappedComponent data={this.state.data} {...this.props as any} />;
+      return (
+        <WrappedComponent data={this.state.data} {...(this.props as any)} />
+      );
     }
   };
   // return WithData;
@@ -303,7 +304,7 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
     }
     render() {
       // Wraps the input component in a container, without mutating it. Good!
-      return <WrappedComponent {...this.props as T} />;
+      return <WrappedComponent {...(this.props as T)} />;
     }
   };
 }
