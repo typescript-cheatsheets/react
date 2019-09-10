@@ -205,6 +205,7 @@ Old content that is possibly out of date
 - [Atlassian's migration (PR)](https://github.com/atlassian/react-beautiful-dnd/issues/982)
 - [Yarn's migration (issue)](https://github.com/yarnpkg/yarn/issues/6953)
 - [MemSQL's Studio's migration](https://davidgom.es/porting-30k-lines-of-code-from-flow-to-typescript/) - blogpost with many useful tips
+- [React Native CLI](https://github.com/react-native-community/cli/issues/683)
 
 ## Results
 
