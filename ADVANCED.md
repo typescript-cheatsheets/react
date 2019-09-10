@@ -971,6 +971,8 @@ declare class GenericComponent<T> extends Component<NestedProps<T>> {}
 const GenericComponent2 = myHoc(GenericComponent);
 ```
 
+See also [Notes from Google upgrading to 3.5](https://github.com/microsoft/TypeScript/issues/33272)
+
 ## TypeScript Roadmap
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
