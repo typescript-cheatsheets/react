@@ -98,6 +98,8 @@
 - [Editor Tooling and Integration](#editor-tooling-and-integration)
 - [Other React + TypeScript resources](#other-react--typescript-resources)
 - [Time to Really Learn TypeScript](#time-to-really-learn-typescript)
+- [Example App](#example-app)
+- [My question isn't answered here!](#my-question-isnt-answered-here)
   </details>
 
 # Section 1: Setup
