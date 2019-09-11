@@ -200,12 +200,8 @@ Old content that is possibly out of date
 
 - Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/79#issuecomment-458227322) at TravelRepublic)
 - [Incremental Migration to TypeScript on a Flowtype codebase][entria] at Entria
-- [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
-- [Expo's migration (issue)](https://github.com/expo/expo/issues/2164)
-- [Atlassian's migration (PR)](https://github.com/atlassian/react-beautiful-dnd/issues/982)
-- [Yarn's migration (issue)](https://github.com/yarnpkg/yarn/issues/6953)
 - [MemSQL's Studio's migration](https://davidgom.es/porting-30k-lines-of-code-from-flow-to-typescript/) - blogpost with many useful tips
-- [React Native CLI](https://github.com/react-native-community/cli/issues/683)
+
 
 ## Results
 
@@ -214,7 +210,7 @@ Old content that is possibly out of date
 - Found incorrect function calls for [Tiny][tiny]
 - Found rarely used, buggy code that was untested for [Tiny][tiny]
 
-## Misc writeups by notable companies
+## Misc migration stories by notable companies and open source
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
@@ -223,6 +219,16 @@ Old content that is possibly out of date
 - [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d)
 - [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
 - Dropbox - [Talk at React Loop](https://www.youtube.com/watch?v=veXkJq0Z2Qk)
+
+Open Source
+
+- [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
+- [Expo's migration (issue)](https://github.com/expo/expo/issues/2164)
+- [Atlassian's migration (PR)](https://github.com/atlassian/react-beautiful-dnd/issues/982)
+- [Yarn's migration (issue)](https://github.com/yarnpkg/yarn/issues/6953)
+- [React Native CLI](https://github.com/react-native-community/cli/issues/683)
+- [Next.js](https://nextjs.org/blog/next-9)
+- [Redux](https://github.com/reduxjs/redux/pull/3536)
 
 ## Links
 
