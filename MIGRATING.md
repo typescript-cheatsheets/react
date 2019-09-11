@@ -202,7 +202,6 @@ Old content that is possibly out of date
 - [Incremental Migration to TypeScript on a Flowtype codebase][entria] at Entria
 - [MemSQL's Studio's migration](https://davidgom.es/porting-30k-lines-of-code-from-flow-to-typescript/) - blogpost with many useful tips
 
-
 ## Results
 
 - Number of production deploys doubled for [Hootsuite][hootsuite]
