@@ -1293,7 +1293,7 @@ In this example we'll add the [`loading`](https://www.chromestatus.com/feature/5
 import "react";
 
 declare module "react" {
-  interface ImgHTMLAttribute<T> extends HTMLAttributes<T> {
+  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
     loading?: "auto" | "eager" | "lazy";
   }
 }
