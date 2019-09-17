@@ -77,6 +77,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Linting](#linting)
   - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
+  - [Adding non-standard attributes](#adding-non-standard-attributes)
   </details>
 
 # Section 0: Utility Types
@@ -1275,6 +1276,28 @@ Anything not listed above is considered an internal type and not public. If you'
 - `LegacyRef`
 - `StatelessComponent`
 - `ReactType`
+
+### Adding non-standard attributes
+
+The attributes allowed on host components such as `button` or `img` follow the
+HTML living standard. New features that are not yet part of specification
+or are only implemented by certain browsers will therefore cause a type error. If
+you specifically write code for these browsers or polyfill this attributes you can
+use [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) to still get those components type checked without having
+to use `any` or `@ts-ignore`.
+
+In this example we'll add the [`loading`](https://www.chromestatus.com/feature/5645767347798016) attribute which adds support for [lazy-loading](https://web.dev/native-lazy-loading) images on Chrome:
+
+```ts
+// react-unstable-attributes.d.ts
+import "react";
+
+declare module "react" {
+  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+    loading?: "auto" | "eager" | "lazy";
+  }
+}
+```
 
 ## `@types/react-dom`
 
