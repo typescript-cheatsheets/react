@@ -502,16 +502,16 @@ type NoTruncateProps = CommonProps & { truncate?: false };
 type TruncateProps = CommonProps & { truncate: true; expanded?: boolean };
 
 // Function overloads to accept both prop types NoTruncateProps & TruncateProps
-function Text(props: NoTruncateProps): JSX.Element
-function Text(props: TruncateProps): JSX.Element
-function Text(props: CommonProps & {truncate?: boolean; expanded?: boolean}) {
+function Text(props: NoTruncateProps): JSX.Element;
+function Text(props: TruncateProps): JSX.Element;
+function Text(props: CommonProps & { truncate?: boolean; expanded?: boolean }) {
   const { children, truncate, expanded, ...otherProps } = props;
   const classNames = truncate ? ".truncate" : "";
   return (
     <div className={classNames} aria-expanded={!!expanded} {...otherProps}>
       {children}
     </div>
-  )
+  );
 }
 ```
 
