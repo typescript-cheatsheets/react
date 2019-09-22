@@ -492,49 +492,27 @@ You want to allow `expanded` to be passed only if `truncate` is also passed, bec
 You can do this by function overloads:
 
 ```tsx
-import React from "react";
-
 type CommonProps = {
   children: React.ReactNode;
-  as: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  miscProps?: any;
 };
 
-type NoTruncateProps = CommonProps & {
-  truncate?: false;
-};
+type NoTruncateProps = CommonProps & { truncate?: false };
 
-type TruncateProps = CommonProps & {
-  truncate: true;
-  expanded?: boolean;
-};
-
-// Type guard
-const isTruncateProps = (
-  props: NoTruncateProps | TruncateProps
-): props is TruncateProps => !!props.truncate;
+type TruncateProps = CommonProps & { truncate: true; expanded?: boolean };
 
 // Function overloads to accept both prop types NoTruncateProps & TruncateProps
-function Text(props: NoTruncateProps | TruncateProps) {
-  if (isTruncateProps(props)) {
-    const { children, as: Tag, truncate, expanded, ...otherProps } = props;
-
-    const classNames = truncate ? ".truncate" : "";
-
-    return (
-      <Tag className={classNames} aria-expanded={!!expanded} {...otherProps}>
-        {children}
-      </Tag>
-    );
-  }
-
-  const { children, as: Tag, ...otherProps } = props;
-
-  return <Tag {...otherProps}>{children}</Tag>;
+function Text(props: NoTruncateProps): JSX.Element
+function Text(props: TruncateProps): JSX.Element
+function Text(props: CommonProps & {truncate?: boolean; expanded?: boolean}) {
+  const { children, truncate, expanded, ...otherProps } = props;
+  const classNames = truncate ? ".truncate" : "";
+  return (
+    <div className={classNames} aria-expanded={!!expanded} {...otherProps}>
+      {children}
+    </div>
+  )
 }
-
-Text.defaultProps = {
-  as: "span"
-};
 ```
 
 Using the Text component:
@@ -542,13 +520,13 @@ Using the Text component:
 ```tsx
 const App: React.FC = () => (
   <>
-    <Text>not truncated</Text> {/* works */}
-    <Text truncate>truncated</Text> {/* works */}
+    {/* these all typecheck */}
+    <Text>not truncated</Text>
+    <Text truncate>truncated</Text>
     <Text truncate expanded>
       truncate-able but expanded
     </Text>
-    {/* works */}
-    {/* TS error: Property 'truncate' is missing in type '{ children: string; expanded: true; }' but required in type 'Pick<TruncateProps, "expanded" | "children" | "truncate">'} */}
+    {/* TS error: Property 'truncate' is missing in type '{ children: string; expanded: true; }' but required in type '{ truncate: true; expanded?: boolean | undefined; }'. */}
     <Text expanded>truncate-able but expanded</Text>
   </>
 );
