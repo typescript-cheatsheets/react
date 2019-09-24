@@ -51,6 +51,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
 - [Section 1: Reusable Components/Type Utilities](#section-1-reusable-componentstype-utilities)
   - [Higher Order Components](#higher-order-components-hocs)
   - [Render Props](#render-props)
+  - [Conditionally Rendering Components](#conditinonally-rendering-components)
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
   - [Typing a Component that Accepts Different Props](#typing-a-component-that-accepts-different-props)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
@@ -118,6 +119,55 @@ export interface Props {
 ```
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose).
+
+## Conditionally Rendering Components
+
+Use [type guards](https://basarat.gitbooks.io/typescript/docs/types/typeGuard.html#user-defined-type-guards)!
+
+```tsx
+// Button props
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: undefined
+}
+
+// Anchor props
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href?: string
+}
+
+// Input/output options
+type Overload = {
+  (props: ButtonProps): JSX.Element
+  (props: AnchorProps): JSX.Element
+}
+
+// Guard to check if href exists in props
+const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps => 'href' in props
+
+// Component
+const Button: Overload = (props: ButtonProps | AnchorProps) => {
+  // anchor render
+  if (hasHref(props)) return <a {...props} />
+  // button render
+  return <button {...props} />
+}
+
+// Usage
+function App() {
+  return (
+  <>
+    {/* 😎 All good */}
+    <Button target="_blank" href="https://www.google.com">
+      Test
+    </Button>
+    {/* 😭 Error, `disabled` doesnt exist on anchor element */}
+    <Button disabled href="x">
+      Test
+    </Button>
+  </>
+  )
+}
+```
 
 ## `as` props (passing a component to be rendered)
 
