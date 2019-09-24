@@ -127,45 +127,46 @@ Use [type guards](https://basarat.gitbooks.io/typescript/docs/types/typeGuard.ht
 ```tsx
 // Button props
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  href?: undefined
-}
+  href?: undefined;
+};
 
 // Anchor props
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href?: string
-}
+  href?: string;
+};
 
 // Input/output options
 type Overload = {
-  (props: ButtonProps): JSX.Element
-  (props: AnchorProps): JSX.Element
-}
+  (props: ButtonProps): JSX.Element;
+  (props: AnchorProps): JSX.Element;
+};
 
 // Guard to check if href exists in props
-const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps => 'href' in props
+const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps =>
+  "href" in props;
 
 // Component
 const Button: Overload = (props: ButtonProps | AnchorProps) => {
   // anchor render
-  if (hasHref(props)) return <a {...props} />
+  if (hasHref(props)) return <a {...props} />;
   // button render
-  return <button {...props} />
-}
+  return <button {...props} />;
+};
 
 // Usage
 function App() {
   return (
-  <>
-    {/* 😎 All good */}
-    <Button target="_blank" href="https://www.google.com">
-      Test
-    </Button>
-    {/* 😭 Error, `disabled` doesnt exist on anchor element */}
-    <Button disabled href="x">
-      Test
-    </Button>
-  </>
-  )
+    <>
+      {/* 😎 All good */}
+      <Button target="_blank" href="https://www.google.com">
+        Test
+      </Button>
+      {/* 😭 Error, `disabled` doesnt exist on anchor element */}
+      <Button disabled href="x">
+        Test
+      </Button>
+    </>
+  );
 }
 ```
 
