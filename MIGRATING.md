@@ -215,7 +215,7 @@ Old content that is possibly out of date
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)
 - [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
-- [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d)
+- [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d) ([podcast](https://softwareengineeringdaily.com/2017/08/11/typescript-at-slack-with-felix-rieseberg/))
 - [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
 - Dropbox - [Talk at React Loop](https://www.youtube.com/watch?v=veXkJq0Z2Qk)
 
