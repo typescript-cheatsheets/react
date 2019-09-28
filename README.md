@@ -183,7 +183,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 }) => <div title={title}>{children}</div>;
 ```
 
-- _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the constructor.
+- _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
 
 - `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
 
