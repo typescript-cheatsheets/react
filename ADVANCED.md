@@ -476,6 +476,21 @@ export const Checkbox = (
 };
 ```
 
+When your component defines multiple props, chances of those conflicts increase. However you can explicitly state that all your fields should be removed from the underlying component using the `keyof` operator:
+
+```tsx
+export interface Props {
+  label: React.ReactNode; // conflicts with the InputElement's label
+  onChange: (text: string) => void; // conflicts with InputElement's onChange
+}
+
+export const Textbox = (
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>
+) => {
+  // implement Textbox component ...
+}
+```
+
 ## Type Zoo
 
 As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit), as well as [utility-types](https://github.com/piotrwitek/utility-types) (especially for those migrating from Flow).
