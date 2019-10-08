@@ -61,6 +61,17 @@
         "question",
         "example"
       ]
+    },
+    {
+      "login": "andreasgruenh",
+      "name": "Andreas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12122390?v=4",
+      "profile": "https://github.com/andreasgruenh",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
