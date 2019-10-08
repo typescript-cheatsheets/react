@@ -625,7 +625,7 @@ export const Textbox = (
   props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>
 ) => {
   // implement Textbox component ...
-}
+};
 ```
 
 ## Type Zoo
