@@ -585,6 +585,8 @@ const App: React.FC = () => (
 
 ## Omit attribute from a type
 
+Note: [Omit was added as a first class utility in TS 3.5](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittk)! 🎉
+
 Sometimes when intersecting types, we want to define our own version of an attribute. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` attribute. Here's how to extract that out:
 
 ```tsx
@@ -609,6 +611,21 @@ export const Checkbox = (
     </div>
   );
 };
+```
+
+When your component defines multiple props, chances of those conflicts increase. However you can explicitly state that all your fields should be removed from the underlying component using the `keyof` operator:
+
+```tsx
+export interface Props {
+  label: React.ReactNode; // conflicts with the InputElement's label
+  onChange: (text: string) => void; // conflicts with InputElement's onChange
+}
+
+export const Textbox = (
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>
+) => {
+  // implement Textbox component ...
+}
 ```
 
 ## Type Zoo
