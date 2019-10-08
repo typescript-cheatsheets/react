@@ -451,6 +451,8 @@ Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
 
 ## Omit attribute from a type
 
+Note: [Omit was added as a first class utility in TS 3.5](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittk)! 🎉
+
 Sometimes when intersecting types, we want to define our own version of an attribute. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` attribute. Here's how to extract that out:
 
 ```tsx
@@ -458,6 +460,7 @@ export interface Props {
   label: React.ReactNode; // this will conflict with the InputElement's label
 }
 
+// note: Omit was added as a first class utility in TS 3.5
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
