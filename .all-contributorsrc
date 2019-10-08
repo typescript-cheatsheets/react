@@ -1,0 +1,71 @@
+{
+  "files": [
+    "CONTRIBUTORS.md",
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "ferdaber",
+      "name": "Ferdy Budhidharma",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12239873?v=4",
+      "profile": "https://github.com/ferdaber",
+      "contributions": [
+        "review",
+        "maintenance",
+        "content"
+      ]
+    },
+    {
+      "login": "sw-yx",
+      "name": "swyx",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6764957?v=4",
+      "profile": "https://twitter.com/swyx",
+      "contributions": [
+        "ideas",
+        "review",
+        "maintenance",
+        "content",
+        "question"
+      ]
+    },
+    {
+      "login": "eps1lon",
+      "name": "Sebastian Silbermann",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12292047?v=4",
+      "profile": "https://github.com/eps1lon",
+      "contributions": [
+        "review",
+        "maintenance",
+        "content"
+      ]
+    },
+    {
+      "login": "Attrash-Islam",
+      "name": "Islam Attrash",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7091543?v=4",
+      "profile": "https://www.linkedin.com/in/islam-attrash-46703a94/",
+      "contributions": [
+        "maintenance",
+        "content"
+      ]
+    },
+    {
+      "login": "stephenkoo",
+      "name": "Stephen Koo",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/18624246?v=4",
+      "profile": "https://stephenkoo.github.io/",
+      "contributions": [
+        "question",
+        "example"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-typescript-cheatsheet",
+  "projectOwner": "typescript-cheatsheets",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
