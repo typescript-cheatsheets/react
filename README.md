@@ -74,6 +74,7 @@
   - [Types or Interfaces?](#types-or-interfaces)
   - [Basic Prop Types Examples](#basic-prop-types-examples)
   - [Useful React Prop Type Examples](#useful-react-prop-type-examples)
+  - [getDerivedStateFromProps](#getDerivedStateFromProps)
   - [Forms and Events](#forms-and-events)
   - [Context](#context)
   - [forwardRef/createRef](#forwardrefcreateref)
@@ -686,6 +687,68 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-che
 [More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/129)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## getDerivedStateFromProps
+
+Before you start using `getDerivedStateFromProps`, please go through the [documentation](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops) and [You Probably Don't Need Derived State](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html). Derived State can be easily achieved using hooks which can also help set up memoization easily.
+
+Here are a few ways in which you can annotate `getDerivedStateFromProps`
+
+1. If you have explicitly typed your derived state and want to make sure that the return value from `getDerivedStateFromProps` conforms to it.
+
+```tsx
+class Comp extends React.Component<Props, State> {
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
+    //
+  }
+}
+```
+
+2. When you want the function's return value to determine your state.
+
+```tsx
+class Comp extends React.Component<
+  Props,
+  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+> {
+  static getDerivedStateFromProps(props: Props) {}
+}
+```
+
+3. When you want derived state with other state fields and memoization
+
+```tsx
+type CustomValue = any;
+interface Props {
+  propA: CustomValue;
+}
+interface DefinedState {
+  otherStateField: string;
+}
+type State = DefinedState & ReturnType<typeof transformPropsToState>;
+function transformPropsToState(props: Props) {
+  return {
+    savedPropA: props.propA, // save for memoization
+    derivedState: props.propA
+  };
+}
+class Comp extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      otherStateField: "123",
+      ...transformPropsToState(props)
+    };
+  }
+  static getDerivedStateFromProps(props: Props, state: State) {
+    if (isEqual(props.propA, state.savedPropA)) return null;
+    return transformPropsToState(props);
+  }
+}
+```
 
 ## Forms and Events
 
