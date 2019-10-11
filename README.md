@@ -33,7 +33,7 @@
 
 ---
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](/CONTRIBUTORS.md)
+[![All Contributors](https://img.shields.io/github/contributors/typescript-cheatsheets/react-typescript-cheatsheet?color=orange&style=flat-square)](/CONTRIBUTORS.md)
 
 ## All React + TypeScript Cheatsheets
 
