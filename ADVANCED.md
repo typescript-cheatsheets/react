@@ -170,6 +170,8 @@ function App() {
 }
 ```
 
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoAekrgCEBXGGCAOzjBzAGcKYBPMEjqNmLAAqcucALyJiMAHQMmrABIAVALIAZAIJMowAEaMkXADwady0QFEANkhBIWMAHxwAZHADeFOHAAFkSYAPwAXHD0LAAmSJjALEgxANwUAL5p5BTUcLosaIHQ7JK8AkL5hdASENwycuiKlUVQVnoGxqYWbc3QDk4u7l6+-kEhEXBcMIYsAOZZmRQ5NACSLGCMlBCMG-C1MMCsPOT8gnAA8gBuSFD2ECgx9X7kAQAUHLVckTasNdwAlJEAFIAZQAGgp+s5XFk3h9uJFelA-lxAXBQRCoYMFlllnAAOL0FBQR7MOCFJBoADWcGAmDG8TgSAAHsAplJEiVPhQ0Ed4IEUFxVCF6u9JN8RL9JHAAD55AotFFo+EcqRIlEyNyjABEwXi2tpbBVuKoNAAwrhIElXDy+cIVCxIlcbncHqKVRKHRq5erJP9NSMXnBcigFcUiLEbqM6XBXgKhSExZ9-v6iDB6FA2OYUL4FHmVelg25YcGaCYHXAI3EoKM0xms+XRLn85JC5RixkTbkAKpcFCzJAUTDRDCHNi6MBgV7+54BOuZ2OjALmLVBgIBHyUABUcEAvBuAOD28vZ7HBZhAII8t5R0kv1+YfmwYMSBzBpNqAPpGeyhqkGvWYN9AiYBFqAAd3AhQzwgWZHAUXkQG1Vd12QuB1DMGBb2XSgHyQlDNx3XdAFo9uBbCgHAoAAGjgAADGI2RQL9kmouAYggMxXCZVkpjgVg4FDKooCZRxoXgK8bzXO8HxY+jGMef832ZRDMPXNCpmU8xsMlFhcKw3D-gWIA)
+
 ## `as` props (passing a component to be rendered)
 
 `ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
@@ -292,6 +294,8 @@ const wrapper = (
 );
 ```
 
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgHUoUwx6AFHMAZwA8AFQB8cAN4U4cYHRAAuOMIDc0uEWoATegEl5SgBRyki5QEo4AXnHJ0MAHR2MAOQg615GWgAWwADZamkrOjqFuHhQAvhQUAPQAVHC8EFywAJ4EvgFBSNT4cFoQSPxw1BDwSAAewPzwENRwMOlcBGwcaSkCIqL4DnAJcRRoDXWs7Jz01nAicNV02qUSUaKGYHz8Su2TUF1CYpY2kupEMACuUI2G6jKCWsAAbqI3MpLrqfwOmjpQ+qZrGwcJhA5hiXleMgk7wEDmygU0YIhgji9ye6nMniinniCQowhazHwEjgcNy1CUdSgNAA5ipZAY4JSaXTvnoGcYGUzqNTDuIubS4FECrUyhU4Ch+PxgNTqCgAEb+ZgwCBNAkEXS0KnUKVoACCMBgVLlZzopQAZOMOjwNoJ+b0HOouvRmlk-PC8gUiiVRZUamMGqrWvgNYaaDr9aHjaa4Bbtp0bXa+hRBrFyCNtfBTfArHBDLyZqjRAAJJD+fwqrPIwvDUbwADuEzS02u4MEcamwKsACIs12NHkfn8QFYJMDrOJgSsXhIs4iZnF21BnuQMUA)
+
 To work around that, either add `children` to the `WrapperProps` definition (possibly narrowing down its type, as needed):
 
 ```tsx
@@ -373,9 +377,9 @@ function RouterLink(props: LinkProps | AnchorProps) {
 
 <details>
   <summary><b>Approach: Generic Components</b></summary>
-  
-  Here is an example solution, see the further discussion for other solutions. *thanks to [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12#issuecomment-394440577)*
-  
+
+Here is an example solution, see the further discussion for other solutions. _thanks to [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12#issuecomment-394440577)_
+
 ```tsx
 interface LinkProps {}
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
@@ -395,11 +399,9 @@ return <a {...props as AnchorProps} />
 <Link<AnchorProps> href="/">My link</Link> // ok
 <Link<RouterLinkProps> to="/" href="/">My link</Link> // error
 
-````
+```
 
 </details>
-
-
 
 <details>
   <summary><b>Approach: Composition</b></summary>
@@ -432,7 +434,7 @@ const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
 <LinkButton to="/login">Login</LinkButton>
 <AnchorButton href="/login">Login</AnchorButton>
 <AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
-````
+```
 
 </details>
 
@@ -515,6 +517,8 @@ const UsageComponent: React.FC = () => (
   </div>
 );
 ```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgAUcwBnARjgF44BvOTCBABccFjCjAAdgHM4AXwDcVWvSYRWAJi684AIxRQRYiTPlLK5TAFdJGYBElwAstQDCuSJKSSYACjDMLCJqrBwAPoyBGgCUvBRwcMCYcL4ARAIQqYmOAeossTzxCXAA9CVwuawAdPpQpeVIUDhQRQlEMFZQjgA8ACbAAG4AfDyVLFUZct0l-cPmCXJwSAA2LPSF5MX1FYETgtuNza1w7Z09syNjNQZTM4ND8-IUchRoDmJwAKosKNJI7uAHN4YCJkOgYFUAGKubS+WKcIYpIp9e7HbouAGeYH8QScdKCLIlIZojEeIE+PQGPG1QnEzbFHglABUcHRbjJXgpGTxGSytWpBlSRO2UgGKGWwF6cCZJRe9OmFwo0QUQA)
 
 Further reading: [how to ban passing `{}` if you have a `NoFields` type.](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable)
 
@@ -710,6 +714,8 @@ try {
   }
 }
 ```
+
+[View in TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtAGxQGc64BJAOwDcVrgATAERRhIAYtBACAolBxQ4SAB6CW3RghQsA5kknS4AbwC+VWgzj9BTOqyEBXGNaLboshUiUq1mxzIMUKmaywYwBAscMB0AGqcPAAU3AJIAFxwdDBQwBoAlHoUcHBEdlCh8YJwAPxwadZIcMmYnHRIANwUhpTk-oEwwaHhVrb2SHEJyanpWTnkeWghqXAlSAByEADucAC8cCxIa2ZDmS1TcDMsc2j2RCwwextbO6YJw4KZuXCvBfah51Ku1wkAdJoYAAVUD7OAAPnmCWWK0BSBBYJiB1avnIAHoAFSY3KYuDo9FwCBgbohTjzCBoABG1EpAGtcXAAAIwAAWOBWjF0rA4XD4CREUDEMC8+jgwNZNWsjRkvyQRG40NKGRmPww1AAnoyWezVly9hZ+oUtFJoGKJVKZbIrvKkIqFmFQv5jbjcei-AEgiE4GAUFBGk8kik0hl1NldK9gJg4DEAIThKJ8wOZF5HPJsjl3NY86L8wSC4VeGIAIhYEHgKDgvJ4SpqmFEAmLKKOUZjfRYNmNyeyGdWWYe5ksHYGDlNUBLDvCjsqkrgzsGTcOeQJcH+a9R7TSGsmy8JaE41B9foDC2ydFwO0lRFaxwEaFZMaQ4cj0ZiNQyqTUaCQEGjOb5ewFhIY7PmmxyzBA1BIP88rSCWGTVvaCRzg2MDFgANLIzZ5GKSDUI0YSvu+pwwF+P7RgaQ6doMXigXk0wQVB-wrH6LATshU4ZHOI5IBhWFLnAuH4TUEZgb2azNK8bT6EAA)
 
 Simply throwing an exception is fine, however it would be nice to make TypeScript remind the consumer of your code to handle your exception. We can do that just by returning instead of throwing:
 
@@ -1069,6 +1075,8 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
   return <div>Hello world {label}</div>;
 }
 ```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgFkBPABRzAGc4BvCnDgB6AFRi4AESQ80UYGBjAI1OBExww3OACIANigBGSfboB0Q4ZIACAEySMArvqwQIRlFCtxJYkVaGJvoA-ABccDwwCtQA5gDcFAC+FBTiYkKSAOJI1PQo+nBouJB5tHAOcgpKKmo0cABSAMpSEGhwmNAgKDDmrF4A1nYQAO51fGI8TmCQsEh2YpbkvgHkSAAes-AOzq4dTtQYtaxsAMIlqrkwABT8cEGmcAC8ep0eXrpwSRHsXBC8AEoBFYiDAnFA1AAeOzAABuAD4ABKmfQQOAjaD6OwCB76JKQkQwhGJchJIA)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
