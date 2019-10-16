@@ -1100,8 +1100,9 @@ You should check out large projects that are migrating from flow to pick up conc
 
 Useful libraries:
 
-- https://github.com/bcherny/flow-to-typescript
-- <https://github.com/piotrwitek/utility-types>.
+- <https://github.com/bcherny/flow-to-typescript>
+- <https://github.com/bcherny/Khan/flow-to-ts>
+- <https://github.com/piotrwitek/utility-types>
 
 If you have specific advice in this area, please file a PR!
 
