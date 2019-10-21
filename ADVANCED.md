@@ -389,9 +389,9 @@ const Link = <T extends {}>(
   props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
 ) => {
   if ((props as RouterLinkProps).to) {
-    return <NavLink {...props as RouterLinkProps} />;
+    return <NavLink {...(props as RouterLinkProps)} />;
   } else {
-    return <a {...props as AnchorProps} />;
+    return <a {...(props as AnchorProps)} />;
   }
 };
 
