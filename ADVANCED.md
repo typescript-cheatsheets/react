@@ -382,23 +382,24 @@ Here is an example solution, see the further discussion for other solutions. _th
 
 ```tsx
 interface LinkProps {}
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type RouterLinkProps = Omit<NavLinkProps, "href">;
 
 const Link = <T extends {}>(
-props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+  props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
 ) => {
-if ((props as RouterLinkProps).to) {
-return <NavLink {...props as RouterLinkProps} />
-} else {
-return <a {...props as AnchorProps} />
-}
-}
+  if ((props as RouterLinkProps).to) {
+    return <NavLink {...props as RouterLinkProps} />;
+  } else {
+    return <a {...props as AnchorProps} />;
+  }
+};
 
-<Link<RouterLinkProps> to="/">My link</Link> // ok
-<Link<AnchorProps> href="/">My link</Link> // ok
-<Link<RouterLinkProps> to="/" href="/">My link</Link> // error
-
+<Link<RouterLinkProps> to="/">My link</Link>; // ok
+<Link<AnchorProps> href="/">My link</Link>; // ok
+<Link<RouterLinkProps> to="/" href="/">
+  My link
+</Link>; // error
 ```
 
 </details>
