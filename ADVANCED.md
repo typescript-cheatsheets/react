@@ -53,6 +53,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Render Props](#render-props)
   - [Conditionally Rendering Components](#conditinonally-rendering-components)
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
+  - [Generic Components](#generic-components)
   - [Typing a Component that Accepts Different Props](#typing-a-component-that-accepts-different-props)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
   - [Props: Must Pass Both](#props-must-pass-both)
@@ -188,7 +189,7 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
 ## Generic Components
 
-Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State.
+Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State. You can then use type `T` to annotate types of any variables defined inside your function.
 
 ```tsx
 interface Props<T> {
@@ -197,7 +198,7 @@ interface Props<T> {
 }
 function List<T>(props: Props<T>) {
   const { items, renderItem } = props;
-  const [state, setState] = React.useState<T[]>([]);
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
   return (
     <div>
       {items.map(renderItem)}
@@ -207,29 +208,6 @@ function List<T>(props: Props<T>) {
   );
 }
 ```
-
-The same using fat arrow function style:
-
-```tsx
-interface Props<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
-}
-
-const List = <T extends {}>(props: Props<T>) => {
-  const { items, renderItem } = props;
-  const [state, setState] = React.useState<T[]>([]);
-  return (
-    <div>
-      {items.map(renderItem)}
-      <button onClick={() => setState(items)}>Clone</button>
-      {JSON.stringify(state, null, 2)}
-    </div>
-  );
-};
-```
-
-Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
 
 You can then use the generic components and get nice type safety through type inference:
 
@@ -260,7 +238,80 @@ ReactDOM.render(
 );
 ```
 
-You can do this for [class components](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71) too (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326))
+The same using fat arrow function style:
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+// Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
+const List = <T extends {}>(props: Props<T>) => {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+};
+```
+
+The same for using classes: (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326)'s [gist](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71))
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+interface State<T> {
+  items: T[];
+}
+
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // You can use type T inside List class.
+  state: Readonly<State<T>> = {
+    items: []
+  };
+  render() {
+    const { items, renderItem } = this.props;
+    // You can use type T inside List class.
+    const clone: T[] = items.slice(0);
+    return (
+      <div>
+        {items.map(renderItem)}
+        <button onClick={() => this.setState({ items: clone })}>Clone</button>
+        {JSON.stringify(this.state, null, 2)}
+      </div>
+    );
+  }
+}
+```
+
+Though you can't use Generic Type Parameters for Static Members:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // Static members cannot reference class type parameters.ts(2302)
+  static getDerivedStateFromProps(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
+
+To fix this you need to convert your static function to a type inferred function:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  static getDerivedStateFromProps<T>(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
 
 ### Generic components with children
 
