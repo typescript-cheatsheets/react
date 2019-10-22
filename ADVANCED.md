@@ -189,7 +189,7 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
 ## Generic Components
 
-Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State. You can then use type `T` to annotate types of any variables defined inside your function.
+Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State. You can then use the generic type to annotate types of any variables defined inside your function / class scope.
 
 ```tsx
 interface Props<T> {
