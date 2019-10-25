@@ -238,7 +238,7 @@ ReactDOM.render(
 );
 ```
 
-The same using fat arrow function style:
+You can also use Generics using fat arrow function style:
 
 ```tsx
 interface Props<T> {
@@ -246,8 +246,10 @@ interface Props<T> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-// Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
-const List = <T extends {}>(props: Props<T>) => {
+// Note the <T extends unknown> before the function definition.
+// You can't use just `<T>` as it will confuse the TSX parser whether it's a JSX tag or a Generic Declaration.
+// You can also use <T,> https://github.com/microsoft/TypeScript/issues/15713#issuecomment-499474386
+const List = <T extends unknown>(props: Props<T>) => {
   const { items, renderItem } = props;
   const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
   return (
