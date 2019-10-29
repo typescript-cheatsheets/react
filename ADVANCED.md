@@ -411,7 +411,7 @@ If you want to conditionally render a component, sometimes is better to use [Rea
 
 ```tsx
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
+type RouterLinkProps = Omit<AnchorProps, 'href'>
 
 interface Button {
   as: React.ComponentClass | 'a'
