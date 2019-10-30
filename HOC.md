@@ -123,6 +123,8 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 
 Note that the `{...this.props as T}` assertion is needed because of a current bug in TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
 
+For `Optionalize` details check out the [utility types section](https://github.com/typescript-cheatsheets/typescript-utilities-cheatsheet#utility-types).
+
 Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
 
 ```tsx
