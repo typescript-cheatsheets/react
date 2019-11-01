@@ -312,6 +312,7 @@ example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#us
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) for reducer actions. Don't forget to define the return type of reducer, otherwise Typescript will infer it.
 
 ```tsx
+type AppState = {}
 type Action =
   | { type: "SET_ONE"; payload: string }
   | { type: "SET_TWO"; payload: number };
