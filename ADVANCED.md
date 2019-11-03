@@ -1295,7 +1295,7 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 }
 ```
 
-You can read a [fuller TypeScript + ESLint setup guide here](https://github.com/MatterhornDev/matterhorn-posts/blob/learn-typescript-linting/learn-typescript-linting.md) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
