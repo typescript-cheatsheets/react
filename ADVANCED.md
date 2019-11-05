@@ -73,6 +73,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
   - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   - [Commenting Components](#commenting-components)
+  - [Namespaced Components](#namespaced-components)
   - [Design System Development](#design-system-development)
   - [Migrating from Flow](#migrating-from-flow)
   - [Prettier](#prettier)
@@ -1131,6 +1132,33 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgFkBPABRzAGc4BvCnDgB6AFRi4AESQ80UYGBjAI1OBExww3OACIANigBGSfboB0Q4ZIACAEySMArvqwQIRlFCtxJYkVaGJvoA-ABccDwwCtQA5gDcFAC+FBTiYkKSAOJI1PQo+nBouJB5tHAOcgpKKmo0cABSAMpSEGhwmNAgKDDmrF4A1nYQAO51fGI8TmCQsEh2YpbkvgHkSAAes-AOzq4dTtQYtaxsAMIlqrkwABT8cEGmcAC8ep0eXrpwSRHsXBC8AEoBFYiDAnFA1AAeOzAABuAD4ABKmfQQOAjaD6OwCB76JKQkQwhGJchJIA)
+
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Namespaced Components
+
+Often when creating similar components or components that have a parent-child relationship, it is useful to namespace your components. Types can easily be added be using `Object.assign()`;
+
+```tsx
+import React from 'react'
+
+const Input = (props: any) => <input {...props} />
+
+const Form = React.forwardRef<HTMLDivElement, any>(({children, ...otherProps}, ref) => (
+  <form {...otherProps} ref={ref}>
+    {children}
+  </form>
+));
+
+/**
+ * Exported components now can be used as `<Form>` and `<Form.Input>`
+ */
+export default Object.assign(Form, {Input: Input});
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2&ssl=1&ssc=1&pln=14&pc=52#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BJGsAV3gF44AKMHMOgC44KGgE8AlHA4A+OAB5gLdnADeAOk18IAgL5wA9DIpVaDOADFoeLsnQx1maAHcUUACbJM8gBIAVAFkAGQARYAA3AFEAGyQQJBoYABoRcRlublU0AAtgaPciGhTNdQgYbKQoAAV+Ol0UokwpWR4KOAUnKDwNTTKK6tr9Ro5VRt1jcnb2rNz8wt02hQNOkAmJCQBuE3IDACpdtt24SIAPSFgkdzhqcFoEmDo4Gghna9E4ACMkOFY6S5FHgADeRWLoyQGpK7A0EgdTMNgwcGHAwUJBnaDwdxITAoVjReAAeQ+ACskBh1Cg6HRgABzGjcGEpVTw9jCFkwXSbIA)
+
+(Contributed by @bryceosterhaus, see [further discussion](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/165))
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
