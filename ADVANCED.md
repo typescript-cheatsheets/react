@@ -1140,20 +1140,22 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
 Often when creating similar components or components that have a parent-child relationship, it is useful to namespace your components. Types can easily be added be using `Object.assign()`;
 
 ```tsx
-import React from 'react'
+import React from "react";
 
-const Input = (props: any) => <input {...props} />
+const Input = (props: any) => <input {...props} />;
 
-const Form = React.forwardRef<HTMLDivElement, any>(({children, ...otherProps}, ref) => (
-  <form {...otherProps} ref={ref}>
-    {children}
-  </form>
-));
+const Form = React.forwardRef<HTMLDivElement, any>(
+  ({ children, ...otherProps }, ref) => (
+    <form {...otherProps} ref={ref}>
+      {children}
+    </form>
+  )
+);
 
 /**
  * Exported components now can be used as `<Form>` and `<Form.Input>`
  */
-export default Object.assign(Form, {Input: Input});
+export default Object.assign(Form, { Input: Input });
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2&ssl=1&ssc=1&pln=14&pc=52#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BJGsAV3gF44AKMHMOgC44KGgE8AlHA4A+OAB5gLdnADeAOk18IAgL5wA9DIpVaDOADFoeLsnQx1maAHcUUACbJM8gBIAVAFkAGQARYAA3AFEAGyQQJBoYABoRcRlublU0AAtgaPciGhTNdQgYbKQoAAV+Ol0UokwpWR4KOAUnKDwNTTKK6tr9Ro5VRt1jcnb2rNz8wt02hQNOkAmJCQBuE3IDACpdtt24SIAPSFgkdzhqcFoEmDo4Gghna9E4ACMkOFY6S5FHgADeRWLoyQGpK7A0EgdTMNgwcGHAwUJBnaDwdxITAoVjReAAeQ+ACskBh1Cg6HRgABzGjcGEpVTw9jCFkwXSbIA)
