@@ -1481,28 +1481,33 @@ This is not yet written. Please PR or [File an issue](https://github.com/typescr
 
 # Troubleshooting Handbook: tsconfig.json
 
-You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for my component library:
+You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
 
 ```json
 {
   "compilerOptions": {
+    "incremental": true,
     "outDir": "build/lib",
-    "module": "commonjs",
     "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
     "sourceMap": true,
+    "importHelpers": true,
+    "declaration": true,
+    "rootDir": "src",
+    "strict": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "strict": true,
     "esModuleInterop": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true
   },
