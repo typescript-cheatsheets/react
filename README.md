@@ -1404,6 +1404,39 @@ function foo(bar: string) {
 type FooReturn = ReturnType<typeof foo>; // { baz: number }
 ```
 
+In fact you can grab virtually anything public: [see this blogpost from Ivan Koshelev](http://ikoshelev.azurewebsites.net/search/id/11/Pragmatic-uses-of-TypeScript-type-system-My-type-of-type)
+
+```ts
+function foo() {
+  return {
+    a: 1,
+    b: 2,
+    subInstArr: [{
+        c: 3,
+        d: 4
+    }]
+  }
+}
+
+type InstType = ReturnType<typeof foo>
+type SubInstArr = InstType['subInstArr'];
+type SubIsntType = SubInstArr[0];
+
+let baz: SubIsntType = {
+  c: 5,
+  d: 6 // type checks ok!
+}
+
+//You could just write a one-liner,
+//But please make sure it is forward-readable
+//(you can understand it from reading once left-to-right with no jumps)
+type SubIsntType2 = ReturnType<typeof foo>['subInstArr'][0];
+let baz2: SubIsntType2 = {
+  c: 5,
+  d: 6 // type checks ok!
+}
+```
+
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
