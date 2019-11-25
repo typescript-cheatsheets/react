@@ -1411,30 +1411,32 @@ function foo() {
   return {
     a: 1,
     b: 2,
-    subInstArr: [{
+    subInstArr: [
+      {
         c: 3,
         d: 4
-    }]
-  }
+      }
+    ]
+  };
 }
 
-type InstType = ReturnType<typeof foo>
-type SubInstArr = InstType['subInstArr'];
+type InstType = ReturnType<typeof foo>;
+type SubInstArr = InstType["subInstArr"];
 type SubIsntType = SubInstArr[0];
 
 let baz: SubIsntType = {
   c: 5,
   d: 6 // type checks ok!
-}
+};
 
 //You could just write a one-liner,
 //But please make sure it is forward-readable
 //(you can understand it from reading once left-to-right with no jumps)
-type SubIsntType2 = ReturnType<typeof foo>['subInstArr'][0];
+type SubIsntType2 = ReturnType<typeof foo>["subInstArr"][0];
 let baz2: SubIsntType2 = {
   c: 5,
   d: 6 // type checks ok!
-}
+};
 ```
 
 # Troubleshooting Handbook: Images and other non-TS/TSX files
