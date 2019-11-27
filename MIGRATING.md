@@ -204,6 +204,7 @@ Old content that is possibly out of date
 - Retail-UI's Codemod: https://github.com/skbkontur/retail-ui/tree/master/packages/react-ui-codemodes/flow-to-ts
 - Quick-n-dirty [Flow to TS Codemod](https://gist.github.com/skovhus/c57367ce6ecbc3f70bb7c80f25727a11)
 - [Ecobee's brief experience](https://mobile.twitter.com/alanhietala/status/1104450494754377728)
+- [Migrating a 50K SLOC Flow + React Native app to TypeScript](https://blog.usejournal.com/migrating-a-flow-react-native-app-to-typescript-c74c7bceae7d)
 
 ## Results
 
