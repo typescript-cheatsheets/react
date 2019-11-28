@@ -1027,6 +1027,8 @@ If you are grabbing the props of a component that forwards refs, use [`Component
 
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
+You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/167).
+
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Portals
