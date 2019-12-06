@@ -116,7 +116,7 @@ This guide will always assume you are starting with the latest TypeScript versio
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-new-react-typescript-app --typescript`
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-app --template typescript`
 
 - We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
 
