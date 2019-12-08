@@ -1534,7 +1534,6 @@ You can find [all the Compiler options in the Typescript docs](https://www.types
     "declaration": true,
     "rootDir": "src",
     "strict": true,
-    "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
