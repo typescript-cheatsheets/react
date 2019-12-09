@@ -18,6 +18,7 @@
 [**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
 [**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
 [Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
@@ -115,7 +116,7 @@ This guide will always assume you are starting with the latest TypeScript versio
 
 ## React + TypeScript Starter Kits
 
-1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-new-react-typescript-app --typescript`
+1. [Create React App v2.1+ with Typescript](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-app --template typescript`
 
 - We used to recommend `create-react-app-typescript` but it is now [deprecated](https://www.reddit.com/r/reactjs/comments/a5919a/createreactapptypescript_has_been_archived_rip/). [see migration instructions](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/)
 
@@ -312,6 +313,7 @@ example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#us
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) for reducer actions. Don't forget to define the return type of reducer, otherwise Typescript will infer it.
 
 ```tsx
+type AppState = {};
 type Action =
   | { type: "SET_ONE"; payload: string }
   | { type: "SET_TWO"; payload: number };
@@ -1026,6 +1028,8 @@ If you are grabbing the props of a component that forwards refs, use [`Component
 
 More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
+You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/167).
+
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Portals
@@ -1403,6 +1407,41 @@ function foo(bar: string) {
 type FooReturn = ReturnType<typeof foo>; // { baz: number }
 ```
 
+In fact you can grab virtually anything public: [see this blogpost from Ivan Koshelev](http://ikoshelev.azurewebsites.net/search/id/11/Pragmatic-uses-of-TypeScript-type-system-My-type-of-type)
+
+```ts
+function foo() {
+  return {
+    a: 1,
+    b: 2,
+    subInstArr: [
+      {
+        c: 3,
+        d: 4
+      }
+    ]
+  };
+}
+
+type InstType = ReturnType<typeof foo>;
+type SubInstArr = InstType["subInstArr"];
+type SubIsntType = SubInstArr[0];
+
+let baz: SubIsntType = {
+  c: 5,
+  d: 6 // type checks ok!
+};
+
+//You could just write a one-liner,
+//But please make sure it is forward-readable
+//(you can understand it from reading once left-to-right with no jumps)
+type SubIsntType2 = ReturnType<typeof foo>["subInstArr"][0];
+let baz2: SubIsntType2 = {
+  c: 5,
+  d: 6 // type checks ok!
+};
+```
+
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
@@ -1480,28 +1519,32 @@ This is not yet written. Please PR or [File an issue](https://github.com/typescr
 
 # Troubleshooting Handbook: tsconfig.json
 
-You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for my component library:
+You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
 
 ```json
 {
   "compilerOptions": {
+    "incremental": true,
     "outDir": "build/lib",
-    "module": "commonjs",
     "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
     "sourceMap": true,
+    "importHelpers": true,
+    "declaration": true,
+    "rootDir": "src",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "strict": true,
     "esModuleInterop": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true
   },

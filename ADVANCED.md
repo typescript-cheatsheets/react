@@ -53,6 +53,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Render Props](#render-props)
   - [Conditionally Rendering Components](#conditinonally-rendering-components)
   - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
+  - [Generic Components](#generic-components)
   - [Typing a Component that Accepts Different Props](#typing-a-component-that-accepts-different-props)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
   - [Props: Must Pass Both](#props-must-pass-both)
@@ -72,6 +73,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
   - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   - [Commenting Components](#commenting-components)
+  - [Namespaced Components](#namespaced-components)
   - [Design System Development](#design-system-development)
   - [Migrating from Flow](#migrating-from-flow)
   - [Prettier](#prettier)
@@ -188,7 +190,7 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
 ## Generic Components
 
-Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State.
+Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State. You can then use the generic type to annotate types of any variables defined inside your function / class scope.
 
 ```tsx
 interface Props<T> {
@@ -197,7 +199,7 @@ interface Props<T> {
 }
 function List<T>(props: Props<T>) {
   const { items, renderItem } = props;
-  const [state, setState] = React.useState<T[]>([]);
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
   return (
     <div>
       {items.map(renderItem)}
@@ -207,29 +209,6 @@ function List<T>(props: Props<T>) {
   );
 }
 ```
-
-The same using fat arrow function style:
-
-```tsx
-interface Props<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
-}
-
-const List = <T extends {}>(props: Props<T>) => {
-  const { items, renderItem } = props;
-  const [state, setState] = React.useState<T[]>([]);
-  return (
-    <div>
-      {items.map(renderItem)}
-      <button onClick={() => setState(items)}>Clone</button>
-      {JSON.stringify(state, null, 2)}
-    </div>
-  );
-};
-```
-
-Note the `<T extends {}>` before the function definition. You can't use just `<T>` as it will confuse the TSX parser.
 
 You can then use the generic components and get nice type safety through type inference:
 
@@ -260,7 +239,82 @@ ReactDOM.render(
 );
 ```
 
-You can do this for [class components](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71) too (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326))
+You can also use Generics using fat arrow function style:
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+// Note the <T extends unknown> before the function definition.
+// You can't use just `<T>` as it will confuse the TSX parser whether it's a JSX tag or a Generic Declaration.
+// You can also use <T,> https://github.com/microsoft/TypeScript/issues/15713#issuecomment-499474386
+const List = <T extends unknown>(props: Props<T>) => {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+};
+```
+
+The same for using classes: (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326)'s [gist](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71))
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+interface State<T> {
+  items: T[];
+}
+
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // You can use type T inside List class.
+  state: Readonly<State<T>> = {
+    items: []
+  };
+  render() {
+    const { items, renderItem } = this.props;
+    // You can use type T inside List class.
+    const clone: T[] = items.slice(0);
+    return (
+      <div>
+        {items.map(renderItem)}
+        <button onClick={() => this.setState({ items: clone })}>Clone</button>
+        {JSON.stringify(this.state, null, 2)}
+      </div>
+    );
+  }
+}
+```
+
+Though you can't use Generic Type Parameters for Static Members:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // Static members cannot reference class type parameters.ts(2302)
+  static getDerivedStateFromProps(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
+
+To fix this you need to convert your static function to a type inferred function:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  static getDerivedStateFromProps<T>(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
 
 ### Generic components with children
 
@@ -382,23 +436,24 @@ Here is an example solution, see the further discussion for other solutions. _th
 
 ```tsx
 interface LinkProps {}
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type RouterLinkProps = Omit<NavLinkProps, "href">;
 
 const Link = <T extends {}>(
-props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+  props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
 ) => {
-if ((props as RouterLinkProps).to) {
-return <NavLink {...props as RouterLinkProps} />
-} else {
-return <a {...props as AnchorProps} />
-}
-}
+  if ((props as RouterLinkProps).to) {
+    return <NavLink {...(props as RouterLinkProps)} />;
+  } else {
+    return <a {...(props as AnchorProps)} />;
+  }
+};
 
-<Link<RouterLinkProps> to="/">My link</Link> // ok
-<Link<AnchorProps> href="/">My link</Link> // ok
-<Link<RouterLinkProps> to="/" href="/">My link</Link> // error
-
+<Link<RouterLinkProps> to="/">My link</Link>; // ok
+<Link<AnchorProps> href="/">My link</Link>; // ok
+<Link<RouterLinkProps> to="/" href="/">
+  My link
+</Link>; // error
 ```
 
 </details>
@@ -410,7 +465,7 @@ If you want to conditionally render a component, sometimes is better to use [Rea
 
 ```tsx
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<NavLinkProps, 'href'>
+type RouterLinkProps = Omit<AnchorProps, 'href'>
 
 interface Button {
   as: React.ComponentClass | 'a'
@@ -1080,6 +1135,35 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
+## Namespaced Components
+
+Often when creating similar components or components that have a parent-child relationship, it is useful to namespace your components. Types can easily be added be using `Object.assign()`;
+
+```tsx
+import React from "react";
+
+const Input = (props: any) => <input {...props} />;
+
+const Form = React.forwardRef<HTMLDivElement, any>(
+  ({ children, ...otherProps }, ref) => (
+    <form {...otherProps} ref={ref}>
+      {children}
+    </form>
+  )
+);
+
+/**
+ * Exported components now can be used as `<Form>` and `<Form.Input>`
+ */
+export default Object.assign(Form, { Input: Input });
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2&ssl=1&ssc=1&pln=14&pc=52#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BJGsAV3gF44AKMHMOgC44KGgE8AlHA4A+OAB5gLdnADeAOk18IAgL5wA9DIpVaDOADFoeLsnQx1maAHcUUACbJM8gBIAVAFkAGQARYAA3AFEAGyQQJBoYABoRcRlublU0AAtgaPciGhTNdQgYbKQoAAV+Ol0UokwpWR4KOAUnKDwNTTKK6tr9Ro5VRt1jcnb2rNz8wt02hQNOkAmJCQBuE3IDACpdtt24SIAPSFgkdzhqcFoEmDo4Gghna9E4ACMkOFY6S5FHgADeRWLoyQGpK7A0EgdTMNgwcGHAwUJBnaDwdxITAoVjReAAeQ+ACskBh1Cg6HRgABzGjcGEpVTw9jCFkwXSbIA)
+
+(Contributed by @bryceosterhaus, see [further discussion](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/165))
+
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
 ## Design System Development
 
 I do like [Docz](https://docz.site/) which takes basically [1 line of config](https://www.docz.site/documentation/project-configuration#typescript) to accept Typescript. However it is newer and has a few more rough edges (many breaking changes since it is still < v1.0)
@@ -1241,7 +1325,7 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 }
 ```
 
-You can read a [fuller TypeScript + ESLint setup guide here](https://github.com/MatterhornDev/matterhorn-posts/blob/learn-typescript-linting/learn-typescript-linting.md) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
