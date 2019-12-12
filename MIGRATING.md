@@ -116,6 +116,7 @@ Problems to be aware of:
 
 - [TypeStat](https://github.com/JoshuaKGoldberg/TypeStat) ([used by Codecademy](https://mobile.twitter.com/JoshuaKGoldberg/status/1159090281314160640))
 - [TypeWiz](https://github.com/urish/typewiz)
+- [js-to-ts-converter](https://github.com/gregjacobs/js-to-ts-converter)
 
 ### Manual JS to TS Conversion
 
