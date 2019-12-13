@@ -1497,7 +1497,7 @@ these are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 
 # Troubleshooting Handbook: TSLint
 
-**Note: TSLint is in maintenance and ESLint is the way forward for TypeScript**
+**Note: TSLint is in maintenance and ESLint is the way forward for TypeScript. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).**
 
 Sometimes TSLint is just getting in the way. Judiciously turning off of things can be helpful. Here are useful tslint disables you may use:
 
