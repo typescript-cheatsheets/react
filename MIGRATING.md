@@ -228,6 +228,7 @@ Open Source
 
 - [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
 - [Expo's migration (issue)](https://github.com/expo/expo/issues/2164)
+- [Google Workbox migration](https://github.com/GoogleChrome/workbox/pull/2058)
 - [Atlassian's migration (PR)](https://github.com/atlassian/react-beautiful-dnd/issues/982)
 - [Yarn's migration (issue)](https://github.com/yarnpkg/yarn/issues/6953)
 - [React Native CLI](https://github.com/react-native-community/cli/issues/683)
