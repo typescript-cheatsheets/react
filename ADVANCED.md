@@ -77,6 +77,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Design System Development](#design-system-development)
   - [Migrating from Flow](#migrating-from-flow)
   - [Prettier](#prettier)
+  - [Testing](#testing)
   - [Linting](#linting)
   - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
@@ -1228,6 +1229,14 @@ yarn add -D prettier husky lint-staged
 ```
 
 This is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
+
+## Testing
+
+Yes, you can test your types! You shouldn't use it for EVERYTHING, but it can help prevent regressions:
+
+- https://github.com/azz/jest-runner-tsc
+- https://github.com/SamVerschueren/tsd
+- https://github.com/ikatyang/dts-jest ([Demo](https://codesandbox.io/s/dts-test-frozen-public-demo-iyorn))
 
 ## Linting
 
