@@ -310,7 +310,7 @@ example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#us
 
 **useReducer**
 
-You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) for reducer actions. Don't forget to define the return type of reducer, otherwise Typescript will infer it.
+You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise Typescript will infer it.
 
 ```tsx
 type AppState = {};
