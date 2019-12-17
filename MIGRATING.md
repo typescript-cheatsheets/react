@@ -64,7 +64,7 @@ Webpack tips
 - webpack loader: `awesome-typescript-loader` vs `ts-loader`? (there is some disagreement in community about this - but read [awesome's point of view](https://github.com/s-panferov/awesome-typescript-loader#differences-between-ts-loader))
 - Webpack config:
 
-```
+```js
 module.exports = {
 
 resolve: {
