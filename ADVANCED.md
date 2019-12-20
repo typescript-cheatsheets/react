@@ -70,6 +70,9 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [TypeScript 3.2](#typescript-32)
   - [TypeScript 3.3](#typescript-33)
   - [TypeScript 3.4](#typescript-34)
+  - [TypeScript 3.5](#typescript-35)
+  - [TypeScript 3.6](#typescript-36)
+  - [TypeScript 3.7](#typescript-37)
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
   - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   - [Commenting Components](#commenting-components)
@@ -1082,9 +1085,107 @@ const GenericComponent2 = myHoc(GenericComponent);
 
 See also [Notes from Google upgrading to 3.5](https://github.com/microsoft/TypeScript/issues/33272)
 
-## TypeScript Roadmap
+
+## TypeScript 3.6
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-6/)]
+
+Nothing particularly React specific but [the playground](https://github.com/agentcooper/typescript-play) got an upgrade and [Ambient Classes and Functions Can Merge](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html#ambient-classes-and-functions-can-merge)
+
+
+## TypeScript 3.7
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/)]
+
+1. Optional Chaining
+
+```ts
+let x = foo?.bar.baz();
+
+// is equivalent to
+
+let x = (foo === null || foo === undefined) ? undefined : foo.bar.baz();
+    
+// Optional Element access
+function tryGetFirstElement<T>(arr?: T[]) {
+    return arr?.[0];
+}
+
+// Optional Call
+async function makeRequest(url: string, log?: (msg: string) => void) {
+    log?.(`Request started at ${new Date().toISOString()}`);
+    const result = (await fetch(url)).json();
+    log?.(`Request finished at at ${new Date().toISOString()}`);
+    return result;
+}
+```
+
+2. Nullish Coalescing
+
+```ts
+let x = foo ?? bar();
+
+// equivalent to 
+
+let x = (foo !== null && foo !== undefined) ? foo : bar();
+```
+
+**YOU SHOULD USUALLY USE `??` WHEREVER YOU NORMALLY USE `||`** unless you truly mean falsiness:
+
+```tsx
+function ShowNumber({ value }: { value: number }) {
+  let _value = value || 0.5 // will replace 0 with 0.5 even if user really means 0
+  // etc...
+}
+```
+
+3. Assertion Functions
+
+```tsx
+function assert(condition: any, msg?: string): asserts condition {
+    if (!condition) {
+        throw new AssertionError(msg)
+    }
+}
+function yell(str) {
+    assert(typeof str === "string");
+
+    return str.toUppercase();
+    //         ~~~~~~~~~~~
+    // error: Property 'toUppercase' does not exist on type 'string'.
+    //        Did you mean 'toUpperCase'?
+}
+```
+
+You can also assert without a custom function:
+
+```tsx
+function assertIsString(val: any): asserts val is string {
+    if (typeof val !== "string") {
+        throw new AssertionError("Not a string!");
+    }
+}
+function yell(str: any) {
+    assertIsString(str);
+
+    // Now TypeScript knows that 'str' is a 'string'.
+
+    return str.toUppercase();
+    //         ~~~~~~~~~~~
+    // error: Property 'toUppercase' does not exist on type 'string'.
+    //        Did you mean 'toUpperCase'?
+}
+```
+
+4. `ts-nocheck`
+
+You can now add `// @ts-nocheck` to the top of TypeScript files! good for migrations.
+
+## TypeScript Roadmap and Spec
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
+
+Did you also know you can read the TypeScript spec online?? https://github.com/microsoft/TypeScript/blob/master/doc/spec.md
 
 # Section 3: Misc. Concerns
 
