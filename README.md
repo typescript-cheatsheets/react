@@ -93,7 +93,7 @@
   - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilties)
-- [Troubleshooting Handbook: TSLint](#troubleshooting-handbook-tslint)
+- [Troubleshooting Handbook: ESLint](#troubleshooting-handbook-eslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
 - [Recommended React + TypeScript talks](#recommended-react--typescript-talks)
@@ -1495,27 +1495,13 @@ these are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 - `Required`: Make all properties in an object required
 - `ReturnType` A function's return type
 
-# Troubleshooting Handbook: TSLint
+# Troubleshooting Handbook: ESLint
 
 **Note: TSLint is in maintenance and ESLint is the way forward for TypeScript. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).**
 
-Sometimes TSLint is just getting in the way. Judiciously turning off of things can be helpful. Here are useful tslint disables you may use:
+This section needs writing, but you can probably find a good starting point with [Wes Bos' ESLint config](https://github.com/wesbos/eslint-config-wesbos) (which comes with a [YouTube intro](https://www.youtube.com/watch?v=lHAeK8t94as)).
 
-- `/* tslint:disable */` total disable
-- `// tslint:disable-line` just this line
-- `/* tslint:disable:semicolon */` sometimes prettier adds semicolons and tslint doesn't like it.
-- `/* tslint:disable:no-any */` disable tslint restriction on no-any when you WANT to use any
-- `/* tslint:disable:max-line-length */` disable line wrapping linting
-
-so on and so forth. there are any number of things you can disable, usually you can look at the error raised in VScode or whatever the tooling and the name of the error will correspond to the rule you should disable.
-
-<details>
-
-<summary>Explanation</summary>
-
-This is not yet written. Please PR or [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!
-
-</details>
+Then, check out the [Prettier](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#prettier) and [Linting](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#linting) sections of the ADVANCED cheatsheet!
 
 # Troubleshooting Handbook: tsconfig.json
 
