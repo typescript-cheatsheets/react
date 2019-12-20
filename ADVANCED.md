@@ -1085,13 +1085,11 @@ const GenericComponent2 = myHoc(GenericComponent);
 
 See also [Notes from Google upgrading to 3.5](https://github.com/microsoft/TypeScript/issues/33272)
 
-
 ## TypeScript 3.6
 
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-6/)]
 
 Nothing particularly React specific but [the playground](https://github.com/agentcooper/typescript-play) got an upgrade and [Ambient Classes and Functions Can Merge](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html#ambient-classes-and-functions-can-merge)
-
 
 ## TypeScript 3.7
 
@@ -1105,7 +1103,7 @@ let x = foo?.bar.baz();
 // is equivalent to
 
 let x = (foo === null || foo === undefined) ? undefined : foo.bar.baz();
-    
+
 // Optional Element access
 function tryGetFirstElement<T>(arr?: T[]) {
     return arr?.[0];
@@ -1125,7 +1123,7 @@ async function makeRequest(url: string, log?: (msg: string) => void) {
 ```ts
 let x = foo ?? bar();
 
-// equivalent to 
+// equivalent to
 
 let x = (foo !== null && foo !== undefined) ? foo : bar();
 ```
@@ -1134,7 +1132,7 @@ let x = (foo !== null && foo !== undefined) ? foo : bar();
 
 ```tsx
 function ShowNumber({ value }: { value: number }) {
-  let _value = value || 0.5 // will replace 0 with 0.5 even if user really means 0
+  let _value = value || 0.5; // will replace 0 with 0.5 even if user really means 0
   // etc...
 }
 ```
