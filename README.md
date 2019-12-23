@@ -999,7 +999,7 @@ const Consumer = Context.Consumer;
 
 ## forwardRef/createRef
 
-Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md) for `useRef`.
+Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#hooks) for `useRef`.
 
 `createRef`:
 
