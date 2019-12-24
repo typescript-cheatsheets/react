@@ -109,7 +109,7 @@
 ## Prerequisites
 
 1. good understanding of [React](https://reactjs.org)
-2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful)
+2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
 3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
 
 This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
@@ -1680,6 +1680,7 @@ It is worth mentioning some resources to help you get started:
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbooks.io/typescript/
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced Typescript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
+- Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
 
 # Example App
 
