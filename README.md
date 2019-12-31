@@ -145,8 +145,7 @@ import ReactDOM from "react-dom";
 
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
-Please PR or [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!
-
+You should also check [the new TypeScript docs for official descriptions between each compiler flag](https://www.typescriptlang.org/v2/en/tsconfig#allowSyntheticDefaultImports)!
 </details>
 
 # Section 2: Getting Started
@@ -1505,7 +1504,7 @@ Then, check out the [Prettier](https://github.com/typescript-cheatsheets/react-t
 
 # Troubleshooting Handbook: tsconfig.json
 
-You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
+You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). [The new TS docs also has per-flag annotations of what each does](https://www.typescriptlang.org/v2/en/tsconfig#allowSyntheticDefaultImports). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
 
 ```json
 {
