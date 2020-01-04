@@ -214,6 +214,12 @@ Old content that is possibly out of date
 - Found incorrect function calls for [Tiny][tiny]
 - Found rarely used, buggy code that was untested for [Tiny][tiny]
 
+## Academic Studies of Migration
+
+- [To Type or Not to Type: Quantifying Detectable Bugs in JavaScript](http://earlbarr.com/publications/typestudy.pdf)
+
+> Our central finding is that both static type systems find an important percentage of public bugs: both Flow 0.30 and TypeScript 2.0 successfully detect 15%!
+
 ## Misc migration stories by notable companies and open source
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
