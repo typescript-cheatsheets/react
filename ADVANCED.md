@@ -1383,12 +1383,13 @@ and a suitable `.eslintrc.json`:
       "error",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
     ],
+    "@typescript-eslint/explicit-function-return-type": "warn",
     "no-empty": "warn"
   }
 }
 ```
 
-This is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
+Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
 
 More `.eslintrc.json` options to consider with more options you may want for **apps**:
 
@@ -1434,6 +1435,8 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 ```
 
 You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+
+Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode. 
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
