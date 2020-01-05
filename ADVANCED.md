@@ -1337,7 +1337,6 @@ Yes, you can test your types! You shouldn't use it for EVERYTHING, but it can he
 - https://github.com/SamVerschueren/tsd
 - https://github.com/ikatyang/dts-jest ([Demo](https://codesandbox.io/s/dts-test-frozen-public-demo-iyorn))
 
-
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
 Lets say you want to use `de-indent`, but it isn't typed or on DefinitelyTyped. You get an error like this:
