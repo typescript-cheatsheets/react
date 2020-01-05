@@ -1361,32 +1361,32 @@ and a suitable `.eslintrc.js` (using `.js` over `.json` here so we can add comme
 
 ```js
 module.exports = {
-  "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
+  env: {
+    es6: true,
+    node: true,
+    jest: true
   },
-  "extends": "eslint:recommended",
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "sourceType": "module"
+  extends: "eslint:recommended",
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: "module"
   },
-  "rules": {
-    "indent": ["error", 2],
+  rules: {
+    indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
+    quotes: ["error", "single"],
     "no-console": "warn",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+      { vars: "all", args: "after-used", ignoreRestSiblings: false }
     ],
-    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred. 
+    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
     "no-empty": "warn"
   }
-}
+};
 ```
 
 Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
@@ -1436,7 +1436,7 @@ More `.eslintrc.json` options to consider with more options you may want for **a
 
 You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
 
-Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode. 
+Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode.
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
