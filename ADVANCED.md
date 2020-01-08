@@ -1336,6 +1336,7 @@ Yes, you can test your types! You shouldn't use it for EVERYTHING, but it can he
 - https://github.com/azz/jest-runner-tsc
 - https://github.com/SamVerschueren/tsd
 - https://github.com/ikatyang/dts-jest ([Demo](https://codesandbox.io/s/dts-test-frozen-public-demo-iyorn))
+- https://github.com/microsoft/dtslint ([Intro to dtslint](https://www.youtube.com/watch?v=nygcFEwOG8w&feature=share))
 
 ## Linting
 
