@@ -1102,19 +1102,19 @@ let x = foo?.bar.baz();
 
 // is equivalent to
 
-let x = (foo === null || foo === undefined) ? undefined : foo.bar.baz();
+let x = foo === null || foo === undefined ? undefined : foo.bar.baz();
 
 // Optional Element access
 function tryGetFirstElement<T>(arr?: T[]) {
-    return arr?.[0];
+  return arr?.[0];
 }
 
 // Optional Call
 async function makeRequest(url: string, log?: (msg: string) => void) {
-    log?.(`Request started at ${new Date().toISOString()}`);
-    const result = (await fetch(url)).json();
-    log?.(`Request finished at at ${new Date().toISOString()}`);
-    return result;
+  log?.(`Request started at ${new Date().toISOString()}`);
+  const result = (await fetch(url)).json();
+  log?.(`Request finished at at ${new Date().toISOString()}`);
+  return result;
 }
 ```
 
@@ -1125,7 +1125,7 @@ let x = foo ?? bar();
 
 // equivalent to
 
-let x = (foo !== null && foo !== undefined) ? foo : bar();
+let x = foo !== null && foo !== undefined ? foo : bar();
 ```
 
 **YOU SHOULD USUALLY USE `??` WHEREVER YOU NORMALLY USE `||`** unless you truly mean falsiness:
@@ -1141,17 +1141,17 @@ function ShowNumber({ value }: { value: number }) {
 
 ```tsx
 function assert(condition: any, msg?: string): asserts condition {
-    if (!condition) {
-        throw new AssertionError(msg)
-    }
+  if (!condition) {
+    throw new AssertionError(msg);
+  }
 }
 function yell(str) {
-    assert(typeof str === "string");
+  assert(typeof str === "string");
 
-    return str.toUppercase();
-    //         ~~~~~~~~~~~
-    // error: Property 'toUppercase' does not exist on type 'string'.
-    //        Did you mean 'toUpperCase'?
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
 }
 ```
 
@@ -1159,19 +1159,19 @@ You can also assert without a custom function:
 
 ```tsx
 function assertIsString(val: any): asserts val is string {
-    if (typeof val !== "string") {
-        throw new AssertionError("Not a string!");
-    }
+  if (typeof val !== "string") {
+    throw new AssertionError("Not a string!");
+  }
 }
 function yell(str: any) {
-    assertIsString(str);
+  assertIsString(str);
 
-    // Now TypeScript knows that 'str' is a 'string'.
+  // Now TypeScript knows that 'str' is a 'string'.
 
-    return str.toUppercase();
-    //         ~~~~~~~~~~~
-    // error: Property 'toUppercase' does not exist on type 'string'.
-    //        Did you mean 'toUpperCase'?
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
 }
 ```
 
