@@ -373,10 +373,7 @@ const commentActions = () => ({
   addComment: (str: string) => comments.push({ text: str, id: comments.length })
 });
 
-const ConnectedComment = connect(
-  commentSelector,
-  commentActions
-)(CommentList);
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 
 // these are the props to be injected by the HOC
 interface WithSubscriptionProps<T> {
