@@ -1328,7 +1328,9 @@ yarn add -D prettier husky lint-staged
 }
 ```
 
-This is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
+Integrating this with ESlint may be a problem. We haven't written much on this yet, please contribute if you have a strong opinion. [Here's a helpful gist.](https://gist.github.com/JirkaVebr/519c7597517e4ba756d5b89e7cb4cc0e)
+
+For library authors, this is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
 
 ## Testing
 
