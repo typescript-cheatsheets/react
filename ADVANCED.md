@@ -82,7 +82,6 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Migrating from Flow](#migrating-from-flow)
   - [Prettier](#prettier)
   - [Testing](#testing)
-  - [Linting](#linting)
   - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
   - [Adding non-standard attributes](#adding-non-standard-attributes)
