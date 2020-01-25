@@ -502,23 +502,6 @@ You may also want to use Discriminated Unions, please check out [Expressive Reac
 Here is a brief intuition for **Discriminated Union Types**:
 
 ```ts
-type UserTextEvent = { value: string; target: HTMLInputElement };
-type UserMouseEvent = { value: [number, number]; target: HTMLElement };
-type UserEvent = UserTextEvent | UserMouseEvent;
-function handle(event: UserEvent) {
-  if (typeof event.value === "string") {
-    event.value; // string
-    event.target; // HTMLInputElement | HTMLElement (!!!!)
-    return;
-  }
-  event.value; // [number, number]
-  event.target; // HTMLInputElement | HTMLElement (!!!!)
-}
-```
-
-Even though we have narrowed based on `event.value`, the logic doesn't filter up and sideways to `event.target`. This is because a union type `UserTextEvent | UserMouseEvent` could be BOTH at once. So TypeScript needs a better hint. The solution is to use a literal type to tag each case of your union type:
-
-```ts
 type UserTextEvent = {
   type: "TextEvent";
   value: string;
@@ -544,8 +527,8 @@ function handle(event: UserEvent) {
 To streamline this you may also combine this with the concept of **User-Defined Type Guards**:
 
 ```ts
-function isString(a: unknown): a is string {
-  return typeof a === "string";
+function isMouseEvent(a: unknown): a is MouseEvent {
+  return a && a.type === "MouseEvent";
 }
 ```
 
