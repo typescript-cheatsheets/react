@@ -1145,7 +1145,7 @@ function isAdmin(user: Admin | User): user is Admin {
 
 Method 2 is also known as [User-Defined Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) and can be really handy for readable code. This is how TS itself refines types with `typeof` and `instanceof`.
 
-If you need `if...else` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
+If you need `if...else` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
 
 ## Optional Types
 
