@@ -425,7 +425,7 @@ They don't even need to be completely different props, as long as they have at l
 type LinkProps = Omit<JSX.IntrinsicElements["a"], "href"> & { to?: string };
 
 function RouterLink(props: LinkProps | AnchorProps) {
-  if ("to" in props) {
+  if ("href" in props) {
     return <a {...props} />;
   } else {
     return <Link {...props} />;
