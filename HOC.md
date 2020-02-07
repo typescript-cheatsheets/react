@@ -17,6 +17,7 @@
 [**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
 [**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
 [Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
@@ -372,10 +373,7 @@ const commentActions = () => ({
   addComment: (str: string) => comments.push({ text: str, id: comments.length })
 });
 
-const ConnectedComment = connect(
-  commentSelector,
-  commentActions
-)(CommentList);
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 
 // these are the props to be injected by the HOC
 interface WithSubscriptionProps<T> {

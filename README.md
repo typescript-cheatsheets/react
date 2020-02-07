@@ -93,11 +93,11 @@
   - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilties)
-- [Troubleshooting Handbook: ESLint](#troubleshooting-handbook-eslint)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
 - [Recommended React + TypeScript codebases to learn from](#recommended-react--typescript-codebases-to-learn-from)
 - [Recommended React + TypeScript talks](#recommended-react--typescript-talks)
 - [Editor Tooling and Integration](#editor-tooling-and-integration)
+- [Linting](#linting)
 - [Other React + TypeScript resources](#other-react--typescript-resources)
 - [Time to Really Learn TypeScript](#time-to-really-learn-typescript)
 - [Example App](#example-app)
@@ -111,6 +111,7 @@
 1. good understanding of [React](https://reactjs.org)
 2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
 3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+4. having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
 
 This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
 
@@ -145,7 +146,7 @@ import ReactDOM from "react-dom";
 
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
-Please PR or [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new) with your suggestions!
+You should also check [the new TypeScript docs for official descriptions between each compiler flag](https://www.typescriptlang.org/v2/en/tsconfig#allowSyntheticDefaultImports)!
 
 </details>
 
@@ -1144,7 +1145,7 @@ function isAdmin(user: Admin | User): user is Admin {
 
 Method 2 is also known as [User-Defined Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) and can be really handy for readable code. This is how TS itself refines types with `typeof` and `instanceof`.
 
-If you need `if...else` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
+If you need `if...else` chains or the `switch` statement instead, it should "just work", but look up [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) if you need help. (See also: [Basarat's writeup](https://basarat.gitbooks.io/typescript/docs/types/discriminated-unions.html)). This is handy in typing reducers for `useReducer` or Redux.
 
 ## Optional Types
 
@@ -1442,6 +1443,9 @@ let baz2: SubIsntType2 = {
 };
 ```
 
+- TS also ships with a `Parameters` utility type for extracting the parameters of a function
+- for anything more "custom", the `infer` keyword is the basic building block for this, but takes a bit of getting used to. Look at the source code for the above utility types, and [this example](https://twitter.com/mgechev/status/1211030455224422401?s=20) to get the idea.
+
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
@@ -1495,17 +1499,11 @@ these are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 - `Required`: Make all properties in an object required
 - `ReturnType` A function's return type
 
-# Troubleshooting Handbook: ESLint
-
-**Note: TSLint is in maintenance and ESLint is the way forward for TypeScript. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).**
-
 This section needs writing, but you can probably find a good starting point with [Wes Bos' ESLint config](https://github.com/wesbos/eslint-config-wesbos) (which comes with a [YouTube intro](https://www.youtube.com/watch?v=lHAeK8t94as)).
-
-Then, check out the [Prettier](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#prettier) and [Linting](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#linting) sections of the ADVANCED cheatsheet!
 
 # Troubleshooting Handbook: tsconfig.json
 
-You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
+You can find [all the Compiler options in the Typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). [The new TS docs also has per-flag annotations of what each does](https://www.typescriptlang.org/v2/en/tsconfig#allowSyntheticDefaultImports). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
 
 ```json
 {
@@ -1626,6 +1624,7 @@ You can see examples of these included in the built in type declarations in the 
 
 React Boilerplates:
 
+- https://github.com/rwieruch/nextjs-firebase-authentication: Next.js + Firebase Starter: styled, tested, typed, and authenticated
 - [@jpavon/react-scripts-ts](https://github.com/jpavon/react-scripts-ts) alternative react-scripts with all TypeScript features using [ts-loader](https://github.com/TypeStrong/ts-loader)
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
@@ -1649,6 +1648,109 @@ React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescri
   - peitalin/vim-jsx-typescript
   - NeoVim: https://github.com/neoclide/coc.nvim
   - other discussion: https://mobile.twitter.com/ryanflorence/status/1085715595994095620
+
+# Linting
+
+> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).
+
+> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint.
+
+Follow the TypeScript + ESLint docs at https://github.com/typescript-eslint/typescript-eslint:
+
+```
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
+```
+
+add a `lint` script to your `package.json`:
+
+```json
+  "scripts": {
+    "lint": "eslint 'src/**/*.ts'"
+  },
+```
+
+and a suitable `.eslintrc.js` (using `.js` over `.json` here so we can add comments):
+
+```js
+module.exports = {
+  env: {
+    es6: true,
+    node: true,
+    jest: true
+  },
+  extends: "eslint:recommended",
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: "module"
+  },
+  rules: {
+    indent: ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "single"],
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { vars: "all", args: "after-used", ignoreRestSiblings: false }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
+    "no-empty": "warn"
+  }
+};
+```
+
+Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
+
+More `.eslintrc.json` options to consider with more options you may want for **apps**:
+
+```json
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["prettier", "jest", "unicorn"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
+```
+
+You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+
+Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode.
+
+If you're looking for information on Prettier, check out the [Prettier](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#prettier).
 
 # Other React + TypeScript resources
 
@@ -1676,6 +1778,7 @@ Believe it or not, we have only barely introduced TypeScript here in this cheats
 
 It is worth mentioning some resources to help you get started:
 
+- Step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section, written by @Orta
 - Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbooks.io/typescript/

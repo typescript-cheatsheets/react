@@ -17,6 +17,7 @@
 [**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
 [**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
 [Ask!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose)
 
@@ -81,7 +82,6 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Migrating from Flow](#migrating-from-flow)
   - [Prettier](#prettier)
   - [Testing](#testing)
-  - [Linting](#linting)
   - [Working with Non-TypeScript Libraries (writing your own index.d.ts)](#working-with-non-typescript-libraries-writing-your-own-indexdts)
 - [Section 4: @types/react and @types/react-dom APIs](#section-4-typesreact-and-typesreact-dom-apis)
   - [Adding non-standard attributes](#adding-non-standard-attributes)
@@ -425,7 +425,7 @@ They don't even need to be completely different props, as long as they have at l
 type LinkProps = Omit<JSX.IntrinsicElements["a"], "href"> & { to?: string };
 
 function RouterLink(props: LinkProps | AnchorProps) {
-  if ("to" in props) {
+  if ("href" in props) {
     return <a {...props} />;
   } else {
     return <Link {...props} />;
@@ -1102,19 +1102,19 @@ let x = foo?.bar.baz();
 
 // is equivalent to
 
-let x = (foo === null || foo === undefined) ? undefined : foo.bar.baz();
+let x = foo === null || foo === undefined ? undefined : foo.bar.baz();
 
 // Optional Element access
 function tryGetFirstElement<T>(arr?: T[]) {
-    return arr?.[0];
+  return arr?.[0];
 }
 
 // Optional Call
 async function makeRequest(url: string, log?: (msg: string) => void) {
-    log?.(`Request started at ${new Date().toISOString()}`);
-    const result = (await fetch(url)).json();
-    log?.(`Request finished at at ${new Date().toISOString()}`);
-    return result;
+  log?.(`Request started at ${new Date().toISOString()}`);
+  const result = (await fetch(url)).json();
+  log?.(`Request finished at at ${new Date().toISOString()}`);
+  return result;
 }
 ```
 
@@ -1125,7 +1125,7 @@ let x = foo ?? bar();
 
 // equivalent to
 
-let x = (foo !== null && foo !== undefined) ? foo : bar();
+let x = foo !== null && foo !== undefined ? foo : bar();
 ```
 
 **YOU SHOULD USUALLY USE `??` WHEREVER YOU NORMALLY USE `||`** unless you truly mean falsiness:
@@ -1141,17 +1141,17 @@ function ShowNumber({ value }: { value: number }) {
 
 ```tsx
 function assert(condition: any, msg?: string): asserts condition {
-    if (!condition) {
-        throw new AssertionError(msg)
-    }
+  if (!condition) {
+    throw new AssertionError(msg);
+  }
 }
 function yell(str) {
-    assert(typeof str === "string");
+  assert(typeof str === "string");
 
-    return str.toUppercase();
-    //         ~~~~~~~~~~~
-    // error: Property 'toUppercase' does not exist on type 'string'.
-    //        Did you mean 'toUpperCase'?
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
 }
 ```
 
@@ -1159,19 +1159,19 @@ You can also assert without a custom function:
 
 ```tsx
 function assertIsString(val: any): asserts val is string {
-    if (typeof val !== "string") {
-        throw new AssertionError("Not a string!");
-    }
+  if (typeof val !== "string") {
+    throw new AssertionError("Not a string!");
+  }
 }
 function yell(str: any) {
-    assertIsString(str);
+  assertIsString(str);
 
-    // Now TypeScript knows that 'str' is a 'string'.
+  // Now TypeScript knows that 'str' is a 'string'.
 
-    return str.toUppercase();
-    //         ~~~~~~~~~~~
-    // error: Property 'toUppercase' does not exist on type 'string'.
-    //        Did you mean 'toUpperCase'?
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
 }
 ```
 
@@ -1211,7 +1211,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 
 ## Commenting Components
 
-Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/documentation/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
+Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/docs/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
 import React from "react";
@@ -1327,7 +1327,9 @@ yarn add -D prettier husky lint-staged
 }
 ```
 
-This is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
+Integrating this with ESlint may be a problem. We haven't written much on this yet, please contribute if you have a strong opinion. [Here's a helpful gist.](https://gist.github.com/JirkaVebr/519c7597517e4ba756d5b89e7cb4cc0e)
+
+For library authors, this is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
 
 ## Testing
 
@@ -1336,104 +1338,7 @@ Yes, you can test your types! You shouldn't use it for EVERYTHING, but it can he
 - https://github.com/azz/jest-runner-tsc
 - https://github.com/SamVerschueren/tsd
 - https://github.com/ikatyang/dts-jest ([Demo](https://codesandbox.io/s/dts-test-frozen-public-demo-iyorn))
-
-## Linting
-
-> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).
-
-> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint.
-
-Follow the TypeScript + ESLint docs at https://github.com/typescript-eslint/typescript-eslint:
-
-```
-yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
-```
-
-add a `lint` script to your `package.json`:
-
-```json
-  "scripts": {
-    "lint": "eslint 'src/**/*.ts'"
-  },
-```
-
-and a suitable `.eslintrc.json`:
-
-```json
-{
-  "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
-  },
-  "extends": "eslint:recommended",
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "sourceType": "module"
-  },
-  "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "no-console": "warn",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-    ],
-    "no-empty": "warn"
-  }
-}
-```
-
-This is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
-
-More `.eslintrc.json` options to consider with more options you may want for **apps**:
-
-```json
-{
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "plugin:jest/recommended",
-    "plugin:unicorn/recommended"
-  ],
-  "plugins": ["prettier", "jest", "unicorn"],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "jest": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
-      "rules": {
-        "no-undef": "off"
-      }
-    }
-  ]
-}
-```
-
-You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
+- https://github.com/microsoft/dtslint ([Intro to dtslint](https://www.youtube.com/watch?v=nygcFEwOG8w&feature=share))
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
