@@ -1198,14 +1198,14 @@ Not really React specific but ok Bloomberg
 
 3. `export * as ns` Syntax
 
-This is ES2020 syntax. Instead of 
+This is ES2020 syntax. Instead of
 
 ```js
 import * as utilities from "./utilities.js";
 export { utilities };
 ```
 
-you can do 
+you can do
 
 ```js
 export * as utilities from "./utilities.js";
