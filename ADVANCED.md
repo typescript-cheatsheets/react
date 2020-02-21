@@ -74,6 +74,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [TypeScript 3.5](#typescript-35)
   - [TypeScript 3.6](#typescript-36)
   - [TypeScript 3.7](#typescript-37)
+  - [TypeScript 3.8](#typescript-38)
 - [Section 3: Misc. Concerns](#section-3-misc-concerns)
   - [Writing TypeScript Libraries instead of Apps](#writing-typescript-libraries-instead-of-apps)
   - [Commenting Components](#commenting-components)
@@ -1178,6 +1179,50 @@ function yell(str: any) {
 4. `ts-nocheck`
 
 You can now add `// @ts-nocheck` to the top of TypeScript files! good for migrations.
+
+## TypeScript 3.8
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8/)]
+
+1. Type-Only Imports and Exports
+
+```ts
+import type { SomeThing } from "./some-module.js";
+
+export type { SomeThing };
+```
+
+2. ECMAScript Private Fields
+
+Not really React specific but ok Bloomberg
+
+3. `export * as ns` Syntax
+
+This is ES2020 syntax. Instead of 
+
+```js
+import * as utilities from "./utilities.js";
+export { utilities };
+```
+
+you can do 
+
+```js
+export * as utilities from "./utilities.js";
+```
+
+4. Top-Level `await`
+
+not React specific but gj Myles
+
+5. JSDoc Property Modifiers
+
+handy for JSDoc users - `@public, @private, @protected, @readonly`
+
+6. Better Directory Watching on Linux and watchOptions
+7. “Fast and Loose” Incremental Checking
+
+`assumeChangesOnlyAffectDirectDependencies` reduces build times for extremely large codebases.
 
 ## TypeScript Roadmap and Spec
 
