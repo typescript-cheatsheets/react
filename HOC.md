@@ -109,7 +109,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
   return class ComponentWithTheme extends React.Component<
     Optionalize<T, WithThemeProps>
   > {
-    public static displayName = `withPages(${displayName})`;
+    public static displayName = `withTheme(${displayName})`;
 
     public render() {
       // Fetch the props you want inject. This could be done with context instead.
