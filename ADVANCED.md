@@ -53,7 +53,7 @@ The best tool for creating React + TS libraries right now is [`tsdx`](https://gi
   - [Higher Order Components](#higher-order-components-hocs)
   - [Render Props](#render-props)
   - [Conditionally Rendering Components](#conditinonally-rendering-components)
-  - [`as` props (passing a component to be rendered)](#as-props-passing-a-component-to-be-rendered)
+  - [Polymorphic Components (passing a component to be rendered, e.g. with `as` props)](#polymorphic-components-passing-a-component-to-be-rendered-e-g-with-as-props)
   - [Generic Components](#generic-components)
   - [Typing a Component that Accepts Different Props](#typing-a-component-that-accepts-different-props)
   - [Props: One or the Other but not Both](#props-one-or-the-other-but-not-both)
@@ -179,7 +179,7 @@ function App() {
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoAekrgCEBXGGCAOzjBzAGcKYBPMEjqNmLAAqcucALyJiMAHQMmrABIAVALIAZAIJMowAEaMkXADwady0QFEANkhBIWMAHxwAZHADeFOHAAFkSYAPwAXHD0LAAmSJjALEgxANwUAL5p5BTUcLosaIHQ7JK8AkL5hdASENwycuiKlUVQVnoGxqYWbc3QDk4u7l6+-kEhEXBcMIYsAOZZmRQ5NACSLGCMlBCMG-C1MMCsPOT8gnAA8gBuSFD2ECgx9X7kAQAUHLVckTasNdwAlJEAFIAZQAGgp+s5XFk3h9uJFelA-lxAXBQRCoYMFlllnAAOL0FBQR7MOCFJBoADWcGAmDG8TgSAAHsAplJEiVPhQ0Ed4IEUFxVCF6u9JN8RL9JHAAD55AotFFo+EcqRIlEyNyjABEwXi2tpbBVuKoNAAwrhIElXDy+cIVCxIlcbncHqKVRKHRq5erJP9NSMXnBcigFcUiLEbqM6XBXgKhSExZ9-v6iDB6FA2OYUL4FHmVelg25YcGaCYHXAI3EoKM0xms+XRLn85JC5RixkTbkAKpcFCzJAUTDRDCHNi6MBgV7+54BOuZ2OjALmLVBgIBHyUABUcEAvBuAOD28vZ7HBZhAII8t5R0kv1+YfmwYMSBzBpNqAPpGeyhqkGvWYN9AiYBFqAAd3AhQzwgWZHAUXkQG1Vd12QuB1DMGBb2XSgHyQlDNx3XdAFo9uBbCgHAoAAGjgAADGI2RQL9kmouAYggMxXCZVkpjgVg4FDKooCZRxoXgK8bzXO8HxY+jGMef832ZRDMPXNCpmU8xsMlFhcKw3D-gWIA)
 
-## `as` props (passing a component to be rendered)
+## Polymorphic Components (passing a component to be rendered, e.g. with `as` props)
 
 `ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
 
@@ -190,6 +190,11 @@ function PassThrough(props: { as: React.ElementType<any> }) {
   return <Component />;
 }
 ```
+
+For more info you can refer to these resources:
+
+- https://blog.andrewbran.ch/polymorphic-react-components/
+- https://github.com/kripod/react-polymorphic-box
 
 [Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) for this
 
