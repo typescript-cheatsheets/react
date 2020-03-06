@@ -870,19 +870,94 @@ Of course, if you're making any sort of significant form, [you should use Formik
 
 ## Context
 
-Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
+You can use the `useContext` API in mostly the same way you would in JavaScript, but it takes a bit of boilerplate out of the box under TypeScript's `strictNullChecks` mode. Here's the most basic example:
+
+```ts
+import * as React from "react";
+
+const currentUserContext = React.createContext<string | undefined>(undefined);
+
+function EnthusasticGreeting() {
+  const currentUser = React.useContext(currentUserContext);
+  return <div>HELLO {currentUser!.toUpperCase()}!</div>;
+}
+
+function App() {
+  return <currentUserContext.Provider value="Shawn">
+    <EnthusasticGreeting />
+  </currentUserContext.Provider>;
+}
+```
+
+Notice the explicit type arguments which we need because we don't have a default `string` value:
+
+```ts
+const currentUserContext = React.createContext<string | undefined>(undefined);
+//                                             ^^^^^^^^^^^^^^^^^^
+```
+
+along with the non-null assertion to tell TypeScript that `currentUser` is definitely going to be there:
+
+```ts
+  return <div>HELLO {currentUser!.toUpperCase()}!</div>;
+//                              ^
+```
+
+This is unfortunate because *we know* that later in our app, a `Provider` is going to fill in the context.
+
+We can write a helper function called `createCtx` that guards against accessing a `Context` whose value wasn't provided. By doing this, API instead, **we never have to provide a default and never have to check for `undefined`**:
 
 ```tsx
-// create context with no upfront defaultValue
-// without having to do undefined check all the time
-function createCtx<A>() {
+import * as React from "react";
+
+/**
+ * A helper to create a Context and Provider with no upfront default value, and
+ * without having to check for undefined all the time.
+ */
+function createCtx<A extends {} | null>() {
   const ctx = React.createContext<A | undefined>(undefined);
   function useCtx() {
     const c = React.useContext(ctx);
-    if (!c) throw new Error("useCtx must be inside a Provider with a value");
+    if (c === undefined) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
-  return [useCtx, ctx.Provider] as const; // make TypeScript infer a tuple, not an array of union types
+  return [useCtx, ctx.Provider] as const; // 'as const' makes TypeScript infer a tuple
+}
+
+// Usage:
+
+// We still have to specify a type, but no default!
+export const [useCurrentUserName, CurrentUserProvider] = createCtx<string>();
+
+function EnthusasticGreeting() {
+  const currentUser = useCurrentUserName();
+  return <div>HELLO {currentUser.toUpperCase()}!</div>;
+}
+
+function App() {
+  return <CurrentUserProvider value="Shawn">
+    <EnthusasticGreeting />
+  </CurrentUserProvider>;
+}
+```
+
+[View in the TypeScript Playground](http://www.typescriptlang.org/play/index.html?jsx=1&ssl=1&ssc=1&pln=31&pc=2#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MLQn1wAHFKFhPnFAcsQWDxEvJ79hDixypZdV1necFiVNV5TgTpNGAfRpgACXJAAZZCAHkllwH8Vz-SpRGTMBBCgOQ0CwBZhm7TpGFg+D6ETepFEaZoOEI99VRfdVoMXIDfyEdcBTgUVfG2MhAyiUxFDIaYUU6K9LFvItH2fV94kYaS3io7iJxwvj+WNaY6KAA)
+
+You can go even further and combine this idea using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
+
+```tsx
+/**
+ * A helper to create a Context and Provider with no upfront default value, and
+ * without having to check for undefined all the time.
+ */
+function createCtx<A extends {} | null>() {
+  const ctx = React.createContext<A | undefined>(undefined);
+  function useCtx() {
+    const c = React.useContext(ctx);
+    if (c === undefined) throw new Error("useCtx must be inside a Provider with a value");
+    return c;
+  }
+  return [useCtx, ctx.Provider] as const; // 'as const' makes TypeScript infer a tuple
 }
 
 // usage
