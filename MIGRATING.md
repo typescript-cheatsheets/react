@@ -192,6 +192,7 @@ Gradually add [more `strict` mode flags](https://www.typescriptlang.org/docs/han
 - [Hootsuite][hootsuite]
 - [Storybook's migration (PR)](https://github.com/storybooks/storybook/issues/5030)
 - [How we migrated a 200K+ LOC project to TypeScript and survived to tell the story][coherentlabs] - Coherent Labs - using `grunt-ts`, jQuery and Kendo UI
+- incrementally adding strict null checks https://code.visualstudio.com/blogs/2019/05/23/strict-null
 
 Old content that is possibly out of date
 
