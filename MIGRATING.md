@@ -243,7 +243,7 @@ Open Source
 - [React Native CLI](https://github.com/react-native-community/cli/issues/683)
 - [Next.js](https://nextjs.org/blog/next-9)
 - [React Router](https://github.com/ReactTraining/react-router/issues/6955)
-  - [history] (https://github.com/ReactTraining/history/pull/774) 
+  - [history](https://github.com/ReactTraining/history/pull/774)
 - [Redux](https://github.com/reduxjs/redux/pull/3536)
 - [Dojo 1 -> 2 migration](https://devchat.tv/js-jabber/jsj-277-dojo-2-dylan-schiemann-kitson-kelly/)
 
