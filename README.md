@@ -1787,7 +1787,7 @@ It is worth mentioning some resources to help you get started:
 
 # Example App
 
-- [React TypeScript Todo Example 2020](https://github.com/laststance/react-typescript-todo-example-2020)
+- [Create React App TypeScript Todo Example 2020](https://github.com/laststance/create-react-app-typescript-todo-example-2020)
 
 # My question isn't answered here!
 
