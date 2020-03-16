@@ -1227,7 +1227,7 @@ Of course, try to actually handle the null case instead of asserting :)
 
 ## Simulating Nominal Types
 
-TS' structural typing is handy, until it is inconvenient. However you can simulate nominal typing with [`type branding`](https://basarat.gitbooks.io/typescript/docs/tips/nominalTyping.html):
+TS' structural typing is handy, until it is inconvenient. However you can simulate nominal typing with [`type branding`](https://basarat.gitbook.io/typescript/main-1/nominaltyping):
 
 ```ts
 type OrderID = string & { readonly brand: unique symbol };
