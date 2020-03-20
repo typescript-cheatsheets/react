@@ -228,6 +228,7 @@ ReactDOM.render(
     items={["a", "b"]} // type of 'string' inferred
     renderItem={item => (
       <li key={item}>
+        <!-- prettier-ignore -->
         {item.toPrecision(3)} // Error: Property 'toPrecision' does not exist on type 'string'.
       </li>
     )}
