@@ -474,31 +474,35 @@ const Link = <T extends {}>(
 If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
 
 ```tsx
-type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
-type RouterLinkProps = Omit<AnchorProps, 'href'>
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type RouterLinkProps = Omit<AnchorProps, "href">;
 
 interface Button {
-  as: React.ComponentClass | 'a'
+  as: React.ComponentClass | "a";
 }
 
-const Button: React.FunctionComponent<Button> = (props) => {
-  const {as: Component, children, ...rest} = props
+const Button: React.FunctionComgetOrElseponent<Button> = props => {
+  const { as: Component, children, ...rest } = props;
   return (
-    <Component className="button" {...rest}>{children}</Component>
-  )
-}
+    <Component className="button" {...rest}>
+      {children}
+    </Component>
+  );
+};
 
-const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
+const AnchorButton: React.FunctionComponent<AnchorProps> = props => (
   <Button as="a" {...props} />
-)
+);
 
-const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
+const LinkButton: React.FunctionComponent<RouterLinkProps> = props => (
   <Button as={NavLink} {...props} />
-)
+);
 
-<LinkButton to="/login">Login</LinkButton>
-<AnchorButton href="/login">Login</AnchorButton>
-<AnchorButton href="/login" to="/test">Login</AnchorButton> // Error: Property 'to' does not exist on type...
+<LinkButton to="/login">Login</LinkButton>;
+<AnchorButton href="/login">Login</AnchorButton>;
+<AnchorButton href="/login" to="/test">
+  Login
+</AnchorButton>; // Error: Property 'to' does not exist on type...
 ```
 
 </details>
@@ -816,41 +820,41 @@ You can also describe exceptions with special-purpose data types (don't say mona
 
 ```ts
 interface Option<T> {
-  flatMap<U>(f: (value: T) => None): None
-  flatMap<U>(f: (value: T) => Option<U>): Option<U>
-  getOrElse(value: T): T
+  flatMap<U>(f: (value: T) => None): None;
+  flatMap<U>(f: (value: T) => Option<U>): FormikOption<U>;
+  getOrElse(value: T): T;
 }
 class Some<T> implements Option<T> {
   constructor(private value: T) {}
-  flatMap<U>(f: (value: T) => None): None
-  flatMap<U>(f: (value: T) => Some<U>): Some<U>
+  flatMap<U>(f: (value: T) => None): None;
+  flatMap<U>(f: (value: T) => Some<U>): Some<U>;
   flatMap<U>(f: (value: T) => Option<U>): Option<U> {
-    return f(this.value)
+    return f(this.value);
   }
   getOrElse(): T {
-    return this.value
+    return this.value;
   }
 }
 class None implements Option<never> {
   flatMap<U>(): None {
-    return this
+    return this;
   }
   getOrElse<U>(value: U): U {
-    return value
+    return value;
   }
 }
 
 // now you can use it like:
 let result = Option(6) // Some<number>
-              .flatMap(n => Option(n*3)) // Some<number>
-              .flatMap(n = new None) // None
-              .getOrElse(7)
+  .flatMap(n => Option(n * 3)) // Some<number>
+  .flatMap((n = new None())) // None
+  .getOrElse(7);
 
 // or:
 let result = ask() // Option<string>
-              .flatMap(parse) // Option<Date>
-              .flatMap(d => new Some(d.toISOString()) // Option<string>
-              .getOrElse('error parsing string')
+  .flatMap(parse) // Option<Date>
+  .flatMap(d => new Some(d.toISOString())) // Option<string>
+  .getOrElse("error parsing string");
 ```
 
 ## Third Party Libraries
@@ -889,11 +893,19 @@ Helps with typing/using generic components:
 
 ```tsx
 // instead of
-<Formik render={(props: FormikProps<Values>) => ....}/>
+<Formik
+  render={(props: FormikProps<Values>) => {
+    /* your code here ... */
+  }}
+/>;
 
 // usage
-<Formik<Values> render={props => ...}/>
-<MyComponent<number> data={12} />
+<Formik<Values>
+  render={props => {
+    /* your code here ... */
+  }}
+/>;
+<MyComponent<number> data={12} />;
 ```
 
 More info: https://github.com/basarat/typescript-book/blob/master/docs/jsx/react.md#react-jsx-tip-generic-components
@@ -966,6 +978,8 @@ if (typeof response === "string") {
 }
 ```
 
+TODO: blame this change. Don't know what this shouldve done
+
 You can also assert a type, or use a **type guard** against an `unknown` type. This is better than resorting to `any`.
 
 4. Project References
@@ -974,7 +988,7 @@ Project references allow TypeScript projects to depend on other TypeScript proje
 
 In each folder, create a tsconfig.json that includes at least:
 
-```js
+```json
 {
   "compilerOptions": {
     "composite": true, // tells TSC it is a subproject of a larger project
@@ -982,10 +996,9 @@ In each folder, create a tsconfig.json that includes at least:
     "declarationMap": true, // sourcemaps for .d.ts
     "rootDir": "." // specify compile it relative to root project at .
   },
-  "include": [
-    "./**/*.ts
-  ],
-  "references": [ // (optional) array of subprojects your subproject depends on
+  "include": ["./**/*.ts"],
+  "references": [
+    // (optional) array of subprojects your subproject depends on
     {
       "path": "../myreferencedproject", // must have tsconfig.json
       "prepend": true // concatenate js and sourcemaps generated by this subproject, if and only if using outFile
@@ -996,13 +1009,10 @@ In each folder, create a tsconfig.json that includes at least:
 
 and the root `tsconfig.json` that references top level subproject:
 
-```js
+```json
 {
-  "files: [],
-  "references": [
-    {"path": "./proj1"},
-    {"path": "./proj2"},
-  ]
+  "files": [],
+  "references": [{ "path": "./proj1" }, { "path": "./proj2" }]
 }
 ```
 
@@ -1010,9 +1020,9 @@ and you must run `tsc --build` or `tsc -b`.
 
 To save the tsconfig boilerplate, you can use the `extends` option:
 
-```js
+```json
 {
-  "extends": "../tsconfig.base",
+  "extends": "../tsconfig.base"
   // more stuff here
 }
 ```
@@ -1346,9 +1356,11 @@ If you have specific advice in this area, please file a PR!
 
 There isn't any real secret to Prettier for TypeScript. But its a great idea to run prettier on every commit!
 
-```js
-yarn add -D prettier husky lint-staged
+```bash
+$ yarn add -D prettier husky lint-staged
+```
 
+```json
 // inside package.json
 {
   //...
@@ -1363,9 +1375,7 @@ yarn add -D prettier husky lint-staged
         "prettier --trailing-comma es5 --single-quote --write",
         "git add"
       ],
-      "ignore": [
-        "**/dist/*, **/node_modules/*"
-      ]
+      "ignore": ["**/dist/*, **/node_modules/*"]
     }
   },
   "prettier": {
