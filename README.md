@@ -870,7 +870,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 
 ## Context
 
-Using `React.createContext` with an empty object as default value (preferred for absolute TypeScript beginners).
+Using `React.createContext` with an empty object as default value.
 
 ```tsx
 interface ContextState {
