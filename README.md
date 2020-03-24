@@ -679,7 +679,7 @@ Notice we have used the TSDoc `/** comment */` style here on each prop. You can 
 ```tsx
 export declare interface AppProps {
   children1: JSX.Element; // bad, doesnt account for arrays
-  children2: JSX.Element | JSX.Element[]; // meh, doesnt accept functions
+  children2: JSX.Element | JSX.Element[]; // meh, doesn't accept strings
   children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
   children4: React.ReactChild[]; // better
   children: React.ReactNode; // best, accepts everything
