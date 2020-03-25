@@ -165,17 +165,20 @@ const App = ({ message }: AppProps) => <div>{message}</div>;
 
 <summary><b>What about `React.FC`/`React.FunctionComponent`?</b></summary>
 
-You can also write components with `React.FunctionComponent` (or the shorthand `React.FC`):
+You can also write components with `React.FunctionComponent` (or the shorthand `React.FC` - they are the same):
 
 ```tsx
-const App: React.FC<{ message: string }> = ({ message }) => (
+const App: React.FunctionComponent<{ message: string }> = ({ message }) => (
   <div>{message}</div>
 );
 ```
 
 Some differences from the "normal function" version:
 
-- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps` - **However**, there are currently known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87) - scroll down to our `defaultProps` section for typing recommendations there.
+- `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
+
+- It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps`.
+  - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
 - It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might considered better style to be explicit about components that consume `children`, anyway.
 
@@ -188,9 +191,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 
 - _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
 
-- `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
-
-In most cases it makes very little difference which syntax is used, but the `React.FC` syntax is slightly more verbose without providing clear advantage, so precedence was given to the "normal function" syntax.
+In most cases it makes very little difference which syntax is used, but you may prefer the more explicit nature of `React.FunctionComponent`.
 
 </details>
 
