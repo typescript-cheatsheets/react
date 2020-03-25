@@ -186,7 +186,7 @@ Some differences from the "normal function" version:
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
   children,
-  title
+  title,
 }) => <div title={title}>{children}</div>;
 ```
 
@@ -326,12 +326,12 @@ export function reducer(state: AppState, action: Action): AppState {
     case "SET_ONE":
       return {
         ...state,
-        one: action.payload // `payload` is string
+        one: action.payload, // `payload` is string
       };
     case "SET_TWO":
       return {
         ...state,
-        two: action.payload // `payload` is number
+        two: action.payload, // `payload` is number
       };
     default:
       return state;
@@ -433,7 +433,7 @@ type MyState = {
 class App extends React.Component<MyProps, MyState> {
   state: MyState = {
     // optional second annotation for better type inference
-    count: 0
+    count: 0,
   };
   render() {
     return (
@@ -492,8 +492,8 @@ class App extends React.Component<{ message: string }, { count: number }> {
   }
   increment = (amt: number) => {
     // like this
-    this.setState(state => ({
-      count: state.count + amt
+    this.setState((state) => ({
+      count: state.count + amt,
     }));
   };
 }
@@ -535,7 +535,7 @@ For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 type Props = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: "Johny Five"
+  who: "Johny Five",
 };
 
 const Greet = (props: Props) => {
@@ -553,7 +553,7 @@ type GreetProps = typeof Greet.defaultProps & {
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
-    name: "world"
+    name: "world",
   };
   /*...*/
 }
@@ -587,7 +587,7 @@ type Props = Required<typeof MyComponent.defaultProps> & {
 
 export class MyComponent extends React.Component<Props> {
   static defaultProps = {
-    foo: "foo"
+    foo: "foo",
   };
 }
 ```
@@ -602,7 +602,7 @@ interface IMyComponentProps {
 
 export class MyComponent extends React.Component<IMyComponentProps> {
   public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: "default"
+    firstProp: "default",
   };
 }
 ```
@@ -749,7 +749,7 @@ type State = DefinedState & ReturnType<typeof transformPropsToState>;
 function transformPropsToState(props: Props) {
   return {
     savedPropA: props.propA, // save for memoization
-    derivedState: props.propA
+    derivedState: props.propA,
   };
 }
 class Comp extends React.PureComponent<Props, State> {
@@ -757,7 +757,7 @@ class Comp extends React.PureComponent<Props, State> {
     super(props);
     this.state = {
       otherStateField: "123",
-      ...transformPropsToState(props)
+      ...transformPropsToState(props),
     };
   }
   static getDerivedStateFromProps(props: Props, state: State) {
@@ -776,7 +776,7 @@ If performance is not an issue, inlining handlers is easiest as you can just use
 ```tsx
 const el = (
   <button
-    onClick={event => {
+    onClick={(event) => {
       /* ... */
     }}
   />
@@ -794,7 +794,7 @@ class App extends React.Component<
   }
 > {
   state = {
-    text: ""
+    text: "",
   };
 
   // typing on RIGHT hand side of =
@@ -914,7 +914,7 @@ export function createCtx<A>(defaultValue: A) {
   const defaultUpdate: UpdateType = () => defaultValue;
   const ctx = React.createContext({
     state: defaultValue,
-    update: defaultUpdate
+    update: defaultUpdate,
   });
   function Provider(props: React.PropsWithChildren<{}>) {
     const [state, update] = React.useState(defaultValue);
@@ -939,7 +939,7 @@ export function Component() {
   return (
     <label>
       {state}
-      <input type="text" onChange={e => update(e.target.value)} />
+      <input type="text" onChange={(e) => update(e.target.value)} />
     </label>
   );
 }
@@ -974,7 +974,7 @@ const Context = React.createContext({} as ProviderStore); // type assertion on e
 
 class Provider extends React.Component<{}, ProviderState> {
   public readonly state = {
-    themeColor: "red"
+    themeColor: "red",
   };
 
   private update = ({ key, value }: UpdateStateArg) => {
@@ -984,7 +984,7 @@ class Provider extends React.Component<{}, ProviderState> {
   public render() {
     const store: ProviderStore = {
       state: this.state,
-      update: this.update
+      update: this.update,
     };
 
     return (
@@ -1102,14 +1102,14 @@ class App extends React.Component<
   }
 > {
   state = {
-    count: null
+    count: null,
   };
   render() {
     return <div onClick={() => this.increment(1)}>{this.state.count}</div>;
   }
   increment = (amt: number) => {
-    this.setState(state => ({
-      count: (state.count || 0) + amt
+    this.setState((state) => ({
+      count: (state.count || 0) + amt,
     }));
   };
 }
@@ -1176,7 +1176,7 @@ Enums in TypeScript default to numbers. You will usually want to use them as str
 export enum ButtonSizes {
   default = "default",
   small = "small",
-  large = "large"
+  large = "large",
 }
 ```
 
@@ -1343,7 +1343,7 @@ Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 ```tsx
 const [state, setState] = React.useState({
   foo: 1,
-  bar: 2
+  bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
 
 const someMethod = (obj: typeof state) => {
@@ -1360,7 +1360,7 @@ Working with slicing state and props is common in React. Again, you don't really
 ```tsx
 const [state, setState] = React.useState({
   foo: 1,
-  bar: 2
+  bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
 
 // NOTE: stale state merging is not actually encouraged in React.useState
@@ -1391,7 +1391,7 @@ This can be annoying but here are ways to grab the types!
 import { Button } from "library"; // but doesn't export ButtonProps! oh no!
 type ButtonProps = React.ComponentProps<typeof Button>; // no problem! grab your own!
 type AlertButtonProps = Omit<ButtonProps, "onClick">; // modify
-const AlertButton: React.FC<AlertButtonProps> = props => (
+const AlertButton: React.FC<AlertButtonProps> = (props) => (
   <Button onClick={() => alert("hello")} {...props} />
 );
 ```
@@ -1420,9 +1420,9 @@ function foo() {
     subInstArr: [
       {
         c: 3,
-        d: 4
-      }
-    ]
+        d: 4,
+      },
+    ],
   };
 }
 
@@ -1432,7 +1432,7 @@ type SubIsntType = SubInstArr[0];
 
 let baz: SubIsntType = {
   c: 5,
-  d: 6 // type checks ok!
+  d: 6, // type checks ok!
 };
 
 //You could just write a one-liner,
@@ -1441,7 +1441,7 @@ let baz: SubIsntType = {
 type SubIsntType2 = ReturnType<typeof foo>["subInstArr"][0];
 let baz2: SubIsntType2 = {
   c: 5,
-  d: 6 // type checks ok!
+  d: 6, // type checks ok!
 };
 ```
 
@@ -1605,8 +1605,8 @@ declare let process: {
 };
 process = {
   env: {
-    NODE_ENV: "production"
-  }
+    NODE_ENV: "production",
+  },
 };
 ```
 
@@ -1678,14 +1678,14 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    jest: true
+    jest: true,
   },
   extends: "eslint:recommended",
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: "module"
+    sourceType: "module",
   },
   rules: {
     indent: ["error", 2],
@@ -1695,11 +1695,11 @@ module.exports = {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { vars: "all", args: "after-used", ignoreRestSiblings: false }
+      { vars: "all", args: "after-used", ignoreRestSiblings: false },
     ],
     "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
-    "no-empty": "warn"
-  }
+    "no-empty": "warn",
+  },
 };
 ```
 

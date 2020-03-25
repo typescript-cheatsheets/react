@@ -226,7 +226,7 @@ You can then use the generic components and get nice type safety through type in
 ReactDOM.render(
   <List
     items={["a", "b"]} // type of 'string' inferred
-    renderItem={item => (
+    renderItem={(item) => (
       <li key={item}>
         {/* Error: Property 'toPrecision' does not exist on type 'string'. */}
         {item.toPrecision(3)}
@@ -243,7 +243,7 @@ As of [TS 2.9](#typescript-29), you can also supply the type parameter in your J
 ReactDOM.render(
   <List<number>
     items={["a", "b"]} // Error: Type 'string' is not assignable to type 'number'.
-    renderItem={item => <li key={item}>{item.toPrecision(3)}</li>}
+    renderItem={(item) => <li key={item}>{item.toPrecision(3)}</li>}
   />,
   document.body
 );
@@ -288,7 +288,7 @@ interface State<T> {
 class List<T> extends React.PureComponent<Props<T>, State<T>> {
   // You can use type T inside List class.
   state: Readonly<State<T>> = {
-    items: []
+    items: [],
   };
   render() {
     const { items, renderItem } = this.props;
@@ -352,7 +352,7 @@ Type '{ children: string; item: string; renderItem: (item: string) => string; }'
 */
 
 const wrapper = (
-  <Wrapper item="test" renderItem={item => item}>
+  <Wrapper item="test" renderItem={(item) => item}>
     {test}
   </Wrapper>
 );
@@ -481,7 +481,7 @@ interface Button {
   as: React.ComponentClass | "a";
 }
 
-const Button: React.FunctionComgetOrElseponent<Button> = props => {
+const Button: React.FunctionComgetOrElseponent<Button> = (props) => {
   const { as: Component, children, ...rest } = props;
   return (
     <Component className="button" {...rest}>
@@ -490,11 +490,11 @@ const Button: React.FunctionComgetOrElseponent<Button> = props => {
   );
 };
 
-const AnchorButton: React.FunctionComponent<AnchorProps> = props => (
+const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
   <Button as="a" {...props} />
 );
 
-const LinkButton: React.FunctionComponent<RouterLinkProps> = props => (
+const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
   <Button as={NavLink} {...props} />
 );
 
@@ -853,14 +853,14 @@ class None implements Option<never> {
 
 // now you can use it like:
 let result = Option(6) // Some<number>
-  .flatMap(n => Option(n * 3)) // Some<number>
+  .flatMap((n) => Option(n * 3)) // Some<number>
   .flatMap((n = new None())) // None
   .getOrElse(7);
 
 // or:
 let result = ask() // Option<string>
   .flatMap(parse) // Option<Date>
-  .flatMap(d => new Some(d.toISOString())) // Option<string>
+  .flatMap((d) => new Some(d.toISOString())) // Option<string>
   .getOrElse("error parsing string");
 ```
 
@@ -908,7 +908,7 @@ Helps with typing/using generic components:
 
 // usage
 <Formik<Values>
-  render={props => {
+  render={(props) => {
     /* your code here ... */
   }}
 />;
@@ -1046,7 +1046,7 @@ Attaching properties to functions like this "just works" now:
 export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-  name: "swyx"
+  name: "swyx",
 };
 ```
 
@@ -1269,7 +1269,7 @@ interface IMyComponentProps {
 export class MyComponent extends React.Component<IMyComponentProps, {}> {
   static propTypes = {
     autoHeight: PropTypes.bool,
-    secondProp: PropTypes.number.isRequired
+    secondProp: PropTypes.number.isRequired,
   };
 }
 ```
