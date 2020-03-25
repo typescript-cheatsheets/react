@@ -43,7 +43,7 @@
   - explains some basic TS types usage and setup along the way
   - answers the most Frequently Asked Questions
   - does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
-   - The goal is to get effective with TS without learning _too much_ TS.
+  - The goal is to get effective with TS without learning _too much_ TS.
 - **The Advanced Cheatsheet** ([`/ADVANCED.md`](/ADVANCED.md)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
   - It also has miscellaneous tips and tricks for pro users.
   - Advice for contributing to DefinitelyTyped
