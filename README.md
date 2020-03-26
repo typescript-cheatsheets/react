@@ -12,7 +12,6 @@
 </a>
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
- 3
 [**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
 [**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
 [**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
