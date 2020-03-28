@@ -874,7 +874,7 @@ Using `React.createContext` with an empty object as default value.
 
 ```tsx
 interface ContextState {
-  // set the type of state you want to handle with context e.g
+  // set the type of state you want to handle with context e.g.
   name: string | null;
 }
 //set an empty object as default state
