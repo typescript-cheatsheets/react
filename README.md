@@ -873,12 +873,12 @@ Of course, if you're making any sort of significant form, [you should use Formik
 Using `React.createContext` with an empty object as default value.
 
 ```tsx
-interface ContextState {
+interface contextState {
   // set the type of state you want to handle with context e.g.
   name: string | null;
 }
 //set an empty object as default state
-const Context = React.createContext({} as ContextState);
+const Context = React.createContext({} as contextState);
 // set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
 ```
 
