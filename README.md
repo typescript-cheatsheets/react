@@ -129,15 +129,15 @@ This guide will always assume you are starting with the latest TypeScript versio
 ## Import React
 
 ```tsx
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 ```
 
 In [TypeScript 2.7+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html), you can run TypeScript with `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true` to tsconfig) to import like in regular jsx:
 
 ```tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 ```
 
 <details>
@@ -316,17 +316,17 @@ You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/
 ```tsx
 type AppState = {};
 type Action =
-  | { type: 'SET_ONE'; payload: string }
-  | { type: 'SET_TWO'; payload: number };
+  | { type: "SET_ONE"; payload: string }
+  | { type: "SET_TWO"; payload: number };
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case 'SET_ONE':
+    case "SET_ONE":
       return {
         ...state,
         one: action.payload // `payload` is string
       };
-    case 'SET_TWO':
+    case "SET_TWO":
       return {
         ...state,
         two: action.payload // `payload` is number
@@ -533,7 +533,7 @@ For Typescript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 type Props = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: 'Johny Five'
+  who: "Johny Five"
 };
 
 const Greet = (props: Props) => {
@@ -551,7 +551,7 @@ type GreetProps = typeof Greet.defaultProps & {
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
-    name: 'world'
+    name: "world"
   };
   /*...*/
 }
@@ -585,7 +585,7 @@ type Props = Required<typeof MyComponent.defaultProps> & {
 
 export class MyComponent extends React.Component<Props> {
   static defaultProps = {
-    foo: 'foo'
+    foo: "foo"
   };
 }
 ```
@@ -600,7 +600,7 @@ interface IMyComponentProps {
 
 export class MyComponent extends React.Component<IMyComponentProps> {
   public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: 'default'
+    firstProp: "default"
   };
 }
 ```
@@ -645,7 +645,7 @@ type AppProps = {
   /** array of a type! */
   names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
-  status: 'waiting' | 'success';
+  status: "waiting" | "success";
   /** any object as long as you dont use its properties (not common) */
   obj: object;
   obj2: {}; // almost the same as `object`, exactly the same as `Object`
@@ -686,7 +686,7 @@ export declare interface AppProps {
   functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
-  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements['button']>; // to impersonate all the props of a button element without its ref
+  props: Props & React.PropsWithoutRef<JSX.IntrinsicElements["button"]>; // to impersonate all the props of a button element without its ref
 }
 ```
 
@@ -727,7 +727,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp['getDerivedStateFromProps']>
+  ReturnType<typeof Comp["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }
@@ -754,7 +754,7 @@ class Comp extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      otherStateField: '123',
+      otherStateField: "123",
       ...transformPropsToState(props)
     };
   }
@@ -792,7 +792,7 @@ class App extends React.Component<
   }
 > {
   state = {
-    text: ''
+    text: ""
   };
 
   // typing on RIGHT hand side of =
@@ -873,12 +873,12 @@ Of course, if you're making any sort of significant form, [you should use Formik
 Using `React.createContext` with an empty object as default value.
 
 ```tsx
-interface contextState {
+interface ContextState {
   // set the type of state you want to handle with context e.g.
   name: string | null;
 }
 //set an empty object as default state
-const Context = React.createContext({} as contextState);
+const Context = React.createContext({} as ContextState);
 // set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
 ```
 
@@ -891,7 +891,7 @@ function createCtx<A>() {
   const ctx = React.createContext<A | undefined>(undefined);
   function useCtx() {
     const c = React.useContext(ctx);
-    if (!c) throw new Error('useCtx must be inside a Provider with a value');
+    if (!c) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
   return [useCtx, ctx.Provider] as const; // make TypeScript infer a tuple, not an array of union types
@@ -901,7 +901,7 @@ function createCtx<A>() {
 
 export const [useCtx, SettingProvider] = createCtx<string>(); // specify type, but no need to specify value upfront!
 export function App() {
-  const key = useCustomHook('key'); // get a value from a hook, must be in a component
+  const key = useCustomHook("key"); // get a value from a hook, must be in a component
   return (
     <SettingProvider value={key}>
       <Component />
@@ -935,7 +935,7 @@ export function createCtx<A>(defaultValue: A) {
 
 // usage
 
-const [ctx, TextProvider] = createCtx('someText');
+const [ctx, TextProvider] = createCtx("someText");
 export const TextContext = ctx;
 export function App() {
   return (
@@ -984,7 +984,7 @@ const Context = React.createContext({} as ProviderStore); // type assertion on e
 
 class Provider extends React.Component<{}, ProviderState> {
   public readonly state = {
-    themeColor: 'red'
+    themeColor: "red"
   };
 
   private update = ({ key, value }: UpdateStateArg) => {
@@ -1028,7 +1028,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: 'submit' | 'button' };
+type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -1050,11 +1050,11 @@ You may also wish to do [Conditional Rendering with `forwardRef`](https://github
 Using `ReactDOM.createPortal`:
 
 ```tsx
-const modalRoot = document.getElementById('modal-root') as HTMLElement;
+const modalRoot = document.getElementById("modal-root") as HTMLElement;
 // assuming in your html file has a div with id 'modal-root';
 
 export class Modal extends React.Component {
-  el: HTMLElement = document.createElement('div');
+  el: HTMLElement = document.createElement("div");
 
   componentDidMount() {
     modalRoot.appendChild(this.el);
@@ -1139,7 +1139,7 @@ interface User {
 
 // Method 1: use `in` keyword
 function redirect(user: Admin | User) {
-  if ('role' in user) {
+  if ("role" in user) {
     // use the `in` operator for typeguards since TS 2.7+
     routeToAdminPage(user.role);
   } else {
@@ -1168,7 +1168,7 @@ class MyComponent extends React.Component<{
   message?: string; // like this
 }> {
   render() {
-    const { message = 'default' } = this.props;
+    const { message = "default" } = this.props;
     return <div>{message}</div>;
   }
 }
@@ -1184,9 +1184,9 @@ Enums in TypeScript default to numbers. You will usually want to use them as str
 
 ```tsx
 export enum ButtonSizes {
-  default = 'default',
-  small = 'small',
-  large = 'large'
+  default = "default",
+  small = "small",
+  large = "large"
 }
 ```
 
@@ -1201,7 +1201,7 @@ export const PrimaryButton = (
 A simpler alternative to enum is just declaring a bunch of strings with union:
 
 ```tsx
-export declare type Position = 'left' | 'right' | 'top' | 'bottom';
+export declare type Position = "left" | "right" | "top" | "bottom";
 ```
 
 This is handy because TypeScript will throw errors when you mistype a string for your props.
@@ -1264,7 +1264,7 @@ Now TypeScript will disallow you from using the wrong ID in the wrong place:
 function queryForUser(id: UserID) {
   // ...
 }
-queryForUser(OrderID('foobar')); // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
+queryForUser(OrderID("foobar")); // Error, Argument of type 'OrderID' is not assignable to parameter of type 'UserID'
 ```
 
 In future you can use the `unique` keyword to brand. [See this PR](https://github.com/microsoft/TypeScript/pull/33038).
@@ -1398,11 +1398,11 @@ This can be annoying but here are ways to grab the types!
 - Grabbing the Prop types of a component: Use `React.ComponentProps` and `typeof`, and optionally `Omit` any overlapping types
 
 ```tsx
-import { Button } from 'library'; // but doesn't export ButtonProps! oh no!
+import { Button } from "library"; // but doesn't export ButtonProps! oh no!
 type ButtonProps = React.ComponentProps<typeof Button>; // no problem! grab your own!
-type AlertButtonProps = Omit<ButtonProps, 'onClick'>; // modify
+type AlertButtonProps = Omit<ButtonProps, "onClick">; // modify
 const AlertButton: React.FC<AlertButtonProps> = props => (
-  <Button onClick={() => alert('hello')} {...props} />
+  <Button onClick={() => alert("hello")} {...props} />
 );
 ```
 
@@ -1437,7 +1437,7 @@ function foo() {
 }
 
 type InstType = ReturnType<typeof foo>;
-type SubInstArr = InstType['subInstArr'];
+type SubInstArr = InstType["subInstArr"];
 type SubIsntType = SubInstArr[0];
 
 let baz: SubIsntType = {
@@ -1448,7 +1448,7 @@ let baz: SubIsntType = {
 //You could just write a one-liner,
 //But please make sure it is forward-readable
 //(you can understand it from reading once left-to-right with no jumps)
-type SubIsntType2 = ReturnType<typeof foo>['subInstArr'][0];
+type SubIsntType2 = ReturnType<typeof foo>["subInstArr"][0];
 let baz2: SubIsntType2 = {
   c: 5,
   d: 6 // type checks ok!
@@ -1465,10 +1465,10 @@ Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declarati
 ```ts
 // declaration.d.ts
 // anywhere in your project, NOT the same name as any of your .ts/tsx files
-declare module '*.png';
+declare module "*.png";
 
 // importing in a tsx file
-import * as logo from './logo.png';
+import * as logo from "./logo.png";
 ```
 
 Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
@@ -1579,14 +1579,14 @@ If you just need to add an interface, or add missing members to an existing inte
 
 ```tsx
 // my-typings.ts
-declare module 'plotly.js' {
+declare module "plotly.js" {
   interface PlotlyHTMLElement {
     removeAllListeners(): void;
   }
 }
 
 // MyComponent.tsx
-import { PlotlyHTMLElement } from 'plotly.js';
+import { PlotlyHTMLElement } from "plotly.js";
 
 const f = (e: PlotlyHTMLElement) => {
   e.removeAllListeners();
@@ -1597,7 +1597,7 @@ You dont always have to implement the module, you can simply import the module a
 
 ```tsx
 // my-typings.ts
-declare module 'plotly.js'; // each of its imports are `any`
+declare module "plotly.js"; // each of its imports are `any`
 ```
 
 Because you don't have to explicitly import this, this is known as an [ambient module declaration](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html#pitfalls-of-namespaces-and-modules). You can do AMD's in a script-mode `.ts` file (no imports or exports), or a `.d.ts` file anywhere in your project.
@@ -1610,12 +1610,12 @@ type ToArray<T> = T extends unknown[] ? T : T[];
 // ambient variable
 declare let process: {
   env: {
-    NODE_ENV: 'development' | 'production';
+    NODE_ENV: "development" | "production";
   };
 };
 process = {
   env: {
-    NODE_ENV: 'production'
+    NODE_ENV: "production"
   }
 };
 ```
@@ -1690,25 +1690,25 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: 'eslint:recommended',
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  extends: "eslint:recommended",
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: "module"
   },
   rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    'no-console': 'warn',
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      { vars: 'all', args: 'after-used', ignoreRestSiblings: false }
+    indent: ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "single"],
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { vars: "all", args: "after-used", ignoreRestSiblings: false }
     ],
-    '@typescript-eslint/explicit-function-return-type': 'warn', // Consider using explicit annotations for object literals and function return types even when they can be inferred.
-    'no-empty': 'warn'
+    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
+    "no-empty": "warn"
   }
 };
 ```
