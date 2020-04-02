@@ -166,12 +166,12 @@ type CommentType = { text: string; id: number };
 const comments: CommentType[] = [
   {
     text: "comment1",
-    id: 1
+    id: 1,
   },
   {
     text: "comment2",
-    id: 2
-  }
+    id: 2,
+  },
 ];
 const blog = "blogpost";
 
@@ -188,7 +188,7 @@ const DataSource = {
   },
   getBlogPost(id: number) {
     return blog;
-  }
+  },
 };
 /** type aliases just to deduplicate */
 type DataType = typeof DataSource;
@@ -256,7 +256,7 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
       super(props);
       this.handleChange = this.handleChange.bind(this);
       this.state = {
-        data: selectData(DataSource, props)
+        data: selectData(DataSource, props),
       };
     }
 
@@ -267,7 +267,7 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
 
     handleChange = () =>
       this.setState({
-        data: selectData(DataSource, this.props)
+        data: selectData(DataSource, this.props),
       });
 
     render() {
@@ -342,12 +342,12 @@ type CommentType = { text: string; id: number };
 const comments: CommentType[] = [
   {
     text: "comment1",
-    id: 1
+    id: 1,
   },
   {
     text: "comment2",
-    id: 2
-  }
+    id: 2,
+  },
 ];
 /** dummy child components that take anything */
 const Comment = (_: any) => null;
@@ -367,10 +367,11 @@ function CommentList({ data }: WithSubscriptionProps<typeof comments>) {
 
 ```tsx
 const commentSelector = (_: any, ownProps: any) => ({
-  id: ownProps.id
+  id: ownProps.id,
 });
 const commentActions = () => ({
-  addComment: (str: string) => comments.push({ text: str, id: comments.length })
+  addComment: (str: string) =>
+    comments.push({ text: str, id: comments.length }),
 });
 
 const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
@@ -380,7 +381,7 @@ interface WithSubscriptionProps<T> {
   data: T;
 }
 function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
-  return function<T, P extends WithSubscriptionProps<T>, C>(
+  return function <T, P extends WithSubscriptionProps<T>, C>(
     WrappedComponent: React.ComponentType<T>
   ) {
     type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
@@ -502,10 +503,10 @@ So how do we type `withOwner`?
 
 ```tsx
 function withOwner(owner: string) {
-  return function<T extends { owner: string }>(
+  return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function(props: Omit<T, "owner">): React.ReactNode {
+    return function (props: Omit<T, "owner">): React.ReactNode {
       return <Component owner={owner} {...props} />;
     };
   };

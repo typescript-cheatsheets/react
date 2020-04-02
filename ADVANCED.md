@@ -226,7 +226,7 @@ You can then use the generic components and get nice type safety through type in
 ReactDOM.render(
   <List
     items={["a", "b"]} // type of 'string' inferred
-    renderItem={item => (
+    renderItem={(item) => (
       <li key={item}>
         {/* Error: Property 'toPrecision' does not exist on type 'string'. */}
         {item.toPrecision(3)}
@@ -243,7 +243,7 @@ As of [TS 2.9](#typescript-29), you can also supply the type parameter in your J
 ReactDOM.render(
   <List<number>
     items={["a", "b"]} // Error: Type 'string' is not assignable to type 'number'.
-    renderItem={item => <li key={item}>{item.toPrecision(3)}</li>}
+    renderItem={(item) => <li key={item}>{item.toPrecision(3)}</li>}
   />,
   document.body
 );
@@ -288,7 +288,7 @@ interface State<T> {
 class List<T> extends React.PureComponent<Props<T>, State<T>> {
   // You can use type T inside List class.
   state: Readonly<State<T>> = {
-    items: []
+    items: [],
   };
   render() {
     const { items, renderItem } = this.props;
@@ -352,7 +352,7 @@ Type '{ children: string; item: string; renderItem: (item: string) => string; }'
 */
 
 const wrapper = (
-  <Wrapper item="test" renderItem={item => item}>
+  <Wrapper item="test" renderItem={(item) => item}>
     {test}
   </Wrapper>
 );
@@ -481,7 +481,7 @@ interface Button {
   as: React.ComponentClass | "a";
 }
 
-const Button: React.FunctionComgetOrElseponent<Button> = props => {
+const Button: React.FunctionComgetOrElseponent<Button> = (props) => {
   const { as: Component, children, ...rest } = props;
   return (
     <Component className="button" {...rest}>
@@ -490,11 +490,11 @@ const Button: React.FunctionComgetOrElseponent<Button> = props => {
   );
 };
 
-const AnchorButton: React.FunctionComponent<AnchorProps> = props => (
+const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
   <Button as="a" {...props} />
 );
 
-const LinkButton: React.FunctionComponent<RouterLinkProps> = props => (
+const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
   <Button as={NavLink} {...props} />
 );
 
@@ -510,23 +510,6 @@ const LinkButton: React.FunctionComponent<RouterLinkProps> = props => (
 You may also want to use Discriminated Unions, please check out [Expressive React Component APIs with Discriminated Unions](https://blog.andrewbran.ch/expressive-react-component-apis-with-discriminated-unions/).
 
 Here is a brief intuition for **Discriminated Union Types**:
-
-```ts
-type UserTextEvent = { value: string; target: HTMLInputElement };
-type UserMouseEvent = { value: [number, number]; target: HTMLElement };
-type UserEvent = UserTextEvent | UserMouseEvent;
-function handle(event: UserEvent) {
-  if (typeof event.value === "string") {
-    event.value; // string
-    event.target; // HTMLInputElement | HTMLElement (!!!!)
-    return;
-  }
-  event.value; // [number, number]
-  event.target; // HTMLInputElement | HTMLElement (!!!!)
-}
-```
-
-Even though we have narrowed based on `event.value`, the logic doesn't filter up and sideways to `event.target`. This is because a union type `UserTextEvent | UserMouseEvent` could be BOTH at once. So TypeScript needs a better hint. The solution is to use a literal type to tag each case of your union type:
 
 ```ts
 type UserTextEvent = {
@@ -550,6 +533,30 @@ function handle(event: UserEvent) {
   event.target; // HTMLElement
 }
 ```
+
+<details>
+  <summary>
+  Take care: TypeScript does not narrow the type of a Discriminated Union on the basis of typeof checks. The type guard has to be on the value of a key and not it's type.
+  </summary>
+
+```ts
+type UserTextEvent = { value: string; target: HTMLInputElement };
+type UserMouseEvent = { value: [number, number]; target: HTMLElement };
+type UserEvent = UserTextEvent | UserMouseEvent;
+function handle(event: UserEvent) {
+  if (typeof event.value === "string") {
+    event.value; // string
+    event.target; // HTMLInputElement | HTMLElement (!!!!)
+    return;
+  }
+  event.value; // [number, number]
+  event.target; // HTMLInputElement | HTMLElement (!!!!)
+}
+```
+
+The above example does not work as we are not checking the value of `event.value` but only it's type. Read more about it [microsoft/TypeScript#30506 (comment)](https://github.com/microsoft/TypeScript/issues/30506#issuecomment-474858198)
+
+</details>
 
 To streamline this you may also combine this with the concept of **User-Defined Type Guards**:
 
@@ -846,14 +853,14 @@ class None implements Option<never> {
 
 // now you can use it like:
 let result = Option(6) // Some<number>
-  .flatMap(n => Option(n * 3)) // Some<number>
+  .flatMap((n) => Option(n * 3)) // Some<number>
   .flatMap((n = new None())) // None
   .getOrElse(7);
 
 // or:
 let result = ask() // Option<string>
   .flatMap(parse) // Option<Date>
-  .flatMap(d => new Some(d.toISOString())) // Option<string>
+  .flatMap((d) => new Some(d.toISOString())) // Option<string>
   .getOrElse("error parsing string");
 ```
 
@@ -901,7 +908,7 @@ Helps with typing/using generic components:
 
 // usage
 <Formik<Values>
-  render={props => {
+  render={(props) => {
     /* your code here ... */
   }}
 />;
@@ -1039,7 +1046,7 @@ Attaching properties to functions like this "just works" now:
 export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-  name: "swyx"
+  name: "swyx",
 };
 ```
 
@@ -1262,7 +1269,7 @@ interface IMyComponentProps {
 export class MyComponent extends React.Component<IMyComponentProps, {}> {
   static propTypes = {
     autoHeight: PropTypes.bool,
-    secondProp: PropTypes.number.isRequired
+    secondProp: PropTypes.number.isRequired,
   };
 }
 ```

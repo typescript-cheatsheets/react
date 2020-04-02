@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.2"
   }
 }

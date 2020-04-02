@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Format code
+      run: yarn format
+    
+    - name: Format correct?
+      run: git diff --exit-code
