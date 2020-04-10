@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "yarn --cwd website start"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,13 @@
   },
   "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
   "devDependencies": {
-    "prettier": "^2.0.2"
+    "husky": "^4.2.5",
+    "prettier": "^2.0.2",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
