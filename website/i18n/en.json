@@ -169,6 +169,22 @@
         "title": "Troubleshooting Handbook: Utilities",
         "sidebar_label": "Utilities"
       },
+      "hoc/excluding_props": {
+        "title": "Section 2: Excluding Props",
+        "sidebar_label": "Excluding Props"
+      },
+      "hoc/full_example": {
+        "title": "Section 0: Full HOC Example",
+        "sidebar_label": "Full HOC Example"
+      },
+      "hoc/intro": {
+        "title": "HOC Cheatsheet",
+        "sidebar_label": "Intro"
+      },
+      "hoc/react_hoc_docs": {
+        "title": "Section 1: React HOC docs in TypeScript",
+        "sidebar_label": "React HOC docs in TypeScript"
+      },
       "migration/academic_studies": {
         "title": "Academic Studies of Migration"
       },
@@ -201,6 +217,7 @@
     },
     "categories": {
       "Basic": "Basic",
+      "HOC": "HOC",
       "Advanced": "Advanced",
       "Migration": "Migration"
     }

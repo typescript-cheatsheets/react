@@ -31,15 +31,13 @@ class Footer extends React.Component {
           <div>
             <h5>Docs</h5>
             <a href={this.docUrl("basic/setup.html", this.props.language)}>
-              Basic
+              Basic Guides
+            </a>
+            <a href={this.docUrl("hoc/intro.html", this.props.language)}>
+              High Order Component (HOC)
             </a>
             <a href={this.docUrl("advanced/intro.html", this.props.language)}>
-              Advanced
-            </a>
-            <a
-              href={this.docUrl("doadvanced/introc3.html", this.props.language)}
-            >
-              HOC
+              Advanced Guides
             </a>
             <a href={this.docUrl("migration/intro.html", this.props.language)}>
               Migrating

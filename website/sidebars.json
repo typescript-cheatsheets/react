@@ -47,6 +47,12 @@
       "basic/linting",
       "basic/examples"
     ],
+    "HOC": [
+      "hoc/intro",
+      "hoc/full_example",
+      "hoc/react_hoc_docs",
+      "hoc/excluding_props"
+    ],
     "Advanced": [
       "advanced/intro",
       "advanced/utility_types",
