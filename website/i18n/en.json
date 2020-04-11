@@ -168,6 +168,31 @@
       "basic/troubleshooting/utilities": {
         "title": "Troubleshooting Handbook: Utilities",
         "sidebar_label": "Utilities"
+      },
+      "migration/academic_studies": {
+        "title": "Academic Studies of Migration"
+      },
+      "migration/from_flow": {
+        "title": "From Flow"
+      },
+      "migration/from_js": {
+        "title": "From JS"
+      },
+      "migration/general_conversion_approaches": {
+        "title": "General Conversion approaches"
+      },
+      "migration/intro": {
+        "title": "Migrating (to TypeScript) Cheatsheet",
+        "sidebar_label": "Intro"
+      },
+      "migration/js_docs": {
+        "title": "JSDoc"
+      },
+      "migration/links": {
+        "title": "Links"
+      },
+      "migration/results": {
+        "title": "Results"
       }
     },
     "links": {
@@ -176,7 +201,8 @@
     },
     "categories": {
       "Basic": "Basic",
-      "Advanced": "Advanced"
+      "Advanced": "Advanced",
+      "Migration": "Migration"
     }
   },
   "pages-strings": {

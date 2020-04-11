@@ -72,6 +72,16 @@
       "advanced/patterns",
       "advanced/misc_concerns",
       "advanced/types_react_api"
+    ],
+    "Migration": [
+      "migration/intro",
+      "migration/general_conversion_approaches",
+      "migration/js_docs",
+      "migration/from_js",
+      "migration/from_flow",
+      "migration/results",
+      "migration/academic_studies",
+      "migration/links"
     ]
   }
 }

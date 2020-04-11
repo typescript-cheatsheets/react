@@ -41,7 +41,7 @@ class Footer extends React.Component {
             >
               HOC
             </a>
-            <a href={this.docUrl("doc3.html", this.props.language)}>
+            <a href={this.docUrl("migration/intro.html", this.props.language)}>
               Migrating
             </a>
           </div>
