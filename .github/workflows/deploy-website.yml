@@ -4,6 +4,7 @@ on:
     branches: [master]
     paths:
       - "website/**"
+      - "docs/**"
   pull_request:
     branches: [master]
 
