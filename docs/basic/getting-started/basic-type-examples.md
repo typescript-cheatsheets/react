@@ -1,7 +1,6 @@
 ---
 id: basic_type_example
 title: Basic Prop Types Examples
-sidebar_label: Basic Prop Types Examples
 ---
 
 ```tsx

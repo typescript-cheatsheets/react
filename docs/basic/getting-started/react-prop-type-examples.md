@@ -1,7 +1,6 @@
 ---
 id: react_prop_type_example
 title: Useful React Prop Type Examples
-sidebar_label: Useful React Prop Type Examples
 ---
 
 ```tsx

@@ -1,7 +1,6 @@
 ---
 id: hooks
 title: Hooks
-sidebar_label: Hooks
 ---
 
 Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L800-L1031).

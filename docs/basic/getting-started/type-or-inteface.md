@@ -1,7 +1,6 @@
 ---
 id: types_or_interfaces
 title: Types or Interfaces?
-sidebar_label: Types or Interfaces?
 ---
 
 `interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:

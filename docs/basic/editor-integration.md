@@ -1,7 +1,6 @@
 ---
 id: editor_integration
 title: Editor Tooling and Integration
-sidebar_label: Editor Tooling and Integration
 ---
 
 - VSCode

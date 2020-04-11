@@ -1,7 +1,6 @@
 ---
 id: function_components
 title: Function Components
-sidebar_label: Function Components
 ---
 
 These can be written as normal functions that take a `props` argument and return a JSX element.

@@ -1,7 +1,6 @@
 ---
 id: default_props
 title: Typing defaultProps
-sidebar_label: Typing defaultProps
 ---
 
 ## Typing defaultProps

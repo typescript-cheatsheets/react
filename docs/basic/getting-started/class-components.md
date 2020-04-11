@@ -1,7 +1,6 @@
 ---
 id: class_components
 title: Class Components
-sidebar_label: Class Components
 ---
 
 Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you want to provide it with (optional) prop and state type parameters:
