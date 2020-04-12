@@ -39,21 +39,21 @@
 ## All React + TypeScript Cheatsheets
 
 - **The Basic Cheatsheet** ([`/README.md`](/README.md#basic-cheatsheet-table-of-contents)) is focused on helping React devs just start using TS in React **apps**
-  - focus on opinionated best practices, copy+pastable examples
-  - explains some basic TS types usage and setup along the way
-  - answers the most Frequently Asked Questions
-  - does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
+  - Focus on opinionated best practices, copy+pastable examples.
+  - Explains some basic TS types usage and setup along the way.
+  - Answers the most Frequently Asked Questions.
+  - Does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
   - The goal is to get effective with TS without learning _too much_ TS.
 - **The Advanced Cheatsheet** ([`/ADVANCED.md`](/ADVANCED.md)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
   - It also has miscellaneous tips and tricks for pro users.
-  - Advice for contributing to DefinitelyTyped
+  - Advice for contributing to DefinitelyTyped.
   - The goal is to take _full advantage_ of TypeScript.
 - **The Migrating Cheatsheet** ([`/MIGRATING.md`](/MIGRATING.md)) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
-  - We do not try to convince people to switch, only to help people who have already decided
-  - ⚠️This is a new cheatsheet, all assistance is welcome
+  - We do not try to convince people to switch, only to help people who have already decided.
+  - ⚠️This is a new cheatsheet, all assistance is welcome.
 - **The HOC Cheatsheet** ([`/HOC.md`](/HOC.md)) specifically teaches people to write HOCs with examples.
   - Familiarity with [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) is necessary.
-  - ⚠️This is the newest cheatsheet, all assistance is welcome
+  - ⚠️This is the newest cheatsheet, all assistance is welcome.
 
 ---
 
@@ -108,10 +108,10 @@
 
 ## Prerequisites
 
-1. good understanding of [React](https://reactjs.org)
-2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
-3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-4. having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
+1. Good understanding of [React](https://reactjs.org).
+2. Familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
+3. Having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+4. Having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section).
 
 This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
 
@@ -619,9 +619,9 @@ The problem with this approach is it causes complex issues with the type inferen
 
 `interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
 
-- always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions.
+- Always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions.
 
-- consider using `type` for your React Component Props and State, because it is more constrained.
+- Consider using `type` for your React Component Props and State, because it is more constrained.
 
 Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas Interfaces are better for declaring dictionary shapes and then `implementing` or `extending` them.
 
