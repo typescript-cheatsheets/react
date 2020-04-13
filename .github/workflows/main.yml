@@ -1,21 +1,31 @@
 name: CI
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      - name: Get yarn cache directory
+        id: yarn
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: Format code
-      run: yarn format
-    
-    - name: Format correct?
-      run: git diff --exit-code
+      - name: Restore yarn cache
+        uses: actions/cache@v1.1.2
+        with:
+          path: ${{ steps.yarn.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/website/yarn.lock')) }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Format code
+        run: yarn format
+
+      - name: Format correct?
+        run: git diff --exit-code

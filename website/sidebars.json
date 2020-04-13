@@ -1,0 +1,93 @@
+{
+  "docs": {
+    "Basic": [
+      "basic/setup",
+      {
+        "type": "subcategory",
+        "label": "Getting Started",
+        "ids": [
+          "basic/getting-started/function_components",
+          "basic/getting-started/hooks",
+          "basic/getting-started/class_components",
+          "basic/getting-started/default_props",
+          "basic/getting-started/types_or_interfaces",
+          "basic/getting-started/basic_type_example",
+          "basic/getting-started/react_prop_type_example",
+          "basic/getting-started/get_derived_props_from_state",
+          "basic/getting-started/forms_and_events",
+          "basic/getting-started/context",
+          "basic/getting-started/forward_and_create_ref",
+          "basic/getting-started/portals",
+          "basic/getting-started/error_boundaries",
+          "basic/getting-started/concurrent"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Troubleshooting Handbook",
+        "ids": [
+          "basic/troubleshooting/types",
+          "basic/troubleshooting/operators",
+          "basic/troubleshooting/utilities",
+          "basic/troubleshooting/non_ts_files",
+          "basic/troubleshooting/tsconfig",
+          "basic/troubleshooting/oficial_typings_bug"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Recommended React + TypeScript",
+        "ids": [
+          "basic/recommended/resources",
+          "basic/recommended/talks",
+          "basic/recommended/other_resources"
+        ]
+      },
+      "basic/editor_integration",
+      "basic/linting",
+      "basic/examples"
+    ],
+    "HOC": [
+      "hoc/intro",
+      "hoc/full_example",
+      "hoc/react_hoc_docs",
+      "hoc/excluding_props"
+    ],
+    "Advanced": [
+      "advanced/intro",
+      "advanced/utility_types",
+      {
+        "type": "subcategory",
+        "label": "Guides",
+        "ids": [
+          "advanced/guides/render_props",
+          "advanced/guides/hocs",
+          "advanced/guides/conditionally_rendering",
+          "advanced/guides/polymorphic_components",
+          "advanced/guides/generic_components",
+          "advanced/guides/type_component_diff_props",
+          "advanced/guides/props_one_other_not_both",
+          "advanced/guides/props_optionally_pass_one",
+          "advanced/guides/omit_attr",
+          "advanced/guides/type_zoo",
+          "advanced/guides/extract_props",
+          "advanced/guides/handling-exceptions",
+          "advanced/guides/third_party_libs"
+        ]
+      },
+      "advanced/patterns",
+      "advanced/misc_concerns",
+      "advanced/types_react_api"
+    ],
+    "Migration": [
+      "migration/intro",
+      "migration/general_conversion_approaches",
+      "migration/js_docs",
+      "migration/from_js",
+      "migration/from_flow",
+      "migration/results",
+      "migration/academic_studies",
+      "migration/links"
+    ]
+  }
+}
