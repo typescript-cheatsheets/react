@@ -13,10 +13,7 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Basic**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
-[**Advanced**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md) |
-[**Migrating**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
+[**Web docs**](https://raulfdm.github.io/react-typescript-cheatsheet/docs/basic/setup) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
 [**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
@@ -1886,7 +1883,6 @@ It is worth mentioning some resources to help you get started:
 
 # My question isn't answered here!
 
-- Check out [the Advanced Cheatsheet](/ADVANCED.md)
 - [File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 ## Contributors
