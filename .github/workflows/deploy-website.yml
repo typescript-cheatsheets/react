@@ -5,14 +5,10 @@ on:
     paths:
       - "website/**"
       - "docs/**"
-  pull_request:
-    branches: [master]
 
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
-    # TODO: Change this before merge
-    if: github.repository == 'raulfdm/react-typescript-cheatsheet'
 
     env:
       working-directory: website
