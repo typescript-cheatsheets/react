@@ -69,14 +69,19 @@ function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function (props: Omit<T, "owner">): React.ReactNode {
-      return <Component owner={owner} {...props} />;
+    return function (props: Omit<T, "owner">): JSX.Element{
+      const newProps = { ...props, owner } as T;
+      return <Component {...newProps} />;
     };
   };
 }
 ```
 
-_Note: above is an incomplete, nonworking example. PR a fix!_
+Note that we need to do a type coercion here. 
+
+This is because TypeScript does not know that merging `Omit<T, "owner">` and `{owner: "whatever"}` is the same as `T`. 
+
+[See this GitHub issue for more.](https://github.com/microsoft/TypeScript/issues/35858)
 
 ## Learn More
 
