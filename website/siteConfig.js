@@ -26,7 +26,7 @@ const siteConfig = {
     "Cheatsheets for experienced React developers getting started with TypeScript",
   /* TODO: Change this to official branch before gets merged */
   url: "https://raulfdm.github.io", // Your website URL
-  baseUrl: "",
+  baseUrl: "/",
   /* TODO: Change this to official branch before gets merged */
   projectName: "react-typescript-cheatsheet",
   organizationName: "raulfdm",
