@@ -69,7 +69,7 @@ function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function (props: Omit<T, "owner">): JSX.Element{
+    return function (props: Omit<T, "owner">): JSX.Element {
       const newProps = { ...props, owner } as T;
       return <Component {...newProps} />;
     };
