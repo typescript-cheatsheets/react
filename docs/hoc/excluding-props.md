@@ -69,14 +69,21 @@ function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function (props: Omit<T, "owner">): React.ReactNode {
-      return <Component owner={owner} {...props} />;
+    return function (props: Omit<T, "owner">): JSX.Element {
+      const newProps = { ...props, owner } as T;
+      return <Component {...newProps} />;
     };
   };
 }
 ```
 
-_Note: above is an incomplete, nonworking example. PR a fix!_
+(*[Link to TS Playground](https://www.typescriptlang.org/play/?strictFunctionTypes=false&jsx=1&ssl=1&ssc=1&pln=47&pc=49#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wG4AoczAVwDsNgJa4B3YGACwHkXakoAFBF78AXHADOMKMFoBzAJRwA3uThwiMalGY16MRswA8AFThIAHjCS0AJhJVxhfKOKkz5cAL4A+AWvU4AGFcSD5aGHFkdBgAOhDwJhsYEwBPMCRTHwClVUCNJC0dOD0GJjgBMBwwCXEuEHZTABoCZ358HyVxACkAZQANWIBRABskEGSVAPyAehmAQTgYdKQ4NAh+NEM4YAc+NDQkCQkUKFS4ACMkNBRqCVW0jN60GTB4Ww2JWgByeABrWjCJYcFDwTireqNEwtfBtKAdOAAahUcPEsXRXjgAF44CZpoF1rQpHA+CwAArVBw45RwdGxKoQGotOHeOAoBwmCj5dSabTGBJhSbKOmkimMiSYmY+LmBLwyuXkLyUZYZYKgsU1bFTdQjYAANyO4lo1BAVygMtRkmksjkFAVpQM5SCoIENN1BokzJEUG84mdMA1ElyAV5xX8+SMtn12W5KnwBCVsYAskhhOJlO6jl4WjwXOm4YnAkYZlG9TG4Ao7ZRCcTc0hbP6tWxOHXBPgJCxUhZ8AoBP7K5QjI3MxIscoAJyYuFY9ud7twKWkBczYG7SQcCDUEa2S6rTCyJDkIx1huguAjseTpzemcdrvxxfL1cOCQbrc7kEGtlLFZDKA4KAjxPYd9SOS9JWlJ9ODXV9N23XcSgPShyBVVYABEIDkQNtRJFAJjca15ACS13BtRUqDoMpmAwuRXVoPCkC9FwvHEGjA2DHlCj5OBI2jOAAHUIAgTB03oiZszgVt829Lxi1LbIlRreATxopt2G4b0BFne9exogdB1UsSkBnfcPnjadtPnR85mfdc4J3K5EL4ICRFsQyGJM4AzOvFxbznB9IJs6CXzfeDP1WFAfwyP8AJcvg3Mw3CJk87zrJXYK7PfBD9z4IA)*)
+
+Note that we need to do a type coercion here.
+
+This is because TypeScript does not know that merging `Omit<T, "owner">` and `{owner: "whatever"}` is the same as `T`.
+
+[See this GitHub issue for more.](https://github.com/microsoft/TypeScript/issues/35858)
 
 ## Learn More
 
