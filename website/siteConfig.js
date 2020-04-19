@@ -102,12 +102,12 @@ const siteConfig = {
   repoUrl:
     "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
 
-  // // https://docusaurus.io/docs/en/site-config#algolia-object
-  // algolia: {
-  //   apiKey:
-  //   indexName:
-  //   appId:
-  // }
+  // https://docusaurus.io/docs/en/site-config#algolia-object
+  algolia: {
+    apiKey: "e1c87cdc9c52f8ccf84ceb7f9e18bcd3",
+    indexName: "react-typescript-cheatsheet",
+    // appId:
+  },
 };
 
 module.exports = siteConfig;
