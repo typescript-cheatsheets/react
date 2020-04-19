@@ -65,20 +65,17 @@
         "sidebar_label": "Utility Types"
       },
       "basic/editor_integration": {
-        "title": "Editor Tooling and Integration",
-        "sidebar_label": "Editor Tooling and Integration"
+        "title": "Editor Tooling and Integration"
       },
       "basic/examples": {
         "title": "Example App",
         "sidebar_label": "Examples"
       },
       "basic/getting-started/basic_type_example": {
-        "title": "Basic Prop Types Examples",
-        "sidebar_label": "Basic Prop Types Examples"
+        "title": "Basic Prop Types Examples"
       },
       "basic/getting-started/class_components": {
-        "title": "Class Components",
-        "sidebar_label": "Class Components"
+        "title": "Class Components"
       },
       "basic/getting-started/concurrent": {
         "title": "Concurrent React/React Suspense"
@@ -87,8 +84,7 @@
         "title": "Context"
       },
       "basic/getting-started/default_props": {
-        "title": "Typing defaultProps",
-        "sidebar_label": "Typing defaultProps"
+        "title": "Typing defaultProps"
       },
       "basic/getting-started/error_boundaries": {
         "title": "Error Boundaries"
@@ -100,30 +96,25 @@
         "title": "forwardRef/createRef"
       },
       "basic/getting-started/function_components": {
-        "title": "Function Components",
-        "sidebar_label": "Function Components"
+        "title": "Function Components"
       },
       "basic/getting-started/get_derived_props_from_state": {
         "title": "getDerivedStateFromProps"
       },
       "basic/getting-started/hooks": {
-        "title": "Hooks",
-        "sidebar_label": "Hooks"
+        "title": "Hooks"
       },
       "basic/getting-started/portals": {
         "title": "Portals"
       },
       "basic/getting-started/react_prop_type_example": {
-        "title": "Useful React Prop Type Examples",
-        "sidebar_label": "Useful React Prop Type Examples"
+        "title": "Useful React Prop Type Examples"
       },
       "basic/getting-started/types_or_interfaces": {
-        "title": "Types or Interfaces?",
-        "sidebar_label": "Types or Interfaces?"
+        "title": "Types or Interfaces?"
       },
       "basic/linting": {
-        "title": "Linting",
-        "sidebar_label": "Linting"
+        "title": "Linting"
       },
       "basic/recommended/other_resources": {
         "title": "Other React + TypeScript resources",
@@ -138,8 +129,7 @@
         "sidebar_label": "Talks"
       },
       "basic/setup": {
-        "title": "Setup",
-        "sidebar_label": "Setup"
+        "title": "Setup"
       },
       "basic/troubleshooting/learn_ts": {
         "title": "Getting Started",

@@ -26,7 +26,7 @@ const siteConfig = {
     "Cheatsheets for experienced React developers getting started with TypeScript",
   /* TODO: Change this to official branch before gets merged */
   url: "https://raulfdm.github.io", // Your website URL
-  baseUrl: "/react-typescript-cheatsheet/",
+  baseUrl: "",
   /* TODO: Change this to official branch before gets merged */
   projectName: "react-typescript-cheatsheet",
   organizationName: "raulfdm",
@@ -101,6 +101,13 @@ const siteConfig = {
 
   repoUrl:
     "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
+
+  // // https://docusaurus.io/docs/en/site-config#algolia-object
+  // algolia: {
+  //   apiKey:
+  //   indexName:
+  //   appId:
+  // }
 };
 
 module.exports = siteConfig;

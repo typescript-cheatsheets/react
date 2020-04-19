@@ -1,4 +1,4 @@
-name: CI
+name: FormatCodeAndShowDiff
 on:
   push:
     branches: [master]
