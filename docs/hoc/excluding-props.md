@@ -77,9 +77,9 @@ function withOwner(owner: string) {
 }
 ```
 
-Note that we need to do a type coercion here. 
+Note that we need to do a type coercion here.
 
-This is because TypeScript does not know that merging `Omit<T, "owner">` and `{owner: "whatever"}` is the same as `T`. 
+This is because TypeScript does not know that merging `Omit<T, "owner">` and `{owner: "whatever"}` is the same as `T`.
 
 [See this GitHub issue for more.](https://github.com/microsoft/TypeScript/issues/35858)
 
