@@ -5,9 +5,11 @@ title: Types or Interfaces?
 
 `interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
 
-- always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions.
+- always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions, as this allows a consumer to extend them via _declaration merging_ if some definitions are missing.
 
-- consider using `type` for your React Component Props and State, because it is more constrained.
+- consider using `type` for your React Component Props and State, for consistency and because it is more constrained.
+
+You can read more about the reasoning behind this rule of thumb in [Interface vs Type alias in TypeScript 2.7](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c).
 
 Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas Interfaces are better for declaring dictionary shapes and then `implementing` or `extending` them.
 
