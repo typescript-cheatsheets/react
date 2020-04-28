@@ -93,7 +93,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 
     // props comes afterwards so the can override the default ones.
     return <WrappedComponent {...themeProps} {...(props as T)} />;
-  }
+  };
 
   ComponentWithTheme.displayName = `withTheme(${displayName})`;
 
