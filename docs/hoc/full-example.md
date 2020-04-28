@@ -88,11 +88,11 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
   const ComponentWithTheme = (props: Omit<T, keyof WithThemeProps>) => {
-      // Fetch the props you want to inject. This could be done with context instead.
-      const themeProps = useTheme();
+    // Fetch the props you want to inject. This could be done with context instead.
+    const themeProps = useTheme();
 
-      // props comes afterwards so the can override the default ones.
-      return <WrappedComponent {...themeProps} {...(props as T)} />;
+    // props comes afterwards so the can override the default ones.
+    return <WrappedComponent {...themeProps} {...(props as T)} />;
   }
 
   ComponentWithTheme.displayName = `withTheme(${displayName})`;
