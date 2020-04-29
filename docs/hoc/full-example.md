@@ -60,39 +60,12 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
     WrappedComponent.displayName || WrappedComponent.name || "Component";
 
   // Creating the inner component. The calculated Props type here is the where the magic happens.
-  return class ComponentWithTheme extends React.Component<
-    Optionalize<T, WithThemeProps>
-  > {
-    public static displayName = `withTheme(${displayName})`;
-
-    public render() {
-      // Fetch the props you want inject. This could be done with context instead.
-      const themeProps = getThemePropsFromSomeWhere();
-
-      // this.props comes afterwards so the can override the default ones.
-      return <WrappedComponent {...themeProps} {...(this.props as T)} />;
-    }
-  };
-}
-```
-
-Or, for a functional component example:
-
-```tsx
-export function withTheme<T extends WithThemeProps = WithThemeProps>(
-  WrappedComponent: React.ComponentType<T>
-) {
-  // Try to create a nice displayName for React Dev Tools.
-  const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || "Component";
-
-  // Creating the inner component. The calculated Props type here is the where the magic happens.
   const ComponentWithTheme = (props: Omit<T, keyof WithThemeProps>) => {
     // Fetch the props you want to inject. This could be done with context instead.
     const themeProps = useTheme();
 
     // props comes afterwards so the can override the default ones.
-    return <WrappedComponent {...themeProps} {...(props as T)} />;
+    return <WrappedComponent {...themeProps} {...props as T} />;
   };
 
   ComponentWithTheme.displayName = `withTheme(${displayName})`;
@@ -101,9 +74,7 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
 }
 ```
 
-Note that the `{...this.props as T}` assertion is needed because of a current bug in TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
-
-For `Optionalize` details check out the [utility types section](https://github.com/typescript-cheatsheets/typescript-utilities-cheatsheet#utility-types).
+Note that the `{...props as T}` assertion is needed because of a current bug in TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
 
 Here is a more advanced example of a dynamic higher order component that bases some of its parameters on the props of the component being passed in:
 
