@@ -36,7 +36,14 @@
   flex-grow: 1;
 }
 
-/* TODO: get it from siteConfig */
 .nav-footer {
-  background: #222;
+  background: $primaryColor;
+}
+
+.container a:not(.button) {
+  color: $urlColor;
+}
+
+.container a:not(.button):hover {
+  opacity: 0.75;
 }
