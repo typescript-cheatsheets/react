@@ -40,3 +40,11 @@
 .nav-footer {
   background: #222;
 }
+
+.container a:not(.button) {
+  color: $urlColor;
+}
+
+.container a:not(.button):hover {
+  opacity: 0.75;
+}
