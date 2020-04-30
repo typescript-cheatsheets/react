@@ -256,7 +256,7 @@ Note that when you implement the actual overloaded function, the implementation 
 
 ## Using Inferred Types
 
-Leaning on Typescript's Type Inference is great... until you realize you need a type that was inferred, and have to go back and explicitly declare types/interfaces so you can export them for reuse.
+Leaning on TypeScript's Type Inference is great... until you realize you need a type that was inferred, and have to go back and explicitly declare types/interfaces so you can export them for reuse.
 
 Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 
