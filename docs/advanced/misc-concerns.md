@@ -28,7 +28,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 
 ## Commenting Components
 
-Typescript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for Typescript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/docs/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
+TypeScript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for TypeScript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/docs/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
 import React from "react";
@@ -83,7 +83,7 @@ export default Object.assign(Form, { Input: Input });
 
 ## Design System Development
 
-I do like [Docz](https://docz.site/) which takes basically [1 line of config](https://www.docz.site/documentation/project-configuration#typescript) to accept Typescript. However it is newer and has a few more rough edges (many breaking changes since it is still < v1.0)
+I do like [Docz](https://docz.site/) which takes basically [1 line of config](https://www.docz.site/documentation/project-configuration#typescript) to accept TypeScript. However it is newer and has a few more rough edges (many breaking changes since it is still < v1.0)
 
 For developing with Storybook, read the docs I wrote over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
