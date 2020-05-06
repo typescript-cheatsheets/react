@@ -11,12 +11,12 @@ For TypeScript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 // function components
 // ////////////////
-type Props = { age: number } & typeof defaultProps;
+type GreetProps = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: "Johny Five",
+  age: 21,
 };
 
-const Greet = (props: Props) => {
+const Greet = (props: GreetProps) => {
   /*...*/
 };
 Greet.defaultProps = defaultProps;
@@ -31,7 +31,7 @@ type GreetProps = typeof Greet.defaultProps & {
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
-    name: "world",
+    age: 21,
   };
   /*...*/
 }
@@ -39,6 +39,44 @@ class Greet extends React.Component<GreetProps> {
 // Type-checks! No type assertions needed!
 let el = <Greet age={3} />;
 ```
+
+<details>
+  <summary>An alternative approach</summary>
+
+As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
+
+- https://twitter.com/hswolff/status/1133759319571345408
+
+The consensus is to use object default values.
+
+```tsx
+// ////////////////
+// function components
+// ////////////////
+type GreetProps = { age: number };
+
+const Greet = ({ age = 21 }: GreetProps) => {
+  /*...*/
+};
+```
+
+```tsx
+// ////////////////
+// class components
+// ////////////////
+type GreetProps =  {
+  age: number;
+};
+
+class Greet extends React.Component<GreetProps> {
+  const { age = 21 } = this.props
+  /*...*/
+}
+
+let el = <Greet age={3} />;
+```
+
+</details>
 
 <details>
   <summary>Why does React.FC break defaultProps?</summary>
