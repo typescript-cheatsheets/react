@@ -11,12 +11,12 @@ For TypeScript 3.0+, type inference [should work](https://www.typescriptlang.org
 // ////////////////
 // function components
 // ////////////////
-type Props = { age: number } & typeof defaultProps;
+type GreetProps = { age: number } & typeof defaultProps;
 const defaultProps = {
-  who: "Johny Five",
+  age: 21,
 };
 
-const Greet = (props: Props) => {
+const Greet = (props: GreetProps) => {
   /*...*/
 };
 Greet.defaultProps = defaultProps;
@@ -31,7 +31,7 @@ type GreetProps = typeof Greet.defaultProps & {
 
 class Greet extends React.Component<GreetProps> {
   static defaultProps = {
-    name: "world",
+    age: 21,
   };
   /*...*/
 }
