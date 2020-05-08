@@ -380,14 +380,13 @@ handy for JSDoc users - `@public, @private, @protected, @readonly`
 
 `assumeChangesOnlyAffectDirectDependencies` reduces build times for extremely large codebases.
 
-
 ## TypeScript 3.9
 
 [[Release Candidate](https://devblogs.microsoft.com/typescript/announcing-typescript-3-9-rc/)]
 
 1. (minor feature) New `ts-expect-error` directive.
 
-Use this when writing tests you expect to error. 
+Use this when writing tests you expect to error.
 
 ```ts
 // @ts-expect-error

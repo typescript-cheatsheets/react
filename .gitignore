@@ -117,3 +117,5 @@ dist
 # Miscellaneous
 .history
 website/build
+# Local Netlify folder
+.netlify
