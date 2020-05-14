@@ -107,6 +107,8 @@ Open Source
   - [v5 attempt](https://github.com/ReactTraining/react-router/issues/6955)
   - [React Router v6](https://github.com/ReactTraining/react-router/releases/tag/v6.0.0-alpha.4)
   - [history](https://github.com/ReactTraining/history/pull/774) - [final](https://github.com/ReactTraining/history/commit/1e91a64a858604062d804e4d51eb1d2a020a95c8)
+- [Docusaurus v2](https://github.com/facebook/docusaurus/pull/2578)
+- [Gatsby](https://github.com/gatsbyjs/gatsby/issues/21995)
 - [Redux](https://github.com/reduxjs/redux/pull/3536)
 - [Theme-UI](https://github.com/system-ui/theme-ui/issues/668)
 - [Hasura Console](https://github.com/hasura/graphql-engine/issues/4314)
