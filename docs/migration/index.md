@@ -90,7 +90,7 @@ Special note on `ts-loader` and 3rd party libraries: https://twitter.com/acemark
 - [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d) ([podcast](https://softwareengineeringdaily.com/2017/08/11/typescript-at-slack-with-felix-rieseberg/))
 - [Netflix adoption story](https://www.youtube.com/watch?v=p5Hwb1YbNMY&feature=share)
 - [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
-- Dropbox 
+- Dropbox
   - [Talk at React Loop](https://www.youtube.com/watch?v=veXkJq0Z2Qk)
   - [Blogpost: The Great CoffeeScript to Typescript Migration of 2017](https://dropbox.tech/frontend/the-great-coffeescript-to-typescript-migration-of-2017)
 - [Heap - How we failed, then succeeded, at migrating to TypeScript](https://heap.io/blog/analysis/migrating-to-typescript)
