@@ -13,7 +13,7 @@
 
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
-[**Web docs**](https://raulfdm.github.io/react-typescript-cheatsheet/docs/basic/setup) |
+[**Web docs**](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) |
 [中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
 [**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [Contribute!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
@@ -41,14 +41,14 @@
   - Answers the most Frequently Asked Questions.
   - Does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
   - The goal is to get effective with TS without learning _too much_ TS.
-- **The Advanced Cheatsheet** ([`/ADVANCED.md`](/ADVANCED.md)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
+- **The Advanced Cheatsheet** ([`/ADVANCED.md`](https://react-typescript-cheatsheet.netlify.app/docs/advanced/intro)) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
   - It also has miscellaneous tips and tricks for pro users.
   - Advice for contributing to DefinitelyTyped.
   - The goal is to take _full advantage_ of TypeScript.
-- **The Migrating Cheatsheet** ([`/MIGRATING.md`](/MIGRATING.md)) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
+- **The Migrating Cheatsheet** ([`/MIGRATING.md`](https://react-typescript-cheatsheet.netlify.app/docs/migration/intro)) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
   - We do not try to convince people to switch, only to help people who have already decided.
   - ⚠️This is a new cheatsheet, all assistance is welcome.
-- **The HOC Cheatsheet** ([`/HOC.md`](/HOC.md)) specifically teaches people to write HOCs with examples.
+- **The HOC Cheatsheet** ([`/HOC.md`](https://react-typescript-cheatsheet.netlify.app/docs/hoc/intro)) specifically teaches people to write HOCs with examples.
   - Familiarity with [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) is necessary.
   - ⚠️This is the newest cheatsheet, all assistance is welcome.
 
