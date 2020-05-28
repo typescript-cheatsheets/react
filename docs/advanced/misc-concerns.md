@@ -1,6 +1,6 @@
 ---
 id: misc_concerns
-title: Section 3: Misc. Concerns
+title: "Section 3: Misc. Concerns"
 sidebar_label: Misc. Concerns
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: tsconfig
-title: Troubleshooting Handbook: tsconfig.json
+title: "Troubleshooting Handbook: tsconfig.json"
 sidebar_label: tsconfig.json
 ---
 

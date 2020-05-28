@@ -1,7 +1,7 @@
 ---
 id: full_example
 sidebar_label: Full HOC Example
-title: Section 0: Full HOC Example
+title: "Section 0: Full HOC Example"
 ---
 
 > This is an HOC example for you to copy and paste. If you certain pieces don't make sense for you, head to [Section 1](#section-1-react-hoc-docs-in-typescript) to get a detailed walkthrough via a complete translation of the React docs in TypeScript.

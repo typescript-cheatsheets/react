@@ -1,6 +1,6 @@
 ---
 id: types
-title: Troubleshooting Handbook: Types
+title: "Troubleshooting Handbook: Types"
 sidebar_label: Types
 ---
 

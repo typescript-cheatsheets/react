@@ -1,6 +1,6 @@
 ---
 id: props_one_other_not_both
-title: Props: One or the Other but not Both
+title: "Props: One or the Other but not Both"
 ---
 
 Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:

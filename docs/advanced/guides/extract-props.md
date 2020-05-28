@@ -1,6 +1,6 @@
 ---
 id: extract_props
-title: Props:  Extracting Prop Types of a Component
+title: "Props:  Extracting Prop Types of a Component"
 ---
 
 _(Contributed by [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/63))_

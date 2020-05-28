@@ -1,6 +1,6 @@
 ---
 id: props_one_other_not_both
-title: Props:  Must Pass Both
+title: "Props:  Must Pass Both"
 ---
 
 ```tsx

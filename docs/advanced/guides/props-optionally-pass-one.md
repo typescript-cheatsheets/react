@@ -1,6 +1,6 @@
 ---
 id: props_optionally_pass_one
-title: Props: Can Optionally Pass One Only If the Other Is Passed
+title: "Props: Can Optionally Pass One Only If the Other Is Passed"
 ---
 
 Say you want a Text component that gets truncated if `truncate` prop is passed but expands to show the full text when `expanded` prop is passed (e.g. when the user clicks the text).

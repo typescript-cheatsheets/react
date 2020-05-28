@@ -1,7 +1,7 @@
 ---
 id: types_react_api
-title: Section 4: @types/react and @types/react-dom APIs
-sidebar_label:  @types/react and @types/react-dom APIs
+title: "Section 4: @types/react and @types/react-dom APIs"
+sidebar_label: "@types/react and @types/react-dom APIs"
 ---
 
 The `@types` typings export both "public" types meant for your use as well as "private" types that are for internal use.

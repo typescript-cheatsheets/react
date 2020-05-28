@@ -1,7 +1,7 @@
 ---
 id: react_hoc_docs
 sidebar_label: React HOC docs in TypeScript
-title: Section 1: React HOC docs in TypeScript
+title: "Section 1: React HOC docs in TypeScript"
 ---
 
 In this first section we refer closely to [the React docs on HOCs](https://reactjs.org/docs/higher-order-components.html) and offer direct TypeScript parallels.

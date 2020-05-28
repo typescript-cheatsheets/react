@@ -119,6 +119,11 @@ dist
 
 # Miscellaneous
 .history
+
+# Docusaurus files
 website/build
+website/.docusaurus
+website/.cache-loader
+
 # Local Netlify folder
 .netlify
