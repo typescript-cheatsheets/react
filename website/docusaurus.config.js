@@ -56,7 +56,7 @@ module.exports = {
     // sidebarCollapsible: false,
 
     navbar: {
-      title: "React Typescript Cheatsheet",
+      title: "React TypeScript Cheatsheet",
       logo: {
         alt: "Logo",
         src: "img/icon.png", // TODO: Make it smaller
@@ -79,9 +79,9 @@ module.exports = {
     footer: {
       logo: {
         alt: "Facebook Open Source Logo",
-        src: "img/icon.png", // TODO: Make it smaller
+        src: "img/icon.png",
       },
-      copyright: `Copyright © ${new Date().getFullYear()} Typescript Cheatsheets`,
+      copyright: `Copyright © ${new Date().getFullYear()} TypeScript Cheatsheets`,
     },
     algolia: {
       apiKey: "e1c87cdc9c52f8ccf84ceb7f9e18bcd3",
@@ -96,6 +96,6 @@ module.exports = {
   customFields: {
     firstDoc: "docs/basic/setup",
 
-    users, // TODO useful ???
+    users, // TODO useless ?
   },
 };
