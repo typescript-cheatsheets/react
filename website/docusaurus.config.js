@@ -20,6 +20,8 @@ const users = [
   },
 ];
 
+const setupDoc = "docs/basic/setup";
+
 module.exports = {
   favicon: "img/icon.png",
   title: "React TypeScript Cheatsheets", // Title for your website.
@@ -37,6 +39,9 @@ module.exports = {
     [
       "@docusaurus/preset-classic",
       {
+        theme: {
+          customCss: require.resolve("./src/css/custom.css"),
+        },
         docs: {
           // Docs folder path relative to website dir.
           path: "../docs",
@@ -49,6 +54,8 @@ module.exports = {
   ],
 
   themeConfig: {
+    defaultDarkMode: true,
+
     image:
       "https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png",
 
@@ -59,30 +66,93 @@ module.exports = {
       title: "React TypeScript Cheatsheet",
       logo: {
         alt: "Logo",
-        src: "img/icon.png", // TODO: Make it smaller
+        src: "img/icon.png",
       },
       links: [
         {
-          to: "docs/basic/setup",
+          to: setupDoc,
           label: "Docs",
-          position: "left",
+          position: "right",
         },
         {
           to: "help",
           label: "Help",
-          position: "left",
+          position: "right",
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},,
+        // {to: 'blog', label: 'Blog', position: 'right'},
       ],
     },
 
     footer: {
+      style: "dark",
       logo: {
-        alt: "Facebook Open Source Logo",
+        alt: "TypeScript Cheatsheets Logo",
         src: "img/icon.png",
+        maxWidth: 128,
+        style: { maxWidth: 128, maxHeight: 128 },
       },
       copyright: `Copyright © ${new Date().getFullYear()} TypeScript Cheatsheets`,
+      links: [
+        {
+          title: "Docs",
+          items: [
+            {
+              label: "Introduction",
+              to: setupDoc,
+            },
+            {
+              label: "High Order Component (HOC)",
+              to: "docs/hoc/intro",
+            },
+            {
+              label: "Advanced Guides",
+              to: "docs/advanced/intro",
+            },
+            {
+              label: "Migrating",
+              to: "docs/migration/intro",
+            },
+          ],
+        },
+        {
+          title: "Community",
+          items: [
+            {
+              label: "Stack Overflow",
+              href: "https://stackoverflow.com/questions/tagged/typescript",
+            },
+            {
+              label: "User Showcase",
+              to: "users",
+            },
+            {
+              label: "Help",
+              to: "help",
+            },
+          ],
+        },
+        {
+          title: "More",
+          items: [
+            {
+              label: "GitHub",
+              href:
+                "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
+            },
+            {
+              label: "Star",
+              class: "footer__link-item github-button",
+              href:
+                "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
+              "data-icon": "octicon-star",
+              "aria-label":
+                "typescript-cheatsheets/react-typescript-cheatsheet",
+            },
+          ],
+        },
+      ],
     },
+
     algolia: {
       apiKey: "e1c87cdc9c52f8ccf84ceb7f9e18bcd3",
       indexName: "react-typescript-cheatsheet",
@@ -94,7 +164,7 @@ module.exports = {
   },
 
   customFields: {
-    firstDoc: "docs/basic/setup",
+    firstDoc: setupDoc,
 
     users, // TODO useless ?
   },
