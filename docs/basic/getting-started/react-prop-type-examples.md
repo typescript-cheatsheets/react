@@ -24,7 +24,8 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-che
 
 - `JSX.Element` -> Return value of `React.createElement`
 - `React.ReactNode` -> Return value of a component
-  </details>
+
+</details>
 
 [More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/129)
 
