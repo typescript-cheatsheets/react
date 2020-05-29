@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container ">
           <div className="padding-vert--md">
             <h1 className="hero__title">{siteConfig.title}</h1>
-            <p className="hero__subtitle">Not all heroes wear capes</p>
+            <p className="hero__subtitle">{siteConfig.tagline}</p>
           </div>
           <div>
             <Link
