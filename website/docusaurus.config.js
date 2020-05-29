@@ -62,6 +62,10 @@ module.exports = {
     // Equivalent to `docsSideNavCollapsible`.
     // sidebarCollapsible: false,
 
+    prism: {
+      defaultLanguage: "typescript",
+    },
+
     navbar: {
       title: "React TypeScript Cheatsheet",
       logo: {
