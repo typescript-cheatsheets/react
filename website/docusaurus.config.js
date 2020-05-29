@@ -166,6 +166,9 @@ module.exports = {
   customFields: {
     firstDoc: setupDoc,
 
-    users, // TODO useless ?
+    // TODO useless user showcase page ?
+    users,
+    addUserUrl:
+      "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/website/docusaurus.config.js",
   },
 };

@@ -9,18 +9,10 @@ import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 
-// TODO this page is probably useless
+// TODO useless user showcase page ?
 export default function Users() {
   const { siteConfig } = useDocusaurusContext();
-
-  const users = siteConfig.customFields.users;
-
-  if ((users || []).length === 0) {
-    return null;
-  }
-
-  //const editUrl = `${siteConfig.repoUrl}/edit/master/website/siteConfig.js`;
-  const editUrl = `TODO`;
+  const { users, addUserUrl } = siteConfig.customFields;
 
   return (
     <Layout title="Users" permalink="/users" description="Users">
@@ -52,7 +44,10 @@ export default function Users() {
             ))}
           </div>
           <p>Are you using this project?</p>
-          <a href={"todo"} className="button button--outline button--primary">
+          <a
+            href={addUserUrl}
+            className="button button--outline button--primary"
+          >
             Add your company
           </a>
         </div>
