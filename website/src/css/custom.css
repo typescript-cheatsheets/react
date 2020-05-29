@@ -32,3 +32,12 @@
   max-width: 4rem;
   max-height: 4rem;
 }
+
+main details {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+main details summary {
+  margin-bottom: 1rem;
+}
