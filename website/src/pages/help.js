@@ -18,7 +18,7 @@ const SupportLink = ({ title, content }) => (
   </div>
 );
 
-function Help(props) {
+export default function Help() {
   const { siteConfig } = useDocusaurusContext();
 
   const supportLinks = [
@@ -65,5 +65,3 @@ function Help(props) {
     </Layout>
   );
 }
-
-export default Help;

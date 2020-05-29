@@ -94,6 +94,8 @@ module.exports = {
   },
 
   customFields: {
+    firstDoc: "docs/basic/setup",
+
     users, // TODO useful ???
   },
 };
