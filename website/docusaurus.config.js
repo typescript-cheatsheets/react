@@ -33,7 +33,7 @@ module.exports = {
   organizationName: "typescript-cheatsheets",
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: ["https://buttons.github.io/buttons.js"],
+  // scripts: ["https://buttons.github.io/buttons.js"],
 
   presets: [
     [
@@ -139,6 +139,7 @@ module.exports = {
               href:
                 "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
             },
+            /*
             {
               label: "Star",
               class: "footer__link-item github-button",
@@ -148,6 +149,7 @@ module.exports = {
               "aria-label":
                 "typescript-cheatsheets/react-typescript-cheatsheet",
             },
+             */
           ],
         },
       ],
