@@ -62,9 +62,17 @@ module.exports = {
         src: "img/icon.png", // TODO: Make it smaller
       },
       links: [
-        { doc: "docs/basic/setup", label: "Docs" },
-        { page: "help", label: "Help" },
-        // {blog: true, label: 'Blog'},
+        {
+          to: "docs/basic/setup",
+          label: "Docs",
+          position: "left",
+        },
+        {
+          to: "help",
+          label: "Help",
+          position: "left",
+        },
+        // {to: 'blog', label: 'Blog', position: 'left'},,
       ],
     },
 
