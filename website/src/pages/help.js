@@ -46,15 +46,15 @@ export default function Help() {
 
   return (
     <Layout title="Help" permalink="/help" description="Help">
-      <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
+      <div className="container margin-vert--xl">
         <div>
-          <header className="postHeader">
+          <header>
             <h1>Need help?</h1>
           </header>
           <p>This project is maintained by a dedicated group of people.</p>
         </div>
 
-        <div className="row" style={{ marginTop: 60 }}>
+        <div className="row margin-vert--xl">
           {supportLinks.map((supportLink, i) => (
             <div className="col col--4" key={i}>
               <SupportLink {...supportLink} />

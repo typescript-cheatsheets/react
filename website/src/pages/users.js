@@ -22,49 +22,39 @@ export default function Users() {
   //const editUrl = `${siteConfig.repoUrl}/edit/master/website/siteConfig.js`;
   const editUrl = `TODO`;
 
-  const showcase = users.map((user) => (
-    <a href={user.infoLink} key={user.infoLink}>
-      <img
-        src={user.image}
-        alt={user.caption}
-        title={user.caption}
-        style={{
-          maxHeight: 128,
-          padding: 20,
-          width: 128,
-        }}
-      />
-    </a>
-  ));
-
   return (
     <Layout title="Users" permalink="/users" description="Users">
       <div className="container">
-        <div style={{ paddingTop: 80, paddingBottom: 80 }}>
-          <div
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <div>
-              <h1>Who is Using This?</h1>
-              <p>This project is used by many folks</p>
-            </div>
-            <div
-              style={{
-                alignItems: "center",
-                display: "flex",
-                flexFlow: "row wrap",
-                justifyContent: "center",
-              }}
-            >
-              {showcase}
-            </div>
-            <p>Are you using this project?</p>
-            <a href={"todo"} className="button button--outline button--primary">
-              Add your company
-            </a>
+        <div className="margin-vert--xl text--center">
+          <div>
+            <h1>Who is Using This?</h1>
+            <p>This project is used by many folks</p>
           </div>
+          <div className="row">
+            {users.map((user) => (
+              <a
+                className="col-2"
+                href={user.infoLink}
+                key={user.infoLink}
+                style={{ flexGrow: 1 }}
+              >
+                <img
+                  className="padding--md"
+                  src={user.image}
+                  alt={user.caption}
+                  title={user.caption}
+                  style={{
+                    maxHeight: 128,
+                    width: 128,
+                  }}
+                />
+              </a>
+            ))}
+          </div>
+          <p>Are you using this project?</p>
+          <a href={"todo"} className="button button--outline button--primary">
+            Add your company
+          </a>
         </div>
       </div>
     </Layout>
