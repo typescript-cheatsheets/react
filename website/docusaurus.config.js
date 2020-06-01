@@ -1,12 +1,7 @@
-// See https://docusaurus.io/docs/en/site-config.html#docsNav for all the possible
-// site configuration options.
-
 // List of projects/orgs using your project for the users page.
 const users = [
   {
     caption: "Docusaurus",
-    // You will need to prepend the image path with your baseUrl
-    // if it is not '/', like: '/test-site/img/image.jpg'.
     image: "https://docusaurus.io/img/docusaurus.svg",
     infoLink: "https://docusaurus.io/",
     pinned: true,
