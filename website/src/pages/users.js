@@ -39,7 +39,7 @@ export default function Users() {
           <p>Are you using this project?</p>
           <a
             href={addUserUrl}
-            className="button button--outline button--primary"
+            className="button button--lg button--outline button--primary"
           >
             Add your company
           </a>

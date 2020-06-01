@@ -22,7 +22,7 @@ export default function Home() {
           <div>
             <Link
               to={useBaseUrl(siteConfig.customFields.firstDoc)}
-              className="button button--outline button--primary"
+              className="button button--lg button--outline button--primary"
             >
               Getting started
             </Link>
