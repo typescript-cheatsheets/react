@@ -20,8 +20,14 @@ module.exports = {
   projectName: "react-typescript-cheatsheet",
   organizationName: "typescript-cheatsheets",
 
-  // Add custom scripts here that would be placed in <script> tags.
-  // scripts: ["https://buttons.github.io/buttons.js"],
+  // Needed for the Github Star in footer
+  scripts: [
+    {
+      src: "https://buttons.github.io/buttons.js",
+      async: true,
+      defer: true,
+    },
+  ],
 
   presets: [
     [
@@ -131,17 +137,10 @@ module.exports = {
               href:
                 "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
             },
-            /*
             {
-              label: "Star",
-              class: "footer__link-item github-button",
-              href:
-                "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
-              "data-icon": "octicon-star",
-              "aria-label":
-                "typescript-cheatsheets/react-typescript-cheatsheet",
+              html:
+                '<a class="footer__link-item github-button" href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star typescript-cheatsheets/react-typescript-cheatsheet on GitHub">Star</a>',
             },
-             */
           ],
         },
       ],
