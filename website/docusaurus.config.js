@@ -20,15 +20,6 @@ module.exports = {
   projectName: "react-typescript-cheatsheet",
   organizationName: "typescript-cheatsheets",
 
-  // Needed for the Github Star in footer
-  scripts: [
-    {
-      src: "https://buttons.github.io/buttons.js",
-      async: true,
-      defer: true,
-    },
-  ],
-
   presets: [
     [
       "@docusaurus/preset-classic",
