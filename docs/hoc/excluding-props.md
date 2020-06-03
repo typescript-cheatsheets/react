@@ -1,7 +1,7 @@
 ---
 id: excluding_props
 sidebar_label: Excluding Props
-title: Section 2: Excluding Props
+title: "Section 2: Excluding Props"
 ---
 
 This is covered in passing in Section 1 but we focus on it here as it is such a common issue. HOCs often inject props to premade components. The problem we want to solve is having the HOC-wrapped-component exposing a type that reflects the reduced surface area of props - without manually retyping the HOC every time. This involves some generics, fortunately with some helper utilities.

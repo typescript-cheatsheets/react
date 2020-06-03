@@ -1,5 +1,5 @@
 ---
-id: handling_exception
+id: handling_exceptions
 title: Handling Exceptions
 ---
 

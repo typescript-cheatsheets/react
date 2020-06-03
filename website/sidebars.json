@@ -3,9 +3,9 @@
     "Basic": [
       "basic/setup",
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Getting Started",
-        "ids": [
+        "items": [
           "basic/getting-started/function_components",
           "basic/getting-started/hooks",
           "basic/getting-started/class_components",
@@ -23,21 +23,21 @@
         ]
       },
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Troubleshooting Handbook",
-        "ids": [
+        "items": [
           "basic/troubleshooting/types",
           "basic/troubleshooting/operators",
           "basic/troubleshooting/utilities",
           "basic/troubleshooting/non_ts_files",
           "basic/troubleshooting/tsconfig",
-          "basic/troubleshooting/oficial_typings_bug"
+          "basic/troubleshooting/official_typings_bugs"
         ]
       },
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Recommended React + TypeScript",
-        "ids": [
+        "items": [
           "basic/recommended/resources",
           "basic/recommended/talks",
           "basic/recommended/other_resources"
@@ -57,9 +57,9 @@
       "advanced/intro",
       "advanced/utility_types",
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Guides",
-        "ids": [
+        "items": [
           "advanced/guides/render_props",
           "advanced/guides/hocs",
           "advanced/guides/conditionally_rendering",
@@ -71,7 +71,7 @@
           "advanced/guides/omit_attr",
           "advanced/guides/type_zoo",
           "advanced/guides/extract_props",
-          "advanced/guides/handling-exceptions",
+          "advanced/guides/handling_exceptions",
           "advanced/guides/third_party_libs"
         ]
       },

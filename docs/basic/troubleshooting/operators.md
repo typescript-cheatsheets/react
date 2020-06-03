@@ -1,6 +1,6 @@
 ---
 id: operators
-title: Troubleshooting Handbook: Operators
+title: "Troubleshooting Handbook: Operators"
 sidebar_label: Operators
 ---
 

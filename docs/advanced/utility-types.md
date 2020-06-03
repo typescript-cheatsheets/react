@@ -1,6 +1,6 @@
 ---
 id: utility_types
-title: Section 0: Utility Types
+title: "Section 0: Utility Types"
 sidebar_label: Utility Types
 ---
 

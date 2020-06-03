@@ -107,6 +107,9 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Idea / Jetbrains IDE
+.idea
+
 # yarn v2
 
 .yarn/cache
@@ -116,6 +119,11 @@ dist
 
 # Miscellaneous
 .history
+
+# Docusaurus files
 website/build
+website/.docusaurus
+website/.cache-loader
+
 # Local Netlify folder
 .netlify

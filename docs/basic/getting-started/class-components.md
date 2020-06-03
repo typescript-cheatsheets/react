@@ -33,7 +33,7 @@ class App extends React.Component<MyProps, MyState> {
 Don't forget that you can export/import/extend these types/interfaces for reuse.
 
 <details>
-<summary><b>Why annotate `state` twice?</b></summary>
+<summary><b>Why annotate <code>state</code> twice?</b></summary>
 
 It isn't strictly necessary to annotate the `state` class property, but it allows better type inference when accessing `this.state` and also initializing the state.
 

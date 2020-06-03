@@ -1,6 +1,6 @@
 ---
 id: utilities
-title: Troubleshooting Handbook: Utilities
+title: "Troubleshooting Handbook: Utilities"
 sidebar_label: Utilities
 ---
 

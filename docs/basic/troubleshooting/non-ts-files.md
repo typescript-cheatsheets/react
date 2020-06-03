@@ -1,6 +1,6 @@
 ---
 id: non_ts_files
-title: Troubleshooting Handbook: Images and other non-TS/TSX files
+title: "Troubleshooting Handbook: Images and other non-TS/TSX files"
 sidebar_label: Images and other non-TS/TSX files
 ---
 
