@@ -44,9 +44,9 @@ The first option will make `ref1.current` read-only, and is intended to be passe
 function MyComponent() {
   const ref1 = useRef<HTMLElement>(null!);
   useEffect(() => {
-    doSomethingWith(ref1.current) // TypeScript won't require null-check e.g. ref1 && ref1.current
-  })
-  return <div ref={ref1}> etc </div>
+    doSomethingWith(ref1.current); // TypeScript won't require null-check e.g. ref1 && ref1.current
+  });
+  return <div ref={ref1}> etc </div>;
 }
 ```
 
@@ -108,7 +108,7 @@ You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/
 ```tsx
 type AppState = {};
 type Action =
-  | { type: "SET_ONE"; payload: string }  // typescript union types allow for leading |'s to have nicer layout
+  | { type: "SET_ONE"; payload: string } // typescript union types allow for leading |'s to have nicer layout
   | { type: "SET_TWO"; payload: number };
 
 export function reducer(state: AppState, action: Action): AppState {
