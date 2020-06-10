@@ -35,6 +35,23 @@ const ref2 = useRef<HTMLElement | null>(null);
 
 The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
 
+<details>
+  <summary>What is the <code>!</code> at the end of <code>null!</code>?</summary>
+
+`null!` is a non-null assertion operator (the `!`). It asserts that any expression before it is not `null` or `undefined`, so if you have `useRef<HTMLElement>(null!)` it means that you're instantiating the ref with a current value of `null` but lying to TypeScript that it's not `null`.
+
+```ts
+function MyComponent() {
+  const ref1 = useRef<HTMLElement>(null!);
+  useEffect(() => {
+    doSomethingWith(ref1.current) // TypeScript won't require null-check e.g. ref1 && ref1.current
+  })
+  return <div ref={ref1}> etc </div>
+}
+```
+
+</details>
+
 The second option will make `ref2.current` mutable, and is intended for "instance variables" that you manage yourself.
 
 **useEffect**
@@ -91,7 +108,7 @@ You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/
 ```tsx
 type AppState = {};
 type Action =
-  | { type: "SET_ONE"; payload: string }
+  | { type: "SET_ONE"; payload: string }  // typescript union types allow for leading |'s to have nicer layout
   | { type: "SET_TWO"; payload: number };
 
 export function reducer(state: AppState, action: Action): AppState {
