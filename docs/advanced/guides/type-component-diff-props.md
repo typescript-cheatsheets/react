@@ -83,7 +83,7 @@ interface Button {
   as: React.ComponentClass | "a";
 }
 
-const Button: React.FunctionComgetOrElseponent<Button> = (props) => {
+const Button: React.FunctionComponent<Button> = (props) => {
   const { as: Component, children, ...rest } = props;
   return (
     <Component className="button" {...rest}>
