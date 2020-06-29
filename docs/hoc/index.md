@@ -25,7 +25,7 @@ const withSampleHoC = <P extends {}>(
     (props: P): Exclude<React.ReactNode, undefined>;
     displayName?: string;
   },
-  memo?: PropsAreEqual<P> | false,
+  propsAreEqual?: PropsAreEqual<P> | false,
 
   componentName = component.displayName ?? component.name
 ): {
@@ -40,7 +40,7 @@ const withSampleHoC = <P extends {}>(
 
   WithSampleHoc.displayName = `withSampleHoC(${componentName})`;
 
-  let wrappedComponent = memo === false ? WithSampleHoc : React.memo(WithSampleHoc, propsAreEqual);
+  let wrappedComponent = propsAreEqual === false ? WithSampleHoc : React.memo(WithSampleHoc, propsAreEqual);
 
   //copyStaticProperties(component, wrappedComponent);
 
