@@ -416,6 +416,13 @@ Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
 
 You can [convert these in bulk](https://github.com/microsoft/TypeScript/pull/37436) if needed.
 
+## TypeScript 4.0
+
+[[Release Candidate](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)]
+
+- [Variadic Tuple Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)
+  - useful for [simplified Reducer-like State](https://www.reddit.com/r/reactjs/comments/hu0ytg/simplified_reducerlike_state_using_typescript_40/)
+
 ## TypeScript Roadmap and Spec
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
