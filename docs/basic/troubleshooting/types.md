@@ -367,3 +367,29 @@ let baz2: SubIsntType2 = {
 
 - TS also ships with a `Parameters` utility type for extracting the parameters of a function
 - for anything more "custom", the `infer` keyword is the basic building block for this, but takes a bit of getting used to. Look at the source code for the above utility types, and [this example](https://twitter.com/mgechev/status/1211030455224422401?s=20) to get the idea. Basarat [also has a good video on `infer`](https://www.youtube.com/watch?v=ijK-1R-LFII&list=PLYvdvJlnTOjF6aJsWWAt7kZRJvzw-en8B&index=3&t=0s).
+
+## The Types I need doesn't exist!
+
+What's more annoying than modules with unexported types? Modules that are **untyped**!
+
+Fret not! It's just a simple two step process.
+* Create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript. To do so, check the `include` array in the `tsconfig.json` file at the root of your directory.
+```tsx
+// inside tsconfig.json
+{
+...
+    "include": [
+        "src" // automatically resolves if path to declaration is src/typedec.d.ts
+    ],
+...
+}
+```
+* Add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file.
+```tsx
+// inside typedec.d.ts
+declare module "my-untyped-module"  // this line alone is enough if you just need it to work.
+{
+  // include your type definitions inferred from the untyped module's source or docs.
+}
+```
+If you're working with untyped class components in React, you can also checkout this [short post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) as a reference. 
