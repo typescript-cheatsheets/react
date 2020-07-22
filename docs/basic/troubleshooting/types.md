@@ -374,7 +374,7 @@ What's more annoying than modules with unexported types? Modules that are **unty
 
 Fret not! It's just a simple two step process.
 * Create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript. To do so, check the `include` array in the `tsconfig.json` file at the root of your directory.
-```json
+```
 // inside tsconfig.json
 {
 ...
