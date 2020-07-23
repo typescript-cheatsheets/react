@@ -88,7 +88,7 @@
   - [Using Inferred Types](#using-inferred-types)
   - [Using Partial Types](#using-partial-types)
   - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
-  - [The Types I need Doesn't Exist!](#the-types-i-need-doesnt-exist)
+  - [The Types I need Don't Exist!](#the-types-i-need-dont-exist)
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
