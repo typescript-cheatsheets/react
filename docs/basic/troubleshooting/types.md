@@ -387,7 +387,7 @@ A **lazier** way would be to create a new type declaration file, say `typedec.d.
 }
 ```
 
-Within this file, add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file.
+Within this file, add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file:
 
 ```ts
 // inside typedec.d.ts
@@ -398,9 +398,11 @@ This one-liner alone is enough if you just need it to work without errors. A eve
 
 This solution works well as a workaround if you have less than a couple untyped modules. Anything more, you now have a ticking type-bomb in your hands. The only way of circumventing this problem would be to define the missing types for those untyped modules as explained in the following sections.
 
-### Typing untyped Hooks
+### Typing Exported Hooks
 
-The following steps work under two assumptions.
+Typing Hooks is just like typing pure functions.
+
+The following steps work under two assumptions:
 
 - You have already created a type declaration file as stated earlier in the section.
 - You have access to the source code - specifically the code that directly exports the functions you will be using. In most cases, it would be housed in an `index.js` file.
@@ -430,7 +432,12 @@ declare module 'use-untyped-hook' {
 }
 ```
 
-For instance, The [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
+<details>
+<summary>
+
+For instance, the [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
+
+</summary>
 
 ```js
 // inside src/index.js
@@ -494,13 +501,13 @@ declare module "use-dark-mode" {
 }
 ```
 
-Simple. Isn't it?
+</details>
 
-### Typing untyped Components
+### Typing Exported Components
 
 In case of typing untyped class components, there's almost no difference in approach except for the fact that after declaring the types, you export the extend the type using `class UntypedClassComponent extends React.Component<UntypedClassComponentProps, any> {}` where `UntypedClassComponentProps` holds the type declaration.
 
-For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the t then untyped RR6.
+For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the then untyped RR6.
 
 ```ts
 declare module "react-router-dom" {
