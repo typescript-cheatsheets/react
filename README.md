@@ -88,6 +88,7 @@
   - [Using Inferred Types](#using-inferred-types)
   - [Using Partial Types](#using-partial-types)
   - [The Types I need Weren't Exported!](#the-types-i-need-werent-exported)
+  - [The Types I need Don't Exist!](#the-types-i-need-dont-exist)
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
@@ -1538,6 +1539,36 @@ let baz2: SubIsntType2 = {
 
 - TS also ships with a `Parameters` utility type for extracting the parameters of a function
 - for anything more "custom", the `infer` keyword is the basic building block for this, but takes a bit of getting used to. Look at the source code for the above utility types, and [this example](https://twitter.com/mgechev/status/1211030455224422401?s=20) to get the idea.
+
+## The Types I need don't exist!
+
+What's more annoying than modules with unexported types? Modules that are **untyped**!
+
+Fret not! It's just a simple two step process.
+
+- Create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript. To do so, check the `include` array in the `tsconfig.json` file at the root of your directory.
+
+```json
+// inside tsconfig.json
+{
+...
+    "include": [
+        "src" // automatically resolves if path to declaration is src/typedec.d.ts
+    ],
+...
+}
+```
+
+- Add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file.
+
+```ts
+// inside typedec.d.ts
+declare module "my-untyped-module";
+```
+
+This one-line alone is enough if you just need it to work without errors. If you need to, you can include your type definitions inferred from the untyped module's source or docs within curly braces following this declaration.
+
+If you're working with untyped class components in React, you can also checkout this [short post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) as a reference.
 
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
