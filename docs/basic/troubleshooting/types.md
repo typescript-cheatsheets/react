@@ -8,7 +8,7 @@ sidebar_label: Types
 
 Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patient - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
-Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
+Try to avoid typing with `any` as much as possible to experience the full benefits of TypeScript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
 ## Union Types and Type Guarding
 
@@ -374,7 +374,7 @@ What's more annoying than modules with unexported types? Modules that are **unty
 
 Fret not! There are more than a couple of ways in which you can solve this problem.
 
-A **lazier** way would be to create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript by checking the `include` array in the `tsconfig.json` file at the root of your directory.
+A **lazier** way would be to create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by TypeScript by checking the `include` array in the `tsconfig.json` file at the root of your directory.
 
 ```json
 // inside tsconfig.json
