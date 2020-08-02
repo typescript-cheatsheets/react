@@ -1545,7 +1545,9 @@ let baz2: SubIsntType2 = {
 What's more annoying than modules with unexported types? Modules that are **untyped**!
 
 Fret not! It's just a simple two step process.
-* Create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript. To do so, check the `include` array in the `tsconfig.json` file at the root of your directory.
+
+- Create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by Typescript. To do so, check the `include` array in the `tsconfig.json` file at the root of your directory.
+
 ```json
 // inside tsconfig.json
 {
@@ -1556,14 +1558,17 @@ Fret not! It's just a simple two step process.
 ...
 }
 ```
-* Add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file.
+
+- Add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file.
+
 ```ts
 // inside typedec.d.ts
-declare module "my-untyped-module"
+declare module "my-untyped-module";
 ```
+
 This one-line alone is enough if you just need it to work without errors. If you need to, you can include your type definitions inferred from the untyped module's source or docs within curly braces following this declaration.
 
-If you're working with untyped class components in React, you can also checkout this [short post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) as a reference. 
+If you're working with untyped class components in React, you can also checkout this [short post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) as a reference.
 
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
