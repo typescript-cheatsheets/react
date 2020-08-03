@@ -1696,6 +1696,7 @@ declare module "react-router-dom" {
 ```
 
 For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
+
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
