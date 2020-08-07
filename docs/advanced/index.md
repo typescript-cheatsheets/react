@@ -15,4 +15,5 @@ title: Advanced Cheatsheet
 The best tool for creating React + TS libraries right now is [`tsdx`](https://github.com/palmerhq/tsdx). Run `npx tsdx create` and select the "react" option. You can view [the React User Guide](https://github.com/palmerhq/tsdx/issues/5) for a few tips on React+TS library best practices and optimizations for production.
 
 - Be sure to also check [`basarat`'s guide](https://basarat.gitbooks.io/typescript/content/docs/quick/library.html) for library tsconfig settings.
+- Alec Larson: [The best Rollup config for TypeScript libraries](https://gist.github.com/aleclarson/9900ed2a9a3119d865286b218e14d226)
 - From the Angular world, check out https://github.com/bitjson/typescript-starter
