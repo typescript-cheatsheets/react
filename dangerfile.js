@@ -13,8 +13,11 @@ edited.forEach((file) => {
   }
 });
 
+/*
+// Spellcheck would be nice but this is a little too eager
 // Spell check all the things
 spellcheck({
-  settings: "artsy/peril-settings@spellcheck.json",
+  settings: "artsy/peril-settings@spellcheck.json", // need to customize someday
   codeSpellCheck: ["website/**/*.js"],
 });
+*/
