@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.43.1",
+    "markdown-toc": "^1.2.0"
   },
   "devDependencies": {
     "danger": "^10.1.1",
