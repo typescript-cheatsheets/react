@@ -14,8 +14,8 @@ jobs:
     - name: Setup Node.js Environment
       uses: actions/setup-node@v1
       
-    - name: Clean Install
-      run: npm ci
+    - name: Install dependencies
+      run: npm i
       
     - name: Generate README from /docs/basic
       run: npm run gen-readme --if-present
