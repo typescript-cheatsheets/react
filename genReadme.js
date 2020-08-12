@@ -10,7 +10,7 @@ const repo_details = {
 
 (async function main() {
   try {
-    const setupMd = readContentFromPath('docs/basic/setup.md');
+    const setupMd = await readContentFromPath('docs/basic/setup.md');
     console.log(JSON.stringify(setupMd, null, 2))
   } catch (err) {
     console.error(err);
