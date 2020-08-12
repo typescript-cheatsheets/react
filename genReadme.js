@@ -1,4 +1,5 @@
 const { Octokit } = require("@octokit/rest");
+const toc = require('markdown-toc');
 
 const REPO_INFO = process.env.GITHUB_REPOSITORY.split('/')
 const REPO_DETAILS = {
@@ -15,6 +16,8 @@ const REPO_DETAILS = {
     })
     setupMd.then(result => {
       const content = Buffer.from(result.data.content, 'base64').toString()
+      const toc = toc(content).content
+      console.log(toc)
       console.log(content)
     })
   } catch (err) {
