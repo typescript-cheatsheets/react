@@ -229,7 +229,9 @@ const [val, toggle] = React.useState(false); // `val` is inferred to be a boolea
 
 See also the [Using Inferred Types](#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
 
-However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
+However, many hooks are initialized with <!--START_SECTION:setup-->- [Prerequisites](#prerequisites)
+- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+- [Import React](#import-react)<!--END_SECTION:setup-->-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
 const [user, setUser] = React.useState<IUser | null>(null);
