@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
   "scripts": {
+    "gen-readme": "node genReadme.js",
     "format": "prettier --write \"**/*.md\"",
     "start": "yarn --cwd website start"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.0.0"
   },
   "devDependencies": {
     "danger": "^10.1.1",
