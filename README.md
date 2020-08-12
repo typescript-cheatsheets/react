@@ -197,7 +197,9 @@ const MyConditionalComponent = ({ shouldRender = false }) =>
 const el = <MyConditionalComponent />; // throws an error
 ```
 
-This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
+This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `<!--START_SECTION:setup-->- [Prerequisites](#prerequisites)
+- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+- [Import React](#import-react)<!--END_SECTION:setup-->`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
 
 ```tsx
 const MyArrayComponent = () => Array(5).fill(<div />);
