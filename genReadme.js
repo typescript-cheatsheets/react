@@ -35,7 +35,7 @@ const repo_details = {
 })();
 
 async function getReadme() {
-  const res = await octokit.repos.getReadme(REPO_DETAILS);
+  const res = await octokit.repos.getReadme(repo_details);
   const encoded = res.data.content;
   const decoded = Buffer.from(encoded, "base64").toString("utf8");
   return {
