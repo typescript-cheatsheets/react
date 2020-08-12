@@ -21,13 +21,13 @@ const repo_details = {
       return 
     }
     let newContents = readme.content.replace(oldTocFences, newTocFences);
-    await octokit.repos.createOrUpdateFileContents({
+    await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(newContents).toString("base64"),
       path: "README.md",
-      message: `endorsements ${new Date().toISOString()}`,
+      message: `Updated README with ${"setup"} on ${new Date().toISOString()}`,
       sha: readme.sha,
-      branch: "master",
+      branch: "master"
     });
   } catch (err) {
     console.error(err);
