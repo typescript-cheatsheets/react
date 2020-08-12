@@ -25,5 +25,4 @@ async function readContentFromPath(relative_path) {
     const MdContent = Buffer.from(MdDoc.data.content, 'base64').toString()
     const TableOfContents = Toc(MdContent).content
     return {md : MdContent, toc: TableOfContents}
-    })
 }
