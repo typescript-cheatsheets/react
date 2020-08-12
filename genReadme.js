@@ -1,38 +1,29 @@
 const { Octokit } = require("@octokit/rest");
-const { exec } = require("child_process");
 const Toc = require('markdown-toc');
 
-const REPO_INFO = process.env.GITHUB_REPOSITORY.split('/')
-const REPO_DETAILS = {
-  owner: REPO_INFO[0],
-  repo: REPO_INFO[1]
+const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
+const repo_info = process.env.GITHUB_REPOSITORY.split('/')
+const repo_details = {
+  owner: repo_info[0],
+  repo: repo_info[1]
 };
 
 (async function main() {
   try {
-    console.log(getFilenamesFrom("docs/basic"))
-    const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
-    const setupMd = octokit.repos.getContents({
-      ...REPO_DETAILS,
-      path: 'docs/basic/setup.md'
-    })
-    setupMd.then(result => {
-      const content = Buffer.from(result.data.content, 'base64').toString()
-      const toc = Toc(content).content
-      console.log(toc)
-      console.log(content)
-    })
+    const setupMd = readContentFromPath('docs/basic/setup.md');
+    console.log(JSON.stringify(setupMd, null, 2))
   } catch (err) {
     console.error(err);
   }
 })();
 
-function getFilenamesFrom(directory) {
-  var stdOut = "";
-  exec(`git ls-files --directory ${directory}`, (error, stdout, stderr) => {
-      if (error) return "";
-      if (stderr) return "";
-      stdOut = stdout;
-  });
-  return stdOut;
+async function readContentFromPath(relative_path) {
+    const MdDoc = await octokit.repos.getContents({
+      ...repo_details,
+      path: relative_path
+    })
+    const MdContent = Buffer.from(MdDoc.data.content, 'base64').toString()
+    const TableOfContents = Toc(MdContent).content
+    return {md : MdContent, toc: TableOfContents}
+    })
 }
