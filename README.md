@@ -61,8 +61,11 @@
 <summary><b>Expand Table of Contents</b></summary>
 
 - [Section 1: Setup](#section-1-setup)
-  <!--START_SECTION:setup-toc-->
-  <!--END_SECTION:setup-toc-->
+  <!--START_SECTION:setup-->
+           - [Prerequisites](#prerequisites)
+- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+- [Import React](#import-react)  
+          <!--END_SECTION:setup-->
 - [Section 2: Getting Started](#section-2-getting-started)
   <!--START_SECTION:getting-started-toc-->
   <!--END_SECTION:getting-started-toc-->
