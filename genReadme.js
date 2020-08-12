@@ -67,9 +67,7 @@ function getFenceForSection(sectionName, isToc=false) {
 
 function generateContentForSection(sectionName, sectionContent, isToc=false) {
   return isToc ? 
-          `<!--START_SECTION:${sectionName}-->
-           ${sectionContent.toc}  
-          <!--END_SECTION:${sectionName}-->`
+          `<!--START_SECTION:${sectionName}-->${sectionContent.toc}<!--END_SECTION:${sectionName}-->`
        : `<!--START_SECTION:${sectionName}-->
            ${sectionContent.body}  
           <!--END_SECTION:${sectionName}-->`
