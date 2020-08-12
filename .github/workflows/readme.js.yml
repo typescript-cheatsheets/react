@@ -18,6 +18,6 @@ jobs:
       run: npm ci
       
     - name: Generate README from /docs/basic
-      run: npm run genReadme --if-present
+      run: npm run gen-readme --if-present
       env:
           ENV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
