@@ -62,7 +62,7 @@
 
 - [Section 1: Setup](#section-1-setup)
   <!--START_SECTION:setup-toc-->
-  <!--END_SECTION:setup-->
+  <!--END_SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   <!--START_SECTION:getting-started-toc-->
   <!--END_SECTION:getting-started-toc-->
