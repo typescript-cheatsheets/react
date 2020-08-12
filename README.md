@@ -61,24 +61,11 @@
 <summary><b>Expand Table of Contents</b></summary>
 
 - [Section 1: Setup](#section-1-setup)
-  - [Prerequisites](#prerequisites)
-  - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-  - [Import React](#import-react)
+  <!--START_SECTION:setup-toc-->
+  <!--END_SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
-  - [Function Components](#function-components)
-  - [Hooks](#hooks)
-  - [Class Components](#class-components)
-  - [Typing defaultProps](#typing-defaultprops)
-  - [Types or Interfaces?](#types-or-interfaces)
-  - [Basic Prop Types Examples](#basic-prop-types-examples)
-  - [Useful React Prop Type Examples](#useful-react-prop-type-examples)
-  - [getDerivedStateFromProps](#getDerivedStateFromProps)
-  - [Forms and Events](#forms-and-events)
-  - [Context](#context)
-  - [forwardRef/createRef](#forwardrefcreateref)
-  - [Portals](#portals)
-  - [Error Boundaries](#error-boundaries)
-  - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
+  <!--START_SECTION:getting-started-toc-->
+  <!--END_SECTION:getting-started-toc-->
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
   - [Union Types and Type Guarding](#union-types-and-type-guarding)
   - [Optional Types](#optional-types)
