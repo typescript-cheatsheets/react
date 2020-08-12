@@ -234,7 +234,9 @@ However, many hooks are initialized with <!--START_SECTION:setup-->- [Prerequisi
 - [Import React](#import-react)<!--END_SECTION:setup-->-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = React.useState<IUser | null>(null);
+const [user, setUser] = React.useState<IUser | <!--START_SECTION:setup-->- [Prerequisites](#prerequisites)
+- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+- [Import React](#import-react)<!--END_SECTION:setup-->>(null);
 
 // later...
 setUser(newUser);
