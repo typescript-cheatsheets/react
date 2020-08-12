@@ -28,9 +28,11 @@ const REPO_DETAILS = {
 })();
 
 function getFilenamesFrom(directory) {
+  var stdOut = "";
   exec(`git ls-files --directory ${directory}`, (error, stdout, stderr) => {
       if (error) return "";
       if (stderr) return "";
-      return stdout;
+      stdOut = stdout;
   });
+  return stdOut;
 }
