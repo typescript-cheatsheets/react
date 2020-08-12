@@ -26,3 +26,9 @@ async function readContentFromPath(relative_path) {
     const TableOfContents = Toc(MdContent).content
     return {md : MdContent, toc: TableOfContents}
 }
+
+function getSectionRegex(sectionName) {
+  const START_COMMENT = `<!--START_SECTION:${sectionName}-->`;
+  const END_COMMENT = `<!--END_SECTION:${sectionName}-->`;
+  return new RegExp(`${START_COMMENT}[\\s\\S]+${END_COMMENT}`);
+}
