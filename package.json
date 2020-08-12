@@ -23,7 +23,7 @@
     "start": "yarn --cwd website start"
   },
   "dependencies": {
-    "@octokit/rest": "^18.0.0"
+    "@octokit/rest": "^16.43.1"
   },
   "devDependencies": {
     "danger": "^10.1.1",
