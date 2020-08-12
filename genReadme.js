@@ -4,7 +4,7 @@ const REPO_DETAILS = {
   repo: process.env.GITHUB_REPOSITORY_OWNER,
 };
 const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
-octokit.repos.getContent({
+octokit.repos.getContents({
   ...REPO_DETAILS,
   path: 'docs/basic/setup.md'
 }).then(result => {
