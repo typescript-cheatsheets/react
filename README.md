@@ -107,8 +107,6 @@
 
 # Section 2: Getting Started
 
-## Function Components
-
 <!--START-SECTION:function-components--><!--END-SECTION:function-components-->
 
 ## Hooks
