@@ -16,7 +16,7 @@ const repo_details = {
   const readmePath = "README.md";
   const fenceSyntax = getFence(name, true);
   let oldTocFences = getFenceForSection(name, true).exec(readme.content);
-  oldTocFences = oldTocFences === null ? (fenceSyntax.start + '\n' + fenceSyntax.end) : oldTocFences
+  oldTocFences = oldTocFences === null ? (fenceSyntax.start + fenceSyntax.end) : oldTocFences
   console.log("oldTocFences",oldTocFences)
   const setupMd = await readContentFromPath(path);
   try {
