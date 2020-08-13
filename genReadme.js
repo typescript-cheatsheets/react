@@ -23,7 +23,7 @@ const repo_details = {
     (path = "docs/basic/getting-started/function-components.md"),
     (to = initialContent)
   );
-  await updateReadmeWith((content = initialContent));
+  await updateReadmeWith((readme = readme), (content = initialContent));
 })();
 
 async function getReadme() {
@@ -36,7 +36,7 @@ async function getReadme() {
   };
 }
 
-async function updateReadmeWith(name, content) {
+async function updateReadmeWith(readme, content) {
   try {
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
