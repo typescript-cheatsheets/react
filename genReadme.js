@@ -86,15 +86,15 @@ function generateContentForSection(
 ) {
   const fence = getFence(sectionName, isToc);
   if (isToc) {
-    let fenceContent = fence.start;
+    let fenceContent = fence.start + "\n";
     let lines = sectionContent.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
       fenceContent += "\t".repeat(indent) + lines[i] + "\n";
     fenceContent += fence.end;
     return fenceContent;
   } else {
-    let fenceContent = fence.start;
-    fenceContent += "\n" + sectionContent.body + "\n";
+    let fenceContent = fence.start + "\n";
+    fenceContent += sectionContent.body + "\n";
     fenceContent += fence.end;
     return fenceContent;
   }
