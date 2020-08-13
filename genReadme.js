@@ -15,7 +15,6 @@ let default_options = {
   tabLevel: 1,
 };
 async function getReadme() {
-  console.log("in getReadme()");
   const res = await octokit.repos.getReadme(repo_details);
   const encoded = res.data.content;
   const decoded = Buffer.from(encoded, "base64").toString("utf8");
@@ -45,36 +44,37 @@ async function getReadme() {
       headingLevel: 2,
       showHeading: true,
     });
-    console.log(initialContent);
+    await octokit.repos.createOrUpdateFile({
+      ...repo_details,
+      content: Buffer.from(initialContent).toString("base64"),
+      path: "README.md",
+      message: `Updated README on ${new Date().toISOString()}`,
+      sha: readme.sha,
+      branch: "master",
+    });
   } catch (err) {
     console.error(
-      "ERROR: ",
-      err,
-      "\n Protip: Please check if your credentials are up-to-date or the path to file exists."
+      "ERROR: ", err, "\n Protip: Please check if your credentials are up-to-date or the path to file exists."
     );
   }
 })();
 async function updateSectionWith(options) {
-  console.log("in updateSectionWith()");
   const update_options = Object.assign(default_options, options);
   const md = await readContentFromPath(update_options.path);
   const oldFences = getFenceForSection(
     update_options.from,
     update_options.name
   );
-  console.log("oldFences", oldFences.content);
   const newFences = generateContentForSection({
     name: update_options.name,
     content: md,
     withToc: false,
   });
-  console.log("newFences", newFences);
   const oldTocFences = getFenceForSection(
     update_options.from,
     update_options.name,
     (isToc = true)
   );
-  console.log("oldTocFences", oldTocFences.content);
   const newTocFences = generateContentForSection({
     name: update_options.name,
     content: md,
@@ -83,11 +83,8 @@ async function updateSectionWith(options) {
     headingLevel: update_options.headingLevel,
     showHeading: update_options.showHeading,
   });
-  console.log("newTocFences", newTocFences);
   let updatedContents = update_options.to.replace(oldFences.regex, newFences);
-  console.log("updatedContents", updatedContents);
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
-  console.log("updatedContentsWithToc", updatedContents);
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
@@ -130,9 +127,7 @@ function getFenceForSection(readme, sectionName, isToc = false) {
     return { regex: regex, content: regex.exec(readme.content) };
   } catch (err) {
     console.error(
-      "ERROR: ",
-      err,
-      "\n Protip: Please ensure the comments exist and are separated by a newline."
+      "ERROR: ", err, "\n Protip: Please ensure the comments exist and are separated by a newline."
     );
   }
 }
