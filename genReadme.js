@@ -11,37 +11,9 @@ const repo_details = {
 
 (async function main() {
   const readme = await getReadme();
-  const name = "setup";
-  const path = "docs/basic/setup.md";
-  const readmePath = "README.md";
-  let oldTocFences = getFenceForSection(name, true);
-  console.log("oldTocFences",oldTocFences)
-  const setupMd = await readContentFromPath(path);
-  try {
-    let indent = path.split("/").length - 1;
-    let newTocFences = generateContentForSection(
-      "setup",
-      setupMd,
-      true,
-      indent - 1
-    );
-    console.log("newTocFences",newTocFences)
-    if (newTocFences === oldTocFences.exec(readme.content)) {
-      console.log("NO CHANGE detected in the setupMd, skipping commit");
-      return;
-    }
-    let newContents = readme.content.replace(oldTocFences, newTocFences);
-    await octokit.repos.createOrUpdateFile({
-      ...repo_details,
-      content: Buffer.from(newContents).toString("base64"),
-      path: readmePath,
-      message: `Updated README with ${"setup"} on ${new Date().toISOString()}`,
-      sha: readme.sha,
-      branch: "master",
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  let initialContent = readme.content;
+  initialContent = await updateSectionWith(name = "setup", path = "docs/basic/setup.md", to = initialContent);
+  await updateReadmeWith(content = initialContent);
 })();
 
 async function getReadme() {
@@ -52,6 +24,37 @@ async function getReadme() {
     content: decoded,
     sha: res.data.sha,
   };
+}
+
+async function updateReadmeWith(name, content) {
+  try {
+    await octokit.repos.createOrUpdateFile({
+      ...repo_details,
+      content: Buffer.from(content).toString("base64"),
+      path: "README.md",
+      message: `Updated README on ${new Date().toISOString()}`,
+      sha: readme.sha,
+      branch: "master",
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function updateSectionWith(name, path, to) {
+  const indent = path.split("/").length - 1;
+  const md = await readContentFromPath(path);
+  const oldFences = getFenceForSection(name);
+  const oldTocFences = getFenceForSection(name, isToc = true);
+  const newFences = generateContentForSection(name, md, tab = indent - 1);
+  const newTocFences = generateContentForSection(name, md, isToc = true, tab = indent - 1);
+  if (newTocFences === oldTocFences.content && newFences === oldFences.content) {
+  console.log(`No change detected, skipping commit for section "${name}".`);
+  return to;
+  }
+  let updatedTocContents = to.replace(oldTocFences.regex, newTocFences);
+  let newContents = updatedTocContents.replace(oldFences.regex, newFences);
+  return newContents;
 }
 
 async function readContentFromPath(relative_path) {
@@ -68,36 +71,39 @@ async function readContentFromPath(relative_path) {
   };
 }
 
-function getFence(sectionName, isToc = false) {
-  const name = isToc ? sectionName + "-toc" : sectionName;
-  const START_COMMENT = "<!--START-SECTION:" + name + "-->";
-  const END_COMMENT = "<!--END-SECTION:" + name + "-->";
-  return { start: START_COMMENT, end: END_COMMENT };
-}
-
-function getFenceForSection(sectionName, isToc = false) {
-  const fence = getFence(sectionName, isToc);
-  return new RegExp(`${fence.start}[\\s\\S]+${fence.end}`, "gm");
-}
-
 function generateContentForSection(
   sectionName,
   sectionContent,
+  sectionKey = 'title',
   isToc = false,
-  indent = 0
+  tab = 0
 ) {
   const fence = getFence(sectionName, isToc);
   if (isToc) {
     let fenceContent = fence.start + "\n";
     let lines = sectionContent.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
-      fenceContent += "\t".repeat(indent) + lines[i] + "\n";
+      fenceContent += "\t".repeat(tab) + lines[i] + "\n";
     fenceContent += fence.end;
     return fenceContent;
   } else {
     let fenceContent = fence.start + "\n";
+    fenceContent += sectionContent.frontmatter[sectionKey] + "\n";
     fenceContent += sectionContent.body + "\n";
     fenceContent += fence.end;
     return fenceContent;
   }
+}
+
+function getFenceForSection(sectionName, isToc = false) {
+  const fence = getFence(sectionName, isToc);
+  const regex = new RegExp(`${fence.start}[\\s\\S]+${fence.end}`, "gm");
+  return {regex : regex, content: regex.exec(readme.content)}
+}
+
+function getFence(sectionName, isToc = false) {
+  const name = isToc ? sectionName + "-toc" : sectionName;
+  const START_COMMENT = "<!--START-SECTION:" + name + "-->";
+  const END_COMMENT = "<!--END-SECTION:" + name + "-->";
+  return { start: START_COMMENT, end: END_COMMENT };
 }
