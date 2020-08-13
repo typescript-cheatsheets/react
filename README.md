@@ -61,8 +61,8 @@
 <summary><b>Expand Table of Contents</b></summary>
 
 - [Section 1: Setup](#section-1-setup)
-  <!--START-SECTION:setup-toc-->
-  <!--END-SECTION:setup-toc-->
+<!--START-SECTION:setup-toc-->
+<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
@@ -188,7 +188,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 }) => <div title={title}>{children}</div>;
 ```
 
-- _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
+- _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
 
 In most cases it makes very little difference which syntax is used, but you may prefer the more explicit nature of `React.FunctionComponent`.
 
@@ -207,11 +207,7 @@ const MyConditionalComponent = ({ shouldRender = false }) =>
 const el = <MyConditionalComponent />; // throws an error
 ```
 
-This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `<!--START_SECTION:setup-toc-->
-	- [Prerequisites](#prerequisites)
-	- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-	- [Import React](#import-react)
-<!--END_SECTION:setup-toc-->`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
+This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
 
 ```tsx
 const MyArrayComponent = () => Array(5).fill(<div />);
