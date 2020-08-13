@@ -12,7 +12,8 @@ const repo_details = {
 (async function main() {
   const readme = await getReadme();
   let initialContent = readme.content;
-  initialContent = await updateSectionWith(name = "setup", path = "docs/basic/setup.md", to = initialContent);
+  initialContent = await updateSectionWith(name = "setup", path = "docs/basic/setup.md", to = initialContent, withToc = true);
+  initialContent = await updateSectionWith(name = "function-components", path = "docs/basic/getting-started/function-components.md", to = initialContent);
   await updateReadmeWith(content = initialContent);
 })();
 
@@ -41,18 +42,18 @@ async function updateReadmeWith(name, content) {
   }
 }
 
-async function updateSectionWith(name, path, to) {
+async function updateSectionWith(name, path, to, withToc=false) {
   const indent = path.split("/").length - 1;
   const md = await readContentFromPath(path);
   const oldFences = getFenceForSection(name);
-  const oldTocFences = getFenceForSection(name, isToc = true);
+  withToc && const oldTocFences = getFenceForSection(name, isToc = true);
   const newFences = generateContentForSection(name, md, tab = indent - 1);
-  const newTocFences = generateContentForSection(name, md, isToc = true, tab = indent - 1);
-  if (newTocFences === oldTocFences.content && newFences === oldFences.content) {
+  withToc && const newTocFences = generateContentForSection(name, md, isToc = true, tab = indent - 1);
+  if ((!withToc && (newFences === newFences.content)) || (withToc && (newTocFences === oldTocFences.content) && (newFences === oldFences.content))) {
   console.log(`No change detected, skipping commit for section "${name}".`);
   return to;
   }
-  let updatedTocContents = to.replace(oldTocFences.regex, newTocFences);
+  let updatedTocContents = withToc ? to.replace(oldTocFences.regex, newTocFences) : to;
   let newContents = updatedTocContents.replace(oldFences.regex, newFences);
   return newContents;
 }
@@ -88,7 +89,7 @@ function generateContentForSection(
     return fenceContent;
   } else {
     let fenceContent = fence.start + "\n";
-    fenceContent += sectionContent.frontmatter[sectionKey] + "\n";
+    fenceContent += "# " + sectionContent.frontmatter[sectionKey] + "\n\n";
     fenceContent += sectionContent.body + "\n";
     fenceContent += fence.end;
     return fenceContent;
