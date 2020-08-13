@@ -54,29 +54,20 @@ async function updateSectionWith(name, path, to, from, withToc = false) {
   const md = await readContentFromPath(path);
   const oldFences = getFenceForSection(from, name);
   const newFences = generateContentForSection(name, md, (tab = indent - 1));
-  if (withToc) {
-    const oldTocFences = getFenceForSection(from, name, (isToc = true));
-    const newTocFences = generateContentForSection(
-      name,
-      md,
-      (isToc = true),
-      (tab = indent - 1)
-    );
-    if (
-      oldFences === newFences.content &&
-      oldTocFences === newTocFences.content
-    ) {
-      console.log(`No change detected, skipping commit for section "${name}".`);
-      return to;
-    }
-  }
   if (oldFences === newFences.content) {
     console.log(`No change detected, skipping commit for section "${name}".`);
     return to;
   }
-  let updatedTocContents = withToc
-    ? to.replace(oldTocFences.regex, newTocFences)
-    : to;
+  let updatedTocContents = to;
+  if (withToc) {
+    const oldTocFences = getFenceForSection(from, name, (isToc = true));
+    const newTocFences = generateContentForSection(name, md, (isToc = true),(tab = indent - 1));
+    if (oldFences === newFences.content && oldTocFences === newTocFences.content) {
+      console.log(`No change detected, skipping commit for section "${name}".`);
+      return to;
+    }
+    updatedTocContents = to.replace(oldTocFences.regex, newTocFences)
+  }
   let newContents = updatedTocContents.replace(oldFences.regex, newFences);
   return newContents;
 }
