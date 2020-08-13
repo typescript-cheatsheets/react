@@ -22,5 +22,5 @@ jobs:
       env:
           ENV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-    - name: Prettify README
-      run: prettier --write "README.md"
+    - name: Format files
+      run: npm run format
