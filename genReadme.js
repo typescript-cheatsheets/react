@@ -89,7 +89,7 @@ function generateContentForSection(
     return fenceContent;
   } else {
     let fenceContent = fence.start + "\n";
-    fenceContent += "# " + sectionContent.frontmatter[sectionKey] + "\n\n";
+    fenceContent += "## " + sectionContent.frontmatter[sectionKey] + "\n\n";
     fenceContent += sectionContent.body + "\n";
     fenceContent += fence.end;
     return fenceContent;
