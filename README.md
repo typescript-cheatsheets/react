@@ -236,7 +236,9 @@ However, many hooks are initialized with <!--START_SECTION:setup-->- [Prerequisi
 ```tsx
 const [user, setUser] = React.useState<IUser | <!--START_SECTION:setup-->- [Prerequisites](#prerequisites)
 - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-- [Import React](#import-react)<!--END_SECTION:setup-->>(null);
+- [Import React](#import-react)<!--END_SECTION:setup-->>(<!--START_SECTION:setup-->- [Prerequisites](#prerequisites)
+- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+- [Import React](#import-react)<!--END_SECTION:setup-->);
 
 // later...
 setUser(newUser);
