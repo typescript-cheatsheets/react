@@ -46,9 +46,9 @@ async function updateSectionWith(name, path, to, withToc=false) {
   const indent = path.split("/").length - 1;
   const md = await readContentFromPath(path);
   const oldFences = getFenceForSection(name);
-  withToc && const oldTocFences = getFenceForSection(name, isToc = true);
+  if (withToc) const oldTocFences = getFenceForSection(name, isToc = true);
   const newFences = generateContentForSection(name, md, tab = indent - 1);
-  withToc && const newTocFences = generateContentForSection(name, md, isToc = true, tab = indent - 1);
+  if (withToc) const newTocFences = generateContentForSection(name, md, isToc = true, tab = indent - 1);
   if ((!withToc && (newFences === newFences.content)) || (withToc && (newTocFences === oldTocFences.content) && (newFences === oldFences.content))) {
   console.log(`No change detected, skipping commit for section "${name}".`);
   return to;
