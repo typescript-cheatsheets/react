@@ -1,31 +1,40 @@
 const { Octokit } = require("@octokit/rest");
 const Toc = require("markdown-toc");
 const Fm = require("front-matter");
-
-const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
-const repo_info = process.env.GITHUB_REPOSITORY.split("/");
+const octokit = new Octokit({
+  auth: "token 499547695717c157df9150e26b717c886d171b73",
+});
+//const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
+const repo_info = "arvindcheenu/react-typescript-cheatsheet".split("/");
+//const repo_info = process.env.GITHUB_REPOSITORY.split("/");
 const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
 };
 
 (async function main() {
-  const readme = await getReadme();
-  let initialContent = readme.content;
-  initialContent = await updateSectionWith(
-    (name = "setup"),
-    (path = "docs/basic/setup.md"),
-    (to = initialContent),
-    (from = readme),
-    (withToc = true)
-  );
-  initialContent = await updateSectionWith(
-    (name = "function-components"),
-    (path = "docs/basic/getting-started/function-components.md"),
-    (to = initialContent),
-    (from = readme)
-  );
   try {
+    const readme = await getReadme();
+    let initialContent = readme.content;
+    initialContent = await updateSectionWith(
+      (name = "setup"),
+      (path = "docs/basic/setup.md"),
+      (to = initialContent),
+      (from = readme),
+      (withToc = true)
+    );
+    console.log(initialContent);
+    initialContent = await updateSectionWith(
+      (name = "function-components"),
+      (path = "docs/basic/getting-started/function-components.md"),
+      (to = initialContent),
+      (from = readme)
+    );
+    console.log(initialContent);
+  } catch (err) {
+    console.error(err);
+  }
+  /*try {
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(initialContent).toString("base64"),
@@ -36,10 +45,11 @@ const repo_details = {
     });
   } catch (err) {
     console.error(err);
-  }
+  }*/
 })();
 
 async function getReadme() {
+  console.log("in getReadme()");
   const res = await octokit.repos.getReadme(repo_details);
   const encoded = res.data.content;
   const decoded = Buffer.from(encoded, "base64").toString("utf8");
@@ -49,26 +59,44 @@ async function getReadme() {
   };
 }
 
-async function updateSectionWith(name, path, to, from, withToc = false) {
+async function updateSectionWith(name, path, to, from, titleKey = "title") {
+  console.log("in updateSectionWith()");
   const indent = path.split("/").length - 1;
   const md = await readContentFromPath(path);
   const oldFences = getFenceForSection(from, name);
-  const newFences = generateContentForSection(name, md, (tab = indent - 1));
-  if (oldFences === newFences.content) {
+  const newFences = generateContentForSection(
+    (sectionName = name),
+    (sectionContent = md),
+    (sectionKey = titleKey),
+    (tab = indent - 1)
+  );
+  if (oldFences.content === newFences.content) {
     console.log(`No change detected, skipping commit for section "${name}".`);
     return to;
   }
   let updatedTocContents = to;
   if (withToc) {
     const oldTocFences = getFenceForSection(from, name, (isToc = true));
-    const newTocFences = generateContentForSection(name, md, (isToc = true),(tab = indent - 1));
-    if (oldFences === newFences.content && oldTocFences === newTocFences.content) {
+    const newTocFences = generateContentForSection(
+      (sectionName = name),
+      (sectionContent = md),
+      (isToc = true),
+      (tab = indent - 1)
+    );
+    if (
+      oldFences === newFences.content &&
+      oldTocFences === newTocFences.content
+    ) {
       console.log(`No change detected, skipping commit for section "${name}".`);
       return to;
     }
-    updatedTocContents = to.replace(oldTocFences.regex, newTocFences)
+    updatedTocContents = to.replace(oldTocFences.regex, newTocFences);
   }
   let newContents = updatedTocContents.replace(oldFences.regex, newFences);
+  console.log(
+    "\n\n\n\n\n\nupdateSectionWith() output\n\n\n\n\n\n",
+    newContents
+  );
   return newContents;
 }
 
@@ -100,12 +128,20 @@ function generateContentForSection(
     for (let i = 0, len = lines.length; i < len; i += 1)
       fenceContent += "\t".repeat(tab) + lines[i] + "\n";
     fenceContent += fence.end;
+    console.log(
+      "\n\n\n\n\n\ngenerateContentForSection() output with TOC\n\n\n\n\n\n",
+      fenceContent
+    );
     return fenceContent;
   } else {
     let fenceContent = fence.start + "\n";
     fenceContent += "## " + sectionContent.frontmatter[sectionKey] + "\n\n";
     fenceContent += sectionContent.body + "\n";
     fenceContent += fence.end;
+    console.log(
+      "\n\n\n\n\n\ngenerateContentForSection() output\n\n\n\n\n\n",
+      fenceContent
+    );
     return fenceContent;
   }
 }
