@@ -75,7 +75,7 @@ function getFence(sectionName, isToc = false) {
 }
 function getFenceForSection(sectionName, isToc = false) {
   const fence = getFence(sectionName, isToc);
-  return new RegExp(fence.start + "[\\s\\S]+" + fence.end);
+  return new RegExp(`${fence.start}[\\s\\S]+${fence.end}`, "gm");
 }
 
 function generateContentForSection(
