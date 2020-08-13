@@ -23,20 +23,6 @@ const repo_details = {
     (path = "docs/basic/getting-started/function-components.md"),
     (to = initialContent)
   );
-  await updateReadmeWith((readme = readme), (content = initialContent));
-})();
-
-async function getReadme() {
-  const res = await octokit.repos.getReadme(repo_details);
-  const encoded = res.data.content;
-  const decoded = Buffer.from(encoded, "base64").toString("utf8");
-  return {
-    content: decoded,
-    sha: res.data.sha,
-  };
-}
-
-async function updateReadmeWith(readme, content) {
   try {
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
@@ -49,6 +35,16 @@ async function updateReadmeWith(readme, content) {
   } catch (err) {
     console.error(err);
   }
+})();
+
+async function getReadme() {
+  const res = await octokit.repos.getReadme(repo_details);
+  const encoded = res.data.content;
+  const decoded = Buffer.from(encoded, "base64").toString("utf8");
+  return {
+    content: decoded,
+    sha: res.data.sha,
+  };
 }
 
 async function updateSectionWith(name, path, to, withToc = false) {
