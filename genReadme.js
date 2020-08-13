@@ -28,7 +28,7 @@ const repo_details = {
   try {
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
-      content: Buffer.from(content).toString("base64"),
+      content: Buffer.from(initialContent).toString("base64"),
       path: "README.md",
       message: `Updated README on ${new Date().toISOString()}`,
       sha: readme.sha,
