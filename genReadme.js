@@ -16,12 +16,14 @@ const repo_details = {
     (name = "setup"),
     (path = "docs/basic/setup.md"),
     (to = initialContent),
+    (from = readme),
     (withToc = true)
   );
   initialContent = await updateSectionWith(
     (name = "function-components"),
     (path = "docs/basic/getting-started/function-components.md"),
-    (to = initialContent)
+    (to = initialContent),
+    (from = readme)
   );
   try {
     await octokit.repos.createOrUpdateFile({
@@ -47,13 +49,13 @@ async function getReadme() {
   };
 }
 
-async function updateSectionWith(name, path, to, withToc = false) {
+async function updateSectionWith(name, path, to, from, withToc = false) {
   const indent = path.split("/").length - 1;
   const md = await readContentFromPath(path);
-  const oldFences = getFenceForSection(name);
+  const oldFences = getFenceForSection(from, name);
   const newFences = generateContentForSection(name, md, (tab = indent - 1));
   if (withToc) {
-    const oldTocFences = getFenceForSection(name, (isToc = true));
+    const oldTocFences = getFenceForSection(from, name, (isToc = true));
     const newTocFences = generateContentForSection(
       name,
       md,
@@ -117,7 +119,7 @@ function generateContentForSection(
   }
 }
 
-function getFenceForSection(sectionName, isToc = false) {
+function getFenceForSection(readme, sectionName, isToc = false) {
   const fence = getFence(sectionName, isToc);
   const regex = new RegExp(`${fence.start}[\\s\\S]+${fence.end}`, "gm");
   return { regex: regex, content: regex.exec(readme.content) };
