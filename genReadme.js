@@ -14,9 +14,8 @@ const repo_details = {
   const name = "setup";
   const path = "docs/basic/setup.md";
   const readmePath = "README.md";
-  const fenceSyntax = getFence(name, true);
   let oldTocFences = getFenceForSection(name, true);
-  console.log("oldTocFences",oldTocFences.exec(readme.content))
+  console.log("oldTocFences",oldTocFences)
   const setupMd = await readContentFromPath(path);
   try {
     let indent = path.split("/").length - 1;
@@ -27,7 +26,7 @@ const repo_details = {
       indent - 1
     );
     console.log("newTocFences",newTocFences)
-    if (newTocFences === oldTocFences) {
+    if (newTocFences === oldTocFences.exec(readme.content)) {
       console.log("NO CHANGE detected in the setupMd, skipping commit");
       return;
     }
@@ -71,8 +70,8 @@ async function readContentFromPath(relative_path) {
 
 function getFence(sectionName, isToc = false) {
   const name = isToc ? sectionName + "-toc" : sectionName;
-  const START_COMMENT = "<!--START_SECTION:" + name + "-->";
-  const END_COMMENT = "<!--END_SECTION:" + name + "-->";
+  const START_COMMENT = "<!--START-SECTION:" + name + "-->";
+  const END_COMMENT = "<!--END-SECTION:" + name + "-->";
   return { start: START_COMMENT, end: END_COMMENT };
 }
 
