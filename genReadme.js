@@ -16,7 +16,7 @@ const repo_details = {
   const readmePath = "README.md";
   const fenceSyntax = getFence(name, true);
   let oldTocFences = getFenceForSection(name, true);
-  console.log("oldTocFences",oldTocFences.exec(readme.content);)
+  console.log("oldTocFences",oldTocFences.exec(readme.content))
   const setupMd = await readContentFromPath(path);
   try {
     let indent = path.split("/").length - 1;
