@@ -61,8 +61,8 @@
 <summary><b>Expand Table of Contents</b></summary>
 
 - [Section 1: Setup](#section-1-setup)
-  <!--START-SECTION:setup-->
-  <!--END-SECTION:setup-->
+  <!--START-SECTION:setup-toc-->
+  <!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
