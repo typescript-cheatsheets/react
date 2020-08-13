@@ -62,7 +62,10 @@
 
 - [Section 1: Setup](#section-1-setup)
   <!--START-SECTION:setup-toc-->
-  <!--END-SECTION:setup-toc-->
+	- [Prerequisites](#prerequisites)
+	- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+	- [Import React](#import-react)
+<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
