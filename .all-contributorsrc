@@ -7,17 +7,6 @@
   "commit": true,
   "commitConvention": "angular",
   "contributors": [
-   {
-      "login": "arvindcheenu",
-      "name": "Arvind Srinivasan",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/13925213?&v=4",
-      "profile": "https://github.com/arvindcheenu",
-      "contributions": [
-        "maintenance",
-        "doc",
-        "content"
-      ]
-    },
     {
       "login": "ferdaber",
       "name": "Ferdy Budhidharma",
