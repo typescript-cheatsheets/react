@@ -14,7 +14,6 @@ const default_options = {
   headingLevel: 2,
   tabLevel: 1,
 };
-console.log("before start", JSON.stringify(default_options, null, 2));
 async function getReadme() {
   let res = await octokit.repos.getReadme(repo_details);
   let encoded = res.data.content;
@@ -28,10 +27,6 @@ async function getReadme() {
   try {
     let readme = await getReadme();
     default_options["from"] = readme;
-    console.log(
-      "added <from> key to default options",
-      JSON.stringify(default_options, null, 2)
-    );
     let initialContent = readme.content;
     initialContent = await updateSectionWith({
       name: "setup",
@@ -116,27 +111,13 @@ async function getReadme() {
     });
   } catch (err) {
     console.error(
-      `🚨 You've encountered a ${err.name} ➜ ${err.message}` +
-        "\n" +
+      `🚨 You've encountered a ${err.name} ➜ ${err.message} \n` +
         `💡 ProTip ➜ Please ensure your credentials are up-to-date or the path to your file exists.`
     );
   }
 })();
 async function updateSectionWith(options) {
-  console.log("UPDATE SECTION WITH:", options.name.toUpperCase());
-  console.log(
-    "in updateSectionWith() with options",
-    JSON.stringify(options, null, 2)
-  );
-  console.log(
-    "in updateSectionWith() with default_options",
-    JSON.stringify(default_options, null, 2)
-  );
   let update_options = Object.assign({}, { ...default_options }, options);
-  console.log(
-    "in updateSectionWith() with update_options",
-    JSON.stringify(update_options, null, 2)
-  );
   let md = await readContentFromPath(update_options.path);
   let oldFences = getFenceForSection(update_options.from, update_options.name);
   let newFences = generateContentForSection({
@@ -147,7 +128,6 @@ async function updateSectionWith(options) {
     headingLevel: update_options.headingLevel,
     showHeading: update_options.showHeading,
   });
-  console.log("newFences", newFences);
   let oldTocFences = getFenceForSection(
     update_options.from,
     update_options.name,
@@ -161,10 +141,8 @@ async function updateSectionWith(options) {
     headingLevel: update_options.headingLevel,
     showHeading: update_options.showHeading,
   });
-  console.log("newTocFences", newTocFences);
   let updatedContents = update_options.to.replace(oldFences.regex, newFences);
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
-  console.log("updatedContents", updatedContents);
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
@@ -181,20 +159,7 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  console.log("GENERATE CONTENT FOR SECTION:", options.name.toUpperCase());
-  console.log(
-    "in generateContentForSection() with options",
-    JSON.stringify(options, null, 2)
-  );
-  console.log(
-    "in generateContentForSection() with default_options",
-    JSON.stringify(default_options, null, 2)
-  );
   let sectionOptions = Object.assign({}, { ...default_options }, options);
-  console.log(
-    "in generateContentForSection() with sectionOptions",
-    JSON.stringify(sectionOptions, null, 2)
-  );
   let fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
@@ -223,8 +188,7 @@ function getFenceForSection(readme, sectionName, isToc = false) {
     return { regex: regex, content: regex.exec(readme.content) };
   } catch (err) {
     console.error(
-      `🚨 You've encountered a ${err.name} ➜ ${err.message}` +
-        "\n" +
+      `🚨 You've encountered a ${err.name} ➜ ${err.message} \n` +
         `💡 ProTip ➜ Please ensure the comments exist and are separated by a newline.`
     );
   }
