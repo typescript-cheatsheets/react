@@ -57,6 +57,7 @@ async function getReadme() {
       name: "default-props",
       path: "docs/basic/getting-started/default-props.md",
       to: initialContent,
+      showHeading: false,
     });
     initialContent = await updateSectionWith({
       name: "type-or-interface",
@@ -109,35 +110,30 @@ async function getReadme() {
       to: initialContent,
       withToc: true,
       headingLevel: 1,
-      showHeading: true,
     });
     initialContent = await updateSectionWith({
       name: "operators",
       path: "docs/basic/troubleshooting/operators.md",
       to: initialContent,
       headingLevel: 1,
-      showHeading: true,
     });
     initialContent = await updateSectionWith({
       name: "utilities",
       path: "docs/basic/troubleshooting/utilities.md",
       to: initialContent,
       headingLevel: 1,
-      showHeading: true,
     });
     initialContent = await updateSectionWith({
       name: "ts-config",
       path: "docs/basic/troubleshooting/ts-config.md",
       to: initialContent,
       headingLevel: 1,
-      showHeading: true,
     });
     initialContent = await updateSectionWith({
       name: "official-typings-bugs",
       path: "docs/basic/troubleshooting/official-typings-bugs.md",
       to: initialContent,
       headingLevel: 1,
-      showHeading: true,
       withKey: "sidebar_label",
       prefix: "Troubleshooting Handbook: ",
     });
@@ -146,7 +142,43 @@ async function getReadme() {
       path: "docs/basic/troubleshooting/non-ts-files.md",
       to: initialContent,
       headingLevel: 1,
-      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "resources",
+      path: "docs/basic/recommended/resources.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
+      name: "editor-integration",
+      path: "docs/basic/editor-integration.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
+      name: "linting",
+      path: "docs/basic/linting.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
+      name: "other-resources",
+      path: "docs/basic/recommended/other-resources.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
+      name: "learn-ts",
+      path: "docs/basic/troubleshooting/learn-ts.md",
+      to: initialContent,
+      headingLevel: 1,
+      withKey: "sidebar_label",
+    });
+    initialContent = await updateSectionWith({
+      name: "examples",
+      path: "docs/basic/examples.md",
+      to: initialContent,
+      headingLevel: 1,
     });
     await octokit.repos.createOrUpdateFile({
       ...repo_details,

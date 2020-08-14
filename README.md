@@ -160,186 +160,26 @@
 <!--START-SECTION:non-ts-files-->
 <!--END-SECTION:non-ts-files-->
 
-# Recommended React + TypeScript codebases to learn from
+<!--START-SECTION:resources-->
+<!--END-SECTION:resources-->
 
-- https://github.com/jaredpalmer/formik
-- https://github.com/jaredpalmer/react-fns
-- https://github.com/palantir/blueprint
-- https://github.com/Shopify/polaris
-- https://github.com/NullVoxPopuli/react-vs-ember/tree/master/testing/react
-- https://github.com/artsy/reaction
-- https://github.com/benawad/codeponder (with [coding livestream!](https://www.youtube.com/watch?v=D8IJOwdNSkc&list=PLN3n1USn4xlnI6kwzI8WrNgSdG4Z6daCq))
-- https://github.com/artsy/emission (React Native)
-- [@reach/ui's community typings](https://github.com/reach/reach-ui/pull/105)
+<!--START-SECTION:editor-integration-->
+<!--END-SECTION:editor-integration-->
 
-React Boilerplates:
+<!--START-SECTION:linting-->
+<!--END-SECTION:linting-->
 
-- https://github.com/rwieruch/nextjs-firebase-authentication: Next.js + Firebase Starter: styled, tested, typed, and authenticated
-- [@jpavon/react-scripts-ts](https://github.com/jpavon/react-scripts-ts) alternative react-scripts with all TypeScript features using [ts-loader](https://github.com/TypeStrong/ts-loader)
-- [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
-- <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
+<!--START-SECTION:other-resources-->
+<!--END-SECTION:other-resources-->
 
-React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/20)_
+<!--START-SECTION:talks-->
+<!--END-SECTION:talks-->
 
-- https://github.com/GeekyAnts/react-native-seed
-- https://github.com/lopezjurip/ReactNativeTS
-- https://github.com/emin93/react-native-template-typescript
-- <https://github.com/Microsoft/TypeScript-React-Native-Starter>
+<!--START-SECTION:learn-ts-->
+<!--END-SECTION:learn-ts-->
 
-# Editor Tooling and Integration
-
-- VSCode
-  - swyx's VSCode Extension: https://github.com/sw-yx/swyx-react-typescript-snippets
-  - amVim: https://marketplace.visualstudio.com/items?itemName=auiworks.amvim
-- VIM
-  - https://github.com/Quramy/tsuquyomi
-  - nvim-typescript?
-  - https://github.com/leafgarland/typescript-vim
-  - peitalin/vim-jsx-typescript
-  - NeoVim: https://github.com/neoclide/coc.nvim
-  - other discussion: https://mobile.twitter.com/ryanflorence/status/1085715595994095620
-
-# Linting
-
-> ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).
-
-> ⚠️This is an evolving topic. `typescript-eslint-parser` is no longer maintained and [work has recently begun on `typescript-eslint` in the ESLint community](https://eslint.org/blog/2019/01/future-typescript-eslint) to bring ESLint up to full parity and interop with TSLint.
-
-Follow the TypeScript + ESLint docs at https://github.com/typescript-eslint/typescript-eslint:
-
-```
-yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
-```
-
-add a `lint` script to your `package.json`:
-
-```json
-  "scripts": {
-    "lint": "eslint 'src/**/*.ts'"
-  },
-```
-
-and a suitable `.eslintrc.js` (using `.js` over `.json` here so we can add comments):
-
-```js
-module.exports = {
-  env: {
-    es6: true,
-    node: true,
-    jest: true,
-  },
-  extends: "eslint:recommended",
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: "module",
-  },
-  rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    "no-console": "warn",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { vars: "all", args: "after-used", ignoreRestSiblings: false },
-    ],
-    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
-    "no-empty": "warn",
-  },
-};
-```
-
-Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
-
-More `.eslintrc.json` options to consider with more options you may want for **apps**:
-
-```json
-{
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "plugin:jest/recommended",
-    "plugin:unicorn/recommended"
-  ],
-  "plugins": ["prettier", "jest", "unicorn"],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "jest": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
-      "rules": {
-        "no-undef": "off"
-      }
-    }
-  ]
-}
-```
-
-You can read a [fuller TypeScript + ESLint setup guide here](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) from Matterhorn, in particular check https://github.com/MatterhornDev/learn-typescript-linting.
-
-Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode.
-
-If you're looking for information on Prettier, check out the [Prettier](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#prettier).
-
-# Other React + TypeScript resources
-
-- me! <https://twitter.com/swyx>
-- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
-- [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
-- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
-- [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
-- [Stefan Baumgartner's TypeScript + React Guide](https://fettblog.eu/typescript-react), which serves as a side-by-side guide to the official docs with extra articles on styling, custom hooks and patterns
-- [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
-- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
-- [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
-- TypeScript conversion:
-  - [Lyft's React-To-TypeScript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
-  - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
-  - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
-- [You?](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
-
-# Recommended React + TypeScript talks
-
-- [Ultimate React Component Patterns with TypeScript](https://www.youtube.com/watch?v=_PBQ3if6Fmg), by Martin Hochel, GeeCon Prague 2018
-- Please help contribute this new section!
-
-# Time to Really Learn TypeScript
-
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
-
-It is worth mentioning some resources to help you get started:
-
-- Step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section, written by @Orta
-- Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
-- Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
-- Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
-- Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
-- Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
-
-# Example App
-
-- [Create React App TypeScript Todo Example 2020](https://github.com/laststance/create-react-app-typescript-todo-example-2020)
+<!--START-SECTION:examples-->
+<!--END-SECTION:examples-->
 
 # My question isn't answered here!
 
