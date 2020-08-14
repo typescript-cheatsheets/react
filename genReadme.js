@@ -62,7 +62,7 @@ async function getReadme() {
   }
 })();
 async function updateSectionWith(options) {
-  let update_options = Object.assign(default_options, options);
+  let update_options = Object.assign({}, {...default_options}, options);
   let md = await readContentFromPath(update_options.path);
   let oldFences = getFenceForSection(
     update_options.from,
@@ -104,7 +104,7 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  let sectionOptions = Object.assign(default_options, options);
+  let sectionOptions = Object.assign({}, {...default_options}, options);
   let fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
