@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
   "scripts": {
+    "format-readme": "prettier --write \"README.md\"",
     "gen-readme": "node genReadme.js",
     "format": "prettier --write \"**/*.md\"",
     "start": "yarn --cwd website start"
