@@ -107,7 +107,42 @@ async function getReadme() {
       to: initialContent,
       withToc: true,
       headingLevel: 1,
-      showHeading: false,
+      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "operators",
+      path: "docs/basic/troubleshooting/operators.md",
+      to: initialContent,
+      headingLevel: 1,
+      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "utilities",
+      path: "docs/basic/troubleshooting/utilities.md",
+      to: initialContent,
+      headingLevel: 1,
+      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "ts-config",
+      path: "docs/basic/troubleshooting/ts-config.md",
+      to: initialContent,
+      headingLevel: 1,
+      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "official-typings-bugs",
+      path: "docs/basic/troubleshooting/official-typings-bugs.md",
+      to: initialContent,
+      headingLevel: 1,
+      showHeading: true,
+    });
+    initialContent = await updateSectionWith({
+      name: "non-ts-files",
+      path: "docs/basic/troubleshooting/non-ts-files.md",
+      to: initialContent,
+      headingLevel: 1,
+      showHeading: true,
     });
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
@@ -153,9 +188,9 @@ async function updateSectionWith(options) {
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
   if (update_options.withToc)
     console.log(
-      `➜ 🗜️ Rewrote Table of Contents for '${md.frontmatter.title}' ✔`
+      `✅ 🗜️ Rewrote Table of Contents for '${md.frontmatter.title}'`
     );
-  console.log(`➜ ✍️ Rewrote Section for '${md.frontmatter.title}' ✔`);
+  console.log(`✅ 📝 Rewrote Section for '${md.frontmatter.title}'`);
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
