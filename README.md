@@ -144,174 +144,23 @@
 <!--START-SECTION:concurrent-->
 <!--END-SECTION:concurrent-->
 
-# Basic Troubleshooting Handbook: Types
-
 <!--START-SECTION:types-->
 <!--END-SECTION:types-->
 
-# Troubleshooting Handbook: Images and other non-TS/TSX files
+<!--START-SECTION:operators-->
+<!--END-SECTION:operators-->
 
-Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
+<!--START-SECTION:utilities-->
+<!--END-SECTION:utilities-->
 
-```ts
-// declaration.d.ts
-// anywhere in your project, NOT the same name as any of your .ts/tsx files
-declare module "*.png";
+<!--START-SECTION:ts-config-->
+<!--END-SECTION:ts-config-->
 
-// importing in a tsx file
-import * as logo from "./logo.png";
-```
+<!--START-SECTION:official-typings-bugs-->
+<!--END-SECTION:official-typings-bugs-->
 
-Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
-
-Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
-
-# Troubleshooting Handbook: Operators
-
-- `typeof` and `instanceof`: type query used for refinement
-- `keyof`: get keys of an object
-- `O[K]`: property lookup
-- `[K in O]`: mapped types
-- `+` or `-` or `readonly` or `?`: addition and subtraction and readonly and optional modifiers
-- `x ? Y : Z`: Conditional types for generic types, type aliases, function parameter types
-- `!`: Nonnull assertion for nullable types
-- `=`: Generic type parameter default for generic types
-- `as`: type assertion
-- `is`: type guard for function return types
-
-Conditional Types are a difficult topic to get around so here are some extra resources:
-
-- fully walked through explanation https://artsy.github.io/blog/2018/11/21/conditional-types-in-typescript/
-- Bailing out and other advanced topics https://github.com/sw-yx/ts-spec/blob/master/conditional-types.md
-
-# Troubleshooting Handbook: Utilities
-
-these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
-
-- `ConstructorParameters`: a tuple of class constructor's parameter types
-- `Exclude`: exclude a type from another type
-- `Extract`: select a subtype that is assignable to another type
-- `InstanceType`: the instance type you get from a `new`ing a class constructor
-- `NonNullable`: exclude `null` and `undefined` from a type
-- `Parameters`: a tuple of a function's parameter types
-- `Partial`: Make all properties in an object optional
-- `Readonly`: Make all properties in an object readonly
-- `ReadonlyArray`: Make an immutable array of the given type
-- `Pick`: A subtype of an object type with a subset of its keys
-- `Record`: A map from a key type to a value type
-- `Required`: Make all properties in an object required
-- `ReturnType` A function's return type
-
-This section needs writing, but you can probably find a good starting point with [Wes Bos' ESLint config](https://github.com/wesbos/eslint-config-wesbos) (which comes with a [YouTube intro](https://www.youtube.com/watch?v=lHAeK8t94as)).
-
-# Troubleshooting Handbook: tsconfig.json
-
-You can find [all the Compiler options in the TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). [The TS docs also has per-flag annotations of what each does](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
-
-```json
-{
-  "compilerOptions": {
-    "incremental": true,
-    "outDir": "build/lib",
-    "target": "es5",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "sourceMap": true,
-    "importHelpers": true,
-    "declaration": true,
-    "rootDir": "src",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowJs": false,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "baseUrl": "src",
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "scripts"]
-}
-```
-
-Please open an issue and discuss if there are better recommended choices for React.
-
-Selected flags and why we like them:
-
-- `esModuleInterop`: disables namespace imports (`import * as foo from "foo"`) and enables CJS/AMD/UMD style imports (`import fs from "fs"`)
-- `strict`: `strictPropertyInitialization` forces you to initialize class properties or explicitly declare that they can be undefined. You can opt out of this with a definite assignment assertion.
-- `"typeRoots": ["./typings", "./node_modules/@types"]`: By default, TypeScript looks in `node_modules/@types` and parent folders for third party type declarations. You may wish to override this default resolution so you can put all your global type declarations in a special `typings` folder.
-
-Compilation speed grows linearly with size of codebase. For large projects, you will want to use [Project References](https://www.typescriptlang.org/docs/handbook/project-references.html). See our [ADVANCED](ADVANCED.md) cheatsheet for commentary.
-
-# Troubleshooting Handbook: Bugs in official typings
-
-If you run into bugs with your library's official typings, you can copy them locally and tell TypeScript to use your local version using the "paths" field. In your `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "mobx-react": ["../typings/modules/mobx-react"]
-    }
-  }
-}
-```
-
-[Thanks to @adamrackis for the tip.](https://twitter.com/AdamRackis/status/1024827730452520963)
-
-If you just need to add an interface, or add missing members to an existing interface, you don't need to copy the whole typing package. Instead, you can use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
-
-```tsx
-// my-typings.ts
-declare module "plotly.js" {
-  interface PlotlyHTMLElement {
-    removeAllListeners(): void;
-  }
-}
-
-// MyComponent.tsx
-import { PlotlyHTMLElement } from "plotly.js";
-
-const f = (e: PlotlyHTMLElement) => {
-  e.removeAllListeners();
-};
-```
-
-You dont always have to implement the module, you can simply import the module as `any` for a quick start:
-
-```tsx
-// my-typings.ts
-declare module "plotly.js"; // each of its imports are `any`
-```
-
-Because you don't have to explicitly import this, this is known as an [ambient module declaration](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html#pitfalls-of-namespaces-and-modules). You can do AMD's in a script-mode `.ts` file (no imports or exports), or a `.d.ts` file anywhere in your project.
-
-You can also do ambient variable and ambient type declarations:
-
-```ts
-// ambient utiltity type
-type ToArray<T> = T extends unknown[] ? T : T[];
-// ambient variable
-declare let process: {
-  env: {
-    NODE_ENV: "development" | "production";
-  };
-};
-process = {
-  env: {
-    NODE_ENV: "production",
-  },
-};
-```
-
-You can see examples of these included in the built in type declarations in the `lib` field of `tsconfig.json`
+<!--START-SECTION:non-ts-files-->
+<!--END-SECTION:non-ts-files-->
 
 # Recommended React + TypeScript codebases to learn from
 
