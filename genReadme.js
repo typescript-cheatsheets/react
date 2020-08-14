@@ -58,7 +58,7 @@ async function getReadme() {
     });
     initialContent = await updateSectionWith({
       name: "type-or-interface",
-      path: "docs/basic/getting-started/type-or-interface.md",
+      path: "docs/basic/getting-started/type-or-inteface.md",
       to: initialContent,
     });
     initialContent = await updateSectionWith({
