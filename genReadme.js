@@ -7,7 +7,7 @@ const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
 };
-let default_options = {
+const default_options = {
   withKey: "title",
   withToc: false,
   showHeading: true,
@@ -39,12 +39,13 @@ async function getReadme() {
     initialContent = await updateSectionWith({
       name: "function-components",
       path: "docs/basic/getting-started/function-components.md",
-      to: initialContent,
-      withToc: false,
-      headingLevel: 2,
-      showHeading: true,
+      to: initialContent
     });
-    await octokit.repos.createOrUpdateFile({
+    initialContent = await updateSectionWith({
+      name: "hooks",
+      path: "docs/basic/getting-started/hooks.md",
+      to: initialContent
+    });    await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(initialContent).toString("base64"),
       path: "README.md",
@@ -53,13 +54,15 @@ async function getReadme() {
       branch: "master",
     });
   } catch (err) {
-    console.error(
-      "ERROR: ", err, "\n Protip: Please check if your credentials are up-to-date or the path to file exists."
+     console.error(
+      `🚨 You've encountered a ${err.name}.` + '\n' +
+       err.message + '\n' +
+      `💡 ProTip: Please check if your credentials are up-to-date or the path to your file exists.`
     );
   }
 })();
 async function updateSectionWith(options) {
-  const update_options = Object.assign(default_options, options);
+  const update_options = Object.assign({...default_options}, options);
   const md = await readContentFromPath(update_options.path);
   const oldFences = getFenceForSection(
     update_options.from,
@@ -101,13 +104,13 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  const sectionOptions = Object.assign(default_options, options);
+  const sectionOptions = Object.assign({...default_options}, options);
   const fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
     let lines = sectionOptions.content.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
-      fenceContent += "\t".repeat(sectionOptions.tabLevel) + lines[i] + "\n";
+      fenceContent += "\t".repeat(sectionOptions.tabLevel) + lines[i] + (i !== len-1 ? "\n" : "");
   } else {
     fenceContent += sectionOptions.showHeading
       ? "#".repeat(sectionOptions.headingLevel) +
@@ -127,7 +130,9 @@ function getFenceForSection(readme, sectionName, isToc = false) {
     return { regex: regex, content: regex.exec(readme.content) };
   } catch (err) {
     console.error(
-      "ERROR: ", err, "\n Protip: Please ensure the comments exist and are separated by a newline."
+      `🚨 You've encountered a ${err.name}.` + '\n' +
+       err.message + '\n' +
+      `💡 ProTip: Please ensure the comments exist and are separated by a newline.`
     );
   }
 }
