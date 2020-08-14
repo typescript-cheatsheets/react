@@ -101,6 +101,14 @@ async function getReadme() {
       path: "docs/basic/getting-started/concurrent.md",
       to: initialContent,
     });
+    initialContent = await updateSectionWith({
+      name: "types",
+      path: "docs/basic/troubleshooting/types.md",
+      to: initialContent,
+      withToc: true,
+      headingLevel: 1,
+      showHeading: false,
+    });
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(initialContent).toString("base64"),
@@ -143,6 +151,11 @@ async function updateSectionWith(options) {
   });
   let updatedContents = update_options.to.replace(oldFences.regex, newFences);
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
+  if (update_options.withToc)
+    console.log(
+      `➜ 🗜️ Rewrote Table of Contents for '${md.frontmatter.title}' ✔`
+    );
+  console.log(`➜ ✍️ Rewrote Section for '${md.frontmatter.title}' ✔`);
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
