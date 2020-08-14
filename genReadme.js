@@ -15,9 +15,9 @@ let default_options = {
   tabLevel: 1,
 };
 async function getReadme() {
-  const res = await octokit.repos.getReadme(repo_details);
-  const encoded = res.data.content;
-  const decoded = Buffer.from(encoded, "base64").toString("utf8");
+  let res = await octokit.repos.getReadme(repo_details);
+  let encoded = res.data.content;
+  let decoded = Buffer.from(encoded, "base64").toString("utf8");
   return {
     content: decoded,
     sha: res.data.sha,
@@ -25,7 +25,7 @@ async function getReadme() {
 }
 (async function main() {
   try {
-    const readme = await getReadme();
+    let readme = await getReadme();
     default_options["from"] = readme;
     let initialContent = readme.content;
     initialContent = await updateSectionWith({
@@ -62,23 +62,23 @@ async function getReadme() {
   }
 })();
 async function updateSectionWith(options) {
-  const update_options = Object.assign(default_options, options);
-  const md = await readContentFromPath(update_options.path);
-  const oldFences = getFenceForSection(
+  let update_options = Object.assign(default_options, options);
+  let md = await readContentFromPath(update_options.path);
+  let oldFences = getFenceForSection(
     update_options.from,
     update_options.name
   );
-  const newFences = generateContentForSection({
+  let newFences = generateContentForSection({
     name: update_options.name,
     content: md,
     withToc: false,
   });
-  const oldTocFences = getFenceForSection(
+  let oldTocFences = getFenceForSection(
     update_options.from,
     update_options.name,
     (isToc = true)
   );
-  const newTocFences = generateContentForSection({
+  let newTocFences = generateContentForSection({
     name: update_options.name,
     content: md,
     withToc: true,
@@ -91,12 +91,12 @@ async function updateSectionWith(options) {
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
-  const MdDoc = await octokit.repos.getContents({
+  let MdDoc = await octokit.repos.getContents({
     ...repo_details,
     path: relative_path,
   });
-  const MdContent = Fm(Buffer.from(MdDoc.data.content, "base64").toString());
-  const TableOfContents = Toc(MdContent.body).content;
+  let MdContent = Fm(Buffer.from(MdDoc.data.content, "base64").toString());
+  let TableOfContents = Toc(MdContent.body).content;
   return {
     frontmatter: MdContent.attributes,
     body: MdContent.body,
@@ -104,8 +104,8 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  const sectionOptions = Object.assign(default_options, options);
-  const fence = getFence(sectionOptions.name, sectionOptions.withToc);
+  let sectionOptions = Object.assign(default_options, options);
+  let fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
     let lines = sectionOptions.content.toc.split("\n");
@@ -125,8 +125,8 @@ function generateContentForSection(options) {
 }
 function getFenceForSection(readme, sectionName, isToc = false) {
   try {
-    const fence = getFence(sectionName, isToc);
-    const regex = new RegExp(`(${fence.start}[\\s\\S]+${fence.end})`, "gm");
+    let fence = getFence(sectionName, isToc);
+    let regex = new RegExp(`(${fence.start}[\\s\\S]+${fence.end})`, "gm");
     return { regex: regex, content: regex.exec(readme.content) };
   } catch (err) {
     console.error(
@@ -137,8 +137,8 @@ function getFenceForSection(readme, sectionName, isToc = false) {
   }
 }
 function getFence(sectionName, isToc = false) {
-  const name = isToc ? sectionName + "-toc" : sectionName;
-  const START_COMMENT = "<!--START-SECTION:" + name + "-->";
-  const END_COMMENT = "<!--END-SECTION:" + name + "-->";
+  let name = isToc ? sectionName + "-toc" : sectionName;
+  let START_COMMENT = "<!--START-SECTION:" + name + "-->";
+  let END_COMMENT = "<!--END-SECTION:" + name + "-->";
   return { start: START_COMMENT, end: END_COMMENT };
 }
