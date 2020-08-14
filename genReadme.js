@@ -7,7 +7,7 @@ const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
 };
-const default_options = {
+let default_options = {
   withKey: "title",
   withToc: false,
   showHeading: true,
@@ -62,7 +62,7 @@ async function getReadme() {
   }
 })();
 async function updateSectionWith(options) {
-  const update_options = Object.assign({...default_options}, options);
+  const update_options = Object.assign(default_options, options);
   const md = await readContentFromPath(update_options.path);
   const oldFences = getFenceForSection(
     update_options.from,
@@ -104,7 +104,7 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  const sectionOptions = Object.assign({...default_options}, options);
+  const sectionOptions = Object.assign(default_options, options);
   const fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
