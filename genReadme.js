@@ -57,6 +57,7 @@ async function getReadme() {
       name: "default-props",
       path: "docs/basic/getting-started/default-props.md",
       to: initialContent,
+      showHeading: false,
     });
     initialContent = await updateSectionWith({
       name: "type-or-interface",
