@@ -1,9 +1,11 @@
 name: Generate README
 on:
-  workflow_dispatch:
-  # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
-  schedule:
-    - cron: "0 0 * * *"
+  pull_request:
+    paths: 'docs/basic/*'
+    branches: [master]
+  push:
+    paths: 'docs/basic/*'
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
