@@ -13,6 +13,8 @@ const default_options = {
   showHeading: true,
   headingLevel: 2,
   tabLevel: 1,
+  prefix: "",
+  suffix: "",
 };
 async function getReadme() {
   let res = await octokit.repos.getReadme(repo_details);
@@ -34,7 +36,7 @@ async function getReadme() {
       to: initialContent,
       withToc: true,
       headingLevel: 1,
-      showHeading: false,
+      prefix: "Section 1: ",
     });
     initialContent = await updateSectionWith({
       name: "function-components",
@@ -136,6 +138,8 @@ async function getReadme() {
       to: initialContent,
       headingLevel: 1,
       showHeading: true,
+      withKey: "sidebar_label",
+      prefix: "Troubleshooting Handbook: ",
     });
     initialContent = await updateSectionWith({
       name: "non-ts-files",
@@ -163,13 +167,19 @@ async function updateSectionWith(options) {
   let update_options = Object.assign({}, { ...default_options }, options);
   let md = await readContentFromPath(update_options.path);
   let oldFences = getFenceForSection(update_options.from, update_options.name);
-  let newFences = generateContentForSection({
+  let fence_options = {
     name: update_options.name,
     content: md,
-    withToc: false,
     tabLevel: update_options.tabLevel,
     headingLevel: update_options.headingLevel,
     showHeading: update_options.showHeading,
+    withKey: update_options.withKey,
+    prefix: update_options.prefix,
+    suffix: update_options.suffix,
+  };
+  let newFences = generateContentForSection({
+    ...fence_options,
+    withToc: false,
   });
   let oldTocFences = getFenceForSection(
     update_options.from,
@@ -177,12 +187,8 @@ async function updateSectionWith(options) {
     (isToc = true)
   );
   let newTocFences = generateContentForSection({
-    name: update_options.name,
-    content: md,
+    ...fence_options,
     withToc: true,
-    tabLevel: update_options.tabLevel,
-    headingLevel: update_options.headingLevel,
-    showHeading: update_options.showHeading,
   });
   let updatedContents = update_options.to.replace(oldFences.regex, newFences);
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
@@ -207,24 +213,25 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  let sectionOptions = Object.assign({}, { ...default_options }, options);
-  let fence = getFence(sectionOptions.name, sectionOptions.withToc);
+  let section_options = Object.assign({}, { ...default_options }, options);
+  let fence = getFence(section_options.name, section_options.withToc);
   let fenceContent = fence.start + "\n";
-  if (sectionOptions.withToc) {
-    let lines = sectionOptions.content.toc.split("\n");
+  if (section_options.withToc) {
+    let lines = section_options.content.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
       fenceContent +=
-        "\t".repeat(sectionOptions.tabLevel) +
+        "\t".repeat(section_options.tabLevel) +
         lines[i] +
         (i !== len - 1 ? "\n" : "");
   } else {
-    fenceContent += sectionOptions.showHeading
-      ? "#".repeat(sectionOptions.headingLevel) +
-        " " +
-        sectionOptions.content.frontmatter[sectionOptions.withKey] +
+    fenceContent += section_options.showHeading
+      ? `${"#".repeat(section_options.headingLevel)} ` +
+        section_options.prefix +
+        section_options.content.frontmatter[section_options.withKey] +
+        section_options.suffix +
         "\n\n"
       : "";
-    fenceContent += sectionOptions.content.body + "\n";
+    fenceContent += section_options.content.body + "\n";
   }
   fenceContent += fence.end;
   return fenceContent;
