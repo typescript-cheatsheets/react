@@ -34,7 +34,7 @@ async function getReadme() {
       to: initialContent,
       withToc: true,
       headingLevel: 1,
-      showHeading: false,
+      showHeading: false
     });
     initialContent = await updateSectionWith({
       name: "function-components",
