@@ -7,13 +7,14 @@ const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
 };
-let default_options = {
+const default_options = {
   withKey: "title",
   withToc: false,
   showHeading: true,
   headingLevel: 2,
   tabLevel: 1,
 };
+console.log("before start", JSON.stringify(default_options, null, 2));
 async function getReadme() {
   let res = await octokit.repos.getReadme(repo_details);
   let encoded = res.data.content;
@@ -27,6 +28,10 @@ async function getReadme() {
   try {
     let readme = await getReadme();
     default_options["from"] = readme;
+    console.log(
+      "added <from> key to default options",
+      JSON.stringify(default_options, null, 2)
+    );
     let initialContent = readme.content;
     initialContent = await updateSectionWith({
       name: "setup",
@@ -39,18 +44,68 @@ async function getReadme() {
     initialContent = await updateSectionWith({
       name: "function-components",
       path: "docs/basic/getting-started/function-components.md",
-      to: initialContent
+      to: initialContent,
     });
     initialContent = await updateSectionWith({
       name: "hooks",
       path: "docs/basic/getting-started/hooks.md",
-      to: initialContent
-    });    
+      to: initialContent,
+    });
     initialContent = await updateSectionWith({
       name: "class-components",
       path: "docs/basic/getting-started/class-components.md",
-      to: initialContent
-    });    
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "default-props",
+      path: "docs/basic/getting-started/default-props.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "type-or-interface",
+      path: "docs/basic/getting-started/type-or-interface.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "basic-type-examples",
+      path: "docs/basic/getting-started/basic-type-examples.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "react-prop-type-examples",
+      path: "docs/basic/getting-started/react-prop-type-examples.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "forms-and-events",
+      path: "docs/basic/getting-started/forms-and-events.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "context",
+      path: "docs/basic/getting-started/context.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "forward-create-ref",
+      path: "docs/basic/getting-started/forward-create-ref.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "portals",
+      path: "docs/basic/getting-started/portals.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "context",
+      path: "docs/basic/getting-started/error-boundaries.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
+      name: "concurrent",
+      path: "docs/basic/getting-started/concurrent.md",
+      to: initialContent,
+    });
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(initialContent).toString("base64"),
@@ -60,25 +115,39 @@ async function getReadme() {
       branch: "master",
     });
   } catch (err) {
-     console.error(
-      `🚨 You've encountered a ${err.name}.` + '\n' +
-       err.message + '\n' +
-      `💡 ProTip: Please check if your credentials are up-to-date or the path to your file exists.`
+    console.error(
+      `🚨 You've encountered a ${err.name} ➜ ${err.message}` +
+        "\n" +
+        `💡 ProTip ➜ Please ensure your credentials are up-to-date or the path to your file exists.`
     );
   }
 })();
 async function updateSectionWith(options) {
-  let update_options = Object.assign(default_options, options);
-  let md = await readContentFromPath(update_options.path);
-  let oldFences = getFenceForSection(
-    update_options.from,
-    update_options.name
+  console.log("UPDATE SECTION WITH:", options.name.toUpperCase());
+  console.log(
+    "in updateSectionWith() with options",
+    JSON.stringify(options, null, 2)
   );
+  console.log(
+    "in updateSectionWith() with default_options",
+    JSON.stringify(default_options, null, 2)
+  );
+  let update_options = Object.assign({}, { ...default_options }, options);
+  console.log(
+    "in updateSectionWith() with update_options",
+    JSON.stringify(update_options, null, 2)
+  );
+  let md = await readContentFromPath(update_options.path);
+  let oldFences = getFenceForSection(update_options.from, update_options.name);
   let newFences = generateContentForSection({
     name: update_options.name,
     content: md,
     withToc: false,
+    tabLevel: update_options.tabLevel,
+    headingLevel: update_options.headingLevel,
+    showHeading: update_options.showHeading,
   });
+  console.log("newFences", newFences);
   let oldTocFences = getFenceForSection(
     update_options.from,
     update_options.name,
@@ -92,8 +161,10 @@ async function updateSectionWith(options) {
     headingLevel: update_options.headingLevel,
     showHeading: update_options.showHeading,
   });
+  console.log("newTocFences", newTocFences);
   let updatedContents = update_options.to.replace(oldFences.regex, newFences);
   updatedContents = updatedContents.replace(oldTocFences.regex, newTocFences);
+  console.log("updatedContents", updatedContents);
   return updatedContents;
 }
 async function readContentFromPath(relative_path) {
@@ -110,13 +181,29 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  let sectionOptions = Object.assign(default_options, options);
+  console.log("GENERATE CONTENT FOR SECTION:", options.name.toUpperCase());
+  console.log(
+    "in generateContentForSection() with options",
+    JSON.stringify(options, null, 2)
+  );
+  console.log(
+    "in generateContentForSection() with default_options",
+    JSON.stringify(default_options, null, 2)
+  );
+  let sectionOptions = Object.assign({}, { ...default_options }, options);
+  console.log(
+    "in generateContentForSection() with sectionOptions",
+    JSON.stringify(sectionOptions, null, 2)
+  );
   let fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
     let lines = sectionOptions.content.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
-      fenceContent += "\t".repeat(sectionOptions.tabLevel) + lines[i] + (i !== len-1 ? "\n" : "");
+      fenceContent +=
+        "\t".repeat(sectionOptions.tabLevel) +
+        lines[i] +
+        (i !== len - 1 ? "\n" : "");
   } else {
     fenceContent += sectionOptions.showHeading
       ? "#".repeat(sectionOptions.headingLevel) +
@@ -136,9 +223,9 @@ function getFenceForSection(readme, sectionName, isToc = false) {
     return { regex: regex, content: regex.exec(readme.content) };
   } catch (err) {
     console.error(
-      `🚨 You've encountered a ${err.name}.` + '\n' +
-       err.message + '\n' +
-      `💡 ProTip: Please ensure the comments exist and are separated by a newline.`
+      `🚨 You've encountered a ${err.name} ➜ ${err.message}` +
+        "\n" +
+        `💡 ProTip ➜ Please ensure the comments exist and are separated by a newline.`
     );
   }
 }
