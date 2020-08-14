@@ -34,7 +34,7 @@ async function getReadme() {
       to: initialContent,
       withToc: true,
       headingLevel: 1,
-      showHeading: false
+      showHeading: false,
     });
     initialContent = await updateSectionWith({
       name: "function-components",
@@ -45,7 +45,13 @@ async function getReadme() {
       name: "hooks",
       path: "docs/basic/getting-started/hooks.md",
       to: initialContent
-    });    await octokit.repos.createOrUpdateFile({
+    });    
+    initialContent = await updateSectionWith({
+      name: "class-components",
+      path: "docs/basic/getting-started/class-components.md",
+      to: initialContent
+    });    
+    await octokit.repos.createOrUpdateFile({
       ...repo_details,
       content: Buffer.from(initialContent).toString("base64"),
       path: "README.md",
@@ -62,7 +68,7 @@ async function getReadme() {
   }
 })();
 async function updateSectionWith(options) {
-  let update_options = Object.assign({}, {...default_options}, options);
+  let update_options = Object.assign(default_options, options);
   let md = await readContentFromPath(update_options.path);
   let oldFences = getFenceForSection(
     update_options.from,
@@ -104,7 +110,7 @@ async function readContentFromPath(relative_path) {
   };
 }
 function generateContentForSection(options) {
-  let sectionOptions = Object.assign({}, {...default_options}, options);
+  let sectionOptions = Object.assign(default_options, options);
   let fence = getFence(sectionOptions.name, sectionOptions.withToc);
   let fenceContent = fence.start + "\n";
   if (sectionOptions.withToc) {
