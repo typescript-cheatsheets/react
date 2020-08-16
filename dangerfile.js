@@ -15,9 +15,5 @@ edited.forEach((file) => {
 
 /*
 // Spellcheck would be nice but this is a little too eager
-// Spell check all the things
-spellcheck({
-  settings: "artsy/peril-settings@spellcheck.json", // need to customize someday
-  codeSpellCheck: ["website/**/*.js"],
-});
+// TODO: add back spellcheck? https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/commit/843200836b168332d31e3c991a883d49dbcaf3f8
 */
