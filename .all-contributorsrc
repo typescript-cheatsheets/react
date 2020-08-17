@@ -72,11 +72,24 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "arvindcheenu",
+      "name": "Arvind Srinivasan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/13925213?v=4",
+      "profile": "https://github.com/arvindcheenu",
+      "contributions": [
+        "code",
+        "content",
+        "doc",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "react-typescript-cheatsheet",
+  "projectName": "react",
   "projectOwner": "typescript-cheatsheets",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
