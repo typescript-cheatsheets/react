@@ -29,6 +29,7 @@ Not Commonly Used but Good to know
 
 - `Ref` - used to type `innerRef`
 - `ElementType` - used for higher order components or operations on components
+- `ReactElement` - [can be used if you want to pass it to `cloneElement`](https://www.reddit.com/r/reactjs/comments/ia8sdi/any_other_typescript_users_constantly_confused/g1npahe/) aka it's pretty rarely used
 - `ComponentType` - used for higher order components where you don't specifically deal with the intrinsic components
 - `ReactPortal` - used if you specifically need to type a prop as a portal, otherwise it is part of `ReactNode`
 - `ComponentClass` - a complete interface for the produced constructor function of a class declaration that extends `Component`, often used to type external components instead of typing your own
@@ -42,7 +43,7 @@ Not Commonly Used but Good to know
 
 **Namespace: JSX**
 
-- `Element` - the type of any JSX expression
+- `Element` - the type of any JSX expression. You should ideally never need to see or use this, but you do because of [a limitation of TypeScript](https://github.com/microsoft/TypeScript/issues/21699).
 - `LibraryManagedAttributes` - It specifies other places where JSX elements can declare and initialize property types. Used to resolve static `defaultProps` and `propTypes` with the internal props type of a component.
 - `IntrinsicElements` - every possible built-in component that can be typed in as a lowercase tag name in JSX
 
