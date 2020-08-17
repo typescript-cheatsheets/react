@@ -1,0 +1,28 @@
+name: Generate README
+on:
+  pull_request:
+    paths: 'docs/basic/*'
+    branches: [master]
+  push:
+    paths: 'docs/basic/*'
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: franzdiebold/github-env-vars-action@v1.0.0
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v1
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Generate README from /docs/basic
+        run: npm run gen-readme --if-present
+        env:
+          ENV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Format README
+        run: npm run format-readme

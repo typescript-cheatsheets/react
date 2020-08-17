@@ -119,6 +119,7 @@ dist
 
 # Miscellaneous
 .history
+.DS_Store
 
 # Docusaurus files
 website/build
