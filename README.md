@@ -1848,7 +1848,6 @@ For more information on creating type definitions for class components, you can 
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
->>>>>>> master
 
 <!--END-SECTION:types-->
 
