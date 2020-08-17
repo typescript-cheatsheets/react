@@ -5,3 +5,9 @@ title: "[Question] QUESTION_TITLE_HERE"
 labels: good first issue
 assignees: sw-yx
 ---
+
+
+
+**(If applicable) Reproduction of issue in TypeScript Playground**
+
+_[start with the basic TS + React template](https://www.typescriptlang.org/play/?jsx=2&esModuleInterop=true&q=222#example/typescript-with-react)_
