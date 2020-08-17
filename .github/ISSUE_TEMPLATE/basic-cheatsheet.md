@@ -13,3 +13,7 @@ Basic cheatsheet
 **What's your issue or idea?**
 
 _Write here_
+
+**(If applicable) Reproduction of issue in TypeScript Playground**
+
+_[start with the basic TS + React template](https://www.typescriptlang.org/play/?jsx=2&esModuleInterop=true&q=222#example/typescript-with-react)_
