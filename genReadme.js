@@ -173,6 +173,12 @@ async function getReadme() {
       headingLevel: 1,
     });
     initialContent = await updateSectionWith({
+      name: "talks",
+      path: "docs/basic/recommended/talks.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
       name: "learn-ts",
       path: "docs/basic/troubleshooting/learn-ts.md",
       to: initialContent,
