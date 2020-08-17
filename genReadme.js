@@ -75,6 +75,11 @@ async function getReadme() {
       to: initialContent,
     });
     initialContent = await updateSectionWith({
+      name: "get-derived-state-from-props",
+      path: "docs/basic/getting-started/get-derived-state-from-props.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
       name: "forms-and-events",
       path: "docs/basic/getting-started/forms-and-events.md",
       to: initialContent,
@@ -95,7 +100,7 @@ async function getReadme() {
       to: initialContent,
     });
     initialContent = await updateSectionWith({
-      name: "context",
+      name: "error-boundaries",
       path: "docs/basic/getting-started/error-boundaries.md",
       to: initialContent,
     });
