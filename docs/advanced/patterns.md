@@ -421,8 +421,9 @@ You can [convert these in bulk](https://github.com/microsoft/TypeScript/pull/374
 [[Release Candidate](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)]
 
 - [Variadic Tuple Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)
+
   - useful for [simplified Reducer-like State](https://www.reddit.com/r/reactjs/comments/hu0ytg/simplified_reducerlike_state_using_typescript_40/)
-  
+
 Possibly in 4.1
 
 - [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
