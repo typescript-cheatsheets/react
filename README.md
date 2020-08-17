@@ -92,7 +92,8 @@
 	- [Overloading Function Types](#overloading-function-types)
 	- [Using Inferred Types](#using-inferred-types)
 	- [Using Partial Types](#using-partial-types)
-	- [The Types I need weren't exported!](#the-types-i-need-werent-exported)<!--END-SECTION:types-toc-->
+	- [The Types I need weren't exported!](#the-types-i-need-werent-exported)
+  - [The Types I need Don't Exist!](#the-types-i-need-dont-exist)<!--END-SECTION:types-toc-->
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
@@ -364,6 +365,17 @@ export function reducer(state: AppState, action: Action): AppState {
       return state;
   }
 }
+```
+
+Setting the type for `dispatch` function:
+
+```jsx
+import { Dispatch } from "react";
+import { Action } from "./reducer";
+
+const handleClick = (dispatch: Dispatch<Action>) => {
+  dispatch({ type: "SET_ONE", payload: "some string" });
+};
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/C4TwDgpgBAgmYGVgENjQLxQN4F8CwAUKJLAMbACWA9gHZTqFRQA+2UxEAXFAEQICiAFQD6AeQBy-HgG4oYZCAA2VZABNuAZ2AAnCjQDmUfASass7cF14CRggOqiZchcrXcaAVwC2AIwjajaUJCCAAPMCptYCgAMw8acmo6bQhVD1J-AAotVCs4RBQ0ABooZETabhhymgBKSvgkXOxGKA0AdwpgUgALKEyyyloAOg4a5pMmKFJkDWg+ITFJHk4WyagU4A9tOixVtaghw5zivbXaKwGkofklFVUoAHoHqAADG9dVF6gKDVadPX0p0Ce2ms2sC3sjhWEzWGy2OyBTEOQ2OECKiPYbSo3Euw3ed0ezzeLjuXx+UE8vn8QJwQRhUFUEBiyA8imA0P26wgm22f1ydKYxhwQA)
@@ -1676,6 +1688,168 @@ let baz2: SubIsntType2 = {
 - TS also ships with a `Parameters` utility type for extracting the parameters of a function
 - for anything more "custom", the `infer` keyword is the basic building block for this, but takes a bit of getting used to. Look at the source code for the above utility types, and [this example](https://twitter.com/mgechev/status/1211030455224422401?s=20) to get the idea. Basarat [also has a good video on `infer`](https://www.youtube.com/watch?v=ijK-1R-LFII&list=PLYvdvJlnTOjF6aJsWWAt7kZRJvzw-en8B&index=3&t=0s).
 
+## The Types I need don't exist!
+
+What's more annoying than modules with unexported types? Modules that are **untyped**!
+
+Fret not! There are more than a couple of ways in which you can solve this problem.
+
+A **lazier** way would be to create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by TypeScript by checking the `include` array in the `tsconfig.json` file at the root of your directory.
+
+```json
+// inside tsconfig.json
+{
+  // ...
+  "include": [
+    "src" // automatically resolves if the path to declaration is src/typedec.d.ts
+  ]
+  // ...
+}
+```
+
+Within this file, add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file:
+
+```ts
+// inside typedec.d.ts
+declare module "my-untyped-module";
+```
+
+This one-liner alone is enough if you just need it to work without errors. A even hackier, write-once-and-forget way would be to use `"*"` instead which would then apply the `Any` type for all existing and future untyped modules.
+
+This solution works well as a workaround if you have less than a couple untyped modules. Anything more, you now have a ticking type-bomb in your hands. The only way of circumventing this problem would be to define the missing types for those untyped modules as explained in the following sections.
+
+### Typing Exported Hooks
+
+Typing Hooks is just like typing pure functions.
+
+The following steps work under two assumptions:
+
+- You have already created a type declaration file as stated earlier in the section.
+- You have access to the source code - specifically the code that directly exports the functions you will be using. In most cases, it would be housed in an `index.js` file.
+  Typically you need a minimum of **two** type declarations (one for **Input Prop** and the other for **Return Prop**) to define a hook completely. Suppose the hook you wish to type follows the following structure,
+
+```js
+// ...
+const useUntypedHook = (prop) => {
+  // some processing happens here
+  return {
+    /* ReturnProps */
+  };
+};
+export default useUntypedHook;
+```
+
+then, your type declaration should most likely follow the following syntax.
+
+```ts
+declare module 'use-untyped-hook' {
+  export interface InputProps { ... }   // type declaration for prop
+  export interface ReturnProps { ... } // type declaration for return props
+  export default function useUntypedHook(
+    prop: InputProps
+    // ...
+  ): ReturnProps;
+}
+```
+
+<details>
+<summary>
+
+For instance, the [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
+
+</summary>
+
+```js
+// inside src/index.js
+const useDarkMode = (
+  initialValue = false, // -> input props / config props to be exported
+  {
+    // -> input props / config props to be exported
+    element,
+    classNameDark,
+    classNameLight,
+    onChange,
+    storageKey = "darkMode",
+    storageProvider,
+    global,
+  } = {}
+) => {
+  // ...
+  return {
+    // -> return props to be exported
+    value: state,
+    enable: useCallback(() => setState(true), [setState]),
+    disable: useCallback(() => setState(false), [setState]),
+    toggle: useCallback(() => setState((current) => !current), [setState]),
+  };
+};
+export default useDarkMode;
+```
+
+As the comments suggest, exporting these config props and return props following the aforementioned structure will result in the following type export.
+
+```ts
+declare module "use-dark-mode" {
+  /**
+   * A config object allowing you to specify certain aspects of `useDarkMode`
+   */
+  export interface DarkModeConfig {
+    classNameDark?: string; // A className to set "dark mode". Default = "dark-mode".
+    classNameLight?: string; // A className to set "light mode". Default = "light-mode".
+    element?: HTMLElement; // The element to apply the className. Default = `document.body`
+    onChange?: (val?: boolean) => void; // Overide the default className handler with a custom callback.
+    storageKey?: string; // Specify the `localStorage` key. Default = "darkMode". Set to `null` to disable persistent storage.
+    storageProvider?: WindowLocalStorage; // A storage provider. Default = `localStorage`.
+    global?: Window; // The global object. Default = `window`.
+  }
+  /**
+   * An object returned from a call to `useDarkMode`.
+   */
+  export interface DarkMode {
+    readonly value: boolean;
+    enable: () => void;
+    disable: () => void;
+    toggle: () => void;
+  }
+  /**
+   * A custom React Hook to help you implement a "dark mode" component for your application.
+   */
+  export default function useDarkMode(
+    initialState?: boolean,
+    config?: DarkModeConfig
+  ): DarkMode;
+}
+```
+
+</details>
+
+### Typing Exported Components
+
+In case of typing untyped class components, there's almost no difference in approach except for the fact that after declaring the types, you export the extend the type using `class UntypedClassComponent extends React.Component<UntypedClassComponentProps, any> {}` where `UntypedClassComponentProps` holds the type declaration.
+
+For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the then untyped RR6.
+
+```ts
+declare module "react-router-dom" {
+  import * as React from 'react';
+  // ...
+  type NavigateProps<T> = {
+    to: string | number,
+    replace?: boolean,
+    state?: T
+  }
+  //...
+  export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
+  // ...
+```
+
+For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
+
+# Troubleshooting Handbook: Images and other non-TS/TSX files
+
+Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
+>>>>>>> master
+
 <!--END-SECTION:types-->
 
 <!--START-SECTION:operators-->
@@ -2017,6 +2191,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
+- [Stefan Baumgartner's TypeScript + React Guide](https://fettblog.eu/typescript-react), which serves as a side-by-side guide to the official docs with extra articles on styling, custom hooks and patterns
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
@@ -2029,6 +2204,10 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 <!--END-SECTION:other-resources-->
 
 <!--START-SECTION:talks-->
+# Recommended React + TypeScript talks
+
+- [Ultimate React Component Patterns with TypeScript](https://www.youtube.com/watch?v=_PBQ3if6Fmg), by Martin Hochel, GeeCon Prague 2018
+- Please help contribute this new section!
 <!--END-SECTION:talks-->
 
 <!--START-SECTION:learn-ts-->
