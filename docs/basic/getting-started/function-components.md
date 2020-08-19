@@ -42,22 +42,26 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 <details>
 <summary>
 
-As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly.
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly. This is an interim solution until the next major version of the type defs (where VoidFunctionComponent will be deprecated and FunctionComponent will by default accept no children).
 
 </summary>
 
 
 
 ```ts
-const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo }: Props) => {
-    return <div>{foo}</div>; // OK
-};
-<VoidFunctionComponent />;
+type Props = { foo: string }
 
-const VoidFunctionComponent2: React.VoidFunctionComponent<SCProps> = ({ foo, children /* ERROR */ }) => {
+// OK now, in future, error
+const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
+    return <div>{foo} {children}</div>; // OK
+};
+
+// Error now, in future, deprecated
+const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, children }) => {
     return <div>{foo}{children}</div>; 
 };
 ```
+
 
 
 </details>
