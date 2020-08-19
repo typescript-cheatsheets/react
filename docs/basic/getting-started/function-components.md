@@ -42,7 +42,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 <details>
 <summary>
 
-As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare a component that explicitly does not have children.
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly.
 
 </summary>
 
