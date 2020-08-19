@@ -12,7 +12,7 @@ const App = ({ message }: AppProps) => <div>{message}</div>;
 
 <details>
 
-<summary><b>What about `React.FC`/`React.FunctionComponent`?</b></summary>
+<summary><b>What about `React.FC`/`React.FunctionComponent`/`React.VoidFunctionComponent`?</b></summary>
 
 You can also write components with `React.FunctionComponent` (or the shorthand `React.FC` - they are the same):
 
@@ -38,6 +38,30 @@ const Title: React.FunctionComponent<{ title: string }> = ({
   title,
 }) => <div title={title}>{children}</div>;
 ```
+
+<details>
+<summary>
+
+As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare a component that explicitly does not have children.
+
+</summary>
+
+
+
+```ts
+const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo }: Props) => {
+    return <div>{foo}</div>; // OK
+};
+<VoidFunctionComponent />;
+
+const VoidFunctionComponent2: React.VoidFunctionComponent<SCProps> = ({ foo, children /* ERROR */ }) => {
+    return <div>{foo}{children}</div>; 
+};
+```
+
+
+</details>
+
 
 - _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
 
