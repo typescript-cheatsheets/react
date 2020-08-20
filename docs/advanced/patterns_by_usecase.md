@@ -278,6 +278,30 @@ const Wrapper = <T extends {}>(
 };
 ```
 
+## Typing Children
+
+Some API designs require some restriction on `children` passed to a parent component. It is common to want to enforce these in types, but you should be aware of limitations to this ability.
+
+### What You CAN Do
+
+You can type the **structure** of your children: just one child, or a tuple of children.
+
+The following are valid:
+
+```ts
+type OneChild = React.ReactElement;
+type TwoChildren = [React.ReactElement, React.ReactElement];
+type ArrayOfProps = SomeProp[];
+type NumbersChildren = number[];
+type TwoNumbersChildren = [number, number];
+```
+
+### What You CANNOT Do
+
+The thing you cannot do is **specify which components** the children are, e.g. If you want to express the fact that "React Router `<Routes>` can only have `<Route>` as children, nothing else is allowed" in TypeScript.
+
+This is because when you write a JSX expression (const foo = <MyComponent foo='foo' />), the resultant type is blackboxed into a generic JSX.Element type. (_[thanks @ferdaber](https://github.com/typescript-cheatsheets/react/issues/271)_)
+
 ## Typing a Component based on their Props
 
 Components, and JSX in general, are analogous to functions. When a component can render differently based on their props, it's similar to how a function can be overloaded to have multiple call signatures. In the same way, you can overload a function component's call signature to list all of its different "versions".
