@@ -1,6 +1,6 @@
 ---
-id: patterns
-title: "Section 2: Useful Patterns by TypeScript Version"
+id: patterns_by_version
+title: "Useful Patterns by TypeScript Version"
 sidebar_label: Useful Patterns by TypeScript Version
 ---
 
