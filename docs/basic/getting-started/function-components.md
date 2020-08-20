@@ -46,26 +46,36 @@ As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyType
 
 </summary>
 
-
-
 ```ts
-type Props = { foo: string }
+type Props = { foo: string };
 
 // OK now, in future, error
-const FunctionComponent: React.FunctionComponent<Props> = ({ foo, children }: Props) => {
-    return <div>{foo} {children}</div>; // OK
+const FunctionComponent: React.FunctionComponent<Props> = ({
+  foo,
+  children,
+}: Props) => {
+  return (
+    <div>
+      {foo} {children}
+    </div>
+  ); // OK
 };
 
 // Error now, in future, deprecated
-const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({ foo, children }) => {
-    return <div>{foo}{children}</div>; 
+const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({
+  foo,
+  children,
+}) => {
+  return (
+    <div>
+      {foo}
+      {children}
+    </div>
+  );
 };
 ```
 
-
-
 </details>
-
 
 - _In the future_, it may automatically mark props as `readonly`, though that's a moot point if the props object is destructured in the parameter list.
 
