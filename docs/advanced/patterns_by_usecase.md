@@ -4,6 +4,26 @@ title: "Useful Patterns by Use Case"
 sidebar_label: Useful Patterns by Use Case
 ---
 
+## Wrapping/Mirroring a HTML Element
+
+Usecase: you want to make a `<Button>` that takes all the normal props of `<button>` and does extra stuff.
+
+Strategy: extend `React.HTMLProps<YOURELEMENTHERE>`
+
+Example:
+
+```tsx
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  specialProp: string;
+  type: "button" | "submit" | "reset"; // flaw of React.HTMLProps
+}
+export function Button(props: ButtonProps) {
+  const { specialProp, ...rest } = props;
+  // do something with specialProp
+  return <button {...rest} />;
+}
+```
+
 ## Polymorphic Components
 
 > "Polymorphic Components" = passing a component to be rendered, e.g. with `as` props
