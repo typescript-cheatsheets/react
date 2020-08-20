@@ -3,6 +3,55 @@ id: context
 title: Context
 ---
 
+## Basic Example
+
+
+```tsx
+import * as React from 'react';
+
+interface AppContextInterface {
+  name: string,
+  author: string,
+  url: string
+}
+
+const AppCtx = React.createContext<AppContextInterface | null>(null);
+
+// Provider in your app
+
+const sampleAppContext: AppContextInterface = {
+  name: 'Using React Context in a Typescript App',
+  author: 'thehappybug',
+  url: 'http://www.example.com'
+};
+
+export const App = () => (
+  <AppCtx.Provider value={sampleAppContext}>
+    ...
+  </AppCtx.Provider>
+);
+
+// Consume in your app
+
+export const PostInfo = () => {
+  const appContext = React.useContext(AppCtx)
+  return (
+      <div>
+        Name: {appContext.name},
+        Author: {appContext.author},
+        Url: {appContext.url}
+      </div>
+    )
+}
+```
+
+You can also use the [Class.contextType](https://reactjs.org/docs/context.html#classcontexttype) or [Context.Consumer](https://reactjs.org/docs/context.html#contextconsumer) API, let us know if you have trouble with that.
+
+
+*[Thanks to @AlvSovereign](https://github.com/typescript-cheatsheets/react/issues/97)*
+
+## Extended Example
+
 Using `React.createContext` with an empty object as default value.
 
 ```tsx
