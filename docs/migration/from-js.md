@@ -8,7 +8,7 @@ title: From JS
 - [TypeStat](https://github.com/JoshuaKGoldberg/TypeStat) ([used by Codecademy](https://mobile.twitter.com/JoshuaKGoldberg/status/1159090281314160640))
 - [TypeWiz](https://github.com/urish/typewiz)
 - [js-to-ts-converter](https://github.com/gregjacobs/js-to-ts-converter)
-- [TS-migrate](https://medium.com/airbnb-engineering/ts-migrate-a-tool-for-migrating-to-typescript-at-scale-cd23bfeb5cc) from Airbnb 
+- [TS-migrate](https://medium.com/airbnb-engineering/ts-migrate-a-tool-for-migrating-to-typescript-at-scale-cd23bfeb5cc) from Airbnb
 - [dts-gen](https://github.com/microsoft/dts-gen) - `dts-gen` is a tool that generates TypeScript definition files (.d.ts) from any JavaScript object.
 
 ## Manual JS to TS Conversion
