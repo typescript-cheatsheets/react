@@ -370,7 +370,7 @@ let baz2: SubIsntType2 = {
 
 ## The Types I need don't exist!
 
-What's more annoying than modules with unexported types? Modules that are **untyped**! 
+What's more annoying than modules with unexported types? Modules that are **untyped**!
 
 > Before you proceed - make sure you have checked that types don't exist in [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) or [TypeSearch](https://microsoft.github.io/TypeSearch/)
 
@@ -404,9 +404,9 @@ This solution works well as a workaround if you have less than a couple untyped 
 
 ### Autogenerate types
 
-You can use TypeScript with `--allowJs` and `--declaration` to see TypeScript's "best guess" at the types of the library. 
+You can use TypeScript with `--allowJs` and `--declaration` to see TypeScript's "best guess" at the types of the library.
 
-If this doesn't work well enough, use [`dts-gen`](https://github.com/Microsoft/dts-gen) to use the runtime shape of the object to accurately enumerate all available properties. This tends to be very accurate, BUT the tool does not yet support scraping JSDoc comments to populate additional types. 
+If this doesn't work well enough, use [`dts-gen`](https://github.com/Microsoft/dts-gen) to use the runtime shape of the object to accurately enumerate all available properties. This tends to be very accurate, BUT the tool does not yet support scraping JSDoc comments to populate additional types.
 
 ```bash
 npm install -g dts-gen
