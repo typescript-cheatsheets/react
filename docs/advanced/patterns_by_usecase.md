@@ -4,7 +4,9 @@ title: "Useful Patterns by Use Case"
 sidebar_label: Useful Patterns by Use Case
 ---
 
-## Wrapping/Mirroring a HTML Element
+## Wrapping/Mirroring
+
+### Wrapping/Mirroring a HTML Element
 
 Usecase: you want to make a `<Button>` that takes all the normal props of `<button>` and does extra stuff.
 
@@ -23,6 +25,55 @@ export function Button(props: ButtonProps) {
   return <button {...rest} />;
 }
 ```
+
+## Wrapping/Mirroring a Component
+
+Usecase: same as above, but for a React Component you don't have access to
+
+```tsx
+const Box = (props: React.CSSProperties) => <div style={props} />;
+
+const Card = ({
+  title,
+  children,
+  ...props
+}: { title: string } & $ElementProps<typeof Box>) => (
+  <Box {...props}>
+    {title}: {children}
+  </Box>
+);
+```
+
+Strategy: extract a component's props by inferring them
+
+Example:
+
+```tsx
+// ReactUtilityTypes.d.ts
+declare type $ElementProps<T> = T extends React.ComponentType<infer Props>
+  ? Props extends object
+    ? Props
+    : never
+  : never;
+```
+
+Advanced Example:
+
+```tsx
+import * as Recompose from "recompose";
+export const defaultProps = <
+  C extends React.ComponentType,
+  D extends Partial<$ElementProps<C>>
+>(
+  defaults: D,
+  Component: C
+): React.ComponentType<$ElementProps<C> & Partial<D>> =>
+  Recompose.defaultProps(defaults)(Component);
+```
+
+_thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
+
+\*TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice
 
 ## Polymorphic Components
 
