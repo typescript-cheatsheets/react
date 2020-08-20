@@ -26,6 +26,12 @@ export default function Home() {
             >
               Getting started
             </Link>
+            <Link
+              to={"https://discord.gg/y88evmj"}
+              className="button button--lg button--outline button--secondary"
+            >
+              Join Official Discord
+            </Link>
           </div>
         </div>
       </div>
