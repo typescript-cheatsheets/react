@@ -12,10 +12,10 @@ type AppProps = {
   names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
   status: "waiting" | "success";
-  /** any object as long as you dont use its properties (not common) */
+  /** any object as long as you dont use its properties (NOT COMMON but useful as placeholder) */
   obj: object;
   obj2: {}; // almost the same as `object`, exactly the same as `Object`
-  /** an object with defined properties (preferred) */
+  /** an object with any number of properties (PREFERRED) */
   obj3: {
     id: string;
     title: string;
@@ -25,6 +25,11 @@ type AppProps = {
     id: string;
     title: string;
   }[];
+  /** a dict object with any number of properties of the same type */
+  dict1: {
+    [key: string]: MyTypeHere;
+  };
+  dict2: Record<string, MyTypeHere>; // equivalent to dict1
   /** any function as long as you don't invoke it (not recommended) */
   onSomething: Function;
   /** function that doesn't take or return anything (VERY COMMON) */

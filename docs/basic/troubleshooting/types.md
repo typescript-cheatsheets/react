@@ -4,7 +4,7 @@ title: "Troubleshooting Handbook: Types"
 sidebar_label: Types
 ---
 
-> ⚠️ Have you read [the TypeScript FAQ](https://github.com/microsoft/TypeScript/wiki/FAQ)?) Your answer might be there!
+> ⚠️ Have you read [the TypeScript FAQ](https://github.com/microsoft/TypeScript/wiki/FAQ?) Your answer might be there!
 
 Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patient - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
@@ -372,7 +372,11 @@ let baz2: SubIsntType2 = {
 
 What's more annoying than modules with unexported types? Modules that are **untyped**!
 
+> Before you proceed - make sure you have checked that types don't exist in [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) or [TypeSearch](https://microsoft.github.io/TypeSearch/)
+
 Fret not! There are more than a couple of ways in which you can solve this problem.
+
+### Slapping `any` on everything
 
 A **lazier** way would be to create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by TypeScript by checking the `include` array in the `tsconfig.json` file at the root of your directory.
 
@@ -397,6 +401,19 @@ declare module "my-untyped-module";
 This one-liner alone is enough if you just need it to work without errors. A even hackier, write-once-and-forget way would be to use `"*"` instead which would then apply the `Any` type for all existing and future untyped modules.
 
 This solution works well as a workaround if you have less than a couple untyped modules. Anything more, you now have a ticking type-bomb in your hands. The only way of circumventing this problem would be to define the missing types for those untyped modules as explained in the following sections.
+
+### Autogenerate types
+
+You can use TypeScript with `--allowJs` and `--declaration` to see TypeScript's "best guess" at the types of the library.
+
+If this doesn't work well enough, use [`dts-gen`](https://github.com/Microsoft/dts-gen) to use the runtime shape of the object to accurately enumerate all available properties. This tends to be very accurate, BUT the tool does not yet support scraping JSDoc comments to populate additional types.
+
+```bash
+npm install -g dts-gen
+dts-gen -m <your-module>
+```
+
+There are other automated JS to TS conversion tools and migration strategies - see [our MIGRATION cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration/from_js).
 
 ### Typing Exported Hooks
 
