@@ -129,8 +129,21 @@ module.exports = {
                 "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet",
             },
             {
-              html:
-                '<a class="footer__link-item" href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet"><img src="https://camo.githubusercontent.com/f00e074779455222f68fde1096fbbd91bae555c2/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f747970657363726970742d63686561747368656574732f72656163742d747970657363726970742d636865617473686565742e7376673f7374796c653d736f6369616c266c6162656c3d53746172266d61784167653d32353932303030" alt="GitHub stars" data-canonical-src="https://img.shields.io/github/stars/typescript-cheatsheets/react-typescript-cheatsheet.svg?style=social&amp;label=Star&amp;maxAge=2592000" style="max-width:100%;"></a>',
+              html: `<a class="footer__link-item" href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet">
+                <img src="https://camo.githubusercontent.com/f00e074779455222f68fde1096fbbd91bae555c2/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f747970657363726970742d63686561747368656574732f72656163742d747970657363726970742d636865617473686565742e7376673f7374796c653d736f6369616c266c6162656c3d53746172266d61784167653d32353932303030" alt="GitHub stars" data-canonical-src="https://img.shields.io/github/stars/typescript-cheatsheets/react-typescript-cheatsheet.svg?style=social&amp;label=Star&amp;maxAge=2592000" style="max-width:100%;">
+                </a>`,
+            },
+            {
+              label: "Discord",
+              html: `<a class="footer__link-item" href="https://discord.gg/y88evmj">
+              <img src="https://img.shields.io/discord/746055213462585435.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" style="max-width:100%;">
+              </a>`,
+            },
+            {
+              label: "Spread the word",
+              html: `<a class="footer__link-item" href="http://twitter.com/home?status=Awesome%20%40Reactjs%20%2B%20%40TypeScript%20cheatsheet%20by%20%40ferdaber%2C%20%40sebsilbermann%2C%20%40swyx%20%26%20others!%20https%3A%2F%2Fgithub.com%2Ftypescript-cheatsheets%2Freact">
+              <img src="https://img.shields.io/twitter/url?label=Help%20spread%20the%20word%21&style=social&url=https%3A%2F%2Fgithub.com%2Ftypescript-cheatsheets%2Freact" style="max-width:100%;">
+              </a>`,
             },
           ],
         },
