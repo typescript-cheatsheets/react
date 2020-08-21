@@ -65,7 +65,7 @@ const Greet = ({ age = 21 }: GreetProps) => {
 // class components
 // ////////////////
 type GreetProps =  {
-  age: number;
+  age?: number;
 };
 
 class Greet extends React.Component<GreetProps> {
