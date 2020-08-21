@@ -2405,6 +2405,7 @@ It is worth mentioning some resources to help you get started:
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
+- Go through [Remo Jansen's TypeScript ladder](http://www.techladder.io/?tech=typescript)
 - Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
 
 <!--END-SECTION:learn-ts-->

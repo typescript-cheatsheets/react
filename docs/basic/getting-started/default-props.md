@@ -65,7 +65,7 @@ const Greet = ({ age = 21 }: GreetProps) => {
 // class components
 // ////////////////
 type GreetProps =  {
-  age: number;
+  age?: number;
 };
 
 class Greet extends React.Component<GreetProps> {
@@ -125,7 +125,7 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 
 The problem with this approach is it causes complex issues with the type inference working with `JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
 
-[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
+[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57) and [here](https://github.com/typescript-cheatsheets/react/issues/61).
 
 </details>
 
