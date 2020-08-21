@@ -5,7 +5,7 @@ title: Hooks
 
 Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L800-L1031).
 
-**useState**
+## useState
 
 Type inference works very well most of the time:
 
@@ -24,84 +24,7 @@ const [user, setUser] = React.useState<IUser | null>(null);
 setUser(newUser);
 ```
 
-**useRef**
-
-When using `useRef`, you have two options when creating a ref container that does not have an initial value:
-
-```ts
-const ref1 = useRef<HTMLElement>(null!);
-const ref2 = useRef<HTMLElement | null>(null);
-```
-
-The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
-
-<details>
-  <summary>What is the <code>!</code> at the end of <code>null!</code>?</summary>
-
-`null!` is a non-null assertion operator (the `!`). It asserts that any expression before it is not `null` or `undefined`, so if you have `useRef<HTMLElement>(null!)` it means that you're instantiating the ref with a current value of `null` but lying to TypeScript that it's not `null`.
-
-```ts
-function MyComponent() {
-  const ref1 = useRef<HTMLElement>(null!);
-  useEffect(() => {
-    doSomethingWith(ref1.current); // TypeScript won't require null-check e.g. ref1 && ref1.current
-  });
-  return <div ref={ref1}> etc </div>;
-}
-```
-
-</details>
-
-The second option will make `ref2.current` mutable, and is intended for "instance variables" that you manage yourself.
-
-**useEffect**
-
-When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
-
-```ts
-function DelayedEffect(props: { timerMs: number }) {
-  const { timerMs } = props;
-  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
-  useEffect(
-    () =>
-      setTimeout(() => {
-        /* do stuff */
-      }, timerMs),
-    [timerMs]
-  );
-  return null;
-}
-```
-
-**useRef**
-
-```tsx
-function TextInputWithFocusButton() {
-  // initialise with null, but tell TypeScript we are looking for an HTMLInputElement
-  const inputEl = React.useRef<HTMLInputElement>(null);
-  const onButtonClick = () => {
-    // strict null checks need us to check if inputEl and current exist.
-    // but once current exists, it is of type HTMLInputElement, thus it
-    // has the method focus! ✅
-    if (inputEl && inputEl.current) {
-      inputEl.current.focus();
-    }
-  };
-  return (
-    <>
-      {/* in addition, inputEl only can be used with input elements. Yay! */}
-      <input ref={inputEl} type="text" />
-      <button onClick={onButtonClick}>Focus the input</button>
-    </>
-  );
-}
-```
-
-[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wFgAoCzAVwDsNgJa4AVJADxgElaxqYA6sBgALAGIQ01AM4AhfjCYAKAJRwA3hThwA9DrjBaw4CgA2waUjgB3YSLi1qp0wBo4AI35wYSZ6wCeYEgAymhQwGDw1lYoRHCmEBAA1oYA5nCY0HAozAASLACyADI8fDAAoqZIIEi0MFpwaEzS8IZllXAAvIjEMAB0MkjImAA8+cWl-JXVtTAAfEqOzioA3A1NtC1wTPIwirQAwuZoSV1wql1zGg3aenAt4RgOTqaNIkgn0g5ISAAmcDJvBA3h9TsBMAZeFNXjl-lIoEQ6nAOBZ+jddPpPPAmGgrPDEfAUS1pG5hAYvhAITBAlZxiUoRUqjU6m5RIDhOi7iIUF9RFYaqIIP9MlJpABCOCAUHJ0eDzm1oXAAGSKyHtUx9fGzNSacjaPWq6Ea6gI2Z9EUyVRrXV6gC+DRtVu0RBgxuYSnRIzm6O06h0ACpIdlfr9jExSQyOkxTP5GjkPFZBv9bKIDYSmbNpH04ABNFD+CV+nR2636kby+BETCddTlyo27w0zr4HycfC6L0lvUjLH7baHY5Jas7BRMI7AE42uYSUXed6pkY6HtMDulnQruCrCg2oA)
-
-example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#useref)
-
-**useReducer**
+## useReducer
 
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
 
@@ -147,7 +70,100 @@ export function reducer: Reducer<AppState, Action>() {}
 
 </details>
 
-**Custom Hooks**
+## useEffect
+
+When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
+
+```ts
+function DelayedEffect(props: { timerMs: number }) {
+  const { timerMs } = props;
+  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
+  useEffect(
+    () =>
+      setTimeout(() => {
+        /* do stuff */
+      }, timerMs),
+    [timerMs]
+  );
+  return null;
+}
+```
+
+## useRef
+
+When using `useRef`, you have two options when creating a ref container that does not have an initial value:
+
+```ts
+const ref1 = useRef<HTMLElement>(null!);
+const ref2 = useRef<HTMLElement | null>(null);
+```
+
+The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
+
+<details>
+  <summary>What is the <code>!</code> at the end of <code>null!</code>?</summary>
+
+`null!` is a non-null assertion operator (the `!`). It asserts that any expression before it is not `null` or `undefined`, so if you have `useRef<HTMLElement>(null!)` it means that you're instantiating the ref with a current value of `null` but lying to TypeScript that it's not `null`.
+
+```ts
+function MyComponent() {
+  const ref1 = useRef<HTMLElement>(null!);
+  useEffect(() => {
+    doSomethingWith(ref1.current); // TypeScript won't require null-check e.g. ref1 && ref1.current
+  });
+  return <div ref={ref1}> etc </div>;
+}
+```
+
+</details>
+
+The second option will make `ref2.current` mutable, and is intended for "instance variables" that you manage yourself.
+
+```tsx
+function TextInputWithFocusButton() {
+  // initialise with null, but tell TypeScript we are looking for an HTMLInputElement
+  const inputEl = React.useRef<HTMLInputElement>(null);
+  const onButtonClick = () => {
+    // strict null checks need us to check if inputEl and current exist.
+    // but once current exists, it is of type HTMLInputElement, thus it
+    // has the method focus! ✅
+    if (inputEl && inputEl.current) {
+      inputEl.current.focus();
+    }
+  };
+  return (
+    <>
+      {/* in addition, inputEl only can be used with input elements. Yay! */}
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wFgAoCzAVwDsNgJa4AVJADxgElaxqYA6sBgALAGIQ01AM4AhfjCYAKAJRwA3hThwA9DrjBaw4CgA2waUjgB3YSLi1qp0wBo4AI35wYSZ6wCeYEgAymhQwGDw1lYoRHCmEBAA1oYA5nCY0HAozAASLACyADI8fDAAoqZIIEi0MFpwaEzS8IZllXAAvIjEMAB0MkjImAA8+cWl-JXVtTAAfEqOzioA3A1NtC1wTPIwirQAwuZoSV1wql1zGg3aenAt4RgOTqaNIkgn0g5ISAAmcDJvBA3h9TsBMAZeFNXjl-lIoEQ6nAOBZ+jddPpPPAmGgrPDEfAUS1pG5hAYvhAITBAlZxiUoRUqjU6m5RIDhOi7iIUF9RFYaqIIP9MlJpABCOCAUHJ0eDzm1oXAAGSKyHtUx9fGzNSacjaPWq6Ea6gI2Z9EUyVRrXV6gC+DRtVu0RBgxuYSnRIzm6O06h0ACpIdlfr9jExSQyOkxTP5GjkPFZBv9bKIDYSmbNpH04ABNFD+CV+nR2636kby+BETCddTlyo27w0zr4HycfC6L0lvUjLH7baHY5Jas7BRMI7AE42uYSUXed6pkY6HtMDulnQruCrCg2oA)
+
+example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#useref)
+
+## useImperativeHandle
+
+_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106)_
+
+```tsx
+type ListProps<ItemType> = {
+  items: ItemType[];
+  innerRef?: React.Ref<{ scrollToItem(item: ItemType): void }>;
+};
+
+function List<ItemType>(props: ListProps<ItemType>) {
+  useImperativeHandle(props.innerRef, () => ({
+    scrollToItem() {},
+  }));
+  return null;
+}
+```
+
+## Custom Hooks
 
 If you are returning an array in your Custom Hook, you will want to avoid type inference as TypeScript will infer a union type (when you actually want different types in each position of the array). Instead, use [TS 3.4 const assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions):
 
