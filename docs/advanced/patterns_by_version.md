@@ -1,6 +1,6 @@
 ---
-id: patterns
-title: "Section 2: Useful Patterns by TypeScript Version"
+id: patterns_by_version
+title: "Useful Patterns by TypeScript Version"
 sidebar_label: Useful Patterns by TypeScript Version
 ---
 
@@ -382,7 +382,7 @@ handy for JSDoc users - `@public, @private, @protected, @readonly`
 
 ## TypeScript 3.9
 
-[[Release Candidate](https://devblogs.microsoft.com/typescript/announcing-typescript-3-9-rc/)]
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-3-9/)]
 
 1. (minor feature) New `ts-expect-error` directive.
 
@@ -418,14 +418,36 @@ You can [convert these in bulk](https://github.com/microsoft/TypeScript/pull/374
 
 ## TypeScript 4.0
 
-[[Release Candidate](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)]
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/)]
 
 - [Variadic Tuple Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)
 
   - useful for [simplified Reducer-like State](https://www.reddit.com/r/reactjs/comments/hu0ytg/simplified_reducerlike_state_using_typescript_40/)
 
+- [Custom JSX Factories](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/#custom-jsx-factories)
+
+It's for custom pragmas with Preact
+
+```tsx
+// Note: these pragma comments need to be written
+// with a JSDoc-style multiline syntax to take effect.
+/** @jsx h */
+/** @jsxFrag Fragment */
+
+import { h, Fragment } from "preact";
+
+let stuff = (
+  <>
+    <div>Hello</div>
+  </>
+);
+// transformed to
+let stuff = h(Fragment, null, h("div", null, "Hello"));
+```
+
 Possibly in 4.1
 
+- 4.1 plan https://github.com/microsoft/TypeScript/issues/40124
 - [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
 
 ## TypeScript Roadmap and Spec

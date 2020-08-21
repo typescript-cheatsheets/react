@@ -1,0 +1,868 @@
+---
+id: patterns_by_usecase
+title: "Useful Patterns by Use Case"
+sidebar_label: Useful Patterns by Use Case
+---
+
+## Wrapping/Mirroring
+
+### Wrapping/Mirroring a HTML Element
+
+Usecase: you want to make a `<Button>` that takes all the normal props of `<button>` and does extra stuff.
+
+Strategy: extend `React.HTMLProps<YOURELEMENTHERE>`
+
+Example:
+
+```tsx
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  specialProp: string;
+  type: "button" | "submit" | "reset"; // flaw of React.HTMLProps
+}
+export function Button(props: ButtonProps) {
+  const { specialProp, ...rest } = props;
+  // do something with specialProp
+  return <button {...rest} />;
+}
+```
+
+## Wrapping/Mirroring a Component
+
+Usecase: same as above, but for a React Component you don't have access to
+
+```tsx
+const Box = (props: React.CSSProperties) => <div style={props} />;
+
+const Card = ({
+  title,
+  children,
+  ...props
+}: { title: string } & $ElementProps<typeof Box>) => (
+  <Box {...props}>
+    {title}: {children}
+  </Box>
+);
+```
+
+Strategy: extract a component's props by inferring them
+
+Example:
+
+```tsx
+// ReactUtilityTypes.d.ts
+declare type $ElementProps<T> = T extends React.ComponentType<infer Props>
+  ? Props extends object
+    ? Props
+    : never
+  : never;
+```
+
+Advanced Example:
+
+```tsx
+import * as Recompose from "recompose";
+export const defaultProps = <
+  C extends React.ComponentType,
+  D extends Partial<$ElementProps<C>>
+>(
+  defaults: D,
+  Component: C
+): React.ComponentType<$ElementProps<C> & Partial<D>> =>
+  Recompose.defaultProps(defaults)(Component);
+```
+
+_thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
+
+\*TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice
+
+## Polymorphic Components
+
+> "Polymorphic Components" = passing a component to be rendered, e.g. with `as` props
+
+`ElementType` is pretty useful to cover most types that can be passed to createElement e.g.
+
+```tsx
+function PassThrough(props: { as: React.ElementType<any> }) {
+  const { as: Component } = props;
+
+  return <Component />;
+}
+```
+
+For more info you can refer to these resources:
+
+- https://blog.andrewbran.ch/polymorphic-react-components/
+- https://github.com/kripod/react-polymorphic-box
+
+[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) for this!
+
+## Generic Components
+
+Just as you can make generic functions and classes in TypeScript, you can also make generic components to take advantage of the type system for reusable type safety. Both Props and State can take advantage of the same generic types, although it probably makes more sense for Props than for State. You can then use the generic type to annotate types of any variables defined inside your function / class scope.
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+function List<T>(props: Props<T>) {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+}
+```
+
+You can then use the generic components and get nice type safety through type inference:
+
+```tsx
+ReactDOM.render(
+  <List
+    items={["a", "b"]} // type of 'string' inferred
+    renderItem={(item) => (
+      <li key={item}>
+        {/* Error: Property 'toPrecision' does not exist on type 'string'. */}
+        {item.toPrecision(3)}
+      </li>
+    )}
+  />,
+  document.body
+);
+```
+
+As of [TS 2.9](#typescript-29), you can also supply the type parameter in your JSX to opt out of type inference:
+
+```tsx
+ReactDOM.render(
+  <List<number>
+    items={["a", "b"]} // Error: Type 'string' is not assignable to type 'number'.
+    renderItem={(item) => <li key={item}>{item.toPrecision(3)}</li>}
+  />,
+  document.body
+);
+```
+
+You can also use Generics using fat arrow function style:
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+// Note the <T extends unknown> before the function definition.
+// You can't use just `<T>` as it will confuse the TSX parser whether it's a JSX tag or a Generic Declaration.
+// You can also use <T,> https://github.com/microsoft/TypeScript/issues/15713#issuecomment-499474386
+const List = <T extends unknown>(props: Props<T>) => {
+  const { items, renderItem } = props;
+  const [state, setState] = React.useState<T[]>([]); // You can use type T in List function scope.
+  return (
+    <div>
+      {items.map(renderItem)}
+      <button onClick={() => setState(items)}>Clone</button>
+      {JSON.stringify(state, null, 2)}
+    </div>
+  );
+};
+```
+
+The same for using classes: (Credit: [Karol Majewski](https://twitter.com/WrocTypeScript/status/1163234064343736326)'s [gist](https://gist.github.com/karol-majewski/befaf05af73c7cb3248b4e084ae5df71))
+
+```tsx
+interface Props<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+interface State<T> {
+  items: T[];
+}
+
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // You can use type T inside List class.
+  state: Readonly<State<T>> = {
+    items: [],
+  };
+  render() {
+    const { items, renderItem } = this.props;
+    // You can use type T inside List class.
+    const clone: T[] = items.slice(0);
+    return (
+      <div>
+        {items.map(renderItem)}
+        <button onClick={() => this.setState({ items: clone })}>Clone</button>
+        {JSON.stringify(this.state, null, 2)}
+      </div>
+    );
+  }
+}
+```
+
+Though you can't use Generic Type Parameters for Static Members:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  // Static members cannot reference class type parameters.ts(2302)
+  static getDerivedStateFromProps(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
+
+To fix this you need to convert your static function to a type inferred function:
+
+```tsx
+class List<T> extends React.PureComponent<Props<T>, State<T>> {
+  static getDerivedStateFromProps<T>(props: Props<T>, state: State<T>) {
+    return { items: props.items };
+  }
+}
+```
+
+### Generic components with children
+
+`children` is usually not defined as a part of the props type. Unless `children` are explicitly defined as a part of the `props` type, an attempt to use `props.children` in JSX or in the function body will fail:
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+}
+
+/* Property 'children' does not exist on type 'WrapperProps<T>'. */
+const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+
+/*
+Type '{ children: string; item: string; renderItem: (item: string) => string; }' is not assignable to type 'IntrinsicAttributes & WrapperProps<string>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & WrapperProps<string>'.
+*/
+
+const wrapper = (
+  <Wrapper item="test" renderItem={(item) => item}>
+    {test}
+  </Wrapper>
+);
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgHUoUwx6AFHMAZwA8AFQB8cAN4U4cYHRAAuOMIDc0uEWoATegEl5SgBRyki5QEo4AXnHJ0MAHR2MAOQg615GWgAWwADZamkrOjqFuHhQAvhQUAPQAVHC8EFywAJ4EvgFBSNT4cFoQSPxw1BDwSAAewPzwENRwMOlcBGwcaSkCIqL4DnAJcRRoDXWs7Jz01nAicNV02qUSUaKGYHz8Su2TUF1CYpY2kupEMACuUI2G6jKCWsAAbqI3MpLrqfwOmjpQ+qZrGwcJhA5hiXleMgk7wEDmygU0YIhgji9ye6nMniinniCQowhazHwEjgcNy1CUdSgNAA5ipZAY4JSaXTvnoGcYGUzqNTDuIubS4FECrUyhU4Ch+PxgNTqCgAEb+ZgwCBNAkEXS0KnUKVoACCMBgVLlZzopQAZOMOjwNoJ+b0HOouvRmlk-PC8gUiiVRZUamMGqrWvgNYaaDr9aHjaa4Bbtp0bXa+hRBrFyCNtfBTfArHBDLyZqjRAAJJD+fwqrPIwvDUbwADuEzS02u4MEcamwKsACIs12NHkfn8QFYJMDrOJgSsXhIs4iZnF21BnuQMUA)
+
+To work around that, either add `children` to the `WrapperProps` definition (possibly narrowing down its type, as needed):
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+  children: string; // The component will only accept a single string child
+}
+
+const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+```
+
+or wrap the type of the props in `React.PropsWithChildren` (this is what `React.FC<>` does):
+
+```tsx
+interface WrapperProps<T> {
+  item: T;
+  renderItem: (item: T) => React.ReactNode;
+}
+
+const Wrapper = <T extends {}>(
+  props: React.PropsWithChildren<WrapperProps<T>>
+) => {
+  return (
+    <div>
+      {props.renderItem(props.item)}
+      {props.children}
+    </div>
+  );
+};
+```
+
+## Typing Children
+
+Some API designs require some restriction on `children` passed to a parent component. It is common to want to enforce these in types, but you should be aware of limitations to this ability.
+
+### What You CAN Do
+
+You can type the **structure** of your children: just one child, or a tuple of children.
+
+The following are valid:
+
+```ts
+type OneChild = React.ReactElement;
+type TwoChildren = [React.ReactElement, React.ReactElement];
+type ArrayOfProps = SomeProp[];
+type NumbersChildren = number[];
+type TwoNumbersChildren = [number, number];
+```
+
+### What You CANNOT Do
+
+The thing you cannot do is **specify which components** the children are, e.g. If you want to express the fact that "React Router `<Routes>` can only have `<Route>` as children, nothing else is allowed" in TypeScript.
+
+This is because when you write a JSX expression (const foo = <MyComponent foo='foo' />), the resultant type is blackboxed into a generic JSX.Element type. (_[thanks @ferdaber](https://github.com/typescript-cheatsheets/react/issues/271)_)
+
+## Type Narrowing based on Props
+
+What you want:
+
+```tsx
+// Usage
+function App() {
+  return (
+    <>
+      {/* 😎 All good */}
+      <Button target="_blank" href="https://www.google.com">
+        Test
+      </Button>
+      {/* 😭 Error, `disabled` doesnt exist on anchor element */}
+      <Button disabled href="x">
+        Test
+      </Button>
+    </>
+  );
+}
+```
+
+How to implement: Use [type guards](https://basarat.gitbooks.io/typescript/docs/types/typeGuard.html#user-defined-type-guards)!
+
+```tsx
+// Button props
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: undefined;
+};
+
+// Anchor props
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href?: string;
+};
+
+// Input/output options
+type Overload = {
+  (props: ButtonProps): JSX.Element;
+  (props: AnchorProps): JSX.Element;
+};
+
+// Guard to check if href exists in props
+const hasHref = (props: ButtonProps | AnchorProps): props is AnchorProps =>
+  "href" in props;
+
+// Component
+const Button: Overload = (props: ButtonProps | AnchorProps) => {
+  // anchor render
+  if (hasHref(props)) return <a {...props} />;
+  // button render
+  return <button {...props} />;
+};
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoAekrgCEBXGGCAOzjBzAGcKYBPMEjqNmLAAqcucALyJiMAHQMmrABIAVALIAZAIJMowAEaMkXADwady0QFEANkhBIWMAHxwAZHADeFOHAAFkSYAPwAXHD0LAAmSJjALEgxANwUAL5p5BTUcLosaIHQ7JK8AkL5hdASENwycuiKlUVQVnoGxqYWbc3QDk4u7l6+-kEhEXBcMIYsAOZZmRQ5NACSLGCMlBCMG-C1MMCsPOT8gnAA8gBuSFD2ECgx9X7kAQAUHLVckTasNdwAlJEAFIAZQAGgp+s5XFk3h9uJFelA-lxAXBQRCoYMFlllnAAOL0FBQR7MOCFJBoADWcGAmDG8TgSAAHsAplJEiVPhQ0Ed4IEUFxVCF6u9JN8RL9JHAAD55AotFFo+EcqRIlEyNyjABEwXi2tpbBVuKoNAAwrhIElXDy+cIVCxIlcbncHqKVRKHRq5erJP9NSMXnBcigFcUiLEbqM6XBXgKhSExZ9-v6iDB6FA2OYUL4FHmVelg25YcGaCYHXAI3EoKM0xms+XRLn85JC5RixkTbkAKpcFCzJAUTDRDCHNi6MBgV7+54BOuZ2OjALmLVBgIBHyUABUcEAvBuAOD28vZ7HBZhAII8t5R0kv1+YfmwYMSBzBpNqAPpGeyhqkGvWYN9AiYBFqAAd3AhQzwgWZHAUXkQG1Vd12QuB1DMGBb2XSgHyQlDNx3XdAFo9uBbCgHAoAAGjgAADGI2RQL9kmouAYggMxXCZVkpjgVg4FDKooCZRxoXgK8bzXO8HxY+jGMef832ZRDMPXNCpmU8xsMlFhcKw3D-gWIA)
+
+Components, and JSX in general, are analogous to functions. When a component can render differently based on their props, it's similar to how a function can be overloaded to have multiple call signatures. In the same way, you can overload a function component's call signature to list all of its different "versions".
+
+A very common use case for this is to render something as either a button or an anchor, based on if it receives a `href` attribute.
+
+```tsx
+type ButtonProps = JSX.IntrinsicElements["button"];
+type AnchorProps = JSX.IntrinsicElements["a"];
+
+// optionally use a custom type guard
+function isPropsForAnchorElement(
+  props: ButtonProps | AnchorProps
+): props is AnchorProps {
+  return "href" in props;
+}
+
+function Clickable(props: ButtonProps | AnchorProps) {
+  if (isPropsForAnchorElement(props)) {
+    return <a {...props} />;
+  } else {
+    return <button {...props} />;
+  }
+}
+```
+
+They don't even need to be completely different props, as long as they have at least one difference in properties:
+
+```tsx
+type LinkProps = Omit<JSX.IntrinsicElements["a"], "href"> & { to?: string };
+
+function RouterLink(props: LinkProps | AnchorProps) {
+  if ("href" in props) {
+    return <a {...props} />;
+  } else {
+    return <Link {...props} />;
+  }
+}
+```
+
+<details>
+  <summary><b>Approach: Generic Components</b></summary>
+
+Here is an example solution, see the further discussion for other solutions. _thanks to [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12#issuecomment-394440577)_
+
+```tsx
+interface LinkProps {}
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type RouterLinkProps = Omit<NavLinkProps, "href">;
+
+const Link = <T extends {}>(
+  props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+) => {
+  if ((props as RouterLinkProps).to) {
+    return <NavLink {...(props as RouterLinkProps)} />;
+  } else {
+    return <a {...(props as AnchorProps)} />;
+  }
+};
+
+<Link<RouterLinkProps> to="/">My link</Link>; // ok
+<Link<AnchorProps> href="/">My link</Link>; // ok
+<Link<RouterLinkProps> to="/" href="/">
+  My link
+</Link>; // error
+```
+
+</details>
+
+<details>
+  <summary><b>Approach: Composition</b></summary>
+
+If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
+
+```tsx
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type RouterLinkProps = Omit<AnchorProps, "href">;
+
+interface Button {
+  as: React.ComponentClass | "a";
+}
+
+const Button: React.FunctionComponent<Button> = (props) => {
+  const { as: Component, children, ...rest } = props;
+  return (
+    <Component className="button" {...rest}>
+      {children}
+    </Component>
+  );
+};
+
+const AnchorButton: React.FunctionComponent<AnchorProps> = (props) => (
+  <Button as="a" {...props} />
+);
+
+const LinkButton: React.FunctionComponent<RouterLinkProps> = (props) => (
+  <Button as={NavLink} {...props} />
+);
+
+<LinkButton to="/login">Login</LinkButton>;
+<AnchorButton href="/login">Login</AnchorButton>;
+<AnchorButton href="/login" to="/test">
+  Login
+</AnchorButton>; // Error: Property 'to' does not exist on type...
+```
+
+</details>
+
+You may also want to use Discriminated Unions, please check out [Expressive React Component APIs with Discriminated Unions](https://blog.andrewbran.ch/expressive-react-component-apis-with-discriminated-unions/).
+
+Here is a brief intuition for **Discriminated Union Types**:
+
+```ts
+type UserTextEvent = {
+  type: "TextEvent";
+  value: string;
+  target: HTMLInputElement;
+};
+type UserMouseEvent = {
+  type: "MouseEvent";
+  value: [number, number];
+  target: HTMLElement;
+};
+type UserEvent = UserTextEvent | UserMouseEvent;
+function handle(event: UserEvent) {
+  if (event.type === "TextEvent") {
+    event.value; // string
+    event.target; // HTMLInputElement
+    return;
+  }
+  event.value; // [number, number]
+  event.target; // HTMLElement
+}
+```
+
+<details>
+  <summary>
+  Take care: TypeScript does not narrow the type of a Discriminated Union on the basis of typeof checks. The type guard has to be on the value of a key and not it's type.
+  </summary>
+
+```ts
+type UserTextEvent = { value: string; target: HTMLInputElement };
+type UserMouseEvent = { value: [number, number]; target: HTMLElement };
+type UserEvent = UserTextEvent | UserMouseEvent;
+function handle(event: UserEvent) {
+  if (typeof event.value === "string") {
+    event.value; // string
+    event.target; // HTMLInputElement | HTMLElement (!!!!)
+    return;
+  }
+  event.value; // [number, number]
+  event.target; // HTMLInputElement | HTMLElement (!!!!)
+}
+```
+
+The above example does not work as we are not checking the value of `event.value` but only it's type. Read more about it [microsoft/TypeScript#30506 (comment)](https://github.com/microsoft/TypeScript/issues/30506#issuecomment-474858198)
+
+</details>
+
+To streamline this you may also combine this with the concept of **User-Defined Type Guards**:
+
+```ts
+function isString(a: unknown): a is string {
+  return typeof a === "string";
+}
+```
+
+[Read more about User-Defined Type Guards in the Handbook](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards).
+
+## Props: One or the Other but not Both
+
+Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
+
+```tsx
+type Props1 = { foo: string };
+type Props2 = { bar: string };
+
+function MyComponent(props: Props1 | Props2) {
+  if ("foo" in props) {
+    // props.bar // error
+    return <div>{props.foo}</div>;
+  } else {
+    // props.foo // error
+    return <div>{props.bar}</div>;
+  }
+}
+const UsageComponent: React.FC = () => (
+  <div>
+    <MyComponent foo="foo" />
+    <MyComponent bar="bar" />
+    {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
+  </div>
+);
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgAUcwBnARjgF44BvOTCBABccFjCjAAdgHM4AXwDcVWvSYRWAJi684AIxRQRYiTPlLK5TAFdJGYBElwAstQDCuSJKSSYACjDMLCJqrBwAPoyBGgCUvBRwcMCYcL4ARAIQqYmOAeossTzxCXAA9CVwuawAdPpQpeVIUDhQRQlEMFZQjgA8ACbAAG4AfDyVLFUZct0l-cPmCXJwSAA2LPSF5MX1FYETgtuNza1w7Z09syNjNQZTM4ND8-IUchRoDmJwAKosKNJI7uAHN4YCJkOgYFUAGKubS+WKcIYpIp9e7HbouAGeYH8QScdKCLIlIZojEeIE+PQGPG1QnEzbFHglABUcHRbjJXgpGTxGSytWpBlSRO2UgGKGWwF6cCZJRe9OmFwo0QUQA)
+
+Further reading: [how to ban passing `{}` if you have a `NoFields` type.](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable)
+
+## Props: Must Pass Both
+
+```tsx
+type OneOrAnother<T1, T2> =
+  | (T1 & { [K in keyof T2]?: undefined })
+  | (T2 & { [K in keyof T1]?: undefined });
+
+type Props = OneOrAnother<{ a: string; b: string }, {}>;
+
+const a: Props = { a: "a" }; // error
+const b: Props = { b: "b" }; // error
+const ab: Props = { a: "a", b: "b" }; // ok
+```
+
+Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
+
+## Props: Pass One ONLY IF the Other Is Passed
+
+Say you want a Text component that gets truncated if `truncate` prop is passed but expands to show the full text when `expanded` prop is passed (e.g. when the user clicks the text).
+
+You want to allow `expanded` to be passed only if `truncate` is also passed, because there is no use for `expanded` if the text is not truncated.
+
+Usage example:
+
+```tsx
+const App: React.FC = () => (
+  <>
+    {/* these all typecheck */}
+    <Text>not truncated</Text>
+    <Text truncate>truncated</Text>
+    <Text truncate expanded>
+      truncate-able but expanded
+    </Text>
+    {/* TS error: Property 'truncate' is missing in type '{ children: string; expanded: true; }' but required in type '{ truncate: true; expanded?: boolean | undefined; }'. */}
+    <Text expanded>truncate-able but expanded</Text>
+  </>
+);
+```
+
+You can implement this by function overloads:
+
+```tsx
+type CommonProps = {
+  children: React.ReactNode;
+  miscProps?: any;
+};
+
+type NoTruncateProps = CommonProps & { truncate?: false };
+
+type TruncateProps = CommonProps & { truncate: true; expanded?: boolean };
+
+// Function overloads to accept both prop types NoTruncateProps & TruncateProps
+function Text(props: NoTruncateProps): JSX.Element;
+function Text(props: TruncateProps): JSX.Element;
+function Text(props: CommonProps & { truncate?: boolean; expanded?: boolean }) {
+  const { children, truncate, expanded, ...otherProps } = props;
+  const classNames = truncate ? ".truncate" : "";
+  return (
+    <div className={classNames} aria-expanded={!!expanded} {...otherProps}>
+      {children}
+    </div>
+  );
+}
+```
+
+## Props: Omit prop from a type
+
+Note: [Omit was added as a first class utility in TS 3.5](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittk)! 🎉
+
+Sometimes when intersecting types, we want to define our own version of a prop. For example, I want my component to have a `label`, but the type I am intersecting with also has a `label` prop. Here's how to extract that out:
+
+```tsx
+export interface Props {
+  label: React.ReactNode; // this will conflict with the InputElement's label
+}
+
+// this comes inbuilt with TS 3.5
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+// usage
+export const Checkbox = (
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, "label">
+) => {
+  const { label } = props;
+  return (
+    <div className="Checkbox">
+      <label className="Checkbox-label">
+        <input type="checkbox" {...props} />
+      </label>
+      <span>{label}</span>
+    </div>
+  );
+};
+```
+
+When your component defines multiple props, chances of those conflicts increase. However you can explicitly state that all your fields should be removed from the underlying component using the `keyof` operator:
+
+```tsx
+export interface Props {
+  label: React.ReactNode; // conflicts with the InputElement's label
+  onChange: (text: string) => void; // conflicts with InputElement's onChange
+}
+
+export const Textbox = (
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>
+) => {
+  // implement Textbox component ...
+};
+```
+
+As you can see from the Omit example above, you can write significant logic in your types as well. [type-zoo](https://github.com/pelotom/type-zoo) is a nice toolkit of operators you may wish to check out (includes Omit), as well as [utility-types](https://github.com/piotrwitek/utility-types) (especially for those migrating from Flow).
+
+## Props: Extracting Prop Types of a Component
+
+There are a lot of places where you want to reuse some slices of props because of prop drilling,
+so you can either export the props type as part of the module or extract them (either way works).
+
+The advantage of extracting the prop types is that you won't need to export everything, and a refactor of the source of truth component will propagate to all consuming components.
+
+```ts
+import { ComponentProps, JSXElementConstructor } from "react";
+
+// goes one step further and resolves with propTypes and defaultProps properties
+type ApparentComponentProps<
+  C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>
+> = C extends JSXElementConstructor<infer P>
+  ? JSX.LibraryManagedAttributes<C, P>
+  : ComponentProps<C>;
+```
+
+You can also use them to strongly type custom event handlers if they're not written at the call sites themselves
+(i.e. inlined with the JSX attribute):
+
+```tsx
+// my-inner-component.tsx
+export function MyInnerComponent(props: {
+  onSomeEvent(
+    event: ComplexEventObj,
+    moreArgs: ComplexArgs
+  ): SomeWeirdReturnType;
+}) {
+  /* ... */
+}
+
+// my-consuming-component.tsx
+export function MyConsumingComponent() {
+  // event and moreArgs are contextually typed along with the return value
+  const theHandler: Props<typeof MyInnerComponent>["onSomeEvent"] = (
+    event,
+    moreArgs
+  ) => {};
+  return <MyInnerComponent onSomeEvent={theHandler} />;
+}
+```
+
+## Props: Render Props
+
+> Advice: Where possible, you should try to use Hooks instead of Render Props. We include this merely for completeness.
+
+Sometimes you will want to write a function that can take a React element or a string or something else as a prop. The best Type to use for such a situation is `React.ReactNode` which fits anywhere a normal, well, React Node would fit:
+
+```tsx
+export interface Props {
+  label?: React.ReactNode;
+  children: React.ReactNode;
+}
+export const Card = (props: Props) => {
+  return (
+    <div>
+      {props.label && <div>{props.label}</div>}
+      {props.children}
+    </div>
+  );
+};
+```
+
+If you are using a function-as-a-child render prop:
+
+```tsx
+export interface Props {
+  children: (foo: string) => React.ReactNode;
+}
+```
+
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose).
+
+## Handling Exceptions
+
+You can provide good information when bad things happen.
+
+```ts
+class InvalidDateFormatError extends RangeError {}
+class DateIsInFutureError extends RangeError {}
+
+/**
+ * // optional docblock
+ * @throws {InvalidDateFormatError} The user entered date incorrectly
+ * @throws {DateIsInFutureError} The user entered date in future
+ *
+ */
+function parse(date: string) {
+  if (!isValid(date))
+    throw new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) throw new DateIsInFutureError("date is in the future");
+  // ...
+}
+
+try {
+  // call parse(date) somewhere
+} catch (e) {
+  if (e instanceof InvalidDateFormatError) {
+    console.error("invalid date format", e);
+  } else if (e instanceof DateIsInFutureError) {
+    console.warn("date is in future", e);
+  } else {
+    throw e;
+  }
+}
+```
+
+[View in TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtAGxQGc64BJAOwDcVrgATAERRhIAYtBACAolBxQ4SAB6CW3RghQsA5kknS4AbwC+VWgzj9BTOqyEBXGNaLboshUiUq1mxzIMUKmaywYwBAscMB0AGqcPAAU3AJIAFxwdDBQwBoAlHoUcHBEdlCh8YJwAPxwadZIcMmYnHRIANwUhpTk-oEwwaHhVrb2SHEJyanpWTnkeWghqXAlSAByEADucAC8cCxIa2ZDmS1TcDMsc2j2RCwwextbO6YJw4KZuXCvBfah51Ku1wkAdJoYAAVUD7OAAPnmCWWK0BSBBYJiB1avnIAHoAFSY3KYuDo9FwCBgbohTjzCBoABG1EpAGtcXAAAIwAAWOBWjF0rA4XD4CREUDEMC8+jgwNZNWsjRkvyQRG40NKGRmPww1AAnoyWezVly9hZ+oUtFJoGKJVKZbIrvKkIqFmFQv5jbjcei-AEgiE4GAUFBGk8kik0hl1NldK9gJg4DEAIThKJ8wOZF5HPJsjl3NY86L8wSC4VeGIAIhYEHgKDgvJ4SpqmFEAmLKKOUZjfRYNmNyeyGdWWYe5ksHYGDlNUBLDvCjsqkrgzsGTcOeQJcH+a9R7TSGsmy8JaE41B9foDC2ydFwO0lRFaxwEaFZMaQ4cj0ZiNQyqTUaCQEGjOb5ewFhIY7PmmxyzBA1BIP88rSCWGTVvaCRzg2MDFgANLIzZ5GKSDUI0YSvu+pwwF+P7RgaQ6doMXigXk0wQVB-wrH6LATshU4ZHOI5IBhWFLnAuH4TUEZgb2azNK8bT6EAA)
+
+Simply throwing an exception is fine, however it would be nice to make TypeScript remind the consumer of your code to handle your exception. We can do that just by returning instead of throwing:
+
+```ts
+function parse(
+  date: string
+): Date | InvalidDateFormatError | DateIsInFutureError {
+  if (!isValid(date))
+    return new InvalidDateFormatError("not a valid date format");
+  if (isInFuture(date)) return new DateIsInFutureError("date is in the future");
+  // ...
+}
+
+// now consumer *has* to handle the errors
+let result = parse("mydate");
+if (result instanceof InvalidDateFormatError) {
+  console.error("invalid date format", result.message);
+} else if (result instanceof DateIsInFutureError) {
+  console.warn("date is in future", result.message);
+} else {
+  /// use result safely
+}
+
+// alternately you can just handle all errors
+if (result instanceof Error) {
+  console.error("error", result);
+} else {
+  /// use result safely
+}
+```
+
+You can also describe exceptions with special-purpose data types (don't say monads...) like the `Try`, `Option` (or `Maybe`), and `Either` data types:
+
+```ts
+interface Option<T> {
+  flatMap<U>(f: (value: T) => None): None;
+  flatMap<U>(f: (value: T) => Option<U>): FormikOption<U>;
+  getOrElse(value: T): T;
+}
+class Some<T> implements Option<T> {
+  constructor(private value: T) {}
+  flatMap<U>(f: (value: T) => None): None;
+  flatMap<U>(f: (value: T) => Some<U>): Some<U>;
+  flatMap<U>(f: (value: T) => Option<U>): Option<U> {
+    return f(this.value);
+  }
+  getOrElse(): T {
+    return this.value;
+  }
+}
+class None implements Option<never> {
+  flatMap<U>(): None {
+    return this;
+  }
+  getOrElse<U>(value: U): U {
+    return value;
+  }
+}
+
+// now you can use it like:
+let result = Option(6) // Some<number>
+  .flatMap((n) => Option(n * 3)) // Some<number>
+  .flatMap((n = new None())) // None
+  .getOrElse(7);
+
+// or:
+let result = ask() // Option<string>
+  .flatMap(parse) // Option<Date>
+  .flatMap((d) => new Some(d.toISOString())) // Option<string>
+  .getOrElse("error parsing string");
+```
