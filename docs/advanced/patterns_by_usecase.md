@@ -315,6 +315,24 @@ type NumbersChildren = number[];
 type TwoNumbersChildren = [number, number];
 ```
 
+<details>
+<summary>
+Don't forget that you can also use `prop-types` if TS fails you.
+</summary>
+
+```ts
+Parent.propTypes = {
+  children: PropTypes.shape({
+    props: PropTypes.shape({
+      // could share `propTypes` to the child
+      value: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
+```
+
+</details>
+
 ### What You CANNOT Do
 
 The thing you cannot do is **specify which components** the children are, e.g. If you want to express the fact that "React Router `<Routes>` can only have `<Route>` as children, nothing else is allowed" in TypeScript.
