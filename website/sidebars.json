@@ -36,11 +36,11 @@
       },
       {
         "type": "category",
-        "label": "Recommended React + TypeScript",
+        "label": "Recommendations",
         "items": [
-          "basic/recommended/resources",
+          "basic/recommended/codebases",
           "basic/recommended/talks",
-          "basic/recommended/other_resources"
+          "basic/recommended/resources"
         ]
       },
       "basic/editor_integration",
@@ -56,26 +56,8 @@
     "Advanced": [
       "advanced/intro",
       "advanced/utility_types",
-      {
-        "type": "category",
-        "label": "Guides",
-        "items": [
-          "advanced/guides/render_props",
-          "advanced/guides/hocs",
-          "advanced/guides/conditionally_rendering",
-          "advanced/guides/polymorphic_components",
-          "advanced/guides/generic_components",
-          "advanced/guides/type_component_diff_props",
-          "advanced/guides/props_one_other_not_both",
-          "advanced/guides/props_optionally_pass_one",
-          "advanced/guides/omit_attr",
-          "advanced/guides/type_zoo",
-          "advanced/guides/extract_props",
-          "advanced/guides/handling_exceptions",
-          "advanced/guides/third_party_libs"
-        ]
-      },
-      "advanced/patterns",
+      "advanced/patterns_by_usecase",
+      "advanced/patterns_by_version",
       "advanced/misc_concerns",
       "advanced/types_react_api"
     ],
