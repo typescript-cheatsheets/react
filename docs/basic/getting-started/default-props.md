@@ -100,9 +100,58 @@ export type ApparentGreetProps = JSX.LibraryManagedAttributes<
 >;
 ```
 
-This will work properly, although hovering over `ApparentGreetProps` may be a little intimidating.
+This will work properly, although hovering over `ApparentGreetProps` may be a little intimidating. You can reduce this boilerplate with the `ComponentProps` utility detailed below.
 
 </details>
+
+## Consuming Props of a Component with defaultProps
+
+A component with `defaultProps` may seem to have some required props that actually aren't.
+
+### Problem Statement
+
+Here's what you want to do:
+
+```tsx
+interface IProps {
+  name: string;
+}
+const defaultProps = {
+  age: 25,
+};
+const GreetComponent = ({ name, age }: IProps & typeof defaultProps) => (
+  <div>{`Hello, my name is ${name}, ${age}`}</div>
+);
+GreetComponent.defaultProps = defaultProps;
+
+const TestComponent = (props: React.ComponentProps<typeof GreetComponent>) => {
+  return <h1 />;
+};
+
+// Property 'age' is missing in type '{ name: string; }' but required in type '{ age: number; }'
+const el = <TestComponent name="foo" />;
+```
+
+### Solution
+
+Define a utility that applies `JSX.LibraryManagedAttributes`:
+
+```tsx
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+const TestComponent = (props: ComponentProps<typeof GreetComponent>) => {
+  return <h1 />;
+};
+
+// No error
+const el = <TestComponent name="foo" />;
+```
+
+## Misc Discussions and Knowledge
 
 <details>
   <summary>Why does React.FC break defaultProps?</summary>
