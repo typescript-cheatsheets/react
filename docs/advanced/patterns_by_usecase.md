@@ -35,6 +35,15 @@ export function Button(props: ButtonProps) {
 }
 ```
 
+You can also use specialized interfaces for each element if they are available to you:
+
+```tsx
+// instead of `export interface ButtonProps extends btnType`
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
+```
+
+There are over 50 of these specialized interfaces available - look for `HTMLAttributes` in our [`@types/react` commentary](https://react-typescript-cheatsheet.netlify.app/docs/advanced/types_react_api#typesreact).
+
 <details>
 <summary>
 

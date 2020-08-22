@@ -37,7 +37,68 @@ Not Commonly Used but Good to know
 - `ComponentProps` - props of a component
 - `ComponentPropsWithRef` - props of a component where if it is a class-based component it will replace the `ref` prop with its own instance type
 - `ComponentPropsWithoutRef` - props of a component without its `ref` prop
-- `HTMLProps` and `HTMLAttributes` - in general, prefer `JSX.IntrinsicElements` for [Wrapping/Mirroring a HTML Element](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element).
+- `HTMLProps` and `HTMLAttributes` - these are the most generic versions, for global attributes (see a list of [attributes marked as "global attribute" on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)). In general, prefer `JSX.IntrinsicElements` for [Wrapping/Mirroring a HTML Element](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element), or [specialized HTMLAttributes interfaces](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a2aa0406e7bf269eef01292fcb2b24dee89a7d2b/types/react/index.d.ts#L1914-L2625):
+
+      <details>
+
+        <summary>
+        List of specialized HTMLAttributes
+        </summary>
+
+      - `AnchorHTMLAttributes`
+      - `AudioHTMLAttributes`
+      - `AreaHTMLAttributes`
+      - `BaseHTMLAttributes`
+      - `BlockquoteHTMLAttributes`
+      - `ButtonHTMLAttributes`
+      - `CanvasHTMLAttributes`
+      - `ColHTMLAttributes`
+      - `ColgroupHTMLAttributes`
+      - `DataHTMLAttributes`
+      - `DetailsHTMLAttributes`
+      - `DelHTMLAttributes`
+      - `DialogHTMLAttributes`
+      - `EmbedHTMLAttributes`
+      - `FieldsetHTMLAttributes`
+      - `FormHTMLAttributes`
+      - `HtmlHTMLAttributes`
+      - `IframeHTMLAttributes`
+      - `ImgHTMLAttributes`
+      - `InsHTMLAttributes`
+      - `InputHTMLAttributes`
+      - `KeygenHTMLAttributes`
+      - `LabelHTMLAttributes`
+      - `LiHTMLAttributes`
+      - `LinkHTMLAttributes`
+      - `MapHTMLAttributes`
+      - `MenuHTMLAttributes`
+      - `MediaHTMLAttributes`
+      - `MetaHTMLAttributes`
+      - `MeterHTMLAttributes`
+      - `QuoteHTMLAttributes`
+      - `ObjectHTMLAttributes`
+      - `OlHTMLAttributes`
+      - `OptgroupHTMLAttributes`
+      - `OptionHTMLAttributes`
+      - `OutputHTMLAttributes`
+      - `ParamHTMLAttributes`
+      - `ProgressHTMLAttributes`
+      - `SlotHTMLAttributes`
+      - `ScriptHTMLAttributes`
+      - `SelectHTMLAttributes`
+      - `SourceHTMLAttributes`
+      - `StyleHTMLAttributes`
+      - `TableHTMLAttributes`
+      - `TextareaHTMLAttributes`
+      - `TdHTMLAttributes`
+      - `ThHTMLAttributes`
+      - `TimeHTMLAttributes`
+      - `TrackHTMLAttributes`
+      - `VideoHTMLAttributes`
+      - `WebViewHTMLAttributes`
+
+      </details>
+
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
 [@Ferdaber's note](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
