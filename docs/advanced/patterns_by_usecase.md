@@ -99,7 +99,7 @@ function App() {
 
 </details>
 
-## Wrapping/Mirroring a Component
+### Wrapping/Mirroring a Component
 
 Usecase: same as above, but for a React Component you don't have access to
 
