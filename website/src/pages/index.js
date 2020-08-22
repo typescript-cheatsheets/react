@@ -19,7 +19,13 @@ export default function Home() {
             <h1 className="hero__title">{siteConfig.title}</h1>
             <p className="hero__subtitle">{siteConfig.tagline}</p>
           </div>
-          <div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gridGap: "20px",
+            }}
+          >
             <Link
               to={useBaseUrl(siteConfig.customFields.firstDoc)}
               className="button button--lg button--outline button--primary"

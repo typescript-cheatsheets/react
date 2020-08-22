@@ -68,6 +68,11 @@ module.exports = {
           label: "Help",
           position: "right",
         },
+        {
+          to: "https://discord.gg/y88evmj",
+          label: "Discord",
+          position: "right",
+        },
         // {to: 'blog', label: 'Blog', position: 'right'},
       ],
     },
