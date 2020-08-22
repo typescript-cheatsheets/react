@@ -26,3 +26,13 @@ main details {
 main details summary {
   margin-bottom: 1rem;
 }
+
+.homePageBtns {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 480px) {
+  .homePageBtns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
