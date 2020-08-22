@@ -37,6 +37,7 @@ Not Commonly Used but Good to know
 - `ComponentProps` - props of a component
 - `ComponentPropsWithRef` - props of a component where if it is a class-based component it will replace the `ref` prop with its own instance type
 - `ComponentPropsWithoutRef` - props of a component without its `ref` prop
+- `HTMLProps` and `HTMLAttributes` - in general, prefer `JSX.IntrinsicElements` for [Wrapping/Mirroring a HTML Element](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element).
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
 [@Ferdaber's note](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.

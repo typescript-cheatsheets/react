@@ -10,14 +10,23 @@ sidebar_label: Useful Patterns by Use Case
 
 Usecase: you want to make a `<Button>` that takes all the normal props of `<button>` and does extra stuff.
 
-Strategy: extend `React.HTMLProps<YOURELEMENTHERE>`
+Strategy: extend `JSX.IntrinsicElements['elementtype']`
 
-Example:
+Example ([Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUIwPTNyhgA2WIWAdjGQxgEPoxgBPMFjgAjGHwAqUmQF44AKQDKADQB0ASQFRgfVMFwBRbrwGoA2mVkBXGDFFkAuoywAPSLDsAlhQBHgyAEKu7nwACsRg6H4w-AAm6PJKKnAA3oxwcKjSuMDInPEQYAD8AFyFMCZ8AOb0DAC+Pv7QhM58+CJ8cFFuogAUYAmodcMxFYkAlLn5cLiiqPA5hcWl5QkANHB6R5TrcG1w6hOVqK0FrHCpEIUkWDAAFqZNcADuwO9bWBKZTmy0oMGcUEGAB4XCNBjkjnoTjBzswAHytDpMBj3ZyoZBNLCMAi9fqiOAAQTAYFGizyDDubGU0nIACJTAA3MrAVKssjsdB8CDwNDmJp8ZCybhwdwy7JkVmwmKsuAAHzgrNQzlkID+KvVrJOr31cF6qSwBFMWFSZD0owATABme32+bLe5giHQmbkyTSVTsvhczg81lowqcVIAawAVnAocwfXw0e62AB5ADSoNeXvjSbl-s12t1MDDMuS8cT0VEKfaQA)):
 
 ```tsx
-export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  specialProp: string;
-  type: "button" | "submit" | "reset"; // flaw of React.HTMLProps
+// usage
+function App() {
+  // Type '"invalid"' is not assignable to type '"button" | "submit" | "reset" | undefined'.(2322)
+  // return <Button type="invalid"> sldkj </Button>
+
+  // OK
+  return <Button type="submit"> text </Button>;
+}
+// implementation
+type btnType = JSX.IntrinsicElements["button"]; // cannot inline or will error
+export interface ButtonProps extends btnType {
+  specialProp?: string;
 }
 export function Button(props: ButtonProps) {
   const { specialProp, ...rest } = props;
@@ -25,6 +34,70 @@ export function Button(props: ButtonProps) {
   return <button {...rest} />;
 }
 ```
+
+<details>
+<summary>
+
+Why not `React.HTMLProps` or `HTMLAttributes`?
+
+</summary>
+
+This is what happens when you use `React.HTMLProps`:
+
+```tsx
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  specialProp: string;
+}
+export function Button(props: ButtonProps) {
+  const { specialProp, ...rest } = props;
+  // ERROR: Type 'string' is not assignable to type '"button" | "submit" | "reset" | undefined'.
+  return <button {...rest} />;
+}
+```
+
+It infers a too-wide type of `string` for `type`.
+
+<details>
+<summary>
+You can remedy this but it's a little ugly.
+</summary>
+
+```tsx
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  specialProp: string;
+  type?: "button" | "submit" | "reset"; // override React.HTMLProps
+}
+export function Button(props: ButtonProps) {
+  const { specialProp, ...rest } = props;
+  // do something with specialProp
+  return <button {...rest} />;
+}
+```
+
+</details>
+
+More reasons per [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/128#issuecomment-508103558):
+
+> `HTMLProps` uses `AllHTMLAttributes`, which is the supertype of all HTML attributes, it is used for HTML elements which you don't the specific tag name for, and so is less specific than the ones defined in `JSX.IntrinsicElements`. For example when using `HTMLProps<HTMLButtonElement>` you will be unable to type its `onChange` event handler prop, as opposed to `DetailedHTMLAttributes<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>`.
+
+This is what happens when you use `React.HTMLAttributes`:
+
+```tsx
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  specialProp: string;
+}
+export function Button(props: ButtonProps) {
+  const { specialProp, ...rest } = props;
+  return <button {...rest} />;
+}
+// usage
+function App() {
+  // Property 'type' does not exist on type 'IntrinsicAttributes & ButtonProps'
+  return <Button type="submit"> text </Button>;
+}
+```
+
+</details>
 
 ## Wrapping/Mirroring a Component
 
