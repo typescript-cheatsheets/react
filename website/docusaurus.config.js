@@ -69,7 +69,7 @@ module.exports = {
           position: "right",
         },
         {
-          to: "https://discord.gg/y88evmj",
+          to: "https://discord.gg/wTGS5z9",
           label: "Discord",
           position: "right",
         },
@@ -140,8 +140,8 @@ module.exports = {
             },
             {
               label: "Discord",
-              html: `<a class="footer__link-item" href="https://discord.gg/y88evmj">
-              <img src="https://img.shields.io/discord/746055213462585435.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" style="max-width:100%;">
+              html: `<a class="footer__link-item" href="https://discord.gg/wTGS5z9">
+              <img src="https://img.shields.io/discord/508357248330760243.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" style="max-width:100%;">
               </a>`,
             },
             {

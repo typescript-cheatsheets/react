@@ -33,7 +33,7 @@ export default function Home() {
               Getting started
             </Link>
             <Link
-              to={"https://discord.gg/y88evmj"}
+              to={"https://discord.gg/wTGS5z9"}
               className="button button--lg button--outline button--secondary"
             >
               Join Official Discord
