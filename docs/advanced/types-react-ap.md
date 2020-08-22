@@ -28,7 +28,7 @@ Most Commonly Used Interfaces and Types
 Not Commonly Used but Good to know
 
 - `Ref` - used to type `innerRef`
-- `ElementType` - used for higher order components or operations on components
+- `ElementType` - used for higher order components or operations on components, e.g. [Polymorphic Components](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase#polymorphic-components)
 - `ReactElement` - [can be used if you want to pass it to `cloneElement`](https://www.reddit.com/r/reactjs/comments/ia8sdi/any_other_typescript_users_constantly_confused/g1npahe/) aka it's pretty rarely used
 - `ComponentType` - used for higher order components where you don't specifically deal with the intrinsic components
 - `ReactPortal` - used if you specifically need to type a prop as a portal, otherwise it is part of `ReactNode`
