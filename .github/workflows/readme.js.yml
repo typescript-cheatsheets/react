@@ -1,11 +1,12 @@
 name: Generate README
 on:
+  workflow_dispatch:
   pull_request:
     paths: 'docs/basic/*'
-    branches: [master]
+    branches: [main]
   push:
     paths: 'docs/basic/*'
-    branches: [master]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
