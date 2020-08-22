@@ -106,11 +106,9 @@ Usecase: same as above, but for a React Component you don't have access to
 ```tsx
 const Box = (props: React.CSSProperties) => <div style={props} />;
 
-const Card = ({
-  title,
-  children,
-  ...props
-}: { title: string } & $ElementProps<typeof Box>) => (
+const Card = (
+  { title, children, ...props }: { title: string } & $ElementProps<typeof Box> // new utility, see below
+) => (
   <Box {...props}>
     {title}: {children}
   </Box>
@@ -130,7 +128,7 @@ declare type $ElementProps<T> = T extends React.ComponentType<infer Props>
   : never;
 ```
 
-Advanced Example:
+Usage:
 
 ```tsx
 import * as Recompose from "recompose";
@@ -146,7 +144,7 @@ export const defaultProps = <
 
 _thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
 
-\*TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice
+_TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice_
 
 ## Polymorphic Components
 
