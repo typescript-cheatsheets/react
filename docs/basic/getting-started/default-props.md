@@ -3,24 +3,56 @@ id: default_props
 title: Typing defaultProps
 ---
 
-## Typing defaultProps
+## You May Not Need `defaultProps`
 
-For TypeScript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/61). Just type your props like normal, except don't use `React.FC`.
+As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
+
+- https://twitter.com/hswolff/status/1133759319571345408
+
+The consensus is to use object default values.
+
+Function Components:
 
 ```tsx
-// ////////////////
-// function components
-// ////////////////
+type GreetProps = { age?: number };
+
+const Greet = ({ age = 21 }: GreetProps) => // etc
+```
+
+Class Components:
+
+```tsx
+type GreetProps =  {
+  age?: number;
+};
+
+class Greet extends React.Component<GreetProps> {
+  const { age = 21 } = this.props
+  /*...*/
+}
+
+let el = <Greet age={3} />;
+```
+
+## Typing `defaultProps`
+
+Type inference improved greatly for `defaultProps` in [TypeScript 3.0+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/61).
+
+**Function Components**
+
+```tsx
 type GreetProps = { age: number } & typeof defaultProps;
 const defaultProps = {
   age: 21,
 };
 
 const Greet = (props: GreetProps) => {
-  /*...*/
+  // etc
 };
 Greet.defaultProps = defaultProps;
 ```
+
+_[See this in TS Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdMAnmFnAOKVYwAKxY6ALxwA3igDmWAFxwAdgFcQAIyxQ4AXzgAyOM1YQCcACZYCyeQBte-VPVwRZqeCbOXrEAXGEi6cCdLgAJgBGABo6dXo6e0d4TixuLzgACjAbGXjuPg9UAEovAD5RXzhKGHkoWTgAHiNgADcCkTScgDpkSTgAeiQFZVVELvVqrrrGiPpMmFaXcytsz2FZtwXbOiA)_
 
 For **Class components**, there are [a couple ways to do it](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/103#issuecomment-481061483)(including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
 
@@ -41,40 +73,34 @@ let el = <Greet age={3} />;
 ```
 
 <details>
-  <summary>An alternative approach</summary>
+  <summary>
+  
+   `JSX.LibraryManagedAttributes` nuance for library authors
+   
+   </summary>
 
-As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
+The above implementations work fine for App creators, but sometimes you want to be able to export `GreetProps` so that others can consume it. The problem here is that the way `GreetProps` is defined, `age` is a required prop when it isn't because of `defaultProps`.
 
-- https://twitter.com/hswolff/status/1133759319571345408
-
-The consensus is to use object default values.
-
-```tsx
-// ////////////////
-// function components
-// ////////////////
-type GreetProps = { age: number };
-
-const Greet = ({ age = 21 }: GreetProps) => {
-  /*...*/
-};
-```
+The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `JSX.LibraryManagedAttributes` utility:
 
 ```tsx
-// ////////////////
-// class components
-// ////////////////
-type GreetProps =  {
+// internal contract, should not be exported out
+type GreetProps = {
   age?: number;
 };
 
-class Greet extends React.Component<GreetProps> {
-  const { age = 21 } = this.props
-  /*...*/
+class Greet extends Component<GreetProps> {
+  static defaultProps = { age: 21 };
 }
 
-let el = <Greet age={3} />;
+// external contract
+export type ApparentGreetProps = JSX.LibraryManagedAttributes<
+  typeof Greet,
+  GreetProps
+>;
 ```
+
+This will work properly, although hovering over `ApparentGreetProps` may be a little intimidating.
 
 </details>
 
