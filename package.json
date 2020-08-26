@@ -22,7 +22,8 @@
     "gen-readme": "node genReadme.js",
     "format": "prettier --write \"**/*.md\"",
     "postinstall": "cd website && yarn",
-    "start": "yarn --cwd website start"
+    "start": "yarn --cwd website start",
+    "build": "yarn --cwd website build"
   },
   "dependencies": {
     "@octokit/rest": "^16.43.1",
