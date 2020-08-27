@@ -75,7 +75,13 @@ Gradually add [more `strict` mode flags](https://www.typescriptlang.org/docs/han
 }
 ```
 
-**More resources**
+## 3 Step Process
+
+![image](https://user-images.githubusercontent.com/6764957/91499410-f1399080-e8f3-11ea-86f8-431266af713b.png)
+
+https://speakerdeck.com/amhinson/convert-a-react-native-project-to-typescript-in-10-minutes?slide=23
+
+## More resources
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE) - their [ts-migrate tool here](https://medium.com/airbnb-engineering/ts-migrate-a-tool-for-migrating-to-typescript-at-scale-cd23bfeb5cc)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
