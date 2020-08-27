@@ -140,7 +140,7 @@ _thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
 
 _TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice_
 
-## Polymorphic Components (with `as` props)
+## Polymorphic Components (e.g. with `as` props)
 
 > "Polymorphic Components" = passing a component to be rendered, e.g. with `as` props
 
@@ -152,6 +152,16 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
   return <Component />;
 }
+```
+
+You might also see this with React Router:
+
+```tsx
+const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
+    const { isLoggedIn } = useAuth();
+
+    return isLoggedIn ? <Component {...rest} /> : <Redirect to="/" />;
+};
 ```
 
 For more info you can refer to these resources:
