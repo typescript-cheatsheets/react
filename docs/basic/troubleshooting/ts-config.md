@@ -38,6 +38,8 @@ You can find [all the Compiler options in the TypeScript docs](https://www.types
 }
 ```
 
+You can find more [recommended TS config here](https://github.com/tsconfig/bases). 
+
 Please open an issue and discuss if there are better recommended choices for React.
 
 Selected flags and why we like them:
