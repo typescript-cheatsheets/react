@@ -5,6 +5,7 @@ title: JSDoc
 
 - https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-JavaScript
 - webpack's codebase uses JSDoc with linting by TS https://twitter.com/TheLarkInn/status/984479953927327744 (some crazy hack: https://twitter.com/thelarkinn/status/996475530944823296)
+- JSDoc can type check if using closure-compiler https://github.com/google/closure-compiler/wiki/Types-in-the-Closure-Type-System
 
 Problems to be aware of:
 
