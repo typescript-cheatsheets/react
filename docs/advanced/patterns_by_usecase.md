@@ -140,7 +140,7 @@ _thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
 
 _TODO: check how this conflicts/merges/duplicates with the Troubleshooting Handbook "Types I need weren't Exported" advice_
 
-## Polymorphic Components
+## Polymorphic Components (with `as` props)
 
 > "Polymorphic Components" = passing a component to be rendered, e.g. with `as` props
 
@@ -158,8 +158,9 @@ For more info you can refer to these resources:
 
 - https://blog.andrewbran.ch/polymorphic-react-components/
 - https://github.com/kripod/react-polymorphic-box
+- https://stackoverflow.com/questions/58200824/generic-react-typescript-component-with-as-prop-able-to-render-any-valid-dom
 
-[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) for this!
+[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) and [@karol-majewski](https://github.com/typescript-cheatsheets/react/issues/151) for thoughts!
 
 ## Generic Components
 
