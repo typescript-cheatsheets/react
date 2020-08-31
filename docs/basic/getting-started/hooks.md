@@ -29,30 +29,37 @@ setUser(newUser);
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
 
 ```tsx
-type AppState = {};
-type Action =
-  | { type: "SET_ONE"; payload: string } // typescript union types allow for leading |'s to have nicer layout
-  | { type: "SET_TWO"; payload: number };
+const initialState = {count: 0};
 
-export function reducer(state: AppState, action: Action): AppState {
+type ACTIONTYPE = 
+  | { type: 'increment', payload: number} 
+  | { type: 'decrement', payload: string} 
+
+
+function reducer(state: typeof initialState, action: ACTIONTYPE) {
   switch (action.type) {
-    case "SET_ONE":
-      return {
-        ...state,
-        one: action.payload, // `payload` is string
-      };
-    case "SET_TWO":
-      return {
-        ...state,
-        two: action.payload, // `payload` is number
-      };
+    case 'increment':
+      return {count: state.count + action.payload};
+    case 'decrement':
+      return {count: state.count - Number(action.payload)};
     default:
-      return state;
+      throw new Error();
   }
+}
+
+function Counter() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement', payload: '5'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment', payload: 5})}>+</button>
+    </>
+  );
 }
 ```
 
-[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/C4TwDgpgBAgmYGVgENjQLxQN4F8CwAUKJLAMbACWA9gHZTqFRQA+2UxEAXFAEQICiAFQD6AeQBy-HgG4oYZCAA2VZABNuAZ2AAnCjQDmUfASass7cF14CRggOqiZchcrXcaAVwC2AIwjajaUJCCAAPMCptYCgAMw8acmo6bQhVD1J-AAotVCs4RBQ0ABooZETabhhymgBKSvgkXOxGKA0AdwpgUgALKEyyyloAOg4a5pMmKFJkDWg+ITFJHk4WyagU4A9tOixVtaghw5zivbXaKwGkofklFVUoAHoHqAADG9dVF6gKDVadPX0p0Ce2ms2sC3sjhWEzWGy2OyBTEOQ2OECKiPYbSo3Euw3ed0ezzeLjuXx+UE8vn8QJwQRhUFUEBiyA8imA0P26wgm22f1ydKYxhwQA)
+[View in the TypeScript Playground](https://www.typescriptlang.org/play?#code/LAKFEsFsAcHsCcAuACAVMghgZ2QJQKYYDGKAZvLJMgOTyEnUDcooRsAdliuO+IuBgA2AZUQZE+ZAF5kAbzYBXdogBcyAAwBfZmBCIAntEkBBAMIAVAJIB5AHLmAmgAUAotOShkyAD5zkBozVqHiI6SHxlagAaZGgMfUFYDAATNXYFSAAjfHhNDxAvX1l-Q3wg5PxQ-HDImLiEpNTkLngeAHM8ll1SJRJwDmQ6ZIUiHIAKLnEykqNYUmQePgERMQkY4n4ONTMrO0dXAEo5T2aAdz4iAAtkMY3+9gA6APwj2ROvImxJYPYqmsRqCp3l5BvhEAp4Ow5IplGpJhIHjCUABqTB9DgPeqJFLaYGfLDfCp-CIAoEFEFeOjgyHQ2BKVTNVb4RF05TIAC0yFsGWy8Fu6MeWMaB1x5K8FVIGAUglUwK8iEuFFOyHY+GVLngFD5Bx0Xk0oH13V6myhplZEm1x3JbE4KAA2vD8DFkuAsHFEFcALruAgbB4KAkEYajPlDEY5GKLfhCURTHUnKkQqFjYEAHgAfHLkGb6WpZI6WfTDRSvKnMgpEIgBhxTIJwEQANZSWRjI5SdPIF1u8RXMayZ7lSphEnRWLxbFNagAVmomhF6fZqYA9OXKxxM2KQWWK1WoTW643m63pB2u+7e-3SkEQsPamOGik1FO55p08jl6vdxuKcvv8h4yAmhAA)
 
 <details>
 
