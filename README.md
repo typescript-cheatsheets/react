@@ -2380,6 +2380,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
   - [Lyft's React-To-TypeScript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
   - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
+- [DefinitelyTyped React source code](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
 - [You?](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 <!--END-SECTION:other-resources-->
