@@ -35,11 +35,7 @@
     "danger-plugin-spellcheck": "^1.5.0",
     "husky": "^4.2.5",
     "prettier": "^2.0.2",
-    "pretty-quick": "^2.0.1",
-    "textlint": "^11.7.6",
-    "textlint-rule-preset-ja-spacing": "^2.0.2",
-    "textlint-rule-preset-ja-technical-writing": "^4.0.1",
-    "textlint-rule-spellcheck-tech-word": "^5.0.0"
+    "pretty-quick": "^2.0.1"
   },
   "husky": {
     "hooks": {
