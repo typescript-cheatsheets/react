@@ -84,6 +84,15 @@
         "doc",
         "maintenance"
       ]
+    },
+    {
+      "login": "williamrjribeiro",
+      "name": "William R. J. Ribeiro",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1503499?v=4",
+      "profile": "http://www.williamrjribeiro.com",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
