@@ -15,6 +15,7 @@
   </tr>
   <tr>
     <td align="center"><a href="http://www.williamrjribeiro.com"><img src="https://avatars2.githubusercontent.com/u/1503499?v=4" width="100px;" alt=""/><br /><sub><b>William R. J. Ribeiro</b></sub></a><br /><a href="#ideas-williamrjribeiro" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://alexandrudanpop.dev/"><img src="https://avatars0.githubusercontent.com/u/15979292?v=4" width="100px;" alt=""/><br /><sub><b>Alexandru-Dan Pop</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=alexandrudanpop" title="Documentation">📖</a></td>
   </tr>
 </table>
 
