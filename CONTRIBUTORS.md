@@ -13,11 +13,13 @@
     <td align="center"><a href="https://github.com/andreasgruenh"><img src="https://avatars2.githubusercontent.com/u/12122390?v=4" width="100px;" alt=""/><br /><sub><b>Andreas</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=andreasgruenh" title="Code">💻</a> <a href="https://github.com/typescript-cheatsheets/react/commits?author=andreasgruenh" title="Documentation">📖</a> <a href="#infra-andreasgruenh" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://github.com/arvindcheenu"><img src="https://avatars2.githubusercontent.com/u/13925213?v=4" width="100px;" alt=""/><br /><sub><b>Arvind Srinivasan</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=arvindcheenu" title="Code">💻</a> <a href="#content-arvindcheenu" title="Content">🖋</a> <a href="https://github.com/typescript-cheatsheets/react/commits?author=arvindcheenu" title="Documentation">📖</a> <a href="#maintenance-arvindcheenu" title="Maintenance">🚧</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://alexandrudanpop.dev/"><img src="https://avatars0.githubusercontent.com/u/15979292?v=4" width="100px;" alt=""/><br /><sub><b>Alexandru-Dan Pop</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=alexandrudanpop" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
