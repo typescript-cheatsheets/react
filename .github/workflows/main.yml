@@ -1,15 +1,19 @@
 name: FormatCodeAndShowDiff
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
 
       - name: Get yarn cache directory
         id: yarn
@@ -24,11 +28,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Format code
-        run: yarn format
+      - name: Prettify code
+        uses: creyD/prettier_action@v2.2
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write **/*.md
 
-      - name: Format correct?
-        run: git diff --exit-code
+      # old formatting code
+      #- name: Format code
+      #  run: yarn format
+
+      #- name: Format correct?
+      #  run: git diff --exit-code
 
       - name: Danger for Spell Checking
         run: |
