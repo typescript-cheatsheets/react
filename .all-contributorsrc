@@ -84,6 +84,15 @@
         "doc",
         "maintenance"
       ]
+    },
+    {
+      "login": "alexandrudanpop",
+      "name": "Alexandru-Dan Pop",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/15979292?v=4",
+      "profile": "https://alexandrudanpop.dev/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
