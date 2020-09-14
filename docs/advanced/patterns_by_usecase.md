@@ -158,9 +158,9 @@ You might also see this with React Router:
 
 ```tsx
 const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
-    const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
 
-    return isLoggedIn ? <Component {...rest} /> : <Redirect to="/" />;
+  return isLoggedIn ? <Component {...rest} /> : <Redirect to="/" />;
 };
 ```
 

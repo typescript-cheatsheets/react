@@ -8,7 +8,7 @@ We will assume knowledge of utility types covered in the sister project [`typesc
 
 If you intend to maintain a large TS codebase/a nontrivial React+TS library, **we strongly recommend exploring these utilities** so that you don't reinvent the wheel and/or lose sanity trying to do so. Studying their code can also teach you a lot of advanced TS that is not covered here.
 
-I also recommend have a good working knowledge of how to construct the inbuilt utility types from scratch. See [Dr. Rasuchmeyer's guide](https://2ality.com/2020/06/computing-with-types.html) for a concise introduction. 
+I also recommend have a good working knowledge of how to construct the inbuilt utility types from scratch. See [Dr. Rasuchmeyer's guide](https://2ality.com/2020/06/computing-with-types.html) for a concise introduction.
 
 A level of comfort with **generic types** is therefore required. Here are some helpful resources:
 
