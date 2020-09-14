@@ -93,6 +93,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mastorm",
+      "name": "Mathias Storm",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10759336?v=4",
+      "profile": "https://github.com/mastorm",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
