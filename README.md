@@ -259,7 +259,7 @@ See also the [Using Inferred Types](#using-inferred-types) section if you need t
 However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = React.useState<IUser | null>(null);
+const [user, setUser] = React.useState<IUser>();
 
 // later...
 setUser(newUser);
