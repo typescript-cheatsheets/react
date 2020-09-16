@@ -16,12 +16,12 @@
   <tr>
     <td align="center"><a href="https://alexandrudanpop.dev/"><img src="https://avatars0.githubusercontent.com/u/15979292?v=4" width="100px;" alt=""/><br /><sub><b>Alexandru-Dan Pop</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=alexandrudanpop" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/mastorm"><img src="https://avatars1.githubusercontent.com/u/10759336?v=4" width="100px;" alt=""/><br /><sub><b>Mathias Storm</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=mastorm" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://twitter.com/dance2die"><img src="https://avatars1.githubusercontent.com/u/8465237?v=4" width="100px;" alt=""/><br /><sub><b>Sung M. Kim</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=dance2die" title="Documentation">📖</a> <a href="#ideas-dance2die" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
