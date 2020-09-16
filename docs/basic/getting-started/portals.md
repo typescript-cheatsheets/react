@@ -58,7 +58,7 @@ export default Modal;
 
 </details>
 
-Modal Component Usage Example: 
+Modal Component Usage Example:
 
 ```tsx
 function App() {
@@ -74,20 +74,25 @@ function App() {
               display: "grid",
               placeItems: "center",
               height: "100vh",
-              width: '100vh',
+              width: "100vh",
               background: "rgba(0,0,0,0.1)",
               zIndex: 99,
             }}
           >
             I'm a modal!{" "}
-            <button style={{background: "papyawhip"}} onClick={() => setShowModal(false)}>close</button>
+            <button
+              style={{ background: "papyawhip" }}
+              onClick={() => setShowModal(false)}
+            >
+              close
+            </button>
           </div>
         </Modal>
       )}
       <button onClick={() => setShowModal(true)}>show Modal</button>
       // rest of your app
     </div>
-  )
+  );
 }
 ```
 
