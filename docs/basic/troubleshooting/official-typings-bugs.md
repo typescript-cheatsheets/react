@@ -1,7 +1,7 @@
 ---
 id: official_typings_bugs
-title: Getting Started
-sidebar_label: Bugs in official typings
+title: Fixing bugs in official typings
+sidebar_label: Fixing bugs in official typings
 ---
 
 If you run into bugs with your library's official typings, you can copy them locally and tell TypeScript to use your local version using the "paths" field. In your `tsconfig.json`:
