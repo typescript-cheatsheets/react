@@ -112,6 +112,16 @@
         "doc",
         "ideas"
       ]
+    },
+    {
+      "login": "ryota-murakami",
+      "name": "Ryota Murakami",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5501268?v=4",
+      "profile": "https://ryota-murakami.github.io/",
+      "contributions": [
+        "example",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
