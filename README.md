@@ -62,9 +62,9 @@
 
 - [Section 1: Setup](#section-1-setup)
   <!--START-SECTION:setup-toc-->
-      	- [Prerequisites](#prerequisites)
-      	- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-      	- [Import React](#import-react)<!--END-SECTION:setup-toc-->
+    - [Prerequisites](#prerequisites)
+    - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+    - [Import React](#import-react)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
@@ -82,18 +82,18 @@
   - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
   <!--START-SECTION:types-toc-->
-      	- [Union Types and Type Guarding](#union-types-and-type-guarding)
-      	- [Optional Types](#optional-types)
-      	- [Enum Types](#enum-types)
-      	- [Type Assertion](#type-assertion)
-      	- [Simulating Nominal Types](#simulating-nominal-types)
-      	- [Intersection Types](#intersection-types)
-      	- [Union Types](#union-types)
-      	- [Overloading Function Types](#overloading-function-types)
-      	- [Using Inferred Types](#using-inferred-types)
-      	- [Using Partial Types](#using-partial-types)
-      	- [The Types I need weren't exported!](#the-types-i-need-werent-exported)
-  - [The Types I need Don't Exist!](#the-types-i-need-dont-exist)<!--END-SECTION:types-toc-->
+    - [Union Types and Type Guarding](#union-types-and-type-guarding)
+    - [Optional Types](#optional-types)
+    - [Enum Types](#enum-types)
+    - [Type Assertion](#type-assertion)
+    - [Simulating Nominal Types](#simulating-nominal-types)
+    - [Intersection Types](#intersection-types)
+    - [Union Types](#union-types)
+    - [Overloading Function Types](#overloading-function-types)
+    - [Using Inferred Types](#using-inferred-types)
+    - [Using Partial Types](#using-partial-types)
+    - [The Types I need weren't exported!](#the-types-i-need-werent-exported)
+- [The Types I need Don't Exist!](#the-types-i-need-dont-exist)<!--END-SECTION:types-toc-->
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
