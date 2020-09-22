@@ -21,10 +21,25 @@
 main details {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  padding: 1rem 1rem 0;
+  border: 0.15rem solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-pagination-nav-border-radius);
 }
 
 main details summary {
   margin-bottom: 1rem;
+  outline: none;
+  /* Make it look like a link to notify user that it's clickable */
+  text-decoration: underline;
+}
+
+main details summary:hover {
+  cursor: pointer;
+  /* Hide the underline on hover */
+  text-decoration: none;
+}
+main details:hover {
+  border-color: var(--ifm-pagination-nav-color-hover);
 }
 
 .homePageBtns {
