@@ -81,6 +81,8 @@ Special note on `ts-loader` and 3rd party libraries: https://twitter.com/acemark
 
 > Our central finding is that both static type systems find an important percentage of public bugs: both Flow 0.30 and TypeScript 2.0 successfully detect 15%!
 
+see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/things-i-was-wrong-about/1-types/)
+
 ## Misc migration stories by notable companies and open source
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
