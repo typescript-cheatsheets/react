@@ -1,10 +1,22 @@
 ---
 id: non_ts_files
-title: "Troubleshooting Handbook: Images and other non-TS/TSX files"
-sidebar_label: Images and other non-TS/TSX files
+title: "Troubleshooting Handbook: Globals, Images and other non-TS files"
+sidebar_label: Globals, Images and other non-TS files
 ---
 
-Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
+Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
+
+If, say, you are using a third party JS script that attaches on to the `window` global, you can extend `Window`:
+
+```ts
+declare global {
+  interface Window {
+    MyVendorThing: MyVendorType
+  }
+}
+```
+
+Likewise if you wish to "import" an image or other non TS/TSX file:
 
 ```ts
 // declaration.d.ts
