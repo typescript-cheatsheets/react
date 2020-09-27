@@ -31,6 +31,12 @@ main details summary {
   outline: none;
   /* Make it look like a link to notify user that it's clickable */
   text-decoration: underline;
+
+  /* Refer to #309 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 main details summary:hover {
