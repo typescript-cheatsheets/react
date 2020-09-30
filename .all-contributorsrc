@@ -131,6 +131,15 @@
         "example",
         "doc"
       ]
+    },
+    {
+      "login": "arpi17",
+      "name": "Árpád Illyés",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13800404?v=4",
+      "profile": "https://github.com/arpi17",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
