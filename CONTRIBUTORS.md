@@ -19,12 +19,12 @@
     <td align="center"><a href="https://github.com/mastorm"><img src="https://avatars1.githubusercontent.com/u/10759336?v=4" width="100px;" alt=""/><br /><sub><b>Mathias Storm</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=mastorm" title="Documentation">📖</a></td>
     <td align="center"><a href="https://twitter.com/dance2die"><img src="https://avatars1.githubusercontent.com/u/8465237?v=4" width="100px;" alt=""/><br /><sub><b>Sung M. Kim</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=dance2die" title="Documentation">📖</a> <a href="#ideas-dance2die" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://ryota-murakami.github.io/"><img src="https://avatars2.githubusercontent.com/u/5501268?v=4" width="100px;" alt=""/><br /><sub><b>Ryota Murakami</b></sub></a><br /><a href="#example-ryota-murakami" title="Examples">💡</a> <a href="https://github.com/typescript-cheatsheets/react/commits?author=ryota-murakami" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/arpi17"><img src="https://avatars1.githubusercontent.com/u/13800404?v=4" width="100px;" alt=""/><br /><sub><b>Árpád Illyés</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=arpi17" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
