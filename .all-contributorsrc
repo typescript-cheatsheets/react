@@ -140,6 +140,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "xamgore",
+      "name": "Igor Strebezhev",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4586392?v=4",
+      "profile": "https://twitter.com/xamgore",
+      "contributions": [
+        "ideas",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
