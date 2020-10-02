@@ -639,12 +639,12 @@ import { render } from 'react-dom';
 // TypeScript discriminated union defined below
 type Props =
   | {
-      isArray: true;
-      value: string[]; 
+      isArray: true,
+      value: string[] 
     }
   | {
-      isArray: false;
-      value: string;
+      isArray: false,
+      value: string
     };
 const X = (p: Props) => {
   return React.useMemo(
