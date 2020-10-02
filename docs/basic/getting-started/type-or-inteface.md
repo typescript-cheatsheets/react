@@ -17,9 +17,27 @@ Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas In
   <summary>
     <b>Useful table for Types vs Interfaces</b>
   </summary>
-It's a nuanced topic, don't get too hung up on it. Here's a handy graphic:
+It's a nuanced topic, don't get too hung up on it. Here's a handy table:
 
-![https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg](https://pbs.twimg.com/media/DwV-oOsXcAIct2q.jpg) (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
+| Aspect | Type | Interface |
+| ------ | :----: | :---------: |
+| Can describe functions | ✅ | ✅ |
+| Can describe constructors | ✅ | ✅ |
+| Can describe tuples | ✅ | ✅ |
+| Interfaces can extend it | ⚠️ | ✅ |
+| Classes can extend it | 🚫 | ✅ |
+| Classes can implement it (`implements`) | ⚠️ | ✅ |
+| Can intersect another one of its kind | ✅ | ⚠️ |
+| Can create a union with another one of its kind | ✅ | 🚫 |
+| Can be used to create mapped types | ✅ | 🚫 |
+| Can be mapped over with mapped types | ✅ | ✅ |
+| Expands in error messages and logs | ✅ | 🚫 |
+| Can be augmented | 🚫 | ✅ |
+| Can be recursive | ⚠️ | ✅ |
+
+⚠️ In some cases
+
+(source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
 
 </details>
 
