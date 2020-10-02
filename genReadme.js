@@ -16,20 +16,33 @@ const default_options = {
   prefix: "",
   suffix: "",
 };
+function getReadmeCoverageReport(readme) {
+  let str = readme;
+  let result = str.replace(/<!--START-SECTION:(.*)-->([\s\S]+)<!--END-SECTION:\1-->/gm, "").replace(/\n\n\n/gm, "");
+  return (result.length / str.length) * 100
+}
 async function getReadme() {
   let res = await octokit.repos.getReadme(repo_details);
   let encoded = res.data.content;
   let decoded = Buffer.from(encoded, "base64").toString("utf8");
+  let coverage = getReadmeCoverageReport(decoded);
   return {
     content: decoded,
     sha: res.data.sha,
+    coverage: coverage + "%",
   };
+}
+function makeBadge(content, coverage) {
+    let badge = `![Percentage of README Automated](https://img.shields.io/static/v1?label=README%20Automated&message=${coverage}%&color=blueviolet&style=flat-square)`
+    let res = content.replace(/<!--START-BADGE:md-auto-->[\s\S]+<!--END-BADGE:md-auto-->/gm, `<!--START-BADGE:md-auto-->${badge}<!--END-BADGE:md-auto-->`) 
+    return res;
 }
 (async function main() {
   try {
     let readme = await getReadme();
     default_options["from"] = readme;
     let initialContent = readme.content;
+    initialContent = makeBadge(initialContent, readme.coverage);
     initialContent = await updateSectionWith({
       name: "setup",
       path: "docs/basic/setup.md",
