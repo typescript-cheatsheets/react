@@ -634,8 +634,14 @@ The above example does not work as we are not checking the value of `event.value
   </summary>
  
  ```tsx
-type SingleElement = { isArray: true; value: string[]; };
-type MultiElement = { isArray: false; value: string; };
+type SingleElement = { 
+  isArray: true; 
+  value: string[]; 
+};
+type MultiElement = { 
+  isArray: false; 
+  value: string; 
+};
 type Props = SingleElement | MultiElement;
 function Sequence(p: Props) {
   return React.useMemo(
