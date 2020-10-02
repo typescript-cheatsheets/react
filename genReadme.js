@@ -263,7 +263,7 @@ function generateContentForSection(options) {
     let lines = section_options.content.toc.split("\n");
     for (let i = 0, len = lines.length; i < len; i += 1)
       fenceContent +=
-        "\t".repeat(section_options.tabLevel) +
+        "  ".repeat(section_options.tabLevel) +
         lines[i] +
         (i !== len - 1 ? "\n" : "");
   } else {
