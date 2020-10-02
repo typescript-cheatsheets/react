@@ -11,7 +11,7 @@ If, say, you are using a third party JS script that attaches on to the `window` 
 ```ts
 declare global {
   interface Window {
-    MyVendorThing: MyVendorType
+    MyVendorThing: MyVendorType;
   }
 }
 ```
