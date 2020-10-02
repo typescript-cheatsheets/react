@@ -32,17 +32,16 @@ async function getReadme() {
     coverage: coverage + "%",
   };
 }
-function makeBadge(content, coverage) {
-    let badge = `![Percentage of README Automated](https://img.shields.io/static/v1?label=README%20Automated&message=${coverage}%&color=blueviolet&style=flat-square)`
-    let res = content.replace(/<!--START-BADGE:md-auto-->[\s\S]+<!--END-BADGE:md-auto-->/gm, `<!--START-BADGE:md-auto-->${badge}<!--END-BADGE:md-auto-->`) 
+function makeBadge(readme) {
+    let badge = `![Percentage of README Automated](https://img.shields.io/static/v1?label=README%20Automated&message=${readme.coverage}&color=blueviolet&style=flat-square)`
+    let res = readme.content.replace(/<!--START-BADGE:md-auto-->[\s\S]+<!--END-BADGE:md-auto-->/gm, `<!--START-BADGE:md-auto-->${badge}<!--END-BADGE:md-auto-->`) 
     return res;
 }
 (async function main() {
   try {
     let readme = await getReadme();
     default_options["from"] = readme;
-    let initialContent = readme.content;
-    initialContent = makeBadge(initialContent, readme.coverage);
+    let initialContent = makeBadge(readme);
     initialContent = await updateSectionWith({
       name: "setup",
       path: "docs/basic/setup.md",
