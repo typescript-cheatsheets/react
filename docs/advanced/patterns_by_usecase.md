@@ -634,12 +634,10 @@ The above example does not work as we are not checking the value of `event.value
   </summary>
  
  ```tsx
- import * as React from 'react';
-import { render } from 'react-dom';
 type SingleElement = { isArray: true; value: string[]; };
 type MultiElement = { isArray: false; value: string; };
 type Props = SingleElement | MultiElement;
-const X = (p: Props) => {
+function Sequence(p: Props) {
   return React.useMemo(
     () => (
       <div>
@@ -654,8 +652,8 @@ const X = (p: Props) => {
 function App() {
   return (
     <div>
-      <X isArray={false} value={'foo'} />
-      <X isArray={true} value={['foo', 'bar', 'baz']} />
+      <Sequence isArray={false} value={'foo'} />
+      <Sequence isArray={true} value={['foo', 'bar', 'baz']} />
     </div>
   );
 }
