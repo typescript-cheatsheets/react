@@ -633,18 +633,11 @@ The above example does not work as we are not checking the value of `event.value
   Discriminated Unions in TypeScript can also work with hook dependencies in React. The type matched is automatically updated when the corresponding union member based on which a hook depends, changes. Expand more to see an example usecase.
   </summary>
  
- ```ts
+ ```tsx
  import * as React from 'react';
 import { render } from 'react-dom';
-// TypeScript discriminated union defined below
-type SingleElement = {
-      isArray: true;
-      value: string[]; 
-    };
-type MultiElement = {
-      isArray: false;
-      value: string;
-    };
+type SingleElement = { isArray: true; value: string[]; };
+type MultiElement = { isArray: false; value: string; };
 type Props = SingleElement | MultiElement;
 const X = (p: Props) => {
   return React.useMemo(
@@ -660,14 +653,12 @@ const X = (p: Props) => {
 };
 function App() {
   return (
-    <div className="App">
+    <div>
       <X isArray={false} value={'foo'} />
       <X isArray={true} value={['foo', 'bar', 'baz']} />
     </div>
   );
 }
-const rootElement = document.getElementById('root');
-render(<App />, rootElement);
  ```
  In the above example,  based on the `isArray` union member, the type of the `value` hook dependency changes.
  </details>
