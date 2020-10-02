@@ -18,7 +18,9 @@ const default_options = {
 };
 function getReadmeCoverageReport(readme) {
   let str = readme;
-  let result = str.replace(/<!--START-SECTION:(.*)-->([\s\S]+)<!--END-SECTION:\1-->/gm, "").replace(/\n\n\n/gm, "");
+  let get_all_sections = new RegExp(`<!--START-SECTION:(.*)-->([\\s\\S]+)<!--END-SECTION:\\1-->`, "gm");
+  let remove_newlines = new RegExp(`\\n\\n\\n`, "gm");
+  let result = str.replace(get_all_sections, "").replace(remove_newlines, "");
   return (result.length / str.length) * 100
 }
 async function getReadme() {
@@ -33,8 +35,9 @@ async function getReadme() {
   };
 }
 function makeBadge(readme) {
+    let badgeRegex = new RegExp(`<!--START-BADGE:md-auto-->[\\s\\S]+<!--END-BADGE:md-auto-->`, "gm");
     let badge = `![Percentage of README Automated](https://img.shields.io/static/v1?label=README%20Automated&message=${readme.coverage}&color=blueviolet&style=flat-square)`
-    let res = readme.content.replace(/<!--START-BADGE:md-auto-->[\s\S]+<!--END-BADGE:md-auto-->/gm, `<!--START-BADGE:md-auto-->${badge}<!--END-BADGE:md-auto-->`) 
+    let res = readme.content.replace(badgeRegex, `<!--START-BADGE:md-auto-->${badge}<!--END-BADGE:md-auto-->`) 
     return res;
 }
 (async function main() {
