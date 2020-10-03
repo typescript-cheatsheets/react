@@ -85,16 +85,16 @@ This is because TypeScript does not know that merging `Omit<T, "owner">` and `{o
 
 [See this GitHub issue for more.](https://github.com/microsoft/TypeScript/issues/35858)
 
-## Generic solution 
+## Generic solution
 
-The above snippet can be modified to create a generic solution to inject any arbitary props; 
+The above snippet can be modified to create a generic solution to inject any arbitary props;
 
 ```typescript
-function withInjectedProps<U extends Record<string, unknown>> (injectedProps: U) {
-  return function <T extends U>(
-    Component: React.ComponentType<T>
-  ) {
-    return function (props: Omit<T, keyof U>) : JSX.Element {
+function withInjectedProps<U extends Record<string, unknown>>(
+  injectedProps: U
+) {
+  return function <T extends U>(Component: React.ComponentType<T>) {
+    return function (props: Omit<T, keyof U>): JSX.Element {
       //A type coercion is neccessary because TypeScript doesn't know that the Omit<T, keyof U> + {...injectedProps} = T
       const newProps = { ...props, ...injectedProps } as T;
       return <Component {...newProps} />;
