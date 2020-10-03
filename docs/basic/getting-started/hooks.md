@@ -26,7 +26,7 @@ setUser(newUser);
 
 ## useReducer
 
-You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
+You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
 
 ```tsx
 const initialState = { count: 0 };
@@ -237,15 +237,15 @@ Note that the React team recommends that custom hooks that return more than two 
 
 More Hooks + TypeScript reading:
 
-- https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
-- https://fettblog.eu/typescript-react/hooks/#useref
+- <https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d>
+- <https://fettblog.eu/typescript-react/hooks/#useref>
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
 Example React Hooks + TypeScript Libraries:
 
-- https://github.com/mweststrate/use-st8
-- https://github.com/palmerhq/the-platform
-- https://github.com/sw-yx/hooks
+- <https://github.com/mweststrate/use-st8>
+- <https://github.com/palmerhq/the-platform>
+- <https://github.com/sw-yx/hooks>
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
