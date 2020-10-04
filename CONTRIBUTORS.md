@@ -22,11 +22,13 @@
     <td align="center"><a href="https://github.com/arpi17"><img src="https://avatars1.githubusercontent.com/u/13800404?v=4" width="100px;" alt=""/><br /><sub><b>Árpád Illyés</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=arpi17" title="Code">💻</a></td>
     <td align="center"><a href="https://twitter.com/xamgore"><img src="https://avatars3.githubusercontent.com/u/4586392?v=4" width="100px;" alt=""/><br /><sub><b>Igor Strebezhev</b></sub></a><br /><a href="#ideas-xamgore" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/typescript-cheatsheets/react/commits?author=xamgore" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://geoplanets.io"><img src="https://avatars2.githubusercontent.com/u/2467377?v=4" width="100px;" alt=""/><br /><sub><b>David Johnston</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=dwjohnston" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
