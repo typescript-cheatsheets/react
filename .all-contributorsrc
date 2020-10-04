@@ -150,6 +150,15 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "dwjohnston",
+      "name": "David Johnston",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2467377?v=4",
+      "profile": "https://geoplanets.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
