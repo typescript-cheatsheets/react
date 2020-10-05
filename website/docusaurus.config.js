@@ -9,6 +9,7 @@ const users = [
 ];
 
 const setupDoc = "docs/basic/setup";
+const contributorsDoc = "docs/contributors";
 
 module.exports = {
   favicon: "img/icon.png",
@@ -126,6 +127,10 @@ module.exports = {
             {
               label: "Help",
               to: "help",
+            },
+            {
+              label: "Contributors",
+              to: contributorsDoc,
             },
           ],
         },

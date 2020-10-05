@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "add-contributors-on-site": "cp ../CONTRIBUTORS.md ../docs/contributors.md",
+    "start": "yarn add-contributors-on-site && docusaurus start",
+    "build": "yarn add-contributors-on-site && docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "yarn add-contributors-on-site && docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.61",
