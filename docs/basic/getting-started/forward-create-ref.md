@@ -29,23 +29,23 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ```
 
 <details>
-<summary>
-You can make a minor optimization to make the forward ref immutable.
-</summary>
+  <summary>
+    You can make a minor optimization to make the forward ref immutable.
+  </summary>
 
-As of Oct 2020, the default `ref` you get from `forwardRef` is mutable. However most of the time you don't want users to be able to assign to it.  [There is an open discussion about this](https://github.com/typescript-cheatsheets/react/pull/323/), but for now you can assign `React.Ref` if you want to ensure nobody reassigns it:
+  As of Oct 2020, the default `ref` you get from `forwardRef` is mutable (`MutableRefObject`). However most of the time you don't want users to be able to assign to it.  [There is an open discussion about this](https://github.com/typescript-cheatsheets/react/pull/323/), but for now you can assign `React.Ref` if you want to ensure nobody reassigns it:
 
-```tsx
-type Props = { children: React.ReactNode; type: "submit" | "button" };
-export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef(
-  (props: Props, ref: React.Ref<Ref>) => (
-    <button ref={ref} className="MyClassName" type={props.type}>
-      {props.children}
-    </button>
-  )
-);
-```
+  ```tsx
+  type Props = { children: React.ReactNode; type: "submit" | "button" };
+  export type Ref = HTMLButtonElement;
+  export const FancyButton = React.forwardRef(
+    (props: Props, ref: React.Ref<Ref>) => ( // <-- here!
+      <button ref={ref} className="MyClassName" type={props.type}>
+        {props.children}
+      </button>
+    )
+  );
+  ```
 
 </details>
 
