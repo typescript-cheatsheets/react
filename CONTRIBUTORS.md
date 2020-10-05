@@ -24,6 +24,7 @@
   </tr>
   <tr>
     <td align="center"><a href="https://geoplanets.io"><img src="https://avatars2.githubusercontent.com/u/2467377?v=4" width="100px;" alt=""/><br /><sub><b>David Johnston</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=dwjohnston" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/kripod"><img src="https://avatars3.githubusercontent.com/u/14854048?v=4" width="100px;" alt=""/><br /><sub><b>Kristóf Poduszló</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=kripod" title="Documentation">📖</a></td>
   </tr>
 </table>
 
