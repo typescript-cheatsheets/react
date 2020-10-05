@@ -454,4 +454,4 @@ Possibly in 4.1
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
 
-Did you also know you can read the TypeScript spec online?? https://github.com/microsoft/TypeScript/blob/master/doc/spec.md
+Did you also know you can read the TypeScript spec online?? https://github.com/microsoft/TypeScript/blob/master/doc/spec-ARCHIVED.md
