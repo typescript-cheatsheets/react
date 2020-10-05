@@ -35,9 +35,9 @@ export function Button(props: ButtonProps) {
 
 [_See this in the TS Playground_](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUI4wPQtwCuqyA5lowQ4A7fMAhC4AQTBgAFAEo4Ab0Zw4bOABUAnmCzkARAQgQDZOMHRCI8NKmA8hyAEYAbfTAhwYu-WQPOHDCeQgZwAD5wBqgcziDAMGGRBpSoWIkRnEIAJlgEwEJY2WQAdLIATADM5eXyqurslDAcUBIAPABCQSHevgC8RiYGAHxwqK7ZANYAVnBtLF3B4sP19RrWcFhQxFD1TS3tiz0+egOBS6GjMFgAHvDzR8uMAL7MDBqgYO4gWEIwyDAxEJGLdILALH8tgQ8PpHkIAArEMDoW7XHLobB4GAlADCJEghT+iIgyLaZHOITIoxUDDUqD0uGAyFcxLAAH4AFxjGBQAo8egMV4MUHQQjCUTiOBw2RgJGoLlw1moRQ0tS4cSoeBKMYMpkspEAGjgJRNqXgzzgfTgspJqAFag02S8qBI6QAFny4AB3BJunVYRnM1l7dIHOYUyVKE0lM0WljDAXPIA)
 
-**Forwarding Refs**: As [the React docs themselves note](https://reactjs.org/docs/forwarding-refs.html), most usecases will not need to obtain a ref to the inner element. But for people making reusable component libraries, you will need to `forwardRef` the underlying element, and then you can use `ComponentPropsWithRef` to grab props for your wrapper component. Check [our docs on forwarding Refs](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forward_and_create_ref/) for more. 
+**Forwarding Refs**: As [the React docs themselves note](https://reactjs.org/docs/forwarding-refs.html), most usecases will not need to obtain a ref to the inner element. But for people making reusable component libraries, you will need to `forwardRef` the underlying element, and then you can use `ComponentPropsWithRef` to grab props for your wrapper component. Check [our docs on forwarding Refs](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forward_and_create_ref/) for more.
 
-In future, the need to `forwardRef` may go away in React 17+, but for now we still have to deal with this. 🙃 
+In future, the need to `forwardRef` may go away in React 17+, but for now we still have to deal with this. 🙃
 
 <details>
 <summary>
@@ -163,7 +163,8 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ));
 
 // second layer button, no need for forwardRef (TODO: doublecheck this)
-export interface DoubleWrappedProps extends React.ComponentPropsWithRef<typeof FancyButton> {
+export interface DoubleWrappedProps
+  extends React.ComponentPropsWithRef<typeof FancyButton> {
   specialProp?: string;
 }
 export function DoubleWrappedButton(props: DoubleWrappedProps) {
@@ -173,13 +174,17 @@ export function DoubleWrappedButton(props: DoubleWrappedProps) {
 
 // usage
 function App() {
-  const btnRef = React.useRef<HTMLButtonElement>(null!)
-  return <DoubleWrappedButton type="button" ref={btnRef}> text </DoubleWrappedButton>
+  const btnRef = React.useRef<HTMLButtonElement>(null!);
+  return (
+    <DoubleWrappedButton type="button" ref={btnRef}>
+      {" "}
+      text{" "}
+    </DoubleWrappedButton>
+  );
 }
-
 ```
 
-*[TS Playground link](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUIwPTNwBGaWHArjDBAB2AGjgB3YDAAWcSgTgFoY5FAAmwQQHNGMAJ5huABWJh0AXjgBvOLinAANqsqCAXJiowAdNjwwAchCqWDRwegZuAESoPOwgkhFwAD5wEex8AoIJAL70DFgAHpCwofrc2PIWABIAKgCyADIAQulCAKL2WCBYgjC5BUXwuEKo8ABiyIK4us38QnAWPvieilDKauUAPOWixhCmAHwAFIdgJqiicgCU8-twh4xwcBtps4KyWARmlnJZNvZoqD8yC6ZgitV0AGF-qhAcCsAkwlgvqc9qhPIisvsHo8rCjTJ5bA4nN0stiNswXhksQxLpdcowWGxUFghoJVHB-rosFBeK9GP1oPANDBuQQ8NwACIQGIdADqUGQYAMql2pjgBRFbPQiy8EJIkEE3RgqtQsskUk2iIg8nGk2mLUEt0s2NQBlwwGQ9lVAH43CMoBpNLlSXlCoKFDxJjBgHMpTKsPLFcqZhkTmc3HH2HKFUqsCqztdnQxHqyRlY4K6WR6vSYLh9RJ5G5Qy78LHjULlHpQYDwoG9ng73p9vh9fpZG55mzBfsx9sGGQxWHAeKhkJosIwCJH8DG3gBBJWHQvY0vwdgwQTlebuXyeFdYTY1BoptodLo9I6CHj2ewAQku2Ldr2-aZtmSZ5i+byIqClJCAkchfOel6jrcIr5PA5KgQmObJg61IhkAA)*
+_[TS Playground link](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUIwPTNwBGaWHArjDBAB2AGjgB3YDAAWcSgTgFoY5FAAmwQQHNGMAJ5huABWJh0AXjgBvOLinAANqsqCAXJiowAdNjwwAchCqWDRwegZuAESoPOwgkhFwAD5wEex8AoIJAL70DFgAHpCwofrc2PIWABIAKgCyADIAQulCAKL2WCBYgjC5BUXwuEKo8ABiyIK4us38QnAWPvieilDKauUAPOWixhCmAHwAFIdgJqiicgCU8-twh4xwcBtps4KyWARmlnJZNvZoqD8yC6ZgitV0AGF-qhAcCsAkwlgvqc9qhPIisvsHo8rCjTJ5bA4nN0stiNswXhksQxLpdcowWGxUFghoJVHB-rosFBeK9GP1oPANDBuQQ8NwACIQGIdADqUGQYAMql2pjgBRFbPQiy8EJIkEE3RgqtQsskUk2iIg8nGk2mLUEt0s2NQBlwwGQ9lVAH43CMoBpNLlSXlCoKFDxJjBgHMpTKsPLFcqZhkTmc3HH2HKFUqsCqztdnQxHqyRlY4K6WR6vSYLh9RJ5G5Qy78LHjULlHpQYDwoG9ng73p9vh9fpZG55mzBfsx9sGGQxWHAeKhkJosIwCJH8DG3gBBJWHQvY0vwdgwQTlebuXyeFdYTY1BoptodLo9I6CHj2ewAQku2Ldr2-aZtmSZ5i+byIqClJCAkchfOel6jrcIr5PA5KgQmObJg61IhkAA)_
 
 ## Polymorphic Components (e.g. with `as` props)
 

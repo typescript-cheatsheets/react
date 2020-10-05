@@ -28,7 +28,7 @@ Local dev setups:
 - [Gatsby](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-typescript)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
 
-Manual setup: 
+Manual setup:
 
 - [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 - In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/))
