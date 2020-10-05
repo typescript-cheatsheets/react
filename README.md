@@ -134,8 +134,9 @@ Cloud setups:
 
 Local dev setups:
 
-- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app -e with-typescript`
-- [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-app --template typescript`
+- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app -e with-typescript` will create in your current folder
+- [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
+- [Meteor](https://www.meteor.com/): `meteor create --typescript name-of-my-new-typescript-app`
 - [Vite](https://twitter.com/swyx/status/1282727239230996480?lang=en): `npm init vite-app my-react-project --template react-ts` (note - not yet v1.0, but very fast)
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
