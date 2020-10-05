@@ -129,8 +129,8 @@ This guide will always assume you are starting with the latest TypeScript versio
 Cloud setups:
 
 - [TypeScript Playground with React](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUKJLHAN5wCuqWAyjMhhYANFx4BRAgSz44AXzhES5Snhi1GjLAA8W8XBAB2qeAGEInQ0KjjtycABsscALxwAFAEpXAPnaM4OANjeABtA0sYUR4Yc0iAXVcxPgEhdwAGT3oGAOTJaXx3L19-BkDAgBMIXE4QLCsAOhhgGCckgAMATQsgh2BcAGssCrgAEjYIqwVmutR27MC5LM0yuEoYTihDD1zAgB4K4AA3H13yvbAfbs5e-qGRiYspuBmsVD2Aekuz-YAjThgMCMcCMpj6gxcbGKLj8MTiVnck3gAGo4ABGTxyU6rcrlMF3OB1H5wT7-QFGbG4z6HE65ZYMOSMIA) just if you are debugging types (and reporting issues)
-- [CodeSandbox](https://codesandbox.io/s/new) boots up React + TypeScript projects fairly fast (we are trying to figure out a direct path to set it up)
-- [Stackblitz](https://stackblitz.com/edit/react-typescript-base)
+- [CodeSandbox](http://ts.react.new) - cloud IDE, boots up super fast
+- [Stackblitz](https://stackblitz.com/edit/react-typescript-base) - same as CodeSandbox
 
 Local dev setups:
 
