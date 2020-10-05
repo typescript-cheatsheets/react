@@ -25,7 +25,6 @@ Local dev setups:
 - [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app -e with-typescript`
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app my-app --template typescript`
 - [Vite](https://twitter.com/swyx/status/1282727239230996480?lang=en): `npm init vite-app my-react-project --template react-ts` (note - not yet v1.0, but very fast)
-- [Gatsby](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-typescript)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
 
 Manual setup: 
