@@ -128,3 +128,7 @@ website/.cache-loader
 
 # Local Netlify folder
 .netlify
+
+# Lock-files
+package-lock.json
+yarn.lock
