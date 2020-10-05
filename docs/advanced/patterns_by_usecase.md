@@ -35,7 +35,9 @@ export function Button(props: ButtonProps) {
 
 [_See this in the TS Playground_](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUI4wPQtwCuqyA5lowQ4A7fMAhC4AQTBgAFAEo4Ab0Zw4bOABUAnmCzkARAQgQDZOMHRCI8NKmA8hyAEYAbfTAhwYu-WQPOHDCeQgZwAD5wBqgcziDAMGGRBpSoWIkRnEIAJlgEwEJY2WQAdLIATADM5eXyqurslDAcUBIAPABCQSHevgC8RiYGAHxwqK7ZANYAVnBtLF3B4sP19RrWcFhQxFD1TS3tiz0+egOBS6GjMFgAHvDzR8uMAL7MDBqgYO4gWEIwyDAxEJGLdILALH8tgQ8PpHkIAArEMDoW7XHLobB4GAlADCJEghT+iIgyLaZHOITIoxUDDUqD0uGAyFcxLAAH4AFxjGBQAo8egMV4MUHQQjCUTiOBw2RgJGoLlw1moRQ0tS4cSoeBKMYMpkspEAGjgJRNqXgzzgfTgspJqAFag02S8qBI6QAFny4AB3BJunVYRnM1l7dIHOYUyVKE0lM0WljDAXPIA)
 
-**Forwarding Refs**: As [the React docs themselves note](https://reactjs.org/docs/forwarding-refs.html), most usecases will not need to obtain a ref to the inner element. But for people making reusable component libraries, you will need to `forwardRef` the underlying element, and then you can use `ComponentPropsWithRef` to grab props for your wrapper the component. Check [our docs on forwarding Refs](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forward_and_create_ref/) for more. In future, the need to `forwardRef` may go away in React 17+, but for now we still have to deal with this.
+**Forwarding Refs**: As [the React docs themselves note](https://reactjs.org/docs/forwarding-refs.html), most usecases will not need to obtain a ref to the inner element. But for people making reusable component libraries, you will need to `forwardRef` the underlying element, and then you can use `ComponentPropsWithRef` to grab props for your wrapper component. Check [our docs on forwarding Refs](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forward_and_create_ref/) for more. 
+
+In future, the need to `forwardRef` may go away in React 17+, but for now we still have to deal with this. 🙃 
 
 <details>
 <summary>
