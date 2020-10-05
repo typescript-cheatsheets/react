@@ -30,10 +30,12 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 
 <details>
   <summary>
-    You can make a minor optimization to make the forward ref immutable.
+    
+    Side note: the `ref` you get from `forwardRef` is mutable so you can assign to it if needed.
+    
   </summary>
 
-  As of Oct 2020, the default `ref` you get from `forwardRef` is mutable (`MutableRefObject`). However most of the time you don't want users to be able to assign to it.  [There is an open discussion about this](https://github.com/typescript-cheatsheets/react/pull/323/), but for now you can assign `React.Ref` if you want to ensure nobody reassigns it:
+  This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
   ```tsx
   type Props = { children: React.ReactNode; type: "submit" | "button" };
