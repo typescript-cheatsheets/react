@@ -177,6 +177,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Winner95",
+      "name": "Ivan",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13730032?v=4",
+      "profile": "https://www.linkedin.com/in/iigrekov/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

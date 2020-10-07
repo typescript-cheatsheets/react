@@ -26,6 +26,7 @@
     <td align="center"><a href="https://geoplanets.io"><img src="https://avatars2.githubusercontent.com/u/2467377?v=4" width="100px;" alt=""/><br /><sub><b>David Johnston</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=dwjohnston" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/kripod"><img src="https://avatars3.githubusercontent.com/u/14854048?v=4" width="100px;" alt=""/><br /><sub><b>Kristóf Poduszló</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=kripod" title="Documentation">📖</a></td>
     <td align="center"><a href="http://www.novusstudio.com/"><img src="https://avatars3.githubusercontent.com/u/10838852?v=4" width="100px;" alt=""/><br /><sub><b>james glasgow</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=glaschu1" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/iigrekov/"><img src="https://avatars0.githubusercontent.com/u/13730032?v=4" width="100px;" alt=""/><br /><sub><b>Ivan</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=Winner95" title="Code">💻</a></td>
   </tr>
 </table>
 
