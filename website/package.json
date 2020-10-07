@@ -1,9 +1,12 @@
 {
   "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "add-contributors-on-site": "node ../copyFile.js ../CONTRIBUTORS.md ../docs/contributors.md true",
+    "add-contributing-on-site": "node ../copyFile.js ../CONTRIBUTING.md ../docs/contributing.md true",
+    "add-pages-on-site": "yarn add-contributors-on-site && yarn add-contributing-on-site",
+    "start": "yarn add-pages-on-site && docusaurus start",
+    "build": "yarn add-pages-on-site && docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "yarn add-pages-on-site && docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.61",

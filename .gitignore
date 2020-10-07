@@ -126,6 +126,10 @@ website/build
 website/.docusaurus
 website/.cache-loader
 
+# copy of contributors for the website
+docs/contributors.md
+docs/contributing.md
+
 # Local Netlify folder
 .netlify
 
