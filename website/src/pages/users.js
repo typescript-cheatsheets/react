@@ -16,7 +16,7 @@ export default function Users() {
             <p>This project is used by many folks</p>
           </div>
           <div className="row">
-            {users.map((user) => (
+            {users && users.length>0&& users.map((user) => (
               <a
                 className="col-2"
                 href={user.infoLink}
