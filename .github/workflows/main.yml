@@ -12,8 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
+          persist-credentials: true
 
       - name: Get yarn cache directory
         id: yarn
@@ -29,17 +28,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Prettify code
-        uses: creyD/prettier_action@v2.2
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.md
-
-      # old formatting code
-      #- name: Format code
-      #  run: yarn format
-
-      #- name: Format correct?
-      #  run: git diff --exit-code
+        run: |
+          yarn format
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git status
+          git diff-index --quiet HEAD || (git commit  --message 'Fix formatting')
 
       - name: Danger for Spell Checking
         run: |
