@@ -55,8 +55,8 @@ module.exports = {
 
 Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
 
-More `.eslintrc.json` options to consider with more options you may want for **apps**:
-
+More `.eslintrc.json` options to consider with more options you may want for __apps__:
+ 
 ```json
 {
   "extends": [
