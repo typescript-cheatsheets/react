@@ -35,6 +35,7 @@ jobs:
           git add -A
           git status
           git diff-index --quiet HEAD || (git commit  --message 'Fix formatting')
+          git push
 
       - name: Danger for Spell Checking
         run: |
