@@ -1,4 +1,4 @@
-name: FormatCodeAndShowDiff
+name: Autofix formatting
 on:
   push:
     branches: [main]
