@@ -1,8 +1,6 @@
 {
   "scripts": {
-    "add-contributors-on-site": "node ../copyFile.js ../CONTRIBUTORS.md ../docs/contributors.md true",
-    "add-contributing-on-site": "node ../copyFile.js ../CONTRIBUTING.md ../docs/contributing.md true",
-    "add-pages-on-site": "yarn add-contributors-on-site && yarn add-contributing-on-site",
+    "add-pages-on-site": "node ../copyFile.js",
     "start": "yarn add-pages-on-site && docusaurus start",
     "build": "yarn add-pages-on-site && docusaurus build",
     "swizzle": "docusaurus swizzle",
