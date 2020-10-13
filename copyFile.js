@@ -1,8 +1,16 @@
 const fs = require("fs");
-
-const src = process.argv[2];
-const dest = process.argv[3];
-const hideHeader = process.argv[4];
+const filesTopCopy = [
+  {
+    src: "../CONTRIBUTORS.md",
+    dest: "../docs/contributors.md",
+    hideHeader: true,
+  },
+  {
+    src: "../CONTRIBUTING.md",
+    dest: "../docs/contributing.md",
+    hideHeader: true,
+  },
+];
 
 const generatingPageOptions = `---
 hide_title: true
@@ -10,7 +18,7 @@ hide_title: true
 
 `;
 
-function writeNewFile() {
+function writeNewFile(src, dest) {
   const fileContent = fs.readFileSync(src).toString();
   const data = new Uint8Array(Buffer.from(generatingPageOptions + fileContent));
 
@@ -23,7 +31,7 @@ function writeNewFile() {
   });
 }
 
-function copyFile() {
+function copyFile(src, dest) {
   fs.copyFile(src, dest, (err) => {
     if (err) {
       console.log("Error Found:", err);
@@ -33,8 +41,10 @@ function copyFile() {
   });
 }
 
-if (hideHeader) {
-  writeNewFile();
-} else {
-  copyFile();
-}
+filesTopCopy.forEach(({ src, dest, hideHeader }) => {
+  if (hideHeader) {
+    writeNewFile(src, dest);
+  } else {
+    copyFile(src, dest);
+  }
+});
