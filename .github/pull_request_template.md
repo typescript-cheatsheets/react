@@ -1,0 +1,3 @@
+Thanks for contributing! If you are making a significant PR, please make sure to open an issue first, so we have a chance to give feedback before you do too much work. If you're just fixing typos or adding small notes, you don't need to open an issue first but a brief explanation of why you'd like to add it would be nice :) 
+
+**If you are contributing to README.md, DON'T**. README.md is auto-generated from `/docs/basic`, in order to preserve the original Github-only reading experience this cheatsheet used to have. Please just make edits to the specific sources inside of `/docs/basic`. Sorry, we get that it is a slight pain.
