@@ -22,7 +22,7 @@ const Greet = ({ age = 21 }: GreetProps) => // etc
 Class Components:
 
 ```tsx
-type GreetProps =  {
+type GreetProps = {
   age?: number;
 };
 
