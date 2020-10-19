@@ -27,8 +27,10 @@ type GreetProps =  {
 };
 
 class Greet extends React.Component<GreetProps> {
-  const { age = 21 } = this.props
-  /*...*/
+  render() {
+    const { age = 21 } = this.props;
+    /*...*/
+  }
 }
 
 let el = <Greet age={3} />;
