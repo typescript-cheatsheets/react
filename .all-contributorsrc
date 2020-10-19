@@ -186,6 +186,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "selrond",
+      "name": "Sebastian Andil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6603389?v=4",
+      "profile": "http://sebastianandil.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
