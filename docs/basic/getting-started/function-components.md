@@ -30,7 +30,7 @@ Some differences from the "normal function" version:
 
   - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
-- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might considered better style to be explicit about components that consume `children`, anyway.
+- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might be better to be explicit about components that consume `children`, anyway.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
@@ -42,7 +42,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 <details>
 <summary>
 
-As of [@types/react PR #46643](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643) (TODO: update with @types/react version when merged), you can use a new `React.VoidFunctionComponent` or `React.VFC` type if you wish to declare the accepted `children` explicitly. This is an interim solution until FunctionComponent will accept no children by default (planned for React 18).
+As of [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can also use `React.VoidFunctionComponent` or `React.VFC` type if you want to type `children` explicitly. This is an interim solution until `FunctionComponent` will accept no children by default (planned for `@types/react@^18.0.0`).
 
 </summary>
 
