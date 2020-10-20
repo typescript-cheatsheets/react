@@ -149,6 +149,12 @@ async function getReadme() {
       headingLevel: 1,
     });
     initialContent = await updateSectionWith({
+      name: "useful-hooks",
+      path: "docs/basic/useful-hooks.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
       name: "editor-integration",
       path: "docs/basic/editor-integration.md",
       to: initialContent,
