@@ -43,6 +43,7 @@
           "basic/recommended/resources"
         ]
       },
+      "basic/useful-hooks",
       "basic/editor_integration",
       "basic/linting",
       "basic/examples"
