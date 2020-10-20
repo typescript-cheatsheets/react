@@ -28,12 +28,12 @@
     <td align="center"><a href="http://www.novusstudio.com/"><img src="https://avatars3.githubusercontent.com/u/10838852?v=4" width="100px;" alt=""/><br /><sub><b>james glasgow</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=glaschu1" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/iigrekov/"><img src="https://avatars0.githubusercontent.com/u/13730032?v=4" width="100px;" alt=""/><br /><sub><b>Ivan</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=Winner95" title="Code">💻</a></td>
     <td align="center"><a href="http://sebastianandil.com"><img src="https://avatars1.githubusercontent.com/u/6603389?v=4" width="100px;" alt=""/><br /><sub><b>Sebastian Andil</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=selrond" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/adnanhusain15"><img src="https://avatars2.githubusercontent.com/u/36721076?v=4" width="100px;" alt=""/><br /><sub><b>Adnan Husain</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=adnanhusain15" title="Documentation">📖</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
