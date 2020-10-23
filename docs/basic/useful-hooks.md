@@ -183,19 +183,19 @@ Example implementation
 const task = useAsyncTask(async (data: any) => await myApiRequest(data));
 task.run(data);
 useEffect(() => {
-  console.log(task.status); // 'IDEAL' | 'PROCESSING' | 'ERROR' | 'SUCCESS';
+  console.log(task.status); // 'IDLE' | 'PROCESSING' | 'ERROR' | 'SUCCESS';
 }, task.status);
 
 // Implementation
 
 import { useCallback, useState } from "react";
 
-type TStatus = "IDEAL" | "PROCESSING" | "ERROR" | "SUCCESS";
+type TStatus = "IDLE" | "PROCESSING" | "ERROR" | "SUCCESS";
 
 function useAsyncTask<T extends any[], R = any>(
   task: (...args: T) => Promise<R>
 ) {
-  const [status, setStatus] = useState<TStatus>("IDEAL");
+  const [status, setStatus] = useState<TStatus>("IDLE");
   const [message, setMessage] = useState("");
 
   const run = useCallback(async (...arg: T) => {
@@ -214,7 +214,7 @@ function useAsyncTask<T extends any[], R = any>(
 
   const reset = useCallback(() => {
     setMessage("");
-    setStatus("IDEAL");
+    setStatus("IDLE");
   }, []);
 
   return {
