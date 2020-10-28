@@ -6,7 +6,7 @@ sidebar_label: Useful Patterns by TypeScript Version
 
 TypeScript Versions often introduce new ways to do things; this section helps current users of React + TypeScript upgrade TypeScript versions and explore patterns commonly used by TypeScript + React apps and libraries. This may have duplications with other sections; if you spot any discrepancies, [file an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new)!
 
-_TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!_ Apart from official TS team communication we also recommend [Marius Schulz's blog for version notes](https://mariusschulz.com/). For more TypeScript history, see [A Brief History of TypeScript Types](https://github.com/blakeembrey/a-brief-history-of-types-with-typescript) and [A Brief History of DefinitelyTyped](https://blog.johnnyreilly.com/2019/10/definitely-typed-movie.html)
+_TypeScript version guides before 2.9 are unwritten, please feel free to send a PR!_ Apart from official TS team communication we also recommend [Marius Schulz's blog for version notes](https://mariusschulz.com/). For more TypeScript history, see [A Brief History of TypeScript Types](https://github.com/blakeembrey/a-brief-history-of-types-with-typescript) and [A Brief History of DefinitelyTyped](https://blog.johnnyreilly.com/2019/10/definitely-typed-movie.html). You may also wish to explore lesser known alternative typings of React like [prop-types](https://reactjs.org/docs/typechecking-with-proptypes.html), [om](https://github.com/omcljs/om), [reason-react](https://reasonml.github.io/reason-react/), and [typed-react](https://github.com/asana/typed-react).
 
 ## TypeScript 2.9
 
