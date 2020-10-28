@@ -4,7 +4,6 @@ title: Recommended React + TypeScript codebases to learn from
 sidebar_label: Codebases to learn from
 ---
 
-
 - https://github.com/devhubapp/devhub
 - https://github.com/formium/formik/
 - https://github.com/jaredpalmer/react-fns
