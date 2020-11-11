@@ -105,6 +105,23 @@ function withInjectedProps<U extends Record<string, unknown>>(
 
 (_[Link to TS Playground](https://www.typescriptlang.org/play?strictFunctionTypes=false&jsx=1#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wG4AoczAVwDsNgJa4B3YGACwElaArJDEgAmABRxgAzgB4AqnCQAPGElpCJiAdCFSJMKMFoBzADRw6Aa1oQWtAHy24ACgP9Bo8RIBccGQEo4AN7kcHBEMNRQzDT0MIzMUgAq8koqaj62jsEhcADCuJC0KjDeyOgwAHR54ExFCQCeYEiJtln+QdmhSOGRcNEMTE5gHt4A8iDsiabmSHUQmOn+3gBSAMoAGuUAogA2SCBFgVkdAPTHAIJwMA1IcGgQSFBocXDA6oVoaEgSEihQdXAAIwEKGoEhu9UaKzQ+jA8CE9wktAA5PBLNZLhwUPBODcxhMEqZ8NZClB8A4ANSBYkPbzlOkAXzgAF44Akjtk7rRdHBCiwxBBJMzAnA6eUhgKJKZRS4BMp3BK4IyUOoEhQOiEwhF4lUCgcAqLefzJIzjrY1dl6ebLeR6ZQro1clijeoWe04NtgAA3L7eWjUEBAqDm6lQby6fRGCjWvqxAY5LGOALur1fUwhxXeeMwZ1tLKanqZDpSIRelrqwL4Ai28sAWSQ1m8AQ93ok9NMIxsNKpnag1eyUmOJc9ZbgvijduucBE2xQhWzHiFbtoKH2Yb0BkMpDgNsoMee09nXUTy-2jO8B7nOcOGq6Wqc7OLpbgjSgEiYbxXN1egRPSHpA6HEcx23W1yE5bkO0KIQsyFNhOB4Vw5WdRMQ28fAAQgAF8HpXxHCzYDKCkGDmy+JkAgATkZEMmXwCQWDqBRK1NLdTgxb8JA4CBqG2IRARuTADCQcgpEg4RiJTCQyMouBqNo+jGLgZjFOONj1A4rieLgTFvTgFBLmuTYoBwKBhNE6CsWTFspJNM1lNUuB1O43igV6QTKHA+AzIvLpYPYbg+FlYRkICVCCAwrCcMcbyYGA1jNgURo3HkIzoDgABaXTtk4LjDA4Ux2CRN4IHgMBfliNBuN+bZ-iIFAhBQAFdnKbcgA)_)
 
+## Without coercion
+
+```typescritpt
+function withOwner(owner: string) {
+  return function <T extends { owner: string }>(
+    Component: React.ComponentType<T>
+  ): React.ComponentType<Omit<T, "owner"> & {owner?: never}> {
+    return function (props) {
+      const newProps = { ...props, owner };
+      return <Component {...newProps} />;
+    };
+  };
+}
+```
+
+(_[Link to TS Playground](https://www.typescriptlang.org/play?strictFunctionTypes=false&jsx=1#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wG4AoczAVwDsNgJa4B3YGACwHkXakoAFBF78AXHADOMKMFoBzAJRwA3uThwiMalGY16MRswA8AFThIAHjCS0AJhJVxhfKOKkz5cAL4A+AWvU4AGFcSD5aGHFkdBgAOhDwJhsYEwBPMCRTHwCFKOI4hLDktIyjLhB2UwAaAmd+fB84ADIVOqgAfnE+ADd+XxUA9U1tXToGJjgBMBwwCSVVQMC0Jik4PhYABRmHAF5HWIPpiFmatu8KRaGkLR04I0KkiJUD2PWt44kvOAB6HwvArz-QHkLyUGDpJDBFAwd6zOB7BZwAA2wF6Ei61BAACN+P82m5pLI5BRgXpxswgtCBMpkaikBJTiIoN5xJSYdt5gFhrd-IsjLZUdlLip8ARQcKALJIYTiZQotFeGo8FyytriwJGb4C7pCuAKEmUZa0VbKpC2Nnw1jsbhMgT4CQsVIWfAKARs-WUe7Q2lonbKACcXzaO3tjudPz+P2+cE4wAcEg4EGoSNscBxcEwsiQ5DKInN3vl9L9gacTJDDqdot+pCjMY4cckieTqY4KF6cBQMYhAFEoDgoDnTfn4IWJMWvtXa7H402U2nIZm+JRyOCMnAACIQOSwhyI2goEBIAkeOQBfGSQnyEFUMYGCabuTU-eHxkuLziB87zlXG7GbWNAB1CAIEwWVnyQRU4FNVxWiZLxNX-a8jRNPMH0tNhOGgu0K2dV0Hw9T00PAkNM1sCBRWDUNKwjGtvmjadGyTOd00XbNcz4WwiIPJASOAMiKLLKjw0nOi6wbBMmJbNtIU7VckF7ftB1Qrc1m43j+Joqd6xnST5wzLMgA)_)
+
 ## Learn More
 
 We will need to extract lessons from here in future but here they are:
