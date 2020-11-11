@@ -107,11 +107,11 @@ function withInjectedProps<U extends Record<string, unknown>>(
 
 ## Without coercion
 
-```typescritpt
+```typescript
 function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
-  ): React.ComponentType<Omit<T, "owner"> & {owner?: never}> {
+  ): React.ComponentType<Omit<T, "owner"> & { owner?: never }> {
     return function (props) {
       const newProps = { ...props, owner };
       return <Component {...newProps} />;
