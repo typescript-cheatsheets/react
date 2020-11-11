@@ -107,7 +107,7 @@ function withInjectedProps<U extends Record<string, unknown>>(
 
 ## Without coercion
 
-```typescritpt
+```typescript
 function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
