@@ -204,6 +204,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "artola",
+      "name": "martin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/11500763?v=4",
+      "profile": "https://github.com/artola",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
