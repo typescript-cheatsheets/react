@@ -1,14 +1,17 @@
+## disabled for now
+## too many 429's
+
 name: Check Markdown Links
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: "0 9 * * *"
+  # pull_request:
+  #   branches:
+  #     - main
+  # schedule:
+  #   - cron: "0 9 * * *"
 
 jobs:
   markdown-link-check:
