@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: `yarn format` changes committed?
+      - name: yarn format changes committed?
         run: yarn format:check
 
       - name: Danger for Spell Checking
