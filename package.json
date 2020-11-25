@@ -21,6 +21,7 @@
     "format-readme": "prettier --write \"README.md\"",
     "gen-readme": "node genReadme.js",
     "format": "prettier --write \"**/*.md\"",
+    "format:check": "prettier --check \"**/*.md\"",
     "postinstall": "cd website && yarn",
     "start": "yarn --cwd website start",
     "build": "yarn --cwd website build"

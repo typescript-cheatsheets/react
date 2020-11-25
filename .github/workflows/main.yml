@@ -9,11 +9,7 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
+      - uses: actions/checkout@v2
 
       - name: Get yarn cache directory
         id: yarn
@@ -28,18 +24,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v2.2
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.md
-
-      # old formatting code
-      #- name: Format code
-      #  run: yarn format
-
-      #- name: Format correct?
-      #  run: git diff --exit-code
+      - name: `yarn format` changes committed?
+        run: yarn format:check
 
       - name: Danger for Spell Checking
         run: |
