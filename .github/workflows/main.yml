@@ -25,10 +25,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Format code
-        run: yarn format
-
-      - name: Format correct?
-        run: git diff --exit-code
+        run: yarn format:check
 
       - name: Danger for Spell Checking
         run: |
