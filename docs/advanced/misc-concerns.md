@@ -189,7 +189,8 @@ Any other tips? Please contribute on this topic! [We have an ongoing issue here 
 
 Compiling large TS projects can get slow. Here are some tips:
 
-- use [TS 3.0 Project references](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_version#typescript-30)
+- Use [TS 3.0 Project references](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_version#typescript-30)
+- Follow the official (TS performance wiki guidelines)[https://github.com/microsoft/TypeScript/wiki/Performance]
 - Webpack ([see CRA diff](https://gist.github.com/jaredpalmer/d3016701589f14df8a3572df91a5754b)):
   - set `output.pathinfo = false`
   - set `optimization.splitChunks`, `optimization.removeAvailableModules`, `optimization.removeEmptyChunks` to `false`
