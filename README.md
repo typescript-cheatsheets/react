@@ -1262,7 +1262,7 @@ const AppCtx = React.createContext<AppContextInterface | null>(null);
 // Provider in your app
 
 const sampleAppContext: AppContextInterface = {
-  name: "Using React Context in a Typescript App",
+  name: "Using React Context in a TypeScript App",
   author: "thehappybug",
   url: "http://www.example.com",
 };
