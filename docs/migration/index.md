@@ -87,7 +87,7 @@ see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/th
 
 ## Misc migration stories by notable companies and open source
 
-- [Bloomberg](https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/) 
+- [Bloomberg](https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/)
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)

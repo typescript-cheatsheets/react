@@ -9,7 +9,16 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout commit
+        uses: actions/checkout@v2
+        if: ${{ github.event_name == 'push' }}
+      
+      - name: Checkout Pull Request
+        uses: actions/checkout@v2
+        with:
+          # TODO: Can we unify the checkout steps i.e. does this value resolve to "undefined" on `push`?
+          ref: ${{ github.event.pull_request.head.sha }}
+        if: ${{ github.event_name == 'pull_request' }}
 
       - name: Get yarn cache directory
         id: yarn
@@ -24,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: yarn format changes committed?
+      - name: '`yarn format` changes committed?'
         run: yarn format:check
 
       - name: Danger for Spell Checking
