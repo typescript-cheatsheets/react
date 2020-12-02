@@ -880,9 +880,9 @@ A simple solution is to use `React.ComponentProps`:
 ```tsx
 // a Modal component defined elsewhere
 const defaultProps: React.ComponentProps<typeof Modal> = {
-	title: "Hello World",
-	visible: true,
-	onClick: jest.fn(),
+  title: "Hello World",
+  visible: true,
+  onClick: jest.fn(),
 };
 ```
 
