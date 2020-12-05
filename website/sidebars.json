@@ -6,11 +6,11 @@
         "type": "category",
         "label": "Getting Started",
         "items": [
+          "basic/getting-started/basic_type_example",
           "basic/getting-started/function_components",
           "basic/getting-started/hooks",
           "basic/getting-started/class_components",
           "basic/getting-started/types_or_interfaces",
-          "basic/getting-started/basic_type_example",
           "basic/getting-started/default_props",
           "basic/getting-started/forms_and_events",
           "basic/getting-started/context",

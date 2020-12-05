@@ -39,6 +39,11 @@ async function getReadme() {
       prefix: "Section 1: ",
     });
     initialContent = await updateSectionWith({
+      name: "basic-type-examples",
+      path: "docs/basic/getting-started/basic-type-examples.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
       name: "function-components",
       path: "docs/basic/getting-started/function-components.md",
       to: initialContent,
@@ -62,11 +67,6 @@ async function getReadme() {
     initialContent = await updateSectionWith({
       name: "type-or-interface",
       path: "docs/basic/getting-started/type-or-inteface.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
-      name: "basic-type-examples",
-      path: "docs/basic/getting-started/basic-type-examples.md",
       to: initialContent,
     });
     initialContent = await updateSectionWith({
