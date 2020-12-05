@@ -70,11 +70,6 @@ async function getReadme() {
       to: initialContent,
     });
     initialContent = await updateSectionWith({
-      name: "react-prop-type-examples",
-      path: "docs/basic/getting-started/react-prop-type-examples.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
       name: "forms-and-events",
       path: "docs/basic/getting-started/forms-and-events.md",
       to: initialContent,
