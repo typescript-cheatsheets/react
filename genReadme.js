@@ -2,7 +2,7 @@ const { Octokit } = require("@octokit/rest");
 const Toc = require("markdown-toc");
 const Fm = require("front-matter");
 const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
-const repo_info = process.env.GITHUB_REPOSITORY.split("/");
+const repo_info = process.env.CI_REPOSITORY.split("/");
 const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
