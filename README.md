@@ -192,9 +192,9 @@ This guide will always assume you are starting with the latest TypeScript versio
 
 Cloud setups:
 
-- [TypeScript Playground with React](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUKJLHAN5wCuqWAyjMhhYANFx4BRAgSz44AXzhES5Snhi1GjLAA8W8XBAB2qeAGEInQ0KjjtycABsscALxwAFAEpXAPnaM4OANjeABtA0sYUR4Yc0iAXVcxPgEhdwAGT3oGAOTJaXx3L19-BkDAgBMIXE4QLCsAOhhgGCckgAMATQsgh2BcAGssCrgAEjYIqwVmutR27MC5LM0yuEoYTihDD1zAgB4K4AA3H13yvbAfbs5e-qGRiYspuBmsVD2Aekuz-YAjThgMCMcCMpj6gxcbGKLj8MTiVnck3gAGo4ABGTxyU6rcrlMF3OB1H5wT7-QFGbG4z6HE65ZYMOSMIA) just if you are debugging types (and reporting issues)
+- [TypeScript Playground with React](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUKJLHAN5wCuqWAyjMhhYANFx4BRAgSz44AXzhES5Snhi1GjLAA8W8XBAB2qeAGEInQ0KjjtycABsscALxwAFAEpXAPnaM4OANjeABtA0sYUR4Yc0iAXVcxPgEhdwAGT3oGAOTJaXx3L19-BkDAgBMIXE4QLCsAOhhgGCckgAMATQsgh2BcAGssCrgAEjYIqwVmutR27MC5LM0yuEoYTihDD1zAgB4K4AA3H13yvbAfbs5e-qGRiYspuBmsVD2Aekuz-YAjThgMCMcCMpj6gxcbGKLj8MTiVnck3gAGo4ABGTxyU6rcrlMF3OB1H5wT7-QFGbG4z6HE65ZYMOSMIA) just if you are debugging types (and reporting issues), not for running code
 - [CodeSandbox](http://ts.react.new) - cloud IDE, boots up super fast
-- [Stackblitz](https://stackblitz.com/edit/react-typescript-base) - same as CodeSandbox
+- [Stackblitz](https://stackblitz.com/edit/react-typescript-base) - cloud IDE, boots up super fast
 
 Local dev setups:
 
@@ -202,7 +202,12 @@ Local dev setups:
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
 - [Meteor](https://guide.meteor.com/build-tool.html#typescript): `meteor create --typescript name-of-my-new-typescript-app`
 - [Ignite](https://github.com/infinitered/ignite#use-ignite-andross-infinite-red-andross-boilerplate) for React Native: `ignite new myapp`
-- TSDX for Creating React+TS libraries
+- [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS libraries
+
+<details>
+<summary>
+Other tools
+</summary>
 
 Less mature tools still worth checking out:
 
@@ -216,6 +221,8 @@ Manual setup:
 - [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 - In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/))
 - There are also many React + TypeScript boilerplates, please see [our Other Resources list](https://react-typescript-cheatsheet.netlify.app/docs/basic/recommended/resources/).
+
+</details>
 
 ## Import React
 
@@ -287,9 +294,11 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 <details>
 <summary>
 
-As of [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can also use `React.VoidFunctionComponent` or `React.VFC` type if you want to type `children` explicitly. This is an interim solution until `FunctionComponent` will accept no children by default (planned for `@types/react@^18.0.0`).
+Using `React.VoidFunctionComponent` or `React.VFC`
 
 </summary>
+
+As of [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can also use `React.VoidFunctionComponent` or `React.VFC` type if you want to type `children` explicitly. This is an interim solution until `FunctionComponent` will accept no children by default (planned for `@types/react@^18.0.0`).
 
 ```ts
 type Props = { foo: string };
@@ -372,7 +381,9 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well most of the time:
 
 ```tsx
-const [val, toggle] = React.useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
+const [val, toggle] = React.useState(false);
+// `val` is inferred to be a boolean
+// `toggle` only takes booleans
 ```
 
 See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.app/docs/basic/troubleshooting/types/#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -449,7 +460,7 @@ When using `useEffect`, take care not to return anything other than a function o
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
-  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
+
   useEffect(
     () =>
       setTimeout(() => {
@@ -457,9 +468,32 @@ function DelayedEffect(props: { timerMs: number }) {
       }, timerMs),
     [timerMs]
   );
+  // bad example! setTimeout implicitly returns a number
+  // because the arrow function body isn't wrapped in curly braces
   return null;
 }
 ```
+
+<details>
+<summary>
+Solution to the above example
+</summary>
+
+```tsx
+function DelayedEffect(props: { timerMs: number }) {
+  const { timerMs } = props;
+
+  useEffect(() => {
+    setTimeout(() => {
+      /* do stuff */
+    }, timerMs);
+  }, [timerMs]);
+  // better; use the void keyword to make sure you return undefined
+  return null;
+}
+```
+
+</details>
 
 ## useRef
 
@@ -481,7 +515,8 @@ The first option will make `ref1.current` read-only, and is intended to be passe
 function MyComponent() {
   const ref1 = useRef<HTMLElement>(null!);
   useEffect(() => {
-    doSomethingWith(ref1.current); // TypeScript won't require null-check e.g. ref1 && ref1.current
+    doSomethingWith(ref1.current);
+    // TypeScript won't require null-check e.g. ref1 && ref1.current
   });
   return <div ref={ref1}> etc </div>;
 }
@@ -519,7 +554,7 @@ example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#us
 
 ## useImperativeHandle
 
-_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106)_
+_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
 
 ```tsx
 type ListProps<ItemType> = {
@@ -575,7 +610,7 @@ export function useLoading() {
 
 A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
 
-```ts
+```tsx
 function tuplify<T extends any[]>(...elements: T) {
   return elements;
 }
@@ -597,18 +632,18 @@ function useTuple() {
 
 Note that the React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
 
-More Hooks + TypeScript reading:
+## More Hooks + TypeScript reading:
 
-- <https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d>
-- <https://fettblog.eu/typescript-react/hooks/#useref>
+- https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
+- https://fettblog.eu/typescript-react/hooks/#useref
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
-Example React Hooks + TypeScript Libraries:
+## Example React Hooks + TypeScript Libraries:
 
-- <https://github.com/mweststrate/use-st8>
-- <https://github.com/palmerhq/the-platform>
-- <https://github.com/sw-yx/hooks>
+- https://github.com/mweststrate/use-st8
+- https://github.com/palmerhq/the-platform
+- https://github.com/sw-yx/hooks
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
@@ -721,6 +756,70 @@ class App extends React.Component<{
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtAGxQGc64BBMMOJADxiQDsATRsnQwAdAGFckHrxgAeAN4U4cEEgYoA5kgBccOjCjAeGgNwUAvgD44i8sshHuUXTwCuIAEZIoJuAHo-OGpgAGskOBgAC2A6JTg0SQhpHhgAEWA+AFkIVxSACgBKGzjlKJiRBxTvOABeOABmMzs4cziifm9C4ublIhhXKB44PJLlOFk+YAA3S1GxmzK6CpwwJdV1LXM4FH4F6KXKp1aesdk-SZnRgqblY-MgA)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Typing getDerivedStateFromProps
+
+Before you start using `getDerivedStateFromProps`, please go through the [documentation](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops) and [You Probably Don't Need Derived State](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html). Derived State can be implemented using hooks which can also help set up memoization.
+
+Here are a few ways in which you can annotate `getDerivedStateFromProps`
+
+1. If you have explicitly typed your derived state and want to make sure that the return value from `getDerivedStateFromProps` conforms to it.
+
+```tsx
+class Comp extends React.Component<Props, State> {
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
+    //
+  }
+}
+```
+
+2. When you want the function's return value to determine your state.
+
+```tsx
+class Comp extends React.Component<
+  Props,
+  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+> {
+  static getDerivedStateFromProps(props: Props) {}
+}
+```
+
+3. When you want derived state with other state fields and memoization
+
+```tsx
+type CustomValue = any;
+interface Props {
+  propA: CustomValue;
+}
+interface DefinedState {
+  otherStateField: string;
+}
+type State = DefinedState & ReturnType<typeof transformPropsToState>;
+function transformPropsToState(props: Props) {
+  return {
+    savedPropA: props.propA, // save for memoization
+    derivedState: props.propA,
+  };
+}
+class Comp extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      otherStateField: "123",
+      ...transformPropsToState(props),
+    };
+  }
+  static getDerivedStateFromProps(props: Props, state: State) {
+    if (isEqual(props.propA, state.savedPropA)) return null;
+    return transformPropsToState(props);
+  }
+}
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoUSWOYAZwFEBHAVxQBs5tcD2IATFHQAWAOnpJWHMuQowAnmCRwAwizoxcANQ4tlAXjgoAdvIDcFYMZhIomdMoAKOMHTgBvCnDhgXAQQAuVXVNEB12PQtyAF9La1t7NGUAESRMKyR+AGUYFBsPLzgIGGFbHLykADFgJHZ+II0oKwBzKNjyBSU4cvzDVPTjTJ7lADJEJBgWKGMAFUUkAB5OpAhMOBgoEzpMaBBnCFcZiGGAPijMFmMMYAhjdc3jbd39w+PcmwAKXwO6IJe6ACUBXI3iIk2mwO83joKAAbpkXoEfC46KJvmA-AAaOAAehxcBh8K40DgICQIAgwAAXnkbsZCt5+LZgPDsu8kEF0aj0X5CtE2hQ0OwhG4VLgwHAkAAPGzGfhuZDoGCiRxTJBi8C3JDWBb-bGnSFwNC3RosDDQL4ov4ooGeEFQugsJRQS0-AFRKHrYT0UQaCpwQx2z3eYqlKDDaq1epwABEAEYAEwAZhjmIZUNEmY2Wx2UD2KKOw1drgB6f5fMKfpgwDQcGaE1STVZEZw+Z+xd+cD1BPZQWGtvTwDWH3ozDY7A7aP82KrSF9cIR-gBQLBUzuxhY7HYHqhq4h2ceubbryLXPdFZiQA)
 
 <!--END-SECTION:class-components-->
 
@@ -980,7 +1079,13 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy table:
 <!--END-SECTION:type-or-interface-->
 
 <!--START-SECTION:basic-type-examples-->
+## Typing Component Props
+
+This is intended as a basic orientation and reference for React developers familiarizing with TypeScript.
+
 ## Basic Prop Types Examples
+
+A list of TypeScript types you will likely use in a React+TypeScript app:
 
 ```tsx
 type AppProps = {
@@ -1023,6 +1128,84 @@ type AppProps = {
 ```
 
 Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](https://react-typescript-cheatsheet.netlify.app/docs/advanced/misc_concerns/#commenting-components) section in the Advanced Cheatsheet.
+
+## Useful React Prop Type Examples
+
+Relevant for components that accept other React components as props.
+
+```tsx
+export declare interface AppProps {
+  children1: JSX.Element; // bad, doesnt account for arrays
+  children2: JSX.Element | JSX.Element[]; // meh, doesn't accept strings
+  children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
+  children4: React.ReactChild[]; // better
+  children: React.ReactNode; // best, accepts everything
+  functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
+  style?: React.CSSProperties; // to pass through style props
+  onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
+  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
+  props: Props & React.ComponentPropsWithoutRef<"button">; // to impersonate all the props of a button element and explicitly not forwarding its ref
+  props2: Props & React.ComponentPropsWithRef<MyButtonWithForwardRef>; // to impersonate all the props of MyButtonForwardedRef and explicitly forwarding its ref
+}
+```
+
+<details>
+ <summary><b>JSX.Element vs React.ReactNode?</b></summary>
+
+Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
+
+- `JSX.Element` -> Return value of `React.createElement`
+- `React.ReactNode` -> Return value of a component
+
+</details>
+
+[More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/129)
+
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Types or Interfaces?
+
+You can use either Types or Interfaces to type Props and State, so naturally the question arises - which do you use?
+
+`interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
+
+- always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions, as this allows a consumer to extend them via _declaration merging_ if some definitions are missing.
+
+- consider using `type` for your React Component Props and State, for consistency and because it is more constrained.
+
+You can read more about the reasoning behind this rule of thumb in [Interface vs Type alias in TypeScript 2.7](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c).
+
+Types are useful for union types (e.g. `type MyType = TypeA | TypeB`) whereas Interfaces are better for declaring dictionary shapes and then `implementing` or `extending` them.
+
+<details>
+  <summary>
+    <b>Useful table for Types vs Interfaces</b>
+  </summary>
+It's a nuanced topic, don't get too hung up on it. Here's a handy table:
+
+| Aspect                                          | Type | Interface |
+| ----------------------------------------------- | :--: | :-------: |
+| Can describe functions                          |  ✅  |    ✅     |
+| Can describe constructors                       |  ✅  |    ✅     |
+| Can describe tuples                             |  ✅  |    ✅     |
+| Interfaces can extend it                        |  ⚠️  |    ✅     |
+| Classes can extend it                           |  🚫  |    ✅     |
+| Classes can implement it (`implements`)         |  ⚠️  |    ✅     |
+| Can intersect another one of its kind           |  ✅  |    ⚠️     |
+| Can create a union with another one of its kind |  ✅  |    🚫     |
+| Can be used to create mapped types              |  ✅  |    🚫     |
+| Can be mapped over with mapped types            |  ✅  |    ✅     |
+| Expands in error messages and logs              |  ✅  |    🚫     |
+| Can be augmented                                |  🚫  |    ✅     |
+| Can be recursive                                |  ⚠️  |    ✅     |
+
+⚠️ In some cases
+
+(source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
+
+</details>
+
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
 <!--END-SECTION:basic-type-examples-->
 
@@ -1133,13 +1316,13 @@ class Comp extends React.PureComponent<Props, State> {
 <!--START-SECTION:forms-and-events-->
 ## Forms and Events
 
-If performance is not an issue, inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
+If performance is not an issue (and it usually isn't!), inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
 
 ```tsx
 const el = (
   <button
     onClick={(event) => {
-      /* ... */
+      /* event will be correctly typed automatically! */
     }}
   />
 );
@@ -1148,13 +1331,10 @@ const el = (
 But if you need to define your event handler separately, IDE tooling really comes in handy here, as the @type definitions come with a wealth of typing. Type what you are looking for and usually the autocomplete will help you out. Here is what it looks like for an `onChange` for a form event:
 
 ```tsx
-class App extends React.Component<
-  {},
-  {
-    // no props
-    text: string;
-  }
-> {
+type State = {
+  text: string;
+};
+class App extends React.Component<Props, State> {
   state = {
     text: "",
   };
@@ -1230,7 +1410,7 @@ If you don't quite care about the type of the event, you can just use React.Synt
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGctoRlM4BeRYmAOgFc6kLABQBKClVoM4AMSbs4o9gD4FFOHAA8mJmrhFMbAN7aozJJgC+u2gGVeAIxDAYRoUgBcndDxsBPGjAAFkgwwGgAogBuSAEiynCGuupI3GBE0QEAIuYovAA2MKIA3Elw1PTwMChQAOYh8ilVtfUodHAwvmBIEKyN1XXwAGQJpckgKMB5noZwkSh5vB5wDFDANDVwFiXk6rtwYK10AO7QACbTs-OLnitrG1ulDzu75VJI45PyTQPc7xN53DmCyQRTgAHowe1Okg0ME0ABrOgAQlKr3gBzoxzOX36IVShxOUFOgKuIPBkI6XVhMMRKOe6ghcBCaG4rN0Fis5CUug0p2AkW59M0eRQ9iQeUFe3U4Q+U1GmjWYF4lWhbAARH9Jmq4DQUCAkOrNXltWDJbsNGCRWKJTywXyBTz7Wb1BoreLnbsAAoEs7ueUaRXKqFddUYrFE7W6-Whn0R8Eei1um3PC1Ox38hOBlUhtV0BxOGDaoGLdUAGQgGzWJrNqYzFAtJhAgpEQA)
 
-Of course, if you're making any sort of significant form, [you should use Formik](https://jaredpalmer.com/formik), which is written in TypeScript.
+Of course, if you're making any sort of significant form, [you should use Formik](https://jaredpalmer.com/formik) or [React Hook Form](https://react-hook-form.com/), which are written in TypeScript.
 
 <!--END-SECTION:forms-and-events-->
 
@@ -2315,7 +2495,7 @@ Conditional Types are a difficult topic to get around so here are some extra res
 <!--START-SECTION:utilities-->
 # Troubleshooting Handbook: Utilities
 
-these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
+These are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
 
 - `ConstructorParameters`: a tuple of class constructor's parameter types
 - `Exclude`: exclude a type from another type
@@ -2329,9 +2509,7 @@ these are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 - `Pick`: A subtype of an object type with a subset of its keys
 - `Record`: A map from a key type to a value type
 - `Required`: Make all properties in an object required
-- `ReturnType` A function's return type
-
-This section needs writing, but you can probably find a good starting point with [Wes Bos' ESLint config](https://github.com/wesbos/eslint-config-wesbos) (which comes with a [YouTube intro](https://www.youtube.com/watch?v=lHAeK8t94as)).
+- `ReturnType`: A function's return type
 
 <!--END-SECTION:utilities-->
 
@@ -2453,7 +2631,7 @@ You can see examples of these included in the built in type declarations in the 
 <!--END-SECTION:official-typings-bugs-->
 
 <!--START-SECTION:non-ts-files-->
-# Getting Started
+# Time to Really Learn TypeScript
 
 Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
 
