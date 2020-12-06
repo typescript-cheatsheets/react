@@ -1,6 +1,6 @@
 ---
 id: learn_ts
-title: Getting Started
+title: "Time to Really Learn TypeScript"
 sidebar_label: Time to Really Learn TypeScript
 ---
 

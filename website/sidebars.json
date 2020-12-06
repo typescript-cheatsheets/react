@@ -6,14 +6,11 @@
         "type": "category",
         "label": "Getting Started",
         "items": [
+          "basic/getting-started/basic_type_example",
           "basic/getting-started/function_components",
           "basic/getting-started/hooks",
           "basic/getting-started/class_components",
           "basic/getting-started/default_props",
-          "basic/getting-started/types_or_interfaces",
-          "basic/getting-started/basic_type_example",
-          "basic/getting-started/react_prop_type_example",
-          "basic/getting-started/get_derived_props_from_state",
           "basic/getting-started/forms_and_events",
           "basic/getting-started/context",
           "basic/getting-started/forward_and_create_ref",
@@ -31,7 +28,8 @@
           "basic/troubleshooting/utilities",
           "basic/troubleshooting/non_ts_files",
           "basic/troubleshooting/tsconfig",
-          "basic/troubleshooting/official_typings_bugs"
+          "basic/troubleshooting/official_typings_bugs",
+          "basic/troubleshooting/learn_ts"
         ]
       },
       {

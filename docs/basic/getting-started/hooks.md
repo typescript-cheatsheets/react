@@ -10,7 +10,9 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well most of the time:
 
 ```tsx
-const [val, toggle] = React.useState(false); // `val` is inferred to be a boolean, `toggle` only takes booleans
+const [val, toggle] = React.useState(false);
+// `val` is inferred to be a boolean
+// `toggle` only takes booleans
 ```
 
 See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.app/docs/basic/troubleshooting/types/#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -87,7 +89,7 @@ When using `useEffect`, take care not to return anything other than a function o
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
-  // bad! setTimeout implicitly returns a number because the arrow function body isn't wrapped in curly braces
+
   useEffect(
     () =>
       setTimeout(() => {
@@ -95,9 +97,32 @@ function DelayedEffect(props: { timerMs: number }) {
       }, timerMs),
     [timerMs]
   );
+  // bad example! setTimeout implicitly returns a number
+  // because the arrow function body isn't wrapped in curly braces
   return null;
 }
 ```
+
+<details>
+<summary>
+Solution to the above example
+</summary>
+
+```tsx
+function DelayedEffect(props: { timerMs: number }) {
+  const { timerMs } = props;
+
+  useEffect(() => {
+    setTimeout(() => {
+      /* do stuff */
+    }, timerMs);
+  }, [timerMs]);
+  // better; use the void keyword to make sure you return undefined
+  return null;
+}
+```
+
+</details>
 
 ## useRef
 
@@ -119,7 +144,8 @@ The first option will make `ref1.current` read-only, and is intended to be passe
 function MyComponent() {
   const ref1 = useRef<HTMLElement>(null!);
   useEffect(() => {
-    doSomethingWith(ref1.current); // TypeScript won't require null-check e.g. ref1 && ref1.current
+    doSomethingWith(ref1.current);
+    // TypeScript won't require null-check e.g. ref1 && ref1.current
   });
   return <div ref={ref1}> etc </div>;
 }
@@ -157,7 +183,7 @@ example from [Stefan Baumgartner](https://fettblog.eu/typescript-react/hooks/#us
 
 ## useImperativeHandle
 
-_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106)_
+_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
 
 ```tsx
 type ListProps<ItemType> = {
@@ -213,7 +239,7 @@ export function useLoading() {
 
 A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
 
-```ts
+```tsx
 function tuplify<T extends any[]>(...elements: T) {
   return elements;
 }
@@ -235,17 +261,17 @@ function useTuple() {
 
 Note that the React team recommends that custom hooks that return more than two values should use proper objects instead of tuples, however.
 
-More Hooks + TypeScript reading:
+## More Hooks + TypeScript reading:
 
-- <https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d>
-- <https://fettblog.eu/typescript-react/hooks/#useref>
+- https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
+- https://fettblog.eu/typescript-react/hooks/#useref
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
-Example React Hooks + TypeScript Libraries:
+## Example React Hooks + TypeScript Libraries:
 
-- <https://github.com/mweststrate/use-st8>
-- <https://github.com/palmerhq/the-platform>
-- <https://github.com/sw-yx/hooks>
+- https://github.com/mweststrate/use-st8
+- https://github.com/palmerhq/the-platform
+- https://github.com/sw-yx/hooks
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).

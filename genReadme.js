@@ -2,7 +2,7 @@ const { Octokit } = require("@octokit/rest");
 const Toc = require("markdown-toc");
 const Fm = require("front-matter");
 const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
-const repo_info = process.env.GITHUB_REPOSITORY.split("/");
+const repo_info = process.env.CI_REPOSITORY.split("/");
 const repo_details = {
   owner: repo_info[0],
   repo: repo_info[1],
@@ -39,6 +39,11 @@ async function getReadme() {
       prefix: "Section 1: ",
     });
     initialContent = await updateSectionWith({
+      name: "basic-type-examples",
+      path: "docs/basic/getting-started/basic-type-examples.md",
+      to: initialContent,
+    });
+    initialContent = await updateSectionWith({
       name: "function-components",
       path: "docs/basic/getting-started/function-components.md",
       to: initialContent,
@@ -58,26 +63,6 @@ async function getReadme() {
       path: "docs/basic/getting-started/default-props.md",
       to: initialContent,
       showHeading: false,
-    });
-    initialContent = await updateSectionWith({
-      name: "type-or-interface",
-      path: "docs/basic/getting-started/type-or-inteface.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
-      name: "basic-type-examples",
-      path: "docs/basic/getting-started/basic-type-examples.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
-      name: "react-prop-type-examples",
-      path: "docs/basic/getting-started/react-prop-type-examples.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
-      name: "get-derived-state-from-props",
-      path: "docs/basic/getting-started/get-derived-state-from-props.md",
-      to: initialContent,
     });
     initialContent = await updateSectionWith({
       name: "forms-and-events",
@@ -145,6 +130,12 @@ async function getReadme() {
     initialContent = await updateSectionWith({
       name: "non-ts-files",
       path: "docs/basic/troubleshooting/non-ts-files.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
+      name: "non-ts-files",
+      path: "docs/basic/troubleshooting/learn-ts.md",
       to: initialContent,
       headingLevel: 1,
     });

@@ -1,7 +1,7 @@
 ---
 id: codebases
 title: Recommended React + TypeScript codebases to learn from
-sidebar_label: Codebases to learn from
+sidebar_label: Codebases
 ---
 
 - https://github.com/devhubapp/devhub
