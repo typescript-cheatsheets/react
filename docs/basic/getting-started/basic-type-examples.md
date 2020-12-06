@@ -7,7 +7,7 @@ This is intended as a basic orientation and reference for React developers famil
 
 ## Basic Prop Types Examples
 
-Just a list of typical TypeScript types you will use in a R+TS app:
+A list of TypeScript types you will likely use in a React+TypeScript app:
 
 ```tsx
 type AppProps = {
