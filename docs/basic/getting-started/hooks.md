@@ -108,7 +108,7 @@ function DelayedEffect(props: { timerMs: number }) {
 Solution to the above example
 </summary>
 
-```ts
+````ts
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
 
@@ -130,7 +130,7 @@ When using `useRef`, you have two options when creating a ref container that doe
 ```ts
 const ref1 = useRef<HTMLElement>(null!);
 const ref2 = useRef<HTMLElement | null>(null);
-```
+````
 
 The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
 
