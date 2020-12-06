@@ -134,6 +134,12 @@ async function getReadme() {
       headingLevel: 1,
     });
     initialContent = await updateSectionWith({
+      name: "non-ts-files",
+      path: "docs/basic/troubleshooting/learn-ts.md",
+      to: initialContent,
+      headingLevel: 1,
+    });
+    initialContent = await updateSectionWith({
       name: "useful-hooks",
       path: "docs/basic/useful-hooks.md",
       to: initialContent,

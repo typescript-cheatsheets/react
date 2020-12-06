@@ -28,7 +28,8 @@
           "basic/troubleshooting/utilities",
           "basic/troubleshooting/non_ts_files",
           "basic/troubleshooting/tsconfig",
-          "basic/troubleshooting/official_typings_bugs"
+          "basic/troubleshooting/official_typings_bugs",
+          "basic/troubleshooting/learn_ts"
         ]
       },
       {

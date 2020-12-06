@@ -4,7 +4,7 @@ title: "Troubleshooting Handbook: Utilities"
 sidebar_label: Utilities
 ---
 
-these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
+These are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
 
 - `ConstructorParameters`: a tuple of class constructor's parameter types
 - `Exclude`: exclude a type from another type
@@ -18,6 +18,4 @@ these are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 - `Pick`: A subtype of an object type with a subset of its keys
 - `Record`: A map from a key type to a value type
 - `Required`: Make all properties in an object required
-- `ReturnType` A function's return type
-
-This section needs writing, but you can probably find a good starting point with [Wes Bos' ESLint config](https://github.com/wesbos/eslint-config-wesbos) (which comes with a [YouTube intro](https://www.youtube.com/watch?v=lHAeK8t94as)).
+- `ReturnType`: A function's return type
