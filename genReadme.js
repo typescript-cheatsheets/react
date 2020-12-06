@@ -65,11 +65,6 @@ async function getReadme() {
       showHeading: false,
     });
     initialContent = await updateSectionWith({
-      name: "type-or-interface",
-      path: "docs/basic/getting-started/type-or-inteface.md",
-      to: initialContent,
-    });
-    initialContent = await updateSectionWith({
       name: "forms-and-events",
       path: "docs/basic/getting-started/forms-and-events.md",
       to: initialContent,
