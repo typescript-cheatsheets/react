@@ -113,19 +113,16 @@ function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
 
   useEffect(
-    () =>
-      void setTimeout(() => {
+    () => {
+      setTimeout(() => {
         /* do stuff */
-      }, timerMs),
+      }, timerMs)
+    },
     [timerMs]
   );
   // better; use the void keyword to make sure you return undefined
   return null;
 }
-```
-
-</details>
-
 ## useRef
 
 When using `useRef`, you have two options when creating a ref container that does not have an initial value:
