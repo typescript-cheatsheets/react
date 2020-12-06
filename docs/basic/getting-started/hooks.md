@@ -108,21 +108,22 @@ function DelayedEffect(props: { timerMs: number }) {
 Solution to the above example
 </summary>
 
-````ts
+```tsx
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
 
-  useEffect(
-    () => {
-      setTimeout(() => {
-        /* do stuff */
-      }, timerMs)
-    },
-    [timerMs]
-  );
+  useEffect(() => {
+    setTimeout(() => {
+      /* do stuff */
+    }, timerMs);
+  }, [timerMs]);
   // better; use the void keyword to make sure you return undefined
   return null;
 }
+```
+
+</details>
+
 ## useRef
 
 When using `useRef`, you have two options when creating a ref container that does not have an initial value:
@@ -130,7 +131,7 @@ When using `useRef`, you have two options when creating a ref container that doe
 ```ts
 const ref1 = useRef<HTMLElement>(null!);
 const ref2 = useRef<HTMLElement | null>(null);
-````
+```
 
 The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
 
@@ -238,7 +239,7 @@ export function useLoading() {
 
 A helper function that automatically types tuples can also be helpful if you write a lot of custom hooks:
 
-```ts
+```tsx
 function tuplify<T extends any[]>(...elements: T) {
   return elements;
 }
@@ -262,15 +263,15 @@ Note that the React team recommends that custom hooks that return more than two 
 
 ## More Hooks + TypeScript reading:
 
-- <https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d>
-- <https://fettblog.eu/typescript-react/hooks/#useref>
+- https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
+- https://fettblog.eu/typescript-react/hooks/#useref
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
 ## Example React Hooks + TypeScript Libraries:
 
-- <https://github.com/mweststrate/use-st8>
-- <https://github.com/palmerhq/the-platform>
-- <https://github.com/sw-yx/hooks>
+- https://github.com/mweststrate/use-st8
+- https://github.com/palmerhq/the-platform
+- https://github.com/sw-yx/hooks
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
