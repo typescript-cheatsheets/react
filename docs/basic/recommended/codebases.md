@@ -16,6 +16,7 @@ sidebar_label: Codebases
 - [@reach/ui's community typings](https://github.com/reach/reach-ui/pull/105)
 - https://github.com/pshrmn/curi/tree/master/packages/router
 - https://github.com/microsoft/fluentui
+- https://github.com/cypress-io/cypress-realworld-app
 
 Older but still worth checking:
 
