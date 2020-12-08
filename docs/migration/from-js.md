@@ -11,6 +11,8 @@ title: From JS
 - [TS-migrate](https://github.com/airbnb/ts-migrate) used in [Airbnb's conversion](https://medium.com/airbnb-engineering/ts-migrate-a-tool-for-migrating-to-typescript-at-scale-cd23bfeb5cc)
 - [dts-gen](https://github.com/microsoft/dts-gen) - `dts-gen` is a tool that generates TypeScript definition files (.d.ts) from any JavaScript object.
 
+for JSON - http://json2ts.com/ generate TypeScript interfaces from JSON
+
 ## Manual JS to TS Conversion
 
 the "Just Renaming" strategy
