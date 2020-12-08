@@ -451,7 +451,7 @@ let stuff = h(Fragment, null, h("div", null, "Hello"));
 
 1. Template Literal Types
 
-This is a HUGE feature. 
+This is a HUGE feature.
 
 Usecase 1 - Generating string literal types from permutations of other string literal types:
 
@@ -510,7 +510,6 @@ This is a new compiler option to offer output inline with React 17 support in ge
     }
 }
 ```
-
 
 Misc
 
