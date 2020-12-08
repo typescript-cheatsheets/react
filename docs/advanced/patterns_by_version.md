@@ -445,10 +445,82 @@ let stuff = (
 let stuff = h(Fragment, null, h("div", null, "Hello"));
 ```
 
-Possibly in 4.1
+## TypeScript 4.1
 
-- 4.1 plan https://github.com/microsoft/TypeScript/issues/40124
-- [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/)]
+
+1. Template Literal Types
+
+This is a HUGE feature. 
+
+Usecase 1 - Generating string literal types from permutations of other string literal types:
+
+```tsx
+type VerticalAlignment = "top" | "middle" | "bottom";
+type HorizontalAlignment = "left" | "center" | "right";
+
+// Takes
+//   | "top-left"    | "top-center"    | "top-right"
+//   | "middle-left" | "middle-center" | "middle-right"
+//   | "bottom-left" | "bottom-center" | "bottom-right"
+declare function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`): void;
+
+setAlignment("top-left");   // works!
+setAlignment("top-middel"); // error!
+setAlignment("top-pot");    // error! but good doughnuts if you're ever in Seattle
+```
+
+Usecase 2 - Modeling dynaming string literal types:
+
+```tsx
+type PropEventSource<T> = {
+    on(eventName: `${string & keyof T}Changed`, callback: () => void): void;
+};
+
+/// Create a "watched object" with an 'on' method
+/// so that you can watch for changes to properties.
+declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
+```
+
+To make string manipulation easier there are new generics: `Uppercase`, `Lowercase`, `Capitalize` and `Uncapitalize`.
+
+2. [React 17 jsx Factories](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#react-17-jsx-factories)
+
+This is a new compiler option to offer output inline with React 17 support in general:
+
+```jsx
+// ./src/tsconfig.json - for production
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2015",
+        "jsx": "react-jsx",
+        "strict": true
+    },
+    "include": [
+        "./**/*"
+    ]
+}
+
+// ./src/tsconfig.dev.json - for development - extending the production config
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react-jsxdev"
+    }
+}
+```
+
+
+Misc
+
+2. [Key Remapping in Mapped Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#key-remapping-in-mapped-types)
+3. [Recursive Conditional Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#recursive-conditional-types)
+4. [Checked Indexed Accesses](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#checked-indexed-accesses-nouncheckedindexedaccess)
+
+## TypeScript 4.2
+
+Plan - https://github.com/microsoft/TypeScript/issues/41601
 
 ## TypeScript Roadmap and Spec
 
