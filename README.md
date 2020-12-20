@@ -158,10 +158,10 @@
   - [Using Partial Types](#using-partial-types)
   - [The Types I need weren't exported!](#the-types-i-need-werent-exported)
   - [The Types I need don't exist!](#the-types-i-need-dont-exist)
-    * [Slapping `any` on everything](#slapping-any-on-everything)
-    * [Autogenerate types](#autogenerate-types)
-    * [Typing Exported Hooks](#typing-exported-hooks)
-    * [Typing Exported Components](#typing-exported-components)<!--END-SECTION:types-toc-->
+    - [Slapping `any` on everything](#slapping-any-on-everything)
+    - [Autogenerate types](#autogenerate-types)
+    - [Typing Exported Hooks](#typing-exported-hooks)
+    - [Typing Exported Components](#typing-exported-components)<!--END-SECTION:types-toc-->
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
@@ -177,6 +177,7 @@
   </details>
 
 <!--START-SECTION:setup-->
+
 # Section 1: Setup TypeScript with React
 
 ## Prerequisites
@@ -202,7 +203,7 @@ Local dev setups:
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
 - [Meteor](https://guide.meteor.com/build-tool.html#typescript): `meteor create --typescript name-of-my-new-typescript-app`
 - [Ignite](https://github.com/infinitered/ignite#use-ignite-andross-infinite-red-andross-boilerplate) for React Native: `ignite new myapp`
-- [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS *libraries*
+- [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS _libraries_
 
 <details>
 <summary>
@@ -215,8 +216,7 @@ Less mature tools still worth checking out:
 - [Snowpack](<https://www.snowpack.dev/#create-snowpack-app-(csa)>): `npx create-snowpack-app my-app --template app-template-react-typescript`
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
-- [JP Morgan's `modular`](https://github.com/jpmorganchase/modular): Sunil Pai's CRA + TS + Yarn Workspaces toolkit. `yarn create modular-react-app <project-name>
-`
+- [JP Morgan's `modular`](https://github.com/jpmorganchase/modular): Sunil Pai's CRA + TS + Yarn Workspaces toolkit. `yarn create modular-react-app <project-name>`
 
 Manual setup:
 
@@ -255,6 +255,7 @@ You should also check [the new TypeScript docs for official descriptions between
 # Section 2: Getting Started
 
 <!--START-SECTION:function-components-->
+
 ## Function Components
 
 These can be written as normal functions that take a `props` argument and return a JSX element.
@@ -374,6 +375,7 @@ const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 <!--END-SECTION:function-components-->
 
 <!--START-SECTION:hooks-->
+
 ## Hooks
 
 Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L800-L1031).
@@ -652,6 +654,7 @@ If you are writing a React Hooks library, don't forget that you should also expo
 <!--END-SECTION:hooks-->
 
 <!--START-SECTION:class-components-->
+
 ## Class Components
 
 Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you want to provide it with (optional) prop and state type parameters:
@@ -826,6 +829,7 @@ class Comp extends React.PureComponent<Props, State> {
 <!--END-SECTION:class-components-->
 
 <!--START-SECTION:default-props-->
+
 ## You May Not Need `defaultProps`
 
 As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
@@ -1082,6 +1086,7 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy table:
 <!--END-SECTION:type-or-interface-->
 
 <!--START-SECTION:basic-type-examples-->
+
 ## Typing Component Props
 
 This is intended as a basic orientation and reference for React developers familiarizing with TypeScript.
@@ -1341,6 +1346,7 @@ class Comp extends React.PureComponent<Props, State> {
 <!--END-SECTION:get-derived-state-from-props-->
 
 <!--START-SECTION:forms-and-events-->
+
 ## Forms and Events
 
 If performance is not an issue (and it usually isn't!), inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
@@ -1442,6 +1448,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 <!--END-SECTION:forms-and-events-->
 
 <!--START-SECTION:context-->
+
 ## Context
 
 ## Basic Example
@@ -1724,6 +1731,7 @@ const Consumer = Context.Consumer;
 <!--END-SECTION:context-->
 
 <!--START-SECTION:forward-create-ref-->
+
 ## forwardRef/createRef
 
 Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#hooks) for `useRef`.
@@ -1786,6 +1794,7 @@ You may also wish to do [Conditional Rendering with `forwardRef`](https://github
 <!--END-SECTION:forward-create-ref-->
 
 <!--START-SECTION:portals-->
+
 ## Portals
 
 Using `ReactDOM.createPortal`:
@@ -1892,6 +1901,7 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 <!--END-SECTION:portals-->
 
 <!--START-SECTION:error-boundaries-->
+
 ## Error Boundaries
 
 ### Option 1: Using react-error-boundary
@@ -1946,6 +1956,7 @@ export default ErrorBoundary;
 <!--END-SECTION:error-boundaries-->
 
 <!--START-SECTION:concurrent-->
+
 ## Concurrent React/React Suspense
 
 _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
@@ -1955,6 +1966,7 @@ _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more o
 <!--END-SECTION:concurrent-->
 
 <!--START-SECTION:types-->
+
 # Troubleshooting Handbook: Types
 
 > ⚠️ Have you read [the TypeScript FAQ](https://github.com/microsoft/TypeScript/wiki/FAQ?) Your answer might be there!
@@ -2498,6 +2510,7 @@ For more information on creating type definitions for class components, you can 
 <!--END-SECTION:types-->
 
 <!--START-SECTION:operators-->
+
 # Troubleshooting Handbook: Operators
 
 - `typeof` and `instanceof`: type query used for refinement
@@ -2520,6 +2533,7 @@ Conditional Types are a difficult topic to get around so here are some extra res
 <!--END-SECTION:operators-->
 
 <!--START-SECTION:utilities-->
+
 # Troubleshooting Handbook: Utilities
 
 These are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
@@ -2541,6 +2555,7 @@ These are all built in, [see source in es5.d.ts](https://github.com/microsoft/Ty
 <!--END-SECTION:utilities-->
 
 <!--START-SECTION:ts-config-->
+
 # Troubleshooting Handbook: tsconfig.json
 
 You can find [all the Compiler options in the TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). [The new TS docs also has per-flag annotations of what each does](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
@@ -2592,6 +2607,7 @@ Compilation speed grows linearly with size of codebase. For large projects, you 
 <!--END-SECTION:ts-config-->
 
 <!--START-SECTION:official-typings-bugs-->
+
 # Troubleshooting Handbook: Fixing bugs in official typings
 
 If you run into bugs with your library's official typings, you can copy them locally and tell TypeScript to use your local version using the "paths" field. In your `tsconfig.json`:
@@ -2658,6 +2674,7 @@ You can see examples of these included in the built in type declarations in the 
 <!--END-SECTION:official-typings-bugs-->
 
 <!--START-SECTION:non-ts-files-->
+
 # Time to Really Learn TypeScript
 
 Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
@@ -2674,6 +2691,7 @@ It is worth mentioning some resources to help you get started:
 <!--END-SECTION:non-ts-files-->
 
 <!--START-SECTION:resources-->
+
 # Other React + TypeScript resources
 
 - me! <https://twitter.com/swyx>
@@ -2696,6 +2714,7 @@ It is worth mentioning some resources to help you get started:
 <!--END-SECTION:resources-->
 
 <!--START-SECTION:editor-integration-->
+
 # Editor Tooling and Integration
 
 - VSCode
@@ -2720,6 +2739,7 @@ You may also wish to use alternative logos - [jsx-tsx-logos](https://github.com/
 <!--END-SECTION:editor-integration-->
 
 <!--START-SECTION:linting-->
+
 # Linting
 
 > ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).
@@ -2850,6 +2870,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 <!--END-SECTION:other-resources-->
 
 <!--START-SECTION:talks-->
+
 # Recommended React + TypeScript talks
 
 - [Ultimate React Component Patterns with TypeScript](https://www.youtube.com/watch?v=_PBQ3if6Fmg), by Martin Hochel, GeeCon Prague 2018
@@ -2858,6 +2879,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 <!--END-SECTION:talks-->
 
 <!--START-SECTION:learn-ts-->
+
 # Time to Really Learn TypeScript
 
 Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
@@ -2874,6 +2896,7 @@ It is worth mentioning some resources to help you get started:
 <!--END-SECTION:learn-ts-->
 
 <!--START-SECTION:examples-->
+
 # Example App
 
 - [Create React App TypeScript Todo Example 2020](https://github.com/laststance/create-react-app-typescript-todo-example-2020)
