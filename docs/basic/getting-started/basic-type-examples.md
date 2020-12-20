@@ -60,8 +60,8 @@ export declare interface AppProps {
   children1: JSX.Element; // bad, doesnt account for arrays
   children2: JSX.Element | JSX.Element[]; // meh, doesn't accept strings
   children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
-  children4: React.ReactChild[]; // better
-  children: React.ReactNode; // best, accepts everything
+  children4: React.ReactChild[]; // better, accepts array children
+  children: React.ReactNode; // best, accepts everything (see edge case below)
   functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
@@ -70,6 +70,33 @@ export declare interface AppProps {
   props2: Props & React.ComponentPropsWithRef<MyButtonWithForwardRef>; // to impersonate all the props of MyButtonForwardedRef and explicitly forwarding its ref
 }
 ```
+
+<details>
+<summary>
+Small `React.ReactNode` edge case
+</summary>
+
+This code typechecks but has a runtime error:
+
+```tsx
+
+type Props = {
+  children: React.ReactNode;
+}
+
+function Comp({children}: Props) {
+  return <div>{children}</div>;
+}
+function App() {
+  return <Comp>{{}}</Comp> // Runtime Error: Objects not valid as React Child!
+}
+```
+
+This is because `ReactNode` includes `ReactFragment` which allows a `{}` type, which is [too wide](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37596#issue-480260937). Fixing this would break a lot of libraries, so for now you just have to be mindful that `ReactNode` is not absolutely bulletproof.
+
+[Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
+
+</details>
 
 <details>
  <summary><b>JSX.Element vs React.ReactNode?</b></summary>
