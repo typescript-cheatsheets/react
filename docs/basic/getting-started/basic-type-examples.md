@@ -79,16 +79,15 @@ Small `React.ReactNode` edge case
 This code typechecks but has a runtime error:
 
 ```tsx
-
 type Props = {
   children: React.ReactNode;
-}
+};
 
-function Comp({children}: Props) {
+function Comp({ children }: Props) {
   return <div>{children}</div>;
 }
 function App() {
-  return <Comp>{{}}</Comp> // Runtime Error: Objects not valid as React Child!
+  return <Comp>{{}}</Comp>; // Runtime Error: Objects not valid as React Child!
 }
 ```
 
