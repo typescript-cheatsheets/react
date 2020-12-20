@@ -26,7 +26,7 @@ Local dev setups:
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
 - [Meteor](https://guide.meteor.com/build-tool.html#typescript): `meteor create --typescript name-of-my-new-typescript-app`
 - [Ignite](https://github.com/infinitered/ignite#use-ignite-andross-infinite-red-andross-boilerplate) for React Native: `ignite new myapp`
-- [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS libraries
+- [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS *libraries*
 
 <details>
 <summary>
@@ -39,6 +39,8 @@ Less mature tools still worth checking out:
 - [Snowpack](<https://www.snowpack.dev/#create-snowpack-app-(csa)>): `npx create-snowpack-app my-app --template app-template-react-typescript`
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
+- [JP Morgan's `modular`](https://github.com/jpmorganchase/modular): Sunil Pai's CRA + TS + Yarn Workspaces toolkit. `yarn create modular-react-app <project-name>
+`
 
 Manual setup:
 
