@@ -39,7 +39,7 @@ Less mature tools still worth checking out:
 - [Snowpack](<https://www.snowpack.dev/#create-snowpack-app-(csa)>): `npx create-snowpack-app my-app --template app-template-react-typescript`
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
-- [JP Morgan's `modular`](https://github.com/jpmorganchase/modular): Sunil Pai's CRA + TS + Yarn Workspaces toolkit. `yarn create modular-react-app <project-name>`
+- [JP Morgan's `modular`](https://github.com/jpmorganchase/modular): CRA + TS + Yarn Workspaces toolkit. `yarn create modular-react-app <project-name>`
 
 Manual setup:
 
