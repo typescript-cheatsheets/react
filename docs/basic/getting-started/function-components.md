@@ -12,15 +12,17 @@ const App = ({ message }: AppProps) => <div>{message}</div>;
 
 <details>
 
-<summary><b>What about `React.FC`/`React.FunctionComponent`/`React.VoidFunctionComponent`?</b></summary>
+<summary><b>Why is `React.FC` discouraged? What about `React.FunctionComponent`/`React.VoidFunctionComponent`?</b></summary>
 
-You can also write components with `React.FunctionComponent` (or the shorthand `React.FC` - they are the same):
+You may see this in many React+TypeScript codebases:
 
 ```tsx
 const App: React.FunctionComponent<{ message: string }> = ({ message }) => (
   <div>{message}</div>
 );
 ```
+
+However, the general consensus today is that `React.FunctionComponent` (or the shorthand `React.FC`) is [discouraged](https://github.com/facebook/create-react-app/pull/8177). This is a nuanced opinion of course, but if you agree and want to remove `React.FC` from your codebase, you can use [this jscodeshift codemod](https://github.com/gndelia/codemod-replace-react-fc-typescript). 
 
 Some differences from the "normal function" version:
 
@@ -42,7 +44,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 <details>
 <summary>
 
-Using `React.VoidFunctionComponent` or `React.VFC`
+Using `React.VoidFunctionComponent` or `React.VFC` instead
 
 </summary>
 
