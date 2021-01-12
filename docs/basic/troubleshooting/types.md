@@ -90,7 +90,15 @@ _Something to add? [File an issue](https://github.com/typescript-cheatsheets/rea
 
 ## Enum Types
 
-Enums in TypeScript default to numbers. You will usually want to use them as strings instead:
+**We recommend avoiding using enums as far as possible**.
+
+Enums have a few [documented issues](https://fettblog.eu/tidy-typescript-avoid-enums/) (the TS team [agrees](https://twitter.com/orta/status/1348966323271987201?s=20)). A simpler alternative to enums is just declaring a union type of string literals:
+
+```tsx
+export declare type Position = "left" | "right" | "top" | "bottom";
+```
+
+If you must use enums, remember that enums in TypeScript default to numbers. You will usually want to use them as strings instead:
 
 ```tsx
 export enum ButtonSizes {
@@ -98,23 +106,12 @@ export enum ButtonSizes {
   small = "small",
   large = "large",
 }
-```
 
-Usage:
-
-```tsx
+// usage
 export const PrimaryButton = (
   props: Props & React.HTMLProps<HTMLButtonElement>
 ) => <Button size={ButtonSizes.default} {...props} />;
 ```
-
-A simpler alternative to enum is just declaring a bunch of strings with union:
-
-```tsx
-export declare type Position = "left" | "right" | "top" | "bottom";
-```
-
-This is handy because TypeScript will throw errors when you mistype a string for your props.
 
 ## Type Assertion
 
