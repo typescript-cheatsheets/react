@@ -20,3 +20,4 @@ Conditional Types are a difficult topic to get around so here are some extra res
 - fully walked through explanation https://artsy.github.io/blog/2018/11/21/conditional-types-in-typescript/
 - Bailing out and other advanced topics https://github.com/sw-yx/ts-spec/blob/master/conditional-types.md
 - Basarat's video https://www.youtube.com/watch?v=SbVgPQDealg&list=PLYvdvJlnTOjF6aJsWWAt7kZRJvzw-en8B&index=2&t=0s
+- [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
