@@ -15,5 +15,6 @@ It is worth mentioning some resources to help you get started:
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
+- Learn about [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
 - Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
 - Here is another [TypeScript Error Guide](https://github.com/threehams/typescript-error-guide/) that you can check for your errors.
