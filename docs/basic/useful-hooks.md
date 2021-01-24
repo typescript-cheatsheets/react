@@ -236,11 +236,10 @@ See also: [useAsync](https://usehooks.com/useAsync/).
 
 This Hook is usefull to make fetch request using `AbortController`
 
-
 export function useFetch(request: RequestInfo, init?: RequestInit) {
-    const [response, setResponse] = useState<null | Response>(null);
-    const [error, setError] = useState<Error | null>();
-    const [isLoading, setIsLoading] = useState(true);
+const [response, setResponse] = useState<null | Response>(null);
+const [error, setError] = useState<Error | null>();
+const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -267,4 +266,5 @@ export function useFetch(request: RequestInfo, init?: RequestInit) {
     }, [init, request]);
 
     return { response, error, isLoading };
+
 }
