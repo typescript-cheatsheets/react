@@ -86,6 +86,7 @@ https://speakerdeck.com/amhinson/convert-a-react-native-project-to-typescript-in
 ## More resources
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE) - their [ts-migrate tool here](https://medium.com/airbnb-engineering/ts-migrate-a-tool-for-migrating-to-typescript-at-scale-cd23bfeb5cc)
+- [Scaling TypeScript lessons from Bloomberg](https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/)
 - [Migrating a `create-react-app`/`react-scripts` app to TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript) - don't use `react-scripts-ts`
 - [Migrating an EJECTED CRA app to TS](https://spin.atomicobject.com/2018/07/04/migrating-cra-typescript/)
 - [Lyft's JS to TS migration tool](https://github.com/lyft/react-javascript-to-typescript-transform) (includes PropTypes migration)
