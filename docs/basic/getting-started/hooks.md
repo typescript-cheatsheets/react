@@ -130,10 +130,13 @@ When using `useRef`, you have two options when creating a ref container that doe
 
 ```ts
 const ref1 = useRef<HTMLElement>(null!);
-const ref2 = useRef<HTMLElement | null>(null);
+const ref2 = useRef<HTMLElement>(null);
+const ref3 = useRef<HTMLElement | null>(null);
 ```
 
-The first option will make `ref1.current` read-only, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
+You can see the difference in [this playground](https://www.typescriptlang.org/play#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwCwAUI7hAHarwCCYYcAvHAAUASn4A+OAG9GjOHAD0CBLLnKGcxHABiwKBzgQwMYGxS4WUACbBWAczgwIcSxFwBXEFlYxkxtgDoVTQBJVmBjZAAbOAA3KLcsOAB3YEjogCNE1jc0-zgAGQBPG3tHOAAVQrAsAGVcKGAjOHTCuDdUErhWNgBabLSUVFQsWBNWA2qoX2hA9VU4AGFKXyx0AFk3H3TIxOwCOAB5dIArLHwgpHcoSm84MGJJmFbgdG74ZcsDVkjC2Y01f7yFQsdjvLAEACM-EwVBg-naWD2AB4ABLlNb5GpgZCsACiO083jEgn6kQAhMJ6HMQfpKJCFpE2IkBNg8HCEci0RisTj8VhCTBiaSKVSVIoAaoLnBQuFgFFYvFEikBpkujkMps4FgAB7VfCdLmY7F4gleOFwAByEHg7U63VYfXVg2Go1MhhG0ygf3mAHVUtF6jgYLtwUdTvguta4Bstjs9mGznCpVcbvB7u7YM90B8vj9vYgLkDqWxaeCAEzQ1n4eHDTnoo2801EknqykyObii5SmpnNifA5GMZmCzWOwOJwudwC3xjKUyiLROKRBLJf3NLJO9KanV64xj0koVifQ08k38s1Sv0DJZBxIx5DbRGhk6J5Nua5mu4PEZPOAvSNgsgnxsHmXZzIgRZyDSYIEAAzJWsI1k+BCovWp58gKcAAD5qmkQqtqKHbyCexoYRecw7IQugcAs76ptCdIQv4KZmoRcjyMRaGkU28A4aSKiUXAwwgpYtEfrcAh0mWzF0ax7bsZx3Lceetx8eqAlYPAMAABa6KJskSXAdKwTJ4kwGxCjyKy-bfK05SrDA8mWVagHAbZeScOY0CjqUE6uOgqDaRAOSfKqOYgb8KiMaZ9GSeCEIMkyMVyUwRHWYc7nSvAgUQEk6AjMQXpReWyWGdFLHeBZHEuTCQEZT8xVwaV8BxZCzUWZQMDvuMghBHASJVnCWhTLYApiH1chIqgxpGeCfCSIxAC+Yj3o+8YvvgSLyNNOLjeBGhTTNdLzVJy3reGMBbTtrB7RoB3XbNBAneCsHLatcbPhdV3GrdB1WYhw3IKNZq-W2DCLYRO7QPAljgsgORcDwVJAA), thanks to [this discussion with @rajivpunjabi](https://github.com/typescript-cheatsheets/react/issues/388).
+
+The first option will bypass nullchecks on `ref1.current`, and is intended to be passed in to built-in `ref` attributes that React will manage (because React handles setting the `current` value for you).
 
 <details>
   <summary>What is the <code>!</code> at the end of <code>null!</code>?</summary>
@@ -142,7 +145,7 @@ The first option will make `ref1.current` read-only, and is intended to be passe
 
 ```ts
 function MyComponent() {
-  const ref1 = useRef<HTMLElement>(null!);
+  const ref1 = useRef<HTMLDivElement>(null!);
   useEffect(() => {
     doSomethingWith(ref1.current);
     // TypeScript won't require null-check e.g. ref1 && ref1.current
@@ -153,7 +156,9 @@ function MyComponent() {
 
 </details>
 
-The second option will make `ref2.current` mutable, and is intended for "instance variables" that you manage yourself.
+The second option will infer a `RefObject` instead of a `MutableRefObject`. This means there will be a type error ifyou try to assign to `ref2.current`.
+
+The third option will make `ref3.current` mutable, and is intended for "instance variables" that you manage yourself.
 
 ```tsx
 function TextInputWithFocusButton() {
