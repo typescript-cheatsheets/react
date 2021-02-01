@@ -101,7 +101,6 @@ see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/th
 - [Heap - How we failed, then succeeded, at migrating to TypeScript](https://heap.io/blog/analysis/migrating-to-typescript)
 - Execute Program (Gary Bernhardt) https://www.executeprogram.com/blog/porting-to-typescript-solved-our-api-woes
 
-
 Open Source
 
 - [Jest's migration (PR)](https://github.com/facebook/jest/pull/7554#issuecomment-454358729)
