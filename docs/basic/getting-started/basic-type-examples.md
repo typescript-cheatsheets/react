@@ -115,6 +115,12 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-che
 
 You can use either Types or Interfaces to type Props and State, so naturally the question arises - which do you use?
 
+### TL;DR
+
+Use Interface until You Need Type - [orta](https://twitter.com/orta/status/1356129195835973632?s=20).
+
+### More Advice
+
 Here's a helpful rule of thumb:
 
 - always use `interface` for public API's definition when authoring a library or 3rd party ambient type definitions, as this allows a consumer to extend them via _declaration merging_ if some definitions are missing.
@@ -122,6 +128,8 @@ Here's a helpful rule of thumb:
 - consider using `type` for your React Component Props and State, for consistency and because it is more constrained.
 
 You can read more about the reasoning behind this rule of thumb in [Interface vs Type alias in TypeScript 2.7](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c).
+
+The TypeScript Handbook now also includes guidance on [Differences Between Type Aliases and Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces).
 
 > Note: At scale, there are performance reasons to prefer interfaces ([see official Microsoft notes on this](https://github.com/microsoft/TypeScript/wiki/Performance#preferring-interfaces-over-intersections)) but [take this with a grain of salt](https://news.ycombinator.com/item?id=25201887)
 
