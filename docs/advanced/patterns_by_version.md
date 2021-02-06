@@ -484,6 +484,19 @@ declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
 
 To make string manipulation easier there are new generics: `Uppercase`, `Lowercase`, `Capitalize` and `Uncapitalize`.
 
+You can combine it with the `infer` keyword [like this](https://www.smashingmagazine.com/2021/01/dynamic-static-typing-typescript/#conditional-types-and-recursive-template-literal-types):
+
+```ts
+type ParseRouteParams<Rte> =
+  Rte extends `${string}/:${infer P}`
+  ? P
+  : never;
+  
+type Params = ParseRouteParams<"/api/user/:userID"> // Params is "userID"
+
+type NoParams = ParseRouteParams<"/api/user"> // NoParams is never --> no params!
+```
+
 2. [React 17 jsx Factories](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#react-17-jsx-factories)
 
 This is a new compiler option to offer output inline with React 17 support in general:
