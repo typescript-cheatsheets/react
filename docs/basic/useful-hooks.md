@@ -184,7 +184,7 @@ const task = useAsyncTask(async (data: any) => await myApiRequest(data));
 task.run(data);
 useEffect(() => {
   console.log(task.status); // 'IDLE' | 'PROCESSING' | 'ERROR' | 'SUCCESS';
-}, task.status);
+}, [task.status]);
 
 // Implementation
 
