@@ -491,7 +491,7 @@ type ParseRouteParams<Rte> =
   Rte extends `${string}/:${infer P}`
   ? P
   : never;
-  
+
 type Params = ParseRouteParams<"/api/user/:userID"> // Params is "userID"
 
 type NoParams = ParseRouteParams<"/api/user"> // NoParams is never --> no params!
