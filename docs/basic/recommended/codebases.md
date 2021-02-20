@@ -4,19 +4,24 @@ title: Recommended React + TypeScript codebases to learn from
 sidebar_label: Codebases
 ---
 
-- https://github.com/devhubapp/devhub
-- https://github.com/formium/formik/
-- https://github.com/jaredpalmer/react-fns
-- https://github.com/palantir/blueprint
-- https://github.com/Shopify/polaris
-- https://github.com/NullVoxPopuli/react-vs-ember/tree/master/testing/react
-- https://github.com/artsy/reaction
-- https://github.com/benawad/codeponder (with [coding livestream!](https://www.youtube.com/watch?v=D8IJOwdNSkc&list=PLN3n1USn4xlnI6kwzI8WrNgSdG4Z6daCq))
-- https://github.com/artsy/emission (React Native)
-- [@reach/ui's community typings](https://github.com/reach/reach-ui/pull/105)
-- https://github.com/pshrmn/curi/tree/master/packages/router
-- https://github.com/microsoft/fluentui
-- https://github.com/cypress-io/cypress-realworld-app
+- Apps
+  - https://github.com/devhubapp/devhub
+  - https://github.com/benawad/codeponder (with [coding livestream!](https://www.youtube.com/watch?v=D8IJOwdNSkc&list=PLN3n1USn4xlnI6kwzI8WrNgSdG4Z6daCq))
+  - https://github.com/cypress-io/cypress-realworld-app
+- Design Systems/Component Libraries
+  - https://github.com/seek-oss/braid-design-system/ (see [how to use TS to validate props](https://twitter.com/markdalgleish/status/1339863859469955072?s=20))
+  - https://github.com/palantir/blueprint
+  - https://github.com/Shopify/polaris
+  - https://github.com/microsoft/fluentui
+- Libraries
+  - https://github.com/formium/formik/
+  - https://github.com/jaredpalmer/react-fns
+- Misc
+  - https://github.com/NullVoxPopuli/react-vs-ember/tree/master/testing/react
+  - https://github.com/artsy/reaction
+  - https://github.com/artsy/emission (React Native)
+  - [@reach/ui's community typings](https://github.com/reach/reach-ui/pull/105)
+  - https://github.com/pshrmn/curi/tree/master/packages/router
 
 Older but still worth checking:
 
