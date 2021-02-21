@@ -181,13 +181,18 @@ In future you can use the `unique` keyword to brand. [See this PR](https://githu
 Adding two types together can be handy, for example when your component is supposed to mirror the props of a native component like a `button`:
 
 ```tsx
-export interface Props {
+export interface PrimaryButtonProps {
   label: string;
 }
 export const PrimaryButton = (
-  props: Props & React.HTMLProps<HTMLButtonElement> // adding my Props together with the @types/react button provided props
-) => <Button {...props} />;
+  props: PrimaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
+  // do custom buttony stuff
+  return <button {...props}> {props.label} </button>;
+}
 ```
+
+*Playground [here](https://www.typescriptlang.org/play?ssl=4&ssc=1&pln=12&pc=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCipAD0ljmADsYkpN0k4AFKUFKAE8AQgFcYMCE14QwAZzgBvCnDgAbFACMkagFxw5MPkwDmAbgoBfanWjw0Uwzz4gBI8ZKZwAvHAAUKnBgOPL6vPxCYhJSMvJwAGSIxDAAdFGeABIAKgCyADIAghJ8muJIcgA82fnpUgCiakggSCwAfBQAlD6tSoEA9H1wACYQcGiihrhwpdFMggYwopiYgUSLUF4VM55KKXvBsnKWPYoH8ika2mqWcBV921KtFuSWQA)*
 
 You can also use Intersection Types to make reusable subsets of props for similar components:
 
