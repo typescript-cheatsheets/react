@@ -15,7 +15,7 @@ Read [TypeScript's official Guide for migrating from JS](https://www.typescriptl
 ## General Conversion approaches
 
 - Level 0: Don't use TypeScript, use JSDoc
-  - See our [JSDoc section](#JSDoc)
+  - See our [JSDoc section](./js-docs.md)
 - Level 1A: Majority JavaScript, increasingly strict TypeScript
   - as recommended by [official TS guide](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
   - use `allowJS` (Experiences: [clayallsop][clayallsop], [pleo][pleo])
