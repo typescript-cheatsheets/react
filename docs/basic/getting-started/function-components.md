@@ -7,7 +7,12 @@ These can be written as normal functions that take a `props` argument and return
 
 ```tsx
 type AppProps = { message: string }; /* could also use interface */
+
+// Component
 const App = ({ message }: AppProps) => <div>{message}</div>;
+
+// you can also choose to annotate the return type 
+const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 ```
 
 <details>
