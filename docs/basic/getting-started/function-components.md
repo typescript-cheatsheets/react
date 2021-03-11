@@ -6,13 +6,17 @@ title: Function Components
 These can be written as normal functions that take a `props` argument and return a JSX element.
 
 ```tsx
-type AppProps = { message: string }; /* could also use interface */
+// Declaring type of props - see "Typing Component Props" for more examples
+type AppProps = { message: string }; /* use `interface` if exporting so that consumers can extend */
 
-// Component
+// Easiest way to declare a Function Component; return type is inferred.
 const App = ({ message }: AppProps) => <div>{message}</div>;
 
-// you can also choose to annotate the return type
+// you can choose annotate the return type so an error is raised if you accidentally return some other type
 const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
+
+// you can also inline the type declaration; eliminates naming the prop types, but looks repetitive
+const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
 <details>
