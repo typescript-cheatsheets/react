@@ -156,7 +156,7 @@ function MyComponent() {
 
 </details>
 
-The second option will infer a `RefObject` instead of a `MutableRefObject`. This means there will be a type error ifyou try to assign to `ref2.current`.
+The second option will infer a `RefObject` instead of a `MutableRefObject`. This means there will be a type error if you try to assign to `ref2.current`.
 
 The third option will make `ref3.current` mutable, and is intended for "instance variables" that you manage yourself.
 
