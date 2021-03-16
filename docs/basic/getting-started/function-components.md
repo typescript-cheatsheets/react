@@ -7,7 +7,9 @@ These can be written as normal functions that take a `props` argument and return
 
 ```tsx
 // Declaring type of props - see "Typing Component Props" for more examples
-type AppProps = { message: string }; /* use `interface` if exporting so that consumers can extend */
+type AppProps = {
+  message: string;
+}; /* use `interface` if exporting so that consumers can extend */
 
 // Easiest way to declare a Function Component; return type is inferred.
 const App = ({ message }: AppProps) => <div>{message}</div>;
