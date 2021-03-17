@@ -102,7 +102,7 @@ export type ApparentGreetProps = JSX.LibraryManagedAttributes<
 >;
 ```
 
-``This will work properly, although hovering over`ApparentGreetProps`may be a little intimidating. You can reduce this boilerplate with the`ComponentProps` utility detailed below.
+This will work properly, although hovering over`ApparentGreetProps`may be a little intimidating. You can reduce this boilerplate with the`ComponentProps` utility detailed below.
 
 </details>
 
