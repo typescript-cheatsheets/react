@@ -38,6 +38,5 @@ jobs:
 
       - name: Danger for Spell Checking
         run: |
-          TOKEN='7469b4e94ce21b43e3ab7a'
-          TOKEN+='79960c12a1e067f2ec'
+          TOKEN='dd46d414ec55efc7ce7c9a2bc84ce5ec8e5ecbb1'
           DANGER_GITHUB_API_TOKEN=$TOKEN yarn danger ci
