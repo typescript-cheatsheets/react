@@ -37,6 +37,6 @@ jobs:
         run: yarn format:check
 
       - name: Danger for Spell Checking
-        run: |
-          TOKEN='dd46d414ec55efc7ce7c9a2bc84ce5ec8e5ecbb1'
-          DANGER_GITHUB_API_TOKEN=$TOKEN yarn danger ci
+        run: yarn danger ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
