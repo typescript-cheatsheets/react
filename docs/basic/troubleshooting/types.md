@@ -137,9 +137,9 @@ Note that you cannot assert your way to anything - basically it is only for refi
 You can also assert a property is non-null, when accessing it:
 
 ```ts
-element.parentNode!.removeChild(element) // ! before the period
-myFunction(document.getElementById(dialog.id!)!) // ! after the property accessing
-let userID!: string // definite assignment assertion... be careful!
+element.parentNode!.removeChild(element); // ! before the period
+myFunction(document.getElementById(dialog.id!)!); // ! after the property accessing
+let userID!: string; // definite assignment assertion... be careful!
 ```
 
 Of course, try to actually handle the null case instead of asserting :)
