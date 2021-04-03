@@ -138,7 +138,7 @@ You can also assert a property is non-null, when accessing it:
 
 ```ts
 element.parentNode!.removeChild(element) // ! before the period
-myFunction(document.getElementById(dialog.id!)! // ! after the property accessing
+myFunction(document.getElementById(dialog.id!)!) // ! after the property accessing
 let userID!: string // definite assignment assertion... be careful!
 ```
 
