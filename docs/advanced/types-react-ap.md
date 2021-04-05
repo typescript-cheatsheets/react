@@ -130,9 +130,9 @@ Anything not listed above is considered an internal type and not public. If you'
 ### Adding non-standard attributes
 
 The attributes allowed on host components such as `button` or `img` follow the
-HTML living standard. New features that are not yet part of specification
+[HTML living standard](https://html.spec.whatwg.org/). New features that are not yet part of the living standard
 or are only implemented by certain browsers will therefore cause a type error. If
-you specifically write code for these browsers or polyfill this attributes you can
+you specifically write code for these browsers or polyfill these attributes you can
 use [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) to still get those components type checked without having
 to use `any` or `@ts-ignore`.
 
