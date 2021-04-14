@@ -99,7 +99,9 @@ If you don't quite care about the type of the event, you can just use React.Synt
 
 Of course, if you're making any sort of significant form, [you should use Formik](https://jaredpalmer.com/formik) or [React Hook Form](https://react-hook-form.com/), which are written in TypeScript.
 
-**List of event types**
+### List of event types
+
+
 | Event Type  | Description                                                                                                                   |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | AnimationEvent   | CSS Animations.                                                                                                               |
@@ -119,12 +121,19 @@ Of course, if you're making any sort of significant form, [you should use Formik
 | WheelEvent       | Scrolling on a mouse wheel or similar input device. (Note:  `wheel` event should not be confused with the `scroll` event)                                                                                                                              |
 | SyntheticEvent   |  The base event for all above events. Should be used when unsure about event type                                                                                                                           |
 
-> **InputEvent ?**
-> You probably noticed that there is no InputEvent. This is because it is not supported by Typescript as the event itself has no fully browser support and may behave differently in different browsers.
-> It's suggested to use `KeyboardEvent` instead
-> Sources:
->
-> - https://github.com/microsoft/TypeScript/issues/29441
-> - https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
-> - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
+<details>
+<summary>
 
+**What about `InputEvent`?**
+
+</summary>
+
+You've probably noticed that there is no `InputEvent`. This is because it is not supported by Typescript as the event itself has no fully browser support and may behave differently in different browsers. You can use `KeyboardEvent` instead.
+
+Sources:
+
+ - https://github.com/microsoft/TypeScript/issues/29441
+ - https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
+ - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
+
+</details>
