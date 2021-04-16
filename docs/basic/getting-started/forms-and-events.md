@@ -61,7 +61,7 @@ The first method uses an inferred method signature `(e: React.FormEvent<HTMLInpu
 
 **Typing onSubmit, with Uncontrolled components in a Form**
 
-If you don't quite care about the type of the event, you can just use React.SyntheticEvent. If your target form has custom named inputs that you'd like to access, you can use type widening:
+If you don't quite care about the type of the event, you can just use React.SyntheticEvent. If your target form has custom named inputs that you'd like to access, you can use a type assertion:
 
 ```tsx
 <form
