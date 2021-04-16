@@ -7,7 +7,7 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 
 ## useState
 
-Type inference works very well most of the time:
+Type inference works very well for simple values:
 
 ```tsx
 const [val, toggle] = React.useState(false);
@@ -23,8 +23,19 @@ However, many hooks are initialized with null-ish default values, and you may wo
 const [user, setUser] = React.useState<IUser | null>(null);
 
 // later...
+setUser(newUser); 
+```
+
+You can also use type assertions if a state is initialized soon after setup and always has a value after:
+
+```tsx
+const [user, setUser] = React.useState<IUser>({} as IUser);
+
+// later...
 setUser(newUser);
 ```
+
+This temporarily "lies" to the TypeScript compiler that `{}` is of type `IUser`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `IUser` and that may lead to runtime errors.
 
 ## useReducer
 
