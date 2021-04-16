@@ -23,7 +23,7 @@ However, many hooks are initialized with null-ish default values, and you may wo
 const [user, setUser] = React.useState<IUser | null>(null);
 
 // later...
-setUser(newUser); 
+setUser(newUser);
 ```
 
 You can also use type assertions if a state is initialized soon after setup and always has a value after:
