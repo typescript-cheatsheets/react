@@ -510,7 +510,7 @@ function DelayedEffect(props: { timerMs: number }) {
 
 ## useRef
 
-When using `useRef`, you have two options when creating a ref container that does not have an initial value:
+When using `useRef`, you have three options when creating a ref container that does not have an initial value:
 
 ```ts
 const ref1 = useRef<HTMLElement>(null!);
