@@ -139,7 +139,7 @@ function DelayedEffect(props: { timerMs: number }) {
 
 In TypeScript, `useRef` returns a reference that is either [read-only](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1025-L1039) or [mutable](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1012-L1023), depends on whether your type argument fully covers the initial value or not. Choose one that suits your use case.
 
-### Option 1
+### Option 1: DOM element ref
 
 **[To access a DOM element](https://reactjs.org/docs/refs-and-the-dom.html):** provide only the element type as argument, and use `null` as initial value. In this case, the returned reference will have a read-only `.current` that is managed by React. TypeScript expects you to give this ref to an element's `ref` prop:
 
@@ -168,11 +168,28 @@ If you are sure that `divRef.current` will never be null, it is also possible to
 
 ```
 const divRef = useRef<HTMLDivElement>(null!);
+// Later... No need to check if it is null
+doSomethingWith(divRef.current);
 ```
 
 Note that you are opting out of type safety here - you will have a runtime error if you forget to assign the ref to an element in the render, or if the ref-ed element is conditionally rendered.
 
-### Option 2
+<details>
+<summary>
+  
+  Tip: Choosing which `HTMLElement` to use
+  
+</summary>
+  
+  
+Refs demand specificity - it is not enough to just specify any old `HTMLElement`. If you don't know the name of the element type you need, you can check [lib.dom.ts](https://github.com/microsoft/TypeScript/blob/v3.9.5/lib/lib.dom.d.ts#L19224-L19343) or make an intentional type error and let the language service tell you:
+
+![image](https://user-images.githubusercontent.com/6764957/116914284-1c436380-ac7d-11eb-9150-f52c571c5f07.png)
+
+</details>
+
+
+### Option 2: Mutable value ref
 
 **[To have a mutable value](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-instance-variables):** provide the type you want, and make sure the initial value fully belongs to that type:
 
@@ -191,12 +208,6 @@ function Foo() {
   return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
 }
 ```
-
-### Choosing which `HTMLElement` to use
-
-Refs demand specificity - it is not enough to just specify any old `HTMLElement`. If you don't know the name of the element type you need, you can check [lib.dom.ts](https://github.com/microsoft/TypeScript/blob/v3.9.5/lib/lib.dom.d.ts#L19224-L19343) or make an intentional type error and let the language service tell you:
-
-![image](https://user-images.githubusercontent.com/6764957/116914284-1c436380-ac7d-11eb-9150-f52c571c5f07.png)
 
 ### See also
 
