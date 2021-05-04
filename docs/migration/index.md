@@ -89,6 +89,7 @@ see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/th
 
 - [Bloomberg](https://www.techatbloomberg.com/blog/10-insights-adopting-typescript-at-scale/) - [Podcast form](https://talkscript.sitepen.com/episode-57-typescript-at-scale/)
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
+- Airtable's [Big Bang Migration from Flow to TS](https://medium.com/airtable-eng/the-continual-evolution-of-airtables-codebase-migrating-a-million-lines-of-code-to-typescript-612c008baf5c)
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)
 - [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
