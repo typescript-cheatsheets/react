@@ -153,7 +153,7 @@ function Foo() {
   useEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
-    if (divRef.current) throw Error("divRef is not assigned");
+    if (!divRef.current) throw Error("divRef is not assigned");
     
     // Now divRef.current is sure to be HTMLDivElement
     doSomethingWith(divRef.current);
