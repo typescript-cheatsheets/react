@@ -543,3 +543,29 @@ declare module "react-router-dom" {
 ```
 
 For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
+
+
+## Frequent Known Problems with TypeScript
+
+Just a list of stuff that React developers frequently run into, that TS has no solution for. Not necessarily TSX only.
+
+### TypeScript doesn't narrow after an object element null check
+
+
+[![https://pbs.twimg.com/media/E0u6b9uUUAAgwAk?format=jpg&name=medium](https://pbs.twimg.com/media/E0u6b9uUUAAgwAk?format=jpg&name=medium)](https://mobile.twitter.com/tannerlinsley/status/1390409931627499523)
+
+Ref: https://mobile.twitter.com/tannerlinsley/status/1390409931627499523. see also https://github.com/microsoft/TypeScript/issues/9998
+
+### TypeScript doesn't let you restrict the type of children
+
+Guaranteeing typesafety for this kind of API isn't possible:
+
+```tsx
+<Menu>
+  <MenuItem/> {/* ok */}
+  <MenuLink/> {/* ok */}
+  <div> {/* error */}
+</Menu>
+```
+
+Source: https://twitter.com/ryanflorence/status/1085745787982700544?s=20
