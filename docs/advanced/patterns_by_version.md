@@ -497,6 +497,11 @@ type Params = ParseRouteParams<"/api/user/:userID"> // Params is "userID"
 type NoParams = ParseRouteParams<"/api/user"> // NoParams is never --> no params!
 ```
 
+This feature is extremely flexible, see other usecase ideas here:
+
+- https://hasura.io/blog/how-typescript-template-literal-types-helped-us-with-multiple-database-support/
+- JSON parser: https://twitter.com/buildsghost/status/1301976526603206657?s=20
+
 2. [React 17 jsx Factories](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#react-17-jsx-factories)
 
 This is a new compiler option to offer output inline with React 17 support in general:
