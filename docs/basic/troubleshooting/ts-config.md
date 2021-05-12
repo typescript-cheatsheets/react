@@ -13,7 +13,7 @@ You can find [all the Compiler options in the TypeScript docs](https://www.types
     "outDir": "build/lib",
     "target": "es5",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": ["DOM", "ESNext"],
     "sourceMap": true,
     "importHelpers": true,
     "declaration": true,
