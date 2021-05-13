@@ -12,6 +12,14 @@ title: Setup TypeScript with React
 
 This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
 
+## VS Code Extensions
+
+- refactoring help https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit
+- R+TS Code Snippets (there are a few...)
+  - https://marketplace.visualstudio.com/items?itemName=infeng.vscode-react-typescript
+  - https://www.digitalocean.com/community/tutorials/the-best-react-extension-for-vs-code
+- TypeScript official extension https://code.visualstudio.com/docs/languages/typescript
+
 ## React + TypeScript Starter Kits
 
 Cloud setups:
