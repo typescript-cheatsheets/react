@@ -21,6 +21,8 @@ const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 const App = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
+> Tip: You might use [Paul Shen's VS Code Extension](https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit) to automate the type destructure declaration (incl a [keyboard shortcut](https://twitter.com/_paulshen/status/1392915279466745857?s=20)).
+
 <details>
 
 <summary><b>Why is `React.FC` discouraged? What about `React.FunctionComponent`/`React.VoidFunctionComponent`?</b></summary>
