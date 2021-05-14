@@ -149,16 +149,16 @@ function Foo() {
   //   is better than HTMLElement and way better than Element.
   // - Technical-wise, this returns RefObject<HTMLDivElement>
   const divRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
     if (!divRef.current) throw Error("divRef is not assigned");
-    
+
     // Now divRef.current is sure to be HTMLDivElement
     doSomethingWith(divRef.current);
   });
-  
+
   // Give the ref to an element so React can manage it for you
   return <div ref={divRef}>etc</div>;
 }
@@ -188,7 +188,6 @@ Refs demand specificity - it is not enough to just specify any old `HTMLElement`
 
 </details>
 
-
 ### Option 2: Mutable value ref
 
 **[To have a mutable value](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-instance-variables):** provide the type you want, and make sure the initial value fully belongs to that type:
@@ -203,7 +202,7 @@ function Foo() {
     intervalRef.current = setInterval(...);
     return () => clearInterval(intervalRef.current);
   }, []);
-  
+
   // The ref is not passed to any element's "ref" prop
   return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
 }

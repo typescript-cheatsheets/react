@@ -544,13 +544,11 @@ declare module "react-router-dom" {
 
 For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
 
-
 ## Frequent Known Problems with TypeScript
 
 Just a list of stuff that React developers frequently run into, that TS has no solution for. Not necessarily TSX only.
 
 ### TypeScript doesn't narrow after an object element null check
-
 
 [![https://pbs.twimg.com/media/E0u6b9uUUAAgwAk?format=jpg&name=medium](https://pbs.twimg.com/media/E0u6b9uUUAAgwAk?format=jpg&name=medium)](https://mobile.twitter.com/tannerlinsley/status/1390409931627499523)
 
