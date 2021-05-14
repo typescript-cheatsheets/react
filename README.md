@@ -920,7 +920,11 @@ Type inference improved greatly for `defaultProps` in [TypeScript 3.0+](https://
 **Function Components**
 
 ```tsx
+// using typeof as a shortcut; note that it hoists!
+// you can also declare the type of DefaultProps if you choose
+// e.g. https://github.com/typescript-cheatsheets/react/issues/415#issuecomment-841223219
 type GreetProps = { age: number } & typeof defaultProps;
+
 const defaultProps = {
   age: 21,
 };
@@ -2945,7 +2949,7 @@ It is worth mentioning some resources to help you get started:
 <!--START-SECTION:examples-->
 # Example App
 
-- [Create React App TypeScript Todo Example 2020](https://github.com/laststance/create-react-app-typescript-todo-example-2020)
+- [Create React App TypeScript Todo Example 2021](https://github.com/laststance/create-react-app-typescript-todo-example-2021)
 - [Ben Awad's 14 hour Fullstack React/GraphQL/TypeScript Tutorial](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
 - [Cypress Realworld App](https://github.com/cypress-io/cypress-realworld-app)
 
