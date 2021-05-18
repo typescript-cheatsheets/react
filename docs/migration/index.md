@@ -99,7 +99,7 @@ see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/th
 - Dropbox
   - [Talk at React Loop](https://www.youtube.com/watch?v=veXkJq0Z2Qk)
   - [Blogpost: The Great CoffeeScript to TypeScript Migration of 2017](https://dropbox.tech/frontend/the-great-coffeescript-to-typescript-migration-of-2017)
-- [Heap - How we failed, then succeeded, at migrating to TypeScript](https://heap.io/blog/analysis/migrating-to-typescript)
+- [Heap - How we failed, then succeeded, at migrating to TypeScript](https://heap.io/blog/migrating-to-typescript)
 - Execute Program (Gary Bernhardt) https://www.executeprogram.com/blog/porting-to-typescript-solved-our-api-woes
 
 Open Source
