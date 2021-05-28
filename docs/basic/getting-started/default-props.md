@@ -92,7 +92,7 @@ The insight to have here is that [`GreetProps` is the _internal_ contract for yo
 ```tsx
 // internal contract, should not be exported out
 type GreetProps = {
-  age?: number;
+  age: number;
 };
 
 class Greet extends Component<GreetProps> {
