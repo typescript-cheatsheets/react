@@ -1787,6 +1787,8 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
     
     Side note: the `ref` you get from `forwardRef` is mutable so you can assign to it if needed.
     
+    You may need to use React.ForwardRefRenderFunction instead of React.forwardRef
+    
   </summary>
 
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
