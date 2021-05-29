@@ -237,7 +237,12 @@ See also: [useAsync](https://usehooks.com/useAsync/).
 
 ## useFetch
 
-This Hook is usefull to make fetch request using `AbortController`
+This Hook is useful to make fetch requests using `AbortController`
+
+<details>
+<summary>
+Example implementation
+</summary>
 
 ```tsx
 export function useFetch(request: RequestInfo, init?: RequestInit) {
@@ -272,3 +277,5 @@ export function useFetch(request: RequestInfo, init?: RequestInit) {
   return { response, error, isLoading };
 }
 ```
+
+</details>
