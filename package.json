@@ -32,8 +32,6 @@
     "markdown-toc": "^1.2.0"
   },
   "devDependencies": {
-    "danger": "^10.1.1",
-    "danger-plugin-spellcheck": "^1.5.0",
     "husky": "^4.2.5",
     "prettier": "^2.0.2",
     "pretty-quick": "^2.0.1"
