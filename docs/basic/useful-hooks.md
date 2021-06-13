@@ -11,6 +11,8 @@ Other useful resources:
 
 - https://usehooks.com/
 
+- https://usehooks-typescript.com/
+
 ## useLocalStorage
 
 <details>
