@@ -111,12 +111,12 @@ const el = <MyConditionalComponent />; // throws an error
 
 This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
 
+**Array.fill**
+
 ```tsx
 const MyArrayComponent = () => Array(5).fill(<div />);
 const el2 = <MyArrayComponent />; // throws an error
 ```
-
-**Array.fill**
 
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
