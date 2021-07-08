@@ -129,7 +129,8 @@
   - [Prerequisites](#prerequisites)
   - [VS Code Extensions](#vs-code-extensions)
   - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-  - [Import React](#import-react)<!--END-SECTION:setup-toc-->
+  - [Import React](#import-react)
+  - [Video Tutorial](#video-tutorial)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
@@ -261,6 +262,18 @@ You should also check [the new TypeScript docs for official descriptions between
 
 </details>
 
+## Video Tutorial
+
+Have a look at the 7-part "React Typescript Course" video series below for an introduction to TypeScript with React.
+
+<a href="https://www.youtube.com/watch?v=PL1NUl7fQ2I&list=PLG-Mk4wQm9_LyKE5EwoZz2_GGXR-zJ5Ml">
+    <img
+        width="200px"
+        alt="react typescript course video series"
+        src="https://i9.ytimg.com/vi/PL1NUl7fQ2I/maxresdefault.jpg?time=1625742300000&sqp=CNy3m4cG&rs=AOn4CLD1jOd4sK7dIvjr9RMg7B2isMgvsQ"
+    />
+</a>
+
 <!--END-SECTION:setup-->
 
 # Section 2: Getting Started
@@ -376,12 +389,12 @@ const el = <MyConditionalComponent />; // throws an error
 
 This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
 
+**Array.fill**
+
 ```tsx
 const MyArrayComponent = () => Array(5).fill(<div />);
 const el2 = <MyArrayComponent />; // throws an error
 ```
-
-**Array.fill**
 
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
@@ -488,9 +501,9 @@ export function reducer: Reducer<AppState, Action>() {}
 
 </details>
 
-## useEffect
+## useEffect / useLayoutEffect
 
-When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
+  Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effects</b> and return an optional cleanup function which means they don't deal with returning values, no types are necessary. When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
 
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
@@ -610,7 +623,7 @@ function Foo() {
 
 ## useImperativeHandle
 
-_we dont have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
+_We don't have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
 
 ```tsx
 type ListProps<ItemType> = {
