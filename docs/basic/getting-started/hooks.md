@@ -93,9 +93,9 @@ export function reducer: Reducer<AppState, Action>() {}
 
 </details>
 
-## useEffect
+## useEffect / useLayoutEffect
 
-When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
+  Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effects</b> and return an optional cleanup function which means they don't deal with returning values, no types are necessary. When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
 
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
