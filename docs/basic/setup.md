@@ -80,3 +80,15 @@ Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](
 You should also check [the new TypeScript docs for official descriptions between each compiler flag](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports)!
 
 </details>
+
+## Video Tutorial
+
+Have a look at the 7-part "React Typescript Course" video series below for an introduction to TypeScript with React.
+
+<a href="https://www.youtube.com/watch?v=PL1NUl7fQ2I&list=PLG-Mk4wQm9_LyKE5EwoZz2_GGXR-zJ5Ml">
+    <img
+        width="200px"
+        alt="react typescript course video series"
+        src="https://i9.ytimg.com/vi/PL1NUl7fQ2I/maxresdefault.jpg?time=1625742300000&sqp=CNy3m4cG&rs=AOn4CLD1jOd4sK7dIvjr9RMg7B2isMgvsQ"
+    />
+</a>
