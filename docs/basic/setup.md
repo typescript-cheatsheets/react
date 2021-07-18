@@ -89,6 +89,6 @@ Have a look at the 7-part "React Typescript Course" video series below for an in
     <img
         width="200px"
         alt="react typescript course video series"
-        src="https://i9.ytimg.com/vi/PL1NUl7fQ2I/maxresdefault.jpg?time=1625742300000&sqp=CNy3m4cG&rs=AOn4CLD1jOd4sK7dIvjr9RMg7B2isMgvsQ"
+        src="https://i.imgur.com/IIG0Xu9.jpeg"
     />
 </a>
