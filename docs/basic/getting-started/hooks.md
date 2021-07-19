@@ -101,8 +101,7 @@ Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effect
 function DelayedEffect(props: { timerMs: number }) {
   const { timerMs } = props;
 
-  useEffect(
-    () =>
+  useEffect(() =>
       setTimeout(() => {
         /* do stuff */
       }, timerMs),
