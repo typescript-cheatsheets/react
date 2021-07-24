@@ -5,7 +5,8 @@ sidebar_label: Operators
 ---
 
 - `typeof` and `instanceof`: type query used for refinement
-- `keyof`: get keys of an object
+- `keyof`: get keys of an object. `keyof T` is an operator to tell you what values of `k` can be used for `obj[k]`.
+  - [Some misconceptions here](https://twitter.com/SeaRyanC/status/1418678670739218438?s=20).
 - `O[K]`: property lookup
 - `[K in O]`: mapped types
 - `+` or `-` or `readonly` or `?`: addition and subtraction and readonly and optional modifiers
