@@ -77,6 +77,8 @@ Special note on `ts-loader` and 3rd party libraries: https://twitter.com/acemark
 
 ## Academic Studies of Migration
 
+> Note: Empirical Software Engineering is desirable, but [extremely hard](https://hillelwayne.com/talks/what-we-know-we-dont-know/). Please be gentle but also please share if you find quality research!
+
 - [To Type or Not to Type: Quantifying Detectable Bugs in JavaScript](http://earlbarr.com/publications/typestudy.pdf)
 
 > Our central finding is that both static type systems find an important percentage of public bugs: both Flow 0.30 and TypeScript 2.0 successfully detect 15%!
