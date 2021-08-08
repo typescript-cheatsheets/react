@@ -83,7 +83,8 @@ Special note on `ts-loader` and 3rd party libraries: https://twitter.com/acemark
 
 - [Empirical study on the impact of static typing](https://www.researchgate.net/publication/259634489_An_empirical_study_on_the_impact_of_static_typing_on_software_maintainability)
 
-see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/things-i-was-wrong-about/1-types/)
+see also [Things I was Wrong About: Types](https://v5.chriskrycho.com/journal/things-i-was-wrong-about/1-types/) and [A Large Scale Study of Programming Languages
+and Code Quality in Github](https://web.cs.ucdavis.edu/~filkov/papers/lang_github.pdf)
 
 ## Misc migration stories by notable companies and open source
 
