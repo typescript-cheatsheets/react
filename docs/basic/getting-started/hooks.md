@@ -215,21 +215,24 @@ function Foo() {
 
 ## useImperativeHandle
 
-_We don't have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
-
+It's normally used in combination with [`forwardRef`](https://github.com/typescript-cheatsheets/react/blob/main/README.md#forwardrefcreateref), and here's [an example from the React docs](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) typed:
+  
 ```tsx
-type ListProps<ItemType> = {
-  items: ItemType[];
-  innerRef?: React.Ref<{ scrollToItem(item: ItemType): void }>;
-};
-
-function List<ItemType>(props: ListProps<ItemType>) {
-  useImperativeHandle(props.innerRef, () => ({
-    scrollToItem() {},
+function FancyInput(props: {}, ref: React.Ref<{ focus: () => void }>) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current?.focus();
+    },
   }));
-  return null;
+  return <input ref={inputRef} />;
 }
+const Input = forwardRef<{ focus: () => void }, {}>(FancyInput);
 ```
+
+### See also
+
+- [A discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106)
 
 ## Custom Hooks
 
