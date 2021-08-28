@@ -15,9 +15,9 @@ interface AppContextInterface {
 }
 
 const AppCtx = React.createContext<AppContextInterface>({
-   name: string, 
-   author: string, 
-   url:string
+   name: "", 
+   author: "", 
+   url:""
 });
 
 // Provider in your app
