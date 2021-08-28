@@ -14,7 +14,11 @@ interface AppContextInterface {
   url: string;
 }
 
-const AppCtx = React.createContext<AppContextInterface | null>(null);
+const AppCtx = React.createContext<AppContextInterface>({
+   name: string, 
+   author: string, 
+   url:string
+});
 
 // Provider in your app
 
