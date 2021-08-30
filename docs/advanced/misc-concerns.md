@@ -8,19 +8,22 @@ Sometimes writing React isn't just about React. While we don't focus on other li
 
 ## Writing TypeScript Libraries instead of Apps
 
-`propTypes` may seem unnecessary with TypeScript, especially when building React + TypeScript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
+`propTypes` may seem unnecessary with TypeScript, especially when building React + TypeScript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript. Rather than defining them twice, you can infer the props interface from your propTypes using `PropTypes.InferProps`: 
 
 ```ts
-interface IMyComponentProps {
-  autoHeight: boolean;
-  secondProp: number;
+const propTypes = {
+  autoHeight: PropTypes.bool,
+  secondProp: PropTypes.number.isRequired,
+  callback: PropTyps.func,
+};
+
+// Instead of defining the props again, infer their types from the const above
+interface IMyComponentProps extends PropTypes.InferProps<typeof propTypes> {
+  callback: (param: string) => void, // You can override a prop to a more specific type
 }
 
 export class MyComponent extends React.Component<IMyComponentProps, {}> {
-  static propTypes = {
-    autoHeight: PropTypes.bool,
-    secondProp: PropTypes.number.isRequired,
-  };
+  static propTypes = propTypes;
 }
 ```
 
