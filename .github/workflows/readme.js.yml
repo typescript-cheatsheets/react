@@ -24,6 +24,3 @@ jobs:
         run: npm run gen-readme --if-present
         env:
           ENV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Format README
-        run: npm run format-readme
