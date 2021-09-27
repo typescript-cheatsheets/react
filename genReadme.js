@@ -1,6 +1,7 @@
 const { Octokit } = require("@octokit/rest");
 const Toc = require("markdown-toc");
 const Fm = require("front-matter");
+const prettier = require("prettier");
 const octokit = new Octokit({ auth: `token ${process.env.ENV_GITHUB_TOKEN}` });
 const repo_info = process.env.CI_REPOSITORY.split("/");
 const repo_details = {
@@ -187,6 +188,11 @@ async function getReadme() {
       path: "docs/basic/examples.md",
       to: initialContent,
       headingLevel: 1,
+    });
+    const prettierConfig = await prettier.resolveConfig("README.md");
+    initialContent = prettier.format(initialContent, {
+      ...prettierConfig,
+      filepath: "README.md",
     });
     await octokit.repos.createOrUpdateFile({
       ...repo_details,
