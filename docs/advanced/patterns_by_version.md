@@ -119,7 +119,7 @@ if (typeof response === "string") {
 }
 ```
 
-TODO: blame this change. Don't know what this shouldve done
+TODO: blame this change. Don't know what this should've done
 
 You can also assert a type, or use a **type guard** against an `unknown` type. This is better than resorting to `any`.
 

@@ -87,7 +87,7 @@ This is because TypeScript does not know that merging `Omit<T, "owner">` and `{o
 
 ## Generic solution
 
-The above snippet can be modified to create a generic solution to inject any arbitary props;
+The above snippet can be modified to create a generic solution to inject any arbitrary props;
 
 ```typescript
 function withInjectedProps<U extends Record<string, unknown>>(
