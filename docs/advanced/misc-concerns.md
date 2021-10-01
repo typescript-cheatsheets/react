@@ -111,7 +111,7 @@ If you have specific advice in this area, please file a PR!
 
 ## Prettier
 
-There isn't any real secret to Prettier for TypeScript. But its a great idea to run prettier on every commit!
+There isn't any real secret to Prettier for TypeScript. But it's a great idea to run prettier on every commit!
 
 ```bash
 $ yarn add -D prettier husky lint-staged
@@ -159,7 +159,7 @@ Yes, you can test your types! You shouldn't use it for EVERYTHING, but it can he
 
 ## Working with Non-TypeScript Libraries (writing your own index.d.ts)
 
-Lets say you want to use `de-indent`, but it isn't typed or on DefinitelyTyped. You get an error like this:
+Let's say you want to use `de-indent`, but it isn't typed or on DefinitelyTyped. You get an error like this:
 
 ```
 [ts]
