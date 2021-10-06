@@ -13,7 +13,7 @@ const SupportLink = ({ title, content }) => (
 
 export default function Help() {
   const { siteConfig } = useDocusaurusContext();
-
+  console.log("just a console log");
   const supportLinks = [
     {
       title: "Browse Docs",
