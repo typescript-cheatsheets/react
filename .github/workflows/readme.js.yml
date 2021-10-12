@@ -1,6 +1,6 @@
 name: Generate README
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   pull_request:
     paths: "docs/basic/*"
     branches: [main]
@@ -15,7 +15,9 @@ jobs:
       - uses: franzdiebold/github-env-vars-action@v2.1.0
 
       - name: Setup Node.js Environment
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
 
       - name: Install dependencies
         run: npm i
