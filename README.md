@@ -131,21 +131,6 @@
   - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
   - [Import React](#import-react)
   - [Video Tutorial](#video-tutorial)<!--END-SECTION:setup-toc-->
-- [Section 2: Getting Started](#section-2-getting-started)
-  - [Function Components](#function-components)
-  - [Hooks](#hooks)
-  - [Class Components](#class-components)
-  - [Typing defaultProps](#typing-defaultprops)
-  - [Types or Interfaces?](#types-or-interfaces)
-  - [Basic Prop Types Examples](#basic-prop-types-examples)
-  - [Useful React Prop Type Examples](#useful-react-prop-type-examples)
-  - [getDerivedStateFromProps](#getDerivedStateFromProps)
-  - [Forms and Events](#forms-and-events)
-  - [Context](#context)
-  - [forwardRef/createRef](#forwardrefcreateref)
-  - [Portals](#portals)
-  - [Error Boundaries](#error-boundaries)
-  - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
   <!--START-SECTION:types-toc-->
   - [Union Types and Type Guarding](#union-types-and-type-guarding)
@@ -2960,28 +2945,6 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 - Please help contribute this new section!
 
 <!--END-SECTION:talks-->
-
-<!--START-SECTION:learn-ts-->
-
-# Time to Really Learn TypeScript
-
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. If you are still facing TypeScript troubleshooting issues, it is likely that your understanding of TS is still too superficial.
-
-There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
-
-It is worth mentioning some resources to help you get started:
-
-- Step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section, written by @Orta
-- Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
-- Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
-- Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
-- Axel Rauschmeyer's [Tackling TypeScript](https://exploringjs.com/tackling-ts/)
-- Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
-- Learn about [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
-- Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
-- Here is another [TypeScript Error Guide](https://github.com/threehams/typescript-error-guide/) that you can check for your errors.
-
-<!--END-SECTION:learn-ts-->
 
 <!--START-SECTION:examples-->
 
