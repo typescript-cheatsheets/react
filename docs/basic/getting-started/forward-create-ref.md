@@ -54,8 +54,75 @@ export const FancyButton = React.forwardRef((
 
 If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L770).
 
-More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
+## Generic forwardRefs
+  
+Read more context in https://fettblog.eu/typescript-react-generic-forward-refs/:
+ 
+### Option 1 - Wrapper component
+  
+```ts
+type ClickableListProps<T> = {
+  items: T[];
+  onSelect: (item: T) => void;
+  mRef?: React.Ref<HTMLUListElement> | null;
+};
 
+export function ClickableList<T>(
+  props: ClickableListProps<T>
+) {
+  return (
+    <ul ref={props.mRef}>
+      {props.items.map((item, i) => (
+        <li key={i}>
+          <button onClick={(el) => props.onSelect(item)}>Select</button>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+  
+### Option 2 - Redeclare forwardRef
+
+```ts
+// Redecalare forwardRef
+declare module "react" {
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+  ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+}
+
+
+// Just write your components like you're used to!
+
+type ClickableListProps<T> = {
+  items: T[];
+  onSelect: (item: T) => void;
+};
+function ClickableListInner<T>(
+  props: ClickableListProps<T>,
+  ref: React.ForwardedRef<HTMLUListElement>
+) {
+  return (
+    <ul ref={ref}>
+      {props.items.map((item, i) => (
+        <li key={i}>
+          <button onClick={(el) => props.onSelect(item)}>Select</button>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export const ClickableList = React.forwardRef(ClickableListInner);
+```
+  
+## More Info
+  
+ - https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
+ 
 You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/167).
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
