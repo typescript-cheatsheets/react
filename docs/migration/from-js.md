@@ -91,6 +91,7 @@ https://speakerdeck.com/amhinson/convert-a-react-native-project-to-typescript-in
 - [Migrating an EJECTED CRA app to TS](https://spin.atomicobject.com/2018/07/04/migrating-cra-typescript/)
 - [Lyft's JS to TS migration tool](https://github.com/lyft/react-javascript-to-typescript-transform) (includes PropTypes migration)
 - [Hootsuite][hootsuite]
+- [Etsy's Journey to TypeScript](https://codeascraft.com/2021/11/08/etsys-journey-to-typescript/)
 - [Storybook's migration (PR)](https://github.com/storybooks/storybook/issues/5030)
 - [How we migrated a 200K+ LOC project to TypeScript and survived to tell the story][coherentlabs] - Coherent Labs - using `grunt-ts`, jQuery and Kendo UI
 - incrementally adding strict null checks https://code.visualstudio.com/blogs/2019/05/23/strict-null
@@ -99,3 +100,12 @@ Old content that is possibly out of date
 
 - [Incrementally Migrating JS to TS][clayallsop] (old)
 - [Microsoft's TypeScript React Conversion Guide][mstsreactconversionguide] (old)
+
+
+[clayallsop]: https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88 "Incrementally Migrating JavaScript to TypeScript"
+[pleo]: https://medium.com/pleo/migrating-a-babel-project-to-typescript-af6cd0b451f4 "Migrating a Babel project to TypeScript"
+[tiny]: https://go.tiny.cloud/blog/benefits-of-gradual-strong-typing-in-javascript/ "Benefits of gradual strong typing in JavaScript"
+[entria]: https://medium.com/entria/incremental-migration-to-typescript-on-a-flowtype-codebase-515f6490d92d "Incremental Migration to TypeScript on a Flowtype codebase"
+[mstsreactconversionguide]: https://github.com/Microsoft/TypeScript-React-Conversion-Guide "TypeScript React Conversion Guide"
+[coherentlabs]: https://hashnode.com/post/how-we-migrated-a-200k-loc-project-to-typescript-and-survived-to-tell-the-story-ciyzhikcc0001y253w00n11yb "How we migrated a 200K+ LOC project to TypeScript and survived to tell the story"
+[hootsuite]: https://medium.com/hootsuite-engineering/thoughts-on-migrating-to-typescript-5e1a04288202 "Thoughts on migrating to TypeScript"
