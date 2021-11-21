@@ -8,6 +8,7 @@ sidebar_label: Codebases
   - https://github.com/devhubapp/devhub
   - https://github.com/benawad/codeponder (with [coding livestream!](https://www.youtube.com/watch?v=D8IJOwdNSkc&list=PLN3n1USn4xlnI6kwzI8WrNgSdG4Z6daCq))
   - https://github.com/cypress-io/cypress-realworld-app
+  - https://github.com/alan2207/bulletproof-react
 - Design Systems/Component Libraries
   - https://github.com/seek-oss/braid-design-system/ (see [how to use TS to validate props](https://twitter.com/markdalgleish/status/1339863859469955072?s=20))
   - https://github.com/palantir/blueprint
