@@ -101,7 +101,6 @@ Old content that is possibly out of date
 - [Incrementally Migrating JS to TS][clayallsop] (old)
 - [Microsoft's TypeScript React Conversion Guide][mstsreactconversionguide] (old)
 
-
 [clayallsop]: https://medium.com/@clayallsopp/incrementally-migrating-javascript-to-typescript-565020e49c88 "Incrementally Migrating JavaScript to TypeScript"
 [pleo]: https://medium.com/pleo/migrating-a-babel-project-to-typescript-af6cd0b451f4 "Migrating a Babel project to TypeScript"
 [tiny]: https://go.tiny.cloud/blog/benefits-of-gradual-strong-typing-in-javascript/ "Benefits of gradual strong typing in JavaScript"
