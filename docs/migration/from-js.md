@@ -17,7 +17,7 @@ for JSON - http://json2ts.com/ generate TypeScript interfaces from JSON
 
 the "Just Renaming" strategy
 
-- OSX/Linux: `find src -name "*.js" -exec sh -c 'mv"$0" "${0%.js}.tsx"' {} \;`
+- OSX/Linux: `find src -name "*.js" -exec sh -c 'mv "$0" "${0%.js}.tsx"' {} \;`
 
 You can either load typescript files with webpack, or use the `tsc` compiler to compile your TS files to JS side by side. The basic `tsconfig.json` is:
 
