@@ -67,7 +67,7 @@ If your target form has custom named inputs that you'd like to access, you can e
 type ExtendedHTMLFormElement = HTMLFormElement & {
   email: HTMLInputElement;
   password: HTMLInputElement;
-}
+};
 
 const Form = () => {
   const formRef = React.useRef<ExtendedHTMLFormElement>(null);
@@ -99,8 +99,8 @@ const Form = () => {
         <input type="submit" value="Log in" />
       </div>
     </form>
-  )
-}
+  );
+};
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgFEAPGJAOwBMkOAJAFQCyAGQBi0EAwA2SEO3gBeOP2FioE6bLbwAZHADeFOHBkpgkgFxLBQgJJswAVxhSZcw3DAoAzl4Du0DktlW3snF00YCgBfCgo0CDYveFU8RQAKAEo4eQA+fXd4xKxxZExsxGIYADoHLyRSgB5mVk5uYJTwuRy0tgdJSQzY8iMiGAcoNjg09yMGzHEZozgiTHk9ebVSmOGlowSAZQcAIxBgGDW0pEtkdGqOgDc5JpZ2Ll5rDo0urNz8nd2jEgqmAiI8tAARJCYFB9GCZRa7QpJOAbVLGKpocZELR8FBQADmSEi-wBSPgJjM5VRVQpkiq9xQkgc9AA9Cy4DQ6GgABZINAAay8AEIEUsyR5vH4AlTxMDJf4oBx6YzmXA2RzaHzeQLhaKjOqiWgqsbRVFtrscqKGhxgPdLSTdg1JCgjkhJPaAQCGCBTBY9UsGsBQvBOUh5Phafg4GwULJw5G1R7PXAGizna73VaWTa7Vac0nPU6XW6C8mAArygLmf2zIOOEOa8OeHwKjhRmNx-DNqWKqMs0uOtPFzMOlPZ20DlP5-2B4MaujhrzHU4wKMMplh-BCCD4uBBvuT1PTkmp1FJwbkKJAA)
