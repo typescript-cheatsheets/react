@@ -61,41 +61,49 @@ The first method uses an inferred method signature `(e: React.FormEvent<HTMLInpu
 
 **Typing onSubmit, with Uncontrolled components in a Form**
 
-If you don't quite care about the type of the event, you can just use React.SyntheticEvent. If your target form has custom named inputs that you'd like to access, you can use a type assertion:
+If your target form has custom named inputs that you'd like to access, you can extend HTMLFormElement:
 
 ```tsx
-<form
-  ref={formRef}
-  onSubmit={(e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-    const email = target.email.value; // typechecks!
-    const password = target.password.value; // typechecks!
-    // etc...
-  }}
->
-  <div>
-    <label>
-      Email:
-      <input type="email" name="email" />
-    </label>
-  </div>
-  <div>
-    <label>
-      Password:
-      <input type="password" name="password" />
-    </label>
-  </div>
-  <div>
-    <input type="submit" value="Log in" />
-  </div>
-</form>
+type ExtendedHTMLFormElement = HTMLFormElement & {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+}
+
+const Form = () => {
+  const formRef = React.useRef<ExtendedHTMLFormElement>(null);
+
+  return (
+    <form
+      ref={formRef}
+      onSubmit={(e: React.FormEvent<ExtendedHTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const email = form.email.value; // typechecks!
+        const password = form.password.value; // typechecks!
+        // etc...
+      }}
+    >
+      <div>
+        <label>
+          Email:
+          <input type="email" name="email" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input type="password" name="password" />
+        </label>
+      </div>
+      <div>
+        <input type="submit" value="Log in" />
+      </div>
+    </form>
+  )
+}
 ```
 
-[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGctoRlM4BeRYmAOgFc6kLABQBKClVoM4AMSbs4o9gD4FFOHAA8mJmrhFMbAN7aozJJgC+u2gGVeAIxDAYRoUgBcndDxsBPGjAAFkgwwGgAogBuSAEiynCGuupI3GBE0QEAIuYovAA2MKIA3Elw1PTwMChQAOYh8ilVtfUodHAwvmBIEKyN1XXwAGQJpckgKMB5noZwkSh5vB5wDFDANDVwFiXk6rtwYK10AO7QACbTs-OLnitrG1ulDzu75VJI45PyTQPc7xN53DmCyQRTgAHowe1Okg0ME0ABrOgAQlKr3gBzoxzOX36IVShxOUFOgKuIPBkI6XVhMMRKOe6ghcBCaG4rN0Fis5CUug0p2AkW59M0eRQ9iQeUFe3U4Q+U1GmjWYF4lWhbAARH9Jmq4DQUCAkOrNXltWDJbsNGCRWKJTywXyBTz7Wb1BoreLnbsAAoEs7ueUaRXKqFddUYrFE7W6-Whn0R8Eei1um3PC1Ox38hOBlUhtV0BxOGDaoGLdUAGQgGzWJrNqYzFAtJhAgpEQA)
+[View in the TypeScript Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgFEAPGJAOwBMkOAJAFQCyAGQBi0EAwA2SEO3gBeOP2FioE6bLbwAZHADeFOHBkpgkgFxLBQgJJswAVxhSZcw3DAoAzl4Du0DktlW3snF00YCgBfCgo0CDYveFU8RQAKAEo4eQA+fXd4xKxxZExsxGIYADoHLyRSgB5mVk5uYJTwuRy0tgdJSQzY8iMiGAcoNjg09yMGzHEZozgiTHk9ebVSmOGlowSAZQcAIxBgGDW0pEtkdGqOgDc5JpZ2Ll5rDo0urNz8nd2jEgqmAiI8tAARJCYFB9GCZRa7QpJOAbVLGKpocZELR8FBQADmSEi-wBSPgJjM5VRVQpkiq9xQkgc9AA9Cy4DQ6GgABZINAAay8AEIEUsyR5vH4AlTxMDJf4oBx6YzmXA2RzaHzeQLhaKjOqiWgqsbRVFtrscqKGhxgPdLSTdg1JCgjkhJPaAQCGCBTBY9UsGsBQvBOUh5Phafg4GwULJw5G1R7PXAGizna73VaWTa7Vac0nPU6XW6C8mAArygLmf2zIOOEOa8OeHwKjhRmNx-DNqWKqMs0uOtPFzMOlPZ20DlP5-2B4MaujhrzHU4wKMMplh-BCCD4uBBvuT1PTkmp1FJwbkKJAA)
 
 Of course, if you're making any sort of significant form, [you should use Formik](https://jaredpalmer.com/formik) or [React Hook Form](https://react-hook-form.com/), which are written in TypeScript.
 
