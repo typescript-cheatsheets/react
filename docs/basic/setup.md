@@ -43,7 +43,7 @@ Other tools
 
 Less mature tools still worth checking out:
 
-- [Vite](https://twitter.com/swyx/status/1282727239230996480?lang=en): `npm init vite-app my-react-project --template react-ts` (note - not yet v1.0, but very fast)
+- [Vite](https://vitejs.dev/): `npm init vite my-app -- --template react-ts`
 - [Snowpack](<https://www.snowpack.dev/#create-snowpack-app-(csa)>): `npx create-snowpack-app my-app --template app-template-react-typescript`
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
