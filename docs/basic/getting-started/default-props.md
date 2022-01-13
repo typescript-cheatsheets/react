@@ -7,7 +7,8 @@ title: Typing defaultProps
 
 As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
 
-- https://twitter.com/hswolff/status/1133759319571345408
+- [Original tweet](https://twitter.com/hswolff/status/1133759319571345408)
+- More info can also be found in [this article](https://medium.com/@matanbobi/react-defaultprops-is-dying-whos-the-contender-443c19d9e7f1)
 
 The consensus is to use object default values.
 
