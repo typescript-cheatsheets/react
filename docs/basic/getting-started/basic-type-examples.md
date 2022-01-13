@@ -42,6 +42,8 @@ type AppProps = {
   onClick: () => void;
   /** function with named prop (VERY COMMON) */
   onChange: (id: number) => void;
+  /** function type syntax that takes an event (VERY COMMON) */
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** alternative function type syntax that takes an event (VERY COMMON) */
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   /** an optional prop (VERY COMMON!) */
