@@ -225,7 +225,7 @@ Other tools
 
 Less mature tools still worth checking out:
 
-- [Vite](https://twitter.com/swyx/status/1282727239230996480?lang=en): `npm init vite-app my-react-project --template react-ts` (note - not yet v1.0, but very fast)
+- [Vite](https://vitejs.dev/): `npm init vite my-app -- --template react-ts`
 - [Snowpack](<https://www.snowpack.dev/#create-snowpack-app-(csa)>): `npx create-snowpack-app my-app --template app-template-react-typescript`
 - [Docusaurus v2](https://v2.docusaurus.io/docs/installation) with [TypeScript Support](https://v2.docusaurus.io/docs/typescript-support)
 - [Parcel](https://v2.parceljs.org/languages/typescript/)
@@ -401,7 +401,7 @@ const el2 = <MyArrayComponent />; // throws an error
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
+const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element;
 ```
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
@@ -506,7 +506,7 @@ export function reducer: Reducer<AppState, Action>() {}
 
 ## useEffect / useLayoutEffect
 
-Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effects</b> and return an optional cleanup function which means they don't deal with returning values, no types are necessary. When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
+Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effects</b> and return an optional cleanup function which means if they don't deal with returning values, no types are necessary. When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
 
 ```ts
 function DelayedEffect(props: { timerMs: number }) {
@@ -902,7 +902,8 @@ class Comp extends React.PureComponent<Props, State> {
 
 As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
 
-- https://twitter.com/hswolff/status/1133759319571345408
+- [Original tweet](https://twitter.com/hswolff/status/1133759319571345408)
+- More info can also be found in [this article](https://medium.com/@matanbobi/react-defaultprops-is-dying-whos-the-contender-443c19d9e7f1)
 
 The consensus is to use object default values.
 
@@ -1154,6 +1155,8 @@ type AppProps = {
   onClick: () => void;
   /** function with named prop (VERY COMMON) */
   onChange: (id: number) => void;
+  /** function type syntax that takes an event (VERY COMMON) */
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** alternative function type syntax that takes an event (VERY COMMON) */
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   /** an optional prop (VERY COMMON!) */
@@ -1807,21 +1810,87 @@ This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pu
 ```tsx
 type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef((
-  props: Props,
-  ref: React.Ref<Ref> // <-- here!
-) => (
-  <button ref={ref} className="MyClassName" type={props.type}>
-    {props.children}
-  </button>
-));
+export const FancyButton = React.forwardRef(
+  (
+    props: Props,
+    ref: React.Ref<Ref> // <-- here!
+  ) => (
+    <button ref={ref} className="MyClassName" type={props.type}>
+      {props.children}
+    </button>
+  )
+);
 ```
 
 </details>
 
 If you are grabbing the props of a component that forwards refs, use [`ComponentPropsWithRef`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L770).
 
-More info: https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
+## Generic forwardRefs
+
+Read more context in https://fettblog.eu/typescript-react-generic-forward-refs/:
+
+### Option 1 - Wrapper component
+
+```ts
+type ClickableListProps<T> = {
+  items: T[];
+  onSelect: (item: T) => void;
+  mRef?: React.Ref<HTMLUListElement> | null;
+};
+
+export function ClickableList<T>(props: ClickableListProps<T>) {
+  return (
+    <ul ref={props.mRef}>
+      {props.items.map((item, i) => (
+        <li key={i}>
+          <button onClick={(el) => props.onSelect(item)}>Select</button>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Option 2 - Redeclare forwardRef
+
+```ts
+// Redecalare forwardRef
+declare module "react" {
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+  ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+}
+
+// Just write your components like you're used to!
+
+type ClickableListProps<T> = {
+  items: T[];
+  onSelect: (item: T) => void;
+};
+function ClickableListInner<T>(
+  props: ClickableListProps<T>,
+  ref: React.ForwardedRef<HTMLUListElement>
+) {
+  return (
+    <ul ref={ref}>
+      {props.items.map((item, i) => (
+        <li key={i}>
+          <button onClick={(el) => props.onSelect(item)}>Select</button>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export const ClickableList = React.forwardRef(ClickableListInner);
+```
+
+## More Info
+
+- https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
 You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/167).
 
@@ -2354,9 +2423,9 @@ function foo() {
 
 type InstType = ReturnType<typeof foo>;
 type SubInstArr = InstType["subInstArr"];
-type SubIsntType = SubInstArr[0];
+type SubInstType = SubInstArr[0];
 
-let baz: SubIsntType = {
+let baz: SubInstType = {
   c: 5,
   d: 6, // type checks ok!
 };
@@ -2364,8 +2433,8 @@ let baz: SubIsntType = {
 //You could just write a one-liner,
 //But please make sure it is forward-readable
 //(you can understand it from reading once left-to-right with no jumps)
-type SubIsntType2 = ReturnType<typeof foo>["subInstArr"][0];
-let baz2: SubIsntType2 = {
+type SubInstType2 = ReturnType<typeof foo>["subInstArr"][0];
+let baz2: SubInstType2 = {
   c: 5,
   d: 6, // type checks ok!
 };
@@ -2784,7 +2853,7 @@ It is worth mentioning some resources to help you get started:
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
-- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
+- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesn't seem to be frequently updated anymore.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
 - [Mike North's Production TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/production-typescript/)
 - [TSX Guide](https://jenil.github.io/chota/) by [gojutin](https://github.com/gojutin/www.tsx.guide)
