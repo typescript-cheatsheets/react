@@ -11,5 +11,5 @@ title: From Flow
 - Quick-n-dirty [Flow to TS Codemod](https://gist.github.com/skovhus/c57367ce6ecbc3f70bb7c80f25727a11)
 - [Ecobee's brief experience](https://mobile.twitter.com/alanhietala/status/1104450494754377728)
 - [Migrating a 50K SLOC Flow + React Native app to TypeScript](https://blog.usejournal.com/migrating-a-flow-react-native-app-to-typescript-c74c7bceae7d)
-
+- [How we migrated 400K+ lines of code from Flow to TypeScript at Factorial](https://labs.factorialhr.com/posts/how-we-migrated-400k-lines-of-code-from-flow-to-typescript)
 [entria]: https://medium.com/entria/incremental-migration-to-typescript-on-a-flowtype-codebase-515f6490d92d "Incremental Migration to TypeScript on a Flowtype codebase"
