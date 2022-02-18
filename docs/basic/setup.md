@@ -37,9 +37,7 @@ Local dev setups:
 - [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS _libraries_. (in future: [TurboRepo](https://twitter.com/jaredpalmer/status/1346217789942591488))
 
 <details>
-<summary>
-Other tools
-</summary>
+<summary><b>Other tools</b></summary>
 
 Less mature tools still worth checking out:
 
@@ -73,7 +71,7 @@ import ReactDOM from "react-dom";
 
 <details>
 
-<summary>Explanation</summary>
+<summary><b>Explanation</b></summary>
 
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
