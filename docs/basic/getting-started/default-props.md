@@ -159,7 +159,7 @@ const el = <TestComponent name="foo" />;
 ## Misc Discussions and Knowledge
 
 <details>
-<details><summary><b>Why does <code>React.FC</code> break <code>defaultProps</code>?</b></summary>
+<summary><b>Why does <code>React.FC</code> break <code>defaultProps</code>?</b></summary>
 
 You can check the discussions here:
 
