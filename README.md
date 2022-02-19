@@ -219,9 +219,7 @@ Local dev setups:
 - [TSDX](https://tsdx.io/): `npx tsdx create mylib` for Creating React+TS _libraries_. (in future: [TurboRepo](https://twitter.com/jaredpalmer/status/1346217789942591488))
 
 <details>
-<summary>
-Other tools
-</summary>
+<summary><b>Other tools</b></summary>
 
 Less mature tools still worth checking out:
 
@@ -255,7 +253,7 @@ import ReactDOM from "react-dom";
 
 <details>
 
-<summary>Explanation</summary>
+<summary><b>Explanation</b></summary>
 
 Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
 
@@ -305,7 +303,7 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 
 <details>
 
-<summary><b>Why is `React.FC` discouraged? What about `React.FunctionComponent`/`React.VoidFunctionComponent`?</b></summary>
+<summary><b>Why is <code>React.FC</code> discouraged? What about <code>React.FunctionComponent</code>/<code>React.VoidFunctionComponent</code>?</b></summary>
 
 You may see this in many React+TypeScript codebases:
 
@@ -335,7 +333,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 ```
 
 <details>
-<summary>Using `React.VoidFunctionComponent` or `React.VFC` instead</summary>
+<summary><b>Using <code>React.VoidFunctionComponent</code> or <code>React.VFC</code> instead</b></summary>
 
 As of [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can also use `React.VoidFunctionComponent` or `React.VFC` type if you want to type `children` explicitly. This is an interim solution until `FunctionComponent` will accept no children by default (planned for `@types/react@^18.0.0`).
 
@@ -490,7 +488,7 @@ function Counter() {
 
 <details>
 
-<summary><b>Usage with `Reducer` from `redux`</b></summary>
+<summary><b>Usage with <code>Reducer</code> from <code>redux</code></b></summary>
 
 In case you use the [redux](https://github.com/reduxjs/redux) library to write reducer function, It provides a convenient helper of the format `Reducer<State, Action>` which takes care of the return type for you.
 
@@ -526,9 +524,7 @@ function DelayedEffect(props: { timerMs: number }) {
 ```
 
 <details>
-<summary>
-Solution to the above example
-</summary>
+<summary><b>Solution to the above example</b></summary>
 
 ```tsx
 function DelayedEffect(props: { timerMs: number }) {
@@ -586,12 +582,7 @@ doSomethingWith(divRef.current);
 Note that you are opting out of type safety here - you will have a runtime error if you forget to assign the ref to an element in the render, or if the ref-ed element is conditionally rendered.
 
 <details>
-<summary>
-  
-  Tip: Choosing which `HTMLElement` to use
-  
-</summary>
-  
+<summary><b>Tip: Choosing which <code>HTMLElement</code> to use</b></summary>
   
 Refs demand specificity - it is not enough to just specify any old `HTMLElement`. If you don't know the name of the element type you need, you can check [lib.dom.ts](https://github.com/microsoft/TypeScript/blob/v3.9.5/lib/lib.dom.d.ts#L19224-L19343) or make an intentional type error and let the language service tell you:
 
@@ -975,11 +966,7 @@ let el = <Greet age={3} />;
 ```
 
 <details>
-  <summary>
-  
-   `JSX.LibraryManagedAttributes` nuance for library authors
-   
-   </summary>
+<summary><b><code>JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
 
 The above implementations work fine for App creators, but sometimes you want to be able to export `GreetProps` so that others can consume it. The problem here is that the way `GreetProps` is defined, `age` is a required prop when it isn't because of `defaultProps`.
 
@@ -1058,7 +1045,7 @@ const el = <TestComponent name="foo" />;
 ## Misc Discussions and Knowledge
 
 <details>
-  <summary>Why does React.FC break defaultProps?</summary>
+<summary><b>Why does <code>React.FC</code> break <code>defaultProps</code>?</b></summary>
 
 You can check the discussions here:
 
@@ -1071,7 +1058,7 @@ This is just the current state and may be fixed in future.
 </details>
 
 <details>
- <summary>TypeScript 2.9 and earlier</summary>
+<summary><b>TypeScript 2.9 and earlier</b></summary>
 
 For TypeScript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
 
@@ -1187,9 +1174,7 @@ export declare interface AppProps {
 ```
 
 <details>
-<summary>
-Small `React.ReactNode` edge case
-</summary>
+<summary><b>Small <code>React.ReactNode</code> edge case</b></summary>
 
 This code typechecks but has a runtime error:
 
@@ -1468,11 +1453,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 | SyntheticEvent   | The base event for all above events. Should be used when unsure about event type                                                                                                                                                                                       |
 
 <details>
-<summary>
-
-**What about `InputEvent`?**
-
-</summary>
+<summary><b>What about <code>InputEvent</code>?</b></summary>
 
 You've probably noticed that there is no `InputEvent`. This is because it is not supported by Typescript as the event itself has no fully browser support and may behave differently in different browsers. You can use `KeyboardEvent` instead.
 
@@ -1799,11 +1780,7 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 ```
 
 <details>
-  <summary>
-    
-    Side note: the `ref` you get from `forwardRef` is mutable so you can assign to it if needed.
-    
-  </summary>
+<summary><b>Side note: the <code>ref</code> you get from <code>forwardRef</code> is mutable so you can assign to it if needed.</b></summary>
 
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
@@ -2368,9 +2345,7 @@ partialStateUpdate({ foo: 2 }); // this works
 ```
 
 <details>
-  <summary>
-    Minor caveats on using <code>Partial</code>
-  </summary>
+<summary><b>Minor caveats on using <code>Partial</code></b></summary>
 
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
 
@@ -2525,11 +2500,7 @@ declare module 'use-untyped-hook' {
 ```
 
 <details>
-<summary>
-
-For instance, the [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
-
-</summary>
+<summary><b>For instance, the <a href="https://github.com/donavon/use-dark-mode">useDarkMode hook</a> exports the functions that follows a similar structure.</b></summary>
 
 ```js
 // inside src/index.js
