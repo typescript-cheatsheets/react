@@ -121,11 +121,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 | SyntheticEvent   | The base event for all above events. Should be used when unsure about event type                                                                                                                                                                                       |
 
 <details>
-<summary>
-
-**What about `InputEvent`?**
-
-</summary>
+<summary><b>What about <code>InputEvent</code>?</b></summary>
 
 You've probably noticed that there is no `InputEvent`. This is because it is not supported by Typescript as the event itself has no fully browser support and may behave differently in different browsers. You can use `KeyboardEvent` instead.
 

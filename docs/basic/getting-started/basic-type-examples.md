@@ -74,9 +74,7 @@ export declare interface AppProps {
 ```
 
 <details>
-<summary>
-Small `React.ReactNode` edge case
-</summary>
+<summary><b>Small <code>React.ReactNode</code> edge case</b></summary>
 
 This code typechecks but has a runtime error:
 

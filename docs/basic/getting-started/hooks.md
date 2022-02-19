@@ -79,7 +79,7 @@ function Counter() {
 
 <details>
 
-<summary><b>Usage with `Reducer` from `redux`</b></summary>
+<summary><b>Usage with <code>Reducer</code> from <code>redux</code></b></summary>
 
 In case you use the [redux](https://github.com/reduxjs/redux) library to write reducer function, It provides a convenient helper of the format `Reducer<State, Action>` which takes care of the return type for you.
 
@@ -115,9 +115,7 @@ function DelayedEffect(props: { timerMs: number }) {
 ```
 
 <details>
-<summary>
-Solution to the above example
-</summary>
+<summary><b>Solution to the above example</b></summary>
 
 ```tsx
 function DelayedEffect(props: { timerMs: number }) {
@@ -175,12 +173,7 @@ doSomethingWith(divRef.current);
 Note that you are opting out of type safety here - you will have a runtime error if you forget to assign the ref to an element in the render, or if the ref-ed element is conditionally rendered.
 
 <details>
-<summary>
-  
-  Tip: Choosing which `HTMLElement` to use
-  
-</summary>
-  
+<summary><b>Tip: Choosing which <code>HTMLElement</code> to use</b></summary>
   
 Refs demand specificity - it is not enough to just specify any old `HTMLElement`. If you don't know the name of the element type you need, you can check [lib.dom.ts](https://github.com/microsoft/TypeScript/blob/v3.9.5/lib/lib.dom.d.ts#L19224-L19343) or make an intentional type error and let the language service tell you:
 

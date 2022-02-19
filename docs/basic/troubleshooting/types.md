@@ -295,9 +295,7 @@ partialStateUpdate({ foo: 2 }); // this works
 ```
 
 <details>
-  <summary>
-    Minor caveats on using <code>Partial</code>
-  </summary>
+<summary><b>Minor caveats on using <code>Partial</code></b></summary>
 
 Note that there are some TS users who don't agree with using `Partial` as it behaves today. See [subtle pitfalls of the above example here](https://twitter.com/ferdaber/status/1084798596027957248), and check out this long discussion on [why @types/react uses Pick instead of Partial](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365).
 
@@ -452,11 +450,7 @@ declare module 'use-untyped-hook' {
 ```
 
 <details>
-<summary>
-
-For instance, the [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
-
-</summary>
+<summary><b>For instance, the <a href="https://github.com/donavon/use-dark-mode">useDarkMode hook</a> exports the functions that follows a similar structure.</b></summary>
 
 ```js
 // inside src/index.js
