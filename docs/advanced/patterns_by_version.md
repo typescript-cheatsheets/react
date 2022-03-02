@@ -537,7 +537,33 @@ Misc
 
 ## TypeScript 4.2
 
-Plan - https://github.com/microsoft/TypeScript/issues/41601
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-2.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-2/)]
+
+nothing react specific
+
+## TypeScript 4.3
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-3/)]
+
+nothing react specific
+
+## TypeScript 4.4
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-4/)]
+
+nothing react specific
+
+## TypeScript 4.5
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-5.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-5/)]
+
+1. (minor VSCode improvement) Snippet Completions for JSX Attributes
+
+## TypeScript 4.6
+
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-6.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/)]
+
+1. (extremely minor) Removed Unnecessary Arguments in `react-jsx` compile output
 
 ## TypeScript Roadmap and Spec
 
