@@ -729,6 +729,10 @@ function isString(a: unknown): a is string {
 
 [Read more about User-Defined Type Guards in the Handbook](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards).
 
+### Narrowing using `extends`
+  
+See this quick guide: https://twitter.com/mpocock1/status/1500813765973053440?s=20&t=ImUA-NnZc4iUuPDx-XiMTA
+  
 ## Props: One or the Other but not Both
 
 Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
