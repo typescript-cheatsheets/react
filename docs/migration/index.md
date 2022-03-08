@@ -98,6 +98,7 @@ and Code Quality in Github](https://web.cs.ucdavis.edu/~filkov/papers/lang_githu
 - [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
 - [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d) ([podcast](https://softwareengineeringdaily.com/2017/08/11/typescript-at-slack-with-felix-rieseberg/))
 - [Etsy](https://codeascraft.com/2021/11/08/etsys-journey-to-typescript/)
+- [Stripe](https://twitter.com/alunny/status/1501261144341680130) - new! 2022!
 - [Netflix adoption story](https://www.youtube.com/watch?v=p5Hwb1YbNMY&feature=share)
 - [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
 - Dropbox
