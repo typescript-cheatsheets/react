@@ -70,7 +70,7 @@
   - [Hooks](#hooks)
   - [useState](#usestate)
   - [useReducer](#usereducer)
-  - [useEffect](#useeffect)
+  - [useEffect](#useeffect--uselayouteffect)
   - [useRef](#useref)
   - [useImperativeHandle](#useimperativehandle)
   - [Custom Hooks](#custom-hooks)
