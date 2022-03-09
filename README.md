@@ -399,7 +399,7 @@ const el2 = <MyArrayComponent />; // throws an error
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element;
+const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 ```
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
@@ -1787,16 +1787,14 @@ This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pu
 ```tsx
 type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef(
-  (
-    props: Props,
-    ref: React.Ref<Ref> // <-- here!
-  ) => (
-    <button ref={ref} className="MyClassName" type={props.type}>
-      {props.children}
-    </button>
-  )
-);
+export const FancyButton = React.forwardRef((
+  props: Props,
+  ref: React.Ref<Ref> // <-- here!
+) => (
+  <button ref={ref} className="MyClassName" type={props.type}>
+    {props.children}
+  </button>
+));
 ```
 
 </details>
