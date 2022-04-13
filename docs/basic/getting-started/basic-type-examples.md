@@ -94,6 +94,8 @@ function App() {
 This is because `ReactNode` includes `ReactFragment` which allows a `{}` type, which is [too wide](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37596#issue-480260937). Fixing this would break a lot of libraries, so for now you just have to be mindful that `ReactNode` is not absolutely bulletproof.
 
 [Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
+  
+With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `{}` is no longer allowed in `ReactFragment`. 
 
 </details>
 
