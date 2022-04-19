@@ -60,7 +60,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 In [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), the `React.VoidFunctionComponent` or `React.VFC` type was added for typing `children` explicitly.
 However, please be aware that `React.VFC` and `React.VoidFunctionComponent` were deprecated in React 18 (https://github.com/DefinitelyTyped/DefinitelyTyped/pull/59882), so this interim solution is no longer necessary or recommended in React 18+.
 
- Please use regular function components or `React.VFC` instead.
+Please use regular function components or `React.VFC` instead.
 
 ```ts
 type Props = { foo: string };
