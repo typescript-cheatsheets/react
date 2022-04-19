@@ -323,7 +323,7 @@ Some differences from the "normal function" version:
 
   - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
-- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might be better to be explicit about components that consume `children`, anyway.
+- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might be better to be explicit about components that consume `children`, anyway. With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `children` is no longer implicitly defined.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
@@ -333,9 +333,12 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 ```
 
 <details>
-<summary><b>Using <code>React.VoidFunctionComponent</code> or <code>React.VFC</code> instead</b></summary>
+<summary>(Deprecated)<b>Using <code>React.VoidFunctionComponent</code> or <code>React.VFC</code> instead</b></summary>
 
-As of [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), you can also use `React.VoidFunctionComponent` or `React.VFC` type if you want to type `children` explicitly. This is an interim solution until `FunctionComponent` will accept no children by default (planned for `@types/react@^18.0.0`).
+In [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), the `React.VoidFunctionComponent` or `React.VFC` type was added for typing `children` explicitly.
+However, please be aware that `React.VFC` and `React.VoidFunctionComponent` were deprecated in React 18 (https://github.com/DefinitelyTyped/DefinitelyTyped/pull/59882), so this interim solution is no longer necessary or recommended in React 18+.
+
+Please use regular function components or `React.VFC` instead.
 
 ```ts
 type Props = { foo: string };
@@ -399,7 +402,7 @@ const el2 = <MyArrayComponent />; // throws an error
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
+const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element;
 ```
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
@@ -1195,6 +1198,8 @@ This is because `ReactNode` includes `ReactFragment` which allows a `{}` type, w
 
 [Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
 
+With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `{}` is no longer allowed in `ReactFragment`.
+
 </details>
 
 <details>
@@ -1787,14 +1792,16 @@ This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pu
 ```tsx
 type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef((
-  props: Props,
-  ref: React.Ref<Ref> // <-- here!
-) => (
-  <button ref={ref} className="MyClassName" type={props.type}>
-    {props.children}
-  </button>
-));
+export const FancyButton = React.forwardRef(
+  (
+    props: Props,
+    ref: React.Ref<Ref> // <-- here!
+  ) => (
+    <button ref={ref} className="MyClassName" type={props.type}>
+      {props.children}
+    </button>
+  )
+);
 ```
 
 </details>
@@ -2300,7 +2307,7 @@ type pickCard = {
 };
 ```
 
-Note that when you implement the actual overloaded function, the implementation will need to declare the combined call signature that you'll be handling, it won't be inferred for you. You can see readily see examples of overloads in DOM APIs, e.g. `createElement`.
+Note that when you implement the actual overloaded function, the implementation will need to declare the combined call signature that you'll be handling, it won't be inferred for you. You can readily see examples of overloads in DOM APIs, e.g. `createElement`.
 
 [Read more about Overloading in the Handbook.](https://www.typescriptlang.org/docs/handbook/functions.html#overloads)
 
@@ -2823,6 +2830,7 @@ It is worth mentioning some resources to help you get started:
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesn't seem to be frequently updated anymore.
+- [Steve Kinney's React and TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/react-typescript/)
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
 - [Mike North's Production TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/production-typescript/)
 - [TSX Guide](https://jenil.github.io/chota/) by [gojutin](https://github.com/gojutin/www.tsx.guide)
