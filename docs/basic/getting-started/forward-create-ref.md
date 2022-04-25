@@ -36,14 +36,16 @@ This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pu
 ```tsx
 type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef((
-  props: Props,
-  ref: React.Ref<Ref> // <-- here!
-) => (
-  <button ref={ref} className="MyClassName" type={props.type}>
-    {props.children}
-  </button>
-));
+export const FancyButton = React.forwardRef(
+  (
+    props: Props,
+    ref: React.Ref<Ref> // <-- here!
+  ) => (
+    <button ref={ref} className="MyClassName" type={props.type}>
+      {props.children}
+    </button>
+  )
+);
 ```
 
 </details>
