@@ -10,7 +10,7 @@ title: Setup TypeScript with React
 3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
 4. having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
 
-This guide will always assume you are starting with the latest TypeScript version. Notes for older versions will be in expandable `<details>` tags.
+This guide will always assume you are starting with the latest TypeScript and React versions. Notes for older versions will be in expandable `<details>` tags.
 
 ## VS Code Extensions
 
