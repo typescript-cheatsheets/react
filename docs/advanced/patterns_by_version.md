@@ -463,18 +463,20 @@ type HorizontalAlignment = "left" | "center" | "right";
 //   | "top-left"    | "top-center"    | "top-right"
 //   | "middle-left" | "middle-center" | "middle-right"
 //   | "bottom-left" | "bottom-center" | "bottom-right"
-declare function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`): void;
+declare function setAlignment(
+  value: `${VerticalAlignment}-${HorizontalAlignment}`
+): void;
 
-setAlignment("top-left");   // works!
+setAlignment("top-left"); // works!
 setAlignment("top-middel"); // error!
-setAlignment("top-pot");    // error! but good doughnuts if you're ever in Seattle
+setAlignment("top-pot"); // error! but good doughnuts if you're ever in Seattle
 ```
 
 Usecase 2 - Modeling dynaming string literal types:
 
 ```tsx
 type PropEventSource<T> = {
-    on(eventName: `${string & keyof T}Changed`, callback: () => void): void;
+  on(eventName: `${string & keyof T}Changed`, callback: () => void): void;
 };
 
 /// Create a "watched object" with an 'on' method
@@ -487,14 +489,11 @@ To make string manipulation easier there are new generics: `Uppercase`, `Lowerca
 You can combine it with the `infer` keyword [like this](https://www.smashingmagazine.com/2021/01/dynamic-static-typing-typescript/#conditional-types-and-recursive-template-literal-types):
 
 ```ts
-type ParseRouteParams<Rte> =
-  Rte extends `${string}/:${infer P}`
-  ? P
-  : never;
+type ParseRouteParams<Rte> = Rte extends `${string}/:${infer P}` ? P : never;
 
-type Params = ParseRouteParams<"/api/user/:userID"> // Params is "userID"
+type Params = ParseRouteParams<"/api/user/:userID">; // Params is "userID"
 
-type NoParams = ParseRouteParams<"/api/user"> // NoParams is never --> no params!
+type NoParams = ParseRouteParams<"/api/user">; // NoParams is never --> no params!
 ```
 
 This feature is extremely flexible, see other usecase ideas here:
