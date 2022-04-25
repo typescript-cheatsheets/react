@@ -323,9 +323,10 @@ Some differences from the "normal function" version:
 
   - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
-- It provides an implicit definition of `children` (see below) - however there are some issues with the implicit `children` type (e.g. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), and it might be better to be explicit about components that consume `children`, anyway. With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `children` is no longer implicitly defined.
+- Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `React.FunctionComponent` provided an implicit definition of `children` (see below), which was heavily debated and is one of the reasons [`React.FC` was removed from the Create React App TypeScript template](https://github.com/facebook/create-react-app/pull/8177).
 
 ```tsx
+// before React 18 types
 const Title: React.FunctionComponent<{ title: string }> = ({
   children,
   title,
@@ -402,7 +403,7 @@ const el2 = <MyArrayComponent />; // throws an error
 Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
 
 ```tsx
-const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
+const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element;
 ```
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/57).
@@ -1792,14 +1793,16 @@ This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pu
 ```tsx
 type Props = { children: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef((
-  props: Props,
-  ref: React.Ref<Ref> // <-- here!
-) => (
-  <button ref={ref} className="MyClassName" type={props.type}>
-    {props.children}
-  </button>
-));
+export const FancyButton = React.forwardRef(
+  (
+    props: Props,
+    ref: React.Ref<Ref> // <-- here!
+  ) => (
+    <button ref={ref} className="MyClassName" type={props.type}>
+      {props.children}
+    </button>
+  )
+);
 ```
 
 </details>
