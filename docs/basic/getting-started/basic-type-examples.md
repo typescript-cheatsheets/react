@@ -74,9 +74,9 @@ export declare interface AppProps {
 ```
 
 <details>
-<summary><b>Small <code>React.ReactNode</code> edge case</b></summary>
+<summary><b>Small <code>React.ReactNode</code> edge case before React 18</b></summary>
 
-This code typechecks but has a runtime error:
+Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), this code typechecked but had a runtime error:
 
 ```tsx
 type Props = {
@@ -87,15 +87,15 @@ function Comp({ children }: Props) {
   return <div>{children}</div>;
 }
 function App() {
-  return <Comp>{{}}</Comp>; // Runtime Error: Objects not valid as React Child!
+  // Before React 18: Runtime error "Objects are not valid as a React child"
+  // After React 18: Typecheck error "Type '{}' is not assignable to type 'ReactNode'"
+  return <Comp>{{}}</Comp>;
 }
 ```
 
-This is because `ReactNode` includes `ReactFragment` which allows a `{}` type, which is [too wide](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37596#issue-480260937). Fixing this would break a lot of libraries, so for now you just have to be mindful that `ReactNode` is not absolutely bulletproof.
+This is because `ReactNode` includes `ReactFragment` which allowed type `{}` before React 18.
 
 [Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
-
-With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `{}` is no longer allowed in `ReactFragment`.
 
 </details>
 
