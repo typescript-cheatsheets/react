@@ -93,7 +93,7 @@ function App() {
 }
 ```
 
-This is becuase `ReactNode` includes `ReactFragment` which allowed type `{}` before React 18.
+This is because `ReactNode` includes `ReactFragment` which allowed type `{}` before React 18.
 
 [Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
 
