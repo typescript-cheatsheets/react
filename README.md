@@ -2787,23 +2787,34 @@ You can see examples of these included in the built in type declarations in the 
 
 <!--START-SECTION:non-ts-files-->
 
-# Time to Really Learn TypeScript
+# Troubleshooting Handbook: Globals, Images and other non-TS files
 
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. If you are still facing TypeScript troubleshooting issues, it is likely that your understanding of TS is still too superficial.
+Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
 
-There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
+If, say, you are using a third party JS script that attaches on to the `window` global, you can extend `Window`:
 
-It is worth mentioning some resources to help you get started:
+```ts
+declare global {
+  interface Window {
+    MyVendorThing: MyVendorType;
+  }
+}
+```
 
-- Step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section, written by @Orta
-- Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
-- Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
-- Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
-- Axel Rauschmeyer's [Tackling TypeScript](https://exploringjs.com/tackling-ts/)
-- Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
-- Learn about [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
-- Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
-- Here is another [TypeScript Error Guide](https://github.com/threehams/typescript-error-guide/) that you can check for your errors.
+Likewise if you wish to "import" an image or other non TS/TSX file:
+
+```ts
+// declaration.d.ts
+// anywhere in your project, NOT the same name as any of your .ts/tsx files
+declare module "*.png";
+
+// importing in a tsx file
+import * as logo from "./logo.png";
+```
+
+Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
+
+Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
 
 <!--END-SECTION:non-ts-files-->
 

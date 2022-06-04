@@ -263,7 +263,7 @@ async function main(argv) {
     from: currentReadme,
     to: pendingReadme,
     name: "non-ts-files",
-    path: "docs/basic/troubleshooting/learn-ts.md",
+    path: "docs/basic/troubleshooting/non-ts-files.md",
     headingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
