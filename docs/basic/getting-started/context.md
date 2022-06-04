@@ -252,7 +252,10 @@ interface ProviderStore {
 
 const Context = React.createContext({} as ProviderStore); // type assertion on empty object
 
-class Provider extends React.Component<{}, ProviderState> {
+class Provider extends React.Component<
+  { children?: React.ReactNode },
+  ProviderState
+> {
   public readonly state = {
     themeColor: "red",
   };

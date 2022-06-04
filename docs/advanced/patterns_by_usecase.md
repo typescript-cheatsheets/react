@@ -346,79 +346,6 @@ class List<T> extends React.PureComponent<Props<T>, State<T>> {
 }
 ```
 
-### Generic components with children
-
-`children` is usually not defined as a part of the props type. Unless `children` are explicitly defined as a part of the `props` type, an attempt to use `props.children` in JSX or in the function body will fail:
-
-```tsx
-interface WrapperProps<T> {
-  item: T;
-  renderItem: (item: T) => React.ReactNode;
-}
-
-/* Property 'children' does not exist on type 'WrapperProps<T>'. */
-const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
-  return (
-    <div>
-      {props.renderItem(props.item)}
-      {props.children}
-    </div>
-  );
-};
-
-/*
-Type '{ children: string; item: string; renderItem: (item: string) => string; }' is not assignable to type 'IntrinsicAttributes & WrapperProps<string>'.
-  Property 'children' does not exist on type 'IntrinsicAttributes & WrapperProps<string>'.
-*/
-
-const wrapper = (
-  <Wrapper item="test" renderItem={(item) => item}>
-    {test}
-  </Wrapper>
-);
-```
-
-[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgHUoUwx6AFHMAZwA8AFQB8cAN4U4cYHRAAuOMIDc0uEWoATegEl5SgBRyki5QEo4AXnHJ0MAHR2MAOQg615GWgAWwADZamkrOjqFuHhQAvhQUAPQAVHC8EFywAJ4EvgFBSNT4cFoQSPxw1BDwSAAewPzwENRwMOlcBGwcaSkCIqL4DnAJcRRoDXWs7Jz01nAicNV02qUSUaKGYHz8Su2TUF1CYpY2kupEMACuUI2G6jKCWsAAbqI3MpLrqfwOmjpQ+qZrGwcJhA5hiXleMgk7wEDmygU0YIhgji9ye6nMniinniCQowhazHwEjgcNy1CUdSgNAA5ipZAY4JSaXTvnoGcYGUzqNTDuIubS4FECrUyhU4Ch+PxgNTqCgAEb+ZgwCBNAkEXS0KnUKVoACCMBgVLlZzopQAZOMOjwNoJ+b0HOouvRmlk-PC8gUiiVRZUamMGqrWvgNYaaDr9aHjaa4Bbtp0bXa+hRBrFyCNtfBTfArHBDLyZqjRAAJJD+fwqrPIwvDUbwADuEzS02u4MEcamwKsACIs12NHkfn8QFYJMDrOJgSsXhIs4iZnF21BnuQMUA)
-
-To work around that, either add `children` to the `WrapperProps` definition (possibly narrowing down its type, as needed):
-
-```tsx
-interface WrapperProps<T> {
-  item: T;
-  renderItem: (item: T) => React.ReactNode;
-  children: string; // The component will only accept a single string child
-}
-
-const Wrapper = <T extends {}>(props: WrapperProps<T>) => {
-  return (
-    <div>
-      {props.renderItem(props.item)}
-      {props.children}
-    </div>
-  );
-};
-```
-
-or wrap the type of the props in `React.PropsWithChildren` (this is what `React.FC<>` does):
-
-```tsx
-interface WrapperProps<T> {
-  item: T;
-  renderItem: (item: T) => React.ReactNode;
-}
-
-const Wrapper = <T extends {}>(
-  props: React.PropsWithChildren<WrapperProps<T>>
-) => {
-  return (
-    <div>
-      {props.renderItem(props.item)}
-      {props.children}
-    </div>
-  );
-};
-```
-
 ## Typing Children
 
 Some API designs require some restriction on `children` passed to a parent component. It is common to want to enforce these in types, but you should be aware of limitations to this ability.
@@ -593,11 +520,12 @@ If you want to conditionally render a component, sometimes is better to use [Rea
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 type RouterLinkProps = Omit<AnchorProps, "href">;
 
-interface Button {
+interface ButtonProps {
   as: React.ComponentClass | "a";
+  children?: React.ReactNode;
 }
 
-const Button: React.FunctionComponent<Button> = (props) => {
+const Button: React.FunctionComponent<ButtonProps> = (props) => {
   const { as: Component, children, ...rest } = props;
   return (
     <Component className="button" {...rest}>
@@ -806,7 +734,7 @@ You can implement this by function overloads:
 
 ```tsx
 type CommonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   miscProps?: any;
 };
 
@@ -901,7 +829,7 @@ Sometimes you will want to write a function that can take a React element or a s
 ```tsx
 export interface Props {
   label?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 export const Card = (props: Props) => {
   return (
