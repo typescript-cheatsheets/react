@@ -339,7 +339,7 @@ const Title: React.FunctionComponent<{ title: string }> = ({
 In [@types/react 16.9.48](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/46643), the `React.VoidFunctionComponent` or `React.VFC` type was added for typing `children` explicitly.
 However, please be aware that `React.VFC` and `React.VoidFunctionComponent` were deprecated in React 18 (https://github.com/DefinitelyTyped/DefinitelyTyped/pull/59882), so this interim solution is no longer necessary or recommended in React 18+.
 
-Please use regular function components or `React.VFC` instead.
+Please use regular function components or `React.FC` instead.
 
 ```ts
 type Props = { foo: string };
@@ -1178,9 +1178,9 @@ export declare interface AppProps {
 ```
 
 <details>
-<summary><b>Small <code>React.ReactNode</code> edge case</b></summary>
+<summary><b>Small <code>React.ReactNode</code> edge case before React 18</b></summary>
 
-This code typechecks but has a runtime error:
+Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), this code typechecked but had a runtime error:
 
 ```tsx
 type Props = {
@@ -1191,15 +1191,15 @@ function Comp({ children }: Props) {
   return <div>{children}</div>;
 }
 function App() {
-  return <Comp>{{}}</Comp>; // Runtime Error: Objects not valid as React Child!
+  // Before React 18: Runtime error "Objects are not valid as a React child"
+  // After React 18: Typecheck error "Type '{}' is not assignable to type 'ReactNode'"
+  return <Comp>{{}}</Comp>;
 }
 ```
 
-This is because `ReactNode` includes `ReactFragment` which allows a `{}` type, which is [too wide](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37596#issue-480260937). Fixing this would break a lot of libraries, so for now you just have to be mindful that `ReactNode` is not absolutely bulletproof.
+This is because `ReactNode` includes `ReactFragment` which allowed type `{}` before React 18.
 
 [Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
-
-With the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `{}` is no longer allowed in `ReactFragment`.
 
 </details>
 
