@@ -9,7 +9,7 @@ Using `ReactDOM.createPortal`:
 const modalRoot = document.getElementById("modal-root") as HTMLElement;
 // assuming in your html file has a div with id 'modal-root';
 
-export class Modal extends React.Component {
+export class Modal extends React.Component<{ children?: React.ReactNode }> {
   el: HTMLElement = document.createElement("div");
 
   componentDidMount() {
@@ -39,7 +39,7 @@ import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-const Modal: React.FC<{}> = ({ children }) => {
+const Modal: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const el = useRef(document.createElement("div"));
 
   useEffect(() => {

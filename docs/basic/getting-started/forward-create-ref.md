@@ -19,7 +19,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: "submit" | "button" };
+type Props = { children?: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -34,7 +34,7 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
 ```tsx
-type Props = { children: React.ReactNode; type: "submit" | "button" };
+type Props = { children?: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef(
   (

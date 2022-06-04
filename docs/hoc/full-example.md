@@ -22,7 +22,7 @@ The goal is to have the props available on the interface for the component, but 
 
 ```ts
 interface Props extends WithThemeProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 class MyButton extends React.Component<Props> {

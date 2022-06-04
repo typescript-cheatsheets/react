@@ -68,7 +68,6 @@ function CommentList({ data }: WithDataProps<typeof comments>) {
 }
 interface BlogPostProps extends WithDataProps<string> {
   id: number;
-  // children: ReactNode;
 }
 function BlogPost({ data, id }: BlogPostProps) {
   return (
