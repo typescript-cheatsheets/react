@@ -29,4 +29,6 @@ jobs:
         run: yarn format:check
 
       - name: "`yarn gen-readme` changes committed?"
-        run: yarn gen-readme --check
+        run: |
+          yarn gen-readme
+          git diff --exit-code

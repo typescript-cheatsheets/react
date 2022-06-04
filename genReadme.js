@@ -330,13 +330,7 @@ async function main(argv) {
     filepath: path.basename(readmePath),
   });
 
-  if (argv.check) {
-    if (pendingReadme !== currentReadme) {
-      throw new Error("Readme is outdated. Forgot to run `yarn gen-readme`?");
-    }
-  } else {
-    await fs.writeFile(readmePath, pendingReadme);
-  }
+  await fs.writeFile(readmePath, pendingReadme);
 }
 
 yargs(hideBin(process.argv))
@@ -344,13 +338,6 @@ yargs(hideBin(process.argv))
     command: "$0",
     describe: "Generate the README.md from docs/ folder",
     handler: main,
-    builder: (yargs) => {
-      return yargs.option("check", {
-        type: "boolean",
-        description:
-          "Exits with 1 if the current README.md is out-of-date and should be regenerated.",
-      });
-    },
   })
   .usage("node $0 [args]")
   .help()
