@@ -577,7 +577,7 @@ function Foo() {
 
 If you are sure that `divRef.current` will never be null, it is also possible to use the non-null assertion operator `!`:
 
-```
+```tsx
 const divRef = useRef<HTMLDivElement>(null!);
 // Later... No need to check if it is null
 doSomethingWith(divRef.current);
@@ -1163,12 +1163,8 @@ Relevant for components that accept other React components as props.
 
 ```tsx
 export declare interface AppProps {
-  children1: JSX.Element; // bad, doesnt account for arrays
-  children2: JSX.Element | JSX.Element[]; // meh, doesn't accept strings
-  children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
-  children4: React.ReactChild[]; // better, accepts array children
-  children: React.ReactNode; // best, accepts everything (see edge case below)
-  functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
+  children?: React.ReactNode; // best, accepts everything React can render
+  childrenElement: JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
   //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
@@ -1184,7 +1180,7 @@ Before the [React 18 type updates](https://github.com/DefinitelyTyped/Definitely
 
 ```tsx
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 function Comp({ children }: Props) {
@@ -1726,7 +1722,10 @@ interface ProviderStore {
 
 const Context = React.createContext({} as ProviderStore); // type assertion on empty object
 
-class Provider extends React.Component<{}, ProviderState> {
+class Provider extends React.Component<
+  { children?: React.ReactNode },
+  ProviderState
+> {
   public readonly state = {
     themeColor: "red",
   };
@@ -1776,7 +1775,7 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children: React.ReactNode; type: "submit" | "button" };
+type Props = { children?: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
@@ -1791,7 +1790,7 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
 ```tsx
-type Props = { children: React.ReactNode; type: "submit" | "button" };
+type Props = { children?: React.ReactNode; type: "submit" | "button" };
 export type Ref = HTMLButtonElement;
 export const FancyButton = React.forwardRef(
   (
@@ -1891,7 +1890,7 @@ Using `ReactDOM.createPortal`:
 const modalRoot = document.getElementById("modal-root") as HTMLElement;
 // assuming in your html file has a div with id 'modal-root';
 
-export class Modal extends React.Component {
+export class Modal extends React.Component<{ children?: React.ReactNode }> {
   el: HTMLElement = document.createElement("div");
 
   componentDidMount() {
@@ -1921,7 +1920,7 @@ import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-const Modal: React.FC<{}> = ({ children }) => {
+const Modal: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const el = useRef(document.createElement("div"));
 
   useEffect(() => {
@@ -2008,7 +2007,7 @@ If you don't want to add a new npm package for this, you can also write your own
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 interface State {
