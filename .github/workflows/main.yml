@@ -1,4 +1,4 @@
-name: FormatCodeAndShowDiff
+name: CI
 on:
   push:
     branches: [main]
@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  prettier:
+  files-up-to-date:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout commit
