@@ -19,7 +19,7 @@
   "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
   "scripts": {
     "format-readme": "prettier --write \"README.md\"",
-    "gen-readme": "node genReadme.new.js",
+    "gen-readme": "node genReadme.js",
     "format": "prettier --write \"**/*.md\"",
     "format:check": "prettier --check \"**/*.md\"",
     "postinstall": "cd website && yarn",
