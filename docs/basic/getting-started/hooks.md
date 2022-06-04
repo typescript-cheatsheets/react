@@ -164,7 +164,7 @@ function Foo() {
 
 If you are sure that `divRef.current` will never be null, it is also possible to use the non-null assertion operator `!`:
 
-```
+```tsx
 const divRef = useRef<HTMLDivElement>(null!);
 // Later... No need to check if it is null
 doSomethingWith(divRef.current);
