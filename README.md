@@ -2787,60 +2787,36 @@ You can see examples of these included in the built in type declarations in the 
 
 <!--START-SECTION:non-ts-files-->
 
-# Time to Really Learn TypeScript
+# Troubleshooting Handbook: Globals, Images and other non-TS files
 
-Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. If you are still facing TypeScript troubleshooting issues, it is likely that your understanding of TS is still too superficial.
+Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
 
-There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
+If, say, you are using a third party JS script that attaches on to the `window` global, you can extend `Window`:
 
-It is worth mentioning some resources to help you get started:
+```ts
+declare global {
+  interface Window {
+    MyVendorThing: MyVendorType;
+  }
+}
+```
 
-- Step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section, written by @Orta
-- Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
-- Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
-- Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
-- Axel Rauschmeyer's [Tackling TypeScript](https://exploringjs.com/tackling-ts/)
-- Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
-- Learn about [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
-- Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)
-- Here is another [TypeScript Error Guide](https://github.com/threehams/typescript-error-guide/) that you can check for your errors.
+Likewise if you wish to "import" an image or other non TS/TSX file:
+
+```ts
+// declaration.d.ts
+// anywhere in your project, NOT the same name as any of your .ts/tsx files
+declare module "*.png";
+
+// importing in a tsx file
+import * as logo from "./logo.png";
+```
+
+Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
+
+Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
 
 <!--END-SECTION:non-ts-files-->
-
-<!--START-SECTION:resources-->
-
-# Other React + TypeScript resources
-
-- me! <https://twitter.com/swyx>
-- https://www.freecodecamp.org/news/how-to-build-a-todo-app-with-react-typescript-nodejs-and-mongodb/
-- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
-- [10 Bad TypeScript Habits](https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/):
-  1. not using `"strict": true`
-  2. using `||` for default values when we have `??`
-  3. Using `any` instead of `unknown` for API responses
-  4. using `as` assertion instead of Type Guards (`function isFoo(obj: unknown): obj is Foo {}`)
-  5. `as any` in tests
-  6. Marking optional properties instead of modeling which combinations exist by extending interfaces
-  7. One letter generics
-  8. Non-boolean `if (nonboolean)` checks
-  9. bangbang checks `if (!!nonboolean)`
-  10. `!= null` to check for `null` and `undefined`
-- [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
-- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
-- [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
-- [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
-- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesn't seem to be frequently updated anymore.
-- [Steve Kinney's React and TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/react-typescript/)
-- [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
-- [Mike North's Production TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/production-typescript/)
-- [TSX Guide](https://jenil.github.io/chota/) by [gojutin](https://github.com/gojutin/www.tsx.guide)
-- TypeScript conversion:
-  - [Lyft's React-To-TypeScript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
-  - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
-  - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
-- [You?](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
-
-<!--END-SECTION:resources-->
 
 <!--START-SECTION:editor-integration-->
 
@@ -2976,27 +2952,40 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 
 <!--END-SECTION:linting-->
 
-<!--START-SECTION:other-resources-->
+<!--START-SECTION:resources-->
 
 # Other React + TypeScript resources
 
 - me! <https://twitter.com/swyx>
+- https://www.freecodecamp.org/news/how-to-build-a-todo-app-with-react-typescript-nodejs-and-mongodb/
 - <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
+- [10 Bad TypeScript Habits](https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/):
+  1. not using `"strict": true`
+  2. using `||` for default values when we have `??`
+  3. Using `any` instead of `unknown` for API responses
+  4. using `as` assertion instead of Type Guards (`function isFoo(obj: unknown): obj is Foo {}`)
+  5. `as any` in tests
+  6. Marking optional properties instead of modeling which combinations exist by extending interfaces
+  7. One letter generics
+  8. Non-boolean `if (nonboolean)` checks
+  9. bangbang checks `if (!!nonboolean)`
+  10. `!= null` to check for `null` and `undefined`
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
-- [Stefan Baumgartner's TypeScript + React Guide](https://fettblog.eu/typescript-react), which serves as a side-by-side guide to the official docs with extra articles on styling, custom hooks and patterns
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
-- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
+- [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesn't seem to be frequently updated anymore.
+- [Steve Kinney's React and TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/react-typescript/)
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
+- [Mike North's Production TypeScript course on Frontend Masters (paid)](https://frontendmasters.com/courses/production-typescript/)
+- [TSX Guide](https://jenil.github.io/chota/) by [gojutin](https://github.com/gojutin/www.tsx.guide)
 - TypeScript conversion:
   - [Lyft's React-To-TypeScript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
   - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
-- [DefinitelyTyped React source code](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
 - [You?](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
 
-<!--END-SECTION:other-resources-->
+<!--END-SECTION:resources-->
 
 <!--START-SECTION:talks-->
 
