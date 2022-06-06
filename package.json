@@ -27,9 +27,9 @@
     "build": "yarn --cwd website build"
   },
   "dependencies": {
-    "@octokit/rest": "^16.43.1",
     "front-matter": "^4.0.2",
-    "markdown-toc": "^1.2.0"
+    "markdown-toc": "^1.2.0",
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "husky": "^4.2.5",

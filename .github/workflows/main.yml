@@ -1,4 +1,4 @@
-name: FormatCodeAndShowDiff
+name: CI
 on:
   push:
     branches: [main]
@@ -6,32 +6,29 @@ on:
     branches: [main]
 
 jobs:
-  prettier:
+  files-up-to-date:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout commit
-        uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' }}
-      
-      - name: Checkout Pull Request
-        uses: actions/checkout@v2
-        with:
-          # TODO: Can we unify the checkout steps i.e. does this value resolve to "undefined" on `push`?
-          ref: ${{ github.event.pull_request.head.sha }}
-        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/checkout@v3
 
-      - name: Get yarn cache directory
-        id: yarn
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
 
-      - name: Restore yarn cache
-        uses: actions/cache@v1.1.2
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          path: ${{ steps.yarn.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/website/yarn.lock')) }}
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: '`yarn format` changes committed?'
+      - name: "`yarn format` changes committed?"
         run: yarn format:check
+
+      - name: "`yarn gen-readme` changes committed?"
+        run: |
+          yarn gen-readme
+          git diff --exit-code
