@@ -9,11 +9,15 @@ const { usage } = require("yargs");
 
 const repositoryRootPath = __dirname;
 const readmePath = path.resolve(repositoryRootPath, "./README.md");
+/**
+ * level of the heading under which the generated content is displayed
+ */
+const baseHeadingLevel = 2;
 const defaultOptions = {
   withKey: "title",
   withToc: false,
   showHeading: true,
-  headingLevel: 2,
+  relativeHeadingLevel: 2,
   tabLevel: 1,
   prefix: "",
   suffix: "",
@@ -35,7 +39,7 @@ async function readContentFromPath(relativePath) {
 async function updateSectionWith(options) {
   const {
     from,
-    headingLevel,
+    relativeHeadingLevel,
     name,
     path,
     prefix,
@@ -52,7 +56,7 @@ async function updateSectionWith(options) {
     name,
     content: md,
     tabLevel,
-    headingLevel,
+    relativeHeadingLevel,
     showHeading,
     withKey,
     prefix,
@@ -77,10 +81,25 @@ async function updateSectionWith(options) {
   return updatedContents;
 }
 
+/**
+ * Adjusts the headings in the given `markdown` to be in a given heading context.
+ * Headings must start in a line.
+ * Preceding whitespace or any other character will result in the heading not being recognized.
+ *
+ * @example `withHeadingContext(2, '# Heading') === '### Heading'`
+ * @param {number} relativeHeadingLevel
+ * @param {string} markdown
+ */
+function withHeadingContext(relativeHeadingLevel, markdown) {
+  return markdown.replaceAll(/^(#+)/gm, (match, markdownHeadingTokens) => {
+    return "#".repeat(markdownHeadingTokens.length + relativeHeadingLevel);
+  });
+}
+
 function generateContentForSection(options) {
   const {
     content,
-    headingLevel,
+    relativeHeadingLevel,
     name,
     prefix,
     showHeading,
@@ -101,13 +120,13 @@ function generateContentForSection(options) {
         "  ".repeat(tabLevel) + lines[i] + (i !== len - 1 ? "\n" : "");
   } else {
     fenceContent += showHeading
-      ? `${"#".repeat(headingLevel)} ` +
+      ? `${"#".repeat(baseHeadingLevel + relativeHeadingLevel)} ` +
         prefix +
         content.frontmatter[withKey] +
         suffix +
         "\n\n"
       : "";
-    fenceContent += content.body + "\n";
+    fenceContent += withHeadingContext(baseHeadingLevel, content.body) + "\n";
   }
   fenceContent += fence.end;
   return fenceContent;
@@ -144,7 +163,7 @@ async function main(argv) {
     name: "setup",
     path: "docs/basic/setup.md",
     withToc: true,
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
     prefix: "Section 1: ",
   });
   pendingReadme = await updateSectionWith({
@@ -220,35 +239,35 @@ async function main(argv) {
     name: "types",
     path: "docs/basic/troubleshooting/types.md",
     withToc: true,
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "operators",
     path: "docs/basic/troubleshooting/operators.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "utilities",
     path: "docs/basic/troubleshooting/utilities.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "ts-config",
     path: "docs/basic/troubleshooting/ts-config.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "official-typings-bugs",
     path: "docs/basic/troubleshooting/official-typings-bugs.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
     withKey: "sidebar_label",
     prefix: "Troubleshooting Handbook: ",
   });
@@ -257,63 +276,63 @@ async function main(argv) {
     to: pendingReadme,
     name: "non-ts-files",
     path: "docs/basic/troubleshooting/non-ts-files.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "non-ts-files",
     path: "docs/basic/troubleshooting/non-ts-files.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "useful-hooks",
     path: "docs/basic/useful-hooks.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "editor-integration",
     path: "docs/basic/editor-integration.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "linting",
     path: "docs/basic/linting.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "resources",
     path: "docs/basic/recommended/resources.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "talks",
     path: "docs/basic/recommended/talks.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "codebases",
     path: "docs/basic/recommended/codebases.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
     name: "learn-ts",
     path: "docs/basic/troubleshooting/learn-ts.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
     withKey: "sidebar_label",
   });
   pendingReadme = await updateSectionWith({
@@ -321,7 +340,7 @@ async function main(argv) {
     to: pendingReadme,
     name: "examples",
     path: "docs/basic/examples.md",
-    headingLevel: 1,
+    relativeHeadingLevel: 1,
   });
 
   const prettierConfig = await prettier.resolveConfig(readmePath);
