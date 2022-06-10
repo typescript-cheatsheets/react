@@ -36,7 +36,7 @@
 
 ## All React + TypeScript Cheatsheets
 
-- [The Basic Cheatsheet](/README.md#basic-cheatsheet-table-of-contents) is focused on helping React devs just start using TS in React **apps**
+- [The Basic Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) is focused on helping React devs just start using TS in React **apps**
   - Focus on opinionated best practices, copy+pastable examples.
   - Explains some basic TS types usage and setup along the way.
   - Answers the most Frequently Asked Questions.
