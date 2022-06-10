@@ -216,7 +216,7 @@ For more info you can refer to these resources:
 - https://github.com/kripod/react-polymorphic-box
 - https://stackoverflow.com/questions/58200824/generic-react-typescript-component-with-as-prop-able-to-render-any-valid-dom
 
-[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69) and [@karol-majewski](https://github.com/typescript-cheatsheets/react/issues/151) for thoughts!
+[Thanks @eps1lon](https://github.com/typescript-cheatsheets/react/pull/69) and [@karol-majewski](https://github.com/typescript-cheatsheets/react/issues/151) for thoughts!
 
 ## Generic Components
 
@@ -485,7 +485,7 @@ function RouterLink(props: LinkProps | AnchorProps) {
 <details>
   <summary><b>Approach: Generic Components</b></summary>
 
-Here is an example solution, see the further discussion for other solutions. _thanks to [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12#issuecomment-394440577)_
+Here is an example solution, see the further discussion for other solutions. _thanks to [@jpavon](https://github.com/typescript-cheatsheets/react/issues/12#issuecomment-394440577)_
 
 ```tsx
 interface LinkProps {}
@@ -849,7 +849,7 @@ export interface Props {
 }
 ```
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new/choose).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new/choose).
 
 ## Handling Exceptions
 

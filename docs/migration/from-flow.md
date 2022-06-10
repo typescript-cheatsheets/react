@@ -3,7 +3,7 @@ id: from_flow
 title: From Flow
 ---
 
-- Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/79#issuecomment-458227322) at TravelRepublic)
+- Try flow2ts: `npx flow2ts` - doesn't work 100% but saves some time ([see this and other tips from @braposo](https://github.com/typescript-cheatsheets/react/pull/79#issuecomment-458227322) at TravelRepublic)
 - Try Airtable's codemod: https://github.com/Airtable/typescript-migration-codemod https://medium.com/airtable-eng/the-continual-evolution-of-airtables-codebase-migrating-a-million-lines-of-code-to-typescript-612c008baf5c
 - [Incremental Migration to TypeScript on a Flowtype codebase][entria] at Entria
 - [MemSQL's Studio's migration](https://davidgom.es/porting-30k-lines-of-code-from-flow-to-typescript/) - blogpost with many useful tips

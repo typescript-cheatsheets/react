@@ -3,7 +3,7 @@ id: forward_and_create_ref
 title: forwardRef/createRef
 ---
 
-Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#hooks) for `useRef`.
+Check the [Hooks section](https://github.com/typescript-cheatsheets/react/blob/main/README.md#hooks) for `useRef`.
 
 `createRef`:
 
@@ -118,6 +118,6 @@ export const ClickableList = React.forwardRef(ClickableListInner);
 
 - https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
 
-You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/167).
+You may also wish to do [Conditional Rendering with `forwardRef`](https://github.com/typescript-cheatsheets/react/issues/167).
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

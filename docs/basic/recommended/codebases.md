@@ -36,7 +36,7 @@ React Boilerplates:
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
 - <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
-React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/20)_
+React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescript-cheatsheets/react/pull/20)_
 
 - https://github.com/GeekyAnts/react-native-seed
 - https://github.com/lopezjurip/ReactNativeTS

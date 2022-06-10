@@ -50,4 +50,4 @@ export default ErrorBoundary;
 
 ```
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

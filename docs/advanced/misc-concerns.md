@@ -24,7 +24,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 }
 ```
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Commenting Components
 
@@ -50,7 +50,7 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgFkBPABRzAGc4BvCnDgB6AFRi4AESQ80UYGBjAI1OBExww3OACIANigBGSfboB0Q4ZIACAEySMArvqwQIRlFCtxJYkVaGJvoA-ABccDwwCtQA5gDcFAC+FBTiYkKSAOJI1PQo+nBouJB5tHAOcgpKKmo0cABSAMpSEGhwmNAgKDDmrF4A1nYQAO51fGI8TmCQsEh2YpbkvgHkSAAes-AOzq4dTtQYtaxsAMIlqrkwABT8cEGmcAC8ep0eXrpwSRHsXBC8AEoBFYiDAnFA1AAeOzAABuAD4ABKmfQQOAjaD6OwCB76JKQkQwhGJchJIA)
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Namespaced Components
 
@@ -77,9 +77,9 @@ export default Object.assign(Form, { Input: Input });
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2&ssl=1&ssc=1&pln=14&pc=52#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BJGsAV3gF44AKMHMOgC44KGgE8AlHA4A+OAB5gLdnADeAOk18IAgL5wA9DIpVaDOADFoeLsnQx1maAHcUUACbJM8gBIAVAFkAGQARYAA3AFEAGyQQJBoYABoRcRlublU0AAtgaPciGhTNdQgYbKQoAAV+Ol0UokwpWR4KOAUnKDwNTTKK6tr9Ro5VRt1jcnb2rNz8wt02hQNOkAmJCQBuE3IDACpdtt24SIAPSFgkdzhqcFoEmDo4Gghna9E4ACMkOFY6S5FHgADeRWLoyQGpK7A0EgdTMNgwcGHAwUJBnaDwdxITAoVjReAAeQ+ACskBh1Cg6HRgABzGjcGEpVTw9jCFkwXSbIA)
 
-(Contributed by @bryceosterhaus, see [further discussion](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/165))
+(Contributed by @bryceosterhaus, see [further discussion](https://github.com/typescript-cheatsheets/react/issues/165))
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Design System Development
 
@@ -87,7 +87,7 @@ I do like [Docz](https://docz.site/) which takes basically [1 line of config](ht
 
 For developing with Storybook, read the docs I wrote over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Migrating From Flow
 
@@ -107,7 +107,7 @@ Useful libraries:
 
 If you have specific advice in this area, please file a PR!
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Prettier
 
@@ -181,7 +181,7 @@ declare module "de-indent" {
 
 <summary>Further Discussion</summary>
 
-Any other tips? Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/8). We have more discussion and examples [in our issue here](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12).
+Any other tips? Please contribute on this topic! [We have an ongoing issue here with some references](https://github.com/typescript-cheatsheets/react/issues/8). We have more discussion and examples [in our issue here](https://github.com/typescript-cheatsheets/react/issues/12).
 
 </details>
 

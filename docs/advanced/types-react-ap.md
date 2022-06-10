@@ -102,7 +102,7 @@ Note that there are about 50 of these, which means there are some HTML elements 
 
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
-[@Ferdaber's note](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
+[@Ferdaber's note](https://github.com/typescript-cheatsheets/react/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
 
 **Namespace: JSX**
 

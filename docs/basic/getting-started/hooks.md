@@ -299,4 +299,4 @@ If you are writing a React Hooks library, don't forget that you should also expo
 - https://github.com/palmerhq/the-platform
 - https://github.com/sw-yx/hooks
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

@@ -4,7 +4,7 @@
   "description": "this package.json is just for maintenance work",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/typescript-cheatsheets/react-typescript-cheatsheet.git"
+    "url": "git+https://github.com/typescript-cheatsheets/react.git"
   },
   "keywords": [
     "react",
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues"
+    "url": "https://github.com/typescript-cheatsheets/react/issues"
   },
-  "homepage": "https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#readme",
+  "homepage": "https://github.com/typescript-cheatsheets/react#readme",
   "scripts": {
     "format-readme": "prettier --write \"README.md\"",
     "gen-readme": "node genReadme.js",
