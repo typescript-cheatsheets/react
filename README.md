@@ -14,7 +14,6 @@
 <p>Cheatsheets for experienced React developers getting started with TypeScript</p>
 
 [**Web docs**](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) |
-[中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
 [**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [**Português**](https://github.com/typescript-cheatsheets/react-pt) |
 [Contribute!](https://github.com/typescript-cheatsheets/react/blob/main/CONTRIBUTING.md) |
