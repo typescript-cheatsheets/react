@@ -233,7 +233,7 @@ There are a few solutions for this:
 
 <summary><b>Mutable Context Using a Class component wrapper</b></summary>
 
-_Contributed by: [@jpavon](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/13)_
+_Contributed by: [@jpavon](https://github.com/typescript-cheatsheets/react/pull/13)_
 
 ```tsx
 interface ProviderState {
@@ -281,4 +281,4 @@ const Consumer = Context.Consumer;
 
 </details>
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
