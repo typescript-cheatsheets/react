@@ -67,7 +67,6 @@
   - [Prerequisites](#prerequisites)
   - [VS Code Extensions](#vs-code-extensions)
   - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-  - [Import React](#import-react)
   - [Video Tutorial](#video-tutorial)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2--getting-started)
   - [Function Components](#function-components)
@@ -202,30 +201,6 @@ Manual setup:
 - [Basarat's guide](https://github.com/basarat/typescript-react/tree/master/01%20bootstrap) for **manual setup** of React + TypeScript + Webpack + Babel
 - In particular, make sure that you have `@types/react` and `@types/react-dom` installed ([Read more about the DefinitelyTyped project if you are unfamiliar](https://definitelytyped.org/))
 - There are also many React + TypeScript boilerplates, please see [our Other Resources list](https://react-typescript-cheatsheet.netlify.app/docs/basic/recommended/resources/).
-
-</details>
-
-#### Import React
-
-```tsx
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-```
-
-This is the [most futureproof way](https://www.reddit.com/r/reactjs/comments/iyehol/import_react_from_react_will_go_away_in_distant/) to import React. If you set `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true`) in your `tsconfig.json` you can use more familiar imports:
-
-```tsx
-import React from "react";
-import ReactDOM from "react-dom";
-```
-
-<details>
-
-<summary><b>Explanation</b></summary>
-
-Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
-
-You should also check [the new TypeScript docs for official descriptions between each compiler flag](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports)!
 
 </details>
 
