@@ -34,12 +34,16 @@ export class Modal extends React.Component<{ children?: React.ReactNode }> {
 Same as above but using hooks
 
 ```tsx
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-const Modal: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+interface ModalProps {
+  children?: ReactNode;
+}
+
+const Modal = ({ children }: ModalProps) => {
   const el = useRef(document.createElement("div"));
 
   useEffect(() => {

@@ -678,7 +678,7 @@ function MyComponent(props: Props1 | Props2) {
     return <div>{props.bar}</div>;
   }
 }
-const UsageComponent: React.FC = () => (
+const UsageComponent = () => (
   <div>
     <MyComponent foo="foo" />
     <MyComponent bar="bar" />
@@ -716,7 +716,7 @@ You want to allow `expanded` to be passed only if `truncate` is also passed, bec
 Usage example:
 
 ```tsx
-const App: React.FC = () => (
+const App = () => (
   <>
     {/* these all typecheck */}
     <Text>not truncated</Text>

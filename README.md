@@ -1858,12 +1858,16 @@ export class Modal extends React.Component<{ children?: React.ReactNode }> {
 Same as above but using hooks
 
 ```tsx
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-const Modal: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+interface ModalProps {
+  children?: ReactNode;
+}
+
+const Modal = ({ children }: ModalProps) => {
   const el = useRef(document.createElement("div"));
 
   useEffect(() => {
@@ -2206,8 +2210,8 @@ type DogProps = {
 type HumanProps = {
   handsCount: number
 }
-export const Human: React.FC<BaseProps & HumanProps> = // ...
-export const Dog: React.FC<BaseProps & DogProps> = // ...
+export const Human = (props: BaseProps & HumanProps) => // ...
+export const Dog = (props: BaseProps & DogProps) => // ...
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgCEUBnJABRzGbgF44BvCnGFoANi2YA5FCCQB+AFxxmMKMAB2AcwA0Q4Suqj5S5OhgA6AMIBlaxwh1YwJMz1x1MpEpVqtcAPT+cACurAAmcBpwAEYQMAAWFAC+VLT0ACIQmvZcvAJ6MCjAosyWEMHqMErqwSDRSFDJqXRwABK1KOo53HyC5MLxnWGl5ZXVtfWN5CnkSAAekLBwaBDqKm0d6ibEFgBilgA8TKzdcABkGyCd3QB8eQAUAJS8d-d6B2HAAG4BNxSPFAo80W8BWa3gmU02zM5n2RxY7E43AukNuD2ePFe70+P38f3IjyAA)
@@ -2309,7 +2313,7 @@ This can be annoying but here are ways to grab the types!
 import { Button } from "library"; // but doesn't export ButtonProps! oh no!
 type ButtonProps = React.ComponentProps<typeof Button>; // no problem! grab your own!
 type AlertButtonProps = Omit<ButtonProps, "onClick">; // modify
-const AlertButton: React.FC<AlertButtonProps> = (props) => (
+const AlertButton = (props: AlertButtonProps) => (
   <Button onClick={() => alert("hello")} {...props} />
 );
 ```
