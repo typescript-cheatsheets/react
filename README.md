@@ -73,7 +73,7 @@
   - [Hooks](#hooks)
   - [useState](#usestate)
   - [useReducer](#usereducer)
-  - [useEffect / useLayoutEffect](#useeffect---uselayouteffect)
+  - [useEffect / useLayoutEffect](#useeffect--uselayouteffect)
   - [useRef](#useref)
     - [Option 1: DOM element ref](#option-1--dom-element-ref)
     - [Option 2: Mutable value ref](#option-2--mutable-value-ref)
