@@ -55,30 +55,6 @@ Manual setup:
 
 </details>
 
-## Import React
-
-```tsx
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-```
-
-This is the [most futureproof way](https://www.reddit.com/r/reactjs/comments/iyehol/import_react_from_react_will_go_away_in_distant/) to import React. If you set `--allowSyntheticDefaultImports` (or add `"allowSyntheticDefaultImports": true`) in your `tsconfig.json` you can use more familiar imports:
-
-```tsx
-import React from "react";
-import ReactDOM from "react-dom";
-```
-
-<details>
-
-<summary><b>Explanation</b></summary>
-
-Why `allowSyntheticDefaultImports` over `esModuleInterop`? [Daniel Rosenwasser](https://twitter.com/drosenwasser/status/1003097042653073408) has said that it's better for webpack/parcel. For more discussion check out <https://github.com/wmonk/create-react-app-typescript/issues/214>
-
-You should also check [the new TypeScript docs for official descriptions between each compiler flag](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports)!
-
-</details>
-
 ## Video Tutorial
 
 Have a look at the 7-part "React Typescript Course" video series below for an introduction to TypeScript with React.
