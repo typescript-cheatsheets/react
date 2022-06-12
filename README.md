@@ -1,5 +1,8 @@
-<div align="center">
 # React+TypeScript Cheatsheets
+
+Cheatsheets for experienced React developers getting started with TypeScript
+
+---
 
 <a href="https://github.com/typescript-cheatsheets/react/issues/81">
   <img
@@ -11,23 +14,13 @@
   />
 </a>
 
-<p>Cheatsheets for experienced React developers getting started with TypeScript</p>
-
 [**Web docs**](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) |
 [**Español**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es) |
 [**Português**](https://github.com/typescript-cheatsheets/react-pt) |
 [Contribute!](https://github.com/typescript-cheatsheets/react/blob/main/CONTRIBUTING.md) |
 [Ask!](https://github.com/typescript-cheatsheets/react/issues/new/choose)
 
-</div>
-
----
-
-<div align="center">
-
 :wave: This repo is maintained by [@swyx](https://twitter.com/swyx), [@eps1lon](https://twitter.com/sebsilbermann) and [@filiptammergard](https://twitter.com/tammergard). We're so happy you want to try out TypeScript with React! If you see anything wrong or missing, please [file an issue](https://github.com/typescript-cheatsheets/react/issues/new/choose)! :+1:
-
-</div>
 
 ---
 
