@@ -203,12 +203,14 @@ nothing specifically React related.
 1. [`const` assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions)
 
 ```tsx
-export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+function useLoading() {
+  const [isLoading, setState] = useState(false);
+
   const load = (aPromise: Promise<any>) => {
     setState(true);
     return aPromise.finally(() => setState(false));
   };
+
   return [isLoading, load] as const; // infers [boolean, typeof load] instead of (boolean | typeof load)[]
 }
 ```

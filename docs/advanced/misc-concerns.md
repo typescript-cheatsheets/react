@@ -11,12 +11,12 @@ Sometimes writing React isn't just about React. While we don't focus on other li
 `propTypes` may seem unnecessary with TypeScript, especially when building React + TypeScript **apps**, but they are still relevant when writing **libraries** which may be used by developers working in Javascript.
 
 ```ts
-interface IMyComponentProps {
+interface MyComponentProps {
   autoHeight: boolean;
   secondProp: number;
 }
 
-export class MyComponent extends React.Component<IMyComponentProps, {}> {
+export class MyComponent extends React.Component<MyComponentProps, {}> {
   static propTypes = {
     autoHeight: PropTypes.bool,
     secondProp: PropTypes.number.isRequired,
@@ -31,9 +31,7 @@ export class MyComponent extends React.Component<IMyComponentProps, {}> {
 TypeScript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for TypeScript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/docs/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
-import React from "react";
-
-interface MyProps {
+interface MyComponentProps {
   /** Description of prop "label".
    * @default foobar
    * */
@@ -43,7 +41,7 @@ interface MyProps {
 /**
  * General component description in JSDoc format. Markdown is *supported*.
  */
-export default function MyComponent({ label = "foobar" }: MyProps) {
+export default function MyComponent({ label = "foobar" }: MyComponentProps) {
   return <div>Hello world {label}</div>;
 }
 ```
@@ -57,11 +55,11 @@ export default function MyComponent({ label = "foobar" }: MyProps) {
 Often when creating similar components or components that have a parent-child relationship, it is useful to namespace your components. Types can easily be added be using `Object.assign()`;
 
 ```tsx
-import React from "react";
+import { forwardRef } from "react";
 
 const Input = (props: any) => <input {...props} />;
 
-const Form = React.forwardRef<HTMLDivElement, any>(
+const Form = forwardRef<HTMLDivElement, any>(
   ({ children, ...otherProps }, ref) => (
     <form {...otherProps} ref={ref}>
       {children}

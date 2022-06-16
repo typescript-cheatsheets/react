@@ -8,8 +8,10 @@ Check the [Hooks section](https://github.com/typescript-cheatsheets/react/blob/m
 `createRef`:
 
 ```tsx
-class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef = React.createRef<HTMLDivElement>(); // like this
+import { createRef, PureComponent } from "react";
+
+class CssThemeProvider extends PureComponent<Props> {
+  private rootRef = createRef<HTMLDivElement>(); // like this
   render() {
     return <div ref={this.rootRef}>{this.props.children}</div>;
   }
@@ -19,9 +21,15 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children?: React.ReactNode; type: "submit" | "button" };
+import { forwardRef, ReactNode } from "react";
+
+interface Props {
+  children?: ReactNode;
+  type: "submit" | "button";
+}
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
+
+export const FancyButton = forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
     {props.children}
   </button>
@@ -34,12 +42,17 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
 ```tsx
-type Props = { children?: React.ReactNode; type: "submit" | "button" };
-export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef(
+import { forwardRef, ReactNode, Ref } from "react";
+
+interface Props {
+  children?: ReactNode;
+  type: "submit" | "button";
+}
+
+export const FancyButton = forwardRef(
   (
     props: Props,
-    ref: React.Ref<Ref> // <-- here!
+    ref: Ref<HTMLButtonElement> // <-- here!
   ) => (
     <button ref={ref} className="MyClassName" type={props.type}>
       {props.children}
@@ -90,14 +103,16 @@ declare module "react" {
 }
 
 // Just write your components like you're used to!
+import { forwardRef, ForwardedRef } from "react";
 
-type ClickableListProps<T> = {
+interface ClickableListProps<T> {
   items: T[];
   onSelect: (item: T) => void;
-};
+}
+
 function ClickableListInner<T>(
   props: ClickableListProps<T>,
-  ref: React.ForwardedRef<HTMLUListElement>
+  ref: ForwardedRef<HTMLUListElement>
 ) {
   return (
     <ul ref={ref}>
@@ -111,7 +126,7 @@ function ClickableListInner<T>(
   );
 }
 
-export const ClickableList = React.forwardRef(ClickableListInner);
+export const ClickableList = forwardRef(ClickableListInner);
 ```
 
 ## More Info

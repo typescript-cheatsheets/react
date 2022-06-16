@@ -359,9 +359,9 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well for simple values:
 
 ```tsx
-const [val, toggle] = React.useState(false);
-// `val` is inferred to be a boolean
-// `toggle` only takes booleans
+const [state, setState] = useState(false);
+// `state` is inferred to be a boolean
+// `setState` only takes booleans
 ```
 
 See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.app/docs/basic/troubleshooting/types/#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -369,7 +369,7 @@ See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.
 However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = React.useState<IUser | null>(null);
+const [user, setUser] = useState<User | null>(null);
 
 // later...
 setUser(newUser);
@@ -378,19 +378,21 @@ setUser(newUser);
 You can also use type assertions if a state is initialized soon after setup and always has a value after:
 
 ```tsx
-const [user, setUser] = React.useState<IUser>({} as IUser);
+const [user, setUser] = useState<User>({} as User);
 
 // later...
 setUser(newUser);
 ```
 
-This temporarily "lies" to the TypeScript compiler that `{}` is of type `IUser`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `IUser` and that may lead to runtime errors.
+This temporarily "lies" to the TypeScript compiler that `{}` is of type `User`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `User` and that may lead to runtime errors.
 
 #### useReducer
 
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
 
 ```tsx
+import { useReducer } from "react";
+
 const initialState = { count: 0 };
 
 type ACTIONTYPE =
@@ -409,7 +411,7 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
 }
 
 function Counter() {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       Count: {state.count}
@@ -578,8 +580,10 @@ function List<ItemType>(props: ListProps<ItemType>) {
 If you are returning an array in your Custom Hook, you will want to avoid type inference as TypeScript will infer a union type (when you actually want different types in each position of the array). Instead, use [TS 3.4 const assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions):
 
 ```tsx
+import { useState } from "react";
+
 export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+  const [isLoading, setState] = useState(false);
   const load = (aPromise: Promise<any>) => {
     setState(true);
     return aPromise.finally(() => setState(false));
@@ -598,8 +602,10 @@ This way, when you destructure you actually get the right types based on destruc
 If you are [having trouble with const assertions](https://github.com/babel/babel/issues/9800), you can also assert or define the function return types:
 
 ```tsx
+import { useState } from "react";
+
 export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+  const [isLoading, setState] = useState(false);
   const load = (aPromise: Promise<any>) => {
     setState(true);
     return aPromise.finally(() => setState(false));
@@ -1412,7 +1418,7 @@ Sources:
 #### Basic Example
 
 ```tsx
-import * as React from "react";
+import { createContext } from "react";
 
 interface AppContextInterface {
   name: string;
@@ -1420,7 +1426,7 @@ interface AppContextInterface {
   url: string;
 }
 
-const AppCtx = React.createContext<AppContextInterface | null>(null);
+const AppCtx = createContext<AppContextInterface | null>(null);
 
 // Provider in your app
 
@@ -1435,9 +1441,10 @@ export const App = () => (
 );
 
 // Consume in your app
+import { useContext } from "react";
 
 export const PostInfo = () => {
-  const appContext = React.useContext(AppCtx);
+  const appContext = useContext(AppCtx);
   return (
     <div>
       Name: {appContext.name}, Author: {appContext.author}, Url:{" "}
@@ -1453,7 +1460,7 @@ _[Thanks to @AlvSovereign](https://github.com/typescript-cheatsheets/react/issue
 
 #### Extended Example
 
-Using `React.createContext` with an empty object as default value.
+Using `createContext` with an empty object as default value.
 
 ```tsx
 interface ContextState {
@@ -1461,19 +1468,19 @@ interface ContextState {
   name: string | null;
 }
 //set an empty object as default state
-const Context = React.createContext({} as ContextState);
+const Context = createContext({} as ContextState);
 // set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
 ```
 
-Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
+Using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
 
 ```ts
-import * as React from "react";
+import { createContext, useContext } from "react";
 
-const currentUserContext = React.createContext<string | undefined>(undefined);
+const currentUserContext = createContext<string | undefined>(undefined);
 
 function EnthusasticGreeting() {
-  const currentUser = React.useContext(currentUserContext);
+  const currentUser = useContext(currentUserContext);
   return <div>HELLO {currentUser!.toUpperCase()}!</div>;
 }
 
@@ -1489,7 +1496,7 @@ function App() {
 Notice the explicit type arguments which we need because we don't have a default `string` value:
 
 ```ts
-const currentUserContext = React.createContext<string | undefined>(undefined);
+const currentUserContext = createContext<string | undefined>(undefined);
 //                                             ^^^^^^^^^^^^^^^^^^
 ```
 
@@ -1507,7 +1514,7 @@ There are a few solutions for this:
 1. You can get around this by asserting non null:
 
    ```ts
-   const currentUserContext = React.createContext<string>(undefined!);
+   const currentUserContext = createContext<string>(undefined!);
    ```
 
    ([Playground here](https://www.typescriptlang.org/play/index.html?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQduEAdqvLgK5SXMwCqqLFADCLGFgAe8ALyYqMAHS5KycaN6SYAHjZRgzAOYA+ABQdmAEywF9WCwEIAlPQLn8wFnACivABYdUNBhgXABxSixgwxNHOABvOjg4JlZ2Lh5+QSg4WWw8RQCsdXEpE05uLF4BIWLNZ0S4ShguZjgtC2AANyMACS8AGX6AeXjyjOqoBRgIPjAwGrQsGIBfey0Aeg7u+mW6V2Z3TwBBOZj4hqaWtrHKzJqxTQUABWJO4CtszuQAGw4saTIAGVfMgAO7MMhGBpJLQ+GD+QJsELhLCRfQGODrKEw9Y3KpZWpSZ6vd5CIw7IA)) This is a quick and easy fix, but this loses type-safety, and if you forget to supply a value to the Provider, you will get an error.
@@ -1515,16 +1522,16 @@ There are a few solutions for this:
 2. We can write a helper function called `createCtx` that guards against accessing a `Context` whose value wasn't provided. By doing this, API instead, **we never have to provide a default and never have to check for `undefined`**:
 
    ```tsx
-   import * as React from "react";
+   import { createContext, useContext } from "react";
 
    /**
     * A helper to create a Context and Provider with no upfront default value, and
     * without having to check for undefined all the time.
     */
    function createCtx<A extends {} | null>() {
-     const ctx = React.createContext<A | undefined>(undefined);
+     const ctx = createContext<A | undefined>(undefined);
      function useCtx() {
-       const c = React.useContext(ctx);
+       const c = useContext(ctx);
        if (c === undefined)
          throw new Error("useCtx must be inside a Provider with a value");
        return c;
@@ -1553,17 +1560,19 @@ There are a few solutions for this:
 
    [View in the TypeScript Playground](http://www.typescriptlang.org/play/index.html?jsx=1&ssl=1&ssc=1&pln=31&pc=2#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MLQn1wAHFKFhPnFAcsQWDxEvJ79hDixypZdV1necFiVNV5TgTpNGAfRpgACXJAAZZCAHkllwH8Vz-SpRGTMBBCgOQ0CwBZhm7TpGFg+D6ETepFEaZoOEI99VRfdVoMXIDfyEdcBTgUVfG2MhAyiUxFDIaYUU6K9LFvItH2fV94kYaS3io7iJxwvj+WNaY6KAA)
 
-3. You can go even further and combine this idea using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
+3. You can go even further and combine this idea using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
 
    ```tsx
+   import { createContext, useContect } from "react";
+
    /**
     * A helper to create a Context and Provider with no upfront default value, and
     * without having to check for undefined all the time.
     */
    function createCtx<A extends {} | null>() {
-     const ctx = React.createContext<A | undefined>(undefined);
+     const ctx = createContext<A | undefined>(undefined);
      function useCtx() {
-       const c = React.useContext(ctx);
+       const c = useContext(ctx);
        if (c === undefined)
          throw new Error("useCtx must be inside a Provider with a value");
        return c;
@@ -1590,26 +1599,34 @@ There are a few solutions for this:
 
    [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BXOpAYWZlwAkIIBrOAF44ACj5IAngC44DKMBoBzAJRCAfHADeFOHGr14AbQYoYSADSykMAMoxTSALpDExGADpmSOw5GaAvso6cEQwjFA0svZmhuISjhT+FAD0yXpEDnq0ZgAe8ADuwDAAFnA0EHCMYNjZcAAmSJgojAA2MABqKC2MSClphSUQjPDFKABuCopwnPUVjDQNmApIdXrFSGgCXS3T69OgveSY8xjAtOmoZqwwOQA8AIJqIqra5Lr6DHo3LsjoHmgZK7ZJB5B5wAA+lQWjWWdSe80WsOUAG5gscaKdzl5rjlnlpgu9aJ80D83J4WKxgXkRBgciiCXBgJhRABCNCqEo4fJlJDcgCiUBwUBEACJsd8QBw4AAjJCM+jABpwFBwAAKOAmDSgcAGpRVYy6PRF9LeuhC1nCkTQqNNSVNoUtcEM4pyllp7nVEE1SCgzhQdCyBmRcFScBAKHEcAAKhIwN4AcAwPAFJgfcrplUWhYyhB4ChIihBSgJHAIMz5mdIjBY0g6IkKH1KnQUIpDhQQZBYIHPs6KTdLDZrDBJp7vb6XADLmwbrc5JMniiQ2k6HG0EyS9W45ZpcMczyVtMKiuNuu4AbunKqjUaDAWe2cp2sCdh+d7mAwHjXoSDHA4i5sRw3C8HwopxMawahq2eZnoaco1HgKrFMBliSp8sryum1DgLQSA3sEDoRKIDK3IOMDDkoo6Kmm549IImhxP4agMrotyUthNC4fAyRMaaLHJKR5GKJRWo8boJp2h20BPhiL6RGxkAcTen7BB88B-sILrPBBaRoPmUTAC0OxeDqRRIbuNCtDsaDrJsd72hahG3HUwBjGo9GSP4tzJM5rk2v4QA)
 
-4. Using `React.createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
+4. Using `createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
 
    ```tsx
+   import {
+     createContext,
+     Dispatch,
+     PropsWithChildren,
+     SetStateAction,
+     useState,
+   } from "react";
+
    export function createCtx<A>(defaultValue: A) {
-     type UpdateType = React.Dispatch<
-       React.SetStateAction<typeof defaultValue>
-     >;
+     type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
      const defaultUpdate: UpdateType = () => defaultValue;
-     const ctx = React.createContext({
+     const ctx = createContext({
        state: defaultValue,
        update: defaultUpdate,
      });
-     function Provider(props: React.PropsWithChildren<{}>) {
-       const [state, update] = React.useState(defaultValue);
+
+     function Provider(props: PropsWithChildren<{}>) {
+       const [state, update] = useState(defaultValue);
        return <ctx.Provider value={{ state, update }} {...props} />;
      }
      return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
    }
 
    // usage
+   import { useContext } from "react";
 
    const [ctx, TextProvider] = createCtx("someText");
    export const TextContext = ctx;
@@ -1621,7 +1638,7 @@ There are a few solutions for this:
      );
    }
    export function Component() {
-     const { state, update } = React.useContext(TextContext);
+     const { state, update } = useContext(TextContext);
      return (
        <label>
          {state}
@@ -1656,10 +1673,10 @@ interface ProviderStore {
   update: (arg: UpdateStateArg) => void;
 }
 
-const Context = React.createContext({} as ProviderStore); // type assertion on empty object
+const Context = createContext({} as ProviderStore); // type assertion on empty object
 
 class Provider extends React.Component<
-  { children?: React.ReactNode },
+  { children?: ReactNode },
   ProviderState
 > {
   public readonly state = {
@@ -1700,8 +1717,10 @@ Check the [Hooks section](https://github.com/typescript-cheatsheets/react/blob/m
 `createRef`:
 
 ```tsx
-class CssThemeProvider extends React.PureComponent<Props> {
-  private rootRef = React.createRef<HTMLDivElement>(); // like this
+import { createRef, PureComponent } from "react";
+
+class CssThemeProvider extends PureComponent<Props> {
+  private rootRef = createRef<HTMLDivElement>(); // like this
   render() {
     return <div ref={this.rootRef}>{this.props.children}</div>;
   }
@@ -1711,9 +1730,15 @@ class CssThemeProvider extends React.PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-type Props = { children?: React.ReactNode; type: "submit" | "button" };
+import { forwardRef, ReactNode } from "react";
+
+interface Props {
+  children?: ReactNode;
+  type: "submit" | "button";
+}
 export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
+
+export const FancyButton = forwardRef<Ref, Props>((props, ref) => (
   <button ref={ref} className="MyClassName" type={props.type}>
     {props.children}
   </button>
@@ -1726,12 +1751,17 @@ export const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
 ```tsx
-type Props = { children?: React.ReactNode; type: "submit" | "button" };
-export type Ref = HTMLButtonElement;
-export const FancyButton = React.forwardRef(
+import { forwardRef, ReactNode, Ref } from "react";
+
+interface Props {
+  children?: ReactNode;
+  type: "submit" | "button";
+}
+
+export const FancyButton = forwardRef(
   (
     props: Props,
-    ref: React.Ref<Ref> // <-- here!
+    ref: Ref<HTMLButtonElement> // <-- here!
   ) => (
     <button ref={ref} className="MyClassName" type={props.type}>
       {props.children}
@@ -1782,14 +1812,16 @@ declare module "react" {
 }
 
 // Just write your components like you're used to!
+import { forwardRef, ForwardedRef } from "react";
 
-type ClickableListProps<T> = {
+interface ClickableListProps<T> {
   items: T[];
   onSelect: (item: T) => void;
-};
+}
+
 function ClickableListInner<T>(
   props: ClickableListProps<T>,
-  ref: React.ForwardedRef<HTMLUListElement>
+  ref: ForwardedRef<HTMLUListElement>
 ) {
   return (
     <ul ref={ref}>
@@ -1803,7 +1835,7 @@ function ClickableListInner<T>(
   );
 }
 
-export const ClickableList = React.forwardRef(ClickableListInner);
+export const ClickableList = forwardRef(ClickableListInner);
 ```
 
 #### More Info
@@ -1885,8 +1917,11 @@ export default Modal;
 Modal Component Usage Example:
 
 ```tsx
+import { useState } from "react";
+
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       // you can also put this in your static html file
@@ -2258,7 +2293,7 @@ Leaning on TypeScript's Type Inference is great... until you realize you need a 
 Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 
 ```tsx
-const [state, setState] = React.useState({
+const [state, setState] = useState({
   foo: 1,
   bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
@@ -2275,12 +2310,12 @@ const someMethod = (obj: typeof state) => {
 Working with slicing state and props is common in React. Again, you don't really have to go and explicitly redefine your types if you use the `Partial` generic type:
 
 ```tsx
-const [state, setState] = React.useState({
+const [state, setState] = useState({
   foo: 1,
   bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
 
-// NOTE: stale state merging is not actually encouraged in React.useState
+// NOTE: stale state merging is not actually encouraged in useState
 // we are just demonstrating how to use Partial here
 const partialStateUpdate = (obj: Partial<typeof state>) =>
   setState({ ...state, ...obj });
