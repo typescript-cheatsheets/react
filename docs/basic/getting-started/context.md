@@ -6,7 +6,7 @@ title: Context
 ## Basic Example
 
 ```tsx
-import * as React from "react";
+import { createContext } from "react";
 
 interface AppContextInterface {
   name: string;
@@ -14,7 +14,7 @@ interface AppContextInterface {
   url: string;
 }
 
-const AppCtx = React.createContext<AppContextInterface | null>(null);
+const AppCtx = createContext<AppContextInterface | null>(null);
 
 // Provider in your app
 
@@ -29,9 +29,10 @@ export const App = () => (
 );
 
 // Consume in your app
+import { useContext } from "react";
 
 export const PostInfo = () => {
-  const appContext = React.useContext(AppCtx);
+  const appContext = useContext(AppCtx);
   return (
     <div>
       Name: {appContext.name}, Author: {appContext.author}, Url:{" "}
@@ -47,7 +48,7 @@ _[Thanks to @AlvSovereign](https://github.com/typescript-cheatsheets/react/issue
 
 ## Extended Example
 
-Using `React.createContext` with an empty object as default value.
+Using `createContext` with an empty object as default value.
 
 ```tsx
 interface ContextState {
@@ -55,19 +56,19 @@ interface ContextState {
   name: string | null;
 }
 //set an empty object as default state
-const Context = React.createContext({} as ContextState);
+const Context = createContext({} as ContextState);
 // set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
 ```
 
-Using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
+Using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
 
 ```ts
-import * as React from "react";
+import { createContext, useContext } from "react";
 
-const currentUserContext = React.createContext<string | undefined>(undefined);
+const currentUserContext = createContext<string | undefined>(undefined);
 
 function EnthusasticGreeting() {
-  const currentUser = React.useContext(currentUserContext);
+  const currentUser = useContext(currentUserContext);
   return <div>HELLO {currentUser!.toUpperCase()}!</div>;
 }
 
@@ -83,7 +84,7 @@ function App() {
 Notice the explicit type arguments which we need because we don't have a default `string` value:
 
 ```ts
-const currentUserContext = React.createContext<string | undefined>(undefined);
+const currentUserContext = createContext<string | undefined>(undefined);
 //                                             ^^^^^^^^^^^^^^^^^^
 ```
 
@@ -101,7 +102,7 @@ There are a few solutions for this:
 1. You can get around this by asserting non null:
 
    ```ts
-   const currentUserContext = React.createContext<string>(undefined!);
+   const currentUserContext = createContext<string>(undefined!);
    ```
 
    ([Playground here](https://www.typescriptlang.org/play/index.html?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQduEAdqvLgK5SXMwCqqLFADCLGFgAe8ALyYqMAHS5KycaN6SYAHjZRgzAOYA+ABQdmAEywF9WCwEIAlPQLn8wFnACivABYdUNBhgXABxSixgwxNHOABvOjg4JlZ2Lh5+QSg4WWw8RQCsdXEpE05uLF4BIWLNZ0S4ShguZjgtC2AANyMACS8AGX6AeXjyjOqoBRgIPjAwGrQsGIBfey0Aeg7u+mW6V2Z3TwBBOZj4hqaWtrHKzJqxTQUABWJO4CtszuQAGw4saTIAGVfMgAO7MMhGBpJLQ+GD+QJsELhLCRfQGODrKEw9Y3KpZWpSZ6vd5CIw7IA)) This is a quick and easy fix, but this loses type-safety, and if you forget to supply a value to the Provider, you will get an error.
@@ -109,16 +110,16 @@ There are a few solutions for this:
 2. We can write a helper function called `createCtx` that guards against accessing a `Context` whose value wasn't provided. By doing this, API instead, **we never have to provide a default and never have to check for `undefined`**:
 
    ```tsx
-   import * as React from "react";
+   import { createContext, useContext } from "react";
 
    /**
     * A helper to create a Context and Provider with no upfront default value, and
     * without having to check for undefined all the time.
     */
    function createCtx<A extends {} | null>() {
-     const ctx = React.createContext<A | undefined>(undefined);
+     const ctx = createContext<A | undefined>(undefined);
      function useCtx() {
-       const c = React.useContext(ctx);
+       const c = useContext(ctx);
        if (c === undefined)
          throw new Error("useCtx must be inside a Provider with a value");
        return c;
@@ -147,17 +148,19 @@ There are a few solutions for this:
 
    [View in the TypeScript Playground](http://www.typescriptlang.org/play/index.html?jsx=1&ssl=1&ssc=1&pln=31&pc=2#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MLQn1wAHFKFhPnFAcsQWDxEvJ79hDixypZdV1necFiVNV5TgTpNGAfRpgACXJAAZZCAHkllwH8Vz-SpRGTMBBCgOQ0CwBZhm7TpGFg+D6ETepFEaZoOEI99VRfdVoMXIDfyEdcBTgUVfG2MhAyiUxFDIaYUU6K9LFvItH2fV94kYaS3io7iJxwvj+WNaY6KAA)
 
-3. You can go even further and combine this idea using `React.createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
+3. You can go even further and combine this idea using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
 
    ```tsx
+   import { createContext, useContect } from "react";
+
    /**
     * A helper to create a Context and Provider with no upfront default value, and
     * without having to check for undefined all the time.
     */
    function createCtx<A extends {} | null>() {
-     const ctx = React.createContext<A | undefined>(undefined);
+     const ctx = createContext<A | undefined>(undefined);
      function useCtx() {
-       const c = React.useContext(ctx);
+       const c = useContext(ctx);
        if (c === undefined)
          throw new Error("useCtx must be inside a Provider with a value");
        return c;
@@ -184,26 +187,34 @@ There are a few solutions for this:
 
    [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BXOpAYWZlwAkIIBrOAF44ACj5IAngC44DKMBoBzAJRCAfHADeFOHGr14AbQYoYSADSykMAMoxTSALpDExGADpmSOw5GaAvso6cEQwjFA0svZmhuISjhT+FAD0yXpEDnq0ZgAe8ADuwDAAFnA0EHCMYNjZcAAmSJgojAA2MABqKC2MSClphSUQjPDFKABuCopwnPUVjDQNmApIdXrFSGgCXS3T69OgveSY8xjAtOmoZqwwOQA8AIJqIqra5Lr6DHo3LsjoHmgZK7ZJB5B5wAA+lQWjWWdSe80WsOUAG5gscaKdzl5rjlnlpgu9aJ80D83J4WKxgXkRBgciiCXBgJhRABCNCqEo4fJlJDcgCiUBwUBEACJsd8QBw4AAjJCM+jABpwFBwAAKOAmDSgcAGpRVYy6PRF9LeuhC1nCkTQqNNSVNoUtcEM4pyllp7nVEE1SCgzhQdCyBmRcFScBAKHEcAAKhIwN4AcAwPAFJgfcrplUWhYyhB4ChIihBSgJHAIMz5mdIjBY0g6IkKH1KnQUIpDhQQZBYIHPs6KTdLDZrDBJp7vb6XADLmwbrc5JMniiQ2k6HG0EyS9W45ZpcMczyVtMKiuNuu4AbunKqjUaDAWe2cp2sCdh+d7mAwHjXoSDHA4i5sRw3C8HwopxMawahq2eZnoaco1HgKrFMBliSp8sryum1DgLQSA3sEDoRKIDK3IOMDDkoo6Kmm549IImhxP4agMrotyUthNC4fAyRMaaLHJKR5GKJRWo8boJp2h20BPhiL6RGxkAcTen7BB88B-sILrPBBaRoPmUTAC0OxeDqRRIbuNCtDsaDrJsd72hahG3HUwBjGo9GSP4tzJM5rk2v4QA)
 
-4. Using `React.createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
+4. Using `createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
 
    ```tsx
+   import {
+     createContext,
+     Dispatch,
+     PropsWithChildren,
+     SetStateAction,
+     useState,
+   } from "react";
+
    export function createCtx<A>(defaultValue: A) {
-     type UpdateType = React.Dispatch<
-       React.SetStateAction<typeof defaultValue>
-     >;
+     type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
      const defaultUpdate: UpdateType = () => defaultValue;
-     const ctx = React.createContext({
+     const ctx = createContext({
        state: defaultValue,
        update: defaultUpdate,
      });
-     function Provider(props: React.PropsWithChildren<{}>) {
-       const [state, update] = React.useState(defaultValue);
+
+     function Provider(props: PropsWithChildren<{}>) {
+       const [state, update] = useState(defaultValue);
        return <ctx.Provider value={{ state, update }} {...props} />;
      }
      return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
    }
 
    // usage
+   import { useContext } from "react";
 
    const [ctx, TextProvider] = createCtx("someText");
    export const TextContext = ctx;
@@ -215,7 +226,7 @@ There are a few solutions for this:
      );
    }
    export function Component() {
-     const { state, update } = React.useContext(TextContext);
+     const { state, update } = useContext(TextContext);
      return (
        <label>
          {state}
@@ -250,10 +261,10 @@ interface ProviderStore {
   update: (arg: UpdateStateArg) => void;
 }
 
-const Context = React.createContext({} as ProviderStore); // type assertion on empty object
+const Context = createContext({} as ProviderStore); // type assertion on empty object
 
 class Provider extends React.Component<
-  { children?: React.ReactNode },
+  { children?: ReactNode },
   ProviderState
 > {
   public readonly state = {

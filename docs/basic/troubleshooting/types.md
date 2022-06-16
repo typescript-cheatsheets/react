@@ -263,7 +263,7 @@ Leaning on TypeScript's Type Inference is great... until you realize you need a 
 Fortunately, with `typeof`, you won't have to do that. Just use it on any value:
 
 ```tsx
-const [state, setState] = React.useState({
+const [state, setState] = useState({
   foo: 1,
   bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
@@ -280,12 +280,12 @@ const someMethod = (obj: typeof state) => {
 Working with slicing state and props is common in React. Again, you don't really have to go and explicitly redefine your types if you use the `Partial` generic type:
 
 ```tsx
-const [state, setState] = React.useState({
+const [state, setState] = useState({
   foo: 1,
   bar: 2,
 }); // state's type inferred to be {foo: number, bar: number}
 
-// NOTE: stale state merging is not actually encouraged in React.useState
+// NOTE: stale state merging is not actually encouraged in useState
 // we are just demonstrating how to use Partial here
 const partialStateUpdate = (obj: Partial<typeof state>) =>
   setState({ ...state, ...obj });

@@ -10,9 +10,9 @@ Hooks are [supported in `@types/react` from v16.8 up](https://github.com/Definit
 Type inference works very well for simple values:
 
 ```tsx
-const [val, toggle] = React.useState(false);
-// `val` is inferred to be a boolean
-// `toggle` only takes booleans
+const [state, setState] = useState(false);
+// `state` is inferred to be a boolean
+// `setState` only takes booleans
 ```
 
 See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.app/docs/basic/troubleshooting/types/#using-inferred-types) section if you need to use a complex type that you've relied on inference for.
@@ -20,7 +20,7 @@ See also the [Using Inferred Types](https://react-typescript-cheatsheet.netlify.
 However, many hooks are initialized with null-ish default values, and you may wonder how to provide types. Explicitly declare the type, and use a union type:
 
 ```tsx
-const [user, setUser] = React.useState<IUser | null>(null);
+const [user, setUser] = useState<User | null>(null);
 
 // later...
 setUser(newUser);
@@ -29,19 +29,21 @@ setUser(newUser);
 You can also use type assertions if a state is initialized soon after setup and always has a value after:
 
 ```tsx
-const [user, setUser] = React.useState<IUser>({} as IUser);
+const [user, setUser] = useState<User>({} as User);
 
 // later...
 setUser(newUser);
 ```
 
-This temporarily "lies" to the TypeScript compiler that `{}` is of type `IUser`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `IUser` and that may lead to runtime errors.
+This temporarily "lies" to the TypeScript compiler that `{}` is of type `User`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `User` and that may lead to runtime errors.
 
 ## useReducer
 
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
 
 ```tsx
+import { useReducer } from "react";
+
 const initialState = { count: 0 };
 
 type ACTIONTYPE =
@@ -60,7 +62,7 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
 }
 
 function Counter() {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       Count: {state.count}
@@ -229,8 +231,10 @@ function List<ItemType>(props: ListProps<ItemType>) {
 If you are returning an array in your Custom Hook, you will want to avoid type inference as TypeScript will infer a union type (when you actually want different types in each position of the array). Instead, use [TS 3.4 const assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions):
 
 ```tsx
+import { useState } from "react";
+
 export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+  const [isLoading, setState] = useState(false);
   const load = (aPromise: Promise<any>) => {
     setState(true);
     return aPromise.finally(() => setState(false));
@@ -249,8 +253,10 @@ This way, when you destructure you actually get the right types based on destruc
 If you are [having trouble with const assertions](https://github.com/babel/babel/issues/9800), you can also assert or define the function return types:
 
 ```tsx
+import { useState } from "react";
+
 export function useLoading() {
-  const [isLoading, setState] = React.useState(false);
+  const [isLoading, setState] = useState(false);
   const load = (aPromise: Promise<any>) => {
     setState(true);
     return aPromise.finally(() => setState(false));

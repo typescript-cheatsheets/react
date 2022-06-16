@@ -68,8 +68,11 @@ export default Modal;
 Modal Component Usage Example:
 
 ```tsx
+import { useState } from "react";
+
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       // you can also put this in your static html file
