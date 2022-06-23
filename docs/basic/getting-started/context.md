@@ -151,7 +151,7 @@ There are a few solutions for this:
 3. You can go even further and combine this idea using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
 
    ```tsx
-   import { createContext, useContect } from "react";
+   import { createContext, useContext } from "react";
 
    /**
     * A helper to create a Context and Provider with no upfront default value, and
