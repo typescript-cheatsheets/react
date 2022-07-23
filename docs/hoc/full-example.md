@@ -4,7 +4,7 @@ sidebar_label: Full HOC Example
 title: "Full HOC Example"
 ---
 
-> This is an HOC example for you to copy and paste. If you certain pieces don't make sense for you, head to [the React HOC Docs intro](https://react-typescript-cheatsheet.netlify.app/docs/hoc/react_hoc_docs/) to get a detailed walkthrough via a complete translation of the React docs in TypeScript.
+> This is an HOC example for you to copy and paste. If certain pieces don't make sense for you, head to [the React HOC Docs intro](https://react-typescript-cheatsheet.netlify.app/docs/hoc/react_hoc_docs/) to get a detailed walkthrough via a complete translation of the React docs in TypeScript.
 
 Sometimes you want a simple way to inject props from somewhere else (either a global store or a provider) and don't want to continually pass down the props for it. Context is great for it, but then the values from the context can only be used in your `render` function. A HoC will provide these values as props.
 
