@@ -55,7 +55,7 @@ Cheatsheets for experienced React developers getting started with TypeScript
 
 <summary><b>Expand Table of Contents</b></summary>
 
-- [Section 1: Setup TypeScript with React](#section-1--setup-typescript-with-react)
+- [Section 1: Setup TypeScript with React](#section-1-setup-typescript-with-react)
   <!--START-SECTION:setup-toc-->
   - [Prerequisites](#prerequisites)
   - [VS Code Extensions](#vs-code-extensions)
