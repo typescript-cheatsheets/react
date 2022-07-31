@@ -1,6 +1,6 @@
 ---
 id: setup
-title: Setup TypeScript with React
+title: Setup TypeScript with React.
 ---
 
 ## Prerequisites
