@@ -426,7 +426,7 @@ function App() {
 }
 ```
 
-How to implement: Use [type guards](https://basarat.gitbooks.io/typescript/docs/types/typeGuard.html#user-defined-type-guards)!
+How to implement: Use [type guards](https://basarat.gitbook.io/typescript/type-system/typeguard#user-defined-type-guards)!
 
 ```tsx
 // Button props
