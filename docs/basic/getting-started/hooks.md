@@ -210,21 +210,52 @@ function Foo() {
 
 ## useImperativeHandle
 
-_We don't have much here, but this is from [a discussion in our issues](https://github.com/typescript-cheatsheets/react/issues/106). Please contribute if you have anything to add!_
+Based on this [Stackoverflow answer](https://stackoverflow.com/a/69292925/5415299):
 
 ```tsx
-type ListProps<ItemType> = {
-  items: ItemType[];
-  innerRef?: React.Ref<{ scrollToItem(item: ItemType): void }>;
+// Countdown.tsx
+
+// Define the handle types which will be passed to the forwardRef
+export type CountdownHandle = {
+  start: () => void;
 };
 
-function List<ItemType>(props: ListProps<ItemType>) {
-  useImperativeHandle(props.innerRef, () => ({
-    scrollToItem() {},
+type CountdownProps = {};
+
+const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    // start() has type inference here
+    start() {
+      alert("Start");
+    },
   }));
-  return null;
+
+  return <div>Countdown</div>;
+});
+```
+
+```tsx
+// The component uses the Countdown component
+
+import Countdown, { CountdownHandle } from "./Countdown.tsx";
+
+function App() {
+  const countdownEl = useRef<CountdownHandle>(null);
+
+  useEffect(() => {
+    if (countdownEl.current) {
+      // start() has type inference here as well
+      countdownEl.current.start();
+    }
+  }, []);
+
+  return <Countdown ref={countdownEl} />;
 }
 ```
+
+### See also:
+
+- [Using ForwardRefRenderFunction](https://stackoverflow.com/a/62258685/5415299)
 
 ## Custom Hooks
 
