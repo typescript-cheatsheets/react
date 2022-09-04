@@ -244,7 +244,7 @@ function App() {
 
   useEffect(() => {
     if (countdownEl.current) {
-      // start() has type inferrence here as well
+      // start() has type inference here as well
       countdownEl.current.start();
     }
   }, []);
