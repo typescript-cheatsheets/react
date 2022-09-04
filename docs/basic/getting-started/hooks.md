@@ -226,15 +226,15 @@ const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
   useImperativeHandle(ref, () => ({
     // start() has type inference here
     start() {
-      alert('Start');
+      alert("Start");
     },
   }));
 
   return <div>Countdown</div>;
 });
 ```
-  
-```tsx  
+
+```tsx
 // The component uses the Countdown component
 
 import Countdown, { CountdownHandle } from "./Countdown.tsx";
@@ -252,9 +252,9 @@ function App() {
   return <Countdown ref={countdownEl} />;
 }
 ```
-  
+
 ### See also:
-  
+
 - [Using ForwardRefRenderFunction](https://stackoverflow.com/a/62258685/5415299)
 
 ## Custom Hooks
