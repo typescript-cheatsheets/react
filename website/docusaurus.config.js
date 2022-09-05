@@ -107,15 +107,15 @@ module.exports = {
             },
             {
               label: "High Order Component (HOC)",
-              to: "docs/hoc/intro",
+              to: "docs/hoc",
             },
             {
               label: "Advanced Guides",
-              to: "docs/advanced/intro",
+              to: "docs/advanced",
             },
             {
               label: "Migrating",
-              to: "docs/migration/intro",
+              to: "docs/migration",
             },
             {
               label: "Contributing",
