@@ -107,15 +107,15 @@ module.exports = {
             },
             {
               label: "High Order Component (HOC)",
-              to: "docs/hoc/intro",
+              to: "docs/hoc",
             },
             {
               label: "Advanced Guides",
-              to: "docs/advanced/intro",
+              to: "docs/advanced",
             },
             {
               label: "Migrating",
-              to: "docs/migration/intro",
+              to: "docs/migration",
             },
             {
               label: "Contributing",
@@ -176,7 +176,7 @@ module.exports = {
     algolia: {
       apiKey: "e1c87cdc9c52f8ccf84ceb7f9e18bcd3",
       indexName: "react-typescript-cheatsheet",
-      // appId: "",
+      appId: "J65EL4UPXZ",
       algoliaOptions: {
         //... },
       },
