@@ -34,14 +34,14 @@ Cheatsheets for experienced React developers getting started with TypeScript
   - Answers the most Frequently Asked Questions.
   - Does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
   - The goal is to get effective with TS without learning _too much_ TS.
-- [The Advanced Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/advanced/intro) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
+- [The Advanced Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/advanced) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
   - It also has miscellaneous tips and tricks for pro users.
   - Advice for contributing to DefinitelyTyped.
   - The goal is to take _full advantage_ of TypeScript.
-- [The Migrating Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration/intro) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
+- [The Migrating Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
   - We do not try to convince people to switch, only to help people who have already decided.
   - ⚠️This is a new cheatsheet, all assistance is welcome.
-- [The HOC Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/hoc/intro)) specifically teaches people to write HOCs with examples.
+- [The HOC Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/hoc)) specifically teaches people to write HOCs with examples.
   - Familiarity with [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html) is necessary.
   - ⚠️This is the newest cheatsheet, all assistance is welcome.
 
@@ -2720,7 +2720,7 @@ Selected flags and why we like them:
 - `strict`: `strictPropertyInitialization` forces you to initialize class properties or explicitly declare that they can be undefined. You can opt out of this with a definite assignment assertion.
 - `"typeRoots": ["./typings", "./node_modules/@types"]`: By default, TypeScript looks in `node_modules/@types` and parent folders for third party type declarations. You may wish to override this default resolution so you can put all your global type declarations in a special `typings` folder.
 
-Compilation time grows linearly with size of codebase. For large projects, you will want to use [Project References](https://www.typescriptlang.org/docs/handbook/project-references.html). See our [ADVANCED](https://react-typescript-cheatsheet.netlify.app/docs/advanced/intro/) cheatsheet for commentary.
+Compilation time grows linearly with size of codebase. For large projects, you will want to use [Project References](https://www.typescriptlang.org/docs/handbook/project-references.html). See our [ADVANCED](https://react-typescript-cheatsheet.netlify.app/docs/advanced) cheatsheet for commentary.
 
 <!--END-SECTION:ts-config-->
 
