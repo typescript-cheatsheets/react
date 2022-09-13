@@ -17,7 +17,7 @@ module.exports = {
   title: "React TypeScript Cheatsheets", // Title for your website.
   tagline:
     "Cheatsheets for experienced React developers getting started with TypeScript",
-  url: "https://react-typescript-cheatsheet.netlify.app/", // Your website URL
+  url: "https://react-typescript-cheatsheet.netlify.app", // Your website URL
   baseUrl: "/",
   projectName: "react-typescript-cheatsheet",
   organizationName: "typescript-cheatsheets",
