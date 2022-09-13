@@ -174,7 +174,7 @@ module.exports = {
     },
 
     algolia: {
-      apiKey: "e1c87cdc9c52f8ccf84ceb7f9e18bcd3",
+      apiKey: "d94250e016f0b87e299e745de0cc6c0c",
       indexName: "react-typescript-cheatsheet",
       appId: "J65EL4UPXZ",
       algoliaOptions: {
