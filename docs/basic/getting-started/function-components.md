@@ -11,14 +11,14 @@ type AppProps = {
   message: string;
 }; /* use `interface` if exporting so that consumers can extend */
 
-// Easiest way to declare a Function Component; return type is inferred.
-const App = ({ message }: AppProps) => <div>{message}</div>;
+// Easiest way to declare a Function Component that expects a prop value; return type is inferred.
+const App: React.FC<Props> = ({ message }: AppProps) => <div>{message}</div>;
 
 // you can choose annotate the return type so an error is raised if you accidentally return some other type
-const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
+const App: React.FC<Props> = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 
 // you can also inline the type declaration; eliminates naming the prop types, but looks repetitive
-const App = ({ message }: { message: string }) => <div>{message}</div>;
+const App: React.FC<Props> = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
 > Tip: You might use [Paul Shen's VS Code Extension](https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit) to automate the type destructure declaration (incl a [keyboard shortcut](https://twitter.com/_paulshen/status/1392915279466745857?s=20)).
