@@ -9,7 +9,7 @@ Cheatsheets for experienced React developers getting started with TypeScript
     height="90"
     width="90"
     alt="react + ts logo"
-    src="https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png"
+    src="https://react-typescript-cheatsheet.netlify.app/img/icon.png"
     align="left"
   />
 </a>
