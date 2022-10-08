@@ -127,7 +127,7 @@ Open Source
 - [Theme-UI](https://github.com/system-ui/theme-ui/issues/668)
 - [Hasura Console](https://github.com/hasura/graphql-engine/issues/4314)
 - [Storybook](https://github.com/storybookjs/storybook/pulls?page=4&q=is%3Apr+sort%3Aupdated-desc+is%3Aclosed+typescript+label%3Atypescript)
-- [Dojo 1 -> 2 migration](https://devchat.tv/js-jabber/jsj-277-dojo-2-with-dylan-schiemann-and-kitson-kelly/)
+- [Dojo 1 -> 2 migration](https://topenddevs.com/podcasts/javascript-jabber/episodes/jsj-277-dojo-2-with-dylan-schiemann-and-kitson-kelly)
 
 ## Migration Results
 
