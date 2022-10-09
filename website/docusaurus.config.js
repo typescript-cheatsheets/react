@@ -68,7 +68,6 @@ module.exports = {
           to: setupDoc,
           label: "Docs",
           position: "right",
-          favicon: "img/icon.png",
         },
         {
           to: "help",
