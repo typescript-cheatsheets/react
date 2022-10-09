@@ -135,3 +135,6 @@ docs/contributing.md
 # Lock-files
 package-lock.json
 yarn.lock
+
+#.vscode folder
+.vscode/
