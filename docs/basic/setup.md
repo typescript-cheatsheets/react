@@ -5,16 +5,16 @@ title: Setup TypeScript with React
 
 ## Prerequisites
 
-1. good understanding of [React](https://reactjs.org)
-2. familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
-3. having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-4. having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
+1. Good understanding of [React](https://reactjs.org)
+2. Familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
+3. Having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+4. Having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
 
 This guide will always assume you are starting with the latest TypeScript and React versions. Notes for older versions will be in expandable `<details>` tags.
 
 ## VS Code Extensions
 
-- refactoring help https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit
+- Refactoring help https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit
 - R+TS Code Snippets (there are a few...)
   - https://marketplace.visualstudio.com/items?itemName=infeng.vscode-react-typescript
   - https://www.digitalocean.com/community/tutorials/the-best-react-extension-for-vs-code
