@@ -172,7 +172,7 @@ Cloud setups:
 
 Local dev setups:
 
-- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app -e with-typescript` will create in your current folder
+- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app@latest --ts` will create in your current folder
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
 - [Vite](https://vitejs.dev/): `npm create vite@latest my-react-ts-app -- --template react-ts`
 - [Meteor](https://guide.meteor.com/build-tool.html#typescript): `meteor create --typescript name-of-my-new-typescript-app`
@@ -2989,6 +2989,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
   - [Lyft's React-To-TypeScript conversion CLI](https://github.com/lyft/react-javascript-to-typescript-transform)
   - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
+  - [Matt Pocock's Beginner's Typescript Tutorial](https://github.com/total-typescript/beginners-typescript-tutorial)
 - [You?](https://github.com/typescript-cheatsheets/react/issues/new).
 
 <!--END-SECTION:resources-->
