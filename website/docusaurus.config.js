@@ -9,8 +9,6 @@ const users = [
 ];
 
 const setupDoc = "docs/basic/setup";
-const contributorsDoc = "docs/contributors";
-const contributingDoc = "docs/contributing";
 
 module.exports = {
   favicon: "img/icon.png",
@@ -79,11 +77,6 @@ module.exports = {
           label: "Discord",
           position: "right",
         },
-        {
-          to: contributorsDoc,
-          label: "Contributors",
-          position: "right",
-        },
         // {to: 'blog', label: 'Blog', position: 'right'},
       ],
     },
@@ -117,10 +110,6 @@ module.exports = {
               label: "Migrating",
               to: "docs/migration",
             },
-            {
-              label: "Contributing",
-              to: contributingDoc,
-            },
           ],
         },
         {
@@ -140,7 +129,11 @@ module.exports = {
             },
             {
               label: "Contributors",
-              to: contributorsDoc,
+              to: "contributors",
+            },
+            {
+              label: "Contributing",
+              to: "contributing",
             },
           ],
         },
