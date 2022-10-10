@@ -30,7 +30,7 @@ Cloud setups:
 
 Local dev setups:
 
-- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app -e with-typescript` will create in your current folder
+- [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app@latest --ts` will create in your current folder
 - [Create React App](https://facebook.github.io/create-react-app/docs/adding-typescript): `npx create-react-app name-of-app --template typescript` will create in new folder
 - [Vite](https://vitejs.dev/): `npm create vite@latest my-react-ts-app -- --template react-ts`
 - [Meteor](https://guide.meteor.com/build-tool.html#typescript): `meteor create --typescript name-of-my-new-typescript-app`
