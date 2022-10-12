@@ -48,6 +48,7 @@ type AppProps = {
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   /** an optional prop (VERY COMMON!) */
   optional?: OptionalType;
+  setState: React.Dispatch<React.SetStateAction<number>>; // the dispatch action returned by `useState`
 };
 ```
 
