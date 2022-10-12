@@ -4,7 +4,7 @@ title: "Troubleshooting Handbook: Utilities"
 sidebar_label: Utilities
 ---
 
-These are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L1523-L1637):
+These are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/33a34e5b96bfe086266f4765ab9789a2a02507f9/src/lib/es5.d.ts#L1523-L1637):
 
 - `Awaited`: emulate the behavior of `await`
 - `Capitalize`: convert first character of string literal type to uppercase
