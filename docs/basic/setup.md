@@ -19,6 +19,7 @@ This guide will always assume you are starting with the latest TypeScript and Re
   - https://marketplace.visualstudio.com/items?itemName=infeng.vscode-react-typescript
   - https://www.digitalocean.com/community/tutorials/the-best-react-extension-for-vs-code
 - TypeScript official extension https://code.visualstudio.com/docs/languages/typescript
+- JavaScript and TypeScript Nightly https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next
 
 ## React + TypeScript Starter Kits
 
