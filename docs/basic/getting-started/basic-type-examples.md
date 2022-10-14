@@ -48,6 +48,8 @@ type AppProps = {
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   /** an optional prop (VERY COMMON!) */
   optional?: OptionalType;
+  /** when passing down the state setter function returned by `useState` to a child component. `number` is an example, swap out with whatever the type of your state */
+  setState: React.Dispatch<React.SetStateAction<number>>;
 };
 ```
 
