@@ -39,29 +39,28 @@ import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-interface ModalProps {
-  children?: ReactNode;
-}
-
-const Modal = ({ children }: ModalProps) => {
-  const el = useRef(document.createElement("div"));
-
-  useEffect(() => {
-    // Use this in case CRA throws an error about react-hooks/exhaustive-deps
-    const current = el.current;
-
-    // We assume `modalRoot` exists with '!'
-    modalRoot!.appendChild(current);
-    return () => void modalRoot!.removeChild(current);
-  }, []);
-
-  return createPortal(children, el.current);
+type ModalProps = {
+  children: ReactNode;
 };
 
-export default Modal;
+function Modal({ children }: ModalProps) {
+  // create div element only once using ref
+  const elRef = useRef<HTMLDivElement | null>(null);
+  if (!elRef.current) elRef.current = document.createElement("div");
+
+  useEffect(() => {
+    const el = elRef.current!; // non-null assertion because it will never be null
+    modalRoot.appendChild(el);
+    return () => {
+      modalRoot.removeChild(el);
+    };
+  }, []);
+
+  return createPortal(children, elRef.current);
+}
 ```
 
-[View in the TypeScript Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoUSWOAbzjSJRiQAVoYUAbOAXzmy4CTDAFoAJrjLkKAellwUAZyUBXEMAB2Aczha4ATwiqocABYwQPTMC5JzyxXHHAAbnADuwGGb3iCIBDi3KI4EDD4ANwUFGgQmkrwALJB3ABciMQwAHQAYgDCADy0vAB8cAC8cAAU9GhmtuJEmnwAlJXltBRwcPJwAKIgqlzM9j72aCMqDLiQmkiaEUp6CZyaaPauKFDAKABGdp7evihwRJjdM6twSDxVyOg5qkpIyJjVkmjqCzmMqCz9OwgH7VABELlcoNarWiMnIPQeGGyzyQ-UwmCQGGq1XaFU6lx6fQA6vZlGpgXAAAaBYJcBAQcKUm4AD2AiWWXh8BAAhNIej04tcadx6eFKs4IF9gYtsgBHVRIKAGADKt0xMGgYIAxMKuKEGTAoYplgAJAAqSQAMoCkNKYLD+XBdaKYNzsigwGAFuJ8g0uOJqrdsl8oM0YDCCWckDATC0cR04K4IMB-M6DW6iIFXEhfY1A1xgyYwxH4XwADRwADaAF0S5c+gBJVaofwQTBU26UivjK6cLSKvTLHuU86F0M-SmXIgxqAtP6jdiwbjVeqNZoVoMh4uw3iwuQKZ4obRIGLkTCqdYwYDxOAAQU98a6pcFiSrSjMEA8KVpFZeMGVH5fqkXDVuKiJPC8yqcCw1SYNwLwlj006xjUkaFBCpSRoSChGKoDAoC08EQHAYCqPAPhsishjGKYiTMMAaDmJY1i2CepaOuhbh+BUoK6vq4SgqUhSyBhWF0O+n7ftwcAAGQyah7GOnAhRSVwmGKUpykQmJmmJAYdgVLQT6aSZzhsmAIwGBkoLaDs4igmWOkmRZ6BIA2LAgEo1kbIsioOU5mlmEgwDaBY1kAIwAAyRa4Zj+RpplHOIPgZPgUUxWY+COQlpl7OgADWtnGJo4jWVA2h5dUkVltVtXZOFrTxYlSkAF5NuISDMhkACc3XZc1PS8LwAVwOpA1wA2+B4KcurcrQoJwKCw05UphR7GRGotHpBlGXlaCFTgF6lYtYAegYKAeA0YBLfw8T5FwDH5YZ8Z4nAf4AZJwGwfBSCtGUkwQC8wnrTAm1jYlwmiStwmqeDjp-WJa0bTed0Pftz24uU72Aap1QwFACp-aUEkeHAqnA8jmhw-yfREK+bbUSYiiemhIluODrQULwQA)
+[View in the TypeScript Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDGMA0cDecCuAzkgKIBmZSG2RSyZ2y6MAchACZJwC+cZUEEHADkUVBmEBYAFChIsXHDRiUMJAAVoMFABsefAUNHiYAWnaCp0mQHobcFIUL4QwAHYBzOO7gBPCPhQcAAWMCB6ZMA6XMGODnDswABucADuwDDB3uwiIBy6pgIQMMIA3DJoEG6E8HnsuggQxXAAvAkQaC5IbjAAdACO+EhQvgDKSNEY0AAUAEQAxHUFRTCzAJQOhHAAEgAqALIAMiTRIN0w5dbSML5gXPv5OuoCYFttODJwSsFR7GJuAC5ECY2JxLtxLjIyPg3BhgFU4A96jppng0D8dH9ujwgUjdM8IK8Nh9pF87EoVGoEsk4BMkGcenAqjpfEzYVwiO4vGIyJ8lFUarSdPRWgRiPQADx7I4AEWSJ3p5zgAB84G58DodAA+abqzVrS5fYBkODTACEE3ovU6UH+MA2lqQZGtgTtoosnQZfWUqDUCq9c0SSXWkNJYtIFCoMGm0w2LS1uD5X0q1XgE1FjudNrtZtKcHJbiqpj1ekcxFg8LccAARlQULRvPB0pq1UgksMa1wS0m4EthU0+igwHc3OwAMIY9jTCYGntiGCBKux1oJklfde9x6NYq9MR5dsT37TnSzsNfCF87jYADaAF1T3z54uKb6NFpdNN0b9-thMy7becp7cDIIHSOSRAoB4SCgdCsIwJWcAAILDsua78qmcDXoQwQQKkeI6NgxAwKMOF4Y8t6ikwGC9LQozaGo0xkLoxCnl8T5QEuPYSkGWo9mS9j+PgSgoFWzEQHAYD4PAmTAFsPiCUENSqMAaAhGEERRNBZ7rtxNLAOwLSzH2hQDrMWoSjYPF8bg2G4fhcAAGQOaa1lfBK+G8dpG5uUGrneTUvjRC0OBod5YXUoQYA6CgvhArMHhQPpsyYH5YVRegSAAJJqCAhBxWg5zDMlqXecESDAB4oRxQAjAADLVSTBMVXnhV86TsJkQLCHVDXBMIKUta11boAA1glASjnFUAeMN0y1Zg82Lb01VrM1rVhQAXplo5IAAHkCACcB0Det67cMBg3rp5p1fJlwhCCgm7ImaOCzHAswXTdcAStWUkwAiAVBSFw1oGNAgwuwcVgEOvgoKkPxgB9vBVGOOgqSNwXLvGcBESRdmPIxzFIGs3BamgOgQMQFm-TA-1uNd60WVZl0WR51kk9ZP1-QiKNo6DmNxgmuOkfh0wwFAQwk1qtmpIijzU9z9PWeSYiChAJoKQ4w5cZZyQM2sMjcEAA)
 
 </details>
 
