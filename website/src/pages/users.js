@@ -16,7 +16,7 @@ export default function Users() {
             <p>This project is used by many folks</p>
           </div>
           <div className="row">
-            {users && users.length>0&& users.map((user) => (
+            { users && users.length>0 && users.map((user) => (
               <a
                 className="col-2"
                 href={user.infoLink}
@@ -25,9 +25,9 @@ export default function Users() {
               >
                 <img
                   className="padding--md"
-                  src={user.image}
-                  alt={user.caption}
-                  title={user.caption}
+                  src={ user.image }
+                  alt={ user.caption }
+                  title={ user.caption }
                   style={{
                     maxHeight: 128,
                     width: 128,
@@ -38,7 +38,7 @@ export default function Users() {
           </div>
           <p>Are you using this project?</p>
           <a
-            href={addUserUrl}
+            href={ addUserUrl }
             className="button button--lg button--outline button--primary"
           >
             Add your company
