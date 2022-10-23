@@ -18,11 +18,8 @@ type AppProps = {
   names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
   status: "waiting" | "success";
-  /** any object as long as you dont use its properties (NOT COMMON but useful as placeholder) */
-  obj: object;
-  obj2: {}; // almost the same as `object`, exactly the same as `Object`
-  /** an object with any number of properties (PREFERRED) */
-  obj3: {
+  /** an object with known properties (but could have more at runtime) */
+  obj: {
     id: string;
     title: string;
   };
@@ -31,13 +28,15 @@ type AppProps = {
     id: string;
     title: string;
   }[];
+  /** any non-primitive value - can't access any properties (NOT COMMON but useful as placeholder) */
+  obj2: object;
+  /** an interface with no required properties - (NOT COMMON, except for things like `React.Component<{}, State>`) */
+  obj3: {};
   /** a dict object with any number of properties of the same type */
   dict1: {
     [key: string]: MyTypeHere;
   };
   dict2: Record<string, MyTypeHere>; // equivalent to dict1
-  /** any function as long as you don't invoke it (not recommended) */
-  onSomething: Function;
   /** function that doesn't take or return anything (VERY COMMON) */
   onClick: () => void;
   /** function with named prop (VERY COMMON) */
@@ -46,6 +45,8 @@ type AppProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** alternative function type syntax that takes an event (VERY COMMON) */
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  /** any function as long as you don't invoke it (not recommended) */
+  onSomething: Function;
   /** an optional prop (VERY COMMON!) */
   optional?: OptionalType;
   /** when passing down the state setter function returned by `useState` to a child component. `number` is an example, swap out with whatever the type of your state */
