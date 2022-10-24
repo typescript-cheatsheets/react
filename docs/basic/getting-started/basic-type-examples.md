@@ -59,7 +59,9 @@ Notice we have used the TSDoc `/** comment */` style here on each prop. You can 
 <details>
 <summary>More on object types: <code>object</code>, <code>{"{}"}</code>, etc</summary>
 
-In Typescript, it's generally best to use specific types for objects. In most cases, this means a literal type like <code>{ id: string; name: string }</code>. In cases where there isn't a fixed structure for an object, you likely either want an index signature or a Record - if there are values of a certain type, but the keys can change - or else <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">generics</a> - if the object structure is more-or-less an arbitrary black-box.
+In Typescript, it's generally best to use specific types for objects. In most cases, this means a literal type like <code>{ id: string; name: string }</code>. In cases where there isn't a fixed structure for an object, you likely either want an index signature (possibly with the <code>Record</code> shorthand) - if there are values of a certain type, but the keys can change - or else <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">generics</a> - if the object structure is more-or-less an arbitrary black-box.
+
+Another approach to objects is the <code>Map</code> data structure, but this is somewhat uncommon to use in React, because React prefers data to be changed immutably (e.g. <code>setUser({...user, name: newName})</code>), while Maps are mutable data structures.
 
 "Vague" object types like <code>object</code>, <code>{}</code> are fairly niche and should be rarely used, and may function differently than you expect. <code>object</code> is any non-primitive value: this includes things like functions and arrays and constructors, not just "simple" objects. And <code>{}</code> is perhaps better thought of as "an interface with no required properties", not "an empty object" - in practice this type allows anything except <code>null</code> or <code>undefined</code>. <code>Object</code> behaves the same as <code>{}</code> and is basically never used.
 
