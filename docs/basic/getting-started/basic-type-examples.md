@@ -18,11 +18,8 @@ type AppProps = {
   names: string[];
   /** string literals to specify exact string values, with a union type to join them together */
   status: "waiting" | "success";
-  /** any object as long as you dont use its properties (NOT COMMON but useful as placeholder) */
-  obj: object;
-  obj2: {}; // almost the same as `object`, exactly the same as `Object`
-  /** an object with any number of properties (PREFERRED) */
-  obj3: {
+  /** an object with known properties (but could have more at runtime) */
+  obj: {
     id: string;
     title: string;
   };
@@ -31,13 +28,15 @@ type AppProps = {
     id: string;
     title: string;
   }[];
+  /** any non-primitive value - can't access any properties (NOT COMMON but useful as placeholder) */
+  obj2: object;
+  /** an interface with no required properties - (NOT COMMON, except for things like `React.Component<{}, State>`) */
+  obj3: {};
   /** a dict object with any number of properties of the same type */
   dict1: {
     [key: string]: MyTypeHere;
   };
   dict2: Record<string, MyTypeHere>; // equivalent to dict1
-  /** any function as long as you don't invoke it (not recommended) */
-  onSomething: Function;
   /** function that doesn't take or return anything (VERY COMMON) */
   onClick: () => void;
   /** function with named prop (VERY COMMON) */
@@ -46,6 +45,8 @@ type AppProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** alternative function type syntax that takes an event (VERY COMMON) */
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  /** any function as long as you don't invoke it (not recommended) */
+  onSomething: Function;
   /** an optional prop (VERY COMMON!) */
   optional?: OptionalType;
   /** when passing down the state setter function returned by `useState` to a child component. `number` is an example, swap out with whatever the type of your state */
@@ -54,6 +55,17 @@ type AppProps = {
 ```
 
 Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](https://react-typescript-cheatsheet.netlify.app/docs/advanced/misc_concerns/#commenting-components) section in the Advanced Cheatsheet.
+
+<details>
+<summary>More on object types: <code>object</code>, <code>{"{}"}</code>, etc</summary>
+
+In Typescript, it's generally best to use specific types for objects. In most cases, this means a literal type like <code>{ id: string; name: string }</code>. In cases where there isn't a fixed structure for an object, you likely either want an index signature (possibly with the <code>Record</code> shorthand) - if there are values of a certain type, but the keys can change - or else <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">generics</a> - if the object structure is more-or-less an arbitrary black-box.
+
+Another approach to objects is the <code>Map</code> data structure, but this is somewhat uncommon to use in React, because React prefers data to be changed immutably (e.g. <code>setUser({...user, name: newName})</code>), while Maps are mutable data structures.
+
+"Vague" object types like <code>object</code>, <code>{}</code> are fairly niche and should be rarely used, and may function differently than you expect. <code>object</code> is any non-primitive value: this includes things like functions and arrays and constructors, not just "simple" objects. And <code>{}</code> is perhaps better thought of as "an interface with no required properties", not "an empty object" - in practice this type allows anything except <code>null</code> or <code>undefined</code>. <code>Object</code> behaves the same as <code>{}</code> and is basically never used.
+
+</details>
 
 ## Useful React Prop Type Examples
 
