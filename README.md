@@ -77,7 +77,7 @@ Cheatsheets for experienced React developers getting started with TypeScript
   - [Example React Hooks + TypeScript Libraries:](#example-react-hooks--typescript-libraries)
   - [Class Components](#class-components)
   - [Typing getDerivedStateFromProps](#typing-getderivedstatefromprops)
-  - [You May Not Need `defaultProps`](#you-may-not-need-defaultprops-)
+  - [You May Not Need `defaultProps`](#you-may-not-need-defaultprops)
   - [Typing `defaultProps`](#typing-defaultprops)
   - [Consuming Props of a Component with defaultProps](#consuming-props-of-a-component-with-defaultprops)
     - [Problem Statement](#problem-statement)
@@ -106,7 +106,7 @@ Cheatsheets for experienced React developers getting started with TypeScript
 - [Option 1: Using react-error-boundary](#option-1-using-react-error-boundary)
 - [Options 2: Writing your custom error boundary component](#options-2-writing-your-custom-error-boundary-component)
 - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
-- [Troubleshooting Handbook: Types](#troubleshooting-handbook--types)
+- [Troubleshooting Handbook: Types](#troubleshooting-handbook-types)
   <!--START-SECTION:types-toc-->
   - [Union Types and Type Guarding](#union-types-and-type-guarding)
   - [Optional Types](#optional-types)
