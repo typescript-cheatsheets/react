@@ -1,3 +1,4 @@
+// copy file 
 const fs = require("fs");
 const filesTopCopy = [
   {
@@ -13,7 +14,7 @@ const filesTopCopy = [
 function copyFile(src, dest) {
   fs.copyFile(src, dest, (err) => {
     if (err) {
-      console.log("Error Found:", err);
+      console.log("Error Found:", err); // if error occur message displayed
     } else {
       console.log("Files copied");
     }
