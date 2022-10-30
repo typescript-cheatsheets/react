@@ -47,9 +47,9 @@ export default function Help() {
           <p>This project is maintained by a dedicated group of people.</p>
         </div>
 
-        <div className="row margin-vert--xl">
+        <div className="row">
           {supportLinks.map((supportLink, i) => (
-            <div className="col col--4" key={i}>
+            <div className="col col--4 margin-top--lg" key={i}>
               <SupportLink {...supportLink} />
             </div>
           ))}
