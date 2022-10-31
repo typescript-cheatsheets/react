@@ -406,7 +406,7 @@ const memoizedCallback = useCallback(
  */
 ```
 
-Note that for React < 18, the function signature of `useCallback` typed arguments as any[]` by default:
+Note that for React < 18, the function signature of `useCallback` typed arguments as `any[]` by default:
 
 ```ts
 function useCallback<T extends (...args: any[]) => any>(
