@@ -406,7 +406,7 @@ const memoizedCallback = useCallback(
  */
 ```
 
-Note that for React < 18, the function signiture of `useCallback` is as follow, in which the args are typed as `any[]` as default.
+Note that for React < 18, the function signature of `useCallback` typed arguments as any[]` by default:
 
 ```ts
 function useCallback<T extends (...args: any[]) => any>(
@@ -415,19 +415,20 @@ function useCallback<T extends (...args: any[]) => any>(
 ): T;
 ```
 
-In React >= 18, the function signiture of `useCallback` changed to the following,
+In React >= 18, the function signature of `useCallback` changed to the following:
 
 ```ts
 function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
 ```
 
-Therefore the follow code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
+Thereforee the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
 
 ```ts
+// @ts-expect-error Parameter 'e' implicitly has 'any' type.
 useCallback((e) => {}, []);
+// Explicit 'any' type.
+useCallback((e: any) => {}, []);
 ```
-
-See https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210
 
 #### useReducer
 
