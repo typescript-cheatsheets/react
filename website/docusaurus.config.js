@@ -56,7 +56,7 @@ module.exports = {
     },
 
     navbar: {
-      title: "React TypeScript Cheatsheet",
+      title: "React TypeScript Cheatsheets",
       logo: {
         alt: "Logo",
         src: "img/icon.png",
