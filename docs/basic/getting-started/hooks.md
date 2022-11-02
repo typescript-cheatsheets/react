@@ -37,6 +37,49 @@ setUser(newUser);
 
 This temporarily "lies" to the TypeScript compiler that `{}` is of type `User`. You should follow up by setting the `user` state — if you don't, the rest of your code may rely on the fact that `user` is of type `User` and that may lead to runtime errors.
 
+## useCallback
+
+You can type the `useCallback` just like any other function.
+
+```ts
+const memoizedCallback = useCallback(
+  (param1: string, param2: number) => {
+    console.log(param1, param2)
+    return { ok: true }
+  },
+  [...],
+);
+/**
+ * VSCode will show the following type:
+ * const memoizedCallback:
+ *  (param1: string, param2: number) => { ok: boolean }
+ */
+```
+
+Note that for React < 18, the function signature of `useCallback` typed arguments as `any[]` by default:
+
+```ts
+function useCallback<T extends (...args: any[]) => any>(
+  callback: T,
+  deps: DependencyList
+): T;
+```
+
+In React >= 18, the function signature of `useCallback` changed to the following:
+
+```ts
+function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
+```
+
+Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
+
+```ts
+// @ts-expect-error Parameter 'e' implicitly has 'any' type.
+useCallback((e) => {}, []);
+// Explicit 'any' type.
+useCallback((e: any) => {}, []);
+```
+
 ## useReducer
 
 You can use [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions) for reducer actions. Don't forget to define the return type of reducer, otherwise TypeScript will infer it.
