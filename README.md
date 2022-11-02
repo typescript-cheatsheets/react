@@ -389,7 +389,7 @@ This temporarily "lies" to the TypeScript compiler that `{}` is of type `User`. 
 
 #### useCallback
 
-You can type the `useCallback` just like any other function.
+You can type `useCallback` just like any other function.
 
 ```ts
 const memoizedCallback = useCallback(
