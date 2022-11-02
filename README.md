@@ -389,7 +389,7 @@ This temporarily "lies" to the TypeScript compiler that `{}` is of type `User`. 
 
 #### useCallback
 
-You can type `useCallback` just like any other function.
+You can type the `useCallback` just like any other function.
 
 ```ts
 const memoizedCallback = useCallback(
@@ -421,7 +421,7 @@ In React >= 18, the function signature of `useCallback` changed to the following
 function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
 ```
 
-Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not in React < 18.
+Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
 
 ```ts
 // @ts-expect-error Parameter 'e' implicitly has 'any' type.
