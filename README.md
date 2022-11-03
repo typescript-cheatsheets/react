@@ -1,4 +1,4 @@
-# React+TypeScript Cheatsheets
+# React + TypeScript Cheatsheets
 
 Cheatsheets for experienced React developers getting started with TypeScript
 
