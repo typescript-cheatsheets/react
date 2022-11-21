@@ -55,7 +55,7 @@ interface ContextState {
   // set the type of state you want to handle with context e.g.
   name: string | null;
 }
-//set an empty object as default state
+// set an empty object as default state
 const Context = createContext({} as ContextState);
 // set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
 ```
@@ -85,14 +85,14 @@ Notice the explicit type arguments which we need because we don't have a default
 
 ```ts
 const currentUserContext = createContext<string | undefined>(undefined);
-//                                             ^^^^^^^^^^^^^^^^^^
+//                                             ^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
 along with the non-null assertion to tell TypeScript that `currentUser` is definitely going to be there:
 
 ```ts
 return <div>HELLO {currentUser!.toUpperCase()}!</div>;
-//                              ^
+//                            ^
 ```
 
 This is unfortunate because _we know_ that later in our app, a `Provider` is going to fill in the context.
