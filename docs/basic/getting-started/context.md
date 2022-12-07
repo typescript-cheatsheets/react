@@ -67,7 +67,7 @@ import { createContext, useContext } from "react";
 
 const currentUserContext = createContext<string | undefined>(undefined);
 
-function EnthusasticGreeting() {
+function EnthusiasticGreeting() {
   const currentUser = useContext(currentUserContext);
   return <div>HELLO {currentUser!.toUpperCase()}!</div>;
 }
@@ -75,7 +75,7 @@ function EnthusasticGreeting() {
 function App() {
   return (
     <currentUserContext.Provider value="Anders">
-      <EnthusasticGreeting />
+      <EnthusiasticGreeting />
     </currentUserContext.Provider>
   );
 }
@@ -132,7 +132,7 @@ There are a few solutions for this:
    // We still have to specify a type, but no default!
    export const [useCurrentUserName, CurrentUserProvider] = createCtx<string>();
 
-   function EnthusasticGreeting() {
+   function EnthusiasticGreeting() {
      const currentUser = useCurrentUserName();
      return <div>HELLO {currentUser.toUpperCase()}!</div>;
    }
@@ -140,7 +140,7 @@ There are a few solutions for this:
    function App() {
      return (
        <CurrentUserProvider value="Anders">
-         <EnthusasticGreeting />
+         <EnthusiasticGreeting />
        </CurrentUserProvider>
      );
    }
