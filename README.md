@@ -1568,7 +1568,7 @@ import { createContext, useContext } from "react";
 
 const currentUserContext = createContext<string | undefined>(undefined);
 
-function EnthusasticGreeting() {
+function EnthusiasticGreeting() {
   const currentUser = useContext(currentUserContext);
   return <div>HELLO {currentUser!.toUpperCase()}!</div>;
 }
@@ -1576,7 +1576,7 @@ function EnthusasticGreeting() {
 function App() {
   return (
     <currentUserContext.Provider value="Anders">
-      <EnthusasticGreeting />
+      <EnthusiasticGreeting />
     </currentUserContext.Provider>
   );
 }
@@ -1606,7 +1606,7 @@ There are a few solutions for this:
    const currentUserContext = createContext<string>(undefined!);
    ```
 
-   ([Playground here](https://www.typescriptlang.org/play/index.html?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQduEAdqvLgK5SXMwCqqLFADCLGFgAe8ALyYqMAHS5KycaN6SYAHjZRgzAOYA+ABQdmAEywF9WCwEIAlPQLn8wFnACivABYdUNBhgXABxSixgwxNHOABvOjg4JlZ2Lh5+QSg4WWw8RQCsdXEpE05uLF4BIWLNZ0S4ShguZjgtC2AANyMACS8AGX6AeXjyjOqoBRgIPjAwGrQsGIBfey0Aeg7u+mW6V2Z3TwBBOZj4hqaWtrHKzJqxTQUABWJO4CtszuQAGw4saTIAGVfMgAO7MMhGBpJLQ+GD+QJsELhLCRfQGODrKEw9Y3KpZWpSZ6vd5CIw7IA)) This is a quick and easy fix, but this loses type-safety, and if you forget to supply a value to the Provider, you will get an error.
+   ([Playground here](https://www.typescriptlang.org/play?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQduEAdqvLgK5SXMwCqqLFADCLGFgAe8ALyYqMAHS5KycaN6SYAHjZRgzAOYA+ABQdmAEywF9WCwEIAlPQLn8wFnACivABYdUYDQYYFwAcUosEMMTRzgAbzo4OCZWdi4efkEoOFlsPEUArHVxKRNObixeASESzWckuEoYLmY4LQtgADcjAAkvABkBgHkEisyaqAUYCD4wMFq0LFiAX3stAHpOnvoVuldmd08AQXnYhMbm1vbxqqzasU0FAAViLuArHK7kABsOLGkZAAyr5kAB3ZhkIyNZJaHwwfyBYKhCJYKL6AxwDbQ2EbW7VbJ1KQvN4fIRGXZAA)) This is a quick and easy fix, but this loses type-safety, and if you forget to supply a value to the Provider, you will get an error.
 
 2. We can write a helper function called `createCtx` that guards against accessing a `Context` whose value wasn't provided. By doing this, API instead, **we never have to provide a default and never have to check for `undefined`**:
 
@@ -1633,7 +1633,7 @@ There are a few solutions for this:
    // We still have to specify a type, but no default!
    export const [useCurrentUserName, CurrentUserProvider] = createCtx<string>();
 
-   function EnthusasticGreeting() {
+   function EnthusiasticGreeting() {
      const currentUser = useCurrentUserName();
      return <div>HELLO {currentUser.toUpperCase()}!</div>;
    }
@@ -1641,13 +1641,13 @@ There are a few solutions for this:
    function App() {
      return (
        <CurrentUserProvider value="Anders">
-         <EnthusasticGreeting />
+         <EnthusiasticGreeting />
        </CurrentUserProvider>
      );
    }
    ```
 
-   [View in the TypeScript Playground](http://www.typescriptlang.org/play/index.html?jsx=1&ssl=1&ssc=1&pln=31&pc=2#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MLQn1wAHFKFhPnFAcsQWDxEvJ79hDixypZdV1necFiVNV5TgTpNGAfRpgACXJAAZZCAHkllwH8Vz-SpRGTMBBCgOQ0CwBZhm7TpGFg+D6ETepFEaZoOEI99VRfdVoMXIDfyEdcBTgUVfG2MhAyiUxFDIaYUU6K9LFvItH2fV94kYaS3io7iJxwvj+WNaY6KAA)
+   [View in the TypeScript Playground](https://www.typescriptlang.org/play?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MOAaE+uAA4pQsJ84oDliCweIl5PfsIcTHKll1XWd5wWJU1XlOBOk0YB9GmAAJckABkUIAeSWXBfxXf9KlEZMwEEKA5DQLAFmGbtOkYOCEPoRN6kURpmg4IiP1VV91RgxdgL-IR1wFOBRV8bYyEDKJTEUMhphRTor0sW972AJ8XzfeJGBkt5qJ4idcP4-ljWmeigA)
 
 3. You can go even further and combine this idea using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
 
