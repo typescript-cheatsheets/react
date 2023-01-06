@@ -267,7 +267,7 @@ class Provider extends React.Component<
   { children?: ReactNode },
   ProviderState
 > {
-  public readonly state = {
+  public state = {
     themeColor: "red",
   };
 
