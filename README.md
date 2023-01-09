@@ -1529,11 +1529,19 @@ export const App = () => (
   <AppCtx.Provider value={sampleAppContext}>...</AppCtx.Provider>
 );
 
+const useAppContext = () => {
+  const appContext = useContext(AppCtx);
+  if (!appContext) {
+    throw new Error("useApp must be used within <AppCtx.Provider>.");
+  }
+  return appContext;
+};
+
 // Consume in your app
 import { useContext } from "react";
 
 export const PostInfo = () => {
-  const appContext = useContext(AppCtx);
+  const appContext = useAppContext();
   return (
     <div>
       Name: {appContext.name}, Author: {appContext.author}, Url:{" "}
