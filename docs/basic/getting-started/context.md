@@ -119,7 +119,7 @@ const MyComponent = () => {
 };
 ```
 
-### Type assertion as an alternative (not recommended)
+### Type assertion as an alternative
 
 Another way to avoid having to check for `null` is to use type assertion to tell TypeScript you know the context is not `null`:
 
