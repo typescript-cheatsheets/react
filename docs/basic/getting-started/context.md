@@ -107,7 +107,7 @@ const useCurrentUser = () => {
 };
 ```
 
-Now it's possible to access `currentUser.username` without checking for `null`:
+Using a runtime type check in this will has the benefit of printing a clear error message in the console when a provider is not wrapping the components properly. Now it's possible to access `currentUser.username` without checking for `null`:
 
 ```tsx
 import { useContext } from "react";
@@ -119,7 +119,7 @@ const MyComponent = () => {
 };
 ```
 
-### Not recommended alternatives
+### Type assertion as an alternative (not recommended)
 
 Another way to avoid having to check for `null` is to use type assertion to tell TypeScript you know the context is not `null`:
 
