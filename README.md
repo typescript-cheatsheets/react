@@ -1648,7 +1648,7 @@ You can also use non-null assertion to get the same result:
 const CurrentUserContext = createContext<CurrentUserContextType>(null!);
 ```
 
-However, it's recommended to avoid these kinds of assertions whenever possible.
+When you don't know what do choose, prefer runtime checking and throwing over type asserting.
 
 <!--END-SECTION:context-->
 
