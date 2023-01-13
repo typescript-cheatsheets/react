@@ -1504,296 +1504,151 @@ Sources:
 
 #### Context
 
-#### Basic Example
+#### Basic example
+
+Here's a basic example of creating a context containing the active theme.
 
 ```tsx
 import { createContext } from "react";
 
-interface AppContextInterface {
-  name: string;
-  author: string;
-  url: string;
-}
+type ThemeContextType = "light" | "dark";
 
-const AppCtx = createContext<AppContextInterface | null>(null);
+const ThemeContext = createContext<ThemeContextType>("light");
+```
 
-// Provider in your app
+Wrap the components that need the context with a context provider:
 
-const sampleAppContext: AppContextInterface = {
-  name: "Using React Context in a Typescript App",
-  author: "thehappybug",
-  url: "http://www.example.com",
+```tsx
+import { useState } from "react";
+
+const App = () => {
+  const [theme, setTheme] = useState<ThemeContextType>("light");
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <MyComponent />
+    </ThemeContext.Provider>
+  );
 };
+```
 
-export const App = () => (
-  <AppCtx.Provider value={sampleAppContext}>...</AppCtx.Provider>
-);
+Call `useContext` to read and subscribe to the context.
 
-// Consume in your app
+```tsx
 import { useContext } from "react";
 
-export const PostInfo = () => {
-  const appContext = useContext(AppCtx);
+const MyComponent = () => {
+  const theme = useContext(ThemeContext);
+
+  return <p>The current theme is {theme}.</p>;
+};
+```
+
+#### Without default context value
+
+If you don't have any meaningful default value, specify `null`:
+
+```tsx
+import { createContext } from "react";
+
+interface CurrentUserContextType {
+  username: string;
+}
+
+const CurrentUserContext = createContext<CurrentUserContextType | null>(null);
+```
+
+```tsx
+const App = () => {
+  const [currentUser, setCurrentUser] = useState<CurrentUserContextType>({
+    username: "filiptammergard",
+  });
+
   return (
-    <div>
-      Name: {appContext.name}, Author: {appContext.author}, Url:{" "}
-      {appContext.url}
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <MyComponent />
+    </CurrentUserContext.Provider>
   );
 };
 ```
 
-You can also use the [Class.contextType](https://reactjs.org/docs/context.html#classcontexttype) or [Context.Consumer](https://reactjs.org/docs/context.html#contextconsumer) API, let us know if you have trouble with that.
-
-_[Thanks to @AlvSovereign](https://github.com/typescript-cheatsheets/react/issues/97)_
-
-#### Extended Example
-
-Using `createContext` with an empty object as default value.
+Now that the type of the context can be `null`, you'll notice that you'll get a `'currentUser' is possibly 'null'` TypeScript error if you try to access the `username` property. You can use optional chaining to access `username`:
 
 ```tsx
-interface ContextState {
-  // set the type of state you want to handle with context e.g.
-  name: string | null;
-}
-// set an empty object as default state
-const Context = createContext({} as ContextState);
-// set up context provider as you normally would in JavaScript [React Context API](https://reactjs.org/docs/context.html#api)
+import { useContext } from "react";
+
+const MyComponent = () => {
+  const currentUser = useContext(CurrentUserContext);
+
+  return <p>Name: {currentUser?.username}.</p>;
+};
 ```
 
-Using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/) to make a `createCtx` with **no `defaultValue`, yet no need to check for `undefined`**:
-
-```ts
-import { createContext, useContext } from "react";
-
-const currentUserContext = createContext<string | undefined>(undefined);
-
-function EnthusiasticGreeting() {
-  const currentUser = useContext(currentUserContext);
-  return <div>HELLO {currentUser!.toUpperCase()}!</div>;
-}
-
-function App() {
-  return (
-    <currentUserContext.Provider value="Anders">
-      <EnthusiasticGreeting />
-    </currentUserContext.Provider>
-  );
-}
-```
-
-Notice the explicit type arguments which we need because we don't have a default `string` value:
-
-```ts
-const currentUserContext = createContext<string | undefined>(undefined);
-//                                             ^^^^^^^^^^^^^^^^^^^^^^^
-```
-
-along with the non-null assertion to tell TypeScript that `currentUser` is definitely going to be there:
-
-```ts
-return <div>HELLO {currentUser!.toUpperCase()}!</div>;
-//                            ^
-```
-
-This is unfortunate because _we know_ that later in our app, a `Provider` is going to fill in the context.
-
-There are a few solutions for this:
-
-1. You can get around this by asserting non null:
-
-   ```ts
-   const currentUserContext = createContext<string>(undefined!);
-   ```
-
-   ([Playground here](https://www.typescriptlang.org/play?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQduEAdqvLgK5SXMwCqqLFADCLGFgAe8ALyYqMAHS5KycaN6SYAHjZRgzAOYA+ABQdmAEywF9WCwEIAlPQLn8wFnACivABYdUYDQYYFwAcUosEMMTRzgAbzo4OCZWdi4efkEoOFlsPEUArHVxKRNObixeASESzWckuEoYLmY4LQtgADcjAAkvABkBgHkEisyaqAUYCD4wMFq0LFiAX3stAHpOnvoVuldmd08AQXnYhMbm1vbxqqzasU0FAAViLuArHK7kABsOLGkZAAyr5kAB3ZhkIyNZJaHwwfyBYKhCJYKL6AxwDbQ2EbW7VbJ1KQvN4fIRGXZAA)) This is a quick and easy fix, but this loses type-safety, and if you forget to supply a value to the Provider, you will get an error.
-
-2. We can write a helper function called `createCtx` that guards against accessing a `Context` whose value wasn't provided. By doing this, API instead, **we never have to provide a default and never have to check for `undefined`**:
-
-   ```tsx
-   import { createContext, useContext } from "react";
-
-   /**
-    * A helper to create a Context and Provider with no upfront default value, and
-    * without having to check for undefined all the time.
-    */
-   function createCtx<A extends {} | null>() {
-     const ctx = createContext<A | undefined>(undefined);
-     function useCtx() {
-       const c = useContext(ctx);
-       if (c === undefined)
-         throw new Error("useCtx must be inside a Provider with a value");
-       return c;
-     }
-     return [useCtx, ctx.Provider] as const; // 'as const' makes TypeScript infer a tuple
-   }
-
-   // Usage:
-
-   // We still have to specify a type, but no default!
-   export const [useCurrentUserName, CurrentUserProvider] = createCtx<string>();
-
-   function EnthusiasticGreeting() {
-     const currentUser = useCurrentUserName();
-     return <div>HELLO {currentUser.toUpperCase()}!</div>;
-   }
-
-   function App() {
-     return (
-       <CurrentUserProvider value="Anders">
-         <EnthusiasticGreeting />
-       </CurrentUserProvider>
-     );
-   }
-   ```
-
-   [View in the TypeScript Playground](https://www.typescriptlang.org/play?jsx=1#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdA9AgnYnAIJwAWWANmCxQ4MCHFyVkMLCjgBhCADtpAD3jJFAEzgAFYgDdgmoXADuwGNziKxAVzBEl8YwWS2+8fcj62sAGhQtNiRzSwhbeG5kQ0UAcxExXF5cAGs4Amg4Wy0sAmBFLG1vPhFeEVAsADpgxjoCbPxgJXFJaTkYFQAeLiw1LC10AG8AXzgAH2t3PgA+AAoASjhBtnElVHh8FTgAXkwqGEqJHDanXphu8aycvILNOeyXfML5+jh0hpgmxSzULHaVBZLFZvXBrDY7PZ4A62X4KZRnWabF7AuDAAhwRE7ba7B65J6aRaWYimaxYEkAUSgxCgszIML+HTgIBh8AARjJ8qgjDJkLoDNzhKErLyvD4sGRkW83pQYLYoN9cK84MMVjK5d8ANr0-4BTaVPQQQzGKAAXRQ6FBinWNDgjEYcAA5GhVlaYA6mcgUlh0AAVACeggAyhJgGB4PkCCZebKwHwsHQVUx7QBVVDIWJYABcDDtcAA6jJ1sA+CUovoZKI4KhBLg0X7ZDAA-44KyItYxC43B4AIR0XqQWAu9ZwLWwuWUZSpoQAOWQIGbcnH-RgU6gBqNQjNuyOUgZXXWUHysTmyLqHy+cHJym4MOAaE+uAA4pQsJ84oDliCweIl5PfsIcTHKll1XWd5wWJU1XlOBOk0YB9GmAAJckABkUIAeSWXBfxXf9KlEZMwEEKA5DQLAFmGbtOkYOCEPoRN6kURpmg4IiP1VV91RgxdgL-IR1wFOBRV8bYyEDKJTEUMhphRTor0sW972AJ8XzfeJGBkt5qJ4idcP4-ljWmeigA)
-
-3. You can go even further and combine this idea using `createContext` and [context getters](https://kentcdodds.com/blog/application-state-management-with-react/).
-
-   ```tsx
-   import { createContext, useContext } from "react";
-
-   /**
-    * A helper to create a Context and Provider with no upfront default value, and
-    * without having to check for undefined all the time.
-    */
-   function createCtx<A extends {} | null>() {
-     const ctx = createContext<A | undefined>(undefined);
-     function useCtx() {
-       const c = useContext(ctx);
-       if (c === undefined)
-         throw new Error("useCtx must be inside a Provider with a value");
-       return c;
-     }
-     return [useCtx, ctx.Provider] as const; // 'as const' makes TypeScript infer a tuple
-   }
-
-   // usage
-
-   export const [useCtx, SettingProvider] = createCtx<string>(); // specify type, but no need to specify value upfront!
-   export function App() {
-     const key = useCustomHook("key"); // get a value from a hook, must be in a component
-     return (
-       <SettingProvider value={key}>
-         <Component />
-       </SettingProvider>
-     );
-   }
-   export function Component() {
-     const key = useCtx(); // can still use without null check!
-     return <div>{key}</div>;
-   }
-   ```
-
-   [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BXOpAYWZlwAkIIBrOAF44ACj5IAngC44DKMBoBzAJRCAfHADeFOHGr14AbQYoYSADSykMAMoxTSALpDExGADpmSOw5GaAvso6cEQwjFA0svZmhuISjhT+FAD0yXpEDnq0ZgAe8ADuwDAAFnA0EHCMYNjZcAAmSJgojAA2MABqKC2MSClphSUQjPDFKABuCopwnPUVjDQNmApIdXrFSGgCXS3T69OgveSY8xjAtOmoZqwwOQA8AIJqIqra5Lr6DHo3LsjoHmgZK7ZJB5B5wAA+lQWjWWdSe80WsOUAG5gscaKdzl5rjlnlpgu9aJ80D83J4WKxgXkRBgciiCXBgJhRABCNCqEo4fJlJDcgCiUBwUBEACJsd8QBw4AAjJCM+jABpwFBwAAKOAmDSgcAGpRVYy6PRF9LeuhC1nCkTQqNNSVNoUtcEM4pyllp7nVEE1SCgzhQdCyBmRcFScBAKHEcAAKhIwN4AcAwPAFJgfcrplUWhYyhB4ChIihBSgJHAIMz5mdIjBY0g6IkKH1KnQUIpDhQQZBYIHPs6KTdLDZrDBJp7vb6XADLmwbrc5JMniiQ2k6HG0EyS9W45ZpcMczyVtMKiuNuu4AbunKqjUaDAWe2cp2sCdh+d7mAwHjXoSDHA4i5sRw3C8HwopxMawahq2eZnoaco1HgKrFMBliSp8sryum1DgLQSA3sEDoRKIDK3IOMDDkoo6Kmm549IImhxP4agMrotyUthNC4fAyRMaaLHJKR5GKJRWo8boJp2h20BPhiL6RGxkAcTen7BB88B-sILrPBBaRoPmUTAC0OxeDqRRIbuNCtDsaDrJsd72hahG3HUwBjGo9GSP4tzJM5rk2v4QA)
-
-4. Using `createContext` and `useContext` to make a `createCtx` with [`unstated`](https://github.com/jamiebuilds/unstated)-like context setters:
-
-   ```tsx
-   import {
-     createContext,
-     Dispatch,
-     PropsWithChildren,
-     SetStateAction,
-     useState,
-   } from "react";
-
-   export function createCtx<A>(defaultValue: A) {
-     type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
-     const defaultUpdate: UpdateType = () => defaultValue;
-     const ctx = createContext({
-       state: defaultValue,
-       update: defaultUpdate,
-     });
-
-     function Provider(props: PropsWithChildren<{}>) {
-       const [state, update] = useState(defaultValue);
-       return <ctx.Provider value={{ state, update }} {...props} />;
-     }
-     return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
-   }
-
-   // usage
-   import { useContext } from "react";
-
-   const [ctx, TextProvider] = createCtx("someText");
-   export const TextContext = ctx;
-   export function App() {
-     return (
-       <TextProvider>
-         <Component />
-       </TextProvider>
-     );
-   }
-   export function Component() {
-     const { state, update } = useContext(TextContext);
-     return (
-       <label>
-         {state}
-         <input type="text" onChange={(e) => update(e.target.value)} />
-       </label>
-     );
-   }
-   ```
-
-   [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCpAD0ljkwFcA7DYCZuNIlGJAYRjUAPAEEAfAAoAJkkwpGAGxgA1FIsZIAXHFEBKOAG8KcODACeYJHACqYabyQAVS9YC8iYjAB0AEWAAzmC8aAAWwsjoPgDKSDDRMI6ibBzCFlYQmHCy8kqq6pri4gDcJlwcAfA5Csp2Dnw6dY4uVnAekgZu4tlyNfkaSKXkpmgV8BjUbZ5R3tyofPwcfNQwksbDpnCVjjrVeWoDADRlpoz2Oz25ted8ZQC+ekOmTKww7JwACjgAbsCyUJIwDgwAEdJEMN4vhAQQB1YAwUL8ULARTSIjMYSGO7iAzrTblZiVOAAbW2fEOcDO9SQAF0puCfIwAkgEo4ZL19gUkI8TnAiDBGFBOMIJpCfn8kFA4N8uW5DIYtolyZSbtY7ncjN4tUDoQENQB6Er3Mr8wWcYkTClQ37-OkoAIEyrFOD6-VwdR8IW8YDfJCKcwU4npJCZLhCCnB0PWiVQGkUO4UCiuykBFAAcyQifIo0J8At4bgThoMGjtqmc0cgmokgARAFcM5izWeeQaHRxmNC8XFsxlvAPBMhm3oFgWClOKIwGAOkYTXEzXBJLzhEWVqXJeJeaZhItwBwkL2XZuNtv9auS+L-sfTC2E63aCOGGO3hw4LvIMwD6tcWUc0SFWSSAUlSjhwBqHgMt4TICEsxaSOePZ9i2pimkKi7LooKAAEZ+te+JGIBd74XAwjAMwYCMPAwZuDWfY1nAHBIigzAZnK7jdCBfCSEg3iJFAGY+DKAx6AaeGnphOGKHht5AA)
-
-5. A [useReducer-based version](https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a4971e80114a052) may also be helpful.
-
-<details>
-
-<summary><b>Mutable Context Using a Class component wrapper</b></summary>
-
-_Contributed by: [@jpavon](https://github.com/typescript-cheatsheets/react/pull/13)_
+However, it would be preferrable to not have to check for `null`, since we know that the context won't be `null`. One way to do that is to provide a custom hook to use the context, where an error is thrown if the context is not provided:
 
 ```tsx
-interface ProviderState {
-  themeColor: string;
+import { createContext } from "react";
+
+interface CurrentUserContextType {
+  username: string;
 }
 
-interface UpdateStateArg {
-  key: keyof ProviderState;
-  value: string;
-}
+const CurrentUserContext = createContext<CurrentUserContextType | null>(null);
 
-interface ProviderStore {
-  state: ProviderState;
-  update: (arg: UpdateStateArg) => void;
-}
+const useCurrentUser = () => {
+  const currentUserContext = useContext(CurrentUserContext);
 
-const Context = createContext({} as ProviderStore); // type assertion on empty object
-
-class Provider extends React.Component<
-  { children?: ReactNode },
-  ProviderState
-> {
-  public readonly state = {
-    themeColor: "red",
-  };
-
-  private update = ({ key, value }: UpdateStateArg) => {
-    this.setState({ [key]: value });
-  };
-
-  public render() {
-    const store: ProviderStore = {
-      state: this.state,
-      update: this.update,
-    };
-
-    return (
-      <Context.Provider value={store}>{this.props.children}</Context.Provider>
+  if (!currentUserContext) {
+    throw new Error(
+      "useCurrentUser has to be used within <CurrentUserContext.Provider>"
     );
   }
-}
 
-const Consumer = Context.Consumer;
+  return currentUserContext;
+};
 ```
 
-</details>
+Using a runtime type check in this will has the benefit of printing a clear error message in the console when a provider is not wrapping the components properly. Now it's possible to access `currentUser.username` without checking for `null`:
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
+```tsx
+import { useContext } from "react";
+
+const MyComponent = () => {
+  const currentUser = useCurrentUser();
+
+  return <p>Username: {currentUser.username}.</p>;
+};
+```
+
+##### Type assertion as an alternative
+
+Another way to avoid having to check for `null` is to use type assertion to tell TypeScript you know the context is not `null`:
+
+```tsx
+import { useContext } from "react";
+
+const MyComponent = () => {
+  const currentUser = useContext(CurrentUserContext);
+
+  return <p>Name: {currentUser!.username}.</p>;
+};
+```
+
+Another option is to use an empty object as default value and cast it to the expected context type:
+
+```tsx
+const CurrentUserContext = createContext<CurrentUserContextType>(
+  {} as CurrentUserContextType
+);
+```
+
+You can also use non-null assertion to get the same result:
+
+```tsx
+const CurrentUserContext = createContext<CurrentUserContextType>(null!);
+```
+
+When you don't know what to choose, prefer runtime checking and throwing over type asserting.
 
 <!--END-SECTION:context-->
 
