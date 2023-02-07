@@ -5,10 +5,12 @@ title: Setup TypeScript with React
 
 ## Prerequisites
 
-1. Good understanding of [React](https://reactjs.org)
-2. Familiarity with [TypeScript Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) ([2ality's guide](http://2ality.com/2018/04/type-notation-typescript.html) is helpful. If you’re an absolute beginner in TypeScript, check out [chibicode’s tutorial](https://ts.chibicode.com/todo/).)
-3. Having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-4. Having read [the React section of the new TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (optional: also step through the 40+ examples under [the playground's](http://www.typescriptlang.org/play/index.html) Examples section)
+You can use this cheatsheet for reference at any skill level, but basic understanding of React and TypeScript is assumed. Here is a list of prerequisites:
+
+- Good understanding of [React](https://reactjs.org).
+- Familiarity with [TypeScript Basics](https://www.typescriptlang.org/docs/handbook/2/basic-types.html) and [Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html).
+- Having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
+- Having read [the React section of the TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react).
 
 This guide will always assume you are starting with the latest TypeScript and React versions. Notes for older versions will be in expandable `<details>` tags.
 
