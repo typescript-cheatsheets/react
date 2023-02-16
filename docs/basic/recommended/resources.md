@@ -33,3 +33,5 @@ sidebar_label: Other resources
   - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [Matt Pocock's Beginner's Typescript Tutorial](https://github.com/total-typescript/beginners-typescript-tutorial)
 - [You?](https://github.com/typescript-cheatsheets/react/issues/new).
+- [React Roadmap](https://roadmap.sh/react).
+- [TypeScript Roadmap](https://roadmap.sh/typescript).
