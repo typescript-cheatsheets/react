@@ -288,13 +288,6 @@ async function main(argv) {
   pendingReadme = await updateSectionWith({
     from: currentReadme,
     to: pendingReadme,
-    name: "useful-hooks",
-    path: "docs/basic/useful-hooks.md",
-    relativeHeadingLevel: 1,
-  });
-  pendingReadme = await updateSectionWith({
-    from: currentReadme,
-    to: pendingReadme,
     name: "editor-integration",
     path: "docs/basic/editor-integration.md",
     relativeHeadingLevel: 1,
