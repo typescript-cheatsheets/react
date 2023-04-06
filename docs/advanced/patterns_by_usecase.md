@@ -709,23 +709,38 @@ const UsageComponent = () => (
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgAUcwBnARjgF44BvOTCBABccFjCjAAdgHM4AXwDcVWvSYRWAJi684AIxRQRYiTPlLK5TAFdJGYBElwAstQDCuSJKSSYACjDMLCJqrBwAPoyBGgCUvBRwcMCYcL4ARAIQqYmOAeossTzxCXAA9CVwuawAdPpQpeVIUDhQRQlEMFZQjgA8ACbAAG4AfDyVLFUZct0l-cPmCXJwSAA2LPSF5MX1FYETgtuNza1w7Z09syNjNQZTM4ND8-IUchRoDmJwAKosKNJI7uAHN4YCJkOgYFUAGKubS+WKcIYpIp9e7HbouAGeYH8QScdKCLIlIZojEeIE+PQGPG1QnEzbFHglABUcHRbjJXgpGTxGSytWpBlSRO2UgGKGWwF6cCZJRe9OmFwo0QUQA)
 
-Further reading: [how to ban passing `{}` if you have a `NoFields` type.](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable)
-
-## Props: Must Pass Both
+## Props: Pass nothing or all
 
 ```tsx
-type OneOrAnother<T1, T2> =
-  | (T1 & { [K in keyof T2]?: undefined })
-  | (T2 & { [K in keyof T1]?: undefined });
+interface Nothing {
+  [key: string]: never; // needed because an empty interface is equivalent to `{}`
+}
 
-type Props = OneOrAnother<{ a: string; b: string }, {}>;
+interface All {
+  a: string;
+  b: string;
+}
 
-const a: Props = { a: "a" }; // error
-const b: Props = { b: "b" }; // error
-const ab: Props = { a: "a", b: "b" }; // ok
+const NothingOrAll = (props: Nothing | All) => {
+  if ("a" in props) {
+    // `props` is of type `All`
+    return <>{props.b}</>;
+  }
+  // `props` is of type `Nothing`
+  return <>Nothing</>;
+};
+
+const Component = () => (
+  <>
+    <NothingOrAll />
+    <NothingOrAll a="" /> {/* error */}
+    <NothingOrAll b="" /> {/* error */}
+    <NothingOrAll a="" b="" />
+  </>
+);
 ```
 
-Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
+Read more about [how to make invalid states irrepresentable](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable).
 
 ## Props: Pass One ONLY IF the Other Is Passed
 
