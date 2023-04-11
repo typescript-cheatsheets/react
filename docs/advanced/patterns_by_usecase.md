@@ -711,10 +711,10 @@ const UsageComponent = () => (
 
 ## Props: Pass nothing or all
 
+Passing no props is equivalent to passing an empty object. However, the type for an empty object is not `{}`, which you might think. [Make sure you understand what empty interface, `{}` and `Object` means](/docs/basic/getting-started/basic_type_example#empty-interface--and-object). `Record<string, never>` is probably the closest you can get to an empty object type, and is [recommended by typescript-eslint](https://typescript-eslint.io/rules/ban-types/). Here's an example of allowing "nothing or all":
+
 ```tsx
-interface Nothing {
-  [key: string]: never; // needed because an empty interface is equivalent to `{}`
-}
+type Nothing = Record<string, never>;
 
 interface All {
   a: string;
@@ -723,24 +723,49 @@ interface All {
 
 const NothingOrAll = (props: Nothing | All) => {
   if ("a" in props) {
-    // `props` is of type `All`
     return <>{props.b}</>;
   }
-  // `props` is of type `Nothing`
   return <>Nothing</>;
 };
 
 const Component = () => (
   <>
-    <NothingOrAll />
+    <NothingOrAll /> {/* ok */}
     <NothingOrAll a="" /> {/* error */}
     <NothingOrAll b="" /> {/* error */}
-    <NothingOrAll a="" b="" />
+    <NothingOrAll a="" b="" /> {/* ok */}
   </>
 );
 ```
 
-Read more about [how to make invalid states irrepresentable](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable).
+While this works, representing and empty object with `Record<string, never>` [is not officially recommended](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856). It might be better approaching this in another way, to avoid trying to type "an exactly empty object". One way is grouping the required props in an optional object:
+
+```tsx
+interface Props {
+  obj?: {
+    a: string;
+    b: string;
+  };
+}
+
+const NothingOrAll = (props: Props) => {
+  if (props.obj) {
+    return <>{props.obj.a}</>;
+  }
+  return <>Nothing</>;
+};
+
+const Component = () => (
+  <>
+    <NothingOrAll /> {/* ok */}
+    <NothingOrAll obj={{ a: "" }} /> {/* error */}
+    <NothingOrAll obj={{ b: "" }} /> {/* error */}
+    <NothingOrAll obj={{ a: "", b: "" }} /> {/* ok */}
+  </>
+);
+```
+
+Another way is to make both props optional and then check that either none or all props are passed at runtime.
 
 ## Props: Pass One ONLY IF the Other Is Passed
 
