@@ -709,23 +709,63 @@ const UsageComponent = () => (
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgAUcwBnARjgF44BvOTCBABccFjCjAAdgHM4AXwDcVWvSYRWAJi684AIxRQRYiTPlLK5TAFdJGYBElwAstQDCuSJKSSYACjDMLCJqrBwAPoyBGgCUvBRwcMCYcL4ARAIQqYmOAeossTzxCXAA9CVwuawAdPpQpeVIUDhQRQlEMFZQjgA8ACbAAG4AfDyVLFUZct0l-cPmCXJwSAA2LPSF5MX1FYETgtuNza1w7Z09syNjNQZTM4ND8-IUchRoDmJwAKosKNJI7uAHN4YCJkOgYFUAGKubS+WKcIYpIp9e7HbouAGeYH8QScdKCLIlIZojEeIE+PQGPG1QnEzbFHglABUcHRbjJXgpGTxGSytWpBlSRO2UgGKGWwF6cCZJRe9OmFwo0QUQA)
 
-Further reading: [how to ban passing `{}` if you have a `NoFields` type.](http://www.javiercasas.com/articles/typescript-impossible-states-irrepresentable)
+## Props: Pass nothing or all
 
-## Props: Must Pass Both
+Passing no props is equivalent to passing an empty object. However, the type for an empty object is not `{}`, which you might think. [Make sure you understand what empty interface, `{}` and `Object` means](/docs/basic/getting-started/basic_type_example#empty-interface--and-object). `Record<string, never>` is probably the closest you can get to an empty object type, and is [recommended by typescript-eslint](https://typescript-eslint.io/rules/ban-types/). Here's an example of allowing "nothing or all":
 
 ```tsx
-type OneOrAnother<T1, T2> =
-  | (T1 & { [K in keyof T2]?: undefined })
-  | (T2 & { [K in keyof T1]?: undefined });
+type Nothing = Record<string, never>;
 
-type Props = OneOrAnother<{ a: string; b: string }, {}>;
+interface All {
+  a: string;
+  b: string;
+}
 
-const a: Props = { a: "a" }; // error
-const b: Props = { b: "b" }; // error
-const ab: Props = { a: "a", b: "b" }; // ok
+const NothingOrAll = (props: Nothing | All) => {
+  if ("a" in props) {
+    return <>{props.b}</>;
+  }
+  return <>Nothing</>;
+};
+
+const Component = () => (
+  <>
+    <NothingOrAll /> {/* ok */}
+    <NothingOrAll a="" /> {/* error */}
+    <NothingOrAll b="" /> {/* error */}
+    <NothingOrAll a="" b="" /> {/* ok */}
+  </>
+);
 ```
 
-Thanks [diegohaz](https://twitter.com/kentcdodds/status/1085655423611367426)
+While this works, representing and empty object with `Record<string, never>` [is not officially recommended](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856). It might be better approaching this in another way, to avoid trying to type "an exactly empty object". One way is grouping the required props in an optional object:
+
+```tsx
+interface Props {
+  obj?: {
+    a: string;
+    b: string;
+  };
+}
+
+const NothingOrAll = (props: Props) => {
+  if (props.obj) {
+    return <>{props.obj.a}</>;
+  }
+  return <>Nothing</>;
+};
+
+const Component = () => (
+  <>
+    <NothingOrAll /> {/* ok */}
+    <NothingOrAll obj={{ a: "" }} /> {/* error */}
+    <NothingOrAll obj={{ b: "" }} /> {/* error */}
+    <NothingOrAll obj={{ a: "", b: "" }} /> {/* ok */}
+  </>
+);
+```
+
+Another way is to make both props optional and then check that either none or all props are passed at runtime.
 
 ## Props: Pass One ONLY IF the Other Is Passed
 

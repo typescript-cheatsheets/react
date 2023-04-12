@@ -54,18 +54,32 @@ type AppProps = {
 };
 ```
 
-Notice we have used the TSDoc `/** comment */` style here on each prop. You can and are encouraged to leave descriptive comments on reusable components. For a fuller example and discussion, see our [Commenting Components](https://react-typescript-cheatsheet.netlify.app/docs/advanced/misc_concerns/#commenting-components) section in the Advanced Cheatsheet.
+### `object` as the non-primitive type
 
-<details>
-<summary>More on object types: <code>object</code>, <code>{"{}"}</code>, etc</summary>
+`object` is a common source of misunderstanding in TypeScript. It does not mean "any object" but rather "any non-primitive type", which means it represents anything that is not `number`, `string`, `boolean`, `symbol`, `null` or `undefined`.
 
-In Typescript, it's generally best to use specific types for objects. In most cases, this means a literal type like <code>{ id: string; name: string }</code>. In cases where there isn't a fixed structure for an object, you likely either want an index signature (possibly with the <code>Record</code> shorthand) - if there are values of a certain type, but the keys can change - or else <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">generics</a> - if the object structure is more-or-less an arbitrary black-box.
+Typing "any non-primitive value" is most likely not something that you should do much in React, which means you will probably not use `object` much.
 
-Another approach to objects is the <code>Map</code> data structure, but this is somewhat uncommon to use in React, because React prefers data to be changed immutably (e.g. <code>setUser({...user, name: newName})</code>), while Maps are mutable data structures.
+### Empty interface, `{}` and `Object`
 
-"Vague" object types like <code>object</code>, <code>{}</code> are fairly niche and should be rarely used, and may function differently than you expect. <code>object</code> is any non-primitive value: this includes things like functions and arrays and constructors, not just "simple" objects. And <code>{}</code> is perhaps better thought of as "an interface with no required properties", not "an empty object" - in practice this type allows anything except <code>null</code> or <code>undefined</code>. <code>Object</code> behaves the same as <code>{}</code> and is basically never used.
+An empty interface, `{}` and `Object` all represent "any non-nullish value"—not "an empty object" as you might think. [Using these types is a common source of misunderstanding and is not recommended](https://typescript-eslint.io/rules/no-empty-interface/).
 
-</details>
+```ts
+interface AnyNonNullishValue {} // equivalent to `type AnyNonNullishValue = {}` or `type AnyNonNullishValue = Object`
+
+let value: AnyNonNullishValue;
+
+// these are all fine, but might not be expected
+value = 1;
+value = "foo";
+value = () => alert("foo");
+value = {};
+value = { foo: "bar" };
+
+// these are errors
+value = undefined;
+value = null;
+```
 
 ## Useful React Prop Type Examples
 
