@@ -59,8 +59,7 @@ Cheatsheets for experienced React developers getting started with TypeScript
   <!--START-SECTION:setup-toc-->
   - [Prerequisites](#prerequisites)
   - [React and TypeScript starter kits](#react-and-typescript-starter-kits)
-  - [Try React and TypeScript online](#try-react-and-typescript-online)
-  - [Video Tutorial](#video-tutorial)<!--END-SECTION:setup-toc-->
+  - [Try React and TypeScript online](#try-react-and-typescript-online)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
@@ -170,18 +169,6 @@ There are some tools that let you run React and TypeScript online, which can be 
 - [TypeScript playground](https://www.typescriptlang.org/play?target=8&jsx=4#code/JYWwDg9gTgLgBAbzgVwM4FMDKMCGN0A0KGAogGZnoDG8AvnGVBCHAORTo42sDcAsAChB6AB6RYcKhAB2qeAGEIyafihwAvHAAUASg0A+RILiSZcuAG0pymEQwxFNgLobiWXPi0AGHfyECTNHRyShotXQMjAJM4ABMIKmQQdBUAOhhgGAAbdFcAAwBNJUks4CoAa3RYuAASBGsVegzk1Dy-E1pfQWM4DhhkKGltHpMAHn0RmNGwfSLkErLK6vqlRrhm9FRRgHoZybGAI2QYGBk4GXlSivUECPVDe0cVLQb4AGo4AEYdWgnomJil0WcGS+zgOyOJxkfwBOxhcC6AlogiAA)
 - [StackBlitz](https://stackblitz.com/fork/react-ts)
 - [CodeSandbox](https://ts.react.new/)
-
-#### Video Tutorial
-
-Have a look at the 7-part "React Typescript Course" video series below for an introduction to TypeScript with React.
-
-<a href="https://www.youtube.com/watch?v=PL1NUl7fQ2I&list=PLG-Mk4wQm9_LyKE5EwoZz2_GGXR-zJ5Ml">
-    <img
-        width="200px"
-        alt="react typescript course video series"
-        src="https://i.imgur.com/IIG0Xu9.jpeg"
-    />
-</a>
 
 <!--END-SECTION:setup-->
 
