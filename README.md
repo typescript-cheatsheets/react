@@ -58,7 +58,6 @@ Cheatsheets for experienced React developers getting started with TypeScript
 - [Section 1: Setup TypeScript with React](#section-1-setup-typescript-with-react)
   <!--START-SECTION:setup-toc-->
   - [Prerequisites](#prerequisites)
-  - [VS Code Extensions](#vs-code-extensions)
   - [React + TypeScript Starter Kits](#react--typescript-starter-kits)
   - [Video Tutorial](#video-tutorial)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
@@ -143,27 +142,16 @@ Cheatsheets for experienced React developers getting started with TypeScript
 
 <!--START-SECTION:setup-->
 
-### Section 1: Setup TypeScript with React
+### Section 1: Setup
 
 #### Prerequisites
 
 You can use this cheatsheet for reference at any skill level, but basic understanding of React and TypeScript is assumed. Here is a list of prerequisites:
 
-- Good understanding of [React](https://reactjs.org).
+- Basic understanding of [React](https://react.dev/).
 - Familiarity with [TypeScript Basics](https://www.typescriptlang.org/docs/handbook/2/basic-types.html) and [Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html).
-- Having read [the TypeScript section in the official React docs](https://reactjs.org/docs/static-type-checking.html#typescript).
-- Having read [the React section of the TypeScript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react).
 
-This guide will always assume you are starting with the latest TypeScript and React versions. Notes for older versions will be in expandable `<details>` tags.
-
-#### VS Code Extensions
-
-- Refactoring help https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit
-- R+TS Code Snippets (there are a few...)
-  - https://marketplace.visualstudio.com/items?itemName=infeng.vscode-react-typescript
-  - https://www.digitalocean.com/community/tutorials/the-best-react-extension-for-vs-code
-- TypeScript official extension https://code.visualstudio.com/docs/languages/typescript
-- JavaScript and TypeScript Nightly https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next
+In the cheatsheet we assume you are using the latest versions of React and TypeScript.
 
 #### React + TypeScript Starter Kits
 
