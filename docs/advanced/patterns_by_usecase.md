@@ -681,33 +681,63 @@ function isString(a: unknown): a is string {
 
 See this quick guide: https://twitter.com/mpocock1/status/1500813765973053440?s=20&t=ImUA-NnZc4iUuPDx-XiMTA
 
-## Props: One or the Other but not Both
+## Props: One or the other but not both
 
-Use the `in` keyword, function overloading, and union types to make components that take either one or another sets of props, but not both:
+Since TypeScript is a structural type system, _minimum_ property requirements are described rather than _exact_, which makes it a bit more difficult to disallow certain props compared to what you might think. `never` can be used to allow either one or another prop, but not both:
 
 ```tsx
-type Props1 = { foo: string };
-type Props2 = { bar: string };
+type Props1 = { foo: string; bar?: never };
+type Props2 = { bar: string; foo?: never };
 
-function MyComponent(props: Props1 | Props2) {
-  if ("foo" in props) {
-    // props.bar // error
-    return <div>{props.foo}</div>;
-  } else {
-    // props.foo // error
-    return <div>{props.bar}</div>;
+const OneOrTheOther = (props: Props1 | Props2) => {
+  if ("foo" in props && typeof props.foo === "string") {
+    // `props.bar` is of type `undefined`
+    return <>{props.foo}</>;
   }
-}
-const UsageComponent = () => (
-  <div>
-    <MyComponent foo="foo" />
-    <MyComponent bar="bar" />
-    {/* <MyComponent foo="foo" bar="bar"/> // invalid */}
-  </div>
+  // `props.foo` is of type `undefined`
+  return <>{props.bar}</>;
+};
+const Component = () => (
+  <>
+    <OneOrTheOther /> {/* error */}
+    <OneOrTheOther foo="" /> {/* ok */}
+    <OneOrTheOther bar="" /> {/* ok */}
+    <OneOrTheOther foo="" bar="" /> {/* error */}
+  </>
 );
 ```
 
-[View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCmATzCTgAUcwBnARjgF44BvOTCBABccFjCjAAdgHM4AXwDcVWvSYRWAJi684AIxRQRYiTPlLK5TAFdJGYBElwAstQDCuSJKSSYACjDMLCJqrBwAPoyBGgCUvBRwcMCYcL4ARAIQqYmOAeossTzxCXAA9CVwuawAdPpQpeVIUDhQRQlEMFZQjgA8ACbAAG4AfDyVLFUZct0l-cPmCXJwSAA2LPSF5MX1FYETgtuNza1w7Z09syNjNQZTM4ND8-IUchRoDmJwAKosKNJI7uAHN4YCJkOgYFUAGKubS+WKcIYpIp9e7HbouAGeYH8QScdKCLIlIZojEeIE+PQGPG1QnEzbFHglABUcHRbjJXgpGTxGSytWpBlSRO2UgGKGWwF6cCZJRe9OmFwo0QUQA)
+[View in the TypeScript Playground](https://www.typescriptlang.org/play#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSYBPMJOABRzAGcBGOAXjgG85MIIAXHCYwowAHYBzANxwARiigB+IeKQA3JFDgBfaRWq0GEZgCYO3eYqEixU2Xwgq4azdr3k0EcSLgB5NT8oABUACyQ-GHDtTgAKMEYmIWNmNgAfekTTAEoOAD5uUjg4YEw4WPxHfBLxOASTJjgAMia4KhoIMvrmADpHDnZOfFsJSXxcriLiuAB6GbgAA26mHoUoBZLGzrbDRYBXcQATJEwJJEOFqeKiGD2oWoAePK5lvv4dB5m8-WKdKbnFq9HBtgFsyu1aAsDsdTmoLlMbndHs9XmsPl99B4vD54ABhXCQNTieBxXLsAqxKZPK5wB4BCIhcKRaKzApcGYAKjgWhw2g5Mz+01p9KCYQiUS0vH47Hw1S+3E5cAgAGs4PzBdM6YFGeKWWsZXK2YqVWqBTStQyxczJY4DVYoHb5eyuTzoKaNZ88qRstIgA).
+
+A better alternative might be to use a discriminant prop like this:
+
+```tsx
+type Props1 = { type: "foo"; foo: string };
+type Props2 = { type: "bar"; bar: string };
+
+const OneOrTheOther = (props: Props1 | Props2) => {
+  if (props.type === "foo") {
+    // `props.bar` does not exist
+    return <>{props.foo}</>;
+  }
+  // `props.foo` does not exist
+  return <>{props.bar}</>;
+};
+const Component = () => (
+  <>
+    <OneOrTheOther type="foo" /> {/* error */}
+    <OneOrTheOther type="foo" foo="" /> {/* ok */}
+    <OneOrTheOther type="foo" bar="" /> {/* error */}
+    <OneOrTheOther type="foo" foo="" bar="" /> {/* error */}
+    <OneOrTheOther type="bar" /> {/* error */}
+    <OneOrTheOther type="bar" foo="" /> {/* error */}
+    <OneOrTheOther type="bar" bar="" /> {/* ok */}
+    <OneOrTheOther type="bar" foo="" bar="" /> {/* error */}
+  </>
+);
+```
+
+[View in the TypeScript Playground](https://www.typescriptlang.org/play#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSYBPMJOABRzAGcBGOAXjgG84qaAuApggR8AbjjCIgpjCjAAdgHM4AXzEVqtBhGYAmDt15bB+AEYoo4uBagy5ilevJoIC2XADyCpJ6gAVAAtfGGCoQwAKMEYmQR1mNgAfehi9AEoOAD5uUjg4YEw4KJiAOj5adkqhEXwMrly8uAB6JrgAA2jdJhLbNrgAEwgkJjgFCHgkAA9gWQa8ohgAVygFOAAeTK5O5hKpVTWmzI081QaW9u3uqT7B4dHxuCmZmAaF5dWNrdLbfcONZ1c7ngAGFcJAfAp4JwIhl2NkIg0NnN1t5fAFgp5QkhwuV2PgpPhmtkuE0AFSPKA4cKkpqnRoonx+IIhMLGGh4gmSER4wmHbhkuAQADWcBpdMaa1RTIxWJxWg5NRslh5RP55OxVNFtORksZ6JZ2LZSAVoi5EBVthVfJJ6sp0C14ryurRzMxrNx5ksvOJAo19rFOql+rdho9tkJUitPttmoD9Od0oNcvZnqsSqgUbVgpFcYlQddsqNePDZotyvw3qzfup2qdh1IaTEQA).
 
 ## Props: Pass nothing or all
 
