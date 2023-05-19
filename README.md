@@ -2885,6 +2885,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
   - [Gustav Wengel's blogpost - converting a React codebase to TypeScript](http://www.gustavwengel.dk/converting-typescript-to-javascript-part-1)
   - [Microsoft React TypeScript conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide)
 - [Matt Pocock's Beginner's Typescript Tutorial](https://github.com/total-typescript/beginners-typescript-tutorial)
+- [Matt Pocock's React with TypeScript Tutorial](https://www.totaltypescript.com/tutorials/react-with-typescript)
 - [You?](https://github.com/typescript-cheatsheets/react/issues/new).
 
 <!--END-SECTION:resources-->
