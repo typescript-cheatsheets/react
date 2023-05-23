@@ -2,19 +2,23 @@
 title: ComponentProps<T>
 ---
 
-`ComponentProps<T>` is a utility type that lets you grab all valid props of an HTML or SVG element, or infer prop type for a component.
+`ComponentProps<T>` is a utility type that lets you grab all valid props of an element, or infer prop type of a component.
+
+:::note
+
+Prefer `ComponentPropsWithRef<T>` if ref is forwarded and `ComponentPropsWithoutRef<T>` when ref is not forwarded.
+
+:::
 
 ## Parameters
 
-- `T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>`
-
-`keyof JSX.IntrinsicElements` is a set of all HTML and SVG elements, such as `"div"`, `"h1"` and `"path"`.
-
-`JSXElementConstructor<any>` is the type of a function or class component.
+- `T`: An element type. Examples include:
+  - An HTML or SVG element such as `"div"`, `"h1"` or `"path"`.
+  - A component type, such as `typeof Component`.
 
 ## Usage
 
-### Getting all valid props of an HTML or SVG element
+### Getting all valid props of an element
 
 `ComponentProps<T>` can be used to create a type that includes all valid `div` props.
 
@@ -23,8 +27,8 @@ interface Props extends ComponentProps<"div"> {
   text: string;
 }
 
-function Component({ className, children, text }: Props) {
-  // ...
+function Component({ className, children, text, ...props }: Props) {
+  // `Props` includes `text` in addition to all valid `div` props
 }
 ```
 
@@ -45,7 +49,15 @@ type MyType = ComponentProps<typeof Component>;
 //     ^? type MyType = Props
 ```
 
-The type of a specific prop can also be inferred this way. Let's say you are using an `<Icon>` component from a component library. The component takes a `name` prop that determines what icon is shown. You need to use the type of `name` in your app, but it's not made available by the library. No problem!
+#### Inferring specific prop type
+
+The type of a specific prop can also be inferred this way. Let's say you are using an `<Icon>` component from a component library. The component takes a `name` prop that determines what icon is shown. You need to use the type of `name` in your app, but it's not made available by the library. You could create a custom type:
+
+```tsx
+type IconName = "warning" | "checkmark";
+```
+
+However, this type if not really reflecting the actual set of icons made available by the library. A better solution is to infer the type:
 
 ```tsx
 import { Icon } from "component-library";
@@ -53,5 +65,3 @@ import { Icon } from "component-library";
 type IconName = ComponentProps<typeof Icon>["name"];
 //       ^? type IconName = "warning" | "checkmark" | ...
 ```
-
-Needless to say, `ComponentProps<T>` can be very useful!
