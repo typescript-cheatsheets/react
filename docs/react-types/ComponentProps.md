@@ -1,12 +1,12 @@
 ---
-title: ComponentProps<T>
+title: ComponentProps<Element>
 ---
 
-`ComponentProps<T>` is a utility type that lets you grab all valid props of an element, or infer prop type of a component.
+`ComponentProps<Element>` is a utility type that lets you grab all valid props of an element, or infer prop type of a component.
 
 :::note
 
-Prefer `ComponentPropsWithRef<T>` if ref is forwarded and `ComponentPropsWithoutRef<T>` when ref is not forwarded.
+Prefer `ComponentPropsWithRef<Element>` if ref is forwarded and `ComponentPropsWithoutRef<Element>` when ref is not forwarded.
 
 :::
 
@@ -20,7 +20,7 @@ Prefer `ComponentPropsWithRef<T>` if ref is forwarded and `ComponentPropsWithout
 
 ### Getting all valid props of an element
 
-`ComponentProps<T>` can be used to create a type that includes all valid `div` props.
+`ComponentProps<Element>` can be used to create a type that includes all valid `div` props.
 
 ```tsx
 interface Props extends ComponentProps<"div"> {
@@ -63,5 +63,14 @@ However, this type if not really reflecting the actual set of icons made availab
 import { Icon } from "component-library";
 
 type IconName = ComponentProps<typeof Icon>["name"];
-//       ^? type IconName = "warning" | "checkmark" | ...
+//       ^? type IconName = "warning" | "checkmark"
+```
+
+You can also use the `Pick<Type, Keys>` utility type to accomplish the same thing:
+
+```tsx
+import { Icon } from "component-library";
+
+type IconName = Pick<ComponentProps<typeof Icon>, "name">;
+//       ^? type IconName = "warning" | "checkmark"
 ```
