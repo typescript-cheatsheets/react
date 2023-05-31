@@ -38,7 +38,6 @@ function Examples() {
       <Component>
         <>Hello</>
       </Component>
-      <Component>{createPortal(<>Hello</>, document.body)}</Component>
       <Component>{true}</Component>
       <Component>{null}</Component>
       <Component>{undefined}</Component>
