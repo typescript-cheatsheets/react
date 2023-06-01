@@ -186,7 +186,7 @@ type AppProps = {
   message: string;
 }; /* use `interface` if exporting so that consumers can extend */
 
-// Easiest way to declare a Function Component; return type is inferred.
+// Easiest way to declare a Function Component; return type is inferred. add some text
 const App = ({ message }: AppProps) => <div>{message}</div>;
 
 // you can choose annotate the return type so an error is raised if you accidentally return some other type
