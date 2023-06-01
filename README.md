@@ -181,7 +181,7 @@ There are some tools that let you run React and TypeScript online, which can be 
 These can be written as normal functions that take a `props` argument and return a JSX element.
 
 ```tsx
-// Declaring type of props - see "Typing Component Props" for more examples
+// Declaring type of props - see "Typing Component Props" for more examples some change
 type AppProps = {
   message: string;
 }; /* use `interface` if exporting so that consumers can extend */
