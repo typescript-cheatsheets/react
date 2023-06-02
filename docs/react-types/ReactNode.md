@@ -15,12 +15,14 @@ title: ReactNode
 The most common use case for `ReactNode` is typing `children`.
 
 ```tsx
+import { ReactNode } from "react";
+
 interface Props {
   children?: ReactNode;
 }
 
 function Component({ children }: Props) {
-  return <>{children}</>;
+  return children;
 }
 ```
 
