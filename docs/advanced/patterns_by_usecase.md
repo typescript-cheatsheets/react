@@ -373,8 +373,8 @@ You can type the **structure** of your children: just one child, or a tuple of c
 The following are valid:
 
 ```ts
-type OneChild = React.ReactElement;
-type TwoChildren = [React.ReactElement, React.ReactElement];
+type OneChild = React.ReactNode;
+type TwoChildren = [React.ReactNode, React.ReactNode];
 type ArrayOfProps = SomeProp[];
 type NumbersChildren = number[];
 type TwoNumbersChildren = [number, number];
