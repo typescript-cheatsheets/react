@@ -65,7 +65,8 @@ Typing "any non-primitive value" is most likely not something that you should do
 An empty interface, `{}` and `Object` all represent "any non-nullish value"—not "an empty object" as you might think. [Using these types is a common source of misunderstanding and is not recommended](https://typescript-eslint.io/rules/no-empty-interface/).
 
 ```ts
-interface AnyNonNullishValue {} // equivalent to `type AnyNonNullishValue = {}` or `type AnyNonNullishValue = Object`
+interface AnyNonNullishValue {}
+// equivalent to `type AnyNonNullishValue = {}` or `type AnyNonNullishValue = Object`
 
 let value: AnyNonNullishValue;
 
