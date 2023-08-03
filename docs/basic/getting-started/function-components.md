@@ -99,35 +99,3 @@ const VoidFunctionComponent: React.VoidFunctionComponent<Props> = ({
 In most cases it makes very little difference which syntax is used, but you may prefer the more explicit nature of `React.FunctionComponent`.
 
 </details>
-
-<details>
-<summary><b>Minor Pitfalls</b></summary>
-
-These patterns are not supported:
-
-**Conditional rendering**
-
-```tsx
-const MyConditionalComponent = ({ shouldRender = false }) =>
-  shouldRender ? <div /> : false; // don't do this in JS either
-const el = <MyConditionalComponent />; // throws an error
-```
-
-This is because due to limitations in the compiler, function components cannot return anything other than a JSX expression or `null`, otherwise it complains with a cryptic error message saying that the other type is not assignable to `Element`.
-
-**Array.fill**
-
-```tsx
-const MyArrayComponent = () => Array(5).fill(<div />);
-const el2 = <MyArrayComponent />; // throws an error
-```
-
-Unfortunately just annotating the function type will not help so if you really need to return other exotic types that React supports, you'd need to perform a type assertion:
-
-```tsx
-const MyArrayComponent = () => Array(5).fill(<div />) as any as JSX.Element;
-```
-
-[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react/issues/57).
-
-</details>
