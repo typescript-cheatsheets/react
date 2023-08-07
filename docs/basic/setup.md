@@ -17,7 +17,7 @@ In the cheatsheet we assume you are using the latest versions of React and TypeS
 React has documentation for [how to start a new React project](https://react.dev/learn/start-a-new-react-project) with some of the most popular frameworks. Here's how to start them with TypeScript:
 
 - [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app@latest --ts`
-- [Vite](https://vitejs.dev/guide/#:~:text=%2C%20react%2C-,react%2Dts,-%2C%20react%2Dswc): `npm create vite@latestt vite-react-ts -- --template react-ts`
+- [Vite](https://vitejs.dev/guide): `npm create vite@latestt vite-react-ts -- --template react-ts`
 - [Remix](https://remix.run/docs/tutorials/blog): `npx create-remix@latest`
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/): `npm init gatsby --ts`
 - [Expo](https://docs.expo.dev/guides/typescript/): `npx create-react-native-app -t with-typescript`
