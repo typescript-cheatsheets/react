@@ -195,7 +195,7 @@ const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
 // you can also inline the type declaration; eliminates naming the prop types, but looks repetitive
 const App = ({ message }: { message: string }) => <div>{message}</div>;
 
-// Alternatively, you can use `React.FunctionComponent` (or `React.FC`), if you prefer.
+// Alternatively, you can use `React.FunctionComponent` (or the shorthand `React.FC`), if you prefer.
 // With latest React types and TypeScript 5.1. it's mostly a stylistic choice, otherwise discouraged.
 const App: React.FunctionComponent<{ message: string }> = ({ message }) => (
   <div>{message}</div>
