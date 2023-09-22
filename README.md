@@ -160,7 +160,7 @@ React has documentation for [how to start a new React project](https://react.dev
 - [Next.js](https://nextjs.org/docs/basic-features/typescript): `npx create-next-app@latest --ts`
 - [Remix](https://remix.run/docs/tutorials/blog): `npx create-remix@latest`
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/): `npm init gatsby --ts`
-- [Expo](https://docs.expo.dev/guides/typescript/): `npx create-react-native-app -t with-typescript`
+- [Expo](https://docs.expo.dev/guides/typescript/): `npx create-expo-app -t with-typescript`
 
 #### Try React and TypeScript online
 
