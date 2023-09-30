@@ -56,4 +56,14 @@ main details:hover {
   .homePageBtns {
     grid-template-columns: 1fr 1fr;
   }
+
+
+}
+
+
+@media (max-width:768px) {
+  .DocSearch-Button {
+    position: relative;
+    left: 5px;
+  }
 }
