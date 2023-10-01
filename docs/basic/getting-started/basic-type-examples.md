@@ -88,7 +88,7 @@ Relevant for components that accept other React components as props.
 ```tsx
 export declare interface AppProps {
   children?: React.ReactNode; // best, accepts everything React can render
-  childrenElement: JSX.Element; // A single React element
+  childrenElement: React.JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
   //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
@@ -124,16 +124,16 @@ This is because `ReactNode` includes `ReactFragment` which allowed type `{}` bef
 </details>
 
 <details>
- <summary><b>JSX.Element vs React.ReactNode?</b></summary>
+ <summary><b>React.JSX.Element vs React.ReactNode?</b></summary>
 
-Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
+Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `React.JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
 
-- `JSX.Element` -> Return value of `React.createElement`
+- `React.JSX.Element` -> Return value of `React.createElement`
 - `React.ReactNode` -> Return value of a component
 
 </details>
 
-[More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
+[More discussion: Where ReactNode does not overlap with React.JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
