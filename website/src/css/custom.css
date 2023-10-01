@@ -57,3 +57,8 @@ main details:hover {
     grid-template-columns: 1fr 1fr;
   }
 }
+@media (max-width: 320px) {
+  .navbar__title {
+    width: 170px;
+  }
+}
