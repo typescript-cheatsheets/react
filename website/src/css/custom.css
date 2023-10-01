@@ -16,24 +16,15 @@
 /* Truncate the navbar title text when the width is small */
 .navbar__title {
   display: inline-block;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 380px) {
   .navbar__title {
-    max-width: 180px;
-  }
-}
-@media screen and (max-width: 320px) {
-  .navbar__title {
-    max-width: 120px;
-  }
-}
-@media screen and (max-width: 280px) {
-  .navbar__title {
-    max-width: 100px;
+    max-width: 40vw;
   }
 }
 
