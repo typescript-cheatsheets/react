@@ -1,4 +1,5 @@
 :root {
+    width: fit-content;
   --ifm-color-primary: #138cd3;
   --ifm-color-primary-dark: #117ebe;
   --ifm-color-primary-darker: #1077b3;
@@ -55,5 +56,11 @@ main details:hover {
 @media (min-width: 480px) {
   .homePageBtns {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width:480px) {
+  :root{
+    width: auto;
   }
 }
