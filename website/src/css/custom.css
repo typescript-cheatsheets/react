@@ -57,3 +57,17 @@ main details:hover {
     grid-template-columns: 1fr 1fr;
   }
 }
+@media (max-width: 300px) {
+  .hero__title {
+    font-size: 24px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
