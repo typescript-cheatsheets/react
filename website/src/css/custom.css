@@ -8,52 +8,77 @@
   --ifm-color-primary-lightest: #3dacee;
 }
 
-.navbar__inner {
-  max-width: 1400px;
+.container {
+  max-width: 100%; /* Allow content to take full width on smaller screens */
   margin: 0 auto;
+  padding: 1rem; 
+  box-sizing: border-box;
 }
 
 .footer__logo {
-  max-width: 4rem;
-  max-height: 4rem;
+  max-width: 5rem; /* Increase the maximum logo size */
+  max-height: 5rem;
 }
 
 main details {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 1rem 1rem 0;
+  margin: 1rem 0; /* Increase top and bottom margin */
+  padding: 1rem; /* Increase padding */
   border: 0.15rem solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-pagination-nav-border-radius);
 }
 
 main details summary {
-  margin-bottom: 1rem;
-  outline: none;
-  /* Make it look like a link to notify user that it's clickable */
+  margin-bottom: 0.5rem; /* Reduce bottom margin */
   text-decoration: underline;
+  cursor: pointer; /* Make it look clickable */
 
-  /* Refer to #309 */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  /* Remove user-select to make it look like a link */
   user-select: none;
 }
 
 main details summary:hover {
-  cursor: pointer;
-  /* Hide the underline on hover */
-  text-decoration: none;
+  text-decoration: none; /* Hide underline on hover */
 }
+
 main details:hover {
   border-color: var(--ifm-pagination-nav-color-hover);
 }
 
 .homePageBtns {
-  display: grid;
-  gap: 20px;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack buttons vertically on small screens */
+  gap: 20px; /* Add spacing between buttons */
 }
+
 @media (min-width: 480px) {
   .homePageBtns {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row; /* Arrange buttons side by side on larger screens */
+    justify-content: space-between; /* Distribute space between buttons */
   }
+}
+
+header {
+  text-align: center;
+}
+
+.SupportLink {
+  text-align: center;
+}
+
+.text--center h1 {
+  text-align: center;
+}
+
+/* Center-align user showcase */
+.row {
+  justify-content: center;
+}
+
+.col-2 {
+  margin: 0.5rem;
+  flex-grow: 1;
+}
+
+.button--outline.button--primary {
+  margin-top: 1rem;
 }
