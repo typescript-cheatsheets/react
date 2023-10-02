@@ -80,11 +80,11 @@ let el = <Greet age={3} />;
 ```
 
 <details>
-<summary><b><code>JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
+<summary><b><code>React.JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
 
 The above implementations work fine for App creators, but sometimes you want to be able to export `GreetProps` so that others can consume it. The problem here is that the way `GreetProps` is defined, `age` is a required prop when it isn't because of `defaultProps`.
 
-The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `JSX.LibraryManagedAttributes` utility:
+The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `React.JSX.LibraryManagedAttributes` utility:
 
 ```tsx
 // internal contract, should not be exported out
@@ -97,7 +97,7 @@ class Greet extends Component<GreetProps> {
 }
 
 // external contract
-export type ApparentGreetProps = JSX.LibraryManagedAttributes<
+export type ApparentGreetProps = React.JSX.LibraryManagedAttributes<
   typeof Greet,
   GreetProps
 >;
@@ -137,13 +137,13 @@ const el = <TestComponent name="foo" />;
 
 ### Solution
 
-Define a utility that applies `JSX.LibraryManagedAttributes`:
+Define a utility that applies `React.JSX.LibraryManagedAttributes`:
 
 ```tsx
 type ComponentProps<T> = T extends
   | React.ComponentType<infer P>
   | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
+  ? React.JSX.LibraryManagedAttributes<T, P>
   : never;
 
 const TestComponent = (props: ComponentProps<typeof GreetComponent>) => {
@@ -203,7 +203,7 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 }
 ```
 
-The problem with this approach is it causes complex issues with the type inference working with `JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
+The problem with this approach is it causes complex issues with the type inference working with `React.JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react/issues/57) and [here](https://github.com/typescript-cheatsheets/react/issues/61).
 

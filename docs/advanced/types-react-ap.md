@@ -37,7 +37,7 @@ Not Commonly Used but Good to know
 - `ComponentProps` - props of a component - most useful for [Wrapping/Mirroring a HTML Element](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element)
 - `ComponentPropsWithRef` - props of a component where if it is a class-based component it will replace the `ref` prop with its own instance type
 - `ComponentPropsWithoutRef` - props of a component without its `ref` prop
-- `HTMLProps` and `HTMLAttributes` - these are the most generic versions, for global attributes (see a list of [attributes marked as "global attribute" on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)). In general, prefer `React.ComponentProps`, `JSX.IntrinsicElements`, or [specialized HTMLAttributes interfaces](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a2aa0406e7bf269eef01292fcb2b24dee89a7d2b/types/react/index.d.ts#L1914-L2625):
+- `HTMLProps` and `HTMLAttributes` - these are the most generic versions, for global attributes (see a list of [attributes marked as "global attribute" on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)). In general, prefer `React.ComponentProps`, `React.JSX.IntrinsicElements`, or [specialized HTMLAttributes interfaces](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a2aa0406e7bf269eef01292fcb2b24dee89a7d2b/types/react/index.d.ts#L1914-L2625):
 
 <details>
   <summary>
@@ -102,7 +102,7 @@ Note that there are about 50 of these, which means there are some HTML elements 
 
 - all methods: `createElement`, `cloneElement`, ... are all public and reflect the React runtime API
 
-[@Ferdaber's note](https://github.com/typescript-cheatsheets/react/pull/69): I discourage the use of most `...Element` types because of how black-boxy `JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
+[@Ferdaber's note](https://github.com/typescript-cheatsheets/react/pull/69): I discourage the use of most `...Element` types because of how black-boxy `React.JSX.Element` is. You should almost always assume that anything produced by `React.createElement` is the base type `React.ReactElement`.
 
 **Namespace: JSX**
 

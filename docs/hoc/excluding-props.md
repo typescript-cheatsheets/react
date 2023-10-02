@@ -69,7 +69,7 @@ function withOwner(owner: string) {
   return function <T extends { owner: string }>(
     Component: React.ComponentType<T>
   ) {
-    return function (props: Omit<T, "owner">): JSX.Element {
+    return function (props: Omit<T, "owner">): React.JSX.Element {
       const newProps = { ...props, owner } as T;
       return <Component {...newProps} />;
     };
@@ -94,7 +94,7 @@ function withInjectedProps<U extends Record<string, unknown>>(
   injectedProps: U
 ) {
   return function <T extends U>(Component: React.ComponentType<T>) {
-    return function (props: Omit<T, keyof U>): JSX.Element {
+    return function (props: Omit<T, keyof U>): React.JSX.Element {
       //A type coercion is neccessary because TypeScript doesn't know that the Omit<T, keyof U> + {...injectedProps} = T
       const newProps = { ...props, ...injectedProps } as T;
       return <Component {...newProps} />;
