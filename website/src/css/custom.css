@@ -52,8 +52,15 @@ main details:hover {
   display: grid;
   gap: 20px;
 }
+
 @media (min-width: 480px) {
   .homePageBtns {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.navbar__title {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
