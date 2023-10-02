@@ -190,7 +190,7 @@ type AppProps = {
 const App = ({ message }: AppProps) => <div>{message}</div>;
 
 // you can choose annotate the return type so an error is raised if you accidentally return some other type
-const App = ({ message }: AppProps): JSX.Element => <div>{message}</div>;
+const App = ({ message }: AppProps): React.JSX.Element => <div>{message}</div>;
 
 // you can also inline the type declaration; eliminates naming the prop types, but looks repetitive
 const App = ({ message }: { message: string }) => <div>{message}</div>;
@@ -921,11 +921,11 @@ let el = <Greet age={3} />;
 ```
 
 <details>
-<summary><b><code>JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
+<summary><b><code>React.JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
 
 The above implementations work fine for App creators, but sometimes you want to be able to export `GreetProps` so that others can consume it. The problem here is that the way `GreetProps` is defined, `age` is a required prop when it isn't because of `defaultProps`.
 
-The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `JSX.LibraryManagedAttributes` utility:
+The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `React.JSX.LibraryManagedAttributes` utility:
 
 ```tsx
 // internal contract, should not be exported out
@@ -938,7 +938,7 @@ class Greet extends Component<GreetProps> {
 }
 
 // external contract
-export type ApparentGreetProps = JSX.LibraryManagedAttributes<
+export type ApparentGreetProps = React.JSX.LibraryManagedAttributes<
   typeof Greet,
   GreetProps
 >;
@@ -978,13 +978,13 @@ const el = <TestComponent name="foo" />;
 
 ##### Solution
 
-Define a utility that applies `JSX.LibraryManagedAttributes`:
+Define a utility that applies `React.JSX.LibraryManagedAttributes`:
 
 ```tsx
 type ComponentProps<T> = T extends
   | React.ComponentType<infer P>
   | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
+  ? React.JSX.LibraryManagedAttributes<T, P>
   : never;
 
 const TestComponent = (props: ComponentProps<typeof GreetComponent>) => {
@@ -1044,7 +1044,7 @@ export class MyComponent extends React.Component<IMyComponentProps> {
 }
 ```
 
-The problem with this approach is it causes complex issues with the type inference working with `JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
+The problem with this approach is it causes complex issues with the type inference working with `React.JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
 
 [See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react/issues/57) and [here](https://github.com/typescript-cheatsheets/react/issues/61).
 
@@ -1143,7 +1143,7 @@ Relevant for components that accept other React components as props.
 ```tsx
 export declare interface AppProps {
   children?: React.ReactNode; // best, accepts everything React can render
-  childrenElement: JSX.Element; // A single React element
+  childrenElement: React.JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
   //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
@@ -1179,16 +1179,16 @@ This is because `ReactNode` includes `ReactFragment` which allowed type `{}` bef
 </details>
 
 <details>
- <summary><b>JSX.Element vs React.ReactNode?</b></summary>
+ <summary><b>React.JSX.Element vs React.ReactNode?</b></summary>
 
-Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
+Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `React.JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
 
-- `JSX.Element` -> Return value of `React.createElement`
+- `React.JSX.Element` -> Return value of `React.createElement`
 - `React.ReactNode` -> Return value of a component
 
 </details>
 
-[More discussion: Where ReactNode does not overlap with JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
+[More discussion: Where ReactNode does not overlap with React.JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
