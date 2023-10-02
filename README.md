@@ -1865,7 +1865,7 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 [React-error-boundary](https://github.com/bvaughn/react-error-boundary) - is a lightweight package ready to use for this scenario with TS support built-in.
 This approach also lets you avoid class components that are not that popular anymore.
 
-##### Options 2: Writing your custom error boundary component
+##### Option 2: Writing your custom error boundary component
 
 If you don't want to add a new npm package for this, you can also write your own `ErrorBoundary` component.
 
