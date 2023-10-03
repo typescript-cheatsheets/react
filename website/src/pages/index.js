@@ -7,6 +7,7 @@ import Layout from "@theme/Layout";
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
+  const { title, tagline, customFields } = siteConfig;
   return (
     <Layout
       title="React TypeScript Cheatsheets"
@@ -16,18 +17,19 @@ export default function Home() {
       <div className="hero text--center">
         <div className="container ">
           <div className="padding-vert--md">
-            <h1 className="hero__title">{siteConfig.title}</h1>
-            <p className="hero__subtitle">{siteConfig.tagline}</p>
+            <h1 className="hero__title">{title}</h1>
+            <p className="hero__subtitle">{tagline}</p>
           </div>
           <div className="homePageBtns">
             <Link
-              to={useBaseUrl(siteConfig.customFields.firstDoc)}
+              to={useBaseUrl(customFields.firstDoc)}
               className="button button--lg button--outline button--primary"
             >
               Getting started
             </Link>
             <Link
               to={"https://discord.gg/wTGS5z9"}
+              target="_blank"
               className="button button--lg button--outline button--secondary"
             >
               Join Official Discord
