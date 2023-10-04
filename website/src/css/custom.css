@@ -13,8 +13,18 @@
   margin: 0 auto;
 }
 
+.text--truncate {
+  white-space: normal;
+}
+
+@media only screen and (max-width: 500px) {
+  .text--truncate {
+    font-size: 12px;
+  }
+}
+
 .footer__logo {
-  max-width: 4rem;
+  max-width: 3rem;
   max-height: 4rem;
 }
 
