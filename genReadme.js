@@ -5,7 +5,6 @@ const Toc = require("markdown-toc");
 const prettier = require("prettier");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
-const { usage } = require("yargs");
 
 const repositoryRootPath = __dirname;
 const readmePath = path.resolve(repositoryRootPath, "./README.md");

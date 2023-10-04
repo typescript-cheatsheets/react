@@ -99,12 +99,12 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
   // props is Readonly because it's readonly inside of the class
   selectData: (
     dataSource: typeof DataSource,
-    props: Readonly<JSX.LibraryManagedAttributes<C, Omit<P, "data">>>
+    props: Readonly<React.JSX.LibraryManagedAttributes<C, Omit<P, "data">>>
   ) => T
 ) {
-  // the magic is here: JSX.LibraryManagedAttributes will take the type of WrapedComponent and resolve its default props
+  // the magic is here: React.JSX.LibraryManagedAttributes will take the type of WrapedComponent and resolve its default props
   // against the props of WithData, which is just the original P type with 'data' removed from its requirements
-  type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
+  type Props = React.JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
   type State = {
     data: T;
   };
@@ -241,7 +241,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
   return function <T, P extends WithSubscriptionProps<T>, C>(
     WrappedComponent: React.ComponentType<T>
   ) {
-    type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
+    type Props = React.JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
     // Creating the inner component. The calculated Props type here is the where the magic happens.
     return class ComponentWithTheme extends React.Component<Props> {
       public render() {
