@@ -13,6 +13,11 @@
   margin: 0 auto;
 }
 
+.navbar__title {
+  white-space: normal;
+  word-break: break-word;
+}
+
 .footer__logo {
   max-width: 4rem;
   max-height: 4rem;
