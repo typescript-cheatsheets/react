@@ -8,4 +8,3 @@ sidebar_label: Examples
 - [Ben Awad's 14 hour Fullstack React/GraphQL/TypeScript Tutorial](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
 - [Cypress Realworld App](https://github.com/cypress-io/cypress-realworld-app)
 - [Build a Type-safe Todo App](https://www.freecodecamp.org/news/typescript-tutorial-for-react-developers/)
-
