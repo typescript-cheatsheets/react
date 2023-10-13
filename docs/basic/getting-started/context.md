@@ -83,7 +83,7 @@ const MyComponent = () => {
 };
 ```
 
-However, it would be preferrable to not have to check for `null`, since we know that the context won't be `null`. One way to do that is to provide a custom hook to use the context, where an error is thrown if the context is not provided:
+However, it would be preferable to not have to check for `null`, since we know that the context won't be `null`. One way to do that is to provide a custom hook to use the context, where an error is thrown if the context is not provided:
 
 ```tsx
 import { createContext } from "react";
