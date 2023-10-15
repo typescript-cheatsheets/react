@@ -2874,6 +2874,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 - [Advanced TypeScript with React](https://youtu.be/zQfD4ZxxyKA?si=FmrgOq667svX6C9O), by Nikhil Verma 2019
 - [Senior Typescript Features You don't Know About - clean-code](https://www.youtube.com/watch?v=Y4u97vJqmhM), by CoderOne 2023
 - [React & TypeScript - Course for Beginners](https://www.youtube.com/watch?v=FJDVKeh7RJI), by FreeCodeCamp 2022
+- [How to Structure & Organize a React + Typescript App](https://youtu.be/MjiWWOzp0vo?si=exinx7nA-9Nt3kms)
 - Please help contribute to this new section!
 
 <!--END-SECTION:talks-->
@@ -2907,6 +2908,7 @@ It is worth mentioning some resources to help you get started:
 - [Create React App TypeScript Todo Example 2021](https://github.com/laststance/create-react-app-typescript-todo-example-2021)
 - [Ben Awad's 14 hour Fullstack React/GraphQL/TypeScript Tutorial](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
 - [Cypress Realworld App](https://github.com/cypress-io/cypress-realworld-app)
+- [Advanced Note App with React + Typescript](https://youtu.be/j898RGRw0b4?si=deTBkAQce42QNkpS)
 
 <!--END-SECTION:examples-->
 
