@@ -10,4 +10,5 @@ sidebar_label: Talks
 - [Advanced TypeScript with React](https://youtu.be/zQfD4ZxxyKA?si=FmrgOq667svX6C9O), by Nikhil Verma 2019
 - [Senior Typescript Features You don't Know About - clean-code](https://www.youtube.com/watch?v=Y4u97vJqmhM), by CoderOne 2023
 - [React & TypeScript - Course for Beginners](https://www.youtube.com/watch?v=FJDVKeh7RJI), by FreeCodeCamp 2022
+- [How to Structure & Organize a React + Typescript App](https://youtu.be/MjiWWOzp0vo?si=exinx7nA-9Nt3kms)
 - Please help contribute to this new section!
