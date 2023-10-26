@@ -20,30 +20,14 @@ Likewise if you wish to "import" an image or other non TS/TSX file:
 
 ```ts
 // declaration.d.ts
-
-declare module "*.png" {
-  const value: any; // Adjust the type based on your use case
-  export = value;
-}
 // anywhere in your project, NOT the same name as any of your .ts/tsx files
-import * as React from 'react';
+declare module "*.png";
 
 // importing in a tsx file
 import * as logo from "./logo.png";
 ```
-const MyComponent: React.FC = () => {
-  return (
-    <div>
-      <img src={logo} alt="Logo" />
-      <p>{window.MyVendorThing}</p>
-    </div>
-  );
-};
 
 Note that `tsc` cannot bundle these files for you, you will have to use Webpack or Parcel.
 
-
-
 Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 and [StackOverflow](https://stackoverflow.com/a/49715468/4216035)
-
-
+ any fixes required then fix it
