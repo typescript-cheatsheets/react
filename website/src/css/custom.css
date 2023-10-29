@@ -7,7 +7,9 @@
   --ifm-color-primary-lighter: #1e9feb;
   --ifm-color-primary-lightest: #3dacee;
 }
-
+*{
+  font-family: 'Times New Roman', Times, serif;
+}
 .navbar__inner {
   max-width: 1400px;
   margin: 0 auto;
@@ -32,7 +34,7 @@ main details {
 }
 
 main details summary {
-  margin-bottom: 1rem;
+  margin-bottom:1.5rem;
   outline: none;
   /* Make it look like a link to notify user that it's clickable */
   text-decoration: underline;
@@ -45,7 +47,7 @@ main details summary {
 }
 
 main details summary:hover {
-  cursor: pointer;
+  cursor:grab;
   /* Hide the underline on hover */
   text-decoration: none;
 }
@@ -55,7 +57,7 @@ main details:hover {
 
 .homePageBtns {
   display: grid;
-  gap: 20px;
+  gap: 22px;
 }
 @media (min-width: 480px) {
   .homePageBtns {
