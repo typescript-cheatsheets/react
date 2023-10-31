@@ -18,7 +18,6 @@ Your contributions will help countless developers, including your future self! ð
 
 - **Content in `/docs`**: All the content resides here.
   - The content in `/docs/basic` is compiled into `README.md` to ensure that it's easy to read on GitHub.
-  
 - **`/website` Folder**: This part consumes the content in `/docs`. It's a Docusaurus 2 site and includes Algolia search. A big thanks to both the Docusaurus and Algolia teams for their support!
 
 The website is deployed on Netlify, under swyx's personal account.
