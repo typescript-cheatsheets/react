@@ -95,7 +95,7 @@ function withInjectedProps<U extends Record<string, unknown>>(
 ) {
   return function <T extends U>(Component: React.ComponentType<T>) {
     return function (props: Omit<T, keyof U>): React.JSX.Element {
-      //A type coercion is neccessary because TypeScript doesn't know that the Omit<T, keyof U> + {...injectedProps} = T
+      //A type coercion is necessary because TypeScript doesn't know that the Omit<T, keyof U> + {...injectedProps} = T
       const newProps = { ...props, ...injectedProps } as T;
       return <Component {...newProps} />;
     };
