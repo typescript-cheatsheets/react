@@ -213,6 +213,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "filiptammergard",
+      "name": "Filip Tammergård",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44197016?v=4",
+      "profile": "https://tammergard.se",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -220,5 +230,6 @@
   "projectOwner": "typescript-cheatsheets",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
