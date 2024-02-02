@@ -213,6 +213,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "threepointone",
+      "name": "Sunil Pai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18808?v=4",
+      "profile": "https://www.coolcomputerclub.com/",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -220,5 +230,6 @@
   "projectOwner": "typescript-cheatsheets",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
