@@ -223,6 +223,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "jsjoeio",
+      "name": "Joe Previte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3806031?v=4",
+      "profile": "https://englishbyte.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
