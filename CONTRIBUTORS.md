@@ -35,6 +35,7 @@
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://tammergard.se"><img src="https://avatars.githubusercontent.com/u/44197016?v=4?s=100" width="100px;" alt="Filip Tammergård"/><br /><sub><b>Filip Tammergård</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=filiptammergard" title="Documentation">📖</a> <a href="https://github.com/typescript-cheatsheets/react/commits?author=filiptammergard" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://englishbyte.com"><img src="https://avatars.githubusercontent.com/u/3806031?v=4?s=100" width="100px;" alt="Joe Previte"/><br /><sub><b>Joe Previte</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=jsjoeio" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sasirura"><img src="https://avatars.githubusercontent.com/u/42542164?v=4?s=100" width="100px;" alt="Sasiru Ravihansa"/><br /><sub><b>Sasiru Ravihansa</b></sub></a><br /><a href="https://github.com/typescript-cheatsheets/react/commits?author=sasirura" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
