@@ -95,7 +95,7 @@ export function ClickableList<T>(props: ClickableListProps<T>) {
 ### Option 2 - Redeclare forwardRef
 
 ```ts
-// Redecalare forwardRef
+// Redeclare forwardRef
 declare module "react" {
   function forwardRef<T, P = {}>(
     render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
