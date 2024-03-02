@@ -61,7 +61,7 @@ This is not necessary as `React.Component<P,S>` already marks them as immutable.
 
 </details>
 
-**Class Methods**: Do it like normal, but just remember any arguments for your functions also need to be typed:
+**Class Properties**: Do it like normal, but just remember any arguments for your functions also need to be typed:
 
 ```tsx
 class App extends React.Component<{ message: string }, { count: number }> {
@@ -84,7 +84,7 @@ class App extends React.Component<{ message: string }, { count: number }> {
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtAGxQGc64BBMMOJADxiQDsATRsnQwAdAGFckHrxgAeAN5wQSBigDmSAFxw6MKMB5q4AXwA0cRWggBXHjG09rIAEZIoJgHwWKcHTBTccAC8FnBWtvZwAAwmANw+cET8bgAUAJTe5L6+RDDWUDxwKQnZcLJ8wABucBA8YtTAaADWQfLpwV4wABbAdCIGaETKdikAjGnGHiWlFt29ImA4YH3KqhrGsz19ugFIIuF2xtO+sgD0FZVTWdlp8ddH1wNDMsFFKCCRji5uGUFe8tNTqc4A0mkg4HM6NNISI6EgYABlfzcFI7QJ-IoA66lA6RNF7XFwADUcHeMGmxjStwSxjuxiAA)
 
-**Class Properties**: If you need to declare class properties for later use, just declare it like `state`, but without assignment:
+**Class Methods**: If you need to declare class methods for later use, just declare it like `state`, but without assignment:
 
 ```tsx
 class App extends React.Component<{
