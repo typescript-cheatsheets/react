@@ -134,10 +134,13 @@ export const ClickableList = forwardRef(ClickableListInner);
 ```ts
 // Add to `index.d.ts`
 interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
-  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<React.FC<WithForwardRefProps<T>>>;
+  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
+    React.FC<WithForwardRefProps<T>>
+  >;
 }
 
-export const ClickableListWithForwardRef: ForwardRefWithGenerics = forwardRef(ClickableList);
+export const ClickableListWithForwardRef: ForwardRefWithGenerics =
+  forwardRef(ClickableList);
 ```
 
 Credits: https://stackoverflow.com/a/73795494
