@@ -1730,6 +1730,22 @@ function ClickableListInner<T>(
 export const ClickableList = forwardRef(ClickableListInner);
 ```
 
+##### Option 3 - Call signature
+
+```ts
+// Add to `index.d.ts`
+interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
+  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
+    React.FC<WithForwardRefProps<T>>
+  >;
+}
+
+export const ClickableListWithForwardRef: ForwardRefWithGenerics =
+  forwardRef(ClickableList);
+```
+
+Credits: https://stackoverflow.com/a/73795494
+
 #### More Info
 
 - https://medium.com/@martin_hotell/react-refs-with-typescript-a32d56c4d315
