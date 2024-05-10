@@ -1,6 +1,6 @@
 # React+TypeScript Cheatsheets
 
-Cheatsheets for experienced React developers getting started with TypeScript
+Cheatsheets experienced React developers getting started with TypeScript
 
 ---
 
