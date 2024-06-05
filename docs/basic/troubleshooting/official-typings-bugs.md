@@ -48,7 +48,7 @@ Because you don't have to explicitly import this, this is known as an [ambient m
 You can also do ambient variable and ambient type declarations:
 
 ```ts
-// ambient utiltity type
+// ambient utility type
 type ToArray<T> = T extends unknown[] ? T : T[];
 // ambient variable
 declare let process: {
