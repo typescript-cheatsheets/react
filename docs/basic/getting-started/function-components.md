@@ -25,6 +25,8 @@ const App = ({ message }: { message: string }) => <div>{message}</div>;
 const App: React.FunctionComponent<{ message: string }> = ({ message }) => (
   <div>{message}</div>
 );
+// or
+const App: React.FC<AppProps> = ({ message }) => <div>{message}</div>;
 ```
 
 > Tip: You might use [Paul Shen's VS Code Extension](https://marketplace.visualstudio.com/items?itemName=paulshen.paul-typescript-toolkit) to automate the type destructure declaration (incl a [keyboard shortcut](https://twitter.com/_paulshen/status/1392915279466745857?s=20)).
