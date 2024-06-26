@@ -719,7 +719,6 @@ const Component = () => (
 Passing no props is equivalent to passing an empty object. However, the type for an empty object is not `{}`, which you might think. [Make sure you understand what empty interface, `{}` and `Object` means](/docs/basic/getting-started/basic_type_example#empty-interface--and-object). `Record<string, never>` is probably the closest you can get to an empty object type, and is [recommended by typescript-eslint](https://typescript-eslint.io/rules/ban-types/). Here's an example of allowing "nothing or all":
 
 ```tsx
-
 interface All {
   a: string;
   b: string;
@@ -727,7 +726,7 @@ interface All {
 
 type Nothing = Record<string, never>;
 
-const AllOrNothing = (All | props: Nothing ) => {
+const AllOrNothing = (props: All | Nothing) => {
   if ("a" in props) {
     return <>{props.b}</>;
   }
