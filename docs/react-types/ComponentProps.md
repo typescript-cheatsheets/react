@@ -57,7 +57,7 @@ The type of a specific prop can also be inferred this way. Let's say you are usi
 type IconName = "warning" | "checkmark";
 ```
 
-However, this type if not really reflecting the actual set of icons made available by the library. A better solution is to infer the type:
+However, this type is not really reflecting the actual set of icons made available by the library. A better solution is to infer the type:
 
 ```tsx
 import { Icon } from "component-library";
