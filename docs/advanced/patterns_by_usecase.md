@@ -505,7 +505,7 @@ const Link = <T extends {}>(
 <details>
   <summary><b>Approach: Composition</b></summary>
 
-If you want to conditionally render a component, sometimes is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
+If you want to conditionally render a component, sometimes it is better to use [React's composition model](https://reactjs.org/docs/composition-vs-inheritance.html) to have simpler components and better to understand typings:
 
 ```tsx
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
@@ -743,7 +743,7 @@ const Component = () => (
 );
 ```
 
-While this works, representing and empty object with `Record<string, never>` [is not officially recommended](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856). It might be better approaching this in another way, to avoid trying to type "an exactly empty object". One way is grouping the required props in an optional object:
+While this works, representing an empty object with `Record<string, never>` [is not officially recommended](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856). It might be better approaching this in another way, to avoid trying to type "an exactly empty object". One way is grouping the required props in an optional object:
 
 ```tsx
 interface Props {
