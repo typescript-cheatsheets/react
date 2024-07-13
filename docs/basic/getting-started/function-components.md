@@ -14,10 +14,10 @@ type AppProps = {
 // Easiest way to declare a Function Component; return type is inferred.
 const App = ({ message }: AppProps) => <div>{message}</div>;
 
-// you can choose annotate the return type so an error is raised if you accidentally return some other type
+// You can choose to annotate the return type so an error is raised if you accidentally return some other type
 const App = ({ message }: AppProps): React.JSX.Element => <div>{message}</div>;
 
-// you can also inline the type declaration; eliminates naming the prop types, but looks repetitive
+// You can also inline the type declaration; eliminates naming the prop types, but looks repetitive
 const App = ({ message }: { message: string }) => <div>{message}</div>;
 
 // Alternatively, you can use `React.FunctionComponent` (or `React.FC`), if you prefer.
