@@ -56,7 +56,7 @@ type AppProps = {
 
 ### `object` as the non-primitive type
 
-`object` is a common source of misunderstanding in TypeScript. It does not mean "any object" but rather "any non-primitive type", which means it represents anything that is not `number`, `string`, `boolean`, `symbol`, `null` or `undefined`.
+`object` is a common source of misunderstanding in TypeScript. It does not mean "any object" but rather "any non-primitive type", which means it represents anything that is not `number`, `bigint`, `string`, `boolean`, `symbol`, `null` or `undefined`.
 
 Typing "any non-primitive value" is most likely not something that you should do much in React, which means you will probably not use `object` much.
 
