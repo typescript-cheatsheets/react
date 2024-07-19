@@ -1,5 +1,6 @@
 const fs = require("fs");
 console.log('testing');
+console.log('testing');
 const filesTopCopy = [
   {
     src: "../CONTRIBUTORS.md",
