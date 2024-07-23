@@ -714,19 +714,19 @@ const Component = () => (
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSYBPMJOABRzAGcBGOAXjgG84qaAuApggR8AbjjCIgpjCjAAdgHM4AXzEVqtBhGYAmDt15bB+AEYoo4uBagy5ilevJoIC2XADyCpJ6gAVAAtfGGCoQwAKMEYmQR1mNgAfehi9AEoOAD5uUjg4YEw4KJiAOj5adkqhEXwMrly8uAB6JrgAA2jdJhLbNrgAEwgkJjgFCHgkAA9gWQa8ohgAVygFOAAeTK5O5hKpVTWmzI081QaW9u3uqT7B4dHxuCmZmAaF5dWNrdLbfcONZ1c7ngAGFcJAfAp4JwIhl2NkIg0NnN1t5fAFgp5QkhwuV2PgpPhmtkuE0AFSPKA4cKkpqnRoonx+IIhMLGGh4gmSER4wmHbhkuAQADWcBpdMaa1RTIxWJxWg5NRslh5RP55OxVNFtORksZ6JZ2LZSAVoi5EBVthVfJJ6sp0C14ryurRzMxrNx5ksvOJAo19rFOql+rdho9tkJUitPttmoD9Od0oNcvZnqsSqgUbVgpFcYlQddsqNePDZotyvw3qzfup2qdh1IaTEQA).
 
-## Props: Pass nothing or all
+## Props: Pass all or nothing
 
 Passing no props is equivalent to passing an empty object. However, the type for an empty object is not `{}`, which you might think. [Make sure you understand what empty interface, `{}` and `Object` means](/docs/basic/getting-started/basic_type_example#empty-interface--and-object). `Record<string, never>` is probably the closest you can get to an empty object type, and is [recommended by typescript-eslint](https://typescript-eslint.io/rules/ban-types/). Here's an example of allowing "nothing or all":
 
 ```tsx
-type Nothing = Record<string, never>;
-
 interface All {
   a: string;
   b: string;
 }
 
-const NothingOrAll = (props: Nothing | All) => {
+type Nothing = Record<string, never>;
+
+const AllOrNothing = (props: All | Nothing) => {
   if ("a" in props) {
     return <>{props.b}</>;
   }
@@ -735,10 +735,10 @@ const NothingOrAll = (props: Nothing | All) => {
 
 const Component = () => (
   <>
-    <NothingOrAll /> {/* ok */}
-    <NothingOrAll a="" /> {/* error */}
-    <NothingOrAll b="" /> {/* error */}
-    <NothingOrAll a="" b="" /> {/* ok */}
+    <AllOrNothing /> {/* ok */}
+    <AllOrNothing a="" /> {/* error */}
+    <AllOrNothing b="" /> {/* error */}
+    <AllOrNothing a="" b="" /> {/* ok */}
   </>
 );
 ```
@@ -753,7 +753,7 @@ interface Props {
   };
 }
 
-const NothingOrAll = (props: Props) => {
+const AllOrNothing = (props: Props) => {
   if (props.obj) {
     return <>{props.obj.a}</>;
   }
@@ -762,10 +762,10 @@ const NothingOrAll = (props: Props) => {
 
 const Component = () => (
   <>
-    <NothingOrAll /> {/* ok */}
-    <NothingOrAll obj={{ a: "" }} /> {/* error */}
-    <NothingOrAll obj={{ b: "" }} /> {/* error */}
-    <NothingOrAll obj={{ a: "", b: "" }} /> {/* ok */}
+    <AllOrNothing /> {/* ok */}
+    <AllOrNothing obj={{ a: "" }} /> {/* error */}
+    <AllOrNothing obj={{ b: "" }} /> {/* error */}
+    <AllOrNothing obj={{ a: "", b: "" }} /> {/* ok */}
   </>
 );
 ```
