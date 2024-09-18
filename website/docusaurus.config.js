@@ -1,3 +1,5 @@
+const { themes } = require("prism-react-renderer");
+
 // List of projects/orgs using your project for the users page.
 const users = [
   {
@@ -53,6 +55,8 @@ module.exports = {
 
     prism: {
       defaultLanguage: "typescript",
+      theme: themes.github,
+      darkTheme: themes.dracula,
     },
 
     navbar: {
