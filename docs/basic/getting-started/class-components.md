@@ -132,7 +132,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+  ReturnType<(typeof Comp)["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }

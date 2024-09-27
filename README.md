@@ -802,7 +802,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+  ReturnType<(typeof Comp)["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }
@@ -1272,7 +1272,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+  ReturnType<(typeof Comp)["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }
@@ -1360,10 +1360,10 @@ class App extends React.Component<Props, State> {
 Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (_contributed by @TomasHubelbauer_):
 
 ```tsx
-  // typing on LEFT hand side of =
-  onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    this.setState({text: e.currentTarget.value})
-  }
+// typing on LEFT hand side of =
+onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  this.setState({ text: e.currentTarget.value });
+};
 ```
 
 <details>
