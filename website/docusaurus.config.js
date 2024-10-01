@@ -150,7 +150,7 @@ module.exports = {
             },
             {
               html: `<a class="footer__link-item" href="https://github.com/typescript-cheatsheets/react">
-                <img src="https://camo.githubusercontent.com/f00e074779455222f68fde1096fbbd91bae555c2/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f747970657363726970742d63686561747368656574732f72656163742d747970657363726970742d636865617473686565742e7376673f7374796c653d736f6369616c266c6162656c3d53746172266d61784167653d32353932303030" alt="GitHub stars" data-canonical-src="https://img.shields.io/github/stars/typescript-cheatsheets/react-typescript-cheatsheet.svg?style=social&amp;label=Star&amp;maxAge=2592000" style="max-width:100%;">
+                <img src="https://img.shields.io/github/stars/typescript-cheatsheets/react-typescript-cheatsheet.svg?style=social&amp;label=Star&amp;maxAge=2592000" alt="GitHub stars" data-canonical-src="https://img.shields.io/github/stars/typescript-cheatsheets/react-typescript-cheatsheet.svg?style=social&amp;label=Star&amp;maxAge=2592000" style="max-width:100%;">
                 </a>`,
             },
             {
