@@ -8,7 +8,7 @@ title: HOC Cheatsheet
 
 - We will map closely to [the official docs on HOCs](https://reactjs.org/docs/higher-order-components.html) initially
 - While hooks exist, many libraries and codebases still have a need to type HOCs.
-- Render props may be considered in future
+- Render props may be considered in the future
 - The goal is to write HOCs that offer type safety while not getting in the way.
 
 Here is a base HOC example you can copy right away:
