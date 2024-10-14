@@ -571,7 +571,7 @@ function handle(event: UserEvent) {
 
 <details>
   <summary>
-  Take care: TypeScript does not narrow the type of a Discriminated Union on the basis of typeof checks. The type guard has to be on the value of a key and not it's type.
+  Take care: TypeScript does not narrow the type of a Discriminated Union on the basis of typeof checks. The type guard has to be on the value of a key and not its type.
   </summary>
 
 ```ts
@@ -589,7 +589,7 @@ function handle(event: UserEvent) {
 }
 ```
 
-The above example does not work as we are not checking the value of `event.value` but only it's type. Read more about it [microsoft/TypeScript#30506 (comment)](https://github.com/microsoft/TypeScript/issues/30506#issuecomment-474858198)
+The above example does not work as we are not checking the value of `event.value` but only its type. Read more about it [microsoft/TypeScript#30506 (comment)](https://github.com/microsoft/TypeScript/issues/30506#issuecomment-474858198)
 
 </details>
 
