@@ -11,6 +11,13 @@ title: HOC Cheatsheet
 - Render props may be considered in the future
 - The goal is to write HOCs that offer type safety while not getting in the way.
 
+There are a lot of use cases where an HOC is used. For example:
+
+- HOCs can wrap components to check if a user is authenticated before rendering, or to restrict access based on user roles.
+- An HOC can conditionally render components based on feature flags or A/B testing.
+- An HOC can provide translation functionality to components.
+- An HOC can add logging or analytics tracking to components without modifying their core logic.
+
 Here is a base HOC example you can copy right away:
 
 ```jsx
