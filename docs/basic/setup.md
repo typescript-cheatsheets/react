@@ -20,7 +20,6 @@ React has documentation for [how to start a new React project](https://react.dev
 - [Remix](https://remix.run/docs/tutorials/blog): `npx create-remix@latest`
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/): `npm init gatsby --ts`
 - [Expo](https://docs.expo.dev/guides/typescript/): `npx create-expo-app -t with-typescript`
-- [Vite](https://vite.dev/guide/): `npm create vite@latest my-react-app -- --template react-ts`
 
 ## Try React and TypeScript online
 
