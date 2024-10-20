@@ -143,6 +143,8 @@ Cheatsheet for using React with TypeScript.
   - [My question isn't answered here!](#my-question-isnt-answered-here)
   - [Contributors](#contributors)
 
+</details>
+
 <!--START-SECTION:setup-->
 
 ### Section 1: Setup
