@@ -24,7 +24,7 @@ export default function Home() {
               to={useBaseUrl(siteConfig.customFields.firstDoc)}
               className="button button--lg button--outline button--primary"
             >
-              Getting started
+              Getting Started
             </Link>
             <Link
               to={"https://discord.gg/wTGS5z9"}
