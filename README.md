@@ -147,7 +147,7 @@ Cheatsheet for using React with TypeScript.
 
 <!--START-SECTION:setup-->
 
-### Section 1: Setup
+### Section 1: 
 
 #### Prerequisites
 
