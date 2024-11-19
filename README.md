@@ -2652,7 +2652,7 @@ const f = (e: PlotlyHTMLElement) => {
 };
 ```
 
-You dont always have to implement the module, you can simply import the module as `any` for a quick start:
+You don't always have to implement the module, you can simply import the module as `any` for a quick start:
 
 ```tsx
 // my-typings.ts
