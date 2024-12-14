@@ -1,3 +1,5 @@
+Edit a comment
+
 # React TypeScript Cheatsheet
 
 Cheatsheet for using React with TypeScript.
