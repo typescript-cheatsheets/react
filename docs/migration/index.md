@@ -23,7 +23,7 @@ Read [TypeScript's official Guide for migrating from JS](https://www.typescriptl
   - "[Just rename all .js files to .ts](https://twitter.com/jamonholmgren/status/1089241726303199232)"?
   - use the loosest, bare minimum settings to start with
 - Level 2: Strict TypeScript
-  - use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
+  - use Microsoft's [`dts-gen`](https://github.com/microsoft/DefinitelyTyped-tools/tree/main/packages/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
   - use `declare` keyword for ambient declarations - see [declaration merging](https://github.com/typescript-cheatsheets/react#troubleshooting-handbook-bugs-in-official-typings) to patch library declarations inline
 
 Misc tips/approaches successful companies have taken
