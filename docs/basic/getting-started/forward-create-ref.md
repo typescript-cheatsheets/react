@@ -21,7 +21,7 @@ class CssThemeProvider extends PureComponent<Props> {
 `forwardRef`:
 
 ```tsx
-import { forwardRef, ReactNode } from "react";
+import { type ReactNode, forwardRef } from "react";
 
 interface Props {
   children?: ReactNode;
@@ -42,7 +42,7 @@ export const FancyButton = forwardRef<Ref, Props>((props, ref) => (
 This was done [on purpose](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/43265/). You can make it immutable if you have to - assign `React.Ref` if you want to ensure nobody reassigns it:
 
 ```tsx
-import { forwardRef, ReactNode, Ref } from "react";
+import { type ReactNode, forwardRef, Ref } from "react";
 
 interface Props {
   children?: ReactNode;
@@ -133,9 +133,11 @@ export const ClickableList = forwardRef(ClickableListInner);
 
 ```ts
 // Add to `index.d.ts`
-interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
+import type {FC} from 'react'; // its better to import types like this
+
+interface ForwardRefWithGenerics extends FC<WithForwardRefProps<Option>> {
   <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
-    React.FC<WithForwardRefProps<T>>
+    FC<WithForwardRefProps<T>>
   >;
 }
 
