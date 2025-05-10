@@ -1,3 +1,7 @@
+Girish S
+
+
+
 # React TypeScript Cheatsheet
 
 Cheatsheet for using React with TypeScript.
