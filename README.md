@@ -1432,6 +1432,7 @@ Of course, if you're making any sort of significant form, [you should use Formik
 | FormEvent        | Event that occurs whenever a form or form element gets/loses focus, a form element value is changed or the form is submitted.                                                                                                                                          |
 | InvalidEvent     | Fired when validity restrictions of an input fails (e.g `<input type="number" max="10">` and someone would insert number 20).                                                                                                                                          |
 | KeyboardEvent    | User interaction with the keyboard. Each event describes a single key interaction.                                                                                                                                                                                     |
+| InputEvent       | Event that occurs before the value of `<input>`, `<select>` and `<textarea>` changes.                                                                                                                                                                                  |
 | MouseEvent       | Events that occur due to the user interacting with a pointing device (e.g. mouse)                                                                                                                                                                                      |
 | PointerEvent     | Events that occur due to user interaction with a variety pointing of devices such as mouse, pen/stylus, a touchscreen and which also supports multi-touch. Unless you develop for older browsers (IE10 or Safari 12), pointer events are recommended. Extends UIEvent. |
 | TouchEvent       | Events that occur due to the user interacting with a touch device. Extends UIEvent.                                                                                                                                                                                    |
@@ -1439,19 +1440,6 @@ Of course, if you're making any sort of significant form, [you should use Formik
 | UIEvent          | Base Event for Mouse, Touch and Pointer events.                                                                                                                                                                                                                        |
 | WheelEvent       | Scrolling on a mouse wheel or similar input device. (Note: `wheel` event should not be confused with the `scroll` event)                                                                                                                                               |
 | SyntheticEvent   | The base event for all above events. Should be used when unsure about event type                                                                                                                                                                                       |
-
-<details>
-<summary><b>What about <code>InputEvent</code>?</b></summary>
-
-You've probably noticed that there is no `InputEvent`. This is because it is not supported by Typescript as the event itself has no fully browser support and may behave differently in different browsers. You can use `KeyboardEvent` instead.
-
-Sources:
-
-- https://github.com/microsoft/TypeScript/issues/29441
-- https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
-- https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
-
-</details>
 
 <!--END-SECTION:forms-and-events-->
 
