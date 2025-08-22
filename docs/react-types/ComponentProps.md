@@ -2,12 +2,12 @@
 title: ComponentProps<ElementType>
 ---
 
-`ComponentProps<ElementType>` constructs a type with all valid props of an element or inferred props of a component.
+`ComponentProps<ElementType>` constructs a type with all valid props of an element or inferred props of a component. It's an alias for `ComponentPropsWithRef<ElementType>`.
 
 :::note
+**React 19+**: `ComponentPropsWithRef<ElementType>` is recommended as refs are now passed as props in function components. (See [forwardRef/createRef](/docs/basic/getting-started/forward_and_create_ref))
 
-Prefer `ComponentPropsWithRef<ElementType>` if ref is forwarded and `ComponentPropsWithoutRef<ElementType>` when ref is not forwarded.
-
+**React ≤18**: Prefer `ComponentPropsWithRef<ElementType>` if ref is forwarded and `ComponentPropsWithoutRef<ElementType>` when ref is not forwarded.
 :::
 
 ## Parameters
