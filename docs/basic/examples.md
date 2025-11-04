@@ -26,3 +26,4 @@ const Hello: React.FC<Props> = ({ message }) => {
 };
 
 export default Hello;
+```
