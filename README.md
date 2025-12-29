@@ -1,7 +1,7 @@
 # React TypeScript Cheatsheet
 
 Cheatsheet for using React with TypeScript.
-
+Best Cheatsheet for Learning
 ---
 
 <a href="https://github.com/typescript-cheatsheets/react/issues/81">
