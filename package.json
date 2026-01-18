@@ -25,7 +25,8 @@
     "postinstall": "cd website && yarn",
     "prepare": "husky install",
     "start": "yarn --cwd website start",
-    "build": "yarn --cwd website build"
+    "build": "yarn --cwd website build",
+    "lint:check": "prettier --check \"**/*.{md,json,js}\"\""
   },
   "dependencies": {
     "front-matter": "^4.0.2",
