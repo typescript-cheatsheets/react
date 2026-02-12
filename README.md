@@ -1379,6 +1379,8 @@ The first method uses an inferred method signature `(e: React.FormEvent<HTMLInpu
 
 </details>
 
+> Starting with React v19.2.10 `FormEvent` and `FormEventHandler` are deprecated and should be replaced with `SubmitEvent` and `SubmitEventHandler`. The older event types will still work but trigger a deprecation message.
+
 **Typing onSubmit, with Uncontrolled components in a Form**
 
 If you don't quite care about the type of the event, you can just use `React.SyntheticEvent`. If your target form has custom named inputs that you'd like to access, you can use a type assertion:
