@@ -429,6 +429,18 @@ export function reducer: Reducer<AppState, Action>() {}
 
 </details>
 
+<details>
+
+<summary><b>Providing explicit types for <code>useReducer</code></b></summary>
+
+In most cases, type inference for useReducer should work reliably. When inference fails, the state and action types can be explicitly provided using the following syntax, where the action type is wrapped in a single-element tuple.
+
+```tsx
+const [state, dispatch] = useReducer<typeof initialState, [ACTIONTYPE]>(reducer, initialState);
+```
+
+</details>
+
 #### useEffect / useLayoutEffect
 
 Both of `useEffect` and `useLayoutEffect` are used for performing <b>side effects</b> and return an optional cleanup function which means if they don't deal with returning values, no types are necessary. When using `useEffect`, take care not to return anything other than a function or `undefined`, otherwise both TypeScript and React will yell at you. This can be subtle when using arrow functions:
