@@ -90,7 +90,7 @@ function App() {
           >
             I'm a modal!{" "}
             <button
-              style={{ background: "papyawhip" }}
+              style={{ background: "papayawhip" }}
               onClick={() => setShowModal(false)}
             >
               close
