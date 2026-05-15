@@ -1,12 +1,13 @@
-const fs = require("fs/promises");
-const path = require("path");
-const Fm = require("front-matter");
-const Toc = require("markdown-toc");
-const prettier = require("prettier");
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
+import Fm from "front-matter";
+import Toc from "markdown-toc";
+import prettier from "prettier";
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
 
-const repositoryRootPath = __dirname;
+const repositoryRootPath = path.dirname(fileURLToPath(import.meta.url));
 const readmePath = path.resolve(repositoryRootPath, "./README.md");
 /**
  * level of the heading under which the generated content is displayed
@@ -336,7 +337,7 @@ async function main(argv) {
   });
 
   const prettierConfig = await prettier.resolveConfig(readmePath);
-  pendingReadme = prettier.format(pendingReadme, {
+  pendingReadme = await prettier.format(pendingReadme, {
     ...prettierConfig,
     filepath: path.basename(readmePath),
   });
