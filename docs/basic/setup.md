@@ -21,6 +21,10 @@ React has documentation for [how to start a new React project](https://react.dev
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/): `npm init gatsby --ts`
 - [Expo](https://docs.expo.dev/guides/typescript/): `npx create-expo-app -t with-typescript`
 
+If you just want a client-side single-page app without a framework, [Vite](https://vitejs.dev/) is the most common choice:
+
+- [Vite](https://vitejs.dev/guide/): `npm create vite@latest my-app -- --template react-ts`
+
 ## Try React and TypeScript online
 
 There are some tools that let you run React and TypeScript online, which can be helpful for debugging or making sharable reproductions.

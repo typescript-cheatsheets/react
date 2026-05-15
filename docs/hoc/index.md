@@ -20,8 +20,7 @@ There are a lot of use cases where an HOC is used. For example:
 
 Here is a base HOC example you can copy right away:
 
-```jsx
-
+```tsx
 type PropsAreEqual<P> = (
   prevProps: Readonly<P>,
   nextProps: Readonly<P>
@@ -39,7 +38,6 @@ const withSampleHoC = <P extends {}>(
   (props: P): React.JSX.Element;
   displayName: string;
 } => {
-
   function WithSampleHoc(props: P) {
     //Do something special to justify the HoC.
     return component(props) as React.JSX.Element;
@@ -47,11 +45,14 @@ const withSampleHoC = <P extends {}>(
 
   WithSampleHoc.displayName = `withSampleHoC(${componentName})`;
 
-  let wrappedComponent = propsAreEqual === false ? WithSampleHoc : React.memo(WithSampleHoc, propsAreEqual);
+  let wrappedComponent =
+    propsAreEqual === false
+      ? WithSampleHoc
+      : React.memo(WithSampleHoc, propsAreEqual);
 
   //copyStaticProperties(component, wrappedComponent);
 
-  return wrappedComponent as typeof WithSampleHoc
+  return wrappedComponent as typeof WithSampleHoc;
 };
 ```
 

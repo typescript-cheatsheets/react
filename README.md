@@ -134,6 +134,10 @@ React has documentation for [how to start a new React project](https://react.dev
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/): `npm init gatsby --ts`
 - [Expo](https://docs.expo.dev/guides/typescript/): `npx create-expo-app -t with-typescript`
 
+If you just want a client-side single-page app without a framework, [Vite](https://vitejs.dev/) is the most common choice:
+
+- [Vite](https://vitejs.dev/guide/): `npm create vite@latest my-app -- --template react-ts`
+
 #### Try React and TypeScript online
 
 There are some tools that let you run React and TypeScript online, which can be helpful for debugging or making sharable reproductions.
@@ -406,11 +410,11 @@ function DelayedEffect(props: { timerMs: number }) {
 
 #### useRef
 
-In TypeScript, `useRef` returns a reference that is either [read-only](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1025-L1039) or [mutable](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1012-L1023), depends on whether your type argument fully covers the initial value or not. Choose one that suits your use case.
+`useRef` always returns a `RefObject<T>` in current `@types/react`. An initial value is required, and the returned `.current` is typed based on it. (`MutableRefObject` is deprecated and only kept for backwards compatibility.)
 
 ##### Option 1: DOM element ref
 
-**[To access a DOM element](https://reactjs.org/docs/refs-and-the-dom.html):** provide only the element type as argument, and use `null` as initial value. In this case, the returned reference will have a read-only `.current` that is managed by React. TypeScript expects you to give this ref to an element's `ref` prop:
+**To access a DOM element:** provide the element type as a generic and pass `null` as the initial value. React manages `.current` for you, and TypeScript expects you to pass this ref to an element's `ref` prop:
 
 ```tsx
 function Foo() {
@@ -454,21 +458,30 @@ Refs demand specificity - it is not enough to just specify any old `HTMLElement`
 
 ##### Option 2: Mutable value ref
 
-**[To have a mutable value](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-instance-variables):** provide the type you want, and make sure the initial value fully belongs to that type:
+**To hold a mutable value across renders without re-rendering on change:** pass the initial value you want — React doesn't manage `.current` for you here, you write to it manually.
 
 ```tsx
 function Foo() {
-  // Technical-wise, this returns MutableRefObject<number | null>
   const intervalRef = useRef<number | null>(null);
 
-  // You manage the ref yourself (that's why it's called MutableRefObject!)
   useEffect(() => {
-    intervalRef.current = setInterval(...);
-    return () => clearInterval(intervalRef.current);
+    intervalRef.current = window.setInterval(() => {
+      /* ... */
+    }, 1000);
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+    };
   }, []);
 
-  // The ref is not passed to any element's "ref" prop
-  return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
+  return (
+    <button
+      onClick={() => {
+        /* clearInterval the ref */
+      }}
+    >
+      Cancel timer
+    </button>
+  );
 }
 ```
 
@@ -479,19 +492,21 @@ function Foo() {
 
 #### useImperativeHandle
 
-Based on this [Stackoverflow answer](https://stackoverflow.com/a/69292925/5415299):
+In React 19, `ref` is a regular prop on function components, so `useImperativeHandle` is called with the `ref` prop directly — no `forwardRef` needed.
 
 ```tsx
 // Countdown.tsx
+import { useImperativeHandle, Ref } from "react";
 
-// Define the handle types which will be passed to the forwardRef
 export type CountdownHandle = {
   start: () => void;
 };
 
-type CountdownProps = {};
+type CountdownProps = {
+  ref?: Ref<CountdownHandle>;
+};
 
-const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
+const Countdown = ({ ref }: CountdownProps) => {
   useImperativeHandle(ref, () => ({
     // start() has type inference here
     start() {
@@ -500,12 +515,12 @@ const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
   }));
 
   return <div>Countdown</div>;
-});
+};
 ```
 
 ```tsx
-// The component uses the Countdown component
-
+// The component using the Countdown component
+import { useEffect, useRef } from "react";
 import Countdown, { CountdownHandle } from "./Countdown.tsx";
 
 function App() {
@@ -522,9 +537,7 @@ function App() {
 }
 ```
 
-##### See also:
-
-- [Using ForwardRefRenderFunction](https://stackoverflow.com/a/62258685/5415299)
+> If you still maintain code that targets React < 19, see the [forwardRef section](./forward-create-ref.md) for the legacy approach using `forwardRef<CountdownHandle, CountdownProps>`.
 
 #### Custom Hooks
 
@@ -786,68 +799,38 @@ class Comp extends React.PureComponent<Props, State> {
 
 <!--START-SECTION:default-props-->
 
-#### You May Not Need `defaultProps`
+#### Function components
 
-As per [this tweet](https://twitter.com/dan_abramov/status/1133878326358171650), defaultProps will eventually be deprecated. You can check the discussions here:
-
-- [Original tweet](https://twitter.com/hswolff/status/1133759319571345408)
-- More info can also be found in [this article](https://medium.com/@matanbobi/react-defaultprops-is-dying-whos-the-contender-443c19d9e7f1)
-
-The consensus is to use object default values.
-
-Function Components:
+As of React 19, `defaultProps` is **no longer supported on function components**. Use destructuring defaults directly in the parameter list — TypeScript will infer the prop as optional automatically:
 
 ```tsx
 type GreetProps = { age?: number };
 
-const Greet = ({ age = 21 }: GreetProps) => // etc
+const Greet = ({ age = 21 }: GreetProps) => {
+  // ...
+};
 ```
 
-Class Components:
+If you prefer to declare defaults separately (for example, to share them across components), pull them into a constant and spread them when destructuring:
+
+```tsx
+type GreetProps = { age?: number };
+
+const defaultProps = { age: 21 } satisfies GreetProps;
+
+const Greet = ({ age = defaultProps.age }: GreetProps) => {
+  // ...
+};
+```
+
+> Setting `Greet.defaultProps = { age: 21 }` will not work on function components in React 19 — the value is ignored at runtime and `FunctionComponent` no longer types it.
+
+#### Class components
+
+Class components still support `static defaultProps`. The recommended approach is to type the props with the defaulted keys as required, and let `LibraryManagedAttributes` (applied automatically by JSX) make them optional at the call site:
 
 ```tsx
 type GreetProps = {
-  age?: number;
-};
-
-class Greet extends React.Component<GreetProps> {
-  render() {
-    const { age = 21 } = this.props;
-    /*...*/
-  }
-}
-
-let el = <Greet age={3} />;
-```
-
-#### Typing `defaultProps`
-
-Type inference improved greatly for `defaultProps` in [TypeScript 3.0+](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/typescript-cheatsheets/react/issues/61).
-
-**Function Components**
-
-```tsx
-// using typeof as a shortcut; note that it hoists!
-// you can also declare the type of DefaultProps if you choose
-// e.g. https://github.com/typescript-cheatsheets/react/issues/415#issuecomment-841223219
-type GreetProps = { age: number } & typeof defaultProps;
-
-const defaultProps = {
-  age: 21,
-};
-
-const Greet = (props: GreetProps) => {
-  // etc
-};
-Greet.defaultProps = defaultProps;
-```
-
-_[See this in TS Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdMAnmFnAOKVYwAKxY6ALxwA3igDmWAFxwAdgFcQAIyxQ4AXzgAyOM1YQCcACZYCyeQBte-VPVwRZqeCbOXrEAXGEi6cCdLgAJgBGABo6dXo6e0d4TixuLzgACjAbGXjuPg9UAEovAD5RXzhKGHkoWTgAHiNgADcCkTScgDpkSTgAeiQFZVVELvVqrrrGiPpMmFaXcytsz2FZtwXbOiA)_
-
-For **Class components**, there are [a couple ways to do it](https://github.com/typescript-cheatsheets/react/pull/103#issuecomment-481061483) (including using the `Pick` utility type) but the recommendation is to "reverse" the props definition:
-
-```tsx
-type GreetProps = typeof Greet.defaultProps & {
   age: number;
 };
 
@@ -855,27 +838,28 @@ class Greet extends React.Component<GreetProps> {
   static defaultProps = {
     age: 21,
   };
-  /*...*/
+
+  render() {
+    return <div>Hello, I am {this.props.age}</div>;
+  }
 }
 
-// Type-checks! No type assertions needed!
-let el = <Greet age={3} />;
+// Type-checks — `age` is optional at the call site thanks to defaultProps.
+const el = <Greet />;
 ```
 
 <details>
 <summary><b><code>React.JSX.LibraryManagedAttributes</code> nuance for library authors</b></summary>
 
-The above implementations work fine for App creators, but sometimes you want to be able to export `GreetProps` so that others can consume it. The problem here is that the way `GreetProps` is defined, `age` is a required prop when it isn't because of `defaultProps`.
-
-The insight to have here is that [`GreetProps` is the _internal_ contract for your component, not the _external_, consumer facing contract](https://github.com/typescript-cheatsheets/react/issues/66#issuecomment-453878710). You could create a separate type specifically for export, or you could make use of the `React.JSX.LibraryManagedAttributes` utility:
+If you export `GreetProps` for consumers, `age` will appear required even though `defaultProps` makes it optional at the call site. `GreetProps` is the _internal_ contract — there's a separate _external_ contract that JSX computes via `React.JSX.LibraryManagedAttributes`. You can compute it explicitly:
 
 ```tsx
-// internal contract, should not be exported out
+// internal contract — don't export
 type GreetProps = {
   age: number;
 };
 
-class Greet extends Component<GreetProps> {
+class Greet extends React.Component<GreetProps> {
   static defaultProps = { age: 21 };
 }
 
@@ -886,109 +870,7 @@ export type ApparentGreetProps = React.JSX.LibraryManagedAttributes<
 >;
 ```
 
-This will work properly, although hovering over`ApparentGreetProps`may be a little intimidating. You can reduce this boilerplate with the`ComponentProps` utility detailed below.
-
-</details>
-
-#### Consuming Props of a Component with defaultProps
-
-A component with `defaultProps` may seem to have some required props that actually aren't.
-
-##### Problem Statement
-
-Here's what you want to do:
-
-```tsx
-interface IProps {
-  name: string;
-}
-const defaultProps = {
-  age: 25,
-};
-const GreetComponent = ({ name, age }: IProps & typeof defaultProps) => (
-  <div>{`Hello, my name is ${name}, ${age}`}</div>
-);
-GreetComponent.defaultProps = defaultProps;
-
-const TestComponent = (props: React.ComponentProps<typeof GreetComponent>) => {
-  return <h1 />;
-};
-
-// Property 'age' is missing in type '{ name: string; }' but required in type '{ age: number; }'
-const el = <TestComponent name="foo" />;
-```
-
-##### Solution
-
-Define a utility that applies `React.JSX.LibraryManagedAttributes`:
-
-```tsx
-type ComponentProps<T> = T extends
-  | React.ComponentType<infer P>
-  | React.Component<infer P>
-  ? React.JSX.LibraryManagedAttributes<T, P>
-  : never;
-
-const TestComponent = (props: ComponentProps<typeof GreetComponent>) => {
-  return <h1 />;
-};
-
-// No error
-const el = <TestComponent name="foo" />;
-```
-
-[_See this in TS Playground_](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcARFDvmQNwBQdMAnmFnAMImQB2W3MABWJhUAHgAqAPjgBeOOLhYAHjD4ATdNjwwAdJ3ARe-cSyyjg3AlihwB0gD6Yqu-Tz4xzl67cl04cAH44ACkAZQANHQAZYAAjKGQoJgBZZG5kAHMsNQBBGBgoOIBXVTFxABofPzgALjheADdrejoLVSgCPDYASSEIETgAb2r0kCw61AKLDPoAXzpcQ0m4NSxOooAbQWF0OWH-TPG4ACYAVnK6WfpF7mWAcUosGFdDd1k4AApB+uQxysO4LM6r0dnAAGRwZisCAEFZrZCbbb9VAASlk0g+1VEamADUkgwABgAJLAbDYQSogJg-MZwYDoAAkg1GWFmlSZh1mBNmogA9Di8XQUfQHlgni8jLpVustn0BnJpQjZTsWrzeXANsh2gwbstxFhJhK3nIPmAdnUjfw5WIoVgYXBReKuK9+JI0TJpPs4JQYEUoNw4KIABYARjgvN8VwYargADkIIooMQoAslvBSe8JAbns7JTSsDIyAQIBAyOHJDQgA)
-
-#### Misc Discussions and Knowledge
-
-<details>
-<summary><b>Why does <code>React.FC</code> break <code>defaultProps</code>?</b></summary>
-
-You can check the discussions here:
-
-- https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
-- https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30695
-- https://github.com/typescript-cheatsheets/react/issues/87
-
-This is just the current state and may be fixed in future.
-
-</details>
-
-<details>
-<summary><b>TypeScript 2.9 and earlier</b></summary>
-
-For TypeScript 2.9 and earlier, there's more than one way to do it, but this is the best advice we've yet seen:
-
-```ts
-type Props = Required<typeof MyComponent.defaultProps> & {
-  /* additional props here */
-};
-
-export class MyComponent extends React.Component<Props> {
-  static defaultProps = {
-    foo: "foo",
-  };
-}
-```
-
-Our former recommendation used the `Partial type` feature in TypeScript, which means that the current interface will fulfill a partial version on the wrapped interface. In that way we can extend defaultProps without any changes in the types!
-
-```ts
-interface IMyComponentProps {
-  firstProp?: string;
-  secondProp: IPerson[];
-}
-
-export class MyComponent extends React.Component<IMyComponentProps> {
-  public static defaultProps: Partial<IMyComponentProps> = {
-    firstProp: "default",
-  };
-}
-```
-
-The problem with this approach is it causes complex issues with the type inference working with `React.JSX.LibraryManagedAttributes`. Basically it causes the compiler to think that when creating a JSX expression with that component, that all of its props are optional.
-
-[See commentary by @ferdaber here](https://github.com/typescript-cheatsheets/react/issues/57) and [here](https://github.com/typescript-cheatsheets/react/issues/61).
+For most apps this isn't needed — only library authors who re-export the props type tend to hit it.
 
 </details>
 
@@ -1370,7 +1252,7 @@ type ThemeContextType = "light" | "dark";
 const ThemeContext = createContext<ThemeContextType>("light");
 ```
 
-Wrap the components that need the context with a context provider:
+Wrap the components that need the context by rendering the context itself as a provider. In React 19, the context object can be rendered directly — you no longer need `<ThemeContext.Provider>`:
 
 ```tsx
 import { useState } from "react";
@@ -1379,24 +1261,28 @@ const App = () => {
   const [theme, setTheme] = useState<ThemeContextType>("light");
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <MyComponent />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 };
 ```
 
-Call `useContext` to read and subscribe to the context.
+> `<ThemeContext.Provider value={theme}>` still works and is identical in behavior — it's just the legacy spelling.
+
+Read the context with `use`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const theme = useContext(ThemeContext);
+  const theme = use(ThemeContext);
 
   return <p>The current theme is {theme}.</p>;
 };
 ```
+
+> `useContext(ThemeContext)` still works too. The main difference is that `use` can also unwrap a promise, and it can be called inside conditions and loops.
 
 #### Without default context value
 
@@ -1419,9 +1305,9 @@ const App = () => {
   });
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext value={currentUser}>
       <MyComponent />
-    </CurrentUserContext.Provider>
+    </CurrentUserContext>
   );
 };
 ```
@@ -1429,10 +1315,10 @@ const App = () => {
 Now that the type of the context can be `null`, you'll notice that you'll get a `'currentUser' is possibly 'null'` TypeScript error if you try to access the `username` property. You can use optional chaining to access `username`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = use(CurrentUserContext);
 
   return <p>Name: {currentUser?.username}.</p>;
 };
@@ -1441,7 +1327,7 @@ const MyComponent = () => {
 However, it would be preferable to not have to check for `null`, since we know that the context won't be `null`. One way to do that is to provide a custom hook to use the context, where an error is thrown if the context is not provided:
 
 ```tsx
-import { createContext } from "react";
+import { createContext, use } from "react";
 
 interface CurrentUserContextType {
   username: string;
@@ -1450,11 +1336,11 @@ interface CurrentUserContextType {
 const CurrentUserContext = createContext<CurrentUserContextType | null>(null);
 
 const useCurrentUser = () => {
-  const currentUserContext = useContext(CurrentUserContext);
+  const currentUserContext = use(CurrentUserContext);
 
   if (!currentUserContext) {
     throw new Error(
-      "useCurrentUser has to be used within <CurrentUserContext.Provider>"
+      "useCurrentUser has to be used within <CurrentUserContext>"
     );
   }
 
@@ -1465,8 +1351,6 @@ const useCurrentUser = () => {
 Using a runtime type check in this will have the benefit of printing a clear error message in the console when a provider is not wrapping the components properly. Now it's possible to access `currentUser.username` without checking for `null`:
 
 ```tsx
-import { useContext } from "react";
-
 const MyComponent = () => {
   const currentUser = useCurrentUser();
 
@@ -1479,10 +1363,10 @@ const MyComponent = () => {
 Another way to avoid having to check for `null` is to use type assertion to tell TypeScript you know the context is not `null`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = use(CurrentUserContext);
 
   return <p>Name: {currentUser!.username}.</p>;
 };
@@ -1904,9 +1788,154 @@ export default ErrorBoundary;
 
 <!--START-SECTION:concurrent-->
 
-#### Concurrent React/React Suspense
+#### Concurrent React
 
-_Not written yet._ watch [https://github.com/sw-yx/fresh-async-react](https://github.com/sw-yx/fresh-async-react) for more on React Suspense and Time Slicing.
+The Concurrent React APIs (`Suspense`, `useTransition`, `useDeferredValue`, `startTransition`, `use`) let you keep the UI responsive while React renders work in the background or waits for data. They're all stable as of React 18 and gained additional capabilities in React 19.
+
+#### `Suspense`
+
+`Suspense` lets you declaratively show a fallback while a child component is waiting for something — typically data unwrapped with `use(promise)`, a lazy component, or a streamed boundary on the server.
+
+```tsx
+import { Suspense } from "react";
+
+const UserProfile = ({ userPromise }: { userPromise: Promise<User> }) => {
+  const user = use(userPromise);
+  return <p>Hello, {user.name}!</p>;
+};
+
+const App = ({ userPromise }: { userPromise: Promise<User> }) => (
+  <Suspense fallback={<p>Loading...</p>}>
+    <UserProfile userPromise={userPromise} />
+  </Suspense>
+);
+```
+
+`SuspenseProps` is typed as `{ children?: ReactNode; fallback?: ReactNode }`. The fallback can be any `ReactNode`, including `null`.
+
+#### `use`
+
+`use` reads the value of a context or a promise. Unlike `useContext`, it can be called inside conditions and loops, and it integrates with `Suspense` for promises.
+
+```tsx
+import { use } from "react";
+
+const Comments = ({
+  commentsPromise,
+}: {
+  commentsPromise: Promise<Comment[]>;
+}) => {
+  // Suspends until the promise resolves; throws to the nearest <Suspense>.
+  const comments = use(commentsPromise);
+  return (
+    <ul>
+      {comments.map((c) => (
+        <li key={c.id}>{c.text}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+The promise is typically created by a parent and passed down — don't create it inside the component, or you'll create a new promise on every render.
+
+#### `useTransition`
+
+`useTransition` marks a state update as non-urgent so React can keep typing, scrolling, and other urgent input responsive while it renders.
+
+```tsx
+import { useState, useTransition } from "react";
+
+const TabSwitcher = () => {
+  const [isPending, startTransition] = useTransition();
+  const [tab, setTab] = useState<"posts" | "comments">("posts");
+
+  const selectTab = (next: "posts" | "comments") => {
+    startTransition(() => {
+      setTab(next);
+    });
+  };
+
+  return (
+    <>
+      <button disabled={isPending} onClick={() => selectTab("posts")}>
+        Posts
+      </button>
+      <button disabled={isPending} onClick={() => selectTab("comments")}>
+        Comments
+      </button>
+      {tab === "posts" ? <Posts /> : <Comments />}
+    </>
+  );
+};
+```
+
+##### Async transitions (React 19)
+
+In React 19, the function passed to `startTransition` can be async. This is the foundation for Actions and is how `useActionState` and `<form action>` schedule their pending state.
+
+```tsx
+const [isPending, startTransition] = useTransition();
+
+const onSubmit = () => {
+  startTransition(async () => {
+    await saveDraft(content);
+    setSavedAt(new Date());
+  });
+};
+```
+
+`isPending` stays `true` for the entire duration of the async callback, including awaited work.
+
+#### `useDeferredValue`
+
+`useDeferredValue` lets you defer re-rendering a part of the UI that's expensive to compute, so urgent updates (typing into an input) can flush first.
+
+```tsx
+import { useDeferredValue, useState } from "react";
+
+const SearchPage = () => {
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+
+  return (
+    <>
+      <input value={query} onChange={(e) => setQuery(e.target.value)} />
+      {/* SearchResults re-renders with deferredQuery, lagging behind input */}
+      <SearchResults query={deferredQuery} />
+    </>
+  );
+};
+```
+
+##### `initialValue` (React 19)
+
+React 19 added an optional second argument: the value to use during the initial render before the deferred value has caught up. Useful for SSR/streaming when you want to show a known initial value rather than the latest one.
+
+```tsx
+const deferredQuery = useDeferredValue(query, "");
+```
+
+#### `startTransition` (standalone)
+
+`startTransition` is also exported directly from `react` for use outside components — for example, inside event handlers in non-React code or third-party stores.
+
+```tsx
+import { startTransition } from "react";
+
+store.subscribe(() => {
+  startTransition(() => {
+    forceRender();
+  });
+});
+```
+
+The standalone version does not provide an `isPending` flag — use the hook if you need that.
+
+#### See also
+
+- [`useActionState`, `useFormStatus`, `useOptimistic`](https://react.dev/reference/react) — built on top of transitions
+- [Server Components and `'use server'`](https://react.dev/reference/rsc/server-components)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
