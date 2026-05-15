@@ -50,7 +50,6 @@ Some differences from the "normal function" version:
 - `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
 
 - It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps`.
-
   - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
 - Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `React.FunctionComponent` provided an implicit definition of `children` (see below), which was heavily debated and is one of the reasons [`React.FC` was removed from the Create React App TypeScript template](https://github.com/facebook/create-react-app/pull/8177).

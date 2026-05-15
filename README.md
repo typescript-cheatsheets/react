@@ -230,7 +230,6 @@ Some differences from the "normal function" version:
 - `React.FunctionComponent` is explicit about the return type, while the normal function version is implicit (or else needs additional annotation).
 
 - It provides typechecking and autocomplete for static properties like `displayName`, `propTypes`, and `defaultProps`.
-
   - Note that there are some known issues using `defaultProps` with `React.FunctionComponent`. See [this issue for details](https://github.com/typescript-cheatsheets/react/issues/87). We maintain a separate `defaultProps` section you can also look up.
 
 - Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), `React.FunctionComponent` provided an implicit definition of `children` (see below), which was heavily debated and is one of the reasons [`React.FC` was removed from the Create React App TypeScript template](https://github.com/facebook/create-react-app/pull/8177).
@@ -362,7 +361,7 @@ In React >= 18, the function signature of `useCallback` changed to the following
 function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
 ```
 
-Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
+Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not &lt;17.
 
 ```ts
 // @ts-expect-error Parameter 'e' implicitly has 'any' type.
@@ -646,7 +645,7 @@ export function useLoading() {
   };
   return [isLoading, load] as [
     boolean,
-    (aPromise: Promise<any>) => Promise<any>
+    (aPromise: Promise<any>) => Promise<any>,
   ];
 }
 ```
@@ -825,7 +824,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+  ReturnType<(typeof Comp)["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }
@@ -1295,7 +1294,7 @@ class Comp extends React.Component<Props, State> {
 ```tsx
 class Comp extends React.Component<
   Props,
-  ReturnType<typeof Comp["getDerivedStateFromProps"]>
+  ReturnType<(typeof Comp)["getDerivedStateFromProps"]>
 > {
   static getDerivedStateFromProps(props: Props) {}
 }
@@ -1383,10 +1382,10 @@ class App extends React.Component<Props, State> {
 Instead of typing the arguments and return values with `React.FormEvent<>` and `void`, you may alternatively apply types to the event handler itself (_contributed by @TomasHubelbauer_):
 
 ```tsx
-  // typing on LEFT hand side of =
-  onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    this.setState({text: e.currentTarget.value})
-  }
+// typing on LEFT hand side of =
+onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  this.setState({ text: e.currentTarget.value });
+};
 ```
 
 <details>
@@ -1814,9 +1813,9 @@ If you need both generic support and proper forwardRef behavior with full type i
 ```tsx
 // Add to your type definitions (e.g. in `index.d.ts` file)
 interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
-  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
-    React.FC<WithForwardRefProps<T>>
-  >;
+  <T extends Option>(
+    props: WithForwardRefProps<T>
+  ): ReturnType<React.FC<WithForwardRefProps<T>>>;
 }
 
 export const ClickableListWithForwardRef: ForwardRefWithGenerics =
@@ -2015,7 +2014,7 @@ export default ErrorBoundary;
 
 #### Concurrent React/React Suspense
 
-_Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
+_Not written yet._ watch [https://github.com/sw-yx/fresh-async-react](https://github.com/sw-yx/fresh-async-react) for more on React Suspense and Time Slicing.
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
@@ -2929,9 +2928,9 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 
 ### Other React + TypeScript resources
 
-- me! <https://twitter.com/swyx>
+- me! [https://twitter.com/swyx](https://twitter.com/swyx)
 - https://www.freecodecamp.org/news/how-to-build-a-todo-app-with-react-typescript-nodejs-and-mongodb/
-- <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
+- [https://github.com/piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide) - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
 - [10 Bad TypeScript Habits](https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/):
   1. not using `"strict": true`
   2. using `||` for default values when we have `??`

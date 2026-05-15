@@ -34,14 +34,14 @@ React Boilerplates:
 - https://github.com/rwieruch/nextjs-firebase-authentication: Next.js + Firebase Starter: styled, tested, typed, and authenticated
 - [@jpavon/react-scripts-ts](https://github.com/jpavon/react-scripts-ts) alternative react-scripts with all TypeScript features using [ts-loader](https://github.com/TypeStrong/ts-loader)
 - [webpack config tool](https://webpack.jakoblind.no/) is a visual tool for creating webpack projects with React and TypeScript
-- <https://github.com/innFactory/create-react-app-material-typescript-redux> ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
+- [https://github.com/innFactory/create-react-app-material-typescript-redux](https://github.com/innFactory/create-react-app-material-typescript-redux) ready to go template with [Material-UI](https://material-ui.com/), routing and Redux
 
 React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescript-cheatsheets/react/pull/20)_
 
 - https://github.com/GeekyAnts/react-native-seed
 - https://github.com/lopezjurip/ReactNativeTS
 - https://github.com/emin93/react-native-template-typescript
-- <https://github.com/Microsoft/TypeScript-React-Native-Starter>
+- [https://github.com/Microsoft/TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter)
 
 TS Library Codebases to study
 

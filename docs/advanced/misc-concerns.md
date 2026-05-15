@@ -83,7 +83,7 @@ export default Object.assign(Form, { Input: Input });
 
 I do like [Docz](https://docz.site/) which takes basically [1 line of config](https://www.docz.site/documentation/project-configuration#typescript) to accept TypeScript. However it is newer and has a few more rough edges (many breaking changes since it is still < v1.0)
 
-For developing with Storybook, read the docs I wrote over here: <https://storybook.js.org/configurations/typescript-config/>. This includes automatic proptype documentation generation, which is awesome :)
+For developing with Storybook, read the docs I wrote over here: [https://storybook.js.org/configurations/typescript-config/](https://storybook.js.org/configurations/typescript-config/). This includes automatic proptype documentation generation, which is awesome :)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
@@ -99,9 +99,9 @@ You should check out large projects that are migrating from flow to pick up conc
 
 Useful libraries:
 
-- <https://github.com/bcherny/flow-to-typescript>
-- <https://github.com/Khan/flow-to-ts>
-- <https://github.com/piotrwitek/utility-types>
+- [https://github.com/bcherny/flow-to-typescript](https://github.com/bcherny/flow-to-typescript)
+- [https://github.com/Khan/flow-to-ts](https://github.com/Khan/flow-to-ts)
+- [https://github.com/piotrwitek/utility-types](https://github.com/piotrwitek/utility-types)
 
 If you have specific advice in this area, please file a PR!
 

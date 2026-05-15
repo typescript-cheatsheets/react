@@ -198,9 +198,9 @@ If you need both generic support and proper forwardRef behavior with full type i
 ```tsx
 // Add to your type definitions (e.g. in `index.d.ts` file)
 interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
-  <T extends Option>(props: WithForwardRefProps<T>): ReturnType<
-    React.FC<WithForwardRefProps<T>>
-  >;
+  <T extends Option>(
+    props: WithForwardRefProps<T>
+  ): ReturnType<React.FC<WithForwardRefProps<T>>>;
 }
 
 export const ClickableListWithForwardRef: ForwardRefWithGenerics =

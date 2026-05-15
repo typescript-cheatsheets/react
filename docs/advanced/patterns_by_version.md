@@ -423,7 +423,6 @@ You can [convert these in bulk](https://github.com/microsoft/TypeScript/pull/374
 [[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html) | [Blog Post](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/)]
 
 - [Variadic Tuple Types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#variadic-tuple-types)
-
   - useful for [simplified Reducer-like State](https://www.reddit.com/r/reactjs/comments/hu0ytg/simplified_reducerlike_state_using_typescript_40/)
 
 - [Custom JSX Factories](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/#custom-jsx-factories)

@@ -274,7 +274,7 @@ interface WithSubscriptionProps {
 }
 
 function withSubscription<
-  T extends WithSubscriptionProps = WithSubscriptionProps
+  T extends WithSubscriptionProps = WithSubscriptionProps,
 >(WrappedComponent: React.ComponentType<T>) {
   class WithSubscription extends React.Component {
     /* ... */
