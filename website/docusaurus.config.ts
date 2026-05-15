@@ -1,22 +1,13 @@
-const { themes } = require("prism-react-renderer");
-
-// List of projects/orgs using your project for the users page.
-const users = [
-  {
-    caption: "Docusaurus",
-    image: "https://docusaurus.io/img/docusaurus.svg",
-    infoLink: "https://docusaurus.io/",
-    pinned: true,
-  },
-];
+import { themes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const setupDoc = "docs/basic/setup";
 
-module.exports = {
+const config: Config = {
   favicon: "img/icon.png",
   title: "React TypeScript Cheatsheet", // Title for your website.
-  tagline:
-    "A cheatsheet for experienced React developers getting started with TypeScript",
+  tagline: "A cheatsheet for developers using React with TypeScript",
   url: "https://react-typescript-cheatsheet.netlify.app", // Your website URL
   baseUrl: "/",
   projectName: "react-typescript-cheatsheet",
@@ -24,7 +15,7 @@ module.exports = {
 
   presets: [
     [
-      "@docusaurus/preset-classic",
+      "classic",
       {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -37,8 +28,7 @@ module.exports = {
           editUrl:
             "https://github.com/typescript-cheatsheets/react/tree/main/docs",
         },
-        // ...
-      },
+      } satisfies Preset.Options,
     ],
   ],
 
@@ -49,9 +39,6 @@ module.exports = {
 
     image:
       "https://user-images.githubusercontent.com/6764957/53868378-2b51fc80-3fb3-11e9-9cee-0277efe8a927.png",
-
-    // Equivalent to `docsSideNavCollapsible`.
-    // sidebarCollapsible: false,
 
     prism: {
       defaultLanguage: "typescript",
@@ -68,12 +55,17 @@ module.exports = {
       items: [
         {
           to: setupDoc,
-          label: "Docs",
+          label: "Introduction",
           position: "right",
         },
         {
-          to: "help",
-          label: "Help",
+          to: "docs/basic/getting-started/basic_type_example",
+          label: "Learn",
+          position: "right",
+        },
+        {
+          to: "docs/reference/ComponentProps",
+          label: "API Reference",
           position: "right",
         },
         {
@@ -81,7 +73,6 @@ module.exports = {
           label: "Discord",
           position: "right",
         },
-        // {to: 'blog', label: 'Blog', position: 'right'},
       ],
     },
 
@@ -90,8 +81,6 @@ module.exports = {
       logo: {
         alt: "TypeScript Cheatsheets Logo",
         src: "img/icon.png",
-        // maxWidth: 128,
-        // style: { maxWidth: 128, maxHeight: 128 },
       },
       copyright: `Copyright © ${new Date().getFullYear()} TypeScript Cheatsheets`,
       links: [
@@ -102,6 +91,14 @@ module.exports = {
               label: "Introduction",
               to: setupDoc,
             },
+            {
+              label: "Learn",
+              to: "docs/basic/getting-started/basic_type_example",
+            },
+            {
+              label: "API Reference",
+              to: "docs/reference/ComponentProps",
+            },
           ],
         },
         {
@@ -110,14 +107,6 @@ module.exports = {
             {
               label: "Stack Overflow",
               href: "https://stackoverflow.com/questions/tagged/typescript",
-            },
-            {
-              label: "User Showcase",
-              to: "users",
-            },
-            {
-              label: "Help",
-              to: "help",
             },
             {
               label: "Contributors",
@@ -142,13 +131,11 @@ module.exports = {
                 </a>`,
             },
             {
-              // label: "Discord",
               html: `<a class="footer__link-item" href="https://discord.gg/wTGS5z9">
               <img src="https://img.shields.io/discord/508357248330760243.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" style="max-width:100%;" alt="Discord">
               </a>`,
             },
             {
-              // label: "Spread the word",
               html: `<a class="footer__link-item" href="http://twitter.com/home?status=Awesome%20%40Reactjs%20%2B%20%40TypeScript%20cheatsheet%20by%20%40ferdaber%2C%20%40sebsilbermann%2C%20%40swyx%20%26%20others!%20https%3A%2F%2Fgithub.com%2Ftypescript-cheatsheets%2Freact">
               <img src="https://img.shields.io/twitter/url?label=Help%20spread%20the%20word%21&style=social&url=https%3A%2F%2Fgithub.com%2Ftypescript-cheatsheets%2Freact" style="max-width:100%;" alt="X">
               </a>`,
@@ -162,18 +149,12 @@ module.exports = {
       apiKey: "9a22585d1841d2fa758da919cd08a764",
       indexName: "react-typescript-cheatsheet",
       appId: "J65EL4UPXZ",
-      algoliaOptions: {
-        //... },
-      },
     },
-  },
+  } satisfies Preset.ThemeConfig,
 
   customFields: {
     firstDoc: setupDoc,
-
-    // TODO useless user showcase page ?
-    users,
-    addUserUrl:
-      "https://github.com/typescript-cheatsheets/react/blob/main/website/docusaurus.config.js",
   },
 };
+
+export default config;
