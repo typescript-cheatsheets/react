@@ -1790,7 +1790,6 @@ export default ErrorBoundary;
 
 #### Concurrent React
 
-<<<<<<< HEAD
 The Concurrent React APIs (`Suspense`, `useTransition`, `useDeferredValue`, `startTransition`, `use`) let you keep the UI responsive while React renders work in the background or waits for data. They're all stable as of React 18 and gained additional capabilities in React 19.
 
 #### `Suspense`
@@ -1936,9 +1935,7 @@ The standalone version does not provide an `isPending` flag — use the hook if 
 #### See also
 
 - [`useActionState`, `useFormStatus`, `useOptimistic`](https://react.dev/reference/react) — built on top of transitions
-- # [Server Components and `'use server'`](https://react.dev/reference/rsc/server-components)
-  _Not written yet._ watch [https://github.com/sw-yx/fresh-async-react](https://github.com/sw-yx/fresh-async-react) for more on React Suspense and Time Slicing.
-  > > > > > > > main
+- [Server Components and `'use server'`](https://react.dev/reference/rsc/server-components)
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
