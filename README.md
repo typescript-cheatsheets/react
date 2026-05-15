@@ -264,7 +264,7 @@ Note that for React < 18, the function signature of `useCallback` typed argument
 ```ts
 function useCallback<T extends (...args: any[]) => any>(
   callback: T,
-  deps: DependencyList
+  deps: DependencyList,
 ): T;
 ```
 
@@ -298,7 +298,7 @@ type ACTIONTYPE =
 
 function reducer(
   state: typeof initialState,
-  action: ACTIONTYPE
+  action: ACTIONTYPE,
 ): typeof initialState {
   switch (action.type) {
     case "increment":
@@ -353,7 +353,7 @@ In most cases, type inference for useReducer should work reliably. When inferenc
 ```tsx
 const [state, dispatch] = useReducer<typeof initialState, [ACTIONTYPE]>(
   reducer,
-  initialState
+  initialState,
 );
 ```
 
@@ -372,7 +372,7 @@ function DelayedEffect(props: { timerMs: number }) {
       setTimeout(() => {
         /* do stuff */
       }, timerMs),
-    [timerMs]
+    [timerMs],
   );
   // bad example! setTimeout implicitly returns a number
   // because the arrow function body isn't wrapped in curly braces
@@ -730,7 +730,7 @@ Here are a few ways in which you can annotate `getDerivedStateFromProps`
 class Comp extends React.Component<Props, State> {
   static getDerivedStateFromProps(
     props: Props,
-    state: State
+    state: State,
   ): Partial<State> | null {
     //
   }
@@ -1037,7 +1037,7 @@ Here are a few ways in which you can annotate `getDerivedStateFromProps`
 class Comp extends React.Component<Props, State> {
   static getDerivedStateFromProps(
     props: Props,
-    state: State
+    state: State,
   ): Partial<State> | null {
     //
   }
@@ -1321,7 +1321,7 @@ const useCurrentUser = () => {
 
   if (!currentUserContext) {
     throw new Error(
-      "useCurrentUser has to be used within <CurrentUserContext>"
+      "useCurrentUser has to be used within <CurrentUserContext>",
     );
   }
 
@@ -1357,7 +1357,7 @@ Another option is to use an empty object as default value and cast it to the exp
 
 ```tsx
 const CurrentUserContext = createContext<CurrentUserContextType>(
-  {} as CurrentUserContextType
+  {} as CurrentUserContextType,
 );
 ```
 
@@ -1464,12 +1464,12 @@ interface Props {
 export const FancyButton = forwardRef(
   (
     props: Props,
-    ref: Ref<HTMLButtonElement> // <-- explicit immutable ref type
+    ref: Ref<HTMLButtonElement>, // <-- explicit immutable ref type
   ) => (
     <button ref={ref} className="MyClassName" type={props.type}>
       {props.children}
     </button>
-  )
+  ),
 );
 ```
 
@@ -1532,7 +1532,7 @@ For true `forwardRef` behavior with generics, extend the module declaration:
 // Redeclare forwardRef to support generics
 declare module "react" {
   function forwardRef<T, P = {}>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
   ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
 }
 
@@ -1546,7 +1546,7 @@ interface ClickableListProps<T> {
 
 function ClickableListInner<T>(
   props: ClickableListProps<T>,
-  ref: ForwardedRef<HTMLUListElement>
+  ref: ForwardedRef<HTMLUListElement>,
 ) {
   return (
     <ul ref={ref}>
@@ -1571,7 +1571,7 @@ If you need both generic support and proper forwardRef behavior with full type i
 // Add to your type definitions (e.g. in `index.d.ts` file)
 interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
   <T extends Option>(
-    props: WithForwardRefProps<T>
+    props: WithForwardRefProps<T>,
   ): ReturnType<React.FC<WithForwardRefProps<T>>>;
 }
 

@@ -103,7 +103,7 @@ const useCurrentUser = () => {
 
   if (!currentUserContext) {
     throw new Error(
-      "useCurrentUser has to be used within <CurrentUserContext>"
+      "useCurrentUser has to be used within <CurrentUserContext>",
     );
   }
 
@@ -139,7 +139,7 @@ Another option is to use an empty object as default value and cast it to the exp
 
 ```tsx
 const CurrentUserContext = createContext<CurrentUserContextType>(
-  {} as CurrentUserContextType
+  {} as CurrentUserContextType,
 );
 ```
 

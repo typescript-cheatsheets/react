@@ -118,7 +118,7 @@ Here are a few ways in which you can annotate `getDerivedStateFromProps`
 class Comp extends React.Component<Props, State> {
   static getDerivedStateFromProps(
     props: Props,
-    state: State
+    state: State,
   ): Partial<State> | null {
     //
   }

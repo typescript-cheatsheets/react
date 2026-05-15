@@ -61,7 +61,7 @@ Note that for React < 18, the function signature of `useCallback` typed argument
 ```ts
 function useCallback<T extends (...args: any[]) => any>(
   callback: T,
-  deps: DependencyList
+  deps: DependencyList,
 ): T;
 ```
 
@@ -95,7 +95,7 @@ type ACTIONTYPE =
 
 function reducer(
   state: typeof initialState,
-  action: ACTIONTYPE
+  action: ACTIONTYPE,
 ): typeof initialState {
   switch (action.type) {
     case "increment":
@@ -150,7 +150,7 @@ In most cases, type inference for useReducer should work reliably. When inferenc
 ```tsx
 const [state, dispatch] = useReducer<typeof initialState, [ACTIONTYPE]>(
   reducer,
-  initialState
+  initialState,
 );
 ```
 
@@ -169,7 +169,7 @@ function DelayedEffect(props: { timerMs: number }) {
       setTimeout(() => {
         /* do stuff */
       }, timerMs),
-    [timerMs]
+    [timerMs],
   );
   // bad example! setTimeout implicitly returns a number
   // because the arrow function body isn't wrapped in curly braces
