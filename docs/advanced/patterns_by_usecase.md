@@ -152,20 +152,22 @@ export const defaultProps = <
 
 _thanks [dmisdm](https://github.com/typescript-cheatsheets/react/issues/23)_
 
-:new: You should also consider whether to explicitly forward refs:
+You should also consider whether to accept a `ref`. In React 19, `ref` is a regular prop on function components — no `forwardRef` needed:
 
 ```tsx
-import { forwardRef, ReactNode } from "react";
+import { Ref, ReactNode } from "react";
 
-// base button, with ref forwarding
-type Props = { children: ReactNode; type: "submit" | "button" };
-export type Ref = HTMLButtonElement;
+type Props = {
+  children: ReactNode;
+  type: "submit" | "button";
+  ref?: Ref<HTMLButtonElement>;
+};
 
-export const FancyButton = forwardRef<Ref, Props>((props, ref) => (
-  <button ref={ref} className="MyCustomButtonClass" type={props.type}>
-    {props.children}
+export const FancyButton = ({ ref, children, type }: Props) => (
+  <button ref={ref} className="MyCustomButtonClass" type={type}>
+    {children}
   </button>
-));
+);
 ```
 
 ## Polymorphic Components (e.g. with `as` props)

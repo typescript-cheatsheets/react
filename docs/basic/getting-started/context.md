@@ -15,7 +15,7 @@ type ThemeContextType = "light" | "dark";
 const ThemeContext = createContext<ThemeContextType>("light");
 ```
 
-Wrap the components that need the context with a context provider:
+Wrap the components that need the context by rendering the context itself as a provider. In React 19, the context object can be rendered directly — you no longer need `<ThemeContext.Provider>`:
 
 ```tsx
 import { useState } from "react";
@@ -24,24 +24,28 @@ const App = () => {
   const [theme, setTheme] = useState<ThemeContextType>("light");
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <MyComponent />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 };
 ```
 
-Call `useContext` to read and subscribe to the context.
+> `<ThemeContext.Provider value={theme}>` still works and is identical in behavior — it's just the legacy spelling.
+
+Read the context with `use`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const theme = useContext(ThemeContext);
+  const theme = use(ThemeContext);
 
   return <p>The current theme is {theme}.</p>;
 };
 ```
+
+> `useContext(ThemeContext)` still works too. The main difference is that `use` can also unwrap a promise, and it can be called inside conditions and loops.
 
 ## Without default context value
 
@@ -64,9 +68,9 @@ const App = () => {
   });
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext value={currentUser}>
       <MyComponent />
-    </CurrentUserContext.Provider>
+    </CurrentUserContext>
   );
 };
 ```
@@ -74,10 +78,10 @@ const App = () => {
 Now that the type of the context can be `null`, you'll notice that you'll get a `'currentUser' is possibly 'null'` TypeScript error if you try to access the `username` property. You can use optional chaining to access `username`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = use(CurrentUserContext);
 
   return <p>Name: {currentUser?.username}.</p>;
 };
@@ -86,7 +90,7 @@ const MyComponent = () => {
 However, it would be preferable to not have to check for `null`, since we know that the context won't be `null`. One way to do that is to provide a custom hook to use the context, where an error is thrown if the context is not provided:
 
 ```tsx
-import { createContext } from "react";
+import { createContext, use } from "react";
 
 interface CurrentUserContextType {
   username: string;
@@ -95,11 +99,11 @@ interface CurrentUserContextType {
 const CurrentUserContext = createContext<CurrentUserContextType | null>(null);
 
 const useCurrentUser = () => {
-  const currentUserContext = useContext(CurrentUserContext);
+  const currentUserContext = use(CurrentUserContext);
 
   if (!currentUserContext) {
     throw new Error(
-      "useCurrentUser has to be used within <CurrentUserContext.Provider>"
+      "useCurrentUser has to be used within <CurrentUserContext>"
     );
   }
 
@@ -110,8 +114,6 @@ const useCurrentUser = () => {
 Using a runtime type check in this will have the benefit of printing a clear error message in the console when a provider is not wrapping the components properly. Now it's possible to access `currentUser.username` without checking for `null`:
 
 ```tsx
-import { useContext } from "react";
-
 const MyComponent = () => {
   const currentUser = useCurrentUser();
 
@@ -124,10 +126,10 @@ const MyComponent = () => {
 Another way to avoid having to check for `null` is to use type assertion to tell TypeScript you know the context is not `null`:
 
 ```tsx
-import { useContext } from "react";
+import { use } from "react";
 
 const MyComponent = () => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = use(CurrentUserContext);
 
   return <p>Name: {currentUser!.username}.</p>;
 };

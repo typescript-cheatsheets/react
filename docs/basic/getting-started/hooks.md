@@ -180,11 +180,11 @@ function DelayedEffect(props: { timerMs: number }) {
 
 ## useRef
 
-In TypeScript, `useRef` returns a reference that is either [read-only](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1025-L1039) or [mutable](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/abd69803c1b710db58d511f4544ec1b70bc9077c/types/react/v16/index.d.ts#L1012-L1023), depends on whether your type argument fully covers the initial value or not. Choose one that suits your use case.
+`useRef` always returns a `RefObject<T>` in current `@types/react`. An initial value is required, and the returned `.current` is typed based on it. (`MutableRefObject` is deprecated and only kept for backwards compatibility.)
 
 ### Option 1: DOM element ref
 
-**[To access a DOM element](https://reactjs.org/docs/refs-and-the-dom.html):** provide only the element type as argument, and use `null` as initial value. In this case, the returned reference will have a read-only `.current` that is managed by React. TypeScript expects you to give this ref to an element's `ref` prop:
+**To access a DOM element:** provide the element type as a generic and pass `null` as the initial value. React manages `.current` for you, and TypeScript expects you to pass this ref to an element's `ref` prop:
 
 ```tsx
 function Foo() {
@@ -228,21 +228,30 @@ Refs demand specificity - it is not enough to just specify any old `HTMLElement`
 
 ### Option 2: Mutable value ref
 
-**[To have a mutable value](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-instance-variables):** provide the type you want, and make sure the initial value fully belongs to that type:
+**To hold a mutable value across renders without re-rendering on change:** pass the initial value you want — React doesn't manage `.current` for you here, you write to it manually.
 
 ```tsx
 function Foo() {
-  // Technical-wise, this returns MutableRefObject<number | null>
   const intervalRef = useRef<number | null>(null);
 
-  // You manage the ref yourself (that's why it's called MutableRefObject!)
   useEffect(() => {
-    intervalRef.current = setInterval(...);
-    return () => clearInterval(intervalRef.current);
+    intervalRef.current = window.setInterval(() => {
+      /* ... */
+    }, 1000);
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+    };
   }, []);
 
-  // The ref is not passed to any element's "ref" prop
-  return <button onClick={/* clearInterval the ref */}>Cancel timer</button>;
+  return (
+    <button
+      onClick={() => {
+        /* clearInterval the ref */
+      }}
+    >
+      Cancel timer
+    </button>
+  );
 }
 ```
 
@@ -253,19 +262,21 @@ function Foo() {
 
 ## useImperativeHandle
 
-Based on this [Stackoverflow answer](https://stackoverflow.com/a/69292925/5415299):
+In React 19, `ref` is a regular prop on function components, so `useImperativeHandle` is called with the `ref` prop directly — no `forwardRef` needed.
 
 ```tsx
 // Countdown.tsx
+import { useImperativeHandle, Ref } from "react";
 
-// Define the handle types which will be passed to the forwardRef
 export type CountdownHandle = {
   start: () => void;
 };
 
-type CountdownProps = {};
+type CountdownProps = {
+  ref?: Ref<CountdownHandle>;
+};
 
-const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
+const Countdown = ({ ref }: CountdownProps) => {
   useImperativeHandle(ref, () => ({
     // start() has type inference here
     start() {
@@ -274,12 +285,12 @@ const Countdown = forwardRef<CountdownHandle, CountdownProps>((props, ref) => {
   }));
 
   return <div>Countdown</div>;
-});
+};
 ```
 
 ```tsx
-// The component uses the Countdown component
-
+// The component using the Countdown component
+import { useEffect, useRef } from "react";
 import Countdown, { CountdownHandle } from "./Countdown.tsx";
 
 function App() {
@@ -296,9 +307,7 @@ function App() {
 }
 ```
 
-### See also:
-
-- [Using ForwardRefRenderFunction](https://stackoverflow.com/a/62258685/5415299)
+> If you still maintain code that targets React < 19, see the [forwardRef section](./forward-create-ref.md) for the legacy approach using `forwardRef<CountdownHandle, CountdownProps>`.
 
 ## Custom Hooks
 
