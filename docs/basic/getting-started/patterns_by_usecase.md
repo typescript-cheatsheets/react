@@ -113,7 +113,7 @@ import { CSSProperties } from "react";
 const Box = (props: CSSProperties) => <div style={props} />;
 
 const Card = (
-  { title, children, ...props }: { title: string } & $ElementProps<typeof Box> // new utility, see below
+  { title, children, ...props }: { title: string } & $ElementProps<typeof Box>, // new utility, see below
 ) => (
   <Box {...props}>
     {title}: {children}
@@ -144,7 +144,7 @@ export const defaultProps = <
   D extends Partial<$ElementProps<C>>,
 >(
   defaults: D,
-  Component: C
+  Component: C,
 ): React.ComponentType<$ElementProps<C> & Partial<D>> =>
   Recompose.defaultProps(defaults)(Component);
 ```
@@ -239,7 +239,7 @@ ReactDOM.render(
       </li>
     )}
   />,
-  document.body
+  document.body,
 );
 ```
 
@@ -251,7 +251,7 @@ ReactDOM.render(
     items={["a", "b"]} // Error: Type 'string' is not assignable to type 'number'.
     renderItem={(item) => <li key={item}>{item.toPrecision(3)}</li>}
   />,
-  document.body
+  document.body,
 );
 ```
 
@@ -444,7 +444,7 @@ type AnchorProps = React.JSX.IntrinsicElements["a"];
 
 // optionally use a custom type guard
 function isPropsForAnchorElement(
-  props: ButtonProps | AnchorProps
+  props: ButtonProps | AnchorProps,
 ): props is AnchorProps {
   return "href" in props;
 }
@@ -485,7 +485,7 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 type RouterLinkProps = Omit<NavLinkProps, "href">;
 
 const Link = <T extends {}>(
-  props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps
+  props: LinkProps & T extends RouterLinkProps ? RouterLinkProps : AnchorProps,
 ) => {
   if ((props as RouterLinkProps).to) {
     return <NavLink {...(props as RouterLinkProps)} />;
@@ -622,7 +622,7 @@ function Sequence(p: Props) {
         {!p.isArray && p.value}
       </div>
     ),
-    [p.isArray, p.value] // TypeScript automatically matches the corresponding value type based on dependency change
+    [p.isArray, p.value], // TypeScript automatically matches the corresponding value type based on dependency change
   );
 }
 
@@ -839,7 +839,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // usage
 export const Checkbox = (
-  props: Props & Omit<React.HTMLProps<HTMLInputElement>, "label">
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, "label">,
 ) => {
   const { label } = props;
   return (
@@ -862,7 +862,7 @@ export interface Props {
 }
 
 export const Textbox = (
-  props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>
+  props: Props & Omit<React.HTMLProps<HTMLInputElement>, keyof Props>,
 ) => {
   // implement Textbox component ...
 };
@@ -963,7 +963,7 @@ Simply throwing an exception is fine, however it would be nice to make TypeScrip
 
 ```ts
 function parse(
-  date: string
+  date: string,
 ): Date | InvalidDateFormatError | DateIsInFutureError {
   if (!isValid(date))
     return new InvalidDateFormatError("not a valid date format");

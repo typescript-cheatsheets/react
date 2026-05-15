@@ -92,12 +92,12 @@ interface Props {
 export const FancyButton = forwardRef(
   (
     props: Props,
-    ref: Ref<HTMLButtonElement> // <-- explicit immutable ref type
+    ref: Ref<HTMLButtonElement>, // <-- explicit immutable ref type
   ) => (
     <button ref={ref} className="MyClassName" type={props.type}>
       {props.children}
     </button>
-  )
+  ),
 );
 ```
 
@@ -160,7 +160,7 @@ For true `forwardRef` behavior with generics, extend the module declaration:
 // Redeclare forwardRef to support generics
 declare module "react" {
   function forwardRef<T, P = {}>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
   ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
 }
 
@@ -174,7 +174,7 @@ interface ClickableListProps<T> {
 
 function ClickableListInner<T>(
   props: ClickableListProps<T>,
-  ref: ForwardedRef<HTMLUListElement>
+  ref: ForwardedRef<HTMLUListElement>,
 ) {
   return (
     <ul ref={ref}>
@@ -199,7 +199,7 @@ If you need both generic support and proper forwardRef behavior with full type i
 // Add to your type definitions (e.g. in `index.d.ts` file)
 interface ForwardRefWithGenerics extends React.FC<WithForwardRefProps<Option>> {
   <T extends Option>(
-    props: WithForwardRefProps<T>
+    props: WithForwardRefProps<T>,
   ): ReturnType<React.FC<WithForwardRefProps<T>>>;
 }
 
