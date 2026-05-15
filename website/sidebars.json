@@ -19,31 +19,7 @@
           "basic/getting-started/concurrent"
         ]
       },
-      {
-        "type": "category",
-        "label": "Troubleshooting Handbook",
-        "items": [
-          "basic/troubleshooting/types",
-          "basic/troubleshooting/operators",
-          "basic/troubleshooting/utilities",
-          "basic/troubleshooting/non_ts_files",
-          "basic/troubleshooting/tsconfig",
-          "basic/troubleshooting/official_typings_bugs",
-          "basic/troubleshooting/learn_ts"
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Recommendations",
-        "items": [
-          "basic/recommended/codebases",
-          "basic/recommended/talks",
-          "basic/recommended/resources"
-        ]
-      },
-      "basic/editor_integration",
-      "basic/linting",
-      "basic/examples"
+      "basic/linting"
     ],
     "HOC": [
       "hoc/intro",
@@ -55,7 +31,6 @@
       "advanced/intro",
       "advanced/utility_types",
       "advanced/patterns_by_usecase",
-      "advanced/patterns_by_version",
       "advanced/misc_concerns",
       "advanced/types_react_api"
     ]
