@@ -52,7 +52,7 @@ function Parent() {
 }
 ```
 
-**Read more**: [Wrapping/Mirroring a HTML Element](/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element)
+**Read more**: [Wrapping/Mirroring a HTML Element](/docs/basic/getting-started/patterns_by_usecase#wrappingmirroring-a-html-element)
 
 ## Legacy Approaches (Pre-React 19)
 

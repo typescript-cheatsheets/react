@@ -1,38 +1,33 @@
 {
-  "docs": {
-    "Basic": [
-      "basic/setup",
-      {
-        "type": "category",
-        "label": "Getting Started",
-        "items": [
-          "basic/getting-started/basic_type_example",
-          "basic/getting-started/function_components",
-          "basic/getting-started/hooks",
-          "basic/getting-started/class_components",
-          "basic/getting-started/default_props",
-          "basic/getting-started/forms_and_events",
-          "basic/getting-started/context",
-          "basic/getting-started/forward_and_create_ref",
-          "basic/getting-started/portals",
-          "basic/getting-started/error_boundaries",
-          "basic/getting-started/concurrent"
-        ]
-      },
-      "basic/linting"
-    ],
-    "HOC": [
-      "hoc/intro",
-      "hoc/full_example",
-      "hoc/react_hoc_docs",
-      "hoc/excluding_props"
-    ],
-    "Advanced": [
-      "advanced/intro",
-      "advanced/utility_types",
-      "advanced/patterns_by_usecase",
-      "advanced/misc_concerns",
-      "advanced/types_react_api"
-    ]
-  }
+  "docs": [
+    "basic/setup",
+    {
+      "type": "category",
+      "label": "Learn",
+      "items": [
+        "basic/getting-started/basic_type_example",
+        "basic/getting-started/function_components",
+        "basic/getting-started/hooks",
+        "basic/getting-started/class_components",
+        "basic/getting-started/default_props",
+        "basic/getting-started/forms_and_events",
+        "basic/getting-started/context",
+        "basic/getting-started/forward_and_create_ref",
+        "basic/getting-started/portals",
+        "basic/getting-started/error_boundaries",
+        "basic/getting-started/concurrent",
+        "basic/getting-started/patterns_by_usecase"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "API Reference",
+      "items": [
+        "reference/ComponentProps",
+        "reference/CSSProperties",
+        "reference/ReactNode",
+        "reference/Ref"
+      ]
+    }
+  ]
 }

@@ -164,7 +164,6 @@ async function main(argv) {
     path: "docs/basic/setup.md",
     withToc: true,
     relativeHeadingLevel: 1,
-    prefix: "Section 1: ",
   });
   pendingReadme = await updateSectionWith({
     from: currentReadme,
@@ -233,14 +232,6 @@ async function main(argv) {
     name: "concurrent",
     path: "docs/basic/getting-started/concurrent.md",
   });
-  pendingReadme = await updateSectionWith({
-    from: currentReadme,
-    to: pendingReadme,
-    name: "linting",
-    path: "docs/basic/linting.md",
-    relativeHeadingLevel: 1,
-  });
-
   const prettierConfig = await prettier.resolveConfig(readmePath);
   pendingReadme = await prettier.format(pendingReadme, {
     ...prettierConfig,

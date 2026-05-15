@@ -4,7 +4,7 @@ We appreciate your interest in contributing to this project. Here are some core 
 
 ## 📋 Core Principles
 
-1. **We're All About Cheatsheets**: Our main goal is to provide concise and easy-to-use cheatsheets. All code examples should be simple, easily searchable, and ready for copy-and-paste.
+1. **Cheatsheet Style**: Our main goal is to provide a concise and easy-to-use cheatsheet. All code examples should be simple, easily searchable, and ready for copy-and-paste.
 
 2. **Collapsible Explanations**: Keep explanations short and sweet, limited to 1-2 sentences. For more in-depth explanations, use `details` tags to provide additional context.
 

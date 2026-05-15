@@ -49,5 +49,3 @@ class ErrorBoundary extends Component<Props, State> {
 export default ErrorBoundary;
 
 ```
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

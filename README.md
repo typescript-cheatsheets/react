@@ -24,38 +24,30 @@ Cheatsheet for using React with TypeScript.
 
 [![All Contributors](https://img.shields.io/github/contributors/typescript-cheatsheets/react-typescript-cheatsheet?color=orange&style=flat-square)](/CONTRIBUTORS.md) | [![Discord](https://img.shields.io/discord/508357248330760243.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/wTGS5z9)
 
-- [The Basic Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) is focused on helping React devs just start using TS in React **apps**
-  - Focus on opinionated best practices, copy+pastable examples.
-  - Explains some basic TS types usage and setup along the way.
-  - Answers the most Frequently Asked Questions.
-  - Does not cover generic type logic in detail. Instead we prefer to teach simple troubleshooting techniques for newbies.
-  - The goal is to get effective with TS without learning _too much_ TS.
-- [The Advanced Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/advanced) helps show and explain advanced usage of generic types for people writing reusable type utilities/functions/render prop/higher order components and TS+React **libraries**.
-  - It also has miscellaneous tips and tricks for pro users.
-  - Advice for contributing to DefinitelyTyped.
-  - The goal is to take _full advantage_ of TypeScript.
-- [The HOC Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/hoc) specifically teaches people to write HOCs with examples.
-  - Familiarity with [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html) is necessary.
-  - ⚠️This is the newest cheatsheet, all assistance is welcome.
+[The Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup) is focused on helping React devs use TypeScript effectively:
+
+- Opinionated best practices and copy+pastable examples.
+- Covers basic TS types and setup, plus advanced usage of generic types for people writing reusable type utilities and React+TS **libraries**.
+- Advice for contributing to DefinitelyTyped.
 
 ---
 
-## Basic Cheatsheet
+## Cheatsheet
 
-### Basic Cheatsheet Table of Contents
+### Table of Contents
 
 <details>
 
 <summary><b>Expand Table of Contents</b></summary>
 
 - [React TypeScript Cheatsheet](#react-typescript-cheatsheet)
-  - [Basic Cheatsheet](#basic-cheatsheet)
-    - [Basic Cheatsheet Table of Contents](#basic-cheatsheet-table-of-contents)
-    - [Section 1: Setup](#section-1-setup)
+  - [Cheatsheet](#cheatsheet)
+    - [Table of Contents](#table-of-contents)
+    - [Setup](#setup)
       - [Prerequisites](#prerequisites)
       - [React and TypeScript starter kits](#react-and-typescript-starter-kits)
       - [Try React and TypeScript online](#try-react-and-typescript-online)
-    - [Section 2: Getting Started](#section-2-getting-started)
+    - [Getting Started](#getting-started)
       - [Function Components](#function-components)
       - [Hooks](#hooks)
       - [useState](#usestate)
@@ -106,7 +98,6 @@ Cheatsheet for using React with TypeScript.
       - [Option 1: Using react-error-boundary](#option-1-using-react-error-boundary)
       - [Option 2: Writing your custom error boundary component](#option-2-writing-your-custom-error-boundary-component)
     - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
-    - [Linting](#linting)
   - [My question isn't answered here!](#my-question-isnt-answered-here)
   - [Contributors](#contributors)
 
@@ -114,7 +105,7 @@ Cheatsheet for using React with TypeScript.
 
 <!--START-SECTION:setup-->
 
-### Section 1: Setup
+### Setup
 
 #### Prerequisites
 
@@ -148,7 +139,7 @@ There are some tools that let you run React and TypeScript online, which can be 
 
 <!--END-SECTION:setup-->
 
-### Section 2: Getting Started
+### Getting Started
 
 <!--START-SECTION:function-components-->
 
@@ -618,8 +609,6 @@ If you are writing a React Hooks library, don't forget that you should also expo
 - https://github.com/palmerhq/the-platform
 - https://github.com/sw-yx/hooks
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
-
 <!--END-SECTION:hooks-->
 
 <!--START-SECTION:class-components-->
@@ -728,8 +717,6 @@ class App extends React.Component<{
 ```
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtAGxQGc64BBMMOJADxiQDsATRsnQwAdAGFckHrxgAeAN4U4cEEgYoA5kgBccOjCjAeGgNwUAvgD44i8sshHuUXTwCuIAEZIoJuAHo-OGpgAGskOBgAC2A6JTg0SQhpHhgAEWA+AFkIVxSACgBKGzjlKJiRBxTvOABeOABmMzs4cziifm9C4ublIhhXKB44PJLlOFk+YAA3S1GxmzK6CpwwJdV1LXM4FH4F6KXKp1aesdk-SZnRgqblY-MgA)
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 #### Typing getDerivedStateFromProps
 
@@ -874,8 +861,6 @@ For most apps this isn't needed — only library authors who re-export the props
 
 </details>
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
-
 <!--END-SECTION:default-props-->
 
 <!--START-SECTION:basic-type-examples-->
@@ -970,7 +955,7 @@ export declare interface AppProps {
   childrenElement: React.JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
-  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
+  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/patterns_by_usecase/#wrappingmirroring
   props: Props & React.ComponentPropsWithoutRef<"button">; // to impersonate all the props of a button element and explicitly not forwarding its ref
   props2: Props & React.ComponentPropsWithRef<MyButtonWithForwardRef>; // to impersonate all the props of MyButtonForwardedRef and explicitly forwarding its ref
 }
@@ -987,8 +972,6 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A 
 </details>
 
 [More discussion: Where ReactNode does not overlap with React.JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 #### Types or Interfaces?
 
@@ -1037,8 +1020,6 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy table:
 ⚠️ In some cases
 
 (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 <!--END-SECTION:basic-type-examples-->
 
@@ -1443,7 +1424,7 @@ function Parent() {
 }
 ```
 
-**Read more**: [Wrapping/Mirroring a HTML Element](/docs/advanced/patterns_by_usecase#wrappingmirroring-a-html-element)
+**Read more**: [Wrapping/Mirroring a HTML Element](/docs/basic/getting-started/patterns_by_usecase#wrappingmirroring-a-html-element)
 
 #### Legacy Approaches (Pre-React 19)
 
@@ -1782,8 +1763,6 @@ export default ErrorBoundary;
 
 ```
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
-
 <!--END-SECTION:error-boundaries-->
 
 <!--START-SECTION:concurrent-->
@@ -1937,112 +1916,7 @@ The standalone version does not provide an `isPending` flag — use the hook if 
 - [`useActionState`, `useFormStatus`, `useOptimistic`](https://react.dev/reference/react) — built on top of transitions
 - [Server Components and `'use server'`](https://react.dev/reference/rsc/server-components)
 
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
-
 <!--END-SECTION:concurrent-->
-
-<!--START-SECTION:linting-->
-
-### Linting
-
-Follow the TypeScript + ESLint docs at https://github.com/typescript-eslint/typescript-eslint:
-
-```
-yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
-```
-
-add a `lint` script to your `package.json`:
-
-```json
-  "scripts": {
-    "lint": "eslint 'src/**/*.ts'"
-  },
-```
-
-and a suitable `.eslintrc.js` (using `.js` over `.json` here so we can add comments):
-
-```js
-module.exports = {
-  env: {
-    es6: true,
-    node: true,
-    jest: true,
-  },
-  extends: "eslint:recommended",
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: "module",
-  },
-  rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    "no-console": "warn",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { vars: "all", args: "after-used", ignoreRestSiblings: false },
-    ],
-    "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
-    "no-empty": "warn",
-  },
-};
-```
-
-Most of this is taken from [the `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) which is for **libraries**.
-
-More `.eslintrc.json` options to consider with more options you may want for **apps**:
-
-```json
-{
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "plugin:jest/recommended",
-    "plugin:unicorn/recommended"
-  ],
-  "plugins": ["prettier", "jest", "unicorn"],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "jest": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
-      "rules": {
-        "no-undef": "off"
-      }
-    }
-  ]
-}
-```
-
-Another great resource is ["Using ESLint and Prettier in a TypeScript Project"](https://dev.to/robertcoopercode/using-eslint-and-prettier-in-a-typescript-project-53jb) by @robertcoopercode.
-
-Wes Bos is also working on [TypeScript support for his eslint+prettier config.](https://github.com/wesbos/eslint-config-wesbos/issues/68)
-
-If you're looking for information on Prettier, check out the [Prettier](https://github.com/typescript-cheatsheets/react/blob/main/docs/advanced/misc-concerns.md#prettier) guide.
-
-<!--END-SECTION:linting-->
 
 ## My question isn't answered here!
 
