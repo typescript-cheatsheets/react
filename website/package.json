@@ -6,13 +6,16 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "yarn add-pages-on-site && docusaurus deploy"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "@docusaurus/core": "^2.4.0",
-    "@docusaurus/preset-classic": "^2.4.0",
-    "classnames": "^2.3.2",
-    "prism-react-renderer": "^2.4.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/preset-classic": "^3.10.1",
+    "classnames": "^2.5.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "browserslist": {
     "production": [
