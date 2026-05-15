@@ -71,7 +71,7 @@ In React >= 18, the function signature of `useCallback` changed to the following
 function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
 ```
 
-Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not <17.
+Therefore, the following code will yield "`Parameter 'e' implicitly has an 'any' type.`" error in React >= 18, but not &lt;17.
 
 ```ts
 // @ts-expect-error Parameter 'e' implicitly has 'any' type.
@@ -364,7 +364,7 @@ export function useLoading() {
   };
   return [isLoading, load] as [
     boolean,
-    (aPromise: Promise<any>) => Promise<any>
+    (aPromise: Promise<any>) => Promise<any>,
   ];
 }
 ```

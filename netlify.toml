@@ -16,3 +16,6 @@
 
   # Directory with the serverless Lambda functions to deploy to AWS.
   # functions = "project/functions/"
+
+[build.environment]
+  NODE_VERSION = "20"

@@ -129,11 +129,12 @@ Example:
 
 ```tsx
 // ReactUtilityTypes.d.ts
-declare type $ElementProps<T> = T extends React.ComponentType<infer Props>
-  ? Props extends object
-    ? Props
-    : never
-  : never;
+declare type $ElementProps<T> =
+  T extends React.ComponentType<infer Props>
+    ? Props extends object
+      ? Props
+      : never
+    : never;
 ```
 
 Usage:
@@ -142,7 +143,7 @@ Usage:
 import * as Recompose from "recompose";
 export const defaultProps = <
   C extends React.ComponentType,
-  D extends Partial<$ElementProps<C>>
+  D extends Partial<$ElementProps<C>>,
 >(
   defaults: D,
   Component: C
@@ -637,8 +638,7 @@ function App() {
 }
 ```
 
-<a href="https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwBQdMAnmFnAArFjoC8dccAD5wA3vwETgqAIJQoyJgC44MKAFcs9CRIBuyADYblqVcAB2AcwDaAXRpxxAgL7jhY7QKmz5SuAQOomo66BkZwJlDmFloSTvS4EGYmcAAacDxwABRgypwQ3ACU6QB8ouKUMGpQZphUMAB0aoEAslggEJnBmUU8pZ0ecAA8ACbAOsXB2nqGWJmoBYqTEiJg9V5yCnAAZFtwq9Ma9QBWEOaZZAA0ZAUuAwIiAISr6z7bu-uhWLcegwD0o+NggULsErM8ZBsmBc9vUDlgbNDfr84AAVFhYVC4SJgeDINQwEjIGDAXAGfRMOAgIm4AAWGJUdLgCTkGMgZlGljgcJU6PEBXocToBDUZnwwEScGkYDA3TKAgqVRq-QkIzGTP0aFQADlkCAsDwAERSsAGiYDQZpF4KHgifz6QJOLmfG1kAgQCBkR2-M0-S0Qnw21QaR1wm1WV3uy7kABGyCgUbIsYAXmQbF6fQI-gCffy6E4gA"><i>See this in TS Playground</i>
-</a>
+[_See this in TS Playground_](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwBQdMAnmFnAArFjoC8dccAD5wA3vwETgqAIJQoyJgC44MKAFcs9CRIBuyADYblqVcAB2AcwDaAXRpxxAgL7jhY7QKmz5SuAQOomo66BkZwJlDmFloSTvS4EGYmcAAacDxwABRgypwQ3ACU6QB8ouKUMGpQZphUMAB0aoEAslggEJnBmUU8pZ0ecAA8ACbAOsXB2nqGWJmoBYqTEiJg9V5yCnAAZFtwq9Ma9QBWEOaZZAA0ZAUuAwIiAISr6z7bu-uhWLcegwD0o+NggULsErM8ZBsmBc9vUDlgbNDfr84AAVFhYVC4SJgeDINQwEjIGDAXAGfRMOAgIm4AAWGJUdLgCTkGMgZlGljgcJU6PEBXocToBDUZnwwEScGkYDA3TKAgqVRq-QkIzGTP0aFQADlkCAsDwAERSsAGiYDQZpF4KHgifz6QJOLmfG1kAgQCBkR2-M0-S0Qnw21QaR1wm1WV3uy7kABGyCgUbIsYAXmQbF6fQI-gCffy6E4gA)
 
 In the above example, based on the `isArray` union member, the type of the `value` hook dependency changes.
 
