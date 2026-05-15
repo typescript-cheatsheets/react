@@ -110,10 +110,6 @@ module.exports = {
               label: "Advanced Guides",
               to: "docs/advanced",
             },
-            {
-              label: "Migrating",
-              to: "docs/migration",
-            },
           ],
         },
         {
