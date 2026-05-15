@@ -54,11 +54,75 @@ main details:hover {
 }
 
 .homePageBtns {
-  display: grid;
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
-@media (min-width: 480px) {
-  .homePageBtns {
-    grid-template-columns: 1fr 1fr;
+
+.homeSectionGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .homeSectionGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.homeSectionCard {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-card-border-radius, 0.5rem);
+  background: var(--ifm-background-surface-color);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.homeSectionCard:hover {
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.homeSectionCard h3 {
+  margin: 0 0 0.5rem;
+  color: var(--ifm-color-primary);
+}
+.homeSectionCard p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+}
+
+.homeTopicsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.homeTopicLink {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
+}
+.homeTopicLink:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-contrast-background, transparent);
+  text-decoration: none;
 }

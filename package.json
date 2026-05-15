@@ -26,7 +26,6 @@
     "format": "prettier --write \"**/*.md\"",
     "format:check": "prettier --check \"**/*.md\"",
     "postinstall": "cd website && yarn",
-    "prepare": "husky",
     "start": "yarn --cwd website start",
     "build": "yarn --cwd website build",
     "serve": "yarn --cwd website serve"
@@ -37,8 +36,6 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
-    "prettier": "^3.8.3",
-    "pretty-quick": "^4.2.2"
+    "prettier": "^3.8.3"
   }
 }

@@ -18,6 +18,13 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
+  "devDependencies": {
+    "@docusaurus/tsconfig": "^3.10.1",
+    "@docusaurus/types": "^3.10.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^6.0.3"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
