@@ -10,7 +10,7 @@ _TypeScript version guides before 2.9 are unwritten, please feel free to send a 
 
 ## TypeScript 2.9
 
-[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html) | [Blog Post](https://blogs.msdn.microsoft.com/typescript/2018/05/31/announcing-typescript-2-9/)]
+[[Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html)]
 
 1. Type arguments for tagged template strings (e.g. `styled-components`):
 
@@ -568,5 +568,3 @@ nothing react specific
 ## TypeScript Roadmap and Spec
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
-
-Did you also know you can read the TypeScript spec online?? https://github.com/microsoft/TypeScript/blob/master/doc/spec-ARCHIVED.md

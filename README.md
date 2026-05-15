@@ -34,9 +34,6 @@ Cheatsheet for using React with TypeScript.
   - It also has miscellaneous tips and tricks for pro users.
   - Advice for contributing to DefinitelyTyped.
   - The goal is to take _full advantage_ of TypeScript.
-- [The Migrating Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration) helps collate advice for incrementally migrating large codebases from JS or Flow, **from people who have done it**.
-  - We do not try to convince people to switch, only to help people who have already decided.
-  - ⚠️This is a new cheatsheet, all assistance is welcome.
 - [The HOC Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/hoc) specifically teaches people to write HOCs with examples.
   - Familiarity with [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html) is necessary.
   - ⚠️This is the newest cheatsheet, all assistance is welcome.
@@ -2433,8 +2430,6 @@ npm install -g dts-gen
 dts-gen -m <your-module>
 ```
 
-There are other automated JS to TS conversion tools and migration strategies - see [our MIGRATION cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration/from_js).
-
 ##### Typing Exported Hooks
 
 Typing Hooks is just like typing pure functions.
@@ -2540,8 +2535,6 @@ declare module "use-dark-mode" {
 
 In case of typing untyped class components, there's almost no difference in approach except for the fact that after declaring the types, you export the extend the type using `class UntypedClassComponent extends React.Component<UntypedClassComponentProps, any> {}` where `UntypedClassComponentProps` holds the type declaration.
 
-For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the then untyped RR6.
-
 ```ts
 declare module "react-router-dom" {
   import * as React from 'react';
@@ -2555,8 +2548,6 @@ declare module "react-router-dom" {
   export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
   // ...
 ```
-
-For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
 
 #### Frequent Known Problems with TypeScript
 
@@ -2943,7 +2934,7 @@ If you're looking for information on Prettier, check out the [Prettier](https://
   9. bangbang checks `if (!!nonboolean)`
   10. `!= null` to check for `null` and `undefined`
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
-- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
+- [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react).
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesn't seem to be frequently updated anymore.
@@ -2993,7 +2984,6 @@ It is worth mentioning some resources to help you get started:
 - Anders Hejlsberg's overview of TS: https://www.youtube.com/watch?v=ET4kT88JRXs
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution with an [Egghead.io course](https://egghead.io/courses/advanced-static-types-in-typescript)
 - Basarat's Deep Dive: https://basarat.gitbook.io/typescript/
-- Axel Rauschmeyer's [Tackling TypeScript](https://exploringjs.com/tackling-ts/)
 - Rares Matei: [Egghead.io course](https://egghead.io/courses/practical-advanced-typescript)'s advanced TypeScript course on Egghead.io is great for newer typescript features and practical type logic applications (e.g. recursively making all properties of a type `readonly`)
 - Learn about [Generics, Conditional types and Mapped types](https://www.youtube.com/watch?v=PJjeHzvi_VQ&feature=youtu.be)
 - Shu Uesugi: [TypeScript for Beginner Programmers](https://ts.chibicode.com/)

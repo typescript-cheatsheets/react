@@ -27,7 +27,6 @@ sidebar_label: Codebases
 Older but still worth checking:
 
 - https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/
-- https://github.com/contiamo/operational-ui
 
 React Boilerplates:
 

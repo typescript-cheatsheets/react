@@ -58,12 +58,6 @@
       "advanced/patterns_by_version",
       "advanced/misc_concerns",
       "advanced/types_react_api"
-    ],
-    "Migration": [
-      "migration/intro",
-      "migration/js_docs",
-      "migration/from_js",
-      "migration/from_flow"
     ]
   }
 }

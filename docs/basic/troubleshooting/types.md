@@ -413,8 +413,6 @@ npm install -g dts-gen
 dts-gen -m <your-module>
 ```
 
-There are other automated JS to TS conversion tools and migration strategies - see [our MIGRATION cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/migration/from_js).
-
 ### Typing Exported Hooks
 
 Typing Hooks is just like typing pure functions.
@@ -520,8 +518,6 @@ declare module "use-dark-mode" {
 
 In case of typing untyped class components, there's almost no difference in approach except for the fact that after declaring the types, you export the extend the type using `class UntypedClassComponent extends React.Component<UntypedClassComponentProps, any> {}` where `UntypedClassComponentProps` holds the type declaration.
 
-For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the then untyped RR6.
-
 ```ts
 declare module "react-router-dom" {
   import * as React from 'react';
@@ -535,8 +531,6 @@ declare module "react-router-dom" {
   export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
   // ...
 ```
-
-For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
 
 ## Frequent Known Problems with TypeScript
 
