@@ -28,7 +28,8 @@
     "postinstall": "cd website && yarn",
     "prepare": "husky",
     "start": "yarn --cwd website start",
-    "build": "yarn --cwd website build"
+    "build": "yarn --cwd website build",
+    "serve": "yarn --cwd website serve"
   },
   "dependencies": {
     "front-matter": "^4.0.2",

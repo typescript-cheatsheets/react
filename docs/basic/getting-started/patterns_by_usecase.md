@@ -65,8 +65,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 Looking at [the source for `ComponentProps`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/f3134f4897c8473f590cbcdd5788da8d59796f45/types/react/index.d.ts#L821) shows that this is a clever wrapper for `React.JSX.IntrinsicElements`, whereas the second method relies on specialized interfaces with unfamiliar naming/capitalization.
 
-> Note: There are over 50 of these specialized interfaces available - look for `HTMLAttributes` in our [`@types/react` commentary](https://react-typescript-cheatsheet.netlify.app/docs/advanced/types_react_api#typesreact).
-
 Ultimately, [we picked the `ComponentProps` method](https://github.com/typescript-cheatsheets/react/pull/276) as it involves the least TS specific jargon and has the most ease of use. But you'll be fine with either of these methods if you prefer.
 
 ### Definitely not `React.HTMLProps` or `React.HTMLAttributes`

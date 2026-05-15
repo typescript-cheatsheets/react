@@ -14,9 +14,9 @@ const setupDoc = "docs/basic/setup";
 
 module.exports = {
   favicon: "img/icon.png",
-  title: "React TypeScript Cheatsheets", // Title for your website.
+  title: "React TypeScript Cheatsheet", // Title for your website.
   tagline:
-    "Cheatsheets for experienced React developers getting started with TypeScript",
+    "A cheatsheet for experienced React developers getting started with TypeScript",
   url: "https://react-typescript-cheatsheet.netlify.app", // Your website URL
   baseUrl: "/",
   projectName: "react-typescript-cheatsheet",
@@ -101,14 +101,6 @@ module.exports = {
             {
               label: "Introduction",
               to: setupDoc,
-            },
-            {
-              label: "High Order Component (HOC)",
-              to: "docs/hoc",
-            },
-            {
-              label: "Advanced Guides",
-              to: "docs/advanced",
             },
           ],
         },

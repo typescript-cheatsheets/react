@@ -124,5 +124,3 @@ const MyComponent = () => "hello";
 // 👍 explicit
 const MyComponent = (): React.JSX.Element => <span>hello</span>;
 ```
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

@@ -91,7 +91,7 @@ export declare interface AppProps {
   childrenElement: React.JSX.Element; // A single React element
   style?: React.CSSProperties; // to pass through style props
   onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
-  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
+  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/patterns_by_usecase/#wrappingmirroring
   props: Props & React.ComponentPropsWithoutRef<"button">; // to impersonate all the props of a button element and explicitly not forwarding its ref
   props2: Props & React.ComponentPropsWithRef<MyButtonWithForwardRef>; // to impersonate all the props of MyButtonForwardedRef and explicitly forwarding its ref
 }
@@ -108,8 +108,6 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A 
 </details>
 
 [More discussion: Where ReactNode does not overlap with React.JSX.Element](https://github.com/typescript-cheatsheets/react/issues/129)
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
 ## Types or Interfaces?
 
@@ -158,5 +156,3 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy table:
 ⚠️ In some cases
 
 (source: [Karol Majewski](https://twitter.com/karoljmajewski/status/1082413696075382785))
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

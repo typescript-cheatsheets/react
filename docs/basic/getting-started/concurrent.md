@@ -149,5 +149,3 @@ The standalone version does not provide an `isPending` flag — use the hook if 
 
 - [`useActionState`, `useFormStatus`, `useOptimistic`](https://react.dev/reference/react) — built on top of transitions
 - [Server Components and `'use server'`](https://react.dev/reference/rsc/server-components)
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).

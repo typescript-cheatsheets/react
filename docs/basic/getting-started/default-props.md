@@ -77,5 +77,3 @@ export type ApparentGreetProps = React.JSX.LibraryManagedAttributes<
 For most apps this isn't needed — only library authors who re-export the props type tend to hit it.
 
 </details>
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
