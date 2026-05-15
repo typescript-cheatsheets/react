@@ -28,7 +28,7 @@ export class MyComponent extends React.Component<MyComponentProps, {}> {
 
 ## Commenting Components
 
-TypeScript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for TypeScript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling (like the [Docz PropsTable](https://www.docz.site/docs/components-api#propstable)). The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
+TypeScript uses [TSDoc](https://github.com/Microsoft/tsdoc), a variant of JSDoc for TypeScript. This is very handy for writing component libraries and having useful descriptions pop up in autocomplete and other tooling. The main thing to remember is to use `/** YOUR_COMMENT_HERE */` syntax in the line just above whatever you're annotating.
 
 ```tsx
 interface MyComponentProps {
@@ -87,26 +87,6 @@ For developing with Storybook, read the docs I wrote over here: [https://storybo
 
 [Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
 
-## Migrating From Flow
-
-You should check out large projects that are migrating from flow to pick up concerns and tips:
-
-- [Jest](https://github.com/facebook/jest/pull/7554)
-- [Expo](https://github.com/expo/expo/issues/2164)
-- [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd/issues/982)
-- [Storybook](https://github.com/storybooks/storybook/issues/5030)
-- [VueJS](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)
-
-Useful libraries:
-
-- [https://github.com/bcherny/flow-to-typescript](https://github.com/bcherny/flow-to-typescript)
-- [https://github.com/Khan/flow-to-ts](https://github.com/Khan/flow-to-ts)
-- [https://github.com/piotrwitek/utility-types](https://github.com/piotrwitek/utility-types)
-
-If you have specific advice in this area, please file a PR!
-
-[Something to add? File an issue](https://github.com/typescript-cheatsheets/react/issues/new).
-
 ## Prettier
 
 There isn't any real secret to Prettier for TypeScript. But its a great idea to run prettier on every commit!
@@ -144,7 +124,7 @@ $ yarn add -D prettier husky lint-staged
 
 Integrating this with ESlint may be a problem. We haven't written much on this yet, please contribute if you have a strong opinion. [Here's a helpful gist.](https://gist.github.com/JirkaVebr/519c7597517e4ba756d5b89e7cb4cc0e)
 
-For library authors, this is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files). You may also wish to check out the newer https://ts-engine.dev/ project.
+For library authors, this is set up for you in [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
 
 ## Testing
 
@@ -188,7 +168,7 @@ Any other tips? Please contribute on this topic! [We have an ongoing issue here 
 Compiling large TS projects can get slow. Here are some tips:
 
 - We have a dedicated repo tracking TS speed recommendations: https://github.com/typescript-cheatsheets/speed
-- Use [TS 3.0 Project references](https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_version#typescript-30)
+- Use [TypeScript Project references](https://www.typescriptlang.org/docs/handbook/project-references.html)
 - Check the official [TS performance wiki guidelines](https://github.com/microsoft/TypeScript/wiki/Performance) - note that [Dan Rossenwasser says to take it with a grain of salt](https://news.ycombinator.com/item?id=25199070)
 - Webpack ([see CRA diff](https://gist.github.com/jaredpalmer/d3016701589f14df8a3572df91a5754b)):
   - set `output.pathinfo = false`

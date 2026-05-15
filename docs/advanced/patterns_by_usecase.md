@@ -245,7 +245,7 @@ ReactDOM.render(
 );
 ```
 
-As of [TS 2.9](#typescript-29), you can also supply the type parameter in your JSX to opt out of type inference:
+You can also supply the type parameter in your JSX to opt out of type inference:
 
 ```tsx
 ReactDOM.render(

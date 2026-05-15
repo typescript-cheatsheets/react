@@ -98,32 +98,6 @@ export declare interface AppProps {
 ```
 
 <details>
-<summary><b>Small <code>React.ReactNode</code> edge case before React 18</b></summary>
-
-Before the [React 18 type updates](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210), this code typechecked but had a runtime error:
-
-```tsx
-type Props = {
-  children?: React.ReactNode;
-};
-
-function Comp({ children }: Props) {
-  return <div>{children}</div>;
-}
-function App() {
-  // Before React 18: Runtime error "Objects are not valid as a React child"
-  // After React 18: Typecheck error "Type '{}' is not assignable to type 'ReactNode'"
-  return <Comp>{{}}</Comp>;
-}
-```
-
-This is because `ReactNode` includes `ReactFragment` which allowed type `{}` before React 18.
-
-[Thanks @pomle for raising this.](https://github.com/typescript-cheatsheets/react/issues/357)
-
-</details>
-
-<details>
  <summary><b>React.JSX.Element vs React.ReactNode?</b></summary>
 
 Quote [@ferdaber](https://github.com/typescript-cheatsheets/react/issues/57): A more technical explanation is that a valid React node is not the same thing as what is returned by `React.createElement`. Regardless of what a component ends up rendering, `React.createElement` always returns an object, which is the `React.JSX.Element` interface, but `React.ReactNode` is the set of all possible return values of a component.
