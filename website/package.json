@@ -7,7 +7,7 @@
     "deploy": "yarn add-pages-on-site && docusaurus deploy"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
