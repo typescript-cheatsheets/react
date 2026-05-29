@@ -17,12 +17,28 @@ const config: Config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
-        // Page moved when the menu was restructured (#820). Keep old URL
+        // Pages moved when the menu was restructured (#820). Keep old URLs
         // working so links out on the web don't break.
         redirects: [
           {
             from: "/docs/advanced/patterns_by_usecase",
             to: "/docs/basic/getting-started/patterns_by_usecase",
+          },
+          {
+            from: "/docs/react-types/ComponentProps",
+            to: "/docs/reference/ComponentProps",
+          },
+          {
+            from: "/docs/react-types/CSSProperties",
+            to: "/docs/reference/CSSProperties",
+          },
+          {
+            from: "/docs/react-types/ReactNode",
+            to: "/docs/reference/ReactNode",
+          },
+          {
+            from: "/docs/react-types/Ref",
+            to: "/docs/reference/Ref",
           },
         ],
       },
