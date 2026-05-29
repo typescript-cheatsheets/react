@@ -13,6 +13,22 @@ const config: Config = {
   projectName: "react-typescript-cheatsheet",
   organizationName: "typescript-cheatsheets",
 
+  plugins: [
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        // Page moved when the menu was restructured (#820). Keep old URL
+        // working so links out on the web don't break.
+        redirects: [
+          {
+            from: "/docs/advanced/patterns_by_usecase",
+            to: "/docs/basic/getting-started/patterns_by_usecase",
+          },
+        ],
+      },
+    ],
+  ],
+
   presets: [
     [
       "classic",
