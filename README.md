@@ -600,6 +600,7 @@ Note that the React team recommends that custom hooks that return more than two 
 
 - https://medium.com/@jrwebdev/react-hooks-in-typescript-88fce7001d0d
 - https://fettblog.eu/typescript-react/hooks/#useref
+- https://github.com/gibbok/typescript-book
 
 If you are writing a React Hooks library, don't forget that you should also expose your types for users to use.
 
